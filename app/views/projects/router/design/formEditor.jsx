@@ -43,7 +43,7 @@ const handleClick=({addFn,editFn,deleteFn},item)=><Menu>
 
 const treeDrop=(item,dropFns)=><Dropdown overlay={()=>handleClick(dropFns,item)} trigger={['contextMenu']}><span className="node-style">{item.type}</span></Dropdown>;
 
-const formData=data=>Array.isArray(data)?data:data?[data]:[];
+const formData=data=>Array.isArray(data)?data:data?[data]:[{}];
 
 const Index=({data,getValues})=>{
   const [visible,setVisible]=useState(false);
@@ -99,7 +99,7 @@ const Index=({data,getValues})=>{
   const editProps=values=>{
     const tree=editNodes(schemaTree,selectedKey,{props:values},'key');
     setSchema(tree);
-    getValues?.(tree);
+    getValues?.({schema:tree[0]});
   };
 
   const onSelect=(selectedKeys,e)=>{

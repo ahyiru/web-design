@@ -34,21 +34,9 @@
 
 [工程化](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&amp;mid=2455985991&amp;idx=1&amp;sn=f1ee35b789a052518a9d2ade54134497&amp;chksm=8cf5d081bb825997f7570355d36a7f6e0b24f56d8613e1a2174c9800c8709b41bf4e8c31ae58&token=300862977&lang=zh_CN#rd)、[layout设计](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&amp;mid=2455985961&amp;idx=1&amp;sn=bc656fc27eea4fc204903d87e70215ff&amp;chksm=8cf5d0efbb8259f9780c0ca630bc668843c6fed262395e8a8fc76c4559de40e5d212b73e6806&token=300862977&lang=zh_CN#rd)、[权限和i18n](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&amp;mid=2455986033&amp;idx=1&amp;sn=1f5bc749f32df0e0cc84b08125a4bc32&amp;chksm=8cf5d0b7bb8259a18b1843e3c2693e72cfb40ff35c40707e32bf653e6e11ca1d6ae812c6cbcc&token=300862977&lang=zh_CN#rd)、[API管理](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&amp;mid=2455986140&amp;idx=1&amp;sn=50b43b26a16abd10adf466a735a6da41&amp;chksm=8cf5d01abb82590c557cd3a80f6c5adb41194a7a501ae238bd39b28dcfe1319b9ad0fbc9ce4c&token=300862977&lang=zh_CN#rd) 这些都是一些管理平台的基础设施，前面也讲过，大家可以去看看。
 
-***创建项目***
+### 页面设计
 
-***创建用户并分配项目***
-
-***创建API***
-
-
-***新建项目路由***
-
-***为用户设置路由权限***
-
-#### 页面设计
-
-***schema设计***
-
+#### schema设计
 
 ```javascript
 const schema={
@@ -60,16 +48,11 @@ const schema={
 
 ```
 
-***type***
+- type：标签名或组件名。组件可以是UI组件或业务组件，先注册再使用。
+- props：属性配置。组件的属性可根据组件库或自定义组件使用文档去配置。如果属性里面含有组件，可依照schema渲染原则执行。
+- children：子节点。可以是文本节点，组件，或子元素列表。
 
-type：标签名或组件名。组件可以是UI组件或业务组件，先注册再使用。
-
-props：属性配置。组件的属性可根据组件库或自定义组件使用文档去配置。如果属性里面含有组件，可依照schema渲染原则执行。
-
-children：子节点。可以是文本节点，组件，或子元素列表。
-
-***schema render***
-
+#### custom render
 
 ```javascript
 const render=(schema,params)=>{
@@ -92,11 +75,9 @@ const render=(schema,params)=>{
 
 ```
 
-components：我们注册的组件。
-
-formatProps、formatChildren：将props或children转换为我们需要的运行时的值。主要用于我们自定义的组件。props或children可以是函数，可以传递我们需要的参数params，最终返回我们需要的数据。
-
-通过 react 的 `createElement(type,props,...children)` 渲染。
+- components：我们注册的组件。
+- formatProps、formatChildren：将props或children转换为我们需要的运行时的值。主要用于我们自定义的组件。props或children可以是函数，可以传递我们需要的参数params，最终返回我们需要的数据。
+- render：通过 react 的 `createElement(type,props,...children)` 渲染。
 
 
 ***属性解析***
@@ -146,7 +127,6 @@ const matchedStr=(str,c=['{','}'])=>str?.trim?.().match(new RegExp(`^${c[0]}([\\
 
 ```
 
-
 ***执行字符串代码***
 
 ```javascript
@@ -161,6 +141,8 @@ const str2code=(str,hasReturn=false)=>{
 > str2code会直接执行并返回结果，如果返回的是函数会执行函数并返回结果。如果我们需要返回函数，就要包裹一层函数。例如：`onClick`，`{()=>e=>alert('hello')}`。
 
 ***路由设置***
+
+路由配置可直接在页面配置，存入后台，使用时获取路由配置即可。
 
 ```javascript
 {
@@ -217,20 +199,10 @@ const str2code=(str,hasReturn=false)=>{
 
 ```
 
-如果整个系统都是通过 `schema` 数据配置生成的，那么我们只需一个渲染器，通过路由获取到 `shcema` 数据，然后渲染成当前路由页面。所以只需一个渲染文件即可。
+如果整个系统都是通过 `schema` 数据配置生成的，那么我们只需一个渲染器，通过路由id获取到 `shcema` 数据，然后渲染成当前路由页面。所以只需一个渲染文件即可。
 
 
-根据 `projectId`、`routerId` 获取路由页面数据。
-
-```javascript
-const pageSchema=async ({id})=>{
-  const {result}=await apiList.listSchemaFn({routerId:id,projectId:defProject._id});
-  return {result};
-};
-
-```
-
-通过设置路由 `loadData` 来提前请求数据，页面直接获取即可。详细使用见[useRouter](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&amp;mid=2455986102&amp;idx=1&amp;sn=4328f6e2d4d3077d7aac4962dbbaa736&amp;chksm=8cf5d070bb8259661c6782d0235e12afce48fe6ce6d63139066a2d264feba61ee3769b32a66b&token=300862977&lang=zh_CN#rd)
+***根据 `projectId`、`routerId` 获取路由页面数据。***
 
 ```javascript
 const pageSchema=async ({id})=>{
@@ -240,7 +212,17 @@ const pageSchema=async ({id})=>{
 
 ```
 
-页面渲染。
+通过设置路由 `loadData` 来提前请求数据，页面直接获取即可。详细使用见 [useRouter](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&amp;mid=2455986102&amp;idx=1&amp;sn=4328f6e2d4d3077d7aac4962dbbaa736&amp;chksm=8cf5d070bb8259661c6782d0235e12afce48fe6ce6d63139066a2d264feba61ee3769b32a66b&token=300862977&lang=zh_CN#rd)
+
+```javascript
+const pageSchema=async ({id})=>{
+  const {result}=await apiList.listSchemaFn({routerId:id,projectId:defProject._id});
+  return {result};
+};
+
+```
+
+***页面渲染***
 
 ```javascript
 const Index=props=>{
@@ -252,6 +234,92 @@ const Index=props=>{
 };
 
 ```
+
+### 可视化开发示例
+
+#### 创建项目
+
+![1](./doc/img/1.png)
+
+首先我们创建一个项目，如图所示。本示例使用 `控制台` 项目演示。
+
+![2](./doc/img/2.png)
+
+#### 创建用户并分配项目
+
+![3](./doc/img/3.png)
+
+#### 创建API
+
+![4](./doc/img/4.png)
+
+![5](./doc/img/5.png)
+
+#### 新建项目路由
+
+![6](./doc/img/6.png)
+
+#### 为用户设置路由权限
+
+![7](./doc/img/7.png)
+
+### 页面设计
+
+#### 原生html标签
+
+![10](./doc/img/10.png)
+
+![23](./doc/img/23.png)
+
+根据dom元素属性自行配置。
+
+#### UI组件
+
+![12](./doc/img/12.png)
+
+![14](./doc/img/14.png)
+
+当我们设计好页面时，可以随时回到项目路由查看改页面，也可点击预览查看，符合预期效果后保存即可。
+
+![22](./doc/img/22.png)
+
+![25](./doc/img/25.png)
+
+原生标签和基础组件只能设计出一些静态展示效果，我们可以自定义一些业务组件，给页面加入交互性。
+
+#### 业务组件
+
+以 `table` 和 `form` 为例，简单设计一个用户管理页面。
+
+![15](./doc/img/15.png)
+
+为 `table` 设置了自定义属性 `actions `、`columns `、`searchSchema `、`modalSchema `
+
+```javascript
+{
+  actions,
+  columns,
+  searchSchema,
+  modalSchema,
+}
+
+```
+- actions：定义事件
+- columns：表头设计
+- searchSchema：搜索表单
+- modalSchema：弹窗表单
+
+![16](./doc/img/16.png)
+
+事件定义可自行定义 `action name` ，共页面使用，`apiName` 从我们API系统里面选。
+
+***预览***
+
+![17](./doc/img/17.png)
+
+可实时进行页面预览，也提供了撤销重做操作。
+
+#### 编辑功能
 
 ***props编辑***
 
@@ -301,6 +369,7 @@ const redoDesign=()=>{
 
 提供了组件移动功能，可根据需要自行拖动。
 
+![27](./doc/img/27.png)
 
 ```javascript
 const onDrop=info=>{
@@ -313,39 +382,41 @@ const onDrop=info=>{
 
 ```
 
-### 搭建
+#### 效果
 
-#### 原生dom
+可点击按钮或链接查看效果。
 
-#### 基础组件
+![28](./doc/img/28.png)
 
-#### 业务组件
+页面 `schema` ：
 
+![29](./doc/img/29.png)
 
-示例：
+***用户管理页面***
 
-1. 原生dom
-2. 基础组件
-3. 业务组件
+![18](./doc/img/18.png)
 
-业务组件有数据处理，需要我们在设计时预留属性可视化配置方案。
+页面 `schema`：
 
-需要我们写一些通用业务组件，来实现配置生成页面。
+![30](./doc/img/30.png)
 
-认清没有一劳永逸的方法
+编辑页面
 
-根据业务需求 定制快速开发 易维护易拓展的系统
+![19](./doc/img/19.png)
 
+页面 `schema`：
 
+![31](./doc/img/31.png)
 
+### 总结
 
+低代码更多的是用来当作提升开发效率的一个工具，在我们当前业务范围内，写少量代码封装好业务组件，即可进行可视化开发。
 
+平台的通用性和灵活性，需要我们在实际业务中去权衡。
 
+我们需要认清，没有一劳永逸的方法，只有在不断探索中提升。
 
-
-
-
-
+项目地址：[https://github.com/ahyiru/web-design](https://github.com/ahyiru/web-design)
 
 
 
