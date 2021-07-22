@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<meta charset="utf-8">
+<style>
+	.container{
+		width:100%;
+		background-color:#eee;
+		padding:10px;
+	}
+	.center{
+		text-align:center;
+		margin:0 auto;
+	}
+	.t1,.tt{
+		display:inline-block;
+	}
+	.t1{
+	    width:280px;
+	    height:280px;
+	    border-radius:280px;
+	    border:10px solid #f00;
+    }
+    .tt{
+    	position:relative;
+    	width:300px;
+    	height:300px;
+    }
+    .tt>canvas,.tt>img{
+    	position:absolute;
+    	left:0;
+    	top:0;
+    }
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="center">
+			<div class="t1"></div>
+			<div class="tt">
+				<img src="../0.png" width="300" height="300">
+				<canvas id="canvas" width="300" height="300"></canvas>
+			</div>
+		</div>
+	</div>
+	
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script>
+		var myt=function(){
+			var c=document.getElementById('canvas');
+	        var ctx=c.getContext('2d');
+	        ctx.strokeStyle='#f00';
+	        ctx.lineWidth=10;
+	        var f=1;
+	        function tt(){
+	        	if(f>59){
+	        		clearInterval(tm);
+	        	}
+	        	ctx.beginPath();
+		        ctx.arc(150,150,125,0,f/60*2*Math.PI,false);
+		        ctx.stroke();
+		        f++;
+	        }
+	        var tm=setInterval(tt,1);
+		}
+
+		$('.tt').on('click',function(){
+			myt();
+		})
+
+	</script>
+</body>
+</html>

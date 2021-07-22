@@ -1,0 +1,99 @@
+@charset "utf-8";
+/*mystyle.css*/
+
+[class^="y-"]{
+  -webkit-font-smoothing:antialiased;/* 这个属性可以使页面上的字体抗锯齿,使用后字体看起来会更清晰舒服。 */
+}
+
+*,*::after,*::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-font-smoothing:antialiased;
+}
+
+html{
+	font-family:Arial,微软雅黑,Helvetica,sans-serif,黑体,宋体;
+  font-size:62.5%;
+	-webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  overflow:auto;
+}
+body{
+	margin:0;
+	width:100%;
+	height:100%;
+	font-size:1.6rem;
+	color:#000;
+	background-color:transparent;
+
+  -webkit-overflow-scrolling:touch;/* 滚动回弹 */
+}
+
+/*a*/
+a:link{color:#03c;}
+a:visited{color:#666;}
+a:hover{color:#f30;}
+a:active{color:#c30;}
+a{text-decoration:none !important;}
+
+/* input */
+input{outline:0;}
+/* button */
+button{outline:0;}
+
+/*ul*/
+ul{list-style:none;padding:0;margin:0;}
+
+/*table*/
+table{border-spacing:0;border-collapse:collapse;}
+
+/*color*/
+.bg-purple{background-color:#af5cc1;}
+.bg-green{background-color:#27c24c;}
+.bg-red{background-color:#f05050;}
+.bg-yellow{background-color:#fad733;}
+.bg-blue{background-color:#23b7e5;}
+.bg-orange{background-color:#ff7f50;}
+.bg-gray{background-color:#666;}
+.bg-primary{background-color:#7266ba;}
+.bg-success{background-color:#45b6af;}
+.bg-danger{background-color:#f3565d;}
+.bg-warning{background-color:#dfba49;}
+.bg-info{background-color:#24cbe5;}
+.bg-tip{background-color:#ff9655;}
+.bg-default{background-color:#999;}
+
+.purple{color:#af5cc1;}
+.green{color:#27c24c;}
+.red{color:#f05050;}
+.yellow{color:#fad733;}
+.blue{color:#23b7e5;}
+.orange{color:#ff7f50;}
+.gray{color:#666;}
+.primary{color:#7266ba;}
+.success{color:#45b6af;}
+.danger{color:#f3565d;}
+.warning{color:#dfba49;}
+.info{color:#24cbe5;}
+.tip{color:#ff9655;}
+.default{color:#999;}
+
+/*flex*/
+.flex-container{
+	display:-webkit-flex;
+	display:flex;
+}
+/*animation*/
+
+/*@media*/
+
+/* @media screen and (max-width:50em){
+  .y-header{
+    padding:3em 10% 4em;
+  }
+  .y-header h1{
+    font-size:2em;
+  }
+} */

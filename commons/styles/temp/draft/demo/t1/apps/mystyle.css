@@ -1,0 +1,108 @@
+@charset "utf-8";
+/*mystyle.css*/
+
+[class^="y-"]{
+  -webkit-font-smoothing:antialiased;/* 这个属性可以使页面上的字体抗锯齿,使用后字体看起来会更清晰舒服。 */
+}
+
+*,*::after,*::before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-font-smoothing:antialiased;
+}
+
+html{
+	font-family:Arial,微软雅黑,Helvetica,sans-serif,黑体,宋体;
+  font-size:62.5%;
+	-webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  overflow:auto;
+}
+body{
+	margin:0;
+	width:100%;
+	height:100%;
+	line-height:1;
+	font-size:1.2rem;
+	color:#000;
+	background-color:transparent;
+
+  -webkit-overflow-scrolling:touch;/* 滚动回弹 */
+}
+
+/*a*/
+/* a:link{color:#03c;}
+a:visited{color:#666;}
+a:hover{color:#f30;}
+a:active{color:#c30;} */
+a{text-decoration:none !important;}
+a{color:#777;}
+
+/* input */
+input,button{outline:0;}
+/* button */
+button[disabled]{
+  cursor:not-allowed;
+  opacity:.6;
+}
+
+/* textarea */
+textarea{resize:none;}
+
+/*ul*/
+ul{list-style:none;padding:0;margin:0;}
+
+/*table*/
+table{border-spacing:0;border-collapse:collapse;}
+
+/*color*/
+.bg-white{background-color:#fff !important;}
+.bg-purple{background-color:#af5cc1 !important;}
+.bg-green{background-color:#27c24c !important;}
+.bg-red{background-color:#f05050 !important;}
+.bg-yellow{background-color:#fad733 !important;}
+.bg-blue{background-color:#23b7e5 !important;}
+.bg-orange{background-color:#ff7f50 !important;}
+.bg-gray{background-color:#666 !important;}
+.bg-primary{background-color:#7266ba !important;}
+.bg-success{background-color:#45b6af !important;}
+.bg-danger{background-color:#f3565d !important;}
+.bg-warning{background-color:#dfba49 !important;}
+.bg-info{background-color:#24cbe5 !important;}
+.bg-tip{background-color:#ff9655 !important;}
+.bg-default{background-color:#999 !important;}
+
+.purple{color:#af5cc1 !important;}
+.green{color:#27c24c !important;}
+.red{color:#f05050 !important;}
+.yellow{color:#fad733 !important;}
+.blue{color:#23b7e5 !important;}
+.orange{color:#ff7f50 !important;}
+.gray{color:#666 !important;}
+.primary{color:#7266ba !important;}
+.success{color:#45b6af !important;}
+.danger{color:#f3565d !important;}
+.warning{color:#dfba49 !important;}
+.info{color:#24cbe5 !important;}
+.tip{color:#ff9655 !important;}
+.default{color:#999 !important;}
+
+/*flex*/
+.flex-container{
+	display:-webkit-flex;
+	display:flex;
+}
+/*animation*/
+
+/*@media*/
+
+@media screen and (max-width:50em){
+  .y-header{
+    padding:3em 10% 4em;
+  }
+  .y-header h1{
+    font-size:2em;
+  }
+}

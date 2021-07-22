@@ -1,0 +1,277 @@
+// 1. 宽高比
+
+
+div{
+	display: flex;
+	&::after{
+		content:'';
+		padding-top:100%;
+	}
+}
+
+// 左边补0
+// `0${n}`.slice(-2);
+
+// 调试模式
+// document.designMode
+
+
+// 背景虚化
+div{
+	filter:blur(2px);
+}
+
+// 饼图
+
+div{
+  width: 200px;
+  height: 200px;
+  background: conic-gradient(deeppink 0 30%, yellowgreen 30% 70%, teal 70% 100%);
+  border-radius: 50%;
+}
+
+// 进度条
+
+div{
+	--c:#3c0;
+	--p:60%;
+	height:20px;
+	background-color:silver;
+	border-radius:50%;
+	background-image: radial-gradient(closest-side circle at var(--p),var(--c),var(--c) 100%,transparent,linear-gradient(var(--c),var(--c)));
+	background-size:100% var(--p);
+	background-repeat:no-repeat;
+	animation:move 1.5s linear;
+	animation-fill-mode:forwards;
+}
+@keyframes move{
+	to{
+		background-size:var(--p);
+	}
+}
+
+
+
+
+// focus-within是为数不多的一个，可以由子操作父选择器
+// <div class="container">
+// 	<input/>
+// 	<button>login</button>
+// </div>
+.container{
+	display: flex;
+	justify-content: center;
+}
+.container:focus-within{
+  transform: scale(1.5);
+}
+.container:focus-within button{
+  transform: rotate(1turn);
+  transition: 1.5s cubic-bezier(0.24, 1.82, 0.53, 1.65);
+}
+
+
+
+// table美化
+table,tr,th,td{
+  border: 1px solid #d6d6d6;
+}
+table{
+  border-collapse: collapse;
+  width: 100%;
+  color: #555;
+  font-size: 14px;
+  table-layout: fixed;
+}
+th,td{
+  padding: 6px 12px;
+}
+tr:nth-child(2n+1){
+  background: aliceblue;
+}
+tr{
+  transition: background-color 1s;
+}
+tr:hover{
+  background: lightpink;
+}
+
+
+
+// 椭圆轨迹
+// <main>
+// 	<div>
+// 		<p></p>	
+// 	</div>
+// </main>
+main{
+	width: 150px;
+	height: 100px;
+	border: 1px solid aqua;
+	border-radius: 50%;
+	position: relative;
+	margin: 20px;
+}
+div{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	animation: move 3s linear infinite;
+}
+@keyframes move{
+	0%,100%{
+		transform: translate(25px, 0);
+	}
+
+	25%, 75%{
+		transform: translate(0, 0);
+	}
+	50%{
+		transform: translate(-25px, 0);
+	}
+}
+p{
+	margin: 0;
+	width: 20px;
+	height: 20px;
+	margin: -50%;
+	border-radius: 50%;
+	background: aqua;
+	animation: rotate 3s linear infinite;
+}
+@keyframes rotate{
+	0%{
+		transform:rotate(0deg) translate(50px, 0) ;
+	}
+	100%{
+		transform:rotate(360deg) translate(50px, 0) ;
+	}
+}
+
+
+// 动态边框
+div{
+  width: 190px;
+  height: 190px;
+  background: aqua;
+  position: relative;
+}
+div:before,
+div:after{
+  position: absolute;
+  content: "";
+  left: -5px;
+  right: -5px;
+  top: -5px;
+  bottom: -5px;
+  border: 5px solid #ff00ff88;
+}
+div:before{
+  animation: move 5s linear infinite;
+}
+div:after{
+  border-color: #ff000088;
+  animation: move 3s linear infinite alternate -2.5s;
+}
+
+@keyframes move{
+  0%,100%{
+    clip: rect(0,200px,5px,0);
+  }
+  25%{
+    clip: rect(0,200px,200px,195px);
+  }
+  50%{
+    border-color: #00ff0088;
+    clip: rect(195px,200px,200px,0);
+  }
+  75%{
+    clip: rect(0,5px,200px,0px);
+  }
+}
+
+
+
+
+// 土星
+// <div class="container">
+//   <div class="ring"></div>
+//   <div class="ball"></div>
+// </div>
+body {
+  background: black;
+}
+.container {
+  margin: 100px;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  perspective-origin: 1000px 0px;
+}
+.ring {
+  width: 220px;
+  height: 220px;
+  background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+  border-radius: 50%;
+  position: absolute;
+  transform: rotateX(50deg) ;
+  animation: move 3s linear infinite;
+  mask: radial-gradient(transparent 75px,#000 0);
+  -webkit-mask: radial-gradient(transparent 75px,#000 0);
+}
+@keyframes move {
+  to {
+    transform: rotateX(50deg) rotateZ(360deg);
+  }
+}
+.ball {
+  background: #000;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  transform: translate(35px, 35px);
+  box-shadow: 0 0 15px 3px magenta inset;
+  position: absolute;
+}
+
+
+// Chrome图标
+
+body{ 
+  background: gray; 
+}
+div{
+	width: 300px;
+	height: 300px;
+	background: 
+    radial-gradient(#419af6 26%, white 0, white 30%, transparent 0), 
+    linear-gradient(120deg, #5dd52f 50%, transparent 0) 0 100% / 115% 44%, 
+    linear-gradient(60deg, #5dd533 50%, transparent 0) 0 0/ 35% 70%, 
+    linear-gradient(120deg, #ff0000 50%, transparent 0) 0 0 / 50% 197%, 
+    linear-gradient(red, red) 0 0 / 100% 29%, 
+    linear-gradient(#fdeb35, #fce72a);
+	background-repeat: no-repeat;
+	border-radius: 100%;
+	border: 8px solid white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+@font-face {
+  font-family: 'cruise';
+  src:
+    url('fonts/cruise.ttf?srz1pg') format('truetype'),
+    url('fonts/cruise.woff?srz1pg') format('woff'),
+    url('fonts/cruise.svg?srz1pg#cruise') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'cruise' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-desktop:before {
+  content: "\e30c";
+}
+.icon-boat:before {
+  content: "\e532";
+}
+.icon-deny:before {
+  content: "\e611";
+}
+.icon-folder:before {
+  content: "\e2c8";
+}
+.icon-info:before {
+  content: "\e88f";
+}
+.icon-plus:before {
+  content: "\f067";
+}
+.icon-search:before {
+  content: "\f002";
+}
+.icon-th-card:before {
+  content: "\f00a";
+}
+.icon-th-list:before {
+  content: "\f00b";
+}
+.icon-close:before {
+  content: "\f00d";
+}
+.icon-cog:before {
+  content: "\f013";
+}
+.icon-trash:before {
+  content: "\f014";
+}
+.icon-sign-in:before {
+  content: "\f090";
+}
+.icon-navicon:before {
+  content: "\f0c9";
+}
+.icon-dashboard:before {
+  content: "\f0e4";
+}
+.icon-sitemap:before {
+  content: "\f0e8";
+}
+.icon-coffee:before {
+  content: "\f0f4";
+}
+.icon-angle-up:before {
+  content: "\f106";
+}
+.icon-angle-down:before {
+  content: "\f107";
+}
+.icon-life-bouy:before {
+  content: "\f1cd";
+}
+.icon-id-card:before {
+  content: "\f2c3";
+}

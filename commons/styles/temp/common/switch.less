@@ -1,0 +1,91 @@
+@import '../theme/colors.less';
+@switchH:26px;
+@switchW:52px;
+@switchB:3px;
+.yswitch{
+  min-width:@switchW;
+  height:@switchH;
+  display:inline-block;
+  line-height:1;
+  position:relative;
+  vertical-align:middle;
+  border-radius:@switchH/2;
+  overflow:hidden;
+  margin:4px;
+  &.disabled{
+    // pointer-events:none;
+    // cursor:not-allowed;
+    opacity:.7;
+    >input{
+      &[disabled]{
+        cursor:not-allowed;
+      }
+    }
+  }
+  >input{
+    // display:none;
+    // visibility:hidden;
+    opacity:0;
+    z-index:2;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    outline:0;
+    border:0;
+    cursor:pointer;
+    border-radius:@switchH/2;
+    &:checked{
+      &+label{
+        background-color:@blue;
+        text-align:left;
+        padding-left:10px;
+        padding-right:@switchH;
+        transition:background-color .3s;
+        &::before{
+          // left:@switchW + @switchB - @switchH;//ie下transition calc无动效
+          left:calc(~"100% + "@switchB - @switchH);
+          transition:left .3s;
+          // transform:translateX(100%) translateX(@switchB) translateX(-@switchH);
+          // transition:transform .3s;
+        }
+      }
+    }
+  }
+  >label{
+    position:relative;
+    top:0;
+    left:0;
+    display:block;
+    width:100%;
+    height:100%;
+    line-height:@switchH;
+    padding-left:@switchH;
+    padding-right:10px;
+    text-align:right;
+    color:#fff;
+    border-radius:@switchH/2;
+    cursor:pointer;
+    -moz-user-select:none;
+    user-select:none;
+    background-color:@gray;
+    transition:background-color .3s;
+    &::before{
+      content:'';
+      position:absolute;
+      left:0;
+      top:@switchB;
+      display:block;
+      width:100%;
+      max-width:@switchH - @switchB*2;
+      height:@switchH - @switchB*2;
+      border-radius:100%;
+      background-color:@white;
+      left:@switchB;
+      transition:left .3s;
+      // transform:translateX(@switchB);
+      // transition:transform .3s;
+    }
+  }
+}

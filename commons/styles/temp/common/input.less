@@ -1,0 +1,37 @@
+@import '../theme/colors.less';
+.input{
+  display:inline-block;
+  width:100%;
+  min-width:0;
+  height:32px;
+  padding:4px 11px;
+  font-size:1.4rem;
+  line-height:1.42857143;
+  color:rgba(0,0,0,0.65);
+  background-color:#fff;
+  background-image:none;
+  border:1px solid #d9d9d9;
+  border-radius:4px;
+  transition:all .3s;
+  &::-webkit-input-placeholder{
+    color:@default;
+  }
+  &:hover,&:focus{
+    border-color:@blue;
+    transition:all .3s;
+    &+i{
+      color:@blue;
+    }
+  }
+  &:focus{
+    outline:0;
+    box-shadow:0 0 0 2px rgba(49,143,250,.2);
+  }
+  &[disabled]{
+    color:rgba(0,0,0,0.25);
+    border-color:#e5e5e5;
+    background-color:#f5f5f5;
+    cursor:not-allowed;
+  }
+}
+

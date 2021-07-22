@@ -1,0 +1,187 @@
+@import '../theme/colors.less';
+.ybtn{
+  display:inline-block;
+  padding:0 13px;
+  font-size:1.4rem;
+  font-weight:500;
+  background-image:none;
+  height:32px;
+  line-height:1.42857143;
+  border:1px solid transparent;
+  border-radius:4px;
+  text-align:center;
+  vertical-align:middle;
+  white-space:nowrap;
+  cursor:pointer;
+  touch-action:manipulation;
+  user-select:none;
+  text-decoration:none;
+  outline:0;
+  box-shadow:0 2px 0 rgba(0,0,0,0.015);
+  color:rgba(0,0,0,0.65);
+  border-color:#d9d9d9;
+  background-color:#fff;
+  transition:all .3s;
+  &:hover,&:focus{
+    box-shadow:none;
+    color:@info;
+    border-color:@blue;
+    background-color:#fff;
+    transition:all .3s;
+  }
+  &:active{
+    box-shadow:0 0 0 5px rgba(49,143,250,.15);
+    transition:all .3s;
+  }
+  &[disabled]{
+    cursor:not-allowed;
+    box-shadow:none;
+    color:rgba(0,0,0,0.25);
+    border-color:#d9d9d9;
+    background-color:#f5f5f5;
+  }
+  &.has-txt{
+    >i{
+      margin-right:.5em;
+    }
+  }
+  &.ybtn-default{
+    color:@white;
+    background-color:@gray;
+    border-color:#777;
+    &:hover,&:focus,&:active{
+      color:@white;
+      background-color:#777;
+      border-color:@gray;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-outline-default{
+    color:@gray;
+    background-color:transparent;
+    border-color:@gray;
+    &:hover,&:focus,&:active{
+      color:#777;
+      border-color:#777;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-info{
+    color:@white;
+    background-color:@blue;
+    border-color:@info;
+    &:hover,&:focus,&:active{
+      color:@white;
+      background-color:@info;
+      border-color:@blue;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-outline-info{
+    color:@blue;
+    background-color:transparent;
+    border-color:@blue;
+    &:hover,&:focus,&:active{
+      color:@info;
+      border-color:@info;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-success{
+    color:@white;
+    background-color:@success;//#33cc33;
+    border-color:@green;
+    &:hover,&:focus,&:active{
+      color:@white;
+      background-color:@green;
+      border-color:@success;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-outline-success{
+    color:@success;
+    background-color:transparent;
+    border-color:@success;
+    &:hover,&:focus,&:active{
+      color:@green;
+      border-color:@green;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-warning{
+    color:@white;
+    background-color:@tip;
+    border-color:@orange;
+    &:hover,&:focus,&:active{
+      color:@white;
+      background-color:@orange;
+      border-color:@tip;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-outline-warning{
+    color:@tip;
+    background-color:transparent;
+    border-color:@tip;
+    &:hover,&:focus,&:active{
+      color:@orange;
+      border-color:@orange;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-danger{
+    color:@white;
+    background-color:@danger;
+    border-color:@red;
+    &:hover,&:focus,&:active{
+      color:@white;
+      background-color:@red;
+      border-color:@danger;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-outline-danger{
+    color:@danger;
+    background-color:transparent;
+    border-color:@danger;
+    &:hover,&:focus,&:active{
+      color:@red;
+      border-color:@red;
+      transition:all .3s;
+    }
+  }
+  &.ybtn-sm{
+    padding:5px 10px;
+    font-size:1.2rem;
+    line-height:1.5;
+    border-radius:3px;
+  }
+  &.ybtn-lg{
+    padding:10px 16px;
+    font-size:1.8rem;
+    line-height:1.3333333;
+    border-radius:6px;
+  }
+  &.ybtn-block{
+    display:block;
+    width:100%;
+  }
+  &.ybtn-right{
+    float:right;
+  }
+}
+.ybtn-group{
+  .ybtn{
+    border-radius:0;
+    margin-left:-1px;
+    &:first-of-type{
+      margin-left:0;
+      border-top-left-radius:4px;
+      border-bottom-left-radius:4px;
+    }
+    &:last-of-type{
+      border-top-right-radius:4px;
+      border-bottom-right-radius:4px;
+    }
+  }
+}

@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>一念</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="share">
+	<meta name="keywords" content="web,分享,逸儒">
+	<meta name="author" content="yiru,ah.yiru@gmail.com">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-title" content="一念生灭">
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./mystyle.css">
+  <link rel="stylesheet" href="./style.css">
+	<style>
+    .login{
+      overflow:hidden;
+      font-weight:600;
+    }
+    .login>a{
+      float:right;
+      display:block;
+      padding:7px;
+    }
+    .login>a:first-child{
+      margin-right:20px;
+    }
+    .login>a:hover{
+      background-color:#ddd;
+    }
+  </style>
+</head>
+<body>
+	<section class="login blue">
+    <a href="http://www.ahyiru.com/yinian/">注册</a>
+    <a href="http://www.ahyiru.com/yinian/">登录</a>
+  </section>
+  <section class="top">
+    <div class="y-container">
+      <div class="yleft">
+        <div class="title">
+          <div>
+            <div class="tp">念</div>
+            <h2>一念</h2>
+            <p>一念三千，记录、分享、交流。</p>
+          </div>
+        </div>
+        <div class="download">
+          <div class="ydown">
+            <div class="ydl">
+              <a href="#" class="ybtn yios"><i class="fa fa-apple"></i>IOS</a>
+              <a href="http://shouji.baidu.com/software/9294904.html" target="_blank" class="ybtn"><i class="fa fa-android"></i>Android</a>
+            </div>
+            <div class="ydr">
+              <img src="img/dl.png">
+            </div>
+          </div>
+          <div class="yfork">
+            <span>关注我:</span>
+            <a href="" class="wx"><i class="green fa fa-weixin"></i></a>
+            <a href="http://weibo.com/ahyiru" target="_blank"><i class="red fa fa-weibo"></i></a>
+            <a href="http://user.qzone.qq.com/642144711/main" target="_blank"><i class="blue fa fa-qq"></i></a>
+            <a href="https://github.com/ahyiru" target="_blank"><i class="purple fa fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="yright">
+        <div class="iphone bg-black ip1">
+          <div class="iphone__power-btn"></div>
+          <div class="iphone__left-btn"></div>
+          <div class="iphone__details"></div>
+          <div class="iphone__home-btn"></div>
+          <div class="iphone__screen yi1"></div>
+        </div>
+        <div class="iphone ip2">
+          <div class="iphone__power-btn"></div>
+          <div class="iphone__left-btn"></div>
+          <div class="iphone__details"></div>
+          <div class="iphone__home-btn"></div>
+          <div class="iphone__screen yi2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">版权所有 &copy; 2016-2020 <a href="https://github.com/ahyiru">yiru</a></div>
+  </section>
+
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="./func.js"></script>
+	<script>
+    $(function(){
+      var h=$(window).height(),
+          ch=$('.y-container').height();
+
+      if(ch>h-36){
+        $('.bottom').css('position','static');
+      }
+      else{
+        $('.bottom').css('position','fixed');
+      }
+
+      $('.yios').on('click',function(){
+        alert('敬请期待！');
+      });
+
+      $(window).resize(function(){
+        var h=$(window).height(),
+            ch=$('.y-container').height();
+        if(ch>h-36){
+          $('.bottom').css('position','static');
+        }
+        else{
+          $('.bottom').css('position','fixed');
+        }
+      });
+
+    }) 
+  </script>
+</body>
+</html>

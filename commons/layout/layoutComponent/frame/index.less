@@ -1,0 +1,134 @@
+.frame-color{
+  h1,h2,h3,h4,h5,h6,p{
+    color:var(--linkColor);
+  }
+  a{
+    color:var(--linkColor);
+    &:active,&.active{
+      color:var(--linkActiveColor);
+    }
+    &:hover{
+      color:var(--linkHoverColor);
+    }
+  }
+}
+
+.frame{
+  --borderShadow:0 0 6px 1px rgba(0,0,0,0.06);
+  --topHeight:calc(var(--topbarHeight) + var(--headerHeight));
+  background:var(--appBgColor);
+  color:var(--appColor);
+  .frame-header{
+    height:var(--headerHeight);
+    line-height:var(--headerHeight);
+    // background:var(--navBgColor);
+    box-shadow:var(--borderShadow);
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:10;
+    .frame-color();
+  }
+  .frame-main{
+    margin:0 auto;
+    max-width:var(--maxWidth);
+    padding-top:var(--topHeight);
+    box-shadow:var(--borderShadow);
+    z-index:5;
+    .frame-container{
+      position:relative;
+      background:var(--menuBgColor);
+      .frame-aside{
+        position:fixed;
+        width:var(--menuWidth);
+        top:var(--topHeight);
+        bottom:0;
+        z-index:5;
+        background:var(--menuBgColor);
+        transition:width .3s;
+        .frame-color();
+      }
+      .frame-view{
+        padding-left:var(--menuWidth);
+        min-height:calc(100vh - var(--topHeight));
+        transition:padding-left .3s;
+        .frame-footer{
+          height:var(--footerHeight);
+          line-height:var(--footerHeight);
+          background:var(--panelBgColor);
+        }
+      }
+    }
+  }
+  &.collapsed{
+    .frame-main{
+      .frame-container{
+        .frame-aside{
+          width:var(--collapseWidth);
+          transition:width .3s;
+        }
+        .frame-view{
+          padding-left:var(--collapseWidth);
+          transition:padding-left .3s;
+        }
+      }
+    }
+  }
+}
+
+
+/*
+@media screen and (max-width:@maxWidth){
+  .frame{
+    .frame-main{
+      .frame-container{
+        .frame-aside{
+          left:0;
+        }
+      }
+    }
+  }
+}*/
+
+@media screen and (max-width:env(--viewport-1)){
+  .frame{
+    .frame-main{
+      .frame-container{
+        .frame-aside{
+          // left:0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:1024px){
+  .frame{
+    .frame-main{
+      .frame-container{
+        .frame-aside{
+          width:0;
+        }
+        .frame-view{
+          padding-left:0;
+        }
+      }
+    }
+    &.collapsed{
+      .frame-main{
+        .frame-container{
+          .frame-aside{
+            width:var(--menuWidth);
+          }
+          .frame-view{
+            padding-left:0;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+

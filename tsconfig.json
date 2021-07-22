@@ -1,0 +1,32 @@
+{
+  "compilerOptions":{
+    "module":"commonjs",
+    "target":"esnext",
+    "allowJs":true,
+    "moduleResolution":"node",
+    "jsx":"preserve",
+    "allowSyntheticDefaultImports":true,
+    "noImplicitAny":false,
+    "experimentalDecorators":true,
+    "emitDecoratorMetadata":true,
+    "preserveConstEnums":true,
+    "sourceMap":true,
+    "pretty":true,
+    "removeComments":true,
+    "declaration": true,
+    "lib":["esnext","dom","dom.iterable","scripthost"],
+    "typeRoots":["./node_modules/@types"]
+  },
+  "exclude":[
+    "node_modules",
+    "configs",
+    "scripts",
+    "server",
+    "**/draft/",
+    "doc",
+    "public",
+    "common",
+    "usehooks",
+    "publish"
+  ]
+}

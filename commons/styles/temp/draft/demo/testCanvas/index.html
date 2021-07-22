@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8">
+<title>my canvas</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="share">
+<meta name="keywords" content="web,app,分享,逸儒">
+<meta name="author" content="yiru,ah.yiru@gmail.com">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-title" content="be yourself">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="toolbar margin-10-5">
+	<button class="btn btn-info" id="color">color</button>
+	<button class="btn btn-success" id="size">size</button>
+	<button class="btn btn-danger" id="eraser">eraser</button>
+	<button class="btn btn-warning" id="text">text</button>
+</div>
+
+<div class="margin-10-5">
+	<button class="btn btn-default" id="clean">clean</button>
+	<button class="btn btn-default" id="pre">撤销</button>
+	<button class="btn btn-default" id="next">重做</button>
+</div>
+
+<div id="note">
+	<textarea id="txtArea" cols="50" rows="5"></textarea>
+</div>
+
+<div class="carea">
+	<canvas id="imgCanvas"></canvas>
+	<canvas id="canvas"></canvas>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="func.js"></script>
+
+</body>
+</html>

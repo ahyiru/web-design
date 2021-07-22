@@ -1,0 +1,56 @@
+.ellipsis{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  width:100%;
+}
+.menu-btbar{
+  height:var(--menuDownBar);
+  overflow:hidden;
+  // border-top:1px solid rgba(255,255,255,.5);
+  // padding:10px 0;
+  .btbar-title{
+    .ellipsis();
+    margin:0;
+    padding:0 15px;
+    height:38px;
+    line-height:38px;
+    background-color:rgba(0,0,0,.1);
+    box-shadow:0 1px 4px rgba(0,0,0,0.1) inset;
+  }
+  .btbar-list{
+    overflow: auto;
+    height:calc(var(--menuDownBar) - 38px);
+    li{
+      a{
+        .ellipsis();
+        position:relative;
+        display:block;
+        padding-left:24px;
+        padding-right:10px;
+        height:38px;
+        line-height:38px;
+        font-size:1.2rem;
+        &::before{
+          content:"";
+          position:absolute;
+          left:10px;
+          top:16px;
+          width:6px;
+          height:6px;
+          border-radius:100%;
+          background-color:#40aff9;
+        }
+      }
+      &:not(:last-of-type){
+        a{
+          border-bottom:1px dotted rgba(0,0,0,.1);
+        }
+      }
+    }
+  }
+}
+
+
+
+

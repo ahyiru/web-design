@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="nav.css">
+<style>
+	.r1{
+		right:20%;
+	}
+	.r2{
+		right:35%;
+	}
+	.r3{
+		right:50%;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		<span class="nav r0"><span class="ico"></span></span>
+		<span class="nav r1"><span class="ico"></span></span>
+		<span class="nav r2"><span class="ico"></span></span>
+		<span class="nav r3"><span class="ico ico0"></span></span>
+	</div>
+	<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	<script>
+		$('.r0').on('click',function(){
+			$('.r0>.ico').toggleClass('ico1');
+		});
+		$('.r1').on('click',function(){
+			$('.r1>.ico').toggleClass('ico2');
+		});
+		$('.r2').on('click',function(){
+			$('.r2>.ico').toggleClass('ico3');
+		});
+		$('.r3').on('click',function(){
+			$('.r3>.ico').toggleClass('ico4');
+		});
+	</script>
+</body>
+</html>

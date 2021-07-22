@@ -1,0 +1,32 @@
+{
+  "name":"测试",
+  "short_name":"Demo",
+  "description":"测试",
+  "lang":"cn",
+  "display":"standalone",
+  "orientation":"any",
+  "start_url":".",
+  "theme_color":"#313131",
+  "background_color":"#313131",
+  "icons":[{
+    "src":"../app/styles/images/usr.jpg",
+    "type":"image/jpg",
+    "sizes":"192x192"
+  },{
+    "src":"./img/logo_256.png",
+    "sizes":"256x256",
+    "type":"image/png"
+  },{
+    "src":"./img/logo_144.png",
+    "type":"image/png",
+    "sizes":"144x144"
+  },{
+    "src":"./img/logo_96.png",
+    "type":"image/png",
+    "sizes":"96x96"
+  },{
+    "src":"./img/logo_72.png",
+    "type":"image/png",
+    "sizes":"72x72"
+  }]
+}

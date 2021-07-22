@@ -1,0 +1,9 @@
+node_modules
+.nyc_output
+coverage
+dist
+build
+/__tests__/
+doc
+public
+**/draft/

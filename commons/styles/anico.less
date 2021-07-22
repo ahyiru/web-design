@@ -1,0 +1,123 @@
+/*@height:2px;
+@width:18px;
+// @bgcolor:currentColor;
+@bgcolor:#00b4cf;
+
+@ratio:1.4142;
+@rotate:45deg;
+@scale:@ratio / (@ratio + 1);
+@maigin:@height * 3;
+@ty:@width / 4 - @height / @ratio;
+@tx:@width / 4 + @height / @ratio;
+@anitime:.3s;
+*/
+.anico{
+  --height:2px;
+  --width:18px;
+  --bgColor:#00b4cf;
+  --ratio:1.4142;
+  --rotate:45deg;
+  --anitime:.3s;
+  --scale:calc(var(--ratio) / (var(--ratio) + 1));
+  --maigin:calc(var(--height) * 3);
+  --ty:calc(var(--width) / 4 - var(--height) / var(--ratio));
+  --tx:calc(var(--width) / 4 + var(--height) / var(--ratio));
+  
+  position:relative;
+  display:inline-block;
+  height:100%;
+  width:var(--width);
+  .hline,.hline::before,.hline::after{
+    position:absolute;
+    background-color:var(--bgColor);
+    border-radius:2px;
+    transform:translateZ(0);
+  }
+  .hline{
+    width:var(--width);
+    height:var(--height);
+    display:inline-block;
+    left:50%;
+    top:50%;
+    transform:translateX(-50%) translateY(-50%);
+    transition:transform var(--anitime),background-color var(--anitime);
+    &::before,&::after{
+      content:"";
+      width:100%;
+      height:100%;
+      top:0;
+      left:0;
+      background-color:currentColor;
+      transition:transform var(--anitime);
+    }
+    &::before{
+      transform:translateY(calc(0px - var(--maigin)));
+    }
+    &::after{
+      transform:translateY(var(--maigin));
+    }
+    &.close{
+      background-color:rgba(255,255,255,0);
+      &::before{
+        transform:rotate(var(--rotate));
+      }
+      &::after{
+        transform:rotate(calc(0deg - var(--rotate)));
+      }
+    }
+    &.right{
+      &::before{
+        transform:translateX(var(--tx)) translateY(calc(0px - var(--ty))) rotate(var(--rotate)) scaleX(var(--scale));
+      }
+      &::after{
+        transform:translateX(var(--tx)) translateY(var(--ty)) rotate(calc(0deg - var(--rotate))) scaleX(var(--scale));
+      }
+    }
+    &.bottom{
+      transform:translateX(-50%) translateY(-50%) rotate(-90deg);
+      &::before{
+        transform:translateX(calc(0px - var(--tx))) translateY(calc(0px - var(--ty))) rotate(calc(0deg - var(--rotate))) scaleX(var(--scale));
+      }
+      &::after{
+        transform:translateX(calc(0px - var(--tx))) translateY(var(--ty)) rotate(var(--rotate)) scaleX(var(--scale));
+      }
+    }
+    &.play{
+      transform:translateX(-50%) translateY(-50%) rotate(-90deg);
+      background-color:rgba(0,0,0,0);
+      &::before{
+        transform-origin:0 0;
+      }
+      &::after{
+        transform-origin:100% 100%;
+      }
+      &.pause{
+        background-color:var(--bgColor);
+        transform:translateX(-75%) translateY(-50%) rotate(-90deg);
+        &::before{
+          transform:rotate(60deg);
+        }
+        &::after{
+          transform:rotate(-60deg);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:1024px){
+  .anico{
+    .hline{
+      &.right{
+        background-color:rgba(255,255,255,0);
+        &::before{
+          transform:rotate(45deg);
+        }
+        &::after{
+          transform:rotate(-45deg);
+        }
+      }
+    }
+  }
+}
+
