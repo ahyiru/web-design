@@ -14,24 +14,6 @@ const {Row,Col}=components;
 
 const {formatTime,validObj,str2code}=utils;
 
-const t=(text,record)=>{
-  const props=str2code(`(text,record)=>({
-    color:text?'green':'red',
-  })`);
-  const children=str2code(`(text,record)=>text?'已激活':'未激活'`);
-  const a=[{
-    type:'Tag',
-    props:props(),
-    children:children(),
-  }];
-  console.log(12,a);
-  return a;
-};
-
-const r=t(1,{a:222});
-
-console.log(r);
-
 const { Search } = Input;
 const { Item } = Form;
 

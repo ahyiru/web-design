@@ -204,6 +204,7 @@ const routers=[
         path:'/users/add',
         name:'新增用户',
         componentPath:'/lowCode',
+        hideMenu:true,
         loadData:{
           pageSchema,
         },

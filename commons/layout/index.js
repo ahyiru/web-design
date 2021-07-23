@@ -1,4 +1,4 @@
-import Layout from './layoutComponent';
+import Layout from '@huxy/layout';
 import Antdi18n from './components/antdi18n';
 import useNavList from './components/useNavList';
 

@@ -1,8 +1,20 @@
 // import {utils} from '@common';
-import fetcher from '@app/api/fetcher';
+import fetcher,{suspense} from '@app/api/fetcher';
 import getApis from '@app/api/getApis';
 
 const apiList={};
+
+const suspenseApis={};
+
+const getSuspense=apis=>{
+  const susList=apis.filter(api=>['profile','allUser'].includes(api.name));
+  susList.map(sus=>{
+    const {name,type,...rest}=sus;
+    const funcName=`${name}Suspense`;
+    const paramsKey=type||rest.method==='post'?'data':'params';
+    suspenseApis[funcName]=data=>suspense({...rest,[paramsKey]:data});
+  });
+};
 
 /* const {userApis,routerApis,authApis,layoutApis,projectApis,handleApis,pageApis}=require('@configs/apis');
 export const getList1=async ()=>{
@@ -22,7 +34,10 @@ export const getApiFn=async ()=>{
     const paramsKey=type||(rest.method==='post'?'data':'params');
     apiList[funcName]=data=>fetcher({...rest,[paramsKey]:data});
   });
+  getSuspense(apis);
   return apiList;
 };
+
+export {suspenseApis};
 
 export default apiList;

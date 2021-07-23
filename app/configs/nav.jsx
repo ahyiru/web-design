@@ -1,4 +1,3 @@
-import { UserOutlined, PoweroffOutlined, RestOutlined,ApiOutlined, GithubOutlined,CameraOutlined } from '@ant-design/icons';
 import {message} from 'antd';
 import themeList from '@app/configs/theme';
 import {logout} from '@app/utils/utils';
@@ -29,19 +28,19 @@ export const leftNav=({store})=>{
       children:[
         {
           name:'zbxtable',
-          icon:<ApiOutlined />,
+          icon:'ApiOutlined',
           type:'link',
           link:'https://zbx.cactifans.com/',
         },
         {
           name:'PhoenixUI',
-          icon:<ApiOutlined />,
+          icon:'ApiOutlined',
           type:'link',
           link:'http://ihuxy.com:8088/',
         },
         {
           name:'API文档',
-          icon:<ApiOutlined />,
+          icon:'ApiOutlined',
           type:'link',
           link:'http://ihuxy.com:8010',
         },
@@ -68,13 +67,13 @@ export const rightNav=({store})=>{
         {
           name:right['profile'],
           type:'profile',
-          icon:<UserOutlined />,
+          icon:'UserOutlined',
           path:'/profile',
         },
         {
           name:right['logout'],
           type:'logout',
-          icon:<PoweroffOutlined />,
+          icon:'PoweroffOutlined',
           handle:item=>{
             logout();
           },
@@ -82,7 +81,6 @@ export const rightNav=({store})=>{
       ],
     },
     {
-      // name:right['language'],
       name:right[language],
       Custom:()=><div className="icon"><img src={`${right[language+'_icon']}`} /></div>,
       // type:'language',
@@ -92,26 +90,25 @@ export const rightNav=({store})=>{
           name:right['zh'],
           type:'language',
           active:language==='zh',
-          icon:<div className="img"><img src={`${right['zh_icon']}`} /></div>,
+          icon:<div key="zh" className="img"><img src={`${right['zh_icon']}`} /></div>,
         },
         {
           key:'en',
           name:right['en'],
           type:'language',
           active:language==='en',
-          icon:<div className="img"><img src={`${right['en_icon']}`} /></div>,
+          icon:<div key="en" className="img"><img src={`${right['en_icon']}`} /></div>,
         },
         {
           key:'jp',
           name:right['jp'],
           type:'language',
           active:language==='jp',
-          icon:<div className="img"><img src={`${right['jp_icon']}`} /></div>,
+          icon:<div key="jp" className="img"><img src={`${right['jp_icon']}`} /></div>,
         },
-      ],//projList,
+      ],
     },
     {
-      // name:left['themeList'],
       icon:'SettingOutlined',
       type:'themeList',
       // arrowDir:'lt',
@@ -121,17 +118,17 @@ export const rightNav=({store})=>{
       }),
     },
     {
-      icon:<GithubOutlined />,
+      icon:'GithubOutlined',
       type:'link',
       link:'https://github.com/ahyiru/mern',
     },
-    /* {
-      name:'fullscreen',
-      Custom:()=><FullPage />,
-    }, */
+    // {
+    //   key:'fullscreen',
+    //   Custom:()=><FullPage />,
+    // },
     {
-      // name:'screencapture',
-      icon:<CameraOutlined />,
+      key:'screencapture',
+      icon:'CameraOutlined',
       handle:item=>{
         html2canvas(document.body).then(canvas=>{
           dlfile(canvas.toDataURL());
@@ -141,52 +138,15 @@ export const rightNav=({store})=>{
         });
       },
     },
-    /* {
-      name:right['clean_cookie'],
-      icon:<RestOutlined />,
-      type:'button',
-      handle:item=>{
-        storage.clear();
-        location.href='/';
-      },
-    },
-    {
-      name:right['projectList'],
-      type:'projectList',
-      Ricon:true,
-      children:[
-        {
-          name:'zbxtable',
-          icon:<ApiOutlined />,
-          type:'link',
-          link:'https://zbx.cactifans.com/',
-        },
-        {
-          name:'vue-demo',
-          icon:<ApiOutlined />,
-          type:'link',
-          link:'http://ihuxy.com:8501/',
-        },
-        {
-          name:'layout',
-          icon:<ApiOutlined />,
-          type:'link',
-          link:'http://ihuxy.com:9301/test-app1/',
-        },
-        {
-          name:'projectTest',
-          icon:<ApiOutlined />,
-          type:'link',
-          link:'http://ihuxy.com:9501/',
-        },
-      ],
-    },
-    {
-      name:'PhoenixUI',
-      icon:<ApiOutlined />,
-      type:'link',
-      link:'http://ihuxy.com:8088/',
-    }, */
+    // {
+    //   name:right['clean_cookie'],
+    //   icon:<RestOutlined />,
+    //   type:'button',
+    //   handle:item=>{
+    //     storage.clear();
+    //     location.href='/';
+    //   },
+    // },
   ];
 };
 

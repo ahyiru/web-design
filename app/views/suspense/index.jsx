@@ -7,7 +7,7 @@ import {Table,Select,InputNumber,Switch,Button} from 'antd';
 import Panel from '@app/components/panel';
 import {Row,Col} from '@app/components/row';
 
-import suspenseApis from '@app/api/suspenseApis';
+import {suspenseApis} from '@app/utils/getApis';
 import {susTest1,susTest2} from './suspenseFns';
 
 const {profileSuspense,allUserSuspense}=suspenseApis;
