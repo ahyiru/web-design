@@ -64,7 +64,7 @@ a{text-decoration:none;}
 
 input,button,textarea{outline:0;margin:0;border-radius:0;}
 
-input[disabled],button[disabled]{cursor:not-allowed;}
+input[disabled],button[disabled],a[disabled]{cursor:not-allowed;color:rgba(0,0,0,.25) !important;}
 
 button,input[type=button],input[type=submit]{-webkit-appearance:button;cursor:pointer;}
 

@@ -482,6 +482,9 @@ const routers=[
                 icon:'RobotOutlined',
                 // component:()=>import(`@app/views/projects/router`),
                 componentPath:'/projects/router',
+                linkProps:{
+                  disabled:true,
+                },
               },
               {
                 path:'/common2-2-3',
@@ -489,6 +492,9 @@ const routers=[
                 icon:'RobotOutlined',
                 // component:()=>import(`@app/views/projects/router`),
                 componentPath:'/projects/router',
+                linkProps:{
+                  target:'_blank',
+                },
               },
             ],
           },
