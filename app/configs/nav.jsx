@@ -120,7 +120,7 @@ export const rightNav=({store})=>{
     {
       icon:'GithubOutlined',
       type:'link',
-      link:'https://github.com/ahyiru/mern',
+      link:'https://github.com/ahyiru/web-design',
     },
     // {
     //   key:'fullscreen',
