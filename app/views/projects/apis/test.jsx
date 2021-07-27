@@ -27,12 +27,12 @@ const formStyle={
 
 const Index=props=>{
   const [form] = Form.useForm();
-  const {getState,back}=props.history;
-  const state=getState();
+  const {getState}=props.history;
+  const {item,backState}=getState();
   const onFinish = async values => {
     try{
       const input=strToJson(values.input||'{}');
-      const {url,method,type}=state;
+      const {url,method,type}=item;
       const paramsKey=type||method==='post'?'data':'params';
       const result=await testFetcher({url,method,[paramsKey]:input});
       form.setFieldsValue({
@@ -44,10 +44,13 @@ const Index=props=>{
       });
     }
   };
+  const back=()=>{
+    backState?props.router.push(backState):props.history.back();
+  };
   return <div>
     <Row>
       <Col>
-        <Back />
+        <Back back={back} />
       </Col>
       <Col>
         <Panel>
@@ -55,7 +58,7 @@ const Index=props=>{
             name="addApi"
             onFinish={onFinish}
             form={form}
-            initialValues={{method:'get',...state}}
+            initialValues={{method:'get',...item}}
             {...layout}
             // style={formStyle}
           >

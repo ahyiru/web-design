@@ -26,7 +26,7 @@ const formStyle={
 const Index=props=>{
   const [form] = Form.useForm();
   const {getState}=props.history;
-  const state=getState();
+  const {item,backState}=getState();
   const [projectList,setProjectList]=useState([]);
   useEffect(()=>{
     const getProjects=async ()=>{
@@ -38,8 +38,8 @@ const Index=props=>{
     getProjects();
   },[]);
   const onFinish = async values => {
-    const handler=state?editUserFn:addUserFn;
-    values=state?{...state,...values}:values;
+    const handler=item?editUserFn:addUserFn;
+    values=item?{...item,...values}:values;
     const projectName=projectList.find(v=>v._id===values.projectId)?.name;
     try{
       const {code,message:msg}=await handler({...values,projectName});
@@ -51,10 +51,13 @@ const Index=props=>{
       console.log(err);
     }
   };
+  const back=()=>{
+    backState?props.router.push(backState):props.history.back();
+  };
   return <div>
     <Row>
       <Col>
-        <Back />
+        <Back back={back} />
       </Col>
       <Col>
         <Panel>
@@ -62,7 +65,7 @@ const Index=props=>{
             name="addUser"
             onFinish={onFinish}
             form={form}
-            initialValues={state??{}}
+            initialValues={item??{}}
             {...layout}
             style={formStyle}
           >

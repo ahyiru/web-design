@@ -62,8 +62,9 @@ const getSelected=(data,id)=>{
 
 const Index=props=>{
   const profile=props.store.getState('profile');
-  const {getState,back}=props.history;
-  const stateItem=getState()||(profile.projectId?{_id:profile.projectId,name:profile.projectName,isDef:true}:defProject);
+  const backState=props.history.getState()?.backState;
+  const selItem=props.history.getState()?.item;
+  const stateItem=selItem||(profile.projectId?{_id:profile.projectId,name:profile.projectName,isDef:true}:defProject);
   const rootNode={
     type:stateItem?.name,
     isRoot:true,
@@ -179,6 +180,10 @@ const Index=props=>{
     setDisableUndo(false);
   };
 
+  const back=()=>{
+    backState?props.router.push(backState):props.history.back();
+  };
+
   const topActions=[
     {
       text:'预览',
@@ -233,7 +238,7 @@ const Index=props=>{
     <Row>
       {
         !stateItem.isDef&&<Col>
-          <Back actions={topActions} />
+          <Back actions={topActions} back={back} />
         </Col>
       }
       <Col width="240px">

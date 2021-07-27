@@ -92,21 +92,21 @@ const getColumns = ({handleCheck,handleEdit,handleDelete},profile) => [
 const Index=props=>{
   const [selectedRows,setSelectedRows]=useState([]);
   // const [modalItem,setModalItem]=useState(null);
-
-  const [result,update,pageChange,searchList]=useHandleList(allUserFn,{/* role:0 */});
+  const pageParams=props.params;
+  const [result,update,pageChange,searchList]=useHandleList(allUserFn,null,{current:pageParams?.current,size:pageParams?.size});
 
   const handleCheck=item=>{
     console.log(item);
     props.router.push({
       path:`./auth/${item._id}`,
-      state:item,
+      state:{item,backState:{path:props.path,params:{current,size}}},
     });
   };
   const handleEdit=item=>{
     // setModalItem(item);
     props.router.push({
       path:`./edit/${item._id}`,
-      state:item,
+      state:{item,backState:{path:props.path,params:{current,size}}},
     });
   };
   const handleAdd=async ()=>{

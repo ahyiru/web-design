@@ -2,7 +2,7 @@ import {useEffect,useRef} from 'react';
 
 import { Form, Input, Button, message,InputNumber,Select } from 'antd';
 
-// import {LeftOutlined} from '@ant-design/icons';
+import {LeftOutlined} from '@ant-design/icons';
 
 import Back from '@app/components/goBack';
 
@@ -24,16 +24,19 @@ const formStyle={
 };
 
 const Index=props=>{
-  // const profile=props.store.getState('profile');
+  const profile=props.store.getState('profile');
   const [form] = Form.useForm();
-  const {getState,back}=props.history;
-  const state=getState();
+  const {getState}=props.history;
+  const {item,backState}=getState();
+  const back=()=>{
+    backState?props.router.push(backState):props.history.back();
+  };
   const onFinish = async values => {
-    const handler=state?editApiFn:addApiFn;
-    values=state?{...state,...values}:values;
+    const handler=item?editApiFn:addApiFn;
+    values=item?{...item,...values}:values;
     // console.log(handler,values);
     try{
-      const {code,message:msg}=await handler({...values,projectId:props.params.projectId});
+      const {code,message:msg}=await handler({...values,projectId:profile.projectId});
       if(code===200){
         message.success(msg);
         // props.router.push(`/users`);
@@ -46,7 +49,7 @@ const Index=props=>{
   return <div>
     <Row>
       <Col>
-        <Back />
+        <Back back={back} />
       </Col>
       <Col>
         <Panel>
@@ -54,7 +57,7 @@ const Index=props=>{
             name="addApi"
             onFinish={onFinish}
             form={form}
-            initialValues={{method:'get',...state}}
+            initialValues={{method:'get',...item}}
             {...layout}
             style={formStyle}
           >

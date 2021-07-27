@@ -61,8 +61,12 @@ const treeDrop=(item,dropFns)=><Dropdown overlay={()=>handleClick(dropFns,item)}
 
 const Index=props=>{
   const profile=props.store.getState('profile');
-  const stateItem=props.history.getState()||(profile.projectId?{_id:profile.projectId,name:profile.projectName,isDef:true}:defProject);
+  const pageParams=props.params;
+  const backState=props.history.getState()?.backState;
+  const selItem=props.history.getState()?.item;
+  const stateItem=selItem||(profile.projectId?{_id:profile.projectId,name:profile.projectName,isDef:true}:defProject);
   const rootNode={
+    key:-1,
     path:'',
     name:stateItem.name,
     iconKey:'LayoutOutlined',
@@ -72,7 +76,7 @@ const Index=props=>{
   const [modalType,setModalType]=useState('');
   const [item,setItem]=useState({});
   const [filterTree,setFilterTree]=useSearch(null);
-  const [selectedItem,setSelectedItem]=useState({});
+  const [selectedItem,setSelectedItem]=useState(pageParams||{});
 
   const [pageSchema,setPageSchema]=useState([]);
 
@@ -139,11 +143,16 @@ const Index=props=>{
   };
 
   const toDesignPage=()=>{
-    const {_id,path,name,iconKey,projectId}=selectedItem;
+    const {_id,path,name,iconKey,projectId,key}=selectedItem;
+    const itemState={_id,path,name,iconKey,projectId,key};
     props.router.push({
       path:`./${_id}`,
-      state:{path,name,iconKey,projectId,pageSchema},
+      state:{item:itemState,backState:{path:props.path,params:itemState,state:{item:selItem,backState}}},
     });
+  };
+
+  const back=()=>{
+    backState?props.router.push(backState):props.history.back();
   };
 
   const dropFns={
@@ -153,29 +162,31 @@ const Index=props=>{
   };
   const {isPending,data}=result;
 
-  const tree=formatTree([rootNode,...sort(data||[],'createtime',true)]);
+  const tree=formatTree([rootNode,...sort(data,'createtime',true)]);
 
   const treeData=filterTree||tree||[];
+
   return <div>
     <Row>
       {
         !stateItem.isDef&&<Col>
-          <Back />
+          <Back back={back} />
         </Col>
       }
       <Col width="240px">
         <Panel>
           <Spin spinning={isPending}>
             <Search placeholder="请输入名称" allowClear enterButton onSearch={searchTree} style={{maxWidth:'240px',marginBottom:12}} />
-            <Tree
+            {!isPending&&<Tree
               showIcon
-              defaultExpandAll
+              defaultExpandedKeys={[selectedItem?.key||-1]}
               switcherIcon={<DownOutlined />}
               titleRender={item=>treeDrop(item,dropFns)}
               treeData={treeData}
               onSelect={onSelect}
+              selectedKeys={[selectedItem?.key||'']}
               virtual={false}
-            />
+            />}
           </Spin>
         </Panel>
       </Col>

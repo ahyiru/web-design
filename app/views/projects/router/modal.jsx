@@ -23,11 +23,9 @@ const ModalForm=props=>{
     <Form.Item name="name" label="展示名" /* rules={nameRule} */>
       <Input placeholder="请输入" />
     </Form.Item>
-    {
-      /* item.isLeaf&&!isRoot&&<Form.Item name="component" label="页面文件路径" rules={pathRule}>
-        <Input placeholder="请输入" />
-      </Form.Item> */
-    }
+    <Form.Item name="componentPath" label="页面文件路径" rules={pathRule}>
+      <Input placeholder="请输入" />
+    </Form.Item>
     <Form.Item name="iconKey" label="图标">
       <Input placeholder="请输入" />
     </Form.Item>

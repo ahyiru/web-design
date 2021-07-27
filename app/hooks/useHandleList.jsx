@@ -2,9 +2,10 @@ import {useRef} from 'react';
 import useFetchList from './useFetchList';
 
 const useHandleList=(fetchList,commonParams=null,initParams=null)=>{
-  const search=useRef({});
-  const page=useRef({current:1,size:10});
-  const [result,update]=useFetchList(fetchList,commonParams,{...page.current,...search.current,...initParams});
+  const {current,size,...rest}=initParams||{};
+  const search=useRef(rest||{});
+  const page=useRef({current:current||1,size:size||10});
+  const [result,update]=useFetchList(fetchList,commonParams,{...page.current,...search.current});
 
   const pageChange=(current,size)=>{
     page.current={current,size};
@@ -23,5 +24,4 @@ const useHandleList=(fetchList,commonParams=null,initParams=null)=>{
 };
 
 export default useHandleList;
-
 

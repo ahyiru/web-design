@@ -19,10 +19,11 @@ const {Row,Col}=components;
 
 const Index=props=>{
   const [form] = Form.useForm();
-  const state=props.history.getState();
+  const {getState}=props.history;
+  const {item,backState}=getState();
   const onFinish = async values => {
-    const handler=state?editProjectFn:addProjectFn;
-    values=state?{...state,...values}:values;
+    const handler=item?editProjectFn:addProjectFn;
+    values=item?{...item,...values}:values;
     try{
       const {code,message:msg}=await handler(values);
       if(code===200){
@@ -33,10 +34,13 @@ const Index=props=>{
       console.log(err);
     }
   };
+  const back=()=>{
+    backState?props.router.push(backState):props.history.back();
+  };
   return <div>
     <Row>
       <Col>
-        <Back />
+        <Back back={back} />
       </Col>
       <Col>
         <Panel>
@@ -44,7 +48,7 @@ const Index=props=>{
             name="addProject"
             onFinish={onFinish}
             form={form}
-            initialValues={state??{}}
+            initialValues={item??{}}
             {...layout}
             style={{width:'50%'}}
           >

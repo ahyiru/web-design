@@ -88,25 +88,26 @@ const Index=props=>{
   const [selectedRows,setSelectedRows]=useState([]);
   // const [modalItem,setModalItem]=useState(null);
 
-  const [result,update,pageChange,searchList]=useHandleList(listProjectFn,{/* role:0 */});
+  const pageParams=props.params;
+  const [result,update,pageChange,searchList]=useHandleList(listProjectFn,null,{current:pageParams?.current,size:pageParams?.size});
 
   const handleRouter=item=>{
     props.router.push({
       path:`./router/${item._id}`,
-      state:item,
+      state:{item,backState:{path:props.path,params:{current,size}}},
     });
   };
   const handleApis=item=>{
     props.router.push({
       path:`./api/${item._id}`,
-      state:item,
+      state:{item,backState:{path:props.path,params:{current,size}}},
     });
   };
   const handleEdit=item=>{
     // setModalItem(item);
     props.router.push({
       path:`./edit/${item._id}`,
-      state:item,
+      state:{item,backState:{path:props.path,params:{current,size}}},
     });
   };
   const handleAdd=async ()=>{

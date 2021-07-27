@@ -97,24 +97,27 @@ const getColumns = ({handleTest,handleEdit,handleDelete},profile) => [
 
 const Index=props=>{
   const profile=props.store.getState('profile');
-  const stateItem=props.history.getState()||(profile.projectId?{_id:profile.projectId,name:profile.projectName,isDef:true}:defProject);
+  const backState=props.history.getState()?.backState;
+  const selItem=props.history.getState()?.item;
+  const stateItem=selItem||(profile.projectId?{_id:profile.projectId,name:profile.projectName,isDef:true}:defProject);
 
   const [selectedRows,setSelectedRows]=useState([]);
 
-  const [result,update,pageChange,searchList]=useHandleList(listApiFn,{projectId:stateItem._id});
+  const pageParams=props.params;
+  const [result,update,pageChange,searchList]=useHandleList(listApiFn,{projectId:stateItem._id},{current:pageParams?.current,size:pageParams?.size});
 
   const handleTest=item=>{
     // console.log(item);
     props.router.push({
       path:`./test/${item._id}`,
-      state:item,
+      state:{item,backState:{path:props.path,params:{current,size},state:{item:selItem,backState}}},
     });
   };
   const handleEdit=item=>{
     // setModalItem(item);
     props.router.push({
       path:`./edit/${item._id}`,
-      state:item,
+      state:{item,backState:{path:props.path,params:{current,size},state:{item:selItem,backState}}},
     });
   };
   const handleAdd=async ()=>{
@@ -147,6 +150,10 @@ const Index=props=>{
   };
   const handleModalOk=values=>{
     console.log(values);
+  };
+
+  const back=()=>{
+    backState?props.router.push(backState):props.history.back();
   };
 
   const rowSelection={
@@ -187,7 +194,7 @@ const Index=props=>{
     <Row>
       {
         !stateItem.isDef&&<Col>
-          <Back />
+          <Back back={back} />
         </Col>
       }
       {/* <Col>

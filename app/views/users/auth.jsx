@@ -22,11 +22,11 @@ const {listRouterFn,listAuthFn,setAuthFn}=apiList;
 
 const {Row,Col}=components;
 
-const {arr2TreeByPath,isValidArr,traverItem,sort}=utils;
+const {arr2TreeByPath,isValidArr,traverItem}=utils;
 
-// const {TreeNode} = Tree;
-// 
-// const { confirm } = Modal;
+const {TreeNode} = Tree;
+
+const { confirm } = Modal;
 
 const rootNode={
   path:'',
@@ -35,6 +35,9 @@ const rootNode={
 };
 
 const Index=props=>{
+  const {getState}=props.history;
+  const {backState}=getState();
+
   const [checkedKeys,setCheckedKeys]=useState([]);
 
   const [routerList]=useFetchList(listRouterFn,{projectId:defProject._id});
@@ -70,8 +73,12 @@ const Index=props=>{
     setCheckedKeys(checkedKeysValue);
   };
 
+  const back=()=>{
+    backState?props.router.push(backState):props.history.back();
+  };
+
   const {isPending,data}=routerList;
-  const arr=[rootNode,...sort(data||[],'createtime',true)].map(item=>{
+  const arr=[rootNode,...(data||[])].map(item=>{
     item.key=item.path;
     const Icon=Icons[item.iconKey]||EyeInvisibleOutlined;
     item.icon=<Icon />;
@@ -89,7 +96,7 @@ const Index=props=>{
   return <div>
     <Row>
       <Col>
-        <Back />
+        <Back back={back} />
       </Col>
       <Col>
         <Panel>

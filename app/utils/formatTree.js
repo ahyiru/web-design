@@ -4,7 +4,7 @@ import {utils} from '@common';
 const {traverItem,arr2TreeByPath,isValidArr}=utils;
 
 const fixIcon=router=>router.map(item=>{
-  item.key=item.path;
+  item.key=item.key||item.path;
   item.icon=fixIcons(item.iconKey||'EyeInvisibleOutlined');
   return item;
 });
