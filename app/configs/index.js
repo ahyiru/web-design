@@ -1,5 +1,7 @@
 import {utils} from '@common';
 
+import {designReg,confirmDesignPage} from '@app/utils/confirmDesignPage';
+
 import whiteList from '../router/whiteList';
 
 const {storage}=utils;
@@ -33,17 +35,20 @@ const routerListenFn=(path,prevPath)=>{
   console.log(`${prevPath||'初始化'}页面停留时间：`,delay,routerListen);
 };
 
-const beforeRender=input=>{
+const beforeRender=(input,next)=>{
   const token=storage.get('token');
   const {path,prevPath}=input;
   const validPath=path.split('?')[0];
   if(validPath===initPath){
-    return {path:'/'};
+    return next({path:'/'});
   }
   if(!token&&!whiteRouters.includes(validPath)){
-    return {path:'/user/signin'};
+    return next({path:'/user/signin'});
   }
-
+  if(designReg.test(prevPath)){
+    return confirmDesignPage(next);
+  }
+  next();
   // routerListenFn(path,prevPath);
 };
 

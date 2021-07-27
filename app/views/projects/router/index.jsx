@@ -1,4 +1,4 @@
-import {useState,useCallback} from 'react';
+import {useState,useCallback,useEffect} from 'react';
 
 import {components,utils,use} from '@common';
 
@@ -136,10 +136,17 @@ const Index=props=>{
     }
   },[]);
 
+  useEffect(()=>{
+    const {_id,projectId}=selectedItem;
+    if(_id){
+      getPageSchema(_id,projectId);
+    }
+  },[selectedItem]);
+
   const onSelect=(selectedKeys,e)=>{
     const item=e.selectedNodes[0];
     setSelectedItem(item);
-    getPageSchema(item._id,item.projectId);
+    // getPageSchema(item._id,item.projectId);
   };
 
   const toDesignPage=()=>{
