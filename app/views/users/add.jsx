@@ -26,7 +26,7 @@ const formStyle={
 const Index=props=>{
   const [form] = Form.useForm();
   const {getState}=props.history;
-  const {item,backState}=getState();
+  const {item,backState}=getState()||{};
   const [projectList,setProjectList]=useState([]);
   useEffect(()=>{
     const getProjects=async ()=>{

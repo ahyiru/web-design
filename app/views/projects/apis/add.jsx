@@ -27,7 +27,7 @@ const Index=props=>{
   const profile=props.store.getState('profile');
   const [form] = Form.useForm();
   const {getState}=props.history;
-  const {item,backState}=getState();
+  const {item,backState}=getState()||{};
   const back=()=>{
     backState?props.router.push(backState):props.history.back();
   };

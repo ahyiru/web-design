@@ -18,6 +18,8 @@ const whiteRouters=browserRouter?whiteList:whiteList.map(path=>`#${path}`);
 
 const routerListen={};
 
+const token=storage.get('token');
+
 const routerListenFn=(path,prevPath)=>{
   if(!routerListen[path]){
     routerListen[path]={};
@@ -36,7 +38,6 @@ const routerListenFn=(path,prevPath)=>{
 };
 
 const beforeRender=(input,next)=>{
-  const token=storage.get('token');
   const {path,prevPath}=input;
   const validPath=path.split('?')[0];
   if(validPath===initPath){

@@ -20,7 +20,7 @@ const {Row,Col}=components;
 const Index=props=>{
   const [form] = Form.useForm();
   const {getState}=props.history;
-  const {item,backState}=getState();
+  const {item,backState}=getState()||{};
   const onFinish = async values => {
     const handler=item?editProjectFn:addProjectFn;
     values=item?{...item,...values}:values;
