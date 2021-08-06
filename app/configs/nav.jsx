@@ -1,5 +1,6 @@
 import {message} from 'antd';
-import themeList from '@app/configs/theme';
+import getThemeList from './theme';
+import getLang from '@app/utils/getLang';
 import {logout} from '@app/utils/utils';
 
 import defUser from '@app/assets/images/user/2.png';
@@ -21,7 +22,7 @@ export const leftNav=({store})=>{
       Custom:({collapsed})=><Anico type={(collapsed?.value??collapsed)?'right':''} />,
     },
     {
-      name:'demo列表',
+      name:left['projectList'],
       type:'projectList',
       arrowDir:'lt',
       Ricon:true,
@@ -49,13 +50,13 @@ export const leftNav=({store})=>{
     {
       icon:'WechatOutlined',
       arrowDir:'lt',
-      ChildRender:status=><div className="follow-me"><img src={wx} /><p>关注我：yiru_js</p></div>,
+      ChildRender:status=><div className="follow-me"><img src={wx} /><p>{left['followMe']}：yiru_js</p></div>,
     },
   ];
 };
 export const rightNav=({store})=>{
+  const language=getLang();
   const i18ns=store.getState('i18ns');
-  const language=store.getState('language');
   const user=store.getState('profile');
   const themeKey=store.getState('huxy-theme')?.key;
   const {nav:{right},theme}=i18ns;
@@ -112,7 +113,7 @@ export const rightNav=({store})=>{
       icon:'SettingOutlined',
       type:'themeList',
       // arrowDir:'lt',
-      children:themeList(theme).map(v=>{
+      children:getThemeList(theme).map(v=>{
         v.key===themeKey&&(v.active=true);
         return v;
       }),
@@ -132,7 +133,7 @@ export const rightNav=({store})=>{
       handle:item=>{
         html2canvas(document.body).then(canvas=>{
           dlfile(canvas.toDataURL());
-          message.success('页面截屏下载完成！');
+          message.success(right['screencapture_msg']);
         }).catch(error=>{
           message.error(error);
         });

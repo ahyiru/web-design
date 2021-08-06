@@ -13,7 +13,6 @@ const Index=props=>{
   const panel1=useRef();
   const panel2=useRef();
   useEffect(()=>{
-    console.log(21,panel1);
     const destroy1=drag(panel1.current);
     const destroy2=drag(panel2.current);
     return ()=>{

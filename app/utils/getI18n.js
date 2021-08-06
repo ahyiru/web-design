@@ -1,8 +1,7 @@
-import {utils} from '@common';
-const {storage,sysLang}=utils;
+import getLang from './getLang';
 
 const getI18n=async ()=>{
-  const language=storage.get('language')||sysLang();
+  const language=getLang();
   const i18ns=await import(`@app/i18n/${language}`);
   return {i18ns:i18ns.default??i18ns,language};
 };

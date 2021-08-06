@@ -1,0 +1,21 @@
+/*colors*/
+
+body{
+  --red1:#ff4d4f;
+  --red2:#f5222d;
+  --orange1:#ffa940;
+  --orange2:#fa8c16;
+  --gold1:#ffc53d;
+  --gold2:#faad14;
+  --yellow1:#ffec3d;
+  --yellow2:#fadb14;
+  --green1:#73d13d;
+  --green2:#52c41a;
+  --blue1:#40a9ff;
+  --blue2:#1890ff;
+  --purple1:#9254de;
+  --purple2:#722ed1;
+
+  --lightColor:rgba(0,0,0,.25);
+}
+

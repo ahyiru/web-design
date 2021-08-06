@@ -1,0 +1,96 @@
+/*单行文本溢出显示省略号*/
+.ellipsis{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  width:100%;
+  // display:inline-block;
+}
+/*清除浮动*/
+.clear{
+  zoom:1;
+  &::after{
+    clear:both;
+    content:"";
+    display:block;
+    height:0;
+    visibility:hidden;
+  }
+}
+/*居中*/
+.center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+/*多行文本溢出显示省略号*/
+.multi-ellip(@line:2){
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:@line;
+  -webkit-box-orient:vertical;
+}
+/*自动换行*/
+.auto-break{
+  white-space:normal;
+  word-break:break-all;
+  word-wrap:break-word;
+  hyphens:auto;
+}
+/*垂直书写文本*/
+.verticle-text{
+  writing-mode:vertical-rl;
+  writing-mode:tb-rl;
+}
+/*单行两端对齐*/
+.justify{
+  text-align:justify;
+  text-align-last:justify;
+  &::after{
+    display:inline-block;
+    content:"";
+    overflow:hidden;
+    width:100%;
+    height:0;
+  }
+}
+/*遮罩层*/
+.mark-layer{
+  display:block;
+  position:fixed;
+  overflow:hidden;
+  pointer-events:auto;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:10000;
+  background-color:rgba(55,55,55,.6);
+}
+/*混合图片*/
+.mix-pic{
+  // background:url(@pic1),url(@pic2);
+  background-size:cover;
+  background-blend-mode:lighten;
+  // mix-blend-mode:lighten;
+}
+/*分割线*/
+.split-line{
+  display:flex;
+  align-items:center;
+  &:before,&:after{
+    content:"";
+    height:1px;
+    background-color:#dfdfdf;
+    flex-grow:1;
+  }
+  &:before{
+    margin-right:10px;
+  }
+  &:after{
+    margin-left:10px;
+  }
+}
+
+

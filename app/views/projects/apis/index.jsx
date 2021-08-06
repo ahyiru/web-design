@@ -1,7 +1,6 @@
-import {useState,useCallback,useEffect,useRef} from 'react';
-import { Table, Tag, Space, Input, Button, Popconfirm, Modal, Form,Tooltip,message,Checkbox,Select} from 'antd';
-import { DeleteOutlined,PlusOutlined,ExclamationCircleOutlined,FullscreenOutlined,FullscreenExitOutlined} from '@ant-design/icons';
-import {roleList} from '@app/utils/config';
+import {useState} from 'react';
+import { Table, Space, Input, Button, Modal, Form,Tooltip,message} from 'antd';
+import { DeleteOutlined,PlusOutlined,ExclamationCircleOutlined} from '@ant-design/icons';
 import {components,utils} from '@common';
 import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
@@ -12,62 +11,59 @@ import Panel from '@app/components/panel';
 
 import Back from '@app/components/goBack';
 
-const {listApiFn,addApiFn,deleteApiFn}=apiList;
+const {listApiFn,deleteApiFn}=apiList;
 
 const {Row,Col}=components;
 
 const {formatTime,validObj}=utils;
 
-const { Search } = Input;
-const { Item } = Form;
-
-const searchFormItems=()=><>
+/* const searchFormItems=()=><>
   <Form.Item name="name" label="用户名">
     <Input placeholder="请输入" />
   </Form.Item>
   <Form.Item name="email" label="邮箱">
     <Input placeholder="请输入" />
   </Form.Item>
-</>;
+</>; */
 
-const getColumns = ({handleTest,handleEdit,handleDelete},profile) => [
+const getColumns = ({handleTest,handleEdit,handleDelete},profile,i18ns) => [
   {
-    title: '接口名',
+    title: i18ns.name,
     dataIndex: 'name',
     render: (text,record) => <a onClick={()=>handleTest(record)}>{text}</a>,
   },
   {
-    title: '标签',
+    title: i18ns.tags,
     dataIndex: 'tags',
   },
   {
-    title: '地址',
+    title: i18ns.url,
     dataIndex: 'url',
   },
   {
-    title: '请求方式',
+    title: i18ns.method,
     dataIndex: 'method',
   },
   {
-    title: '参数类型',
+    title: i18ns.type,
     dataIndex: 'type',
   },
   {
-    title: '接口权限',
+    title: i18ns.auth,
     dataIndex: 'auth',
   },
   {
-    title: '入参',
+    title: i18ns.input,
     dataIndex: 'input',
     render:(text,record)=><Tooltip title={text}>{text}</Tooltip>,
   },
   {
-    title: '出参',
+    title: i18ns.output,
     dataIndex: 'output',
     render:(text,record)=><Tooltip title={text}>{text}</Tooltip>,
   },
   {
-    title: '更新时间',
+    title: i18ns.updatetime,
     dataIndex: 'updatetime',
     render:(text,record)=>{
       const time=text||record.createtime||record.signuptime||+new Date();
@@ -76,26 +72,30 @@ const getColumns = ({handleTest,handleEdit,handleDelete},profile) => [
     },
   },
   {
-    title: '更新人',
+    title: i18ns.updater,
     dataIndex: 'updater',
     render:(text,record)=>text||record.creator,
   },
   {
-    title: '操作',
+    title: i18ns.action,
     dataIndex: 'action',
     align:'center',
     render:(text,record)=>{
       const disabled=false;//!profile.role&&record._id!==profile._id;
       return <>
-        <Button type="link" size="small" disabled={disabled} onClick={()=>handleTest(record)}>测试</Button>
-        <Button type="link" size="small" disabled={disabled} onClick={()=>handleEdit(record)}>编辑</Button>
-        <Button type="link" size="small" disabled={disabled} onClick={()=>handleDelete(record)} style={{color:disabled?'var(--lightColor)':'var(--red2)'}}>删除</Button>
+        <Button type="link" size="small" disabled={disabled} onClick={()=>handleTest(record)}>{i18ns.test_action}</Button>
+        <Button type="link" size="small" disabled={disabled} onClick={()=>handleEdit(record)}>{i18ns.edit_action}</Button>
+        <Button type="link" size="small" disabled={disabled} onClick={()=>handleDelete(record)} style={{color:disabled?'var(--lightColor)':'var(--red2)'}}>{i18ns.delete_action}</Button>
       </>;
     },
   },
 ];
 
 const Index=props=>{
+  const i18ns=props.store.getState('i18ns');
+  const i18nCfg=i18ns?.main.projectApis??{};
+  const {tableHeaderText={},actionsText={},searchFormText={}}=i18nCfg;
+
   const profile=props.store.getState('profile');
   const backState=props.history.getState()?.backState;
   const selItem=props.history.getState()?.item;
@@ -129,12 +129,12 @@ const Index=props=>{
     const items=item?[item]:selectedRows;
     const ids=items.map(v=>v._id);
     Modal.confirm({
-      title: '确定删除吗？',
+      title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v=>v.name)}`,
-      okText: '删除',
+      okText: actionsText.delete_confirm_ok,
       okType: 'danger',
-      cancelText: '取消',
+      cancelText: actionsText.delete_confirm_cancel,
       onOk:async ()=>{
         const {code,message:msg}=await deleteApiFn({ids});
         if(code===200){
@@ -173,7 +173,7 @@ const Index=props=>{
     handleDelete,
   };
 
-  const columns=getColumns(actions,profile);
+  const columns=getColumns(actions,profile,{...tableHeaderText,...actionsText});
 
   const {isPending,data}=result;
 
@@ -214,13 +214,13 @@ const Index=props=>{
           <div style={{overflow:'hidden',marginBottom:'10px'}}>
             <div style={{float:'left'}}>
               <Space size="small">
-                <Button loading={isPending} onClick={()=>handleAdd()} type="primary" icon={<PlusOutlined />}>新增</Button>
-                <Button loading={isPending} disabled={!selectedRows.length} onClick={()=>handleDelete()} icon={<DeleteOutlined />}>批量删除</Button>
+                <Button loading={isPending} onClick={()=>handleAdd()} type="primary" icon={<PlusOutlined />}>{actionsText.add_action}</Button>
+                <Button loading={isPending} disabled={!selectedRows.length} onClick={()=>handleDelete()} icon={<DeleteOutlined />}>{actionsText.batch_action}</Button>
               </Space>
             </div>
             <div style={{float:'right'}}>
               {/* <Search loading={isPending} placeholder="请输入用户名" allowClear onSearch={value=>searchList({keyword:value})} enterButton /> */}
-              <SearchForm submit={searchList} loading={isPending} />
+              <SearchForm submit={searchList} loading={isPending} searchFormText={searchFormText} />
             </div>
           </div>
           <Table
@@ -241,15 +241,15 @@ const Index=props=>{
 };
 
 const SearchForm=props=>{
-  const {submit,loading}=props;
+  const {submit,loading,searchFormText}=props;
   const [form]=Form.useForm();
   return <Form layout="inline" form={form} initialValues={{}} onFinish={value=>submit(validObj(value))}>
-    <Form.Item name="url" label="url">
-      <Input placeholder="请输入" allowClear style={{width:'120px'}} />
+    <Form.Item name="url" label={searchFormText.url}>
+      <Input placeholder={searchFormText.url_placeholder} allowClear style={{width:'120px'}} />
     </Form.Item>
     <Form.Item>
-      <Button loading={loading} type="primary" htmlType="submit">查询</Button>
-      <Button style={{marginLeft:'12px'}} onClick={()=>form.resetFields()}>重置</Button>
+      <Button loading={loading} type="primary" htmlType="submit">{searchFormText.submit}</Button>
+      <Button style={{marginLeft:'12px'}} onClick={()=>form.resetFields()}>{searchFormText.reset}</Button>
     </Form.Item>
   </Form>;
 };

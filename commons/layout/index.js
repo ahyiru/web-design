@@ -1,13 +1,15 @@
-import Layout from '@huxy/layout';
-import Antdi18n from './components/antdi18n';
+import {Layout} from '@common';
+import UiI18n from './components/uiI18n';
 import useNavList from './components/useNavList';
 
 import * as configs from './configs';
 
 const Index=props=>{
   const {store}=props;
+  const menu=store.getState('appMenu');
+  const i18ns=store.getState('i18ns');
   const [leftList,rightList]=useNavList({store});
-  return <Antdi18n store={store}><Layout {...props} leftList={leftList} rightList={rightList} {...configs} /></Antdi18n>;
+  return <UiI18n store={store}><Layout title={i18ns?.title} {...props} menu={menu} leftList={leftList} rightList={rightList} {...configs} /></UiI18n>;
 };
 
 export default Index;

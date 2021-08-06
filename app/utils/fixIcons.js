@@ -1,6 +1,5 @@
 import icons from './icons';
-import {utils} from '@common';
-const {fixEle}=utils;
+import fixEle from './fixEle';
 
 const fixIcons=fixEle(icons);
 

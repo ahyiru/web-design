@@ -9,7 +9,7 @@ const routers=[
     name:'首页',
     icon:'HomeOutlined',
     denied:false,
-    component:()=>import('@common/layout/index'),
+    component:()=>import('@common/layout'),
   },
   {
     path:'/user',

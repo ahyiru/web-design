@@ -6,7 +6,7 @@ const selectedType={
   background:'rgba(0,0,0,.2)',
   color:'var(--blue1)',
 };
-const Index=({icon,name,format,active,className,dropList,selectedKey,defaultValue,onClick,...rest},ref)=>{
+const Index=({icon,name,format,active,className,dropList,selectedKey,defaultValue,onClick,formatType,...rest},ref)=>{
   const [show,setShow]=useState(false);
   const iconRef=useRef();
   // ref=iconRef;

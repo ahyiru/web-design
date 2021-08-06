@@ -38,9 +38,9 @@ app.use(prefix,createProxyMiddleware(opts));
 /* app.use('/v1',createProxyMiddleware({
   target: 'https://zbx.cactifans.com',
   changeOrigin: true,
-})); */
+}));
 
-/* app.use('/mocks',createProxyMiddleware({
+app.use('/mocks',createProxyMiddleware({
   target: MOCK,
   changeOrigin: true,
 })); */
@@ -83,7 +83,7 @@ app.use(compression());
 
 // browserRouter
 app.get('*',(req,res)=>{
-  const htmlBuffer=devMiddleware.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
+  const htmlBuffer=compiler.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
   res.send(htmlBuffer.toString());
 });
 

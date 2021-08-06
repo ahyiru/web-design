@@ -1,4 +1,4 @@
-import { Modal,Form,Input,Select } from 'antd';
+import { Modal,Form,Select } from 'antd';
 
 import {layout} from '@app/utils/config';
 
@@ -11,10 +11,10 @@ const compNames=Object.keys(components);
 const nameList=[...compNames,...ele];
 
 const ModalForm=props=>{
-  const {form,item,isEdit}=props;
+  const {form,item,isEdit,addFormText}=props;
   return <Form form={form} {...layout} initialValues={{}}>
-    <Form.Item name="type" label="组件">
-      <Select placeholder="请选择" showSearch>
+    <Form.Item name="type" label={addFormText.type}>
+      <Select placeholder={addFormText.type} showSearch>
         {
           nameList.map(name=><Select.Option key={name} value={name}>{name}</Select.Option>)
         }
@@ -28,8 +28,8 @@ const ModalForm=props=>{
 
 const HandleModal=props=>{
   const [form]=Form.useForm();
-  const {onModalOk,modalVisible,onModalCancel,type,item}=props;
-  const title={add:'新增',edit:'编辑'};
+  const {onModalOk,modalVisible,onModalCancel,type,item,addFormText}=props;
+  const title={add:addFormText.add_title,edit:addFormText.edit_title};
   const isEdit=type==='edit';
   const handleSubmit=()=>{
     form.validateFields().then(values=>{
@@ -45,11 +45,11 @@ const HandleModal=props=>{
     onOk={() => handleSubmit()}
     // width={600}
     onCancel={() => onModalCancel()}
-    okText="确定"
-    cancelText="取消"
+    okText={addFormText.ok_text}
+    cancelText={addFormText.cancel_text}
   >
     <div>
-      <ModalForm form={form} item={item} isEdit={isEdit} />
+      <ModalForm form={form} item={item} isEdit={isEdit} addFormText={addFormText} />
     </div>
   </Modal>;
 };

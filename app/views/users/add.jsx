@@ -1,29 +1,21 @@
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useState} from 'react';
 
 import { Form, Input, Button, message,InputNumber,Select } from 'antd';
-
-import {LeftOutlined} from '@ant-design/icons';
-
 import Back from '@app/components/goBack';
-
 import apiList from '@app/utils/getApis';
-
 import {components} from '@common';
-
 import {layout,tailLayout} from '@app/utils/config';
 import {nameRule,emailRule,passwordRule,roleRule} from '@app/utils/rules';
-
 import Panel from '@app/components/panel';
 
 const {addUserFn,editUserFn,listProjectFn}=apiList;
-
 const {Row,Col}=components;
 
-const formStyle={
-  width:'50%',
-};
-
 const Index=props=>{
+  const i18ns=props.store.getState('i18ns');
+  const i18nCfg=i18ns?.main.users??{};
+  const {addFormText={}}=i18nCfg;
+
   const [form] = Form.useForm();
   const {getState}=props.history;
   const {item,backState}=getState()||{};
@@ -67,33 +59,34 @@ const Index=props=>{
             form={form}
             initialValues={item??{}}
             {...layout}
-            style={formStyle}
+            style={{width:'50%'}}
+            autoComplete="off"
           >
-            <Form.Item label="用户名" name="name" rules={nameRule}>
-              <Input placeholder="用户名" />
+            <Form.Item label={addFormText.name} name="name" rules={nameRule}>
+              <Input placeholder={addFormText.name} />
             </Form.Item>
-            <Form.Item label="邮箱" name="email" rules={emailRule}>
-              <Input placeholder="邮箱" />
+            <Form.Item label={addFormText.email} name="email" rules={emailRule}>
+              <Input placeholder={addFormText.email} />
             </Form.Item>
-            <Form.Item label="密码" name="password" rules={passwordRule}>
-              <Input type="password" placeholder="密码" />
+            <Form.Item label={addFormText.password} name="password" rules={passwordRule}>
+              <Input type="password" placeholder={addFormText.password} autoComplete="new-password" />
             </Form.Item>
-            <Form.Item label="等级" name="role" rules={roleRule}>
-              <InputNumber placeholder="等级" />
+            <Form.Item label={addFormText.role} name="role" rules={roleRule}>
+              <InputNumber placeholder={addFormText.role} />
             </Form.Item>
-            <Form.Item label="头像" name="avatar">
-              <Input placeholder="头像" />
+            <Form.Item label={addFormText.avatar} name="avatar">
+              <Input placeholder={addFormText.avatar} />
             </Form.Item>
-            <Form.Item label="所在项目" name="projectId">
-              <Select placeholder="请选择" allowClear style={{width:'80%'}}>
+            <Form.Item label={addFormText.projectId} name="projectId">
+              <Select placeholder={addFormText.projectId} allowClear style={{width:'80%'}}>
                 {
                   projectList.map(v=><Select.Option key={v._id} value={v._id}>{v.name}</Select.Option>)
                 }
               </Select>
             </Form.Item>
             <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">保存</Button>
-              <Button style={{marginLeft:'12px'}} onClick={()=>form.resetFields()}>重置</Button>
+              <Button type="primary" htmlType="submit">{addFormText.submit}</Button>
+              <Button style={{marginLeft:'12px'}} onClick={()=>form.resetFields()}>{addFormText.reset}</Button>
             </Form.Item>
           </Form>
         </Panel>
@@ -103,20 +96,6 @@ const Index=props=>{
 };
 
 export default Index;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

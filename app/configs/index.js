@@ -4,6 +4,8 @@ import {designReg,confirmDesignPage} from '@app/utils/confirmDesignPage';
 
 import whiteList from '../router/whiteList';
 
+import eventStore from './eventStore';
+
 const {storage}=utils;
 
 export const browserRouter=!process.env.isDev;
@@ -57,6 +59,7 @@ export default {
   browserRouter,
   beforeRender,
   basepath,
+  eventStore,
   // afterRender,
   // store:createStore(),
 };

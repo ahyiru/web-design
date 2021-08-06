@@ -4,7 +4,7 @@ const {merge} = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const rimraf = require('rimraf');
 
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -103,8 +103,8 @@ const prodConfig=merge(webpackConfig, {
           mangle: true,
         },
       }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorPluginOptions: {
+      new CssMinimizerPlugin({
+        minimizerOptions: {
           preset:['default',{
             discardComments:{removeAll:true},
             // calc: false,

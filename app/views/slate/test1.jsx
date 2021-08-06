@@ -6,9 +6,9 @@ import { withHistory } from 'slate-history';
 
 import { utils } from '@common';
 
-import * as elements from './types/components/text';
-
 import Panel from '@app/components/panel';
+
+import * as elements from './types/components/text';
 
 import Toolsbar from './types/renderElement/toolsbar';
 
@@ -81,27 +81,29 @@ const Leaf = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>;
 };
 
-const App = () => {
+const Index = props => {
+  const i18ns=props.store.getState('i18ns');
+  const i18nCfg=i18ns?.main.editor??{};
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const [value, setValue] = useState(initialValue);
 
-  const renderElement=useCallback(props=>{
-    const Comp=elements[firstUpper(props.element.type)]||elements.DefaultElement;
-    // console.log('renderElement',props,Comp);
-    return <Comp {...props} />;
+  const renderElement=useCallback(params=>{
+    const Comp=elements[firstUpper(params.element.type)]||elements.DefaultElement;
+    // console.log('renderElement',params,Comp);
+    return <Comp {...params} />;
   }, []);
-  const renderLeaf=useCallback(props=>{
-    const {text,...rest}=props.leaf;
-    // const Comp=elements[props.element.format]||elements.DefaultElement;
-    // console.log('renderLeaf',props);
-    return <Leaf {...props} />;
+  const renderLeaf=useCallback(params=>{
+    const {text,...rest}=params.leaf;
+    // const Comp=elements[params.element.format]||elements.DefaultElement;
+    // console.log('renderLeaf',params);
+    return <Leaf {...params} />;
   }, []);
-  // const renderLeaf = useCallback(props => <Leaf {...props} />, []);
+  // const renderLeaf = useCallback(params => <Leaf {...params} />, []);
   // console.log(12,editor);
 
   return <Panel title="slate editor - 未完成！">
     <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-      <Toolsbar />
+      <Toolsbar i18nCfg={i18nCfg} />
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}
@@ -129,4 +131,5 @@ const App = () => {
   </Panel>;
 };
 
-export default App;
+export default Index;
+

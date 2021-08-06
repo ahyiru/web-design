@@ -8,31 +8,31 @@ import {
 
 const themeList=nameList=>[
   {
-    name:nameList['defaults'],
+    name:nameList?.['defaults']??'defaults',
     key:'defaults',
     list:defaults,
     type:'theme',
   },
   {
-    name:nameList['dark'],
+    name:nameList?.['dark']??'dark',
     key:'dark',
     list:dark,
     type:'theme',
   },
   {
-    name:nameList['light'],
+    name:nameList?.['light']??'light',
     key:'light',
     list:light,
     type:'theme',
   },
   {
-    name:nameList['portal'],
+    name:nameList?.['portal']??'portal',
     key:'portal',
     list:portal,
     type:'theme',
   },
   {
-    name:nameList['lightPortal'],
+    name:nameList?.['lightPortal']??'lightPortal',
     key:'lightPortal',
     list:lightPortal,
     type:'theme',

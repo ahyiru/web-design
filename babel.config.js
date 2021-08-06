@@ -25,11 +25,6 @@ const config=api=>{
     ],
   ];
 
-  const targets={
-    browsers: ['last 2 versions'],
-    // esmodules: true,
-  };
-
   const plugins=[
     [
       'import',
@@ -58,8 +53,8 @@ const config=api=>{
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-proposal-function-bind',
     '@babel/plugin-proposal-object-rest-spread',
-    ['@babel/plugin-proposal-class-properties',{loose:true}],
-    ['@babel/plugin-proposal-private-methods',{loose:true}],
+    ['@babel/plugin-proposal-class-properties'/* ,{loose:true} */],
+    ['@babel/plugin-proposal-private-methods'/* ,{loose:true} */],
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-proposal-nullish-coalescing-operator',
     [
@@ -100,9 +95,23 @@ const config=api=>{
   };
 
   return {
+    /* babelrcRoots: [
+      '.',
+      'playground/publish/*',
+    ], */
+    assumptions:{
+      noDocumentAll:true,
+      noClassCalls:true,
+      iterableIsArray:true,
+      privateFieldsAsProperties:true,
+      setPublicClassFields:true,
+    },
+    targets:{
+      browsers: ['last 2 versions'],
+      // esmodules: true,
+    },
     sourceType:'unambiguous',
     presets,
-    targets,
     plugins,
     env,
   };

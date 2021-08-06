@@ -1,13 +1,11 @@
-import {useEffect,useRef} from 'react';
-
-import { Form, Input, Button, message,InputNumber,Select } from 'antd';
+import { Form, Input, Button, message,Select } from 'antd';
 
 import apiList from '@app/utils/getApis';
 
 import {components} from '@common';
 
 import {layout,tailLayout,projectRoleList} from '@app/utils/config';
-import {nameRule,emailRule,passwordRule,roleRule} from '@app/utils/rules';
+import {nameRule} from '@app/utils/rules';
 
 import Back from '@app/components/goBack';
 
@@ -18,6 +16,9 @@ const {addProjectFn,editProjectFn}=apiList;
 const {Row,Col}=components;
 
 const Index=props=>{
+  const i18ns=props.store.getState('i18ns');
+  const i18nCfg=i18ns?.main.projects??{};
+  const {addFormText={}}=i18nCfg;
   const [form] = Form.useForm();
   const {getState}=props.history;
   const {item,backState}=getState()||{};
@@ -52,28 +53,28 @@ const Index=props=>{
             {...layout}
             style={{width:'50%'}}
           >
-            <Form.Item label="项目名" name="name" rules={nameRule}>
-              <Input placeholder="项目名" />
+            <Form.Item label={addFormText.name} name="name" rules={nameRule}>
+              <Input placeholder={addFormText.name_placeholder} />
             </Form.Item>
             {/* <Form.Item label="项目类型" name="type">
               <Input placeholder="项目类型" />
             </Form.Item> */}
-            <Form.Item label="接口前缀" name="target">
-              <Input placeholder="接口前缀" />
+            <Form.Item label={addFormText.target} name="target">
+              <Input placeholder={addFormText.target_placeholder} />
             </Form.Item>
-            <Form.Item label="等级" name="role">
-              <Select placeholder="请选择" allowClear style={{maxWidth:'250px'}}>
+            <Form.Item label={addFormText.role} name="role">
+              <Select placeholder={addFormText.role_placeholder} allowClear style={{maxWidth:'250px'}}>
                 {
                   projectRoleList.map(v=><Select.Option key={v.value} value={v.value}>{v.label}</Select.Option>)
                 }
               </Select>
             </Form.Item>
-            <Form.Item label="描述" name="description">
-              <Input.TextArea placeholder="描述" />
+            <Form.Item label={addFormText.description} name="description">
+              <Input.TextArea placeholder={addFormText.description_placeholder} />
             </Form.Item>
             <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">保存</Button>
-              <Button style={{marginLeft:'12px'}} onClick={()=>form.resetFields()}>重置</Button>
+              <Button type="primary" htmlType="submit">{addFormText.submit}</Button>
+              <Button style={{marginLeft:'12px'}} onClick={()=>form.resetFields()}>{addFormText.reset}</Button>
             </Form.Item>
           </Form>
         </Panel>
@@ -83,18 +84,6 @@ const Index=props=>{
 };
 
 export default Index;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

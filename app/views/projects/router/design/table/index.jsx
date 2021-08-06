@@ -5,7 +5,8 @@ import FormEditor from '../formEditor';
 import Panel from '@app/components/panel';
 
 const TableEditor=props=>{
-  const {data={},getValues}=props;
+  const {data={},getValues,designConfigText}=props;
+  const {editorI18n={},actionI18n={},columnI18n={}}=designConfigText||{};
   const getActions=values=>{
     // console.log(1,values);
     data.actions=values;
@@ -27,17 +28,17 @@ const TableEditor=props=>{
     getValues?.(data);
   };
   return <>
-    <h4 style={{margin:'10px 0'}}>actions配置</h4>
-    <Panel style={{height:'auto'}}><Actions getValues={getActions} data={data.actions||[]} /></Panel>
+    <h4 style={{margin:'10px 0'}}>{editorI18n.actions}</h4>
+    <Panel style={{height:'auto'}}><Actions getValues={getActions} data={data.actions||[]} actionI18n={actionI18n} /></Panel>
     <Divider dashed style={{borderColor:'rgba(255,255,255,.1)'}} />
-    <h4 style={{margin:'10px 0'}}>searchForm配置</h4>
-    <FormEditor getValues={getSearchForm} data={data.searchSchema} />
+    <h4 style={{margin:'10px 0'}}>{editorI18n.searchForm}</h4>
+    <FormEditor getValues={getSearchForm} data={data.searchSchema} editorI18n={editorI18n} />
     <Divider dashed style={{borderColor:'rgba(255,255,255,.1)'}} />
-    <h4 style={{margin:'10px 0'}}>columns配置</h4>
-    <Panel style={{height:'auto'}}><Columns getValues={getColumns} data={data.columns||[]} /></Panel>
+    <h4 style={{margin:'10px 0'}}>{editorI18n.columns}</h4>
+    <Panel style={{height:'auto'}}><Columns getValues={getColumns} data={data.columns||[]} columnI18n={columnI18n} /></Panel>
     <Divider dashed style={{borderColor:'rgba(255,255,255,.1)'}} />
-    <h4 style={{margin:'10px 0'}}>modalForm配置配置</h4>
-    <FormEditor getValues={getModalForm} data={data.modalSchema} />
+    <h4 style={{margin:'10px 0'}}>{editorI18n.modalForm}</h4>
+    <FormEditor getValues={getModalForm} data={data.modalSchema} editorI18n={editorI18n} />
   </>;
 };
 

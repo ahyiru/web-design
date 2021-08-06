@@ -1,5 +1,5 @@
 import {utils} from '@common';
-import initStart from './handleEvts';
+import initStart from '@app/utils/handleEvts';
 
 const {debounce,getTouchPosition,getRelative,getViewportSize,setStyle,getPosition}=utils;
 

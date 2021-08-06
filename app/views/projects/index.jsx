@@ -1,5 +1,5 @@
-import {useState,useCallback,useEffect,useRef} from 'react';
-import { Table, Tag, Space, Input, Button, Popconfirm, Modal, Form,Tooltip,message,Checkbox,Select} from 'antd';
+import {useState} from 'react';
+import { Table, Tag, Space, Input, Button, Modal, Form,Tooltip,message} from 'antd';
 import { DeleteOutlined,PlusOutlined,ExclamationCircleOutlined} from '@ant-design/icons';
 import {projectRoleList} from '@app/utils/config';
 import {components,utils} from '@common';
@@ -14,9 +14,9 @@ const {Row,Col}=components;
 
 const {formatTime,validObj}=utils;
 
-const getColumns = ({handleRouter,handleEdit,handleDelete,handleApis},profile) => [
+const getColumns = ({handleRouter,handleEdit,handleDelete,handleApis},profile,i18ns) => [
   {
-    title: '项目名',
+    title: i18ns.name,
     dataIndex: 'name',
     width:60,
     render: (text,record) => <a onClick={()=>handleRouter(record)}>{text}</a>,
@@ -26,14 +26,14 @@ const getColumns = ({handleRouter,handleEdit,handleDelete,handleApis},profile) =
     dataIndex: 'type',
   }, */
   {
-    title: '项目描述',
+    title: i18ns.description,
     dataIndex: 'description',
     width:80,
     ellipsis:true,
     render: text => <Tooltip title={text}>{text}</Tooltip>,
   },
   {
-    title: '项目等级',
+    title: i18ns.role,
     dataIndex: 'role',
     width:50,
     render:text=>{
@@ -42,13 +42,13 @@ const getColumns = ({handleRouter,handleEdit,handleDelete,handleApis},profile) =
     },
   },
   {
-    title: '接口前缀',
+    title: i18ns.target,
     dataIndex: 'target',
     width:50,
     render:(text,record)=>text||'/',
   },
   {
-    title: '更新时间',
+    title: i18ns.updatetime,
     dataIndex: 'updatetime',
     width:80,
     ellipsis:true,
@@ -59,23 +59,23 @@ const getColumns = ({handleRouter,handleEdit,handleDelete,handleApis},profile) =
     },
   },
   {
-    title: '更新人',
+    title: i18ns.updater,
     dataIndex: 'updater',
     width:60,
     render:(text,record)=>text||record.creator,
   },
   {
-    title: '操作',
+    title: i18ns.action,
     dataIndex: 'action',
     align:'center',
     width:150,
     render:(text,record)=>{
       const disabled=false;//!profile.role&&record._id!==profile.projectId;
       return <>
-        <Button type="link" size="small" disabled={disabled} onClick={()=>handleRouter(record)}>路由配置</Button>
-        <Button type="link" size="small" disabled={disabled} onClick={()=>handleApis(record)}>接口管理</Button>
-        <Button type="link" size="small" disabled={disabled} onClick={()=>handleEdit(record)}>编辑</Button>
-        <Button type="link" size="small" disabled={disabled} onClick={()=>handleDelete(record)} style={{color:disabled?'var(--lightColor)':'var(--red2)'}}>删除</Button>
+        <Button type="link" size="small" disabled={disabled} onClick={()=>handleRouter(record)}>{i18ns.router_action}</Button>
+        <Button type="link" size="small" disabled={disabled} onClick={()=>handleApis(record)}>{i18ns.api_action}</Button>
+        <Button type="link" size="small" disabled={disabled} onClick={()=>handleEdit(record)}>{i18ns.edit_action}</Button>
+        <Button type="link" size="small" disabled={disabled} onClick={()=>handleDelete(record)} style={{color:disabled?'var(--lightColor)':'var(--red2)'}}>{i18ns.delete_action}</Button>
         {/* <Popconfirm title="确认删除?" onConfirm={()=>handleDelete(record)}>
           <a style={{color:'var(--red2)'}}>删除</a>
         </Popconfirm> */}
@@ -87,7 +87,9 @@ const getColumns = ({handleRouter,handleEdit,handleDelete,handleApis},profile) =
 const Index=props=>{
   const [selectedRows,setSelectedRows]=useState([]);
   // const [modalItem,setModalItem]=useState(null);
-
+  const i18ns=props.store.getState('i18ns');
+  const i18nCfg=i18ns?.main.projects??{};
+  const {tableHeaderText={},actionsText={},searchFormText={}}=i18nCfg;
   const pageParams=props.params;
   const [result,update,pageChange,searchList]=useHandleList(listProjectFn,null,{current:pageParams?.current,size:pageParams?.size});
 
@@ -119,12 +121,12 @@ const Index=props=>{
     const items=item?[item]:selectedRows;
     const ids=items.map(v=>v._id);
     Modal.confirm({
-      title: '确定删除吗？',
+      title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v=>v.name)}`,
-      okText: '删除',
+      okText: actionsText.delete_confirm_ok,
       okType: 'danger',
-      cancelText: '取消',
+      cancelText: actionsText.delete_confirm_cancel,
       onOk:async ()=>{
         const {code,message:msg}=await deleteProjectFn({ids});
         if(code===200){
@@ -162,7 +164,7 @@ const Index=props=>{
     handleApis,
   };
 
-  const columns=getColumns(actions,profile);
+  const columns=getColumns(actions,profile,{...tableHeaderText,...actionsText});
 
   const {isPending,data}=result;
 
@@ -185,13 +187,13 @@ const Index=props=>{
         <Panel>
           <div style={{float:'left'}}>
             <Space size="small">
-              <Button loading={isPending} onClick={()=>handleAdd()} type="primary" icon={<PlusOutlined />}>新增</Button>
-              <Button loading={isPending} disabled={!selectedRows.length} onClick={()=>handleDelete()} icon={<DeleteOutlined />}>批量删除</Button>
+              <Button loading={isPending} onClick={()=>handleAdd()} type="primary" icon={<PlusOutlined />}>{actionsText.add_action}</Button>
+              <Button loading={isPending} disabled={!selectedRows.length} onClick={()=>handleDelete()} icon={<DeleteOutlined />}>{actionsText.batch_action}</Button>
             </Space>
           </div>
           <div style={{float:'right'}}>
             {/* <Search loading={isPending} placeholder="请输入用户名" allowClear onSearch={value=>searchList({keyword:value})} enterButton /> */}
-            <SearchForm submit={searchList} loading={isPending} />
+            <SearchForm submit={searchList} loading={isPending} searchFormText={searchFormText} />
           </div>
         </Panel>
       </Col>
@@ -214,11 +216,11 @@ const Index=props=>{
 };
 
 const SearchForm=props=>{
-  const {submit,loading}=props;
+  const {submit,loading,searchFormText}=props;
   const [form]=Form.useForm();
   return <Form layout="inline" form={form} initialValues={{}} onFinish={value=>submit(validObj(value))}>
-    <Form.Item name="name" label="项目名">
-      <Input placeholder="请输入" allowClear style={{width:'120px'}} />
+    <Form.Item name="name" label={searchFormText.name}>
+      <Input placeholder={searchFormText.placeholder} allowClear style={{width:'120px'}} />
     </Form.Item>
     {/* <Form.Item name="role" label="等级">
       <Select placeholder="请选择" allowClear style={{width:'100px'}}>
@@ -228,7 +230,7 @@ const SearchForm=props=>{
       </Select>
     </Form.Item> */}
     <Form.Item>
-      <Button loading={loading} type="primary" htmlType="submit">查询</Button>
+      <Button loading={loading} type="primary" htmlType="submit">{searchFormText.submit}</Button>
       {/* <Button style={{marginLeft:'12px'}} onClick={()=>form.resetFields()}>重置</Button> */}
     </Form.Item>
   </Form>;

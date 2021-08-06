@@ -1,56 +1,41 @@
 import {useState,useEffect} from 'react';
-
 import {components,utils} from '@common';
-
 import {Tree,Modal,Dropdown,Menu,message,Spin} from 'antd';
-
 import {DownOutlined,PlusOutlined,DeleteOutlined,ExclamationCircleOutlined} from '@ant-design/icons';
-
 import apiList from '@app/utils/getApis';
-
 import defProject from '@app/configs/projects';
-
 import Back from '@app/components/goBack';
-
 import Panel from '@app/components/panel';
-
 import HandleModal from './modal';
-
 import CommonEditor from './commonEditor';
-
 import FormEditor from './formEditor';
-
 import TableEditor from './table';
-
-// import indexSchema from '@app/models/schema/indexSchema';
-// import addSchema from '@app/models/schema/addSchema';
+// import indexSchema from '@app/20210720.bk/schema/indexSchema';
+// import addSchema from '@app/20210720.bk/schema/addSchema';
 
 const {setSchemaFn}=apiList;
-
 const {Row,Col}=components;
-
 const {updateId,addNodes,editNodes,deleteNodes,moveNodes,cacheData,clone,selectedHandle,session}=utils;
-
 const {record,undo,redo,clean}=cacheData();
 
-const handleClick=({addFn,editFn,deleteFn},item)=><Menu>
+const handleClick=({addFn,editFn,deleteFn},item,actionsText)=><Menu>
   <Menu.Item key="add" onClick={()=>addFn(item)}>
     <a>
       <PlusOutlined />
-      <span style={{padding:'0 4px'}}>新增</span>
+      <span style={{padding:'0 4px'}}>{actionsText.add_action}</span>
     </a>
   </Menu.Item>
   {
     !item.isRoot&&<Menu.Item key="delete" onClick={()=>deleteFn(item)}>
       <a>
         <DeleteOutlined />
-        <span style={{padding:'0 4px'}}>删除</span>
+        <span style={{padding:'0 4px'}}>{actionsText.delete_confirm}</span>
       </a>
     </Menu.Item>
   }
 </Menu>;
 
-const treeDrop=(item,dropFns)=><Dropdown overlay={()=>handleClick(dropFns,item)} trigger={['contextMenu']}><span className="node-style">{item.type}</span></Dropdown>;
+const treeDrop=(item,dropFns,actionsText)=><Dropdown overlay={()=>handleClick(dropFns,item,actionsText)} trigger={['contextMenu']}><span className="node-style">{item.type}</span></Dropdown>;
 
 const getSelected=(data,id)=>{
   let selected={};
@@ -61,6 +46,11 @@ const getSelected=(data,id)=>{
 };
 
 const Index=props=>{
+  const i18ns=props.store.getState('i18ns');
+  const i18nCfg=i18ns?.main.projectDesign??{};
+  const {pageText={},actionsText={},topActionText={},addFormText={},designConfigText}=i18nCfg;
+  const {editorI18n={}}=designConfigText||{};
+
   const profile=props.store.getState('profile');
   const backState=props.history.getState()?.backState;
   const selItem=props.history.getState()?.item;
@@ -77,7 +67,6 @@ const Index=props=>{
   const pageSchema=stateItem?.pageSchema?Array.isArray(stateItem.pageSchema)?stateItem.pageSchema:[stateItem.pageSchema]:[];
 
   const [schema,setSchema]=useState([{...rootNode,children:pageSchema}]);
-
   const [disableUndo,setDisableUndo]=useState(true);
   const [disableRedo,setDisableRedo]=useState(true);
 
@@ -97,12 +86,12 @@ const Index=props=>{
   };
   const deleteFn=item=>{
     Modal.confirm({
-      title: '确定删除吗？',
+      title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
       content: `component: ${item.type}`,
-      okText: '删除',
+      okText: actionsText.delete_confirm_ok,
       okType: 'danger',
-      cancelText: '取消',
+      cancelText: actionsText.delete_confirm_cancel,
       onOk:()=>{
         const tree=deleteNodes(schemaTree,item.key,'key');
         setSchema(tree);
@@ -186,21 +175,21 @@ const Index=props=>{
 
   const topActions=[
     {
-      text:'预览',
+      text:topActionText.preview,
       icon:'EyeOutlined',
       type:'primary',
       onClick:preview,
       style:{float:'right'},
     },
     {
-      text:'保存配置',
+      text:topActionText.saveConfigs,
       icon:'SaveOutlined',
       type:'primary',
       onClick:saveConfigs,
       style:{float:'right',marginRight:12},
     },
     {
-      text:'重做',
+      text:topActionText.redoDesign,
       icon:'RedoOutlined',
       // type:'primary',
       onClick:redoDesign,
@@ -208,7 +197,7 @@ const Index=props=>{
       disabled:disableRedo,
     },
     {
-      text:'撤销',
+      text:topActionText.undoDesign,
       icon:'UndoOutlined',
       // type:'primary',
       onClick:undoDesign,
@@ -226,10 +215,10 @@ const Index=props=>{
   const item=getSelected(schemaTree,selectedKey);
 
   const CfgComp=type=>{
-    const DefultComp=<Panel><CommonEditor getValues={editProps} data={item?.props} title="属性配置" selectedKey={item?.key} /></Panel>;
+    const DefultComp=<Panel><CommonEditor getValues={editProps} data={item?.props} title={pageText.page_title} selectedKey={item?.key} editorI18n={editorI18n} /></Panel>;
     const Comps={
-      CustomForm:<FormEditor getValues={editProps} data={[item?.props?.schema]} />,
-      CustomTable:<TableEditor getValues={editProps} data={item?.props} />,
+      CustomForm:<FormEditor getValues={editProps} data={[item?.props?.schema]} actionsText={actionsText} />,
+      CustomTable:<TableEditor getValues={editProps} data={item?.props} designConfigText={designConfigText} />,
     };
     return Comps[type]||DefultComp;
   };
@@ -248,7 +237,7 @@ const Index=props=>{
               showIcon
               defaultExpandAll
               switcherIcon={<DownOutlined />}
-              titleRender={item=>treeDrop(item,dropFns)}
+              titleRender={item=>treeDrop(item,dropFns,actionsText)}
               treeData={schemaTree}
               onSelect={onSelect}
               virtual={false}
@@ -271,6 +260,7 @@ const Index=props=>{
         modalVisible={visible}
         type={modalType}
         item={item}
+        addFormText={addFormText}
       />
     }
   </div>;

@@ -53,12 +53,12 @@ const routers=[
     // component:()=>import(`@app/views/projects/router`),
     componentPath:'/projects/router/design',
   },
-  {
+  /* {
     path:'/projects/router/:projectId/:routerId/preview',
     name:'预览',
     denied:false,
     componentPath:'/projects/router/design/preview',
-  },
+  }, */
   {
     path:'/projects/api/:projectId',
     name:'项目接口管理',
@@ -314,13 +314,6 @@ const routers=[
         componentPath:'/canvas',
       },
       {
-        path:'/dragable',
-        name:'dragable',
-        icon:'RobotOutlined',
-        // component:()=>import(`@app/views/canvas/dragable`),
-        componentPath:'/canvas/dragable',
-      },
-      {
         path:'/d3',
         name:'d3',
         icon:'RobotOutlined',
@@ -333,6 +326,13 @@ const routers=[
         icon:'RobotOutlined',
         // component:()=>import(`@app/views/canvas/webgl`),
         componentPath:'/canvas/webgl',
+      },
+      {
+        path:'/dragable',
+        name:'dragable',
+        icon:'RobotOutlined',
+        // component:()=>import(`@app/views/canvas/dragable`),
+        componentPath:'/canvas/dragable',
       },
     ],
   },
@@ -440,58 +440,53 @@ const routers=[
     ], */
   },
   {
-    path:'/common',
-    name:'通用页面',
+    path:'/page1',
+    name:'一级菜单',
     icon:'RobotOutlined',
     denied:false,
     children:[
       {
-        path:'/common1',
-        name:'页面1',
+        path:'/page1-1',
+        name:'二级菜单1',
         icon:'RobotOutlined',
-        // component:()=>import(`@app/views/projects/router`),
-        componentPath:'/projects/router',
+        componentPath:'/page',
       },
       {
-        path:'/common2',
-        name:'页面2',
+        path:'/page1-2',
+        name:'二级菜单2',
         icon:'RobotOutlined',
         children:[
           {
-            path:'/common2-1',
-            name:'页面2-1',
+            path:'/page1-2-1',
+            name:'三级菜单1',
             icon:'RobotOutlined',
-            // component:()=>import(`@app/views/projects/router`),
-            componentPath:'/projects/router',
+            componentPath:'/page',
           },
           {
-            path:'/common2-2',
-            name:'页面2-2',
+            path:'/page1-2-2',
+            name:'三级菜单2',
             icon:'RobotOutlined',
             children:[
               {
-                path:'/common2-2-1',
-                name:'页面2-2-1',
+                path:'/page1-2-2-1',
+                name:'四级菜单1',
                 icon:'RobotOutlined',
-                // component:()=>import(`@app/views/projects/router`),
-                componentPath:'/projects/router',
+                componentPath:'/page',
               },
               {
-                path:'/common2-2-2',
-                name:'页面2-2-2',
+                path:'/page1-2-2-2',
+                name:'四级菜单1-disabled',
                 icon:'RobotOutlined',
-                // component:()=>import(`@app/views/projects/router`),
-                componentPath:'/projects/router',
+                componentPath:'/page',
                 linkProps:{
                   disabled:true,
                 },
               },
               {
-                path:'/common2-2-3',
-                name:'页面2-2-3',
+                path:'/page1-2-2-3',
+                name:'四级菜单3-_blank',
                 icon:'RobotOutlined',
-                // component:()=>import(`@app/views/projects/router`),
-                componentPath:'/projects/router',
+                componentPath:'/page',
                 linkProps:{
                   target:'_blank',
                 },
@@ -501,49 +496,13 @@ const routers=[
         ],
       },
       {
-        path:'/common3',
-        name:'页面3',
+        path:'/page1-3',
+        name:'二级菜单3',
         icon:'RobotOutlined',
-        // component:()=>import(`@app/views/projects/router`),
-        componentPath:'/projects/router',
-      },
-      {
-        path:'/common4',
-        name:'页面4',
-        icon:'RobotOutlined',
-        // component:()=>import(`@app/views/projects/router`),
-        componentPath:'/projects/router',
+        componentPath:'/page',
       },
     ],
   },
-  /* {
-    path:'/test1',
-    name:'test1',
-    icon:'DashboardOutlined',
-    denied:false,
-    component:'test1',
-  },
-  {
-    path:'/test2',
-    name:'test2',
-    icon:'DashboardOutlined',
-    denied:false,
-    component:'test2',
-  },
-  {
-    path:'/test3',
-    name:'test3',
-    icon:'DashboardOutlined',
-    denied:false,
-    component:'test3',
-  },
-  {
-    path:'/test4',
-    name:'test4',
-    icon:'DashboardOutlined',
-    denied:false,
-    component:'test4',
-  }, */
 ];
 
 export default routers;

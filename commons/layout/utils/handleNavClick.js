@@ -4,27 +4,27 @@ const {storage}=utils;
 const types={
   link:({item})=>window.open(item.link),
   language:({store,item})=>store.setState({'huxy-language':item.key}),
-  theme:({store,item,themeList})=>{
+  theme:({store,item})=>{
+    const i18ns=store.getState('i18ns');
+    const themeList=getThemeList(i18ns?.theme)??[];
     const current=themeList.find(v=>v.key===item.key);
     if(current){
       storage.set('theme',current);
       store.setState({'huxy-theme':current});
     }
   },
-  collapse:({store})=>store.setState({'huxy-collapsed':!store.getState('huxy-collapsed')}),
+  collapse:({store})=>store.setState({'huxy-collapse':!store.getState('huxy-collapse')}),
 };
 const handleNavClick=(props,item)=>{
-  const {store,router}=props;
   const {handle,path,type}=item;
-  const i18ns=store.getState('i18ns');
-  const themeList=getThemeList?.(i18ns?.theme)??[];
+  const {router,store}=props;
   if(typeof handle==='function'){
     return handle(item);
   }
   if(path){
     return router.push(path);
   }
-  types[type]?.({store,item,themeList});
+  types[type]?.({store,item});
 };
 
 export default handleNavClick;

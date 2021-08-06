@@ -21,7 +21,7 @@ const fnNames={
   handleDelete:'handleDelete',
 }; */
 
-export default ({data,getValues}) => {
+export default ({data,getValues,actionI18n}) => {
   const [editableKeys, setEditableRowKeys] = useState([]);
   const [dataSource, setDataSource] = useState(fmData(data)||[]);
   useEffect(()=>{
@@ -38,24 +38,24 @@ export default ({data,getValues}) => {
   };
   const columns = [
     {
-      title: 'name',
+      title: actionI18n.name,
       dataIndex: 'name',
       valueType: 'select',
       valueEnum:fnNames,
       formItemProps: (form, { rowIndex }) => {
         return {
-          rules: [{ required: true, message: '此项为必填项' }],
+          rules: [{ required: true, message: actionI18n.required_msg}],
         };
       },
     },
     {
-      title: 'apiName',
+      title: actionI18n.apiName,
       dataIndex: 'apiName',
       valueType: 'select',
       valueEnum: arr2obj(Object.keys(apiList).map(api=>({name:api,value:api}))),
       formItemProps: (form, { rowIndex }) => {
         return {
-          rules: [{ required: true, message: '此项为必填项' }],
+          rules: [{ required: true, message: actionI18n.required_msg }],
         };
       },
     },
@@ -66,34 +66,30 @@ export default ({data,getValues}) => {
       valueEnum:handleNames,
     }, */
     {
-      title: 'handlePath',
+      title: actionI18n.handlePath,
       dataIndex: 'handlePath',
     },
     {
-      title: 'btnText',
+      title: actionI18n.btnText,
       dataIndex: 'btnText',
     },
     {
-      title: '批量操作',
+      title: actionI18n.isBatch,
       dataIndex: 'isBatch',
       valueType: 'select',
-      valueEnum: ['否','是'],
+      valueEnum: [actionI18n.is_batch_no,actionI18n.is_batch_yes],
     },
     {
-      title: '操作',
+      title: actionI18n.option,
       valueType: 'option',
       width: 120,
       render: (text, record, _, action) => [
         <a key="editable" onClick={() => {
           let _a;
           (_a = action === null || action === void 0 ? void 0 : action.startEditable) === null || _a === void 0 ? void 0 : _a.call(action, record.uuid);
-        }}>
-          编辑
-        </a>,
-        <Popconfirm key="delete" title="确认删除?" onConfirm={() => deleteRow(record)}>
-          <a /* onClick={() => deleteRow(record)} */ style={{color:'var(--red2)'}}>
-            删除
-          </a>
+        }}>{actionI18n.edit_action}</a>,
+        <Popconfirm key="delete" title={actionI18n.delete_confirm} onConfirm={() => deleteRow(record)}>
+          <a /* onClick={() => deleteRow(record)} */ style={{color:'var(--red2)'}}>{actionI18n.delete_action}</a>
         </Popconfirm>,
       ],
     },
@@ -106,7 +102,7 @@ export default ({data,getValues}) => {
     }} */
     recordCreatorProps={{
       position: 'bottom',
-      creatorButtonText:'添加action',
+      creatorButtonText:actionI18n.table_title,
       record: () => ({ uuid:uuidv4() }),
     }}
     /* request={async () => ({

@@ -4,24 +4,28 @@ import jp_icon from '@app/assets/icons/jp.png';
 const nav={
   left:{
     collapse:'切换',
-    themeList:'主题',
+    projectList:'项目列表',
+    apis:'API文档',
+    wechat:'微信',
+    followMe:'关注我',
   },
   right:{
-    user:'一如',
-    profile:'センター',
-    logout:'終了',
+    user:'游客',
+    profile:'个人中心',
+    logout:'退出',
     language:'语言',
-    zh:'中国語',
-    en:'英語',
-    jp:'日本語',
+    zh:'汉语',
+    en:'英语',
+    jp:'日语',
     zh_icon,
     en_icon,
     jp_icon,
-    clean_cookie:'清缓',
-    projectList:'项目入口',
+    themeList:'主题',
+    github:'github',
+    screenshot:'截屏',
+    screencapture_msg:'页面截屏下载完成！',
   },
 };
 
 export default nav;
-
 

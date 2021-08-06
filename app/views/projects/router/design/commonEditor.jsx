@@ -6,7 +6,7 @@ const {obj2arr,arr2obj,uuidv4}=utils;
 
 const fmData=data=>obj2arr(data||{}).map(item=>({...item,uuid:uuidv4()}));
 
-export default ({data,getValues,title,selectedKey}) => {
+export default ({data,getValues,title,selectedKey,editorI18n}) => {
   const [editableKeys, setEditableRowKeys] = useState([]);
   const [dataSource, setDataSource] = useState(fmData(data)||[]);
   useEffect(()=>{
@@ -23,39 +23,35 @@ export default ({data,getValues,title,selectedKey}) => {
   };
   const columns = [
     {
-      title: '属性名',
+      title: editorI18n.name,
       dataIndex: 'name',
       formItemProps: (form, { rowIndex }) => {
         return {
-          rules: [{ required: true, message: '此项为必填项' }],
+          rules: [{ required: true, message: editorI18n.required_msg }],
         };
       },
     },
     {
-      title: '属性值',
+      title: editorI18n.value,
       dataIndex: 'value',
       valueType:'code',
       formItemProps: (form, { rowIndex }) => {
         return {
-          rules: [{ required: true, message: '此项为必填项' }],
+          rules: [{ required: true, message: editorI18n.required_msg}],
         };
       },
     },
     {
-      title: '操作',
+      title: editorI18n.option,
       valueType: 'option',
       width: 120,
       render: (text, record, _, action) => [
         <a key="editable" onClick={() => {
           let _a;
           (_a = action === null || action === void 0 ? void 0 : action.startEditable) === null || _a === void 0 ? void 0 : _a.call(action, record.uuid);
-        }}>
-          编辑
-        </a>,
-        <Popconfirm key="delete" title="确认删除?" onConfirm={() => deleteRow(record)}>
-          <a /* onClick={() => deleteRow(record)} */ style={{color:'var(--red2)'}}>
-            删除
-          </a>
+        }}>{editorI18n.edit_action}</a>,
+        <Popconfirm key="delete" title={editorI18n.delete_confirm} onConfirm={() => deleteRow(record)}>
+          <a /* onClick={() => deleteRow(record)} */ style={{color:'var(--red2)'}}>{editorI18n.delete_action}</a>
         </Popconfirm>,
       ],
     },
@@ -68,7 +64,7 @@ export default ({data,getValues,title,selectedKey}) => {
     }} */
     recordCreatorProps={{
       position: 'bottom',
-      creatorButtonText:'添加属性',
+      creatorButtonText:editorI18n.table_title,
       record: () => ({ uuid:uuidv4() }),
       disabled:!selectedKey,
     }}

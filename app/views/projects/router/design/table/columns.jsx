@@ -36,7 +36,7 @@ const ellipsis={
   display:'inline-block',
 };
 
-export default ({data,getValues}) => {
+export default ({data,getValues,columnI18n}) => {
   const [editableKeys, setEditableRowKeys] = useState([]);
   const [dataSource, setDataSource] = useState(fmData(data)||[]);
   useEffect(()=>{
@@ -55,24 +55,24 @@ export default ({data,getValues}) => {
   };
   const columns = [
     {
-      title: 'title',
+      title: columnI18n.title,
       dataIndex: 'title',
       // width:100,
       // ellipsis:true,
       formItemProps: (form, { rowIndex }) => {
         return {
-          rules: [{ required: true, message: '此项为必填项' }],
+          rules: [{ required: true, message: columnI18n.required_msg }],
         };
       },
     },
     {
-      title: 'dataIndex',
+      title: columnI18n.dataIndex ,
       dataIndex: 'dataIndex',
       // width:100,
       // ellipsis:true,
       formItemProps: (form, { rowIndex }) => {
         return {
-          rules: [{ required: true, message: '此项为必填项' }],
+          rules: [{ required: true, message: columnI18n.required_msg  }],
         };
       },
     },
@@ -91,7 +91,7 @@ export default ({data,getValues}) => {
       valueEnum: ['否','是'],
     }, */
     {
-      title: 'align',
+      title: columnI18n.align,
       dataIndex: 'align',
       // width:80,
       // ellipsis:true,
@@ -110,7 +110,7 @@ export default ({data,getValues}) => {
       render:(text,record)=>JSON.stringify(text),
     }, */
     {
-      title: 'renderType',
+      title: columnI18n.renderType,
       dataIndex: 'renderType',
       // width:100,
       // ellipsis:true,
@@ -120,7 +120,7 @@ export default ({data,getValues}) => {
       }, */
     },
     {
-      title: 'renderProps',
+      title: columnI18n.renderProps,
       dataIndex: 'renderProps',
       valueType:'code',
       // width:140,
@@ -131,7 +131,7 @@ export default ({data,getValues}) => {
       }, */
     },
     {
-      title: 'renderChildren',
+      title: columnI18n.renderChildren,
       dataIndex: 'renderChildren',
       valueType:'code',
       // width:140,
@@ -142,7 +142,7 @@ export default ({data,getValues}) => {
       }, */
     },
     {
-      title: 'tools',
+      title: columnI18n.tools,
       dataIndex: 'tools',
       // width:120,
       // ellipsis:true,
@@ -159,7 +159,7 @@ export default ({data,getValues}) => {
       render:(text,record)=><Tooltip title={text}><span style={{...ellipsis}}>{text}</span></Tooltip>,
     },
     {
-      title: '操作',
+      title: columnI18n.option,
       valueType: 'option',
       width: 120,
       // fixed: 'right',
@@ -167,13 +167,9 @@ export default ({data,getValues}) => {
         <a key="editable" onClick={() => {
           let _a;
           (_a = action === null || action === void 0 ? void 0 : action.startEditable) === null || _a === void 0 ? void 0 : _a.call(action, record.uuid);
-        }}>
-          编辑
-        </a>,
-        <Popconfirm key="delete" title="确认删除?" onConfirm={() => deleteRow(record)}>
-          <a /* onClick={() => deleteRow(record)} */ style={{color:'var(--red2)'}}>
-            删除
-          </a>
+        }}>{columnI18n.edit_action}</a>,
+        <Popconfirm key="delete" title={columnI18n.delete_confirm} onConfirm={() => deleteRow(record)}>
+          <a /* onClick={() => deleteRow(record)} */ style={{color:'var(--red2)'}}>{columnI18n.delete_action}</a>
         </Popconfirm>,
       ],
     },
@@ -186,7 +182,7 @@ export default ({data,getValues}) => {
     }} */
     recordCreatorProps={{
       position: 'bottom',
-      creatorButtonText:'添加column',
+      creatorButtonText:columnI18n.table_title,
       record: () => ({ uuid:uuidv4() }),
     }}
     /* request={async () => ({

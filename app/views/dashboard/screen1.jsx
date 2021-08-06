@@ -1,4 +1,4 @@
-import {useState,useCallback,useEffect,useRef} from 'react';
+import {useState,useEffect} from 'react';
 import ECharts from 'echarts-for-react';
 import {Table as AntTable} from 'antd';
 import DefPanel from '@app/components/panel';
@@ -24,9 +24,8 @@ import {
 } from '@app/models/screen1';
 import defaultOpts from '@app/models/screen1/defaultOpts';
 import {tableCfg} from '@app/utils/config';
-import {components,utils} from '@common';
+import {components} from '@common';
 const {Spinner}=components;
-const {merge,sleep}=utils;
 
 const Panel=props=><DefPanel {...props} style={{background:'rgba(255,255,255,.074)'/*'rgba(42,48,66,.7)'*/}} />;
 
@@ -152,35 +151,6 @@ const Index=props=>{
 };
 
 export default Index;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

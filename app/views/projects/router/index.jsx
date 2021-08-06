@@ -1,42 +1,27 @@
 import {useState,useCallback,useEffect} from 'react';
-
 import {components,utils,use} from '@common';
-
 import {Tree,Modal,Dropdown,Menu,message,Input,Spin,Button} from 'antd';
-
 import {DownOutlined,PlusOutlined,EditOutlined,DeleteOutlined,ExclamationCircleOutlined} from '@ant-design/icons';
-
 import HandleModal from './modal';
-
 import apiList from '@app/utils/getApis';
-
 import defProject from '@app/configs/projects';
-
 import useFetchList from '@app/hooks/useFetchList';
-
 import formatTree from '@app/utils/formatTree';
-
 import Back from '@app/components/goBack';
-
 import Panel from '@app/components/panel';
-
 import customRender from '@app/utils/render';
 
 const {listRouterFn,addRouterFn,editRouterFn,deleteRouterFn,listSchemaFn}=apiList;
-
 const {Row,Col}=components;
-
 const {traverItem,sort}=utils;
-
 const {Search}=Input;
-
 const {useSearch}=use;
 
-const handleClick=({addFn,editFn,deleteFn},item)=><Menu>
+const handleClick=({addFn,editFn,deleteFn},item,actionsText)=><Menu>
   <Menu.Item onClick={()=>addFn(item)}>
     <a>
       <PlusOutlined />
-      <span style={{padding:'0 4px'}}>新增</span>
+      <span style={{padding:'0 4px'}}>{actionsText.add_action}</span>
     </a>
   </Menu.Item>
   {
@@ -44,22 +29,26 @@ const handleClick=({addFn,editFn,deleteFn},item)=><Menu>
       <Menu.Item onClick={()=>editFn(item)}>
         <a>
           <EditOutlined />
-          <span style={{padding:'0 4px'}}>编辑</span>
+          <span style={{padding:'0 4px'}}>{actionsText.edit_action}</span>
         </a>
       </Menu.Item>
       <Menu.Item onClick={()=>deleteFn(item)}>
         <a>
           <DeleteOutlined />
-          <span style={{padding:'0 4px'}}>删除</span>
+          <span style={{padding:'0 4px'}}>{actionsText.delete_action}</span>
         </a>
       </Menu.Item>
     </>
   }
 </Menu>;
 
-const treeDrop=(item,dropFns)=><Dropdown overlay={()=>handleClick(dropFns,item)} trigger={['contextMenu']}><span className="node-style">{item.name}</span></Dropdown>;
+const treeDrop=(item,dropFns,actionsText)=><Dropdown overlay={()=>handleClick(dropFns,item,actionsText)} trigger={['contextMenu']}><span className="node-style">{item.name}</span></Dropdown>;
 
 const Index=props=>{
+  const i18ns=props.store.getState('i18ns');
+  const i18nCfg=i18ns?.main.projectRouter??{};
+  const {pageText={},actionsText={}}=i18nCfg;
+
   const profile=props.store.getState('profile');
   const pageParams=props.params;
   const backState=props.history.getState()?.backState;
@@ -77,9 +66,7 @@ const Index=props=>{
   const [item,setItem]=useState({});
   const [filterTree,setFilterTree]=useSearch(null);
   const [selectedItem,setSelectedItem]=useState(pageParams||{});
-
   const [pageSchema,setPageSchema]=useState([]);
-
   const [result,update]=useFetchList(listRouterFn,{projectId:stateItem._id});
 
   const searchTree=value=>setFilterTree(tree,value,'name','path');
@@ -101,12 +88,12 @@ const Index=props=>{
       paths.push(v.path);
     })([item]);
     Modal.confirm({
-      title: '确定删除吗？',
+      title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
       content: `path: ${paths.join()}`,
-      okText: '删除',
+      okText: actionsText.delete_confirm_ok,
       okType: 'danger',
-      cancelText: '取消',
+      cancelText: actionsText.delete_confirm_cancel,
       onOk:async ()=>{
         const {code,message:msg}=await deleteRouterFn({_id:item._id});
         if(code===200){
@@ -151,7 +138,7 @@ const Index=props=>{
 
   const toDesignPage=()=>{
     const {_id,path,name,iconKey,projectId,key}=selectedItem;
-    const itemState={_id,path,name,iconKey,projectId,key};
+    const itemState={_id,path,name,iconKey,projectId,key,pageSchema};
     props.router.push({
       path:`./${_id}`,
       state:{item:itemState,backState:{path:props.path,params:itemState,state:{item:selItem,backState}}},
@@ -170,7 +157,6 @@ const Index=props=>{
   const {isPending,data}=result;
 
   const tree=formatTree([rootNode,...sort(data,'createtime',true)]);
-
   const treeData=filterTree||tree||[];
 
   return <div>
@@ -183,12 +169,12 @@ const Index=props=>{
       <Col width="240px">
         <Panel>
           <Spin spinning={isPending}>
-            <Search placeholder="请输入名称" allowClear enterButton onSearch={searchTree} style={{maxWidth:'240px',marginBottom:12}} />
+            <Search placeholder={pageText.search_placeholder} allowClear enterButton onSearch={searchTree} style={{maxWidth:'240px',marginBottom:12}} />
             {!isPending&&<Tree
               showIcon
               defaultExpandedKeys={[selectedItem?.key||-1]}
               switcherIcon={<DownOutlined />}
-              titleRender={item=>treeDrop(item,dropFns)}
+              titleRender={item=>treeDrop(item,dropFns,actionsText)}
               treeData={treeData}
               onSelect={onSelect}
               selectedKeys={[selectedItem?.key||'']}
@@ -200,8 +186,8 @@ const Index=props=>{
       <Col auto>
         <Panel>
           <div style={{display:'flex',marginBottom:10}}>
-            <h4 style={{flex:'auto',margin:0,lineHeight:'24px'}}>页面预览</h4>
-            <Button type="primary" disabled={!selectedItem?._id} size="small" icon={<EditOutlined />} onClick={e=>toDesignPage()}>页面设计</Button>
+            <h4 style={{flex:'auto',margin:0,lineHeight:'24px'}}>{pageText.preview_text}</h4>
+            <Button type="primary" disabled={!selectedItem?._id} size="small" icon={<EditOutlined />} onClick={e=>toDesignPage()}>{pageText.design_text}</Button>
           </div>
           <div style={{border:'1px solid rgba(255,255,255,.2)'}}>
             {customRender(pageSchema,{},props)}

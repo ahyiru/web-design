@@ -24,28 +24,28 @@ const getSelected=(data,id)=>{
   return selected;
 };
 
-const handleClick=({addFn,editFn,deleteFn},item)=><Menu>
+const handleClick=({addFn,editFn,deleteFn},item,actionsText)=><Menu>
   <Menu.Item key="add" onClick={()=>addFn(item)}>
     <a>
       <PlusOutlined />
-      <span style={{padding:'0 4px'}}>新增</span>
+      <span style={{padding:'0 4px'}}>{actionsText.add_action}</span>
     </a>
   </Menu.Item>
   {
     !item.isRoot&&<Menu.Item key="delete" onClick={()=>deleteFn(item)}>
       <a>
         <DeleteOutlined />
-        <span style={{padding:'0 4px'}}>删除</span>
+        <span style={{padding:'0 4px'}}>{actionsText.delete_action}</span>
       </a>
     </Menu.Item>
   }
 </Menu>;
 
-const treeDrop=(item,dropFns)=><Dropdown overlay={()=>handleClick(dropFns,item)} trigger={['contextMenu']}><span className="node-style">{item.type}</span></Dropdown>;
+const treeDrop=(item,dropFns,actionsText)=><Dropdown overlay={()=>handleClick(dropFns,item,actionsText)} trigger={['contextMenu']}><span className="node-style">{item.type}</span></Dropdown>;
 
 const formData=data=>Array.isArray(data)?data:data?[data]:[{}];
 
-const Index=({data,getValues})=>{
+const Index=({data,getValues,actionsText})=>{
   const [visible,setVisible]=useState(false);
   const [modalType,setModalType]=useState('');
   const [selectedKey,setSelectedKey]=useState('');
@@ -74,12 +74,12 @@ const Index=({data,getValues})=>{
   };
   const deleteFn=item=>{
     Modal.confirm({
-      title: '确定删除吗？',
+      title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
       content: `component: ${item.type}`,
-      okText: '删除',
+      okText: actionsText.delete_confirm_ok,
       okType: 'danger',
-      cancelText: '取消',
+      cancelText: actionsText.delete_confirm_cancel,
       onOk:()=>{
         const tree=deleteNodes(schemaTree,item.key,'key');
         setSchema(tree);
@@ -132,7 +132,7 @@ const Index=({data,getValues})=>{
               showIcon
               defaultExpandAll
               switcherIcon={<DownOutlined />}
-              titleRender={item=>treeDrop(item,dropFns)}
+              titleRender={item=>treeDrop(item,dropFns,actionsText)}
               treeData={schemaTree}
               onSelect={onSelect}
               virtual={false}

@@ -1,15 +1,9 @@
-import {useState,useEffect} from 'react';
-
+import {useState} from 'react';
 import {Input,InputNumber,Switch,Button,message} from 'antd';
-
-import {utils,use} from '@common';
-
 import {Row,Col} from '@app/components/row';
-
 import Panel from '@app/components/panel';
-
+import {utils,use} from '@common';
 const {storage}=utils;
-
 const {useDebounce}=use;
 
 const delay=500;
@@ -20,23 +14,23 @@ const labelStyle={
   lineHeight:'32px',
 };
 
-const validValues=item=>{
+const validValues=(item,i18nCfg)=>{
   const {value}=item;
   if(item.key==='--maxWidth'){
     const mpx=value.match(/px$/);
     const mper=value.match(/%$/);
     if(!mpx&&!mper){
-      message.warning('请输入合法数据！');
+      message.warning(i18nCfg.data_valid_msg);
       return;
     }
     if(mpx){
       const val=value.slice(0,-2);
       if(!val||isNaN(val)){
-        message.warning('请输入合法数据！');
+        message.warning(i18nCfg.data_valid_msg);
         return;
       }
       if(val<500||val>5000){
-        message.warning('请输入500-5000内数据！');
+        message.warning(i18nCfg.data_px_msg);
         return;
       }
       // item.value=val;
@@ -45,11 +39,11 @@ const validValues=item=>{
     if(mper){
       const val=value.slice(0,-1);
       if(!val||isNaN(val)){
-        message.warning('请输入合法数据！');
+        message.warning(i18nCfg.data_valid_msg);
         return;
       }
       if(val<50||val>100){
-        message.warning('请输入50-100内数据！');
+        message.warning(i18nCfg.data_percent_msg);
         return;
       }
       // item.value=val;
@@ -58,16 +52,16 @@ const validValues=item=>{
   }else{
     const mpx=value.match(/px$/);
     if(!mpx){
-      message.warning('请输入合法数据！');
+      message.warning(i18nCfg.data_valid_msg);
       return;
     }
     const val=value.slice(0,-2);
     if(!val||isNaN(val)){
-      message.warning('请输入合法数据！');
+      message.warning(i18nCfg.data_valid_msg);
       return;
     }
     if(val<0||val>300){
-      message.warning('请输入0-300内数据！');
+      message.warning(i18nCfg.menu_width_msg);
       return;
     }
     console.log(val);
@@ -77,16 +71,20 @@ const validValues=item=>{
 };
 
 const Index=props=>{
-  const {store}=props;
-  const themeLang=store.getState('i18ns')?.theme??{};
-  const localTheme=store.getState('huxy-theme')?.list;
-  const [theme,setTheme]=useState(localTheme||[]);
+  const {store,useStore}=props;
+  const [theme,setTheme]=useStore(store,'huxy-theme');
+  const [menuType,setMenuType]=useStore(store,'huxy-menuType');
+  const i18ns=store.getState('i18ns');
+  const themeLang=i18ns?.theme??{};
+  const i18nCfg=i18ns?.main.layout??{};
+
+  const [themeList,setThemeList]=useState(theme?.list??[]);
   const [size,setSize]=useState('10');
-  const [menuType,setMenuType]=useState(false);
+
   const changeFontSize=useDebounce(value=>document.documentElement.style.setProperty('--rootSize',value),delay);
   const changeLayout=useDebounce((item,value,save=false)=>{
     if(item&&!item.key.includes('Color')){
-      const val=validValues(item);
+      const val=validValues(item,i18nCfg);
       if(!val){
         return;
       }
@@ -96,23 +94,20 @@ const Index=props=>{
       key:'custom',
       list:value,
     };
-    store.setState({'huxy-theme':newTheme});
+    setTheme(newTheme);
     if(save){
       storage.set('theme',newTheme);
-      message.success('主题保存成功！！');
+      message.success(i18nCfg.save_cfg_msg);
     }
   },delay);
-  useEffect(()=>{
-    store.subscribe('huxy-theme',result=>setTheme(result.list));
-  },[]);
   const changeTheme=(e,item)=>{
     // e.persist();
-    const curItem=theme.find(v=>v.key===item.key);
+    const curItem=themeList.find(v=>v.key===item.key);
     if(curItem){
       curItem.value=e.target.value;
     }
-    setTheme([...theme]);
-    changeLayout(curItem,[...theme]);
+    setThemeList([...themeList]);
+    changeLayout(curItem,[...themeList]);
   };
   const changeFont=value=>{
     // const {value}=e.target;
@@ -120,26 +115,25 @@ const Index=props=>{
     changeFontSize(`${value*100/16}%`);
   };
   const saveConfig=()=>{
-    changeLayout(null,theme,true);
+    changeLayout(null,themeList,true);
   };
-  const sizes=theme.filter(v=>!v.key.includes('Color')).map(v=>({...v,type:'text'}));
-  const colors=theme.filter(v=>v.key.includes('Color')).map(v=>({...v,type:'color'}));
+  const sizes=themeList.filter(v=>!v.key.includes('Color')).map(v=>({...v,type:'text'}));
+  const colors=themeList.filter(v=>v.key.includes('Color')).map(v=>({...v,type:'color'}));
   return <div>
     <Row>
       <Col>
         <Panel>
           <div style={{padding:'15px 0',float:'right'}}>
-            <Button type="primary" onClick={saveConfig}>保存配置</Button>
+            <Button type="primary" onClick={saveConfig}>{i18nCfg.saveConfig}</Button>
           </div>
           <div style={{marginTop:10}}>
-            <span>切换横纵菜单：</span>
-            <Switch checkedChildren="横" unCheckedChildren="纵" checked={menuType} onChange={type=>{
-              setMenuType(type);
-              store.setState({'huxy-menuType':{menuType:type}});
+            <span>{i18nCfg.switchMenu}</span>
+            <Switch checkedChildren={i18nCfg.checkedChildren} unCheckedChildren={i18nCfg.unCheckedChildren} checked={menuType==='navMenu'} onChange={type=>{
+              setMenuType(type?'navMenu':'sideMenu');
             }} />
           </div>
           <div style={{marginTop:10}}>
-            <span>字体比例大小：</span>
+            <span>{i18nCfg.fontSize}</span>
             <InputNumber min={0} max={18} value={size} onChange={e=>changeFont(e)} />
           </div>
         </Panel>
@@ -148,7 +142,7 @@ const Index=props=>{
         <Row>
           <Col span={6}>
             <Panel>
-              <h2>大小设计</h2>
+              <h2>{i18nCfg.sizeDesign}</h2>
               {
                 sizes.map(v=><Row key={v.key} style={{marginTop:8}}>
                   <Col span={4}><span style={labelStyle}>{themeLang[v.key]}：</span></Col>
@@ -159,7 +153,7 @@ const Index=props=>{
           </Col>
           <Col span={6}>
             <Panel>
-              <h2>颜色设计</h2>
+              <h2>{i18nCfg.colorDesign}</h2>
               {
                 colors.map(v=><Row key={v.key} style={{marginTop:8}}>
                   <Col span={4}><span style={labelStyle}>{themeLang[v.key]}：</span></Col>

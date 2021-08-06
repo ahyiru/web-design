@@ -1,37 +1,31 @@
-import {useEffect,useState} from 'react';
+import {useEffect} from 'react';
 import {useRouter,components,utils} from '@common';
-
 import configs from '@app/configs';
-
-import {setTheme} from '@app/configs/defaultConfigs';
-
-// import SkeletonContent from '@app/components/skeletonContent';
-
-import apiList,{getApiFn} from '@app/utils/getApis';
+import getTheme from '@app/utils/getTheme';
 import getI18n from '@app/utils/getI18n';
+import useGetI18ns from '@app/hooks/useGetI18ns';
 import useGetProfile from '@app/hooks/useGetProfile';
 import {isAuthed} from '@app/utils/utils';
 import getRouters from '@app/utils/getRouters';
-
+// import SkeletonContent from '@app/components/skeletonContent';
 const {Spinner}=components;
 const {storage,clone}=utils;
 
-const ConfigProvider=({i18ns,language,profile,permission,routerList})=>{
-  const {output,loading,store,updateRouter}=useRouter({...configs,routers:getRouters({profile,i18ns,permission,routerList}),title:i18ns.title});
+const ConfigProvider=({i18ns,profile,permission,routerList})=>{
+  const {output,loading,store,useStore,updateRouter}=useRouter({...configs,routers:getRouters({profile,i18ns,permission,routerList}),title:i18ns.title});
+  const [,,subscribe]=useStore(store,'huxy-language');
+  const [,setTheme]=useStore(store,'huxy-theme');
   useEffect(()=>{
     let off;
     if(store){
-      const {subscribe,setState}=store;
-      setState({permission,profile,i18ns,language});
-      setTheme(store,i18ns);
-      /* subscribe('update-router',result=>{
-        updateRouter({routers:result.menu,exact:true});
-      }); */
-      off=subscribe('huxy-language',async lang=>{
+      const {setState}=store;
+      setState({permission,profile,i18ns});
+      setTheme(getTheme(i18ns));
+      off=subscribe(async lang=>{
         storage.set('language',lang);
-        const {i18ns,language}=await getI18n();
-        setState({i18ns,language});
-        setTheme(store,i18ns);
+        const {i18ns}=await getI18n();
+        setState({i18ns});
+        setTheme(getTheme(i18ns));
         updateRouter({routers:clone(getRouters({profile,i18ns,permission,routerList})),title:i18ns.title});
       });
     }
@@ -51,29 +45,13 @@ const AuthedApp=props=>{
   return <ConfigProvider {...props} profile={profile} permission={permission} routerList={routerList} />;
 };
 
-const NotAuthedApp=props=><ConfigProvider {...props} />;
-
 const App=()=>{
-  const [apis,setApis]=useState(null);
-  const [i18ns,setI18ns]=useState(null);
-  useEffect(()=>{
-    const loadI18n=async ()=>{
-      const i18ns=await getI18n();
-      setI18ns(i18ns);
-    };
-    const loadApis=async ()=>{
-      const apis=await getApiFn();
-      setApis(apis);
-    };
-    loadI18n();
-    loadApis();
-  },[]);
-  if(!i18ns||!apis){
+  const [i18ns]=useGetI18ns();
+  if(!i18ns){
     return <Spinner global />;
   }
-  return isAuthed()?<AuthedApp {...i18ns} />:<NotAuthedApp {...i18ns} />;
+  return isAuthed()?<AuthedApp {...i18ns} />:<ConfigProvider {...i18ns} />;
 };
 
 export default App;
-
 

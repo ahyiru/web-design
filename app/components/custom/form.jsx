@@ -27,7 +27,8 @@ const {traverItem,clone}=utils;
 const Index=({commonprops,...props})=>{
   const {initialValues,submit,loading,getValues,modalItem,handleOk,onCancel,title,schema}=props;
   const [form]=Form.useForm();
-  const tmpSchema=clone(schema);
+  let tmpSchema=clone(schema);
+  tmpSchema=Array.isArray(tmpSchema)?tmpSchema[0]:tmpSchema;
   const [fetchDatas,setFetchDatas]=useState({});
   /* useEffect(()=>{
     const getDatas=async apis=>{
@@ -94,6 +95,7 @@ const Index=({commonprops,...props})=>{
     onValuesChange,
     resetFields,
     rules,
+    loading,
     fetchDatas,
   };
   tmpSchema.props=mergeProps;

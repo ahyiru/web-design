@@ -1,5 +1,5 @@
 import {FullscreenOutlined,FullscreenExitOutlined} from '@ant-design/icons';
-import {Link,components,use} from '@common';
+import {Link,components} from '@common';
 import './index.less';
 
 const {FullPage}=components;
