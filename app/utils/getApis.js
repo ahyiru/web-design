@@ -1,6 +1,6 @@
 // import {utils} from '@common';
-import fetcher,{suspense} from '@app/api/fetcher';
-import getApis from '@app/api/getApis';
+import fetcher,{suspense} from '@app/apis/fetcher';
+import getApis from '@app/apis/getApis';
 
 const apiList={};
 

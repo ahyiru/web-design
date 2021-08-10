@@ -16,7 +16,7 @@ module.exports={
   coveragePathIgnorePatterns:['/node_modules/'],
   testRegex:'(/__tests__/.*\\.(test|spec))\\.(tsx?|jsx?)$',
   testPathIgnorePatterns:['/scripts/','configs','common','playground/server'],
-  moduleFileExtensions:['js','jsx','ts','tsx','mjs','json','node'],
+  moduleFileExtensions:['js','jsx','ts','tsx','mjs','json','node','vue'],
   modulePathIgnorePatterns:['/node_modules/'],
   moduleNameMapper:{
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':'<rootDir>/__mocks__/fileMock.js',
@@ -25,6 +25,7 @@ module.exports={
     '@src(.*)$':'<rootDir>/playground/src/$1',
   },
   transform:{
+    // '^.+\\.vue$': 'vue-jest',
     // '^.+\\.tsx?$':'ts-jest',
     '^.+\\.jsx?$':'babel-jest',
   },

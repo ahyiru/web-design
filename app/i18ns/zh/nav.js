@@ -1,6 +1,3 @@
-import zh_icon from '@app/assets/icons/zh.png';
-import en_icon from '@app/assets/icons/en.png';
-import jp_icon from '@app/assets/icons/jp.png';
 const nav={
   left:{
     collapse:'切换',
@@ -17,9 +14,6 @@ const nav={
     zh:'汉语',
     en:'英语',
     jp:'日语',
-    zh_icon,
-    en_icon,
-    jp_icon,
     themeList:'主题',
     github:'github',
     screenshot:'截屏',

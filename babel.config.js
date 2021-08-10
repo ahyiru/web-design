@@ -8,7 +8,7 @@ const config=api=>{
       {
         // modules:'commonjs',
         modules:false,
-        loose: true,
+        // loose: true,
         useBuiltIns: 'usage',
         shippedProposals:true,
         corejs: {

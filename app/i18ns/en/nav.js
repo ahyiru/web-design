@@ -1,6 +1,3 @@
-import zh_icon from '@app/assets/icons/zh.png';
-import en_icon from '@app/assets/icons/en.png';
-import jp_icon from '@app/assets/icons/jp.png';
 const nav={
   left:{
     collapse:'collapse',
@@ -17,9 +14,6 @@ const nav={
     zh:'zh',
     en:'en',
     jp:'jp',
-    zh_icon,
-    en_icon,
-    jp_icon,
     themeList:'themeList',
     github:'github',
     screenshot:'screenshot',

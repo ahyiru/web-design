@@ -6,23 +6,29 @@ import {logout} from '@app/utils/utils';
 import defUser from '@app/assets/images/user/2.png';
 import wx from '@app/assets/images/wx.jpg/';
 
+import zh_icon from '@app/assets/icons/zh.png';
+import en_icon from '@app/assets/icons/en.png';
+import jp_icon from '@app/assets/icons/jp.png';
+
 import html2canvas from 'html2canvas';
 
 import {components,utils} from '@common';
 const {Anico}=components;
 const {dlfile}=utils;
 
+const langIcons={zh_icon,en_icon,jp_icon};
+
 export const leftNav=({store})=>{
   const i18ns=store.getState('i18ns');
   const {nav:{left}}=i18ns;
   return [
     {
-      name:left['collapse'],
+      name:left?.['collapse']??'collapse',
       type:'collapse',
       Custom:({collapsed})=><Anico type={(collapsed?.value??collapsed)?'right':''} />,
     },
     {
-      name:left['projectList'],
+      name:left?.['projectList']??'projectList',
       type:'projectList',
       arrowDir:'lt',
       Ricon:true,
@@ -50,7 +56,7 @@ export const leftNav=({store})=>{
     {
       icon:'WechatOutlined',
       arrowDir:'lt',
-      ChildRender:status=><div className="follow-me"><img src={wx} /><p>{left['followMe']}：yiru_js</p></div>,
+      ChildRender:status=><div className="follow-me"><img src={wx} /><p>{left?.['followMe']??'followMe'}：yiru_js</p></div>,
     },
   ];
 };
@@ -62,17 +68,17 @@ export const rightNav=({store})=>{
   const {nav:{right},theme}=i18ns;
   return [
     {
-      name:user?.name??right['user'],
+      name:user?.name??right?.['user'],
       img:user?.avatar??defUser,
       children:[
         {
-          name:right['profile'],
+          name:right?.['profile']??'个人中心',
           type:'profile',
           icon:'UserOutlined',
           path:'/profile',
         },
         {
-          name:right['logout'],
+          name:right?.['logout']??'退出',
           type:'logout',
           icon:'PoweroffOutlined',
           handle:item=>{
@@ -82,30 +88,30 @@ export const rightNav=({store})=>{
       ],
     },
     {
-      name:right[language],
-      Custom:()=><div className="icon"><img src={`${right[language+'_icon']}`} /></div>,
+      name:right?.[language]??'语言',
+      Custom:()=><div className="icon"><img src={`${langIcons[language+'_icon']}`} /></div>,
       // type:'language',
       children:[
         {
           key:'zh',
-          name:right['zh'],
+          name:right?.['zh']??'汉语',
           type:'language',
           active:language==='zh',
-          icon:<div key="zh" className="img"><img src={`${right['zh_icon']}`} /></div>,
+          icon:<div key="zh" className="img"><img src={`${langIcons['zh_icon']}`} /></div>,
         },
         {
           key:'en',
-          name:right['en'],
+          name:right?.['en']??'英语',
           type:'language',
           active:language==='en',
-          icon:<div key="en" className="img"><img src={`${right['en_icon']}`} /></div>,
+          icon:<div key="en" className="img"><img src={`${langIcons['en_icon']}`} /></div>,
         },
         {
           key:'jp',
-          name:right['jp'],
+          name:right?.['jp']??'日语',
           type:'language',
           active:language==='jp',
-          icon:<div key="jp" className="img"><img src={`${right['jp_icon']}`} /></div>,
+          icon:<div key="jp" className="img"><img src={`${langIcons['jp_icon']}`} /></div>,
         },
       ],
     },
@@ -133,7 +139,7 @@ export const rightNav=({store})=>{
       handle:item=>{
         html2canvas(document.body).then(canvas=>{
           dlfile(canvas.toDataURL());
-          message.success(right['screencapture_msg']);
+          message.success(right?.['screencapture_msg']??'下载成功！');
         }).catch(error=>{
           message.error(error);
         });

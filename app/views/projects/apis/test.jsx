@@ -8,7 +8,7 @@ import {layout,tailLayout,methodList} from '@app/utils/config';
 
 import Panel from '@app/components/panel';
 
-import {testFetcher} from '@app/api/fetcher';
+import {testFetcher} from '@app/apis/fetcher';
 
 const strToJson=str=>(new Function(`return ${str}`))();
 
