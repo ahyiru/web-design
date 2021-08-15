@@ -4,7 +4,7 @@ const {storage}=utils;
 
 const getTheme=i18ns=>{
   const themeList=typeof getThemeList==='function'?getThemeList(i18ns?.theme):[];
-  const theme=storage.get('theme')||themeList[0]||{};
+  const theme=storage.get('theme')||themeList[1]||{};
   return theme;
 };
 

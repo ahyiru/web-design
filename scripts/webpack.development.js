@@ -26,7 +26,7 @@ const postcssOptions={
 const devConfig=merge(webpackConfig,{
   mode:'development',
   devtool:'eval-cheap-module-source-map',
-  // target:'web',
+  target:'web',
   entry:{
     app:['webpack-hot-middleware/client?reload=true'],
   },
@@ -109,6 +109,33 @@ const devConfig=merge(webpackConfig,{
         ],
         // exclude:[/node_modules/],
       },
+      /* {
+        test:/\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          {
+            loader:'css-loader',
+            options:{
+              importLoaders:2,
+            },
+          },
+          {
+            loader:'sass-loader',
+            options:{
+              implementation: require('sass'),
+              sassOptions:{
+                indentWidth:2,
+              },
+              additionalData:(content, loaderContext) =>{
+                if(loaderContext.resourcePath.endsWith('app/styles/index.scss')) {
+                  return content;
+                }
+                return `@import '~@app/styles/index.scss';${content};`;
+              },
+            },
+          },
+        ],
+      }, */
     ],
   },
   plugins:[

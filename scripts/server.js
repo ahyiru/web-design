@@ -10,7 +10,7 @@ const fs=require('fs');
 
 const app = express();
 
-const {appName,HOST,PRO_PORT,PROXY_URL,BUILD_DIR,DIST,PRD_ROOT_DIR}=require('../configs');
+const {appName,HOST,PRO_PORT,PROXY_URL,BUILD_DIR,PRD_ROOT_DIR}=require('../configs');
 
 const {createProxyMiddleware}=require('http-proxy-middleware');
 
@@ -18,11 +18,6 @@ const proxyCfg=require('./appProxy');
 
 const {prefix,opts}=proxyCfg(PROXY_URL);
 app.use(prefix,createProxyMiddleware(opts));
-
-/* app.use('/v1',createProxyMiddleware({
-  target: 'https://zbx.cactifans.com',
-  changeOrigin: true,
-})); */
 
 app.set('host',HOST);
 app.set('port',PRO_PORT);
@@ -46,17 +41,8 @@ app.get('*',function(request,response){
   response.sendFile(path.resolve(build,'index.html'));
 });
 
-/* https */
-const cert=path.resolve(__dirname,'../cert');
-const options={
-  key:fs.readFileSync(`${cert}/server.key`),
-  cert:fs.readFileSync(`${cert}/server.cert`),
-  // passphrase: 'YOUR PASSPHRASE HERE',
-};
-const httpsServer=https.createServer(options,app);
-/* https */
 
-httpsServer.listen(app.get('port'),(err)=>{
+app.listen(app.get('port'),(err)=>{
   if (err) {
     console.log(err);
     return false;

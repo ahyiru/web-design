@@ -9,7 +9,7 @@ const theme=[
   },
   {
     key:'--collapseWidth',
-    value:'50px',
+    value:'60px',
   },
   {
     key:'--collapseMenuWidth',
@@ -17,7 +17,7 @@ const theme=[
   },
   {
     key:'--headerHeight',
-    value:'52px',
+    value:'56px',
   },
   {
     key:'--footerHeight',

@@ -116,6 +116,7 @@ export const rightNav=({store})=>{
       ],
     },
     {
+      title:'主题设置',
       icon:'SettingOutlined',
       type:'themeList',
       // arrowDir:'lt',
@@ -125,6 +126,7 @@ export const rightNav=({store})=>{
       }),
     },
     {
+      title:'Github',
       icon:'GithubOutlined',
       type:'link',
       link:'https://github.com/ahyiru/web-design',
@@ -134,6 +136,7 @@ export const rightNav=({store})=>{
     //   Custom:()=><FullPage />,
     // },
     {
+      title:'截屏',
       key:'screencapture',
       icon:'CameraOutlined',
       handle:item=>{

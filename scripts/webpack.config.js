@@ -1,10 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OpenBrowserWebpackPlugin = require('@huxy/open-browser-webpack-plugin');
+// const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-
-const {appName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR,publicPath}=require('../configs');
+const {appName,projectName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR,HOST,PORT}=require('../configs');
 
 const publics=path.resolve(__dirname,PUBLIC_DIR);
 const app=path.resolve(__dirname,`../${appName}`);
@@ -37,7 +37,7 @@ const templ=path.resolve(publics,'index.html');
 const icon=path.resolve(publics,'favicon.png');
 
 const htmlPlugin=()=>new HtmlWebpackPlugin({
-  title:'招摇山',//appName,
+  title:projectName||appName,
   template:templ,
   favicon:icon,
   inject:true,
@@ -72,7 +72,7 @@ const plugins=[
   }),
   new webpack.optimize.ModuleConcatenationPlugin(),
   // new BundleAnalyzerPlugin(),
-  new ModuleFederationPlugin({
+  /* new ModuleFederationPlugin({
     name:'reactApp',
     // library:{ type:'var',name:'reactApp'},
     // filename:'remoteEntry.js',
@@ -84,7 +84,7 @@ const plugins=[
     //   // VueApp:path.resolve(__dirname, '../vue'),
     // },
     // shared:['react','react-dom'],
-  }),
+  }), */
   // new HelloWorldPlugin(),
   /* {
     apply:compiler=>{
@@ -115,19 +115,15 @@ const plugins=[
     dependenciesCount:10000,
     percentBy:null,
   }),
+  new OpenBrowserWebpackPlugin({target:`${HOST}:${PORT}`}),
 ];
 
 const rules=[
-  {
+  /* {
     test:/\.m?js/,
     resolve:{
       fullySpecified:false,
     },
-  },
-  {
-    test:/\.(js|jsx)$/,
-    loader:'babel-loader',
-    exclude:[/node_modules/,/draft/,path.resolve(__dirname,'node')],
   },
   {
     test:/\.tsx?$/,
@@ -136,8 +132,39 @@ const rules=[
       {loader:'ts-loader'},
     ],
     exclude:[/node_modules/,/draft/],
+  }, */
+  {
+    test:/\.jsx?$/,
+    loader:'babel-loader',
+    options:{
+      cacheDirectory:true,
+    },
+    exclude:[/node_modules/,/draft/,path.resolve(__dirname,'node')],
   },
   {
+    test:/\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)$/i,
+    loader:'url-loader',
+    options:{
+      limit:20480,
+      name:'img/img_[hash:8].[ext]',
+      // publicPath:'../',
+      esModule:false,
+    },
+    type:'javascript/auto',
+    exclude:[/node_modules/],
+  },
+  {
+    test:/\.(ttf|eot|svg|woff|woff2|otf)$/,
+    loader:'url-loader',
+    options:{
+      limit:20480,
+      name:'fonts/[hash:8].[ext]',
+      publicPath:'../',
+      esModule:false,
+    },
+    exclude:[/images/],
+  },
+  /* {
     test: /\.html$/,
     use: {
       loader: 'html-loader',
@@ -159,29 +186,7 @@ const rules=[
     ],
   },
   {
-    test:/\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)/i,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'img/img_[hash:8].[ext]',
-      // publicPath:'../',
-      esModule:false,
-    },
-    type:'javascript/auto',
-    exclude:[/node_modules/],
-  },
-  {
-    test:/\.(ttf|eot|svg|woff|woff2|otf)/,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'fonts/[hash:8].[ext]',
-      publicPath:'../',
-    },
-    exclude:[/images/],
-  },
-  {
-    test:/\.pdf/,
+    test:/\.pdf$/,
     loader:'url-loader',
     options:{
       limit:20480,
@@ -189,23 +194,23 @@ const rules=[
     },
   },
   {
-    test:/\.(swf|xap|mp4|webm)/,
+    test:/\.(swf|xap|mp4|webm)$/,
     loader:'url-loader',
     options:{
       limit:20480,
       name:'video/[hash].[ext]',
     },
-  },
+  }, */
 ];
 
 module.exports={
   context:app,
-  /* cache: {
+  cache: {
     type: 'filesystem',
     buildDependencies: {
       config: [ __filename ],
     },
-  }, */
+  },
   experiments:{
     topLevelAwait:true,
     // outputModule:true,
@@ -217,9 +222,9 @@ module.exports={
   entry:entry,
   output:{
     path:path.resolve(app,BUILD_DIR),
-    publicPath,
-    filename:'js/[name]_[contenthash:8].js',
-    chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
+    publicPath:DEV_ROOT_DIR,
+    filename:'js/[name].js',
+    // chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
     // assetModuleFilename: 'assets/[contenthash][ext]',
     /* library:{
       name:`${appName}App`,
@@ -230,12 +235,12 @@ module.exports={
     // globalObject:'this',
   },
   optimization:{
-    minimize:true,
+    // minimize:true,
     concatenateModules:false,
     usedExports:false,
     sideEffects:false,
-
-    splitChunks:{
+    splitChunks:false,
+    /* splitChunks:{
       chunks:'all',//'async','initial'
       // minSize:0,
       minSize:{
@@ -277,8 +282,8 @@ module.exports={
           },
         },
       },
-    },
-    // runtimeChunk:true,
+    }, */
+    runtimeChunk:'single',
     moduleIds:'deterministic',
     chunkIds:'named',
   },
@@ -296,10 +301,14 @@ module.exports={
       '@configs':path.resolve(__dirname, '../configs'),
       '@common':path.resolve(__dirname, '../commons'),
       '@src':path.resolve(__dirname, '../playground/src'),
-      '@vueCommon':path.resolve(__dirname, '../playground/vue'),
-      'vue$':'vue/dist/vue.esm-bundler.js',
     },
-    extensions:['.js','.mjs','.cjs','.jsx','.ts','.tsx','.json','.css','.less','.vue'],
+    extensions:['.jsx','.js','.less','.css','.scss','.json','.ts','.tsx','.vue','.mjs'],
+    fallback: {
+      path: false,//require.resolve('path-browserify'),
+      process: false,
+    },
+    symlinks:false,
+    cacheWithContext:false,
   },
   module:{
     rules:rules,

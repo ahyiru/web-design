@@ -87,21 +87,6 @@ app.get('*',(req,res)=>{
   res.send(htmlBuffer.toString());
 });
 
-/* app.get('/subRouter',(req,res)=>{
-  const htmlBuffer=devMiddleware.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
-  res.send(htmlBuffer.toString());
-}); */
-
-/* https */
-/* const cert=path.resolve(__dirname,'../cert');
-const options={
-  key:fs.readFileSync(`${cert}/server.key`),
-  cert:fs.readFileSync(`${cert}/server.cert`),
-  // passphrase: 'YOUR PASSPHRASE HERE',
-};
-const httpsServer=https.createServer(options,app); */
-/* https */
-
 app.listen(app.get('port'),err=>{
   if(err){
     console.log(err);
