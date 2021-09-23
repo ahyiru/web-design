@@ -1,10 +1,10 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OpenBrowserWebpackPlugin = require('@huxy/open-browser-webpack-plugin');
+
 // const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
-const {appName,projectName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR,HOST,PORT}=require('../configs');
+const {appName,projectName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR}=require('../configs');
 
 const publics=path.resolve(__dirname,PUBLIC_DIR);
 const app=path.resolve(__dirname,`../${appName}`);
@@ -85,23 +85,6 @@ const plugins=[
     // },
     // shared:['react','react-dom'],
   }), */
-  // new HelloWorldPlugin(),
-  /* {
-    apply:compiler=>{
-      // compiler.plugin('webpacksEventHook',(compilation,callback)=>{
-      //   console.log(compilation,callback);
-      //   callback();
-      // });
-      // compiler.plugin('compilation',compilation=>{
-      //   compilation.plugin('optimize',()=>{
-      //     console.log('Assets are being optimized.');
-      //   });
-      // });
-      compiler.plugin('done', function() {
-        console.log('Hello World!');
-      });
-    },
-  }, */
   new webpack.ProgressPlugin({
     activeModules:false,
     entries:true,
@@ -115,7 +98,6 @@ const plugins=[
     dependenciesCount:10000,
     percentBy:null,
   }),
-  new OpenBrowserWebpackPlugin({target:`${HOST}:${PORT}`}),
 ];
 
 const rules=[

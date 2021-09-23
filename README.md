@@ -1,5 +1,10 @@
 ## 低代码（low-code）简单实践
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ahyiru/ihuxy/blob/develop/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@huxy/router.svg)](https://www.npmjs.com/package/@huxy/router)
+[![Build Status](https://api.travis-ci.com/ahyiru/ihuxy.svg?branch=develop)](https://app.travis-ci.com/github/ahyiru/ihuxy)
+[![](https://img.shields.io/badge/blog-ihuxy-blue.svg)](http://ihuxy.com/)
+
 ### 理解
 
 低代码就是尽量**少写代码**，定义好业务组件，通过可视化操作实现开发工作。它主要受众是开发者。

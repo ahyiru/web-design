@@ -1,10 +1,7 @@
 const appName=require('./appName');
 const app=require('./app');
-const vue=require('./vue');
 const cfg={
   app,
-  vue,
-  demo1:app,
   login:app,
   'blog/router':{...app,PORT:8000,PRO_PORT:8001},
   'blog/utils':{...app,PORT:8010,PRO_PORT:8011},

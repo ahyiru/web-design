@@ -11,8 +11,6 @@ const logger=require('morgan');
 const bodyParser=require('body-parser');
 const compression=require('compression');
 
-// const open=require('open');
-
 const webpackDevMiddleware=require('webpack-dev-middleware');
 const webpackHotMiddleware=require('webpack-hot-middleware');
 
@@ -32,6 +30,8 @@ const compiler = webpack(webpackConfig);
 
 const proxyCfg=require('./appProxy');
 
+const mocks=require('./mock');
+
 const {prefix,opts}=proxyCfg(PROXY_URL);
 app.use(prefix,createProxyMiddleware(opts));
 
@@ -46,21 +46,9 @@ app.use('/mocks',createProxyMiddleware({
 })); */
 
 const devMiddleware=webpackDevMiddleware(compiler,{
-  // contentBase:webpackConfig.output.path,
   publicPath:webpackConfig.output.publicPath,
-  // hot:true,
-  // inline:true,
-  // http2: true,
-  // https: true,
-  // open: true,
-  // open: 'Google Chrome',
-  // socket: 'socket',
-  // historyApiFallback:true,
-  // compress:true,
-  // noInfo:true,
-  // stats:{
-  //   colors:true,
-  // },
+  // index:'index.html',
+  // outputFileSystem:{},
   stats: {
     preset: 'minimal',
     moduleTrace: true,
@@ -82,10 +70,27 @@ app.use(bodyParser.urlencoded({limit:'20mb',extended:true}));
 app.use(compression());
 
 // browserRouter
-app.get('*',(req,res)=>{
+app.use('*',(req,res,next)=>{
   const htmlBuffer=compiler.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
-  res.send(htmlBuffer.toString());
+  res.set('Content-Type','text/html');
+  res.send(htmlBuffer);
+  res.end();
 });
+
+/* app.get('/subRouter',(req,res)=>{
+  const htmlBuffer=devMiddleware.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
+  res.send(htmlBuffer.toString());
+}); */
+
+/* https */
+/* const cert=path.resolve(__dirname,'../cert');
+const options={
+  key:fs.readFileSync(`${cert}/server.key`),
+  cert:fs.readFileSync(`${cert}/server.cert`),
+  // passphrase: 'YOUR PASSPHRASE HERE',
+};
+const httpsServer=https.createServer(options,app); */
+/* https */
 
 app.listen(app.get('port'),err=>{
   if(err){
@@ -94,25 +99,29 @@ app.listen(app.get('port'),err=>{
   }
   const ips=getIPs().map(ip=>`${ip}:${app.get('port')}`).join('\n');
   // open(`http://${app.get('host')}:${app.get('port')}`);
-  console.log('\n'+appName.magenta+': 服务已启动! '.black+'✓'.green);
+  console.log('\n'+appName.magenta+': 服务已启动! '.cyan+'✓'.green);
   console.log(`\n监听端口: ${app.get('port')} ,正在构建,请稍后...`.cyan);
-  console.log('-----------------------------------'.grey);
+  console.log('-----------------------------------'.blue);
   // console.log(` 本地地址: http://${app.get('host')}:${app.get('port')}`.magenta);
   console.log(`运行地址: \n`.magenta);
   console.log(`${ips} \n`.magenta);
-  console.log(`如需打包部署到生产环境，请运行 `.black+`npm run build`.cyan);
-  console.log('-----------------------------------'.grey);
+  console.log(`如需打包部署到生产环境，请运行 `.cyan+`npm run build`.green);
+  console.log('-----------------------------------'.blue);
   console.log('\n按下 CTRL-C 停止服务\n'.blue);
 });
 
-app.get('test',(req,res)=>{
+if(appName==='demo'){
+  mocks();
+}
+
+/* app.get('test',(req,res)=>{
   return res.send({id:'test'});
 });
 
 app.get('/users/test1',(req,res)=>{
   console.log(req.originalUrl);
   res.send({users:'huy'});
-});
+}); */
 
 
 

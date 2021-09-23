@@ -72,8 +72,8 @@ const validValues=(item,i18nCfg)=>{
 
 const Index=props=>{
   const {store,useStore}=props;
-  const [theme,setTheme]=useStore(store,'huxy-theme');
-  const [menuType,setMenuType]=useStore(store,'huxy-menuType');
+  const [theme,setTheme]=useStore('huxy-theme');
+  const [menuType,setMenuType]=useStore('huxy-menuType');
   const i18ns=store.getState('i18ns');
   const themeLang=i18ns?.theme??{};
   const i18nCfg=i18ns?.main.layout??{};

@@ -2,9 +2,7 @@ import {utils} from '@common';
 
 import {designReg,confirmDesignPage} from '@app/utils/confirmDesignPage';
 
-import whiteList from '../router/whiteList';
-
-import eventStore from './eventStore';
+import whiteList from '../routers/whiteList';
 
 const {storage}=utils;
 
@@ -59,9 +57,7 @@ export default {
   browserRouter,
   beforeRender,
   basepath,
-  eventStore,
   // afterRender,
-  // store:createStore(),
 };
 
 

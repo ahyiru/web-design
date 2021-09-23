@@ -23,12 +23,12 @@ export const leftNav=({store})=>{
   const {nav:{left}}=i18ns;
   return [
     {
-      name:left?.['collapse']??'collapse',
+      name:left?.collapse??'collapse',
       type:'collapse',
       Custom:({collapsed})=><Anico type={(collapsed?.value??collapsed)?'right':''} />,
     },
     {
-      name:left?.['projectList']??'projectList',
+      name:left?.projectList??'projectList',
       type:'projectList',
       arrowDir:'lt',
       Ricon:true,
@@ -46,7 +46,7 @@ export const leftNav=({store})=>{
           link:'http://ihuxy.com:8088/',
         },
         {
-          name:'API文档',
+          name:left?.apis??'API文档',
           icon:'ApiOutlined',
           type:'link',
           link:'http://ihuxy.com:8010',
@@ -56,7 +56,7 @@ export const leftNav=({store})=>{
     {
       icon:'WechatOutlined',
       arrowDir:'lt',
-      ChildRender:status=><div className="follow-me"><img src={wx} /><p>{left?.['followMe']??'followMe'}：yiru_js</p></div>,
+      ChildRender:status=><div className="follow-me"><img src={wx} /><p>{left?.followMe??'followMe'}：yiru_js</p></div>,
     },
   ];
 };
@@ -68,17 +68,17 @@ export const rightNav=({store})=>{
   const {nav:{right},theme}=i18ns;
   return [
     {
-      name:user?.name??right?.['user'],
+      name:user?.name??right?.user,
       img:user?.avatar??defUser,
       children:[
         {
-          name:right?.['profile']??'个人中心',
+          name:right?.profile??'个人中心',
           type:'profile',
           icon:'UserOutlined',
           path:'/profile',
         },
         {
-          name:right?.['logout']??'退出',
+          name:right?.logout??'退出',
           type:'logout',
           icon:'PoweroffOutlined',
           handle:item=>{
@@ -94,21 +94,21 @@ export const rightNav=({store})=>{
       children:[
         {
           key:'zh',
-          name:right?.['zh']??'汉语',
+          name:right?.zh??'汉语',
           type:'language',
           active:language==='zh',
           icon:<div key="zh" className="img"><img src={`${langIcons['zh_icon']}`} /></div>,
         },
         {
           key:'en',
-          name:right?.['en']??'英语',
+          name:right?.en??'英语',
           type:'language',
           active:language==='en',
           icon:<div key="en" className="img"><img src={`${langIcons['en_icon']}`} /></div>,
         },
         {
           key:'jp',
-          name:right?.['jp']??'日语',
+          name:right?.jp??'日语',
           type:'language',
           active:language==='jp',
           icon:<div key="jp" className="img"><img src={`${langIcons['jp_icon']}`} /></div>,
@@ -116,7 +116,7 @@ export const rightNav=({store})=>{
       ],
     },
     {
-      title:'主题设置',
+      title:right?.themeList??'主题设置',
       icon:'SettingOutlined',
       type:'themeList',
       // arrowDir:'lt',
@@ -126,7 +126,7 @@ export const rightNav=({store})=>{
       }),
     },
     {
-      title:'Github',
+      title:right?.github??'Github',
       icon:'GithubOutlined',
       type:'link',
       link:'https://github.com/ahyiru/web-design',
@@ -136,13 +136,13 @@ export const rightNav=({store})=>{
     //   Custom:()=><FullPage />,
     // },
     {
-      title:'截屏',
+      title:right?.screenshot??'截屏',
       key:'screencapture',
       icon:'CameraOutlined',
       handle:item=>{
         html2canvas(document.body).then(canvas=>{
           dlfile(canvas.toDataURL());
-          message.success(right?.['screencapture_msg']??'下载成功！');
+          message.success(right?.screencapture_msg??'下载成功！');
         }).catch(error=>{
           message.error(error);
         });

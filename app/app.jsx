@@ -13,24 +13,18 @@ const {storage,clone}=utils;
 
 const ConfigProvider=({i18ns,profile,permission,routerList})=>{
   const {output,loading,store,useStore,updateRouter}=useRouter({...configs,routers:getRouters({profile,i18ns,permission,routerList}),title:i18ns.title});
-  const [,,subscribe]=useStore(store,'huxy-language');
-  const [,setTheme]=useStore(store,'huxy-theme');
+  const [,,subLang]=useStore('huxy-language');
   useEffect(()=>{
-    let off;
-    if(store){
-      const {setState}=store;
-      setState({permission,profile,i18ns});
-      setTheme(getTheme(i18ns));
-      off=subscribe(async lang=>{
-        storage.set('language',lang);
-        const {i18ns}=await getI18n();
-        setState({i18ns});
-        setTheme(getTheme(i18ns));
-        updateRouter({routers:clone(getRouters({profile,i18ns,permission,routerList})),title:i18ns.title});
-      });
-    }
-    return ()=>off?.();
-  },[store]);
+    const {setState}=store;
+    setState({permission,profile,i18ns,'huxy-theme':getTheme(i18ns)});
+    const off=subLang(async lang=>{
+      storage.set('language',lang);
+      const {i18ns}=await getI18n();
+      setState({i18ns,'huxy-theme':getTheme(i18ns)});
+      updateRouter({routers:clone(getRouters({profile,i18ns,permission,routerList})),title:i18ns.title});
+    });
+    return ()=>off();
+  },[]);
   return <>
     {output}
     {loading&&<Spinner global />}

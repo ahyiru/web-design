@@ -23,7 +23,7 @@ const Index=props=>{
   const [values,setValues]=useState({});
   const [form] = Form.useForm();
   useEffect(()=>{
-    props.store.subscribe('profile',(result)=>{
+    props.store.subscribe('profile',result=>{
       if(result){
         // form.setFieldsValue(result);
         setValues(result);

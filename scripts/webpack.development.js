@@ -1,8 +1,10 @@
 const webpack = require('webpack');
 const {merge} = require('webpack-merge');
 const postcssPresetEnv = require('postcss-preset-env');
+const OpenBrowserWebpackPlugin = require('@huxy/open-browser-webpack-plugin');
 // const {GenerateSW}=require('workbox-webpack-plugin');
 const webpackConfig = require('./webpack.config');
+const {HOST,PORT}=require('../configs');
 
 const postcssOptions={
   stage: 0,
@@ -148,6 +150,7 @@ const devConfig=merge(webpackConfig,{
       EMAIL:JSON.stringify('ah.yiru@gmail.com'),
       VERSION:JSON.stringify('0.0.x'),
     }),
+    new OpenBrowserWebpackPlugin({target:`${HOST}:${PORT}`}),
     /*new GenerateSW({
       // include: [/\.html$/, /\.js$/, /\.css$/],
       // exclude: '/node_modules/',

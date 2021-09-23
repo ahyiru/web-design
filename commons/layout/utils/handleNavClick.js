@@ -13,9 +13,12 @@ const types={
       store.setState({'huxy-theme':current});
     }
   },
-  collapse:({store})=>store.setState({'huxy-collapse':!store.getState('huxy-collapse')}),
+  collapse:({store},e)=>{
+    e.stopPropagation();
+    store.setState({'huxy-collapse':!store.getState('huxy-collapse')});
+  },
 };
-const handleNavClick=(props,item)=>{
+const handleNavClick=(props,item,e)=>{
   const {handle,path,type}=item;
   const {router,store}=props;
   if(typeof handle==='function'){
@@ -24,7 +27,7 @@ const handleNavClick=(props,item)=>{
   if(path){
     return router.push(path);
   }
-  types[type]?.({store,item});
+  types[type]?.({store,item},e);
 };
 
 export default handleNavClick;

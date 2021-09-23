@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CopyFileWebpackPlugin = require('@huxy/copy-file-webpack-plugin');
 const rimraf = require('rimraf');
 
 // const CompressionPlugin = require('compression-webpack-plugin');
@@ -15,10 +16,11 @@ const {GenerateSW}=require('workbox-webpack-plugin');
 
 const webpackConfig = require('./webpack.config');
 
-const {appName,PRD_ROOT_DIR,BUILD_DIR}=require('../configs');
+const {appName,PRD_ROOT_DIR,BUILD_DIR,PUBLIC_DIR}=require('../configs');
 
 const rootDir=['/','./'].includes(PRD_ROOT_DIR)?PRD_ROOT_DIR:`${PRD_ROOT_DIR}/`;
 
+const publics=path.resolve(__dirname,PUBLIC_DIR);
 const app=path.resolve(__dirname,`../${appName}`);
 const build=path.resolve(app,BUILD_DIR);
 
@@ -75,10 +77,22 @@ const plugins=[
   }),
   new GenerateSW({
     // importWorkboxFrom: 'local',
-    cacheId: 'demo-pwa',
+    cacheId: 'huxy-pwa',
     clientsClaim: true,
     skipWaiting: true,
   }),
+  new CopyFileWebpackPlugin([
+    /* {
+      from:path.resolve(publics,'src'),
+      to:path.resolve(app,`${BUILD_DIR}/src`),
+    },{
+      from:path.resolve(publics,'manifest.json'),
+      to:path.resolve(app,`${BUILD_DIR}/manifest.json`),
+    }, */{
+      from:path.resolve(publics,'robots.txt'),
+      to:path.resolve(app,`${BUILD_DIR}/robots.txt`),
+    },
+  ]),
   /* new CompressionPlugin({
     test: /\.(js|css)(\?.*)?$/i,
     filename: '[path].gz[query]',
@@ -97,7 +111,7 @@ if(ANALYZE){
 
 const prodConfig=merge(webpackConfig, {
   mode:'production',
-  // devtool:'cheap-module-source-map',
+  // devtool:'nosources-source-map',
   output:{
     path:build,
     publicPath:rootDir,
@@ -170,6 +184,15 @@ const prodConfig=merge(webpackConfig, {
           test: function(module){
             const context = module.context;
             return context && (context.indexOf('echarts') >= 0 || context.indexOf('zrender') >= 0);
+          },
+        },
+        antd: {
+          idHint:'antd',
+          chunks:'all',
+          priority:25,
+          test: function(module){
+            const context = module.context;
+            return context && (context.indexOf('@ant-design') >= 0 || context.indexOf('antd') >= 0);
           },
         },
       },

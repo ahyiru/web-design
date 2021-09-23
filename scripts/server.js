@@ -19,6 +19,11 @@ const proxyCfg=require('./appProxy');
 const {prefix,opts}=proxyCfg(PROXY_URL);
 app.use(prefix,createProxyMiddleware(opts));
 
+/* app.use('/v1',createProxyMiddleware({
+  target: 'https://zbx.cactifans.com',
+  changeOrigin: true,
+})); */
+
 app.set('host',HOST);
 app.set('port',PRO_PORT);
 
@@ -41,6 +46,15 @@ app.get('*',function(request,response){
   response.sendFile(path.resolve(build,'index.html'));
 });
 
+/* https */
+const cert=path.resolve(__dirname,'../cert');
+const options={
+  key:fs.readFileSync(`${cert}/server.key`),
+  cert:fs.readFileSync(`${cert}/server.cert`),
+  // passphrase: 'YOUR PASSPHRASE HERE',
+};
+const httpsServer=https.createServer(options,app);
+/* https */
 
 app.listen(app.get('port'),(err)=>{
   if (err) {
@@ -50,7 +64,7 @@ app.listen(app.get('port'),(err)=>{
   console.log('\n服务已启动! '.black+'✓'.green);
   console.log(`\n监听端口: ${app.get('port')} ,正在构建,请稍后...`.cyan);
   console.log('-----------------------------------'.grey);
-  console.log(` 本地地址: https://${app.get('host')}:${app.get('port')}${PRD_ROOT_DIR}`.magenta);
+  console.log(` 本地地址: ${app.get('host')}:${app.get('port')}${PRD_ROOT_DIR}`.magenta);
   console.log('-----------------------------------'.grey);
   console.log('\n按下 CTRL-C 停止服务\n'.blue);
 });

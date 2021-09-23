@@ -1,7 +1,7 @@
 {
-  "name":"测试",
-  "short_name":"Demo",
-  "description":"测试",
+  "name":"huxy",
+  "short_name":"huxy",
+  "description":"huxy",
   "lang":"cn",
   "display":"standalone",
   "orientation":"any",
@@ -9,24 +9,24 @@
   "theme_color":"#313131",
   "background_color":"#313131",
   "icons":[{
-    "src":"../app/styles/images/usr.jpg",
-    "type":"image/jpg",
-    "sizes":"192x192"
+    "src":"./src/images/150.png",
+    "type":"image/png",
+    "sizes":"150x150"
   },{
-    "src":"./img/logo_256.png",
-    "sizes":"256x256",
+    "src":"./src/images/300.png",
+    "sizes":"300x300",
     "type":"image/png"
   },{
-    "src":"./img/logo_144.png",
+    "src":"./src/images/450.png",
     "type":"image/png",
-    "sizes":"144x144"
+    "sizes":"450x450"
   },{
-    "src":"./img/logo_96.png",
+    "src":"./src/images/600.png",
     "type":"image/png",
-    "sizes":"96x96"
+    "sizes":"600x600"
   },{
-    "src":"./img/logo_72.png",
+    "src":"./src/images/900.png",
     "type":"image/png",
-    "sizes":"72x72"
+    "sizes":"900x900"
   }]
 }

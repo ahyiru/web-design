@@ -1,10 +1,11 @@
 import {Button} from 'antd';
 import fixIcons from '@app/utils/fixIcons';
 import Panel from '@app/components/panel';
-import eventStore from '@app/configs/eventStore';
+import {useRoute} from '@common';
 
 const Index=({back,actions=[]})=>{
-  const i18ns=eventStore.store.getState('i18ns');
+  const routes=useRoute();
+  const i18ns=routes.store.getState('i18ns');
   const i18nCfg=i18ns?.main.components??{};
   return <Panel>
     <Button onClick={e=>typeof back==='function'?back():history.back()} type="link" size="small" icon={fixIcons('LeftOutlined')}>{i18nCfg.back}</Button>
