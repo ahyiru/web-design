@@ -1,4 +1,4 @@
-.arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   position:relative;
   background:@arrowBgColor;
   border:1px solid @arrowBorderColor;
@@ -70,7 +70,7 @@
     }
   }*/
 }
-.arrow-lt(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow-lt(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   .arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth);
   &::before,&::after{
     top:auto;
@@ -85,7 +85,7 @@
     border-bottom-color:@arrowBgColor;
   }
 }
-.arrow-rt(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow-rt(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   .arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth);
   &::before,&::after{
     top:auto;
@@ -100,7 +100,7 @@
     border-bottom-color:@arrowBgColor;
   }
 }
-.arrow-lb(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow-lb(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   .arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth);
   &::before,&::after{
     bottom:auto;
@@ -115,7 +115,7 @@
     border-top-color:@arrowBgColor;
   }
 }
-.arrow-rb(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow-rb(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   .arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth);
   &::before,&::after{
     bottom:auto;
@@ -130,7 +130,7 @@
     border-top-color:@arrowBgColor;
   }
 }
-.arrow-tl(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow-tl(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   .arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth);
   &::before,&::after{
     left:auto;
@@ -145,7 +145,7 @@
     border-right-color:@arrowBgColor;
   }
 }
-.arrow-tr(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow-tr(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   .arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth);
   &::before,&::after{
     right:auto;
@@ -160,7 +160,7 @@
     border-left-color:@arrowBgColor;
   }
 }
-.arrow-bl(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow-bl(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   .arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth);
   &::before,&::after{
     left:auto;
@@ -175,7 +175,7 @@
     border-right-color:@arrowBgColor;
   }
 }
-.arrow-br(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth:1px){
+.arrow-br(@arrowBgColor:#fff,@arrowBorderColor:#f0f0f0,@arrowSize:6px,@position:10px,@arrowWidth:1px){
   .arrow(@arrowBgColor,@arrowBorderColor,@arrowSize,@position,@arrowWidth);
   &::before,&::after{
     right:auto;
@@ -191,7 +191,7 @@
   }
 }
 
-.angle(@angleSize,@width:1px){
+.angle(@angleSize:6px,@width:1px){
   @pos:(@angleSize - @width)/2;
   position:relative;
   display:inline-block;
@@ -235,7 +235,7 @@
     }
   }*/
 }
-.angle-bt(@angleSize,@width:1px){
+.angle-bt(@angleSize:6px,@width:1px){
   .angle(@angleSize,@width);
   &::before,&::after{
     top:calc(50% + @pos);
@@ -247,7 +247,7 @@
     transform:rotate(45deg);
   }
 }
-.angle-top(@angleSize,@width:1px){
+.angle-top(@angleSize:6px,@width:1px){
   .angle(@angleSize,@width);
   &::before,&::after{
     top:calc(50% - @pos);
@@ -333,7 +333,7 @@
   }
 }
 
-.tooltip(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position:15px,@arrowSize:8px){
+.tooltip(@tooltipBgColor:#303133,@tooltipBorderColor:#303133,@tooltipColor:#fff,@position:15px,@arrowSize:8px){
   position:relative;
   // cursor:pointer;
   &:hover{
@@ -369,7 +369,7 @@
     border-bottom-color:transparent;
   }
 }
-.tooltip-lb(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position:15px,@arrowSize:8px){
+.tooltip-lb(@tooltipBgColor:#303133,@tooltipBorderColor:#303133,@tooltipColor:#fff,@position:15px,@arrowSize:8px){
   &[tooltips]{
     .tooltip(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position,@arrowSize);
     &::before{
@@ -383,7 +383,7 @@
     }
   }
 }
-.tooltip-rb(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position:15px,@arrowSize:8px){
+.tooltip-rb(@tooltipBgColor:#303133,@tooltipBorderColor:#303133,@tooltipColor:#fff,@position:15px,@arrowSize:8px){
   &[tooltips]{
     .tooltip(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position,@arrowSize);
     &::before{
@@ -397,7 +397,7 @@
     }
   }
 }
-.tooltip-lt(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position:15px,@arrowSize:8px){
+.tooltip-lt(@tooltipBgColor:#303133,@tooltipBorderColor:#303133,@tooltipColor:#fff,@position:15px,@arrowSize:8px){
   &[tooltips]{
     .tooltip(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position,@arrowSize);
     &::before{
@@ -411,7 +411,7 @@
     }
   }
 }
-.tooltip-rt(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position:15px,@arrowSize:8px){
+.tooltip-rt(@tooltipBgColor:#303133,@tooltipBorderColor:#303133,@tooltipColor:#fff,@position:15px,@arrowSize:8px){
   &[tooltips]{
     .tooltip(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position,@arrowSize);
     &::before{
@@ -425,7 +425,7 @@
     }
   }
 }
-.tooltip-tr(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position:15px,@arrowSize:8px){
+.tooltip-tr(@tooltipBgColor:#303133,@tooltipBorderColor:#303133,@tooltipColor:#fff,@position:15px,@arrowSize:8px){
   &[tooltips]{
     .tooltip(@tooltipBgColor,@tooltipBorderColor,@tooltipColor,@position,@arrowSize);
     &::before{
@@ -441,7 +441,7 @@
 }
 
 /*callout*/
-.callout(@info:#428bca,@success:#5cb85c,@warning:#f0ad4e,@danger:#d9534f){
+/*.callout(@info:#428bca,@success:#5cb85c,@warning:#f0ad4e,@danger:#d9534f){
   display: block;
   padding: 5px 10px;
   margin: 5px 0;
@@ -485,4 +485,4 @@
       border-left-color: @danger;
     }
   }
-}
+}*/

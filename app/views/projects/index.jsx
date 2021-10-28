@@ -7,6 +7,7 @@ import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
 
 import Panel from '@app/components/panel';
+import Ellipsis from '@app/components/ellipsis';
 
 const {listProjectFn,deleteProjectFn}=apiList;
 
@@ -30,7 +31,8 @@ const getColumns = ({handleRouter,handleEdit,handleDelete,handleApis},profile,i1
     dataIndex: 'description',
     width:80,
     ellipsis:true,
-    render: text => <Tooltip title={text}>{text}</Tooltip>,
+    // render: text => <Tooltip title={text}>{text}</Tooltip>,
+    render: text => <Ellipsis>{text}</Ellipsis>,
   },
   {
     title: i18ns.role,
@@ -55,7 +57,8 @@ const getColumns = ({handleRouter,handleEdit,handleDelete,handleApis},profile,i1
     render:(text,record)=>{
       const time=text||record.createtime||+new Date();
       const txt=formatTime(new Date(time));
-      return <Tooltip title={txt}>{txt}</Tooltip>;
+      // return <Tooltip title={txt}>{txt}</Tooltip>;
+      return <Ellipsis>{txt}</Ellipsis>;
     },
   },
   {

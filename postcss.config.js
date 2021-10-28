@@ -21,5 +21,6 @@ module.exports={
     },
     'cssnano':{},
     // 'autoprefixer':{},
+    // tailwindcss: {},
   },
 };

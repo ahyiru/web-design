@@ -1,6 +1,42 @@
 const {sleep,uuidv4}=require('@huxy/utils');
 const mock=app=>{
-  app.post('/api/user/login',async (req,res)=>{
+  app.get('/api/api/list',async (req,res)=>{
+    await sleep();
+    res.json({
+      code:200,
+      message:'success！',
+      result:{
+        list:[
+          {
+            name: 'login',
+            url: '/auth/login',
+            method: 'post',
+          },
+          {
+            name: 'logout',
+            url: '/auth/logout',
+            method: 'get',
+          },
+          {
+            name: 'profile',
+            url: '/users/profile',
+            method: 'get',
+          },
+          {
+            name: 'listAuth',
+            url: '/auth/list',
+            method: 'get',
+          },
+          {
+            name: 'listRouter',
+            url: '/router/list',
+            method: 'get',
+          },
+        ],
+      },
+    });
+  });
+  app.post('/api/auth/login',async (req,res)=>{
     await sleep();
     res.json({
       code:200,
@@ -10,7 +46,23 @@ const mock=app=>{
       },
     });
   });
-  app.get('/api/user/profile',async (req,res)=>{
+  app.post('/api/auth/logout',async (req,res)=>{
+    await sleep();
+    res.json({
+      code:200,
+      message:'success！',
+      result:{},
+    });
+  });
+  app.get('/api/auth/list',async (req,res)=>{
+    await sleep();
+    res.json({
+      code:200,
+      message:'success！',
+      result:[],
+    });
+  });
+  app.get('/api/users/profile',async (req,res)=>{
     await sleep();
     res.json({
       code:200,
@@ -23,7 +75,15 @@ const mock=app=>{
       },
     });
   });
-  app.get('/api/user/allUser',async (req,res)=>{
+  app.get('/api/router/list',async (req,res)=>{
+    await sleep();
+    res.json({
+      code:200,
+      message:'success！',
+      result:[],
+    });
+  });
+  app.get('/api/users/allUser',async (req,res)=>{
     await sleep();
     res.json({
       code:200,
@@ -66,6 +126,7 @@ const mock=app=>{
   });
 };
 
+
 const express = require('express');
 const colors=require('colors');
 const cors=require('cors');
@@ -92,5 +153,3 @@ app.listen(SERVER_PORT,(err)=>{
 module.exports=()=>{
   mock(app);
 };
-
-

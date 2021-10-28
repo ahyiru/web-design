@@ -1,0 +1,81 @@
+const theme=[
+  {
+    key:'--maxWidth',
+    value:'1200px',
+  },
+  {
+    key:'--menuWidth',
+    value:'160px',
+  },
+  {
+    key:'--collapseWidth',
+    value:'60px',
+  },
+  {
+    key:'--collapseMenuWidth',
+    value:'160px',
+  },
+  {
+    key:'--headerHeight',
+    value:'52px',
+  },
+  {
+    key:'--footerHeight',
+    value:'40px',
+  },
+  {
+    key:'--breadHeight',
+    value:'40px',
+  },
+  {
+    key:'--topbarHeight',
+    value:'0px',
+  },
+  {
+    key:'--bannerBgColor',
+    value:'#2b4381',
+  },
+  {
+    key:'--navBgColor',
+    value:'linear-gradient(to right,#3b5892,#273971)',
+  },
+  {
+    key:'--menuBgColor',
+    value:'linear-gradient(to bottom,#2b4381,#101d4a)',
+  },
+  {
+    key:'--appBgColor',
+    value:'#f0f0f0',
+  },
+  {
+    key:'--pageBgColor',
+    value:'#0f1c49',
+  },
+  {
+    key:'--panelBgColor',
+    value:'linear-gradient(to right,#3b5892,#273971)',
+  },
+  {
+    key:'--appColor',
+    value:'#fff',
+  },
+  {
+    key:'--linkColor',
+    value:'#eee',
+  },
+  {
+    key:'--pageLinkColor',
+    value:'#eee',
+  },
+  {
+    key:'--linkHoverColor',
+    value:'#40a9ff',
+  },
+  {
+    key:'--linkActiveColor',
+    value:'#40a9ff',
+  },
+];
+
+export default theme;
+

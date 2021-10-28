@@ -7,6 +7,10 @@ module.exports={
     es6: true,
     jest: true,
   },
+  /* meta:{
+    hasSuggestions: true,
+    fixable: 'code',
+  }, */
   parserOptions:{
     requireConfigFile:false,
     ecmaVersion:2021,

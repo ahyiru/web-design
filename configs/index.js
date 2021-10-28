@@ -1,7 +1,13 @@
 const appName=require('./appName');
 const app=require('./app');
+const demo=require('./demo');
+const template=require('./template');
+const vue=require('./vue');
 const cfg={
   app,
+  demo,
+  vue,
+  template,
   login:app,
   'blog/router':{...app,PORT:8000,PRO_PORT:8001},
   'blog/utils':{...app,PORT:8010,PRO_PORT:8011},

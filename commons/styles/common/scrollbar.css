@@ -25,6 +25,12 @@
   background-color:rgba(0,0,0,.5);
 }
 
-
-
+::selection {
+  color: #ffffff;
+  background-color: #fa541c;
+}
+* {
+  user-select: none;
+  caret-color: #faad14;
+}
 
