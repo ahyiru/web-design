@@ -402,6 +402,13 @@ export const dynamicRoutes=[
     ],
   }, */
   {
+    path:'/graph',
+    name:'图形可视化',
+    icon:'FundOutlined',
+    denied:false,
+    componentPath:'/graph/graphin',
+  },
+  {
     path:'/editor',
     name:'富文本编辑器',
     icon:'EditOutlined',

@@ -125,6 +125,8 @@
   },
   "dependencies": {
     "@ant-design/pro-table": "^2.56.6",
+    "@antv/graphin": "^2.4.3",
+    "@antv/graphin-components": "^2.4.0",
     "@huxy/components": "^0.9.0",
     "@huxy/layout": "^0.5.0",
     "@huxy/router": "^0.9.0",
