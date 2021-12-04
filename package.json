@@ -1,6 +1,6 @@
 {
   "name": "ihuxy",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "scripts/index.js",
   "description": "react use router",
   "keywords": [
