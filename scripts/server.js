@@ -19,18 +19,13 @@ const proxyCfg=require('./appProxy');
 const {prefix,opts}=proxyCfg(PROXY_URL);
 app.use(prefix,createProxyMiddleware(opts));
 
-/* app.use('/v1',createProxyMiddleware({
-  target: 'https://zbx.cactifans.com',
-  changeOrigin: true,
-})); */
-
 app.set('host',HOST);
 app.set('port',PRO_PORT);
 
 app.use(cors());
-app.use(logger('dev'));
-app.use(bodyParser.json({limit:'20mb'}));
-app.use(bodyParser.urlencoded({limit:'20mb',extended:true}));
+app.use(logger('combined'));
+app.use(bodyParser.json({limit:'30mb'}));
+app.use(bodyParser.urlencoded({limit:'30mb',extended:true}));
 app.use(compression());
 
 // const appDist=path.resolve(__dirname,`../${appName}`);

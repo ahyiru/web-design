@@ -16,11 +16,6 @@ const getSuspense=apis=>{
   });
 };
 
-/* const {userApis,routerApis,authApis,layoutApis,projectApis,handleApis,pageApis}=require('@configs/apis');
-export const getList1=async ()=>{
-  return [...userApis,...routerApis,...authApis,...layoutApis,...projectApis,...handleApis,...pageApis];
-}; */
-
 export const getList=async ()=>{
   const {result}=await getApis();
   return result?.list??[];

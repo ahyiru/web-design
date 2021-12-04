@@ -1,11 +1,15 @@
 import {useState} from 'react';
-import {Input,InputNumber,Switch,Button,message} from 'antd';
+import {Input,InputNumber,Slider,Button,message,Select,Radio} from 'antd';
 import {Row,Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 // import TimeBar from '@app/components/test1';
+import {sizeRules} from '@app/utils/sizeRules';
 import {utils,use} from '@common';
-const {storage}=utils;
+import getThemeList from '@app/configs/theme';
+const {storage,copyToClipboard}=utils;
 const {useDebounce}=use;
+
+const {Option}=Select;
 
 const delay=500;
 
@@ -15,81 +19,32 @@ const labelStyle={
   lineHeight:'32px',
 };
 
-const validValues=(item,i18nCfg)=>{
-  const {value}=item;
-  if(item.key==='--maxWidth'){
-    const mpx=value.match(/px$/);
-    const mper=value.match(/%$/);
-    if(!mpx&&!mper){
-      message.warning(i18nCfg.data_valid_msg);
-      return;
-    }
-    if(mpx){
-      const val=value.slice(0,-2);
-      if(!val||isNaN(val)){
-        message.warning(i18nCfg.data_valid_msg);
-        return;
-      }
-      if(val<500||val>5000){
-        message.warning(i18nCfg.data_px_msg);
-        return;
-      }
-      // item.value=val;
-      return true;
-    }
-    if(mper){
-      const val=value.slice(0,-1);
-      if(!val||isNaN(val)){
-        message.warning(i18nCfg.data_valid_msg);
-        return;
-      }
-      if(val<50||val>100){
-        message.warning(i18nCfg.data_percent_msg);
-        return;
-      }
-      // item.value=val;
-      return true;
-    }
-  }else{
-    const mpx=value.match(/px$/);
-    if(!mpx){
-      message.warning(i18nCfg.data_valid_msg);
-      return;
-    }
-    const val=value.slice(0,-2);
-    if(!val||isNaN(val)){
-      message.warning(i18nCfg.data_valid_msg);
-      return;
-    }
-    if(val<0||val>300){
-      message.warning(i18nCfg.menu_width_msg);
-      return;
-    }
-    console.log(val);
-    // item.value=val;
-    return true;
-  }
-};
+const getSizeList=list=>Object.keys(list).map(key=>{
+  const size=list[key];
+  const value=size.replace(/[^0-9]/ig,'')-0;
+  const unit=size.replace(value,'');
+  const units=Object.keys(sizeRules[key]);
+  const range=sizeRules[key][unit];
+  return {
+    key,
+    value,
+    unit,
+    units,
+    min:range[0],
+    max:range[1],
+  };
+});
 
 const Index=props=>{
   const {store,useStore}=props;
   const [theme,setTheme]=useStore('huxy-theme');
-  const [menuType,setMenuType]=useStore('huxy-menuType');
+  const [menuType,setMenuType]=useStore('huxy-menuType','vertical');
   const i18ns=store.getState('i18ns');
   const themeLang=i18ns?.theme??{};
   const i18nCfg=i18ns?.main.layout??{};
-
-  const [themeList,setThemeList]=useState(theme?.list??[]);
-  const [size,setSize]=useState('10');
-
+  const [size,setSize]=useState(10);
   const changeFontSize=useDebounce(value=>document.documentElement.style.setProperty('--rootSize',value),delay);
-  const changeLayout=useDebounce((item,value,save=false)=>{
-    if(item&&!item.key.includes('Color')){
-      const val=validValues(item,i18nCfg);
-      if(!val){
-        return;
-      }
-    }
+  const changeLayout=useDebounce((value,save=false)=>{
     const newTheme={
       name:'custom',
       key:'custom',
@@ -101,64 +56,105 @@ const Index=props=>{
       message.success(i18nCfg.save_cfg_msg);
     }
   },delay);
-  const changeTheme=(e,item)=>{
+  const changeSizes=(key,value,unit)=>{
     // e.persist();
-    const curItem=themeList.find(v=>v.key===item.key);
-    if(curItem){
-      curItem.value=e.target.value;
-    }
-    setThemeList([...themeList]);
-    changeLayout(curItem,[...themeList]);
+    theme.list.sizes[key]=`${value||''}${unit}`;
+    changeLayout(theme.list);
+  };
+  const changeColors=(e,key)=>{
+    const {value}=e.target;
+    theme.list.colors[key]=value;
+    changeLayout(theme.list);
   };
   const changeFont=value=>{
-    // const {value}=e.target;
     setSize(value);
     changeFontSize(`${value*100/16}%`);
   };
   const saveConfig=()=>{
-    changeLayout(null,themeList,true);
+    changeLayout(theme.list,true);
   };
-  const sizes=themeList.filter(v=>!v.key.includes('Color')).map(v=>({...v,type:'text'}));
-  const colors=themeList.filter(v=>v.key.includes('Color')).map(v=>({...v,type:'color'}));
-  return <div>
+  const copyConfig=()=>{
+    copyToClipboard(JSON.stringify(theme.list));
+    message.success(i18nCfg.copy_cfg_msg);
+  };
+  const changeUnit=(key,unit)=>{
+    const value=unit==='px'?1200:100;
+    theme.list.sizes[key]=`${value}${unit}`;
+    changeLayout(theme.list);
+  };
+  const selectTheme=current=>{
+    storage.set('theme',current);
+    setTheme(current);
+  };
+  return <div className="layout-setting">
     <Row>
       <Col>
         <Panel>
-          <div style={{padding:'15px 0',float:'right'}}>
-            <Button type="primary" onClick={saveConfig}>{i18nCfg.saveConfig}</Button>
-          </div>
-          <div style={{marginTop:10}}>
-            <span>{i18nCfg.switchMenu}</span>
-            <Switch checkedChildren={i18nCfg.checkedChildren} unCheckedChildren={i18nCfg.unCheckedChildren} checked={menuType==='navMenu'} onChange={type=>{
-              setMenuType(type?'navMenu':'sideMenu');
-            }} />
-          </div>
-          <div style={{marginTop:10}}>
-            <span>{i18nCfg.fontSize}</span>
-            <InputNumber min={0} max={18} value={size} onChange={e=>changeFont(e)} />
+          <div className="block-justify">
+            <h3 style={{margin:'0',height:'32px',lineHeight:'32px'}}>{i18nCfg.layoutDesign}</h3>
+            <div>
+              <Button type="primary" onClick={saveConfig} style={{marginRight:'10px'}}>{i18nCfg.saveConfig}</Button>
+              <Button type="primary" onClick={copyConfig}>{i18nCfg.copyConfig}</Button>
+            </div>
           </div>
         </Panel>
       </Col>
       <Col>
         <Row>
-          <Col span={6}>
+          <Col span={4}>
             <Panel>
-              <h2>{i18nCfg.sizeDesign}</h2>
+              <h3>{i18nCfg.layoutDesign}</h3>
+              <div className="vertical-item">
+                <label>{i18nCfg.menuType}</label>
+                <Radio.Group style={{marginTop:'5px'}} value={menuType} onChange={e=>setMenuType(e.target.value)}>
+                  <Radio value="vertical">{i18nCfg.vertical}</Radio>
+                  <Radio value="horizontal">{i18nCfg.horizontal}</Radio>
+                  <Radio value="compose">{i18nCfg.compose}</Radio>
+                </Radio.Group>
+              </div>
+              <div className="vertical-item">
+                <label>{i18nCfg.fontSize}</label>
+                <Slider min={6} max={16} value={size} onChange={e=>changeFont(e)} />
+              </div>
+              <Row className="select-item">
+                {
+                  getThemeList(themeLang).map(item=><Col key={item.key} span={6} onClick={e=>selectTheme(item)}>
+                    <a className={`item${item.key===theme.key?' selected':''}`}>{item.name}</a>
+                  </Col>)
+                }
+              </Row>
+            </Panel>
+          </Col>
+          <Col span={4}>
+            <Panel>
+              <h3>{i18nCfg.sizeDesign}</h3>
               {
-                sizes.map(v=><Row key={v.key} style={{marginTop:8}}>
-                  <Col span={4}><span style={labelStyle}>{themeLang[v.key]}：</span></Col>
-                  <Col span={6}><Input disabled={v.key==='--topbarHeight'} type={v.type} value={v.value} onChange={e=>changeTheme(e,v)} /></Col>
+                getSizeList(theme.list.sizes).map(({key,value,unit,units,min,max})=><Row key={key} style={{marginTop:8}}>
+                  <Col span={5}><span style={labelStyle}>{themeLang[key]}：</span></Col>
+                  <Col span={6}>
+                    <InputNumber
+                      min={min}
+                      max={max}
+                      value={value}
+                      onChange={value=>changeSizes(key,value,unit)}
+                      addonAfter={units.length>1?<Select value={unit} onChange={val=>changeUnit(key,val)}>
+                        {
+                          units.map(u=><Option key={u} value={u}>{u}</Option>)
+                        }
+                      </Select>:units[0]}
+                    />
+                  </Col>
                 </Row>)
               }
             </Panel>
           </Col>
-          <Col span={6}>
-            <Panel>
-              <h2>{i18nCfg.colorDesign}</h2>
+          <Col span={4}>
+            <Panel className="color-picker-panel">
+              <h3>{i18nCfg.colorDesign}</h3>
               {
-                colors.map(v=><Row key={v.key} style={{marginTop:8}}>
-                  <Col span={4}><span style={labelStyle}>{themeLang[v.key]}：</span></Col>
-                  <Col span={6}><Input type={v.type} value={v.value} onChange={e=>changeTheme(e,v)} /></Col>
+                Object.keys(theme.list.colors).map(key=><Row key={key} style={{marginTop:8}}>
+                  <Col span={5}><span style={labelStyle}>{themeLang[key]}：</span></Col>
+                  <Col span={6}><Input type="color" value={theme.list.colors[key]} onChange={e=>changeColors(e,key)} /></Col>
                 </Row>)
               }
             </Panel>

@@ -43,7 +43,7 @@ const actionsRender={
       return {
         type:'link',
         size:'small',
-        style:{color:disabled?'var(--lightColor)':'var(--red2)'},
+        style:{color:disabled?'var(--light-color)':'var(--red2)'},
         onClick:e=>actions['handleDelete'](record),
         children:'删除',
       };

@@ -2,34 +2,51 @@
   /*colors*/
   --red1:#ff4d4f;
   --red2:#f5222d;
+  --light-red:#fff5f8;
   --orange1:#ffa940;
   --orange2:#fa8c16;
+  --light-orange:#fff8dd;
   --gold1:#ffc53d;
   --gold2:#faad14;
+  --light-gold:#fff8dd;
   --yellow1:#ffec3d;
   --yellow2:#fadb14;
+  --light-yellow:#fff8dd;
   --green1:#73d13d;
   --green2:#52c41a;
+  --light-green:#e8fff3;
   --blue1:#40a9ff;
   --blue2:#1890ff;
+  --light-blue:#f1faff;
   --purple1:#9254de;
   --purple2:#722ed1;
-  --lightColor:rgba(0,0,0,.25);
+  --light-purple:#f8f5ff;
+  --dark:#999999;
+  --light-dark:#eff2f5;
+  --light-color:rgba(0,0,0,.25);
 
   /*size*/
   --size: 1.4rem;
   --weight: 400;
   --color: #444;
   --bgcolor: #eaeff2;
-  --title-size: 1.8rem;
+  --title-size: 1.6rem;
   --title-weight: 500;
   --title-color: #404040;
-  --link-size: 1.6rem;
+  --link-size: 1.4rem;
   --link-weight: 400;
   --link-color: #f0f0f0;
-  --link-hover-color: #40a9ff;
+  --hover-color: #40a9ff;
   --hover-bgcolor: #eaeff2;
   --disabled-color: rgba(0,0,0,.25);
   --disabled-bgcolor: #f5f5f5;
+
+  --space:1.2rem;
+  --h1:2.6rem;
+  --h2:2.2rem;
+  --h3:1.8rem;
+  --h4:1.6rem;
+  --h5:1.4rem;
+  --h6:1.2rem;
 }
 

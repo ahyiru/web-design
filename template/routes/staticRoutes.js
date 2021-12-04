@@ -1,21 +1,8 @@
-/* import apiList from '@app/utils/getApis';
-const pageSchema=async ({params})=>{
-  const {result}=await apiList.listSchemaFn(params);
-  return {result};
-}; */
 const routes=[
-  {
-    path:'/',
-    name:'首页',
-    icon:'HomeOutlined',
-    denied:false,
-    component:()=>import('@common/layout'),
-  },
   {
     path:'/user',
     title:'登录注册',
     icon:'TeamOutlined',
-    denied:false,
     hideMenu:true,
     component:()=>import('@app/user'),
     children:[
@@ -44,9 +31,14 @@ const routes=[
   {
     path:'/404',
     name:'404',
-    denied:false,
     component:import('@app/404'),
     hideMenu:true,
+  },
+  {
+    path:'/preview',
+    name:'预览',
+    hideMenu:true,
+    componentPath:'/projects/router/design/preview',
   },
 ];
 

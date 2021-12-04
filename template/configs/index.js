@@ -46,7 +46,7 @@ const beforeRender=(input,next)=>{
   /* if(!token&&!whiteRoutes.includes(validPath)){
     return next({path:'/user/signin'});
   } */
-  if(designReg.test(prevPath)){
+  if(path!==prevPath&&designReg.test(prevPath)){
     return confirmDesignPage(next);
   }
   next();

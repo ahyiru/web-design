@@ -1,81 +1,30 @@
-const theme=[
-  {
-    key:'--maxWidth',
-    value:'100%',
-  },
-  {
-    key:'--menuWidth',
-    value:'200px',
-  },
-  {
-    key:'--collapseWidth',
-    value:'60px',
-  },
-  {
-    key:'--collapseMenuWidth',
-    value:'160px',
-  },
-  {
-    key:'--headerHeight',
-    value:'56px',
-  },
-  {
-    key:'--footerHeight',
-    value:'40px',
-  },
-  {
-    key:'--breadHeight',
-    value:'40px',
-  },
-  {
-    key:'--topbarHeight',
-    value:'0px',
-  },
-  {
-    key:'--bannerBgColor',
-    value:'#2a3042',
-  },
-  {
-    key:'--navBgColor',
-    value:'#262b3c',
-  },
-  {
-    key:'--menuBgColor',
-    value:'#2a3042',
-  },
-  {
-    key:'--appBgColor',
-    value:'#222736',
-  },
-  {
-    key:'--pageBgColor',
-    value:'#222736',
-  },
-  {
-    key:'--panelBgColor',
-    value:'#2a3042',
-  },
-  {
-    key:'--appColor',
-    value:'#a6b0cf',
-  },
-  {
-    key:'--linkColor',
-    value:'#a6b0cf',
-  },
-  {
-    key:'--pageLinkColor',
-    value:'#a6b0cf',
-  },
-  {
-    key:'--linkHoverColor',
-    value:'#ffffff',
-  },
-  {
-    key:'--linkActiveColor',
-    value:'#ffffff',
-  },
-];
+export const sizes={
+  '--maxWidth': '100vw',
+  '--menuWidth': '240px',
+  '--collapseWidth': '68px',
+  '--collapseMenuWidth': '180px',
+  '--headerHeight': '68px',
+  '--footerHeight': '60px',
+  '--breadHeight': '50px',
+  '--menuItemHeight': '48px',
+};
+export const colors={
+  '--bannerBgColor': '#37424c',
+  '--navBgColor': '#3c4752',
+  '--menuBgColor': '#37424c',
+  '--appBgColor': '#303841',
+  '--pageBgColor': '#303841',
+  '--panelBgColor': '#36404a',
+  '--appColor': '#8c98a5',
+  '--linkColor': '#9097a7',
+  '--pageLinkColor': '#8c98a5',
+  '--linkHoverColor': '#c8cddc',
+  '--linkActiveColor': '#ffffff',
+  '--borderColor':'#424e5a',
+};
 
-export default theme;
+export default {
+  sizes,
+  colors,
+};
 

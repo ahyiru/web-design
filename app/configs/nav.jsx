@@ -1,5 +1,6 @@
 import {message} from 'antd';
-import getThemeList from './theme';
+import Settings from '@app/components/settings';
+// import getThemeList from './theme';
 import getLang from '@app/utils/getLang';
 import {logout} from '@app/utils/utils';
 
@@ -10,42 +11,52 @@ import zh_icon from '@app/assets/icons/zh.png';
 import en_icon from '@app/assets/icons/en.png';
 import jp_icon from '@app/assets/icons/jp.png';
 
+import FullPage from '@app/components/fullScreen';
+import CustomCollapse from '@app/components/customCollapse';
+import Notify from '@app/components/notify';
+import Search from '@app/components/search';
+
 import html2canvas from 'html2canvas';
 
-import {components,utils} from '@common';
-const {Anico}=components;
+import {utils} from '@common';
+// const {Anico}=components;
 const {dlfile}=utils;
 
 const langIcons={zh_icon,en_icon,jp_icon};
 
-export const leftNav=({store})=>{
+export const leftNav=({store,useStore})=>{
   const i18ns=store.getState('i18ns');
   const {nav:{left}}=i18ns;
   return [
     {
+      key:'collapse',
       name:left?.collapse??'collapse',
       type:'collapse',
-      Custom:({collapsed})=><Anico type={(collapsed?.value??collapsed)?'right':''} />,
+      Custom:()=><CustomCollapse />,
     },
     {
+      key:'projectList',
       name:left?.projectList??'projectList',
       type:'projectList',
       arrowDir:'lt',
       Ricon:true,
       children:[
         {
+          key:'zbxtable',
           name:'zbxtable',
           icon:'ApiOutlined',
           type:'link',
           link:'https://zbx.cactifans.com/',
         },
         {
+          key:'PhoenixUI',
           name:'PhoenixUI',
           icon:'ApiOutlined',
           type:'link',
           link:'http://ihuxy.com:8088/',
         },
         {
+          key:'API文档',
           name:left?.apis??'API文档',
           icon:'ApiOutlined',
           type:'link',
@@ -54,30 +65,48 @@ export const leftNav=({store})=>{
       ],
     },
     {
+      key:'wechat',
       icon:'WechatOutlined',
       arrowDir:'lt',
-      ChildRender:status=><div className="follow-me"><img src={wx} /><p>{left?.followMe??'followMe'}：yiru_js</p></div>,
+      ChildRender:item=><div className="follow-me"><img src={wx} /><p>{left?.followMe??'followMe'}：yiru_js</p></div>,
     },
   ];
 };
-export const rightNav=({store})=>{
+export const rightNav=({store,useStore})=>{
   const language=getLang();
   const i18ns=store.getState('i18ns');
   const user=store.getState('profile');
-  const themeKey=store.getState('huxy-theme')?.key;
-  const {nav:{right},theme}=i18ns;
+  // const themeKey=store.getState('huxy-theme')?.key;
+  const {nav:{right}}=i18ns;
   return [
     {
+      key:'configs',
+      icon:'ToolOutlined',
+      type:'configs',
+      Custom:()=><Settings store={store} useStore={useStore} />,
+    },
+    {
+      key:'username',
       name:user?.name??right?.user,
       img:user?.avatar??defUser,
       children:[
         {
+          key:'profile',
           name:right?.profile??'个人中心',
           type:'profile',
           icon:'UserOutlined',
           path:'/profile',
         },
         {
+          key:'settings',
+          name:right?.settings??'设置',
+          type:'setting',
+          icon:'SettingOutlined',
+          path:'/settings',
+        },
+        {
+          divider: true,
+          key:'logout',
           name:right?.logout??'退出',
           type:'logout',
           icon:'PoweroffOutlined',
@@ -88,9 +117,9 @@ export const rightNav=({store})=>{
       ],
     },
     {
+      key:'language',
       name:right?.[language]??'语言',
-      Custom:()=><div className="icon"><img src={`${langIcons[language+'_icon']}`} /></div>,
-      // type:'language',
+      Custom:()=><a><div className="icon"><img src={`${langIcons[language+'_icon']}`} /></div></a>,
       children:[
         {
           key:'zh',
@@ -115,7 +144,8 @@ export const rightNav=({store})=>{
         },
       ],
     },
-    {
+    /* {
+      key:'themeList',
       title:right?.themeList??'主题设置',
       icon:'SettingOutlined',
       type:'themeList',
@@ -124,17 +154,23 @@ export const rightNav=({store})=>{
         v.key===themeKey&&(v.active=true);
         return v;
       }),
-    },
+    }, */
     {
+      key:'github',
       title:right?.github??'Github',
       icon:'GithubOutlined',
       type:'link',
       link:'https://github.com/ahyiru/web-design',
     },
-    // {
-    //   key:'fullscreen',
-    //   Custom:()=><FullPage />,
-    // },
+    {
+      key:'notify',
+      title:right?.notify??'消息',
+      Custom:()=><Notify />,
+    },
+    {
+      key:'fullscreen',
+      Custom:()=><FullPage />,
+    },
     {
       title:right?.screenshot??'截屏',
       key:'screencapture',
@@ -157,6 +193,11 @@ export const rightNav=({store})=>{
     //     location.href='/';
     //   },
     // },
+    {
+      key:'search',
+      title:right?.search??'搜索',
+      Custom:()=><Search />,
+    },
   ];
 };
 

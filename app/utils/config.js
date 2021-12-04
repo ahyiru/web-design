@@ -93,6 +93,7 @@ export const colCfg={
 };
 
 export const tableCfg={
+  rowKey:'name',
   pagination:false,
   scroll:{x:true,y:true},
   size:'small',

@@ -32,6 +32,11 @@ const mock=app=>{
             url: '/router/list',
             method: 'get',
           },
+          {
+            name: 'allUser',
+            url: '/users/allUser',
+            method: 'get',
+          },
         ],
       },
     });
@@ -126,7 +131,6 @@ const mock=app=>{
   });
 };
 
-
 const express = require('express');
 const colors=require('colors');
 const cors=require('cors');
@@ -138,7 +142,7 @@ const {HOST,SERVER_PORT}=require('../configs');
 app.set('host',HOST);
 app.set('port',SERVER_PORT);
 app.use(cors());
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(bodyParser.json({limit:'20mb'}));
 app.use(bodyParser.urlencoded({limit:'20mb',extended:true}));
 app.use(compression());

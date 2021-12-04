@@ -8,23 +8,27 @@ import useGetI18ns from '@app/hooks/useGetI18ns';
 import useGetProfile from '@app/hooks/useGetProfile';
 import {isAuthed} from '@app/utils/utils';
 import getRoutes from '@app/utils/getRoutes';
+import setGlobalVar from '@app/utils/setGlobalVar';
 // import SkeletonContent from '@app/components/skeletonContent';
 const {Spinner}=components;
 const {storage,clone}=utils;
 
-const ConfigProvider=({i18ns,profile,permission,routerList})=>{
-  const {output,loading,store,useStore,updateRouter}=useRouter({...configs,routers:getRoutes({profile,i18ns,permission,routerList}),title:i18ns.title});
-  const [,,subLang]=useStore('huxy-language');
+const ConfigProvider=({i18ns,language,profile,permission,routerList})=>{
+  const {output,loading,store,updateRouter}=useRouter({...configs,routers:getRoutes({profile,i18ns,permission,routerList}),title:i18ns.title});
   useEffect(()=>{
-    const {setState}=store;
-    setState({permission,profile,i18ns,'huxy-theme':getTheme(i18ns)});
-    const off=subLang(async lang=>{
+    const {setState,subscribe}=store;
+    setState({permission,profile,i18ns,'huxy-theme':getTheme(i18ns),'huxy-language':language});
+    const cancelLang=subscribe('huxy-language',async lang=>{
       storage.set('language',lang);
       const {i18ns}=await getI18n();
       setState({i18ns,'huxy-theme':getTheme(i18ns)});
       updateRouter({routers:clone(getRoutes({profile,i18ns,permission,routerList})),title:i18ns.title});
     });
-    return ()=>off();
+    const cancelTheme=subscribe('huxy-theme',theme=>setGlobalVar(theme));
+    return ()=>{
+      cancelLang();
+      cancelTheme();
+    };
   },[]);
   return <>
     {output}

@@ -1,0 +1,38 @@
+import {forwardRef,useState,useRef} from 'react';
+import fixIcons from '@app/utils/fixIcons';
+import {use} from '@common';
+const {useClickAway}=use;
+const selectedType={
+  background:'rgba(0,0,0,.2)',
+  color:'var(--blue1)',
+};
+const Index=({icon,name,format,active,className,dropList,selectedKey,defaultValue,onClick,...rest},ref)=>{
+  const [show,setShow]=useState(false);
+  const iconRef=useRef();
+  // ref=iconRef;
+  const activeCls=active?` active`:'';
+  const cls=className?`${activeCls} ${className}`:activeCls;
+  useClickAway(iconRef,e=>setShow(false));
+  const handleClick=(e,hasDrop)=>{
+    e.preventDefault();
+    if(hasDrop){
+      setShow(prev=>!prev);
+    }else{
+      onClick();
+    }
+  };
+  const showIcon=dropList?.length?<>
+    {selectedKey||defaultValue}
+    {
+      show&&<ul className="icon-drop-area">
+        {
+          dropList.map(({format:key})=><li key={key} style={{[format]:key,...(selectedKey===key?selectedType:null)}}>{key}</li>)
+        }
+      </ul>
+    }
+  </>:fixIcons(icon);
+
+  return <span {...rest} ref={iconRef} className={`tools-bar-icon${cls}`} tooltips={name} onMouseDown={e=>handleClick(e,dropList?.length)}>{showIcon}</span>;
+};
+
+export default forwardRef(Index);

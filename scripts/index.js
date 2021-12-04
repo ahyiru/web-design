@@ -113,7 +113,6 @@ app.listen(app.get('port'),err=>{
 if(appName==='demo'){
   mocks();
 }
-
 /* app.get('test',(req,res)=>{
   return res.send({id:'test'});
 });

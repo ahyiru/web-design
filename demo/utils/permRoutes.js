@@ -6,7 +6,8 @@ const permRouter=(routers,permList,permKey='path',prefix='')=>{
     if(!isRouterDenied&&router.children?.length){
       router.children=permRouter(router.children,permList,permKey,path);
     }
-    router.denied=router.denied!=null?router.denied:!permList?.includes(path);
+    // 权限控制
+    // router.denied=router.denied!=null?router.denied:!permList?.includes(path);
     return router;
   });
 };

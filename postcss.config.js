@@ -6,6 +6,7 @@ module.exports={
       stage: 2,
       features: {
         'nesting-rules': true,
+        'double-position-gradients':false,
       },
       // autoprefixer: { grid: true }
       browsers: 'last 2 versions',
@@ -19,8 +20,8 @@ module.exports={
         },
       ], */
     },
-    'cssnano':{},
-    // 'autoprefixer':{},
-    // tailwindcss: {},
+    cssnano:{},
+    autoprefixer:{},
+    tailwindcss:{},
   },
 };

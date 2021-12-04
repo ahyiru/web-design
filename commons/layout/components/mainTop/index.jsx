@@ -1,29 +1,20 @@
-import {FullscreenOutlined,FullscreenExitOutlined} from '@ant-design/icons';
-import {Link,components} from '@common';
+import {Link} from '@common';
+import TopRight from '@app/components/topRight';
 import './index.less';
 
-const {FullPage}=components;
-// const {useTime}=use;
-
-const Index=({current,leftBar,contentRef})=>{
-  // const [time]=useTime();
+const Index=({current,Right=TopRight})=>{
+  current=current.filter(v=>v.name);
+  const name=<li><a style={{fontSize:'1.6rem'}}>{current.slice(-1)[0]?.name}</a></li>;
+  const bread=current.map(({path,name})=><li key={path}><Link to={path}>{name}</Link></li>);
+  const isRightBread=current.length>1;
+  const leftBar=isRightBread?name:bread;
+  const rightBar=isRightBread?bread:<Right />;
   return <div className="main-top">
-    {
-      leftBar?.length?<ul className="left-bar">
-        {
-          leftBar.map(item=><li key={item.key}><a className="btn-bar">{item.label}</a></li>)
-        }
-      </ul>:<ul className="bread">
-        {current?.filter(v=>v.name).map(v=><li key={v.path}><Link to={v.path}>{v.name}</Link></li>)}
-      </ul>
-    }
-    <ul className="right-bar">
-      {/* <li>
-        <a>{time}</a>
-      </li> */}
-      <li>
-        <a><FullPage panel={contentRef} fullIcon={FullscreenOutlined} exitIcon={FullscreenExitOutlined} /></a>
-      </li>
+    <ul className={`left-bar${isRightBread?'':' bread'}`}>
+      {leftBar}
+    </ul>
+    <ul className={`right-bar${isRightBread?' bread':''}`}>
+      {rightBar}
     </ul>
   </div>;
 };

@@ -4,8 +4,8 @@ import Panel from '@app/components/panel';
 import {useRoute} from '@common';
 
 const Index=({back,actions=[]})=>{
-  const routes=useRoute();
-  const i18ns=routes.store.getState('i18ns');
+  const {store}=useRoute();
+  const i18ns=store.getState('i18ns');
   const i18nCfg=i18ns?.main.components??{};
   return <Panel>
     <Button onClick={e=>typeof back==='function'?back():history.back()} type="link" size="small" icon={fixIcons('LeftOutlined')}>{i18nCfg.back}</Button>

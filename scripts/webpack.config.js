@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
 
 // const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
@@ -11,23 +12,7 @@ const app=path.resolve(__dirname,`../${appName}`);
 
 // const rootDir=DEV_ROOT_DIR==='/'?DEV_ROOT_DIR:`${DEV_ROOT_DIR}/`;
 
-const frame=appName==='vue'?{vue:['vue']}:{react:['react','react-dom']};
-
-const frameChunks=appName==='vue'?{
-  vue:{
-    idHint:'vue',
-    test: /[\\/]node_modules[\\/]vue[\\/]/,
-    enforce:true,
-    priority:15,
-  },
-}:{
-  react:{
-    idHint:'react',
-    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-    enforce:true,
-    priority:15,
-  },
-};
+const frame=appName==='vue'?{uiframe:['vue']}:{uiframe:['react','react-dom']};
 
 const entry={
   app:[path.resolve(app,'index.jsx')],
@@ -85,11 +70,11 @@ const plugins=[
     // },
     // shared:['react','react-dom'],
   }), */
-  new webpack.ProgressPlugin({
+  /* new webpack.ProgressPlugin({
     activeModules:false,
     entries:true,
     handler:(percentage,message,...args)=>{
-      // custom logic
+      // console.log(percentage,message,...args);
     },
     modules:true,
     modulesCount:5000,
@@ -97,6 +82,9 @@ const plugins=[
     dependencies:true,
     dependenciesCount:10000,
     percentBy:null,
+  }), */
+  new SimpleProgressWebpackPlugin({
+    format: 'compact',
   }),
 ];
 
@@ -121,7 +109,7 @@ const rules=[
     options:{
       cacheDirectory:true,
     },
-    exclude:[/node_modules/,/draft/,path.resolve(__dirname,'node')],
+    exclude:[/node_modules//* ,/draft/ */,path.resolve(__dirname,'node')],
   },
   {
     test:/\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)$/i,
@@ -146,43 +134,6 @@ const rules=[
     },
     exclude:[/images/],
   },
-  /* {
-    test: /\.html$/,
-    use: {
-      loader: 'html-loader',
-      options: {
-        minimize:true,
-      },
-    },
-    include:[app],
-  },
-  {
-    test:/\.md$/,
-    use:[
-      {
-        loader:'html-loader',
-        options:{
-          minimize:false,
-        },
-      },
-    ],
-  },
-  {
-    test:/\.pdf$/,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'pdf/[hash].[ext]',
-    },
-  },
-  {
-    test:/\.(swf|xap|mp4|webm)$/,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'video/[hash].[ext]',
-    },
-  }, */
 ];
 
 module.exports={
@@ -222,49 +173,6 @@ module.exports={
     usedExports:false,
     sideEffects:false,
     splitChunks:false,
-    /* splitChunks:{
-      chunks:'all',//'async','initial'
-      // minSize:0,
-      minSize:{
-        javascript:8000,
-        style:8000,
-      },
-      maxSize:{
-        javascript:1000000,
-        style:1000000,
-      },
-      minChunks:2,
-      maxInitialRequests:10,
-      maxAsyncRequests:10,
-      // automaticNameDelimiter: '~',
-      cacheGroups:{
-        commons:{
-          // chunks:'initial',
-          // minSize:30000,
-          idHint:'commons',
-          test:app,
-          priority: 5,
-          reuseExistingChunk:true,
-        },
-        defaultVendors:{
-          // chunks:'initial',
-          idHint:'vendors',
-          test:/[\\/]node_modules[\\/]/,
-          enforce:true,
-          priority:10,
-        },
-        ...frameChunks,
-        echarts: {
-          idHint:'echarts',
-          chunks:'all',
-          priority:20,
-          test: function(module){
-            const context = module.context;
-            return context && (context.indexOf('echarts') >= 0 || context.indexOf('zrender') >= 0);
-          },
-        },
-      },
-    }, */
     runtimeChunk:'single',
     moduleIds:'deterministic',
     chunkIds:'named',

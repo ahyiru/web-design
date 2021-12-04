@@ -1,5 +1,5 @@
 const router={
-  '/':'首页',
+  // '/':'首页',
   '/user':'登录注册',
   '/user/signin':'登录',
   '/user/signup':'注册',
@@ -8,24 +8,24 @@ const router={
   '/404':'404',
   '/preview':'预览',
   '/layout':'框架配置',
-  '/projects':'项目管理',
-  '/projects/add':'添加项目',
-  '/projects/edit/:projectId':'编辑项目',
-  '/projects/router/:projectId':'项目路由设置',
-  '/projects/router/:projectId/:routerId':'页面设计',
-  '/projects/api/:projectId':'项目接口管理',
-  '/projects/api/:projectId/add':'添加接口',
-  '/projects/api/:projectId/edit/:id':'编辑接口',
-  '/projects/api/:projectId/test/:id':'接口测试',
-  '/users':'用户管理',
-  '/users/add':'添加用户',
-  '/users/edit/:id':'编辑用户',
-  '/users/auth/:id':'路由权限设置',
-  '/profile':'个人中心',
-  '/apis':'接口管理',
-  '/apis/add':'添加接口',
-  '/apis/edit/:id':'编辑接口',
-  '/apis/test/:id':'接口测试',
+  '/apps/projects':'项目管理',
+  '/apps/projects/add':'添加项目',
+  '/apps/projects/edit/:projectId':'编辑项目',
+  '/apps/projects/router/:projectId':'项目路由设置',
+  '/apps/projects/router/:projectId/:routerId':'页面设计',
+  '/apps/projects/api/:projectId':'项目接口管理',
+  '/apps/projects/api/:projectId/add':'添加接口',
+  '/apps/projects/api/:projectId/edit/:id':'编辑接口',
+  '/apps/projects/api/:projectId/test/:id':'接口测试',
+  '/apps/users':'用户管理',
+  '/apps/users/add':'添加用户',
+  '/apps/users/edit/:id':'编辑用户',
+  '/apps/users/auth/:id':'路由权限设置',
+  '/apps/profile':'个人中心',
+  '/apps/apis':'接口管理',
+  '/apps/apis/add':'添加接口',
+  '/apps/apis/edit/:id':'编辑接口',
+  '/apps/apis/test/:id':'接口测试',
   '/low-code':'低代码',
   '/low-code/dom':'原生dom',
   '/low-code/ui':'UI组件',
@@ -36,15 +36,16 @@ const router={
   '/dashboard':'仪表盘',
   '/dashboard/screen1':'模板1',
   '/dashboard/screen2':'模板2',
-  '/suspense':'suspense',
-  '/suspense/suspense':'异步处理',
-  '/suspense/errorboundary':'错误边界',
-  '/canvas':'canvas',
-  '/canvas/canvas':'画布',
-  '/canvas/d3':'d3',
-  '/canvas/webgl':'webgl',
-  '/canvas/dragable':'dragable',
-  '/editor':'富文本编辑器',
+  '/commons/suspense':'suspense',
+  '/commons/suspense/suspense':'异步处理',
+  '/commons/suspense/errorboundary':'错误边界',
+  '/commons/canvas':'canvas',
+  '/commons/canvas/canvas':'画布',
+  '/commons/canvas/d3':'d3',
+  '/commons/canvas/webgl':'webgl',
+  '/commons/canvas/dragable':'dragable',
+  '/commons/editor':'富文本编辑器',
+  '/commons/virtualList':'虚拟列表',
   '/page1':'一级菜单',
   '/page1/page1-1':'二级菜单1',
   '/page1/page1-2':'二级菜单2',
@@ -57,24 +58,6 @@ const router={
 };
 
 export default router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

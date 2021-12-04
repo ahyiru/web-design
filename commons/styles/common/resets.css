@@ -51,7 +51,7 @@ body{
   margin:0;
   line-height:1.42857143;
 	font-size:var(--fontSize);
-	color:var(--color);
+	color:var(--appColor);
 	background-color:transparent;
   z-index:0;
   text-rendering: optimizeLegibility;

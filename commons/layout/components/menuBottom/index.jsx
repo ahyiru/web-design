@@ -1,21 +1,13 @@
-import {useMemo} from 'react';
-import {utils} from '@common';
+import {components,Link} from '@common';
 import './index.less';
-const {cacheData}=utils;
 
-const {getList,record}=cacheData();
+const {Anico}=components;
 
-const Index=props=>{
-  const {curPath}=props;
-  useMemo(()=>record(curPath||'/'),[curPath]);
-  
-  return <div className="menu-btbar">
-    <h4 className="btbar-title">history list</h4>
-    <ul className="btbar-list">
-      {
-        getList().reverse().map(({data},i)=><li key={`${data}-${i}`}><a href={data}>{data}</a></li>)
-      }
-    </ul>
+const Index=({useStore})=>{
+  const [collapsed,setCollapsed]=useStore('huxy-collapse');
+  return <div className="menu-collapsed">
+    <a className="collapsed-bar" onClick={()=>setCollapsed(!collapsed)}><Anico type={collapsed?'right':''} /></a>
+    {!collapsed&&<Link to="http://ihuxy.com:8088/" target="_blank" className="link-bar">文档</Link>}
   </div>;
 };
 

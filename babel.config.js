@@ -63,7 +63,7 @@ const config=api=>{
         absoluteRuntime:false,
         helpers: true,
         regenerator: true,
-        corejs: false, /* {
+        /* corejs: false, {
           version: 3,
           proposals: true,
         }, */
@@ -108,7 +108,7 @@ const config=api=>{
     },
     targets:{
       browsers: ['last 2 versions'],
-      // esmodules: true,
+      esmodules: true,
     },
     sourceType:'unambiguous',
     presets,

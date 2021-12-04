@@ -10,8 +10,8 @@ const uiLang={
 };
 
 const Index=props=>{
-  const {store,children}=props;
-  const language=store.getState('language');
+  const {useStore,children}=props;
+  const [language]=useStore('huxy-language');
   return <ConfigProvider locale={uiLang[language]||zhCN}>
     {children}
   </ConfigProvider>;

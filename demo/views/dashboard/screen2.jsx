@@ -3,7 +3,7 @@ import ECharts from 'echarts-for-react';
 import {Table as AntTable} from 'antd';
 import DefPanel from '@app/components/panel';
 import {Row,Col} from '@app/components/row';
-// import ScreenHeader from '@app/components/screenHeader';
+import ScreenHeader from '@app/components/screenHeader';
 import {
   option1,
   option2,
@@ -27,7 +27,7 @@ import {tableCfg} from '@app/utils/config';
 import {components} from '@common';
 const {Spinner}=components;
 
-const Panel=props=><DefPanel {...props} style={{borderColor:'rgba(0,180,220,0.08)'}} />;
+const Panel=props=><DefPanel {...props} style={{background:'rgba(255,255,255,.074)'/*'rgba(42,48,66,.7)'*/}} />;
 
 const Table=({style,...rest})=><div style={{height:style?.height??300,overflow:'auto'}}><AntTable {...rest} {...tableCfg} /></div>;
 
@@ -47,8 +47,8 @@ const Index=props=>{
     return <Spinner global />;
   }
   const opt1=option1(charts);
-  return <div>
-    {/* <ScreenHeader title="大屏监控测试平台" /> */}
+  return <div className="page-bg-dot">
+    <ScreenHeader title="大屏监控测试平台" />
     <Row>
       <Col>
         <Row gutter={[12,12]}>

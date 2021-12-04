@@ -2,22 +2,29 @@ import {utils} from '@common';
 const {traverItem}=utils;
 
 import staticRoutes from './staticRoutes';
-import {dynamicRoutes} from './dynamicRoutes';
+import {configRoutes,dashboardRoutes,commonRoutes,pageRoutes,playgroundRoutes} from './dynamicRoutes';
 
-staticRoutes[0].children=dynamicRoutes;
+const dynamicRoutes=[configRoutes,dashboardRoutes,commonRoutes,pageRoutes,playgroundRoutes];
 
-const routers=(nameList,routerList)=>traverItem((item,parent)=>{
+const allRoutes=[
+  {
+    path:'/',
+    component:()=>import('@common/layout'),
+    children:dynamicRoutes,
+  },
+  ...staticRoutes,
+];
+
+const routes=(nameList,routerList)=>traverItem((item,parent)=>{
   const fullPath=[...parent,item].map(item=>item.path).join('').replace('//','/');
   item.name=nameList?.[fullPath]??item.name;
   item.id=routerList?.find(route=>route.path===fullPath)?._id;
   if(typeof item.componentPath==='string'){
     item.component=()=>import(`@app/views${item.componentPath}`);
   }
-})(staticRoutes);
+})(allRoutes);
 
-export default routers;
-
-
+export default routes;
 
 
 

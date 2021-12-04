@@ -6,12 +6,12 @@ import Layout from '@huxy/layout';
 
 export {useRouter,Link,useRoute,utils,use,components,Layout};
 
-// window.useRouter=useRouter;
-// window.Link=Link;
-// window.useRoute=useRoute;
-// window.utils=utils;
-// window.use=use;
-// window.components=components;
-// window.Layout=Layout;
+window.useRouter=useRouter;
+window.Link=Link;
+window.useRoute=useRoute;
+window.utils=utils;
+window.use=use;
+window.components=components;
+window.Layout=Layout;
 
 
