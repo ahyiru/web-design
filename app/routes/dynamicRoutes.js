@@ -332,40 +332,68 @@ export const pageRoutes={
     },
   ],
 };
-export const playgroundRoutes={
-  path:'/playground',
-  name:' Playground',
-  icon:'ConsoleSqlOutlined',
-  children:[
+export const playgroundRoutes = {
+  path: '/playground',
+  name: ' Playground',
+  icon: 'ConsoleSqlOutlined',
+  children: [
     {
-      path:'/demo',
-      name:'demo',
-      icon:'MergeCellsOutlined',
-      componentPath:'/demo',
+      path: '/icons',
+      name: 'icons',
+      icon: 'PictureOutlined',
+      componentPath: '/demo/icons',
     },
     {
-      path:'/tools',
-      name:'常用工具',
-      icon:'ToolOutlined',
-      // denied:browserRouter,
-      children:[
-        {
-          path:'/demo1',
-          name:'demo1',
-          component:()=>import(`@app/draft/tools/demo1`),
-        },
-        {
-          path:'/demo2',
-          name:'demo2',
-          component:()=>import(`@app/draft/tools/demo2`),
-        },
-      ],
+      path: '/md2html',
+      name: 'md2html',
+      componentPath: '/demo/md2html',
+    },
+
+    {
+      path: '/list',
+      name: 'list',
+      componentPath: '/demo/list',
     },
     {
-      path:'/icons',
-      name:'icons',
-      icon:'PictureOutlined',
-      componentPath:'/demo/icons',
+      path: '/list/add',
+      name: '添加用户',
+      hideMenu: true,
+      componentPath: '/demo/list/add',
+    },
+    {
+      path: '/list/edit/:id',
+      name: '编辑用户',
+      componentPath: '/demo/list/add',
+    },
+    {
+      path: '/list/auth/:id',
+      name: '路由权限设置',
+      componentPath: '/demo/list/auth',
+    },
+    {
+      path: '/panel',
+      name: 'panel',
+      componentPath: '/demo/panel',
+    },
+    {
+      path: '/styles',
+      name: 'styles',
+      componentPath: '/demo/styles',
+    },
+    {
+      path: '/modal',
+      name: 'modal',
+      componentPath: '/demo/modal',
+    },
+    {
+      path: '/demo-tools',
+      name: 'tools',
+      componentPath: '/demo/tools',
+    },
+    {
+      path: '/bagua',
+      name: 'bagua',
+      componentPath: '/demo/bagua',
     },
   ],
 };

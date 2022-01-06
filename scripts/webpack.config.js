@@ -89,7 +89,7 @@ const plugins=[
 ];
 
 const rules=[
-  /* {
+  {
     test:/\.m?js/,
     resolve:{
       fullySpecified:false,
@@ -102,7 +102,7 @@ const rules=[
       {loader:'ts-loader'},
     ],
     exclude:[/node_modules/,/draft/],
-  }, */
+  },
   {
     test:/\.jsx?$/,
     loader:'babel-loader',
@@ -133,6 +133,43 @@ const rules=[
       esModule:false,
     },
     exclude:[/images/],
+  },
+  {
+    test: /\.html$/,
+    use: {
+      loader: 'html-loader',
+      options: {
+        minimize:true,
+      },
+    },
+    include:[app],
+  },
+  {
+    test:/\.md$/,
+    use:[
+      {
+        loader:'html-loader',
+        options:{
+          minimize:false,
+        },
+      },
+    ],
+  },
+  {
+    test:/\.pdf$/,
+    loader:'url-loader',
+    options:{
+      limit:20480,
+      name:'pdf/[hash].[ext]',
+    },
+  },
+  {
+    test:/\.(swf|xap|mp4|webm)$/,
+    loader:'url-loader',
+    options:{
+      limit:20480,
+      name:'video/[hash].[ext]',
+    },
   },
 ];
 

@@ -62,7 +62,7 @@ const fetchApi=fetcher(handler);
 
 const dlFile=fetcher(dlHandler);
 
-const getToken=()=>({'Authorization':`yiru ${storage.get('token')||''}`});
+const getToken=()=>({Authorization:`yiru ${storage.get('token')||''}`});
 
 const fetch=({method,url,...opt})=>fetchApi(method)(`${TARGET}${url}`,{...opt,headers:getToken(),credentials:'omit'});
 

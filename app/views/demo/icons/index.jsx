@@ -1,9 +1,9 @@
-import React,{useState,useEffect,useCallback} from 'react';
-import {utils,components} from '@common';
-const {copyToClipboard}=utils;
-const {Row,Col}=components;
+import {message} from 'antd';
+import {utils, components} from '@common';
+const {copyToClipboard} = utils;
+const {Row, Col} = components;
 import './index.less';
-const icons=[
+const icons = [
   'plus',
   'plus-circle',
   'minus',
@@ -70,41 +70,25 @@ const icons=[
   'border-outer',
 ];
 
-const Index=props=>{
-  const copyText=v=>{
+const Index = (props) => {
+  const copyText = (v) => {
     copyToClipboard(v);
+    message.success('拷贝成功！');
   };
-  return <div className="page icon-list">
-    {/* <div className="notify">
-      <h1>test notify</h1>
-    </div> */}
-    <Row gutter={12}>
-      {
-        icons.map((v,k)=><Col span={4} sm={6}>
-          <div className="ilist" onClick={()=>copyText(v)}>
-            <span className={`ico-${v}`} /><span className="icon-name">{v}</span>
-          </div>
-        </Col>)
-      }
-    </Row>
-  </div>;
+  return (
+    <div className="page icon-list">
+      <Row gutter={12}>
+        {icons.map((v, k) => (
+          <Col key={v} span={3} sm={4}>
+            <div className="ilist" onClick={() => copyText(v)}>
+              <span className={`ico-${v}`} />
+              <span className="icon-name">{v}</span>
+            </div>
+          </Col>
+        ))}
+      </Row>
+    </div>
+  );
 };
 
 export default Index;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

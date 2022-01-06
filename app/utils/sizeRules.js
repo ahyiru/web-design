@@ -1,7 +1,7 @@
 export const sizeRules={
   '--maxWidth': {
     px:[800,2000],
-    'vw':[60,100],
+    vw:[60,100],
   },
   '--menuWidth': {
     px:[100,300],

@@ -22,6 +22,6 @@ module.exports={
     },
     cssnano:{},
     autoprefixer:{},
-    tailwindcss:{},
+    // tailwindcss:{},
   },
 };
