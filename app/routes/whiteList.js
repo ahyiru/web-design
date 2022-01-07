@@ -1,4 +1,4 @@
-import staticRoutes from './staticRoutes';
+import staticRoutes from './routerComp/staticRoutes';
 import {utils} from '@common';
 const {traverItem}=utils;
 

@@ -1,8 +1,8 @@
 import {utils} from '@common';
 const {traverItem}=utils;
 
-import staticRoutes from './staticRoutes';
-import {configRoutes,dashboardRoutes,appRoutes,commonRoutes,lowCodeRoutes,pageRoutes,playgroundRoutes} from './dynamicRoutes';
+import staticRoutes from './routerComp/staticRoutes';
+import {configRoutes,dashboardRoutes,appRoutes,commonRoutes,lowCodeRoutes,pageRoutes,playgroundRoutes} from './routerComp/dynamicRoutes';
 
 const dynamicRoutes=[configRoutes,appRoutes,dashboardRoutes,commonRoutes,lowCodeRoutes,pageRoutes,playgroundRoutes];
 
