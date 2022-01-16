@@ -1,60 +1,68 @@
-import { Table, Tag, Space, Button } from 'antd';
+import {Table, Tag, Space, Button} from 'antd';
 import {roleList} from '@app/utils/config';
 export const columns = [
   {
     title: '用户名',
     dataIndex: 'name',
-    ellipsis:true,
-    render: (text,record) => <a onClick={()=>{}}>{text}</a>,
+    ellipsis: true,
+    render: (text, record) => <a onClick={() => {}}>{text}</a>,
   },
   {
     title: '邮箱',
     dataIndex: 'email',
-    ellipsis:true,
-    render: text => text.replace(/\S+(@\S+)/,'*****$1'),
+    ellipsis: true,
+    render: (text) => text.replace(/\S+(@\S+)/, '*****$1'),
   },
   {
     title: '状态',
     dataIndex: 'active',
-    ellipsis:true,
-    render: text => text?<Tag color="green">已激活</Tag>:<Tag color="red">未激活</Tag>,
+    ellipsis: true,
+    render: (text) => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
   },
   {
     title: '是否绑定GitHub',
     dataIndex: 'github',
-    ellipsis:true,
-    render: text => text?<Tag color="green">已绑定</Tag>:<Tag color="red">未绑定</Tag>,
+    ellipsis: true,
+    render: (text) => (text ? <Tag color="green">已绑定</Tag> : <Tag color="red">未绑定</Tag>),
   },
   {
     title: '等级',
     dataIndex: 'role',
-    ellipsis:true,
-    render:(text,record)=>{
-      return roleList.find(v=>v.value===text)?.label??'-';
+    ellipsis: true,
+    render: (text, record) => {
+      return roleList.find((v) => v.value === text)?.label ?? '-';
     },
   },
   {
     title: '更新时间',
     dataIndex: 'updatetime',
-    ellipsis:true,
+    ellipsis: true,
   },
   {
     title: '更新人',
     dataIndex: 'updater',
-    ellipsis:true,
-    render:(text,record)=>text||record.creator,
+    ellipsis: true,
+    render: (text, record) => text || record.creator,
   },
   {
     title: '操作',
     dataIndex: 'action',
-    align:'center',
-    ellipsis:true,
-    render:(text,record)=>{
-      return <>
-        <Button type="link" size="small" onClick={()=>{}}>设置权限</Button>
-        <Button type="link" size="small" onClick={()=>{}}>编辑</Button>
-        <Button type="link" size="small" onClick={()=>{}} style={{color:'var(--red2)'}}>删除</Button>
-      </>;
+    align: 'center',
+    ellipsis: true,
+    render: (text, record) => {
+      return (
+        <>
+          <Button type="link" size="small" onClick={() => {}}>
+            设置权限
+          </Button>
+          <Button type="link" size="small" onClick={() => {}}>
+            编辑
+          </Button>
+          <Button type="link" size="small" onClick={() => {}} style={{color: 'var(--red2)'}}>
+            删除
+          </Button>
+        </>
+      );
     },
   },
 ];
@@ -142,5 +150,3 @@ export const dataSource = [
     updater: 'admin',
   },
 ];
-
-

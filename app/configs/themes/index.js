@@ -6,13 +6,4 @@ import portal from './portal';
 import lightPortal from './lightPortal';
 import gradient from './gradient';
 
-export {
-  dark,
-  dark1,
-  light,
-  light1,
-  portal,
-  lightPortal,
-  gradient,
-};
-
+export {dark, dark1, light, light1, portal, lightPortal, gradient};

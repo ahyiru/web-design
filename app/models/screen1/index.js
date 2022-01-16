@@ -10,29 +10,12 @@ import option9 from './option9';
 import option10 from './option10';
 import option11 from './option11';
 import option12 from './option12';
-import {columns,dataSource} from './tables';
+import {columns, dataSource} from './tables';
 
-const columns1=columns;
-const columns2=columns;
+const columns1 = columns;
+const columns2 = columns;
 
-const dataSource1=dataSource;
-const dataSource2=dataSource;
+const dataSource1 = dataSource;
+const dataSource2 = dataSource;
 
-export {
-  option1,
-  option2,
-  option3,
-  option4,
-  option5,
-  option6,
-  option7,
-  option8,
-  option9,
-  option10,
-  option11,
-  option12,
-  columns1,
-  columns2,
-  dataSource1,
-  dataSource2,
-};
+export {option1, option2, option3, option4, option5, option6, option7, option8, option9, option10, option11, option12, columns1, columns2, dataSource1, dataSource2};

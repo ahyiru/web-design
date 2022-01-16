@@ -1,4 +1,4 @@
-import {Layout} from '@common';
+import Layout from 'ihuxy/layout';
 import UiI18n from './components/uiI18n';
 import useNavList from './components/useNavList';
 import useFormatMenu from './components/useFormatMenu';

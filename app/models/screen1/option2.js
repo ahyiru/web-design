@@ -1,4 +1,4 @@
-const option={
+const option = {
   title: {
     text: '网站访问量统计',
   },
@@ -7,11 +7,11 @@ const option={
   },
   legend: [
     {
-      bottom:'20px',
+      bottom: '20px',
       data: ['直接访问', '邮件营销', '视频广告', '谷歌'],
     },
     {
-      bottom:'-5px',
+      bottom: '-5px',
       data: ['搜索引擎', '联盟广告', '百度', '必应', '其他'],
     },
   ],
@@ -73,9 +73,7 @@ const option={
         lineStyle: {
           type: 'dashed',
         },
-        data: [
-          [{type: 'min'}, {type: 'max'}],
-        ],
+        data: [[{type: 'min'}, {type: 'max'}]],
       },
     },
     {
@@ -119,8 +117,3 @@ const option={
 };
 
 export default option;
-
-
-
-
-

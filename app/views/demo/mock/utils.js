@@ -1,6 +1,5 @@
-import {utils} from '@common';
-
-const {sleep, uuidv4} = utils;
+import sleep from 'ihuxy-utils/sleep';
+import uuidv4 from 'ihuxy-utils/uuidv4';
 
 export const fakeFetch = async (params) => {
   await sleep();

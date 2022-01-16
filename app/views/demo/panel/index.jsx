@@ -1,15 +1,16 @@
 import {useState, useEffect} from 'react';
 import {DatePicker, Button, Input, Space} from 'antd';
-import {utils, use} from '@common';
+import {timeGap} from 'ihuxy-utils/timeInterval';
+import {ten2Base, base2Ten, rgba2hex, hex2rgba} from 'ihuxy-utils/baseConversion';
+import cacheData from 'ihuxy-utils/cacheData';
+import useTime from 'ihuxy-use/useTime';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 import FullPage from '@app/components/fullScreen';
 import MaxSize from '@app/components/maxSize';
 const {RangePicker} = DatePicker;
-const {timeGap, ten2Base, base2Ten, rgba2hex, hex2rgba, cacheData} = utils;
 import './index.less';
 
-const {useTime} = use;
 const {record, undo, redo, clean} = cacheData();
 
 const plugins = [({panel}) => <FullPage panel={panel} />, ({panel}) => <MaxSize panel={panel} />];

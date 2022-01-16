@@ -1,15 +1,17 @@
 import {useState, useRef} from 'react';
 import {Button} from 'antd';
-import {utils, components, use} from '@common';
+import Spinner from 'ihuxy-components/spinner';
+import Anico from 'ihuxy-components/anico';
+import loadError from 'ihuxy-components/loadError';
+import {HandleError} from 'ihuxy-components/errorBoundary';
+import traverItem from 'ihuxy-utils/traverItem';
+import useClickAway from 'ihuxy-use/useClickAway';
+import useUpdate from 'ihuxy-use/useUpdate';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 import Ellipsis from '@app/components/ellipsis';
 import {typeList, data} from './config';
 import './index.less';
-
-const {Spinner, Anico, loadError, HandleError} = components;
-const {useClickAway, useUpdate} = use;
-const {traverItem} = utils;
 
 const ErrorComp = ({state, name}) => <div>{state[name]}</div>;
 

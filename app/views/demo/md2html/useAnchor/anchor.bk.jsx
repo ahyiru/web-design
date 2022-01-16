@@ -1,7 +1,8 @@
 import {useEffect, useRef} from 'react';
-import {utils} from '@common';
-
-const {scrollToTop, scrollTop, throttle, sort, validObj} = utils;
+import {scrollToTop, scrollTop} from 'ihuxy-utils/scrollTo';
+import throttle from 'ihuxy-utils/throttle';
+import sort from 'ihuxy-utils/sort';
+import validObj from 'ihuxy-utils/validObj';
 
 const Anchor = ({router, curName, itemList, children}) => {
   const timer = useRef(0);

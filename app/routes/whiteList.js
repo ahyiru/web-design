@@ -1,15 +1,11 @@
 import staticRoutes from './routerComp/staticRoutes';
-import {utils} from '@common';
-const {traverItem}=utils;
+import traverItem from 'ihuxy-utils/traverItem';
 
-const whiteList=[];
+const whiteList = [];
 
-traverItem((item,parent)=>{
-  const path=`${parent.map(v=>v.path).join('')}${item.path}`;
+traverItem((item, parent) => {
+  const path = `${parent.map((v) => v.path).join('')}${item.path}`;
   whiteList.push(path);
 })(staticRoutes);
 
 export default whiteList;
-
-
-

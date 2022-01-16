@@ -1,9 +1,9 @@
-import {components} from '@common';
+import Panel from 'ihuxy-components/panel';
 
-const {Panel}=components;
-
-const Index=({style,children,...rest})=><Panel style={{background:'var(--panelBgColor)',...style}} {...rest}>{children}</Panel>;
+const Index = ({style, children, ...rest}) => (
+  <Panel style={{background: 'var(--panelBgColor)', ...style}} {...rest}>
+    {children}
+  </Panel>
+);
 
 export default Index;
-
-

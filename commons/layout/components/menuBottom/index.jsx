@@ -1,7 +1,6 @@
-import {components,Link} from '@common';
+import {Link} from 'ihuxy/router';
+import Anico from 'ihuxy-components/anico';
 import './index.less';
-
-const {Anico}=components;
 
 const Index=({useStore})=>{
   const [collapsed,setCollapsed]=useStore('huxy-collapse');

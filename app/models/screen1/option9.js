@@ -8,7 +8,7 @@ const option = {
     formatter: '{a} <br/>{b} : {c}%',
   },
   legend: {
-    data: ['展现','点击','访问','咨询','订单'],
+    data: ['展现', '点击', '访问', '咨询', '订单'],
   },
   series: [
     {
@@ -52,7 +52,7 @@ const option = {
       },
       itemStyle: {
         // opacity: 0.5,
-        borderColor: 'rgba(0,0,0,.2)',//'#a6b0cf',
+        borderColor: 'rgba(0,0,0,.2)', //'#a6b0cf',
         borderWidth: 1,
       },
       emphasis: {
@@ -75,8 +75,3 @@ const option = {
 };
 
 export default option;
-
-
-
-
-

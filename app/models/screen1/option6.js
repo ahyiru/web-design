@@ -8,7 +8,7 @@ const option = {
   legend: {
     orient: 'vertical',
     left: 'right',
-    top:'center',
+    top: 'center',
   },
   series: [
     {
@@ -26,7 +26,7 @@ const option = {
           show: true,
           fontSize: '26',
           fontWeight: 'bold',
-          color:'#eee',
+          color: '#eee',
         },
       },
       labelLine: {
@@ -44,9 +44,3 @@ const option = {
 };
 
 export default option;
-
-
-
-
-
-

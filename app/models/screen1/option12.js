@@ -2,24 +2,25 @@ const option = {
   title: {
     text: '收支分析图',
   },
-  grid:{
-    top:'30px',
+  grid: {
+    top: '30px',
     left: '2%',
     right: '20%',
-    bottom:'0',
+    bottom: '0',
     containLabel: true,
   },
   tooltip: {
     trigger: 'axis',
-    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-      type: 'shadow',        // 默认为直线，可选为：'line' | 'shadow'
+    axisPointer: {
+      // 坐标轴指示器，坐标轴触发有效
+      type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
     },
   },
   legend: {
     data: ['利润', '支出', '收入'],
     orient: 'vertical',
     left: 'right',
-    top:'center',
+    top: 'center',
   },
   xAxis: [
     {
@@ -77,4 +78,3 @@ const option = {
 };
 
 export default option;
-

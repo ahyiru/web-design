@@ -1,21 +1,12 @@
-import React, { Ref, PropsWithChildren } from 'react';
+import React, {Ref, PropsWithChildren} from 'react';
 import ReactDOM from 'react-dom';
 // import { cx, css } from 'emotion';
 
-export const Button = React.forwardRef(
-  (
-    {
-      className,
-      active,
-      reversed,
-      ...props
-    },
-    ref,
-  ) => (
-    <span
-      {...props}
-      ref={ref}
-      /* className={cx(
+export const Button = React.forwardRef(({className, active, reversed, ...props}, ref) => (
+  <span
+    {...props}
+    ref={ref}
+    /* className={cx(
         className,
         css`
           cursor: pointer;
@@ -28,57 +19,42 @@ export const Button = React.forwardRef(
             : '#ccc'};
         `,
       )} */
-      style={{
-        cursor: 'pointer',
-        color: `${reversed
-          ? active
-            ? 'white'
-            : '#aaa'
-          : active
-            ? 'black'
-            : '#ccc'}`,
-      }}
-    />
-  ),
-);
+    style={{
+      cursor: 'pointer',
+      color: `${reversed ? (active ? 'white' : '#aaa') : active ? 'black' : '#ccc'}`,
+    }}
+  />
+));
 
-export const EditorValue = React.forwardRef(
-  (
-    {
-      className,
-      value,
-      ...props
-    },
-    ref,
-  ) => {
-    const textLines = value.document.nodes
-      .map(node => node.text)
-      .toArray()
-      .join('\n');
-    return (
-      <div
-        ref={ref}
-        {...props}
-        /* className={cx(
+export const EditorValue = React.forwardRef(({className, value, ...props}, ref) => {
+  const textLines = value.document.nodes
+    .map((node) => node.text)
+    .toArray()
+    .join('\n');
+  return (
+    <div
+      ref={ref}
+      {...props}
+      /* className={cx(
           className,
           css`
             margin: 30px -20px 0;
           `,
         )} */
-      >
-        <div
-          /* className={css`
+    >
+      <div
+      /* className={css`
             font-size: 14px;
             padding: 5px 20px;
             color: #404040;
             border-top: 2px solid #eeeeee;
             background: #f8f8f8;
           `} */
-        >
-          Slate's value as text
-        </div>
-        <div
-          /* className={css`
+      >
+        Slate's value as text
+      </div>
+      <div
+      /* className={css`
             color: #404040;
             font: 12px monospace;
             white-space: pre-wrap;
@@ -87,23 +63,18 @@ export const EditorValue = React.forwardRef(
               margin: 0 0 0.5em;
             }
           `} */
-        >
-          {textLines}
-        </div>
+      >
+        {textLines}
       </div>
-    );
-  },
-);
+    </div>
+  );
+});
 
-export const Icon = React.forwardRef(
-  (
-    { className, ...props },
-    ref,
-  ) => (
-    <span
-      {...props}
-      ref={ref}
-      /* className={cx(
+export const Icon = React.forwardRef(({className, ...props}, ref) => (
+  <span
+    {...props}
+    ref={ref}
+    /* className={cx(
         'material-icons',
         className,
         css`
@@ -111,21 +82,16 @@ export const Icon = React.forwardRef(
           vertical-align: text-bottom;
         `,
       )} */
-      className="material-icons"
-      style={{fontSize: '18px',verticalAlign: 'text-bottom'}}
-    />
-  ),
-);
+    className="material-icons"
+    style={{fontSize: '18px', verticalAlign: 'text-bottom'}}
+  />
+));
 
-export const Instruction = React.forwardRef(
-  (
-    { className, ...props },
-    ref,
-  ) => (
-    <div
-      {...props}
-      ref={ref}
-      /* className={cx(
+export const Instruction = React.forwardRef(({className, ...props}, ref) => (
+  <div
+    {...props}
+    ref={ref}
+    /* className={cx(
         className,
         css`
           white-space: pre-wrap;
@@ -135,19 +101,14 @@ export const Instruction = React.forwardRef(
           background: #f8f8e8;
         `,
       )} */
-    />
-  ),
-);
+  />
+));
 
-export const Menu = React.forwardRef(
-  (
-    { className, ...props },
-    ref,
-  ) => (
-    <div
-      {...props}
-      ref={ref}
-      /* className={cx(
+export const Menu = React.forwardRef(({className, ...props}, ref) => (
+  <div
+    {...props}
+    ref={ref}
+    /* className={cx(
         className,
         css`
           & > * {
@@ -159,25 +120,18 @@ export const Menu = React.forwardRef(
           }
         `,
       )} */
-    />
-  ),
-);
+  />
+));
 
-export const Portal = ({ children }) => {
-  return typeof document === 'object'
-    ? ReactDOM.createPortal(children, document.body)
-    : null;
+export const Portal = ({children}) => {
+  return typeof document === 'object' ? ReactDOM.createPortal(children, document.body) : null;
 };
 
-export const Toolbar = React.forwardRef(
-  (
-    { className, ...props },
-    ref,
-  ) => (
-    <Menu
-      {...props}
-      ref={ref}
-      /* className={cx(
+export const Toolbar = React.forwardRef(({className, ...props}, ref) => (
+  <Menu
+    {...props}
+    ref={ref}
+    /* className={cx(
         className,
         css`
           position: relative;
@@ -187,6 +141,5 @@ export const Toolbar = React.forwardRef(
           margin-bottom: 20px;
         `,
       )} */
-    />
-  ),
-);
+  />
+));

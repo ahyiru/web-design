@@ -1,14 +1,14 @@
-import { useState,useEffect} from 'react';
-import { EditableProTable } from '@ant-design/pro-table';
-import {Tooltip,Popconfirm} from 'antd';
-import {utils} from '@common';
-const {uuidv4}=utils;
+import {useState, useEffect} from 'react';
+import {EditableProTable} from '@ant-design/pro-table';
+import {Tooltip, Popconfirm} from 'antd';
+import uuidv4 from 'ihuxy-utils/uuidv4';
 
-const fmData=data=>data.map(item=>{
-  const {render,...rest}=item;
-  const {type:renderType,props:renderProps,children:renderChildren}=render||{};
-  return {...rest,renderType,renderProps,renderChildren,uuid:uuidv4()};
-});
+const fmData = (data) =>
+  data.map((item) => {
+    const {render, ...rest} = item;
+    const {type: renderType, props: renderProps, children: renderChildren} = render || {};
+    return {...rest, renderType, renderProps, renderChildren, uuid: uuidv4()};
+  });
 
 /* const handleNames={
   handleCheck:'handleCheck',
@@ -16,40 +16,41 @@ const fmData=data=>data.map(item=>{
   handleDelete:'handleDelete',
 }; */
 
-const formatTable=data=>data.map(item=>{
-  const {renderType,renderProps,renderChildren,...rest}=item;
-  if(renderType||renderProps||renderChildren){
-    rest.render={
-      type:renderType,
-      props:renderProps,
-      children:renderChildren,
-    };
-  }
-  return rest;
-});
+const formatTable = (data) =>
+  data.map((item) => {
+    const {renderType, renderProps, renderChildren, ...rest} = item;
+    if (renderType || renderProps || renderChildren) {
+      rest.render = {
+        type: renderType,
+        props: renderProps,
+        children: renderChildren,
+      };
+    }
+    return rest;
+  });
 
-const ellipsis={
-  overflow:'hidden',
-  textOverflow:'ellipsis',
-  whiteSpace:'nowrap',
-  width:'100%',
-  display:'inline-block',
+const ellipsis = {
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  width: '100%',
+  display: 'inline-block',
 };
 
-export default ({data,getValues,columnI18n}) => {
+export default ({data, getValues, columnI18n}) => {
   const [editableKeys, setEditableRowKeys] = useState([]);
-  const [dataSource, setDataSource] = useState(fmData(data)||[]);
-  useEffect(()=>{
-    setDataSource(fmData(data)||[]);
-  },[data]);
-  const onChange=value=>{
-    const ds=formatTable(value);
+  const [dataSource, setDataSource] = useState(fmData(data) || []);
+  useEffect(() => {
+    setDataSource(fmData(data) || []);
+  }, [data]);
+  const onChange = (value) => {
+    const ds = formatTable(value);
     setDataSource(ds);
     getValues?.(ds);
   };
-  const deleteRow=record=>{
-    const value=dataSource.filter((item) => item.uuid !== record.uuid);
-    const ds=formatTable(value);
+  const deleteRow = (record) => {
+    const value = dataSource.filter((item) => item.uuid !== record.uuid);
+    const ds = formatTable(value);
     setDataSource(ds);
     getValues?.(ds);
   };
@@ -59,20 +60,20 @@ export default ({data,getValues,columnI18n}) => {
       dataIndex: 'title',
       // width:100,
       // ellipsis:true,
-      formItemProps: (form, { rowIndex }) => {
+      formItemProps: (form, {rowIndex}) => {
         return {
-          rules: [{ required: true, message: columnI18n.required_msg }],
+          rules: [{required: true, message: columnI18n.required_msg}],
         };
       },
     },
     {
-      title: columnI18n.dataIndex ,
+      title: columnI18n.dataIndex,
       dataIndex: 'dataIndex',
       // width:100,
       // ellipsis:true,
-      formItemProps: (form, { rowIndex }) => {
+      formItemProps: (form, {rowIndex}) => {
         return {
-          rules: [{ required: true, message: columnI18n.required_msg  }],
+          rules: [{required: true, message: columnI18n.required_msg}],
         };
       },
     },
@@ -97,10 +98,10 @@ export default ({data,getValues,columnI18n}) => {
       // ellipsis:true,
       valueType: 'select',
       valueEnum: {
-        '':'-',
-        left:'left',
-        right:'right',
-        center:'center',
+        '': '-',
+        left: 'left',
+        right: 'right',
+        center: 'center',
       },
     },
     /* {
@@ -122,7 +123,7 @@ export default ({data,getValues,columnI18n}) => {
     {
       title: columnI18n.renderProps,
       dataIndex: 'renderProps',
-      valueType:'code',
+      valueType: 'code',
       // width:140,
       // ellipsis:true,
       /* render:(text,record)=>{
@@ -133,7 +134,7 @@ export default ({data,getValues,columnI18n}) => {
     {
       title: columnI18n.renderChildren,
       dataIndex: 'renderChildren',
-      valueType:'code',
+      valueType: 'code',
       // width:140,
       // ellipsis:true,
       /* render:(text,record)=>{
@@ -156,7 +157,11 @@ export default ({data,getValues,columnI18n}) => {
       /* fieldProps: {
         mode: 'multiple',
       }, */
-      render:(text,record)=><Tooltip title={text}><span style={{...ellipsis}}>{text}</span></Tooltip>,
+      render: (text, record) => (
+        <Tooltip title={text}>
+          <span style={{...ellipsis}}>{text}</span>
+        </Tooltip>
+      ),
     },
     {
       title: columnI18n.option,
@@ -164,47 +169,58 @@ export default ({data,getValues,columnI18n}) => {
       width: 120,
       // fixed: 'right',
       render: (text, record, _, action) => [
-        <a key="editable" onClick={() => {
-          let _a;
-          (_a = action === null || action === void 0 ? void 0 : action.startEditable) === null || _a === void 0 ? void 0 : _a.call(action, record.uuid);
-        }}>{columnI18n.edit_action}</a>,
+        <a
+          key="editable"
+          onClick={() => {
+            let _a;
+            (_a = action === null || action === void 0 ? void 0 : action.startEditable) === null || _a === void 0 ? void 0 : _a.call(action, record.uuid);
+          }}
+        >
+          {columnI18n.edit_action}
+        </a>,
         <Popconfirm key="delete" title={columnI18n.delete_confirm} onConfirm={() => deleteRow(record)}>
-          <a /* onClick={() => deleteRow(record)} */ style={{color:'var(--red2)'}}>{columnI18n.delete_action}</a>
+          <a /* onClick={() => deleteRow(record)} */ style={{color: 'var(--red2)'}}>{columnI18n.delete_action}</a>
         </Popconfirm>,
       ],
     },
   ];
-  return <EditableProTable rowKey="uuid" /* headerTitle="columns配置" */ value={dataSource} onChange={onChange} columns={columns}
-    /* toolBarRender={() => {
+  return (
+    <EditableProTable
+      rowKey="uuid"
+      /* headerTitle="columns配置" */ value={dataSource}
+      onChange={onChange}
+      columns={columns}
+      /* toolBarRender={() => {
       return [
         <Button type="primary" size="small" key="save" onClick={()=>save(arr2obj(dataSource))}>保存数据</Button>,
       ];
     }} */
-    recordCreatorProps={{
-      position: 'bottom',
-      creatorButtonText:columnI18n.table_title,
-      record: () => ({ uuid:uuidv4() }),
-    }}
-    /* request={async () => ({
+      recordCreatorProps={{
+        position: 'bottom',
+        creatorButtonText: columnI18n.table_title,
+        record: () => ({uuid: uuidv4()}),
+      }}
+      /* request={async () => ({
       data: defaultData,
       total: 3,
       // success: true,
     })} */
-    editable={{
-      type: 'multiple',
-      editableKeys,
-      onSave: async (key,row,originRow) => {
-        // console.log(key,row,originRow);
-      },
-      // onDelete:(key,row)=>{},
-      onChange: setEditableRowKeys,
-    }}
-    // scroll={{ x: 1000 }}
-    /* options={{
+      editable={{
+        type: 'multiple',
+        editableKeys,
+        onSave: async (key, row, originRow) => {
+          // console.log(key,row,originRow);
+        },
+        // onDelete:(key,row)=>{},
+        onChange: setEditableRowKeys,
+      }}
+      // scroll={{ x: 1000 }}
+      /* options={{
       show: true,
       density: true,
       fullScreen: true,
       setting: true,
     }} */
-  />;
+    />
+  );
 };

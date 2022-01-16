@@ -1,4 +1,4 @@
-import {Link} from '@common';
+import {Link} from 'ihuxy/router';
 import TopRight from '@app/components/topRight';
 import './index.less';
 

@@ -227,7 +227,10 @@ module.exports={
       '@app':app,
       '@configs':path.resolve(__dirname, '../configs'),
       '@common':path.resolve(__dirname, '../commons'),
-      '@src':path.resolve(__dirname, '../playground/src'),
+      ihuxy:path.resolve(__dirname, '../node_modules/@huxy'),
+      'ihuxy-utils':path.resolve(__dirname, '../node_modules/@huxy/utils/src'),
+      'ihuxy-use':path.resolve(__dirname, '../node_modules/@huxy/use/src'),
+      'ihuxy-components':path.resolve(__dirname, '../node_modules/@huxy/components/src'),
     },
     extensions:['.jsx','.js','.less','.css','.scss','.json','.ts','.tsx','.vue','.mjs'],
     fallback: {

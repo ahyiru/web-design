@@ -1,13 +1,13 @@
-const color='#a6b0cf';
+const color = '#a6b0cf';
 const option = {
   title: {
     text: '网站访问量统计',
   },
-  grid:{
-    top:'30px',
+  grid: {
+    top: '30px',
     left: '2%',
     right: '2%',
-    bottom:'50px',
+    bottom: '50px',
     containLabel: true,
   },
   tooltip: {
@@ -43,7 +43,7 @@ const option = {
       stack: 'total',
       label: {
         show: true,
-        color:'#fff',
+        color: '#fff',
       },
       emphasis: {
         focus: 'series',
@@ -56,7 +56,7 @@ const option = {
       stack: 'total',
       label: {
         show: true,
-        color:'#fff',
+        color: '#fff',
       },
       emphasis: {
         focus: 'series',
@@ -69,7 +69,7 @@ const option = {
       stack: 'total',
       label: {
         show: true,
-        color:'#eee',
+        color: '#eee',
       },
       emphasis: {
         focus: 'series',
@@ -82,7 +82,7 @@ const option = {
       stack: 'total',
       label: {
         show: true,
-        color:'#eee',
+        color: '#eee',
       },
       emphasis: {
         focus: 'series',
@@ -93,8 +93,3 @@ const option = {
 };
 
 export default option;
-
-
-
-
-

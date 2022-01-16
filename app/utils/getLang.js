@@ -1,6 +1,6 @@
-import {utils} from '@common';
-const {storage,sysLang}=utils;
+import storage from 'ihuxy-utils/storage';
+import {sysLang} from 'ihuxy-utils/sysInfo';
 
-const getLang=()=>storage.get('language')||sysLang();
+const getLang = () => storage.get('language') || sysLang();
 
 export default getLang;

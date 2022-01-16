@@ -71,7 +71,7 @@ export const passTime = (start, end, unit = 'date', minDate = minDate) => {
     startDate = dayjs([curYear - start, curMonth + 1, curDate]);
   } else if (unit === 'month') {
     const months = curYear * 12 + curMonth - start;
-    startDate = dayjs([~~(months / 12), months % 12 + 1, curDate]);
+    startDate = dayjs([~~(months / 12), (months % 12) + 1, curDate]);
   } else if (unit === 'week') {
     startDate = dayjs().subtract(7 * start, 'day');
   } else {
@@ -92,22 +92,42 @@ export const monthEnd = (year = dayjs().year(), month = dayjs().month()) => form
 export const formatMonth = (year = dayjs().year(), month = dayjs().month()) => {
   const endMonth = monthEnd(year, month);
   const lastDay = dayjs(endMonth).date();
-  const monthList = Array(lastDay).fill().map((item, i) => {
-    const date = dayjs([year, month + 1, i + 1]);
-    return {
-      date,
-      day: date.day(),
-      label: i + 1,
-    };
-  });
+  const monthList = Array(lastDay)
+    .fill()
+    .map((item, i) => {
+      const date = dayjs([year, month + 1, i + 1]);
+      return {
+        date,
+        day: date.day(),
+        label: i + 1,
+      };
+    });
   return monthList;
 };
 
-export const formatMonthWeeks = monthList => {
+export const formatMonthWeeks = (monthList) => {
   const firstDay = monthList[0].day;
   const lastDay = monthList[monthList.length - 1].day;
-  const front = Array(firstDay).fill().map((item, i) => ({ day: i, date: pass(firstDay - i, monthList[0].date), label: dayjs().subtract(firstDay - i, 'day').date(), isPrev: true }));
-  const end = Array(6 - lastDay).fill().map((item, i) => ({ day: lastDay + 1 + i, date: next(1 + i, monthList[monthList.length - 1].date), label: dayjs().add(1 + i, 'day').date(), isNext: true }));
+  const front = Array(firstDay)
+    .fill()
+    .map((item, i) => ({
+      day: i,
+      date: pass(firstDay - i, monthList[0].date),
+      label: dayjs()
+        .subtract(firstDay - i, 'day')
+        .date(),
+      isPrev: true,
+    }));
+  const end = Array(6 - lastDay)
+    .fill()
+    .map((item, i) => ({
+      day: lastDay + 1 + i,
+      date: next(1 + i, monthList[monthList.length - 1].date),
+      label: dayjs()
+        .add(1 + i, 'day')
+        .date(),
+      isNext: true,
+    }));
   const dates = [...front, ...monthList, ...end];
   const weeks = [];
   let start = 0;
@@ -137,17 +157,19 @@ export const getMonths = (minDate = minDate) => {
   const minMonth = dayjs(minDate).month();
   const PREV = (dayjs().year() - minYear) * 12 + dayjs().month() - minMonth + 1;
   let currentMonth = [dayjs().year(), dayjs().month() + 1];
-  const monthList = Array(PREV).fill().map((item, i) => {
-    currentMonth = prevMonth(...currentMonth);
-    return {
-      month: currentMonth,
-      id: i,
-    };
-  });
+  const monthList = Array(PREV)
+    .fill()
+    .map((item, i) => {
+      currentMonth = prevMonth(...currentMonth);
+      return {
+        month: currentMonth,
+        id: i,
+      };
+    });
   return monthList.reverse();
 };
 
-export const formatSelected = selected => {
+export const formatSelected = (selected) => {
   const start = selected[0] ? dayjs(selected[0]).valueOf() : null;
   const end = selected[1] ? dayjs(selected[1]).valueOf() : null;
   return [start, end].filter(Boolean).sort();
@@ -162,14 +184,16 @@ export const formatStartDate = (start, unit = 'date') => {
     startDate = dayjs([curYear - start, curMonth + 1, curDate]);
   } else if (unit === 'month') {
     const months = curYear * 12 + curMonth - start;
-    startDate = dayjs([~~(months / 12), months % 12 + 1, curDate]);
+    startDate = dayjs([~~(months / 12), (months % 12) + 1, curDate]);
   } else if (unit === 'week') {
     startDate = dayjs().subtract(7 * start, 'day');
   } else {
     startDate = dayjs().subtract(start, 'day');
   }
   const startVal = startDate.endOf('date').valueOf();
-  const curVal = dayjs([curYear, curMonth + 1, curDate]).endOf('date').valueOf();
+  const curVal = dayjs([curYear, curMonth + 1, curDate])
+    .endOf('date')
+    .valueOf();
   return ~~((curVal - startVal) / DATE_VAL);
 };
 
@@ -201,7 +225,8 @@ export const cycleTime = (start, end, unit = 'day') => {
     return [];
   }
   const endDate = dayjs().subtract(end || 0, 'day');
-  const startDate = dayjs(endDate).subtract(start || 0, unit).add(1, 'day');
+  const startDate = dayjs(endDate)
+    .subtract(start || 0, unit)
+    .add(1, 'day');
   return [format(startDate), format(endDate)];
 };
-

@@ -1,4 +1,4 @@
-import { getOnlineDate, today, yesterday, pass, curWeekStart, prevWeekStart, prevWeekEnd, curMonthStart, prevMonthStart, prevMonthEnd } from './formatTime';
+import {getOnlineDate, today, yesterday, pass, curWeekStart, prevWeekStart, prevWeekEnd, curMonthStart, prevMonthStart, prevMonthEnd} from './formatTime';
 
 export const tagList = () => [
   {

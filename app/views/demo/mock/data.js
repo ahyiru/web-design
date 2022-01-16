@@ -1,6 +1,5 @@
-import {utils} from '@common';
-
-const {uuidv4, randNum, randTrue} = utils;
+import uuidv4 from 'ihuxy-utils/uuidv4';
+import {randNum, randTrue} from 'ihuxy-utils/rand';
 
 const userSchema = {
   name: 'demo',

@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {Button} from 'antd';
-import {components} from '@common';
+import Portal from 'ihuxy-components/portal';
+import Mask from 'ihuxy-components/mask';
+import Modal from 'ihuxy-components/modal';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
-
-const {Portal, Mask, Modal} = components;
 
 const Index = (props) => {
   const [maskOpen, setMaskOpen] = useState(false);

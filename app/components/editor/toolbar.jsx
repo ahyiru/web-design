@@ -1,31 +1,26 @@
-import { useCallback, useMemo, useState } from 'react';
+import {useCallback, useMemo, useState} from 'react';
 
-import { Editable, withReact, useSlate, Slate } from 'slate-react';
-import {
-  Editor,
-  Transforms,
-  createEditor,
-  Descendant,
-  Element as SlateElement,
-} from 'slate';
+import {Editable, withReact, useSlate, Slate} from 'slate-react';
+import {Editor, Transforms, createEditor, Descendant, Element as SlateElement} from 'slate';
 
-import { Button, Icon, Toolbar } from './components';
+import {Button, Icon, Toolbar} from './components';
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 
 const RichTextExample = () => {
-
-  return <Toolbar>
-    <MarkButton format="bold" icon="format_bold" />
-    <MarkButton format="italic" icon="format_italic" />
-    <MarkButton format="underline" icon="format_underlined" />
-    <MarkButton format="code" icon="code" />
-    <BlockButton format="heading-one" icon="looks_one" />
-    <BlockButton format="heading-two" icon="looks_two" />
-    <BlockButton format="block-quote" icon="format_quote" />
-    <BlockButton format="numbered-list" icon="format_list_numbered" />
-    <BlockButton format="bulleted-list" icon="format_list_bulleted" />
-  </Toolbar>;
+  return (
+    <Toolbar>
+      <MarkButton format="bold" icon="format_bold" />
+      <MarkButton format="italic" icon="format_italic" />
+      <MarkButton format="underline" icon="format_underlined" />
+      <MarkButton format="code" icon="code" />
+      <BlockButton format="heading-one" icon="looks_one" />
+      <BlockButton format="heading-two" icon="looks_two" />
+      <BlockButton format="block-quote" icon="format_quote" />
+      <BlockButton format="numbered-list" icon="format_list_numbered" />
+      <BlockButton format="bulleted-list" icon="format_list_bulleted" />
+    </Toolbar>
+  );
 };
 
 const toggleBlock = (editor, format) => {
@@ -33,10 +28,7 @@ const toggleBlock = (editor, format) => {
   const isList = LIST_TYPES.includes(format);
 
   Transforms.unwrapNodes(editor, {
-    match: n =>
-      LIST_TYPES.includes(
-        !Editor.isEditor(n) && SlateElement.isElement(n) && n.type,
-      ),
+    match: (n) => LIST_TYPES.includes(!Editor.isEditor(n) && SlateElement.isElement(n) && n.type),
     split: true,
   });
   const newProperties = {
@@ -45,7 +37,7 @@ const toggleBlock = (editor, format) => {
   Transforms.setNodes(editor, newProperties);
 
   if (!isActive && isList) {
-    const block = { type: format, children: [] };
+    const block = {type: format, children: []};
     Transforms.wrapNodes(editor, block);
   }
 };
@@ -62,8 +54,7 @@ const toggleMark = (editor, format) => {
 
 const isBlockActive = (editor, format) => {
   const [match] = Editor.nodes(editor, {
-    match: n =>
-      !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === format,
+    match: (n) => !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === format,
   });
 
   return !!match;
@@ -74,7 +65,7 @@ const isMarkActive = (editor, format) => {
   return marks ? marks[format] === true : false;
 };
 
-const Element = ({ attributes, children, element }) => {
+const Element = ({attributes, children, element}) => {
   switch (element.type) {
   case 'block-quote':
     return <blockquote {...attributes}>{children}</blockquote>;
@@ -93,7 +84,7 @@ const Element = ({ attributes, children, element }) => {
   }
 };
 
-const Leaf = ({ attributes, children, leaf }) => {
+const Leaf = ({attributes, children, leaf}) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
@@ -113,12 +104,12 @@ const Leaf = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>;
 };
 
-const BlockButton = ({ format, icon }) => {
+const BlockButton = ({format, icon}) => {
   const editor = useSlate();
   return (
     <Button
       active={isBlockActive(editor, format)}
-      onMouseDown={event => {
+      onMouseDown={(event) => {
         event.preventDefault();
         toggleBlock(editor, format);
       }}
@@ -128,12 +119,12 @@ const BlockButton = ({ format, icon }) => {
   );
 };
 
-const MarkButton = ({ format, icon }) => {
+const MarkButton = ({format, icon}) => {
   const editor = useSlate();
   return (
     <Button
       active={isMarkActive(editor, format)}
-      onMouseDown={event => {
+      onMouseDown={(event) => {
         event.preventDefault();
         toggleMark(editor, format);
       }}
@@ -145,9 +136,6 @@ const MarkButton = ({ format, icon }) => {
 
 export default RichTextExample;
 
-
-
-
 /* const renderElement = useCallback(props => {
   switch (props.element.type) {
     case 'code':
@@ -156,35 +144,3 @@ export default RichTextExample;
       return <DefaultElement {...props} />
   }
 }, []) */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

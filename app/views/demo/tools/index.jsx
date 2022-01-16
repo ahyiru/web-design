@@ -1,14 +1,10 @@
 import {useEffect, useRef} from 'react';
-import {components, utils, use} from '@common';
+import watermark from 'ihuxy-utils/watermark';
+import Panel from 'ihuxy-components/panel';
+import {useEleResize} from 'ihuxy-use/useViewSize';
 import {Row, Col} from '@app/components/row';
 
 import SkeletonContent from '@app/components/skeletonContent';
-
-const {Panel} = components;
-
-const {watermark} = utils;
-
-const {useEleResize} = use;
 
 const Index = (props) => {
   const watermarkRef = useRef();

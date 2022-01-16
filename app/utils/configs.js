@@ -1,6 +1,5 @@
 import * as configs from './config';
 
-window.configs=configs;
+window.configs = configs;
 
 export default configs;
-

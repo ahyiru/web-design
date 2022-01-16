@@ -1,6 +1,5 @@
-import {utils} from '@common';
-const {emitter}=utils;
+import emitter from 'ihuxy-utils/emitter';
 
-export const emit=emitter();
+export const emit = emitter();
 
 export default emit;

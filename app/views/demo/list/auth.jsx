@@ -1,6 +1,11 @@
 import {useState, useCallback, useEffect} from 'react';
 
-import {components, utils, use} from '@common';
+import Row,{Col} from 'ihuxy-components/grid';
+import {arr2TreeByPath} from 'ihuxy-utils/arr2Tree';
+import isValidArr from 'ihuxy-utils/isValidArr';
+import traverItem from 'ihuxy-utils/traverItem';
+import useSearch from 'ihuxy-use/useSearch';
+import useDebounce from 'ihuxy-use/useDebounce';
 
 import {Tree, Button, message, Input, Spin} from 'antd';
 
@@ -19,12 +24,6 @@ import Panel from '@app/components/panel';
 import {getRouter, getAuthedRouter, setAuthedRouter} from '../mock';
 
 const {Search} = Input;
-
-const {useSearch, useDebounce} = use;
-
-const {Row, Col} = components;
-
-const {arr2TreeByPath, isValidArr, traverItem} = utils;
 
 const rootNode = {
   path: '',

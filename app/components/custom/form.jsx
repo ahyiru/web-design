@@ -1,11 +1,10 @@
-import {useEffect,useState} from 'react';
-import {Form,Modal,message} from 'antd';
-import {utils} from '@common';
+import {useEffect, useState} from 'react';
+import {Form, Modal, message} from 'antd';
+import traverItem from 'ihuxy-utils/traverItem';
+import clone from 'ihuxy-utils/clone';
 import apiList from '@app/utils/getApis';
 import customRender from '@app/utils/render';
 import * as rules from '@app/utils/rules';
-
-const {traverItem,clone}=utils;
 
 /* const formCfg={
   name:'',
@@ -24,12 +23,12 @@ const {traverItem,clone}=utils;
   },
 }; */
 
-const Index=({commonprops,...props})=>{
-  const {initialValues,submit,loading,getValues,modalItem,handleOk,onCancel,title,schema}=props;
-  const [form]=Form.useForm();
-  let tmpSchema=clone(schema);
-  tmpSchema=Array.isArray(tmpSchema)?tmpSchema[0]:tmpSchema;
-  const [fetchDatas,setFetchDatas]=useState({});
+const Index = ({commonprops, ...props}) => {
+  const {initialValues, submit, loading, getValues, modalItem, handleOk, onCancel, title, schema} = props;
+  const [form] = Form.useForm();
+  let tmpSchema = clone(schema);
+  tmpSchema = Array.isArray(tmpSchema) ? tmpSchema[0] : tmpSchema;
+  const [fetchDatas, setFetchDatas] = useState({});
   /* useEffect(()=>{
     const getDatas=async apis=>{
       const resultList=await Promise.all(apis.map(({name,params})=>apiList[name](params)));
@@ -42,55 +41,58 @@ const Index=({commonprops,...props})=>{
     // getDatas(apis);
   },[]); */
 
-  const {getState,back}=commonprops.history||{};
+  const {getState, back} = commonprops.history || {};
 
-  const initVal=modalItem||initialValues||getState?.()?.item;
-  const {props:cfgProps}=tmpSchema;
+  const initVal = modalItem || initialValues || getState?.()?.item;
+  const {props: cfgProps} = tmpSchema;
 
-  const onValuesChange=(changedValues,allValues)=>{
-    typeof getValues==='function'&&getValues(changedValues,allValues);
+  const onValuesChange = (changedValues, allValues) => {
+    typeof getValues === 'function' && getValues(changedValues, allValues);
   };
-  const resetFields=()=>form.resetFields();
-  const onFinish=async values=>{
-    if(modalItem){
+  const resetFields = () => form.resetFields();
+  const onFinish = async (values) => {
+    if (modalItem) {
       return;
     }
-    if(typeof submit==='function'){
+    if (typeof submit === 'function') {
       submit(values);
       return;
     }
-    values={...initVal,...values};
-    const apiName=getState?.()?.apiName;
-    const apiFn=apiList[apiName];
-    try{
-      const {code,message:msg}=await apiFn?.({...values}) || {};
-      if(code===200){
+    values = {...initVal, ...values};
+    const apiName = getState?.()?.apiName;
+    const apiFn = apiList[apiName];
+    try {
+      const {code, message: msg} = (await apiFn?.({...values})) || {};
+      if (code === 200) {
         message.success(msg);
         back?.();
       }
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
-  const modalOk=()=>{
-    form.validateFields().then(values=>{
-      handleOk(values);
-      onCancel();
-    }).catch(info=>{
-      onCancel();
-    });
+  const modalOk = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        handleOk(values);
+        onCancel();
+      })
+      .catch((info) => {
+        onCancel();
+      });
   };
-  const formProps={
+  const formProps = {
     form,
     onFinish,
     onValuesChange,
-    initialValues:initVal,
+    initialValues: initVal,
   };
-  const mergeProps={
+  const mergeProps = {
     ...formProps,
     ...cfgProps,
   };
-  const self={
+  const self = {
     ...props,
     onValuesChange,
     resetFields,
@@ -98,8 +100,8 @@ const Index=({commonprops,...props})=>{
     loading,
     fetchDatas,
   };
-  tmpSchema.props=mergeProps;
-  const newSchema=traverItem((item,p,i,hasChild)=>{
+  tmpSchema.props = mergeProps;
+  const newSchema = traverItem((item, p, i, hasChild) => {
     /* const {customRender,...rest}=item.props||{};
     if(Array.isArray(customRender)){
       const [key,valueKey]=customRender;
@@ -112,21 +114,18 @@ const Index=({commonprops,...props})=>{
         item.props=rest;
       }
     } */
-    if(!hasChild&&modalItem){
-      item.props.disabled=true;
+    if (!hasChild && modalItem) {
+      item.props.disabled = true;
     }
     return item;
   })([tmpSchema]);
-  return modalItem?<Modal title={title} visible={!!modalItem} onCancel={onCancel} onOk={()=>modalOk()}>
-    {customRender(newSchema[0],self)}
-  </Modal>:customRender(newSchema[0],self);
+  return modalItem ? (
+    <Modal title={title} visible={!!modalItem} onCancel={onCancel} onOk={() => modalOk()}>
+      {customRender(newSchema[0], self)}
+    </Modal>
+  ) : (
+    customRender(newSchema[0], self)
+  );
 };
 
-
 export default Index;
-
-
-
-
-
-

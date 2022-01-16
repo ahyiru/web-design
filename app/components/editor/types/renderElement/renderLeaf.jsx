@@ -1,4 +1,4 @@
-const Index=({attributes,children,leaf})=>{
+const Index = ({attributes, children, leaf}) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }

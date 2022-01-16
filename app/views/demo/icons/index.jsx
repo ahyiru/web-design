@@ -1,7 +1,7 @@
 import {message} from 'antd';
-import {utils, components} from '@common';
-const {copyToClipboard} = utils;
-const {Row, Col} = components;
+import Row,{Col} from 'ihuxy-components/grid';
+import copyToClipboard from 'ihuxy-utils/copyToClipboard';
+
 import './index.less';
 const icons = [
   'plus',

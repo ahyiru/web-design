@@ -1,16 +1,8 @@
-const colors=[
-  '#1890ff',
-  '#52c41a',
-  '#fa8c16',
-  '#722ed1',
-  '#f5222d',
-  '#fadb14',
-  '#faad14',
-];
-const bgColor='#2a3042';
-const color='#a6b0cf';
+const colors = ['#1890ff', '#52c41a', '#fa8c16', '#722ed1', '#f5222d', '#fadb14', '#faad14'];
+const bgColor = '#2a3042';
+const color = '#a6b0cf';
 
-const axis={
+const axis = {
   axisLine: {
     show: true,
     lineStyle: {
@@ -38,32 +30,29 @@ const axis={
   splitArea: {
     show: false,
     areaStyle: {
-      color: [
-        color,
-        color,
-      ],
+      color: [color, color],
     },
   },
 };
 
-const shadows={
+const shadows = {
   shadowBlur: 50,
   shadowOffsetX: 0,
   shadowOffsetY: 0,
   shadowColor: 'rgba(0,180,220,.5)',
 };
 
-const barItemStyle={
+const barItemStyle = {
   barBorderWidth: 0,
   barBorderColor: color,
   ...shadows,
 };
-const itemStyle={
+const itemStyle = {
   borderWidth: 0,
   borderColor: color,
   ...shadows,
 };
-const mapItemStle={
+const mapItemStle = {
   itemStyle: {
     normal: {
       color,
@@ -92,7 +81,7 @@ const mapItemStle={
   },
 };
 
-const itemStyles={
+const itemStyles = {
   bar: {itemStyle: barItemStyle},
   pie: {itemStyle},
   scatter: {itemStyle},
@@ -119,21 +108,21 @@ const itemStyles={
   },
 };
 
-const defaultOpts={
+const defaultOpts = {
   // color:colors,
   backgroundColor: 'transparent',
   textStyle: {
     color,
   },
-  itemStyle:{
+  itemStyle: {
     borderWidth: 0,
     borderColor: color,
   },
-  grid:{
-    top:'50px',
+  grid: {
+    top: '50px',
     left: '4%',
     right: '4%',
-    bottom:'50px',
+    bottom: '50px',
     containLabel: true,
   },
   title: {
@@ -178,9 +167,9 @@ const defaultOpts={
     },
   },
   legend: {
-    icon:'roundRect',
+    icon: 'roundRect',
     left: 'center',
-    top:'bottom',
+    top: 'bottom',
     // bottom:'20px',
     textStyle: {
       color,
@@ -189,7 +178,7 @@ const defaultOpts={
   tooltip: {
     confine: true,
     backgroundColor: bgColor,
-    borderColor:color,
+    borderColor: color,
     axisPointer: {
       lineStyle: {
         color,
@@ -200,11 +189,11 @@ const defaultOpts={
         width: 1,
       },
     },
-    textStyle:{
+    textStyle: {
       color,
     },
   },
-  label:{
+  label: {
     color,
   },
   ...itemStyles,
@@ -213,6 +202,3 @@ const defaultOpts={
 };
 
 export default defaultOpts;
-
-
-

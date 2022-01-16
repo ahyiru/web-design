@@ -1,11 +1,10 @@
 import {useEffect, useState} from 'react';
-import {components} from '@common';
+import Spinner from 'ihuxy-components/spinner';
+import str2React from 'ihuxy-components/str2React';
 import getContext from '../getFiles/getContext';
 import replacePath from '../getFiles/replacePath';
 
 import marked from './marked';
-
-const {Spinner, str2React} = components;
 
 const Index = ({item}) => {
   const [context, setContext] = useState('');

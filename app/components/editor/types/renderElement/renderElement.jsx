@@ -1,4 +1,4 @@
-const Index=({attributes,children,element})=>{
+const Index = ({attributes, children, element}) => {
   switch (element.type) {
   case 'block-quote':
     return <blockquote {...attributes}>{children}</blockquote>;

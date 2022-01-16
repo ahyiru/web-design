@@ -1,4 +1,4 @@
-export const sizes={
+export const sizes = {
   '--maxWidth': '1310px',
   '--menuWidth': '200px',
   '--collapseWidth': '60px',
@@ -8,7 +8,7 @@ export const sizes={
   '--breadHeight': '50px',
   '--menuItemHeight': '50px',
 };
-export const colors={
+export const colors = {
   '--bannerBgColor': '#9575ce',
   '--navBgColor': '#9575ce',
   '--menuBgColor': '#ffffff',
@@ -20,11 +20,10 @@ export const colors={
   '--pageLinkColor': '#444444',
   '--linkHoverColor': '#505050',
   '--linkActiveColor': '#505050',
-  '--borderColor':'#d0d0d0',
+  '--borderColor': '#d0d0d0',
 };
 
 export default {
   sizes,
   colors,
 };
-

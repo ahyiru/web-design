@@ -1,11 +1,8 @@
-import {utils} from '@common';
+import setStyle from 'ihuxy-utils/setStyle';
 
-const {setStyle}=utils;
-
-const setGlobalVar=(theme)=>{
-  const globalVar={...theme?.list?.colors,...theme?.list?.sizes};
-  setStyle(document.documentElement,globalVar);
+const setGlobalVar = (theme) => {
+  const globalVar = {...theme?.list?.colors, ...theme?.list?.sizes};
+  setStyle(document.documentElement, globalVar);
 };
 
 export default setGlobalVar;
-

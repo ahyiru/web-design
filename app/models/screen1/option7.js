@@ -2,11 +2,11 @@ const option = {
   title: {
     text: '食品销量统计',
   },
-  grid:{
-    top:'25px',
+  grid: {
+    top: '25px',
     left: '0',
     right: '0',
-    bottom:'0',
+    bottom: '0',
     containLabel: true,
   },
   dataset: {
@@ -20,16 +20,7 @@ const option = {
   },
   xAxis: {type: 'category'},
   yAxis: {},
-  series: [
-    {type: 'bar'},
-    {type: 'bar'},
-    {type: 'bar'},
-  ],
+  series: [{type: 'bar'}, {type: 'bar'}, {type: 'bar'}],
 };
 
 export default option;
-
-
-
-
-

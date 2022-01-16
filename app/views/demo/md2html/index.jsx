@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Link} from '@common';
+import {Link} from 'ihuxy/router';
 import renderMenu from './renderMenu';
 import RenderPage from './renderPage';
 import listFiles from './getFiles';

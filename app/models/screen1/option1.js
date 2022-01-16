@@ -1,8 +1,8 @@
-const option=echarts=>({
+const option = (echarts) => ({
   color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
   title: {
     text: '使用量统计',
-    subtext:'前端框架周使用量统计',
+    subtext: '前端框架周使用量统计',
   },
   tooltip: {
     trigger: 'axis',
@@ -34,13 +34,16 @@ const option=echarts=>({
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-          offset: 0,
-          color: 'rgba(128, 255, 165)',
-        }, {
-          offset: 1,
-          color: 'rgba(1, 191, 236)',
-        }]),
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgba(128, 255, 165)',
+          },
+          {
+            offset: 1,
+            color: 'rgba(1, 191, 236)',
+          },
+        ]),
       },
       emphasis: {
         focus: 'series',
@@ -58,13 +61,16 @@ const option=echarts=>({
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-          offset: 0,
-          color: 'rgba(0, 221, 255)',
-        }, {
-          offset: 1,
-          color: 'rgba(77, 119, 255)',
-        }]),
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgba(0, 221, 255)',
+          },
+          {
+            offset: 1,
+            color: 'rgba(77, 119, 255)',
+          },
+        ]),
       },
       emphasis: {
         focus: 'series',
@@ -82,13 +88,16 @@ const option=echarts=>({
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-          offset: 0,
-          color: 'rgba(55, 162, 255)',
-        }, {
-          offset: 1,
-          color: 'rgba(116, 21, 219)',
-        }]),
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgba(55, 162, 255)',
+          },
+          {
+            offset: 1,
+            color: 'rgba(116, 21, 219)',
+          },
+        ]),
       },
       emphasis: {
         focus: 'series',
@@ -106,13 +115,16 @@ const option=echarts=>({
       showSymbol: false,
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-          offset: 0,
-          color: 'rgba(255, 0, 135)',
-        }, {
-          offset: 1,
-          color: 'rgba(135, 0, 157)',
-        }]),
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgba(255, 0, 135)',
+          },
+          {
+            offset: 1,
+            color: 'rgba(135, 0, 157)',
+          },
+        ]),
       },
       emphasis: {
         focus: 'series',
@@ -134,13 +146,16 @@ const option=echarts=>({
       },
       areaStyle: {
         opacity: 0.8,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-          offset: 0,
-          color: 'rgba(255, 191, 0)',
-        }, {
-          offset: 1,
-          color: 'rgba(224, 62, 76)',
-        }]),
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgba(255, 191, 0)',
+          },
+          {
+            offset: 1,
+            color: 'rgba(224, 62, 76)',
+          },
+        ]),
       },
       emphasis: {
         focus: 'series',
@@ -151,8 +166,3 @@ const option=echarts=>({
 });
 
 export default option;
-
-
-
-
-

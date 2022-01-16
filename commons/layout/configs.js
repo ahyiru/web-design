@@ -4,7 +4,7 @@ import Footer from './components/footer';
 import handleNavClick from './utils/handleNavClick';
 import fixIcons from '@app/utils/fixIcons';
 import logo from '@app/assets/images/logo.png';
-import {Link} from '@common';
+import {Link} from 'ihuxy/router';
 
 export {
   MainTop,

@@ -1,8 +1,8 @@
 import {Tooltip} from 'antd';
-import {utils} from '@common';
+import isObject from 'ihuxy-utils/isObject';
 import fixIcons from './fixIcons';
-const tooltipIcon=icon=>{
-  if(utils.isObject(icon)){
+const tooltipIcon = (icon) => {
+  if (isObject(icon)) {
     return <Tooltip title={icon.label}>{fixIcons(icon.icon)}</Tooltip>;
   }
   return fixIcons(icon);

@@ -1,30 +1,30 @@
-import {utils} from '@common';
-const {traverItem}=utils;
+import traverItem from 'ihuxy-utils/traverItem';
 
 import staticRoutes from './routerComp/staticRoutes';
-import {configRoutes,dashboardRoutes,appRoutes,commonRoutes,lowCodeRoutes,pageRoutes,playgroundRoutes} from './routerComp/dynamicRoutes';
+import {configRoutes, dashboardRoutes, appRoutes, commonRoutes, lowCodeRoutes, pageRoutes, playgroundRoutes} from './routerComp/dynamicRoutes';
 
-const dynamicRoutes=[configRoutes,appRoutes,dashboardRoutes,commonRoutes,lowCodeRoutes,pageRoutes,playgroundRoutes];
+const dynamicRoutes = [configRoutes, appRoutes, dashboardRoutes, commonRoutes, lowCodeRoutes, pageRoutes, playgroundRoutes];
 
-const allRoutes=[
+const allRoutes = [
   {
-    path:'/',
-    component:()=>import('@common/layout'),
-    children:dynamicRoutes,
+    path: '/',
+    component: () => import('@common/layout'),
+    children: dynamicRoutes,
   },
   ...staticRoutes,
 ];
 
-const routes=(nameList,routerList)=>traverItem((item,parent)=>{
-  const fullPath=[...parent,item].map(item=>item.path).join('').replace('//','/');
-  item.name=nameList?.[fullPath]??item.name;
-  item.id=routerList?.find(route=>route.path===fullPath)?._id;
-  if(typeof item.componentPath==='string'){
-    item.component=()=>import(`@app/views${item.componentPath}`);
-  }
-})(allRoutes);
+const routes = (nameList, routerList) =>
+  traverItem((item, parent) => {
+    const fullPath = [...parent, item]
+      .map((item) => item.path)
+      .join('')
+      .replace('//', '/');
+    item.name = nameList?.[fullPath] ?? item.name;
+    item.id = routerList?.find((route) => route.path === fullPath)?._id;
+    if (typeof item.componentPath === 'string') {
+      item.component = () => import(`@app/views${item.componentPath}`);
+    }
+  })(allRoutes);
 
 export default routes;
-
-
-

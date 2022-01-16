@@ -2,16 +2,14 @@ import {useState} from 'react';
 import {Table, Tag, Space, Input, Button, Modal, Form, message, Select} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {roleList} from '@app/utils/config';
-import {components, utils} from '@common';
+import Row,{Col} from 'ihuxy-components/grid';
+import {formatTime} from 'ihuxy-utils/formatTime';
+import validObj from 'ihuxy-utils/validObj';
 import useHandleList from '@app/hooks/useHandleList';
 
 import Panel from '@app/components/panel';
 
 import {allUser, deleteUser} from '../mock';
-
-const {Row, Col} = components;
-
-const {formatTime, validObj} = utils;
 
 const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => [
   {

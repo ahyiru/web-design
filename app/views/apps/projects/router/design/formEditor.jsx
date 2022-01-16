@@ -1,10 +1,13 @@
-import {useState,useEffect} from 'react';
+import {useState, useEffect} from 'react';
 
-import {components,utils} from '@common';
+import Row,{Col} from 'ihuxy-components/grid';
+import updateId from 'ihuxy-utils/updateId';
+import {addNodes, editNodes, deleteNodes, moveNodes} from 'ihuxy-utils/handleTree';
+import selectedHandle from 'ihuxy-utils/selectedHandle';
 
-import {Tree,Modal,Dropdown,Menu,Spin} from 'antd';
+import {Tree, Modal, Dropdown, Menu, Spin} from 'antd';
 
-import {DownOutlined,PlusOutlined,DeleteOutlined,ExclamationCircleOutlined} from '@ant-design/icons';
+import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 
 import Panel from '@app/components/panel';
 
@@ -12,67 +15,69 @@ import HandleModal from './modal';
 
 import CommonEditor from './commonEditor';
 
-const {Row,Col}=components;
-
-const {updateId,addNodes,editNodes,deleteNodes,moveNodes,selectedHandle}=utils;
-
-const getSelected=(data,id)=>{
-  let selected={};
-  selectedHandle((data,i)=>{
-    selected=data[i];
-  })(data,id,'key');
+const getSelected = (data, id) => {
+  let selected = {};
+  selectedHandle((data, i) => {
+    selected = data[i];
+  })(data, id, 'key');
   return selected;
 };
 
-const handleClick=({addFn,editFn,deleteFn},item,actionsText)=><Menu>
-  <Menu.Item key="add" onClick={()=>addFn(item)}>
-    <a>
-      <PlusOutlined />
-      <span style={{padding:'0 4px'}}>{actionsText.add_action}</span>
-    </a>
-  </Menu.Item>
-  {
-    !item.isRoot&&<Menu.Item key="delete" onClick={()=>deleteFn(item)}>
+const handleClick = ({addFn, editFn, deleteFn}, item, actionsText) => (
+  <Menu>
+    <Menu.Item key="add" onClick={() => addFn(item)}>
       <a>
-        <DeleteOutlined />
-        <span style={{padding:'0 4px'}}>{actionsText.delete_action}</span>
+        <PlusOutlined />
+        <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>
       </a>
     </Menu.Item>
-  }
-</Menu>;
+    {!item.isRoot && (
+      <Menu.Item key="delete" onClick={() => deleteFn(item)}>
+        <a>
+          <DeleteOutlined />
+          <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>
+        </a>
+      </Menu.Item>
+    )}
+  </Menu>
+);
 
-const treeDrop=(item,dropFns,actionsText)=><Dropdown overlay={()=>handleClick(dropFns,item,actionsText)} trigger={['contextMenu']}><span className="node-style">{item.type}</span></Dropdown>;
+const treeDrop = (item, dropFns, actionsText) => (
+  <Dropdown overlay={() => handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
+    <span className="node-style">{item.type}</span>
+  </Dropdown>
+);
 
-const formData=data=>Array.isArray(data)?data:data?[data]:[{}];
+const formData = (data) => (Array.isArray(data) ? data : data ? [data] : [{}]);
 
-const Index=({data,getValues,actionsText})=>{
-  const [visible,setVisible]=useState(false);
-  const [modalType,setModalType]=useState('');
-  const [selectedKey,setSelectedKey]=useState('');
+const Index = ({data, getValues, actionsText, editorI18n}) => {
+  const [visible, setVisible] = useState(false);
+  const [modalType, setModalType] = useState('');
+  const [selectedKey, setSelectedKey] = useState('');
   // const [selectedItem,setSelectedItem]=useState({});
 
-  const [schema,setSchema]=useState(formData(data));
+  const [schema, setSchema] = useState(formData(data));
 
-  useEffect(()=>{
+  useEffect(() => {
     setSchema(formData(data));
-  },[data]);
+  }, [data]);
 
-  const schemaTree=updateId(schema,'key');
+  const schemaTree = updateId(schema, 'key');
   /* const schemaTree=traverItem(item=>{
     if(typeof item.children==='string'){
       item.children=undefined;
     }
   })(updateId(schema,'key')); */
 
-  const addFn=item=>{
+  const addFn = (item) => {
     setVisible(true);
     setModalType('add');
   };
-  const editFn=item=>{
+  const editFn = (item) => {
     setVisible(true);
     setModalType('edit');
   };
-  const deleteFn=item=>{
+  const deleteFn = (item) => {
     Modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
@@ -80,29 +85,29 @@ const Index=({data,getValues,actionsText})=>{
       okText: actionsText.delete_confirm_ok,
       okType: 'danger',
       cancelText: actionsText.delete_confirm_cancel,
-      onOk:()=>{
-        const tree=deleteNodes(schemaTree,item.key,'key');
+      onOk: () => {
+        const tree = deleteNodes(schemaTree, item.key, 'key');
         setSchema(tree);
         getValues?.(tree);
       },
-      onCancel(){
+      onCancel() {
         console.log('Cancel');
       },
     });
   };
-  const onModalOk=values=>{
-    const tree=addNodes(schemaTree,selectedKey,[values],'key');
+  const onModalOk = (values) => {
+    const tree = addNodes(schemaTree, selectedKey, [values], 'key');
     setSchema(tree);
     getValues?.(tree);
   };
 
-  const editProps=values=>{
-    const tree=editNodes(schemaTree,selectedKey,{props:values},'key');
+  const editProps = (values) => {
+    const tree = editNodes(schemaTree, selectedKey, {props: values}, 'key');
     setSchema(tree);
-    getValues?.({schema:tree[0]});
+    getValues?.({schema: tree[0]});
   };
 
-  const onSelect=(selectedKeys,e)=>{
+  const onSelect = (selectedKeys, e) => {
     setSelectedKey(e.node.key);
   };
 
@@ -115,54 +120,43 @@ const Index=({data,getValues,actionsText})=>{
     getValues?.(tree);
   }; */
 
-  const dropFns={
+  const dropFns = {
     addFn,
     editFn,
     deleteFn,
   };
 
-  const item=getSelected(schemaTree,selectedKey);
+  const item = getSelected(schemaTree, selectedKey);
 
-  return <div>
-    <Row>
-      <Col width="240px">
-        <Panel>
-          <Spin spinning={false}>
-            <Tree
-              showIcon
-              defaultExpandAll
-              switcherIcon={<DownOutlined />}
-              titleRender={item=>treeDrop(item,dropFns,actionsText)}
-              treeData={schemaTree}
-              onSelect={onSelect}
-              virtual={false}
-              // draggable
-              // onDrop={onDrop}
-            />
-          </Spin>
-        </Panel>
-      </Col>
-      <Col auto>
-        <Panel>
-          <CommonEditor getValues={editProps} data={item?.props} selectedKey={item?.key} />
-        </Panel>
-      </Col>
-    </Row>
-    {
-      visible&&<HandleModal
-        onModalOk={onModalOk}
-        onModalCancel={()=>setVisible(false)}
-        modalVisible={visible}
-        type={modalType}
-        item={item}
-      />
-    }
-  </div>;
+  return (
+    <div>
+      <Row>
+        <Col width="240px">
+          <Panel>
+            <Spin spinning={false}>
+              <Tree
+                showIcon
+                defaultExpandAll
+                switcherIcon={<DownOutlined />}
+                titleRender={(item) => treeDrop(item, dropFns, actionsText)}
+                treeData={schemaTree}
+                onSelect={onSelect}
+                virtual={false}
+                // draggable
+                // onDrop={onDrop}
+              />
+            </Spin>
+          </Panel>
+        </Col>
+        <Col auto>
+          <Panel>
+            <CommonEditor getValues={editProps} data={item?.props} selectedKey={item?.key} editorI18n={editorI18n} />
+          </Panel>
+        </Col>
+      </Row>
+      {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} />}
+    </div>
+  );
 };
 
 export default Index;
-
-
-
-
-

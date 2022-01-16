@@ -1,9 +1,8 @@
 import {fakeFetch} from './utils';
 import {users, routers} from './data';
 
-import {utils} from '@common';
-
-const {uuidv4, createStore} = utils;
+import uuidv4 from 'ihuxy-utils/uuidv4';
+import createStore from 'ihuxy-utils/store';
 
 const store = createStore();
 

@@ -1,13 +1,11 @@
 import {Form, Input, Button, message, InputNumber, Select} from 'antd';
 import Back from '@app/components/goBack';
-import {components} from '@common';
+import Row,{Col} from 'ihuxy-components/grid';
 import {layout, tailLayout} from '@app/utils/config';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';
 import Panel from '@app/components/panel';
 
 import {addUser, editUser, projectList} from '../mock';
-
-const {Row, Col} = components;
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');

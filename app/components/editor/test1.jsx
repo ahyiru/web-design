@@ -1,11 +1,11 @@
-import {useState,useMemo,useCallback} from 'react';
-import {Editor,Transforms,createEditor} from 'slate';
-import { Editable, withReact, Slate } from 'slate-react';
-import {CodeElement,DefaultElement} from './comps';
+import {useState, useMemo, useCallback} from 'react';
+import {Editor, Transforms, createEditor} from 'slate';
+import {Editable, withReact, Slate} from 'slate-react';
+import {CodeElement, DefaultElement} from './comps';
 
-import { withHistory } from 'slate-history';
+import {withHistory} from 'slate-history';
 
-import { utils } from '@common';
+import firstUpper from 'ihuxy-utils/firstUpper';
 
 import * as elements from './types/components/text';
 
@@ -13,46 +13,34 @@ import Panel from '@app/components/panel';
 
 import Toolsbar from './types/renderElement/toolsbar';
 
-const {firstUpper}=utils;
-
 const initialValue = [
   {
     type: 'paragraph',
-    children: [
-      { text: 'This is editable ' },
-      { text: 'rich', bold: true },
-      { text: ' text, ' },
-      { text: 'much', italic: true },
-      { text: ' better than a ' },
-      { text: '<textarea>', code: true },
-      { text: '!' },
-    ],
+    children: [{text: 'This is editable '}, {text: 'rich', bold: true}, {text: ' text, '}, {text: 'much', italic: true}, {text: ' better than a '}, {text: '<textarea>', code: true}, {text: '!'}],
   },
   {
     type: 'paragraph',
     children: [
       {
-        text:
-          'Since it\'s rich text, you can do things like turn a selection of text ',
+        text: 'Since it\'s rich text, you can do things like turn a selection of text ',
       },
-      { text: 'bold', bold: true },
+      {text: 'bold', bold: true},
       {
-        text:
-          ', or add a semantically rendered block quote in the middle of the page, like this:',
+        text: ', or add a semantically rendered block quote in the middle of the page, like this:',
       },
     ],
   },
   {
     type: 'quote',
-    children: [{ text: 'A wise quote.' }],
+    children: [{text: 'A wise quote.'}],
   },
   {
     type: 'paragraph',
-    children: [{ text: 'Try it out for yourself!' }],
+    children: [{text: 'Try it out for yourself!'}],
   },
 ];
 
-const Leaf0 = ({ attributes, children, leaf }) => {
+const Leaf0 = ({attributes, children, leaf}) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
@@ -72,13 +60,15 @@ const Leaf0 = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>;
 };
 
-const Leaf = ({ attributes, children, leaf }) => {
-  const {text,...rest}=leaf;
-  Object.keys(rest).filter(Boolean).map(key=>{
-    const LeafComp=elements[firstUpper(key)];
-    children=<LeafComp>{children}</LeafComp>;
-    // console.log(333,rest,key,children);
-  });
+const Leaf = ({attributes, children, leaf}) => {
+  const {text, ...rest} = leaf;
+  Object.keys(rest)
+    .filter(Boolean)
+    .map((key) => {
+      const LeafComp = elements[firstUpper(key)];
+      children = <LeafComp>{children}</LeafComp>;
+      // console.log(333,rest,key,children);
+    });
   return <span {...attributes}>{children}</span>;
 };
 
@@ -86,13 +76,13 @@ const App = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const [value, setValue] = useState(initialValue);
 
-  const renderElement=useCallback(props=>{
-    const Comp=elements[firstUpper(props.element.type)]||elements.DefaultElement;
+  const renderElement = useCallback((props) => {
+    const Comp = elements[firstUpper(props.element.type)] || elements.DefaultElement;
     // console.log('renderElement',props,Comp);
     return <Comp {...props} />;
   }, []);
-  const renderLeaf=useCallback(props=>{
-    const {text,...rest}=props.leaf;
+  const renderLeaf = useCallback((props) => {
+    const {text, ...rest} = props.leaf;
     // const Comp=elements[props.element.format]||elements.DefaultElement;
     // console.log('renderLeaf',props);
     return <Leaf {...props} />;
@@ -100,16 +90,17 @@ const App = () => {
   // const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   // console.log(12,editor);
 
-  return <Panel title="slate editor - 未完成！">
-    <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-      <Toolsbar />
-      <Editable
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        placeholder="Enter some rich text…"
-        spellCheck
-        autoFocus
-        /* onKeyDown={event => {
+  return (
+    <Panel title="slate editor - 未完成！">
+      <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
+        <Toolsbar />
+        <Editable
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          placeholder="Enter some rich text…"
+          spellCheck
+          autoFocus
+          /* onKeyDown={event => {
           if (event.key === '`' && event.ctrlKey) {
             event.preventDefault();
             // 确定当前选中的块是否为任意的代码块.
@@ -124,10 +115,11 @@ const App = () => {
             );
           }
         }} */
-        style={{border:'1px solid #f3f3f3',minHeight:300}}
-      />
-    </Slate>
-  </Panel>;
+          style={{border: '1px solid #f3f3f3', minHeight: 300}}
+        />
+      </Slate>
+    </Panel>
+  );
 };
 
 export default App;

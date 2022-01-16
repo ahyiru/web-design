@@ -4,7 +4,7 @@ import theme from './theme';
 import main from './main';
 import login from './login';
 
-const title='low-code platform';
+const title = 'low-code platform';
 
 export default {
   title,
@@ -14,5 +14,3 @@ export default {
   main,
   login,
 };
-
-

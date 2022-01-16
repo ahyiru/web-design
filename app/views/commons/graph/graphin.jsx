@@ -1,12 +1,12 @@
-import {useState,useContext} from 'react';
-import Graphin, { GraphinContext, Utils } from '@antv/graphin';
-import { ContextMenu, CreateEdge, Toolbar } from '@antv/graphin-components';
-import { message } from 'antd';
-import { TagFilled, DeleteFilled, ExpandAltOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import {useState, useContext} from 'react';
+import Graphin, {GraphinContext, Utils} from '@antv/graphin';
+import {ContextMenu, CreateEdge, Toolbar} from '@antv/graphin-components';
+import {message} from 'antd';
+import {TagFilled, DeleteFilled, ExpandAltOutlined, PlusCircleOutlined} from '@ant-design/icons';
 
 import testImage from '@app/assets/images/logo.png';
 
-const { Menu } = ContextMenu;
+const {Menu} = ContextMenu;
 
 const options = [
   {
@@ -27,7 +27,7 @@ const options = [
 ];
 
 const CanvasMenu = () => {
-  const { graph, contextmenu } = useContext(GraphinContext);
+  const {graph, contextmenu} = useContext(GraphinContext);
 
   const context = contextmenu.canvas;
 
@@ -53,20 +53,20 @@ const CanvasMenu = () => {
   );
 };
 
-const isTree=false;
+const isTree = false;
 
-const defData=isTree?Utils.mock(8).tree().graphinTree():Utils.mock(8).tree().graphin();
+const defData = isTree ? Utils.mock(8).tree().graphinTree() : Utils.mock(8).tree().graphin();
 
-const layout={
-  type: isTree?'compactBox':'dagre',
-  nodeSize:300,
+const layout = {
+  type: isTree ? 'compactBox' : 'dagre',
+  nodeSize: 300,
 };
-const theme={
+const theme = {
   mode: 'light',
   primaryColor: '#D77622',
-  nodeSize:32,
-  edgeSize:2,
-  primaryEdgeColor:'#60f',
+  nodeSize: 32,
+  edgeSize: 2,
+  primaryEdgeColor: '#60f',
 };
 
 const edges = [
@@ -222,42 +222,46 @@ const edges = [
   },
 ];
 
-Graphin.registerNode('custom-node', {
-  options: {
-    style: {},
-    stateStyles: {
-      hover: {},
-      selected: {},
+Graphin.registerNode(
+  'custom-node',
+  {
+    options: {
+      style: {},
+      stateStyles: {
+        hover: {},
+        selected: {},
+      },
+    },
+    draw(cfg, group) {
+      console.log(cfg);
+      const keyshape = group.addShape('rect', {
+        attrs: {
+          id: 'circle-floor',
+          x: 0,
+          y: 0,
+          width: 20,
+          height: 20,
+          fill: 'red',
+        },
+        draggable: true,
+        name: 'circle-floor',
+      });
+      group.addShape('text', {
+        attrs: {
+          fontSize: 12,
+          x: 0,
+          y: 0,
+          text: cfg.id,
+          fill: '#ddd',
+        },
+        draggable: true,
+        name: 'text',
+      });
+      return keyshape;
     },
   },
-  draw(cfg, group) {
-    console.log(cfg);
-    const keyshape = group.addShape('rect', {
-      attrs: {
-        id: 'circle-floor',
-        x: 0,
-        y: 0,
-        width: 20,
-        height: 20,
-        fill: 'red',
-      },
-      draggable: true,
-      name: 'circle-floor',
-    });
-    group.addShape('text', {
-      attrs: {
-        fontSize: 12,
-        x: 0,
-        y: 0,
-        text: cfg.id,
-        fill: '#ddd',
-      },
-      draggable: true,
-      name: 'text',
-    });
-    return keyshape;
-  },
-}, 'single-node');
+  'single-node',
+);
 
 const App = () => {
   const [active, setActive] = useState(true);
@@ -269,8 +273,8 @@ const App = () => {
 
   const handleBarChange = (edges, edge) => {
     // 如果需要多边的话
-    const pEdges = Utils.processEdges(edges, { poly: 50, loop: 10 });
-    setData({ nodes: data.nodes,edges: pEdges});
+    const pEdges = Utils.processEdges(edges, {poly: 50, loop: 10});
+    setData({nodes: data.nodes, edges: pEdges});
   };
   const handleBarClick = () => {
     setActive(!active);
@@ -279,30 +283,33 @@ const App = () => {
   /* data.nodes.forEach(node => {
     node.type = 'custom-node';
   }); */
-  data.edges=edges;
-  data.nodes=data.nodes.map((node,i)=>{
-    const style={
-      icon:{
+  data.edges = edges;
+  data.nodes = data.nodes.map((node, i) => {
+    const style = {
+      icon: {
         type: 'image',
-        value: i%2?testImage:'https://pic2.zhimg.com/a2e68681a006bd3e60fd5b22d51cb629_im.jpg',
+        value: i % 2 ? testImage : 'https://pic2.zhimg.com/a2e68681a006bd3e60fd5b22d51cb629_im.jpg',
         size: [20, 20],
         clip: {
           r: 10,
         },
       },
-      label:{
-        value:`label-${i}`,
+      label: {
+        value: `label-${i}`,
       },
-      badges:(i===1||i===5)?[
-        {
-          position: 'RT',
-          type: 'text',
-          value: 8,
-          size: [15, 15],
-          fill: 'red',
-          color: '#fff',
-        },
-      ]:undefined,
+      badges:
+        i === 1 || i === 5
+          ? [
+            {
+              position: 'RT',
+              type: 'text',
+              value: 8,
+              size: [15, 15],
+              fill: 'red',
+              color: '#fff',
+            },
+          ]
+          : undefined,
     };
     return {
       ...node,
@@ -313,15 +320,14 @@ const App = () => {
   return (
     <div className="App">
       <Graphin data={data} layout={layout} theme={theme} height={650} fitView>
-        <ContextMenu style={{ width: '80px' }}>
+        <ContextMenu style={{width: '80px'}}>
           <Menu options={options} onChange={handleMenuChange} bindType="node" />
         </ContextMenu>
-        <ContextMenu style={{ width: '80px' }} bindType="canvas">
+        <ContextMenu style={{width: '80px'}} bindType="canvas">
           <CanvasMenu />
         </ContextMenu>
-        <ContextMenu style={{ width: '120px' }} bindType="edge">
-          <Menu options={options.map(item => ({ ...item, name: `${item.name}-EDGE` }))} onChange={handleMenuChange} bindType="edge"
-          />
+        <ContextMenu style={{width: '120px'}} bindType="edge">
+          <Menu options={options.map((item) => ({...item, name: `${item.name}-EDGE`}))} onChange={handleMenuChange} bindType="edge" />
         </ContextMenu>
         <Toolbar>
           <Toolbar.Item onClick={handleBarClick}>
@@ -335,4 +341,3 @@ const App = () => {
   );
 };
 export default App;
-
