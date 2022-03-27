@@ -70,6 +70,8 @@ module.exports={
     'no-unused-expressions':[1,{ allowShortCircuit: true, allowTernary: true }],
     'no-unused-vars':[1,{ args: 'none', ignoreRestSiblings: true }],
 
+    'no-constant-condition': [2, {checkLoops: false }],
+
     'no-undef':2,
     'no-restricted-globals': [2, 'event'],
 

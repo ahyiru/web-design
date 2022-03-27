@@ -1,9 +1,6 @@
 import str2code from 'ihuxy-utils/str2code';
 import matchedStr from 'ihuxy-utils/matchedStr';
 import isObject from 'ihuxy-utils/isObject';
-import {formatTime} from 'ihuxy-utils/formatTime';
-
-window.utils={formatTime};
 
 export const formatProps = (props, params) => {
   const matched = matchedStr(props || {});

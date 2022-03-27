@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 
 import App from './app';
 import initSW from './sw';
@@ -8,8 +8,8 @@ import '@app/assets/styles.less';
 
 const mountNode = document.getElementById('app');
 
-// ReactDOM.createRoot(mountNode).render(<App />);
+createRoot(mountNode).render(<App />);
 
-ReactDOM.render(<App />, mountNode);
+// render(<App />, mountNode);
 
 initSW();
