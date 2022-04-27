@@ -1,5 +1,5 @@
 import {Form, Input, Button, message, InputNumber, Select} from 'antd';
-import {Row,Col} from '@huxy/components';
+import {Row, Col} from '@huxy/components';
 import Back from '@app/components/goBack';
 import {layout, tailLayout} from '@app/utils/config';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';

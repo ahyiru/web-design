@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {EditableProTable} from '@ant-design/pro-table';
 import {Popconfirm} from 'antd';
-import {obj2arr,arr2obj,uuidv4} from '@huxy/utils';
+import {obj2arr, arr2obj, uuidv4} from '@huxy/utils';
 
 const fmData = (data) => obj2arr(data || {}).map((item) => ({...item, uuid: uuidv4()}));
 

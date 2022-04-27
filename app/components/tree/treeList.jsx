@@ -7,7 +7,7 @@ import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCir
 import * as Icons from '@ant-design/icons';
 
 import {useSearch} from '@huxy/use';
-import {traverItem,arr2TreeByPath,isValidArr} from '@huxy/utils';
+import {traverItem, arr2TreeByPath, isValidArr} from '@huxy/utils';
 
 import apiList from '@app/utils/getApis';
 

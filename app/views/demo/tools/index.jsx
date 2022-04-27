@@ -26,7 +26,17 @@ const Index = (props) => {
         </Panel>
       </Col>
       <Col>
-        <Panel ref={skeletonRef} title="skeleton" plugins={[() => <div style={{padding: '0.3rem 2rem', fontSize: '1.2rem', color: 'var(--appColor)'}} style={{background: 'var(--panelBgColor)'}}>panelWidth: {width}</div>]}>
+        <Panel
+          ref={skeletonRef}
+          title="skeleton"
+          plugins={[
+            () => (
+              <div style={{padding: '0.3rem 2rem', fontSize: '1.2rem', color: 'var(--appColor)'}} style={{background: 'var(--panelBgColor)'}}>
+                panelWidth: {width}
+              </div>
+            ),
+          ]}
+        >
           <SkeletonContent />
         </Panel>
       </Col>

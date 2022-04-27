@@ -1,4 +1,4 @@
-import {storage,sysLang} from '@huxy/utils';
+import {storage, sysLang} from '@huxy/utils';
 
 const getLang = () => storage.get('language') || sysLang();
 

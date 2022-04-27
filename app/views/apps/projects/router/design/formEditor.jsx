@@ -2,8 +2,8 @@ import {useState, useEffect} from 'react';
 import {Tree, Modal, Dropdown, Menu, Spin} from 'antd';
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 
-import {Row,Col} from '@huxy/components';
-import {updateId,addNodes,editNodes,deleteNodes,selectedHandle} from '@huxy/utils';
+import {Row, Col} from '@huxy/components';
+import {updateId, addNodes, editNodes, deleteNodes, selectedHandle} from '@huxy/utils';
 
 import Panel from '@app/components/panel';
 

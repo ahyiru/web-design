@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Table, Space, Button, Modal, message} from 'antd';
 
-import {Row,Col} from '@huxy/components';
+import {Row, Col} from '@huxy/components';
 import {validObj} from '@huxy/utils';
 
 import apiList from '@app/utils/getApis';

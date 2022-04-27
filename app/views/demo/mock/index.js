@@ -1,4 +1,4 @@
-import {uuidv4,createStore} from '@huxy/utils';
+import {uuidv4, createStore} from '@huxy/utils';
 import {fakeFetch} from './utils';
 import {users, routers} from './data';
 

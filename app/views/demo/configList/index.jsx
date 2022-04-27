@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {Modal, message} from 'antd';
-import {ExclamationCircleOutlined,TableOutlined,BarsOutlined} from '@ant-design/icons';
+import {ExclamationCircleOutlined, TableOutlined, BarsOutlined} from '@ant-design/icons';
 import {TabHeader} from '@huxy/components';
 import useHandleList from '@app/hooks/useHandleList';
 import * as apiList from './mock';
-import getColumns,{RenderItem} from './getColumns';
+import getColumns, {RenderItem} from './getColumns';
 import List from './searchList';
 
 import {tabs, formList, actionList, colsCfg, tableHeader} from './configs';
@@ -20,15 +20,15 @@ const Index = (props) => {
 
   const {current, size} = result.data || {};
 
-  const switchListType=type=>{
+  const switchListType = (type) => {
     setListType(type);
     update({current: 1, size: 10, active});
   };
-  const switchTab=active=>{
+  const switchTab = (active) => {
     setActive(active);
     update({current: 1, size: 10, active});
   };
-  const handleSearchList=values=>{
+  const handleSearchList = (values) => {
     setSearchParmas(values);
     searchList(values);
   };
@@ -98,27 +98,33 @@ const Index = (props) => {
     handleExport,
     handleDelete,
   };
-  const tableProps={
+  const tableProps = {
     RenderItem,
-    columns:getColumns(tableHeader,colsCfg(colActions)),
+    columns: getColumns(tableHeader, colsCfg(colActions)),
     result,
     pageChange,
-    searchList:handleSearchList,
+    searchList: handleSearchList,
     rowSelection,
     formList,
     listType,
     actionList: actionList(topActions, !selectedRows.length),
-    paramsKey:JSON.stringify({...searchParmas,active}),
+    paramsKey: JSON.stringify({...searchParmas, active}),
   };
 
-  return <div className="config-list">
-    <TabHeader tabs={tabs} switchTab={switchTab} />
-    <List {...tableProps} />
-    <div className="handle-bar">
-      <a className={listType==='table'?'active':''} onClick={e=>switchListType('table')}><TableOutlined /></a>
-      <a className={listType==='list'?'active':''} onClick={e=>switchListType('list')}><BarsOutlined /></a>
+  return (
+    <div className="config-list">
+      <TabHeader tabs={tabs} switchTab={switchTab} />
+      <List {...tableProps} />
+      <div className="handle-bar">
+        <a className={listType === 'table' ? 'active' : ''} onClick={(e) => switchListType('table')}>
+          <TableOutlined />
+        </a>
+        <a className={listType === 'list' ? 'active' : ''} onClick={(e) => switchListType('list')}>
+          <BarsOutlined />
+        </a>
+      </div>
     </div>
-  </div>;
+  );
 };
 
 export default Index;

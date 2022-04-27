@@ -1,4 +1,4 @@
-import {getRelative,dlfile,cacheData} from '@huxy/utils';
+import {getRelative, dlfile, cacheData} from '@huxy/utils';
 import initStart from '@app/utils/handleEvts';
 import drawText from './drawText';
 
@@ -54,7 +54,7 @@ const downloadImg = (imgCanvas, canvas, name) => {
   };
 };
 
-const resetImg=(imgCanvas, canvas, tempUrl)=>{
+const resetImg = (imgCanvas, canvas, tempUrl) => {
   const {width, height} = canvas;
   const ctx = imgCanvas.getContext('2d');
   ctx.clearRect(0, 0, width, height);
@@ -121,10 +121,10 @@ const next = (canvas) => {
 };
 
 const init = (ref, defCfg, imgRef, imgUrl) => {
-  setCfg({...defCfg,imgRef});
-  if(imgUrl){
+  setCfg({...defCfg, imgRef});
+  if (imgUrl) {
     loadImg(imgRef, imgUrl, ref);
-  }else{
+  } else {
     clearRect(imgRef);
   }
   const destroy = initStart(ref, startEvent, moveEvent, endEvent);

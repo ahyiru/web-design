@@ -1,8 +1,8 @@
 import {useState, useCallback, useEffect} from 'react';
 import {Tree, Modal, Dropdown, Menu, message, Input, Spin, Button} from 'antd';
 import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
-import {Row,Col} from '@huxy/components';
-import {traverItem,sort} from '@huxy/utils';
+import {Row, Col} from '@huxy/components';
+import {traverItem, sort} from '@huxy/utils';
 import {useSearch} from '@huxy/use';
 import apiList from '@app/utils/getApis';
 import defProject from '@app/configs/projects';

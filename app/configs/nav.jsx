@@ -23,7 +23,7 @@ const langIcons = {zh_icon, en_icon, jp_icon};
 
 export const leftNav = ({store, useStore}) => {
   const i18ns = store.getState('i18ns');
-  const {left} = i18ns?.nav??{};
+  const {left} = i18ns?.nav ?? {};
   return [
     {
       key: 'collapse',
@@ -79,7 +79,7 @@ export const rightNav = ({store, useStore}) => {
   const i18ns = store.getState('i18ns');
   const user = store.getState('profile');
   // const themeKey=store.getState('huxy-theme')?.key;
-  const {right} = i18ns?.nav??{};
+  const {right} = i18ns?.nav ?? {};
   return [
     {
       key: 'configs',

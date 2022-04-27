@@ -1,8 +1,8 @@
 import {useState, useEffect, useMemo} from 'react';
 import {Tree, Modal, Dropdown, Menu, message, Spin} from 'antd';
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
-import {Row,Col} from '@huxy/components';
-import {updateId,addNodes,editNodes,deleteNodes,moveNodes,cacheData,selectedHandle,session} from '@huxy/utils';
+import {Row, Col} from '@huxy/components';
+import {updateId, addNodes, editNodes, deleteNodes, moveNodes, cacheData, selectedHandle, session} from '@huxy/utils';
 import apiList from '@app/utils/getApis';
 import defProject from '@app/configs/projects';
 import Back from '@app/components/goBack';
@@ -14,7 +14,7 @@ import TableEditor from './table';
 // import indexSchema from '@app/20210720.bk/schema/indexSchema';
 // import addSchema from '@app/20210720.bk/schema/addSchema';
 
-const {setSchemaFn}=apiList;
+const {setSchemaFn} = apiList;
 const {record, undo, redo, clean} = cacheData();
 
 const handleClick = ({addFn, editFn, deleteFn}, item, actionsText) => (
@@ -219,9 +219,16 @@ const Index = (props) => {
 
   const item = getSelected(schemaTree, selectedKey);
 
-  const DefultComp=useMemo(()=><Panel><CommonEditor getValues={editProps} data={item?.props} title={pageText.page_title} selectedKey={item?.key} editorI18n={editorI18n} /></Panel>,[item]);
-  const CustomForm=useMemo(()=><FormEditor getValues={editProps} data={[item?.props?.schema]} actionsText={actionsText} editorI18n={editorI18n} />,[item]);
-  const CustomTable=useMemo(()=><TableEditor getValues={editProps} data={item?.props} designConfigText={designConfigText} />,[item]);
+  const DefultComp = useMemo(
+    () => (
+      <Panel>
+        <CommonEditor getValues={editProps} data={item?.props} title={pageText.page_title} selectedKey={item?.key} editorI18n={editorI18n} />
+      </Panel>
+    ),
+    [item],
+  );
+  const CustomForm = useMemo(() => <FormEditor getValues={editProps} data={[item?.props?.schema]} actionsText={actionsText} editorI18n={editorI18n} />, [item]);
+  const CustomTable = useMemo(() => <TableEditor getValues={editProps} data={item?.props} designConfigText={designConfigText} />, [item]);
 
   const CfgComp = {
     CustomForm,
@@ -254,7 +261,9 @@ const Index = (props) => {
             </Spin>
           </Panel>
         </Col>
-        <Col auto offsetWidth="240px">{Comp}</Col>
+        <Col auto offsetWidth="240px">
+          {Comp}
+        </Col>
       </Row>
       {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} addFormText={addFormText} />}
     </div>

@@ -1,4 +1,4 @@
-import {uuidv4,randNum,randTrue} from '@huxy/utils';
+import {uuidv4, randNum, randTrue} from '@huxy/utils';
 
 const userSchema = {
   name: 'demo',

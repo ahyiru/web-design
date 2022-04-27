@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Button} from 'antd';
-import {Portal,Mask,Modal} from '@huxy/components';
+import {Portal, Mask, Modal} from '@huxy/components';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 

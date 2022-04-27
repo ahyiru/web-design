@@ -1,5 +1,5 @@
 import {useState, useEffect, useRef} from 'react';
-import {scrollTo,scrollTop,throttle,sort,validObj} from '@huxy/utils';
+import {scrollTo, scrollTop, throttle, sort, validObj} from '@huxy/utils';
 
 const Anchor = ({curName, itemList}) => {
   const timer = useRef(0);

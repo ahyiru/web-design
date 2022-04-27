@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Input, InputNumber, Slider, Button, message, Select, Radio} from 'antd';
-import {storage,copyToClipboard} from '@huxy/utils';
+import {storage, copyToClipboard} from '@huxy/utils';
 import {useDebounce} from '@huxy/use';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';

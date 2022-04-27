@@ -3,7 +3,7 @@ import {Drawer, Space, Input, InputNumber, Slider, Button, message, Select, Radi
 import {SettingOutlined} from '@ant-design/icons';
 import {TabHeader} from '@huxy/components';
 import {useDebounce} from '@huxy/use';
-import {storage,copyToClipboard} from '@huxy/utils';
+import {storage, copyToClipboard} from '@huxy/utils';
 import {Row, Col} from '@app/components/row';
 // import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';

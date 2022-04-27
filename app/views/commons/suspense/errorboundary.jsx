@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Button} from 'antd';
-import {LoadError,ErrorBoundary,HandleError} from '@huxy/components';
+import {LoadError, ErrorBoundary, HandleError} from '@huxy/components';
 
 import Panel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';

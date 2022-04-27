@@ -1,4 +1,4 @@
-import {getTouchPosition,getRelative,getViewportSize,setStyle,getPosition} from '@huxy/utils';
+import {getTouchPosition, getRelative, getViewportSize, setStyle, getPosition} from '@huxy/utils';
 import initStart from '@app/utils/handleEvts';
 
 const defCfg = {

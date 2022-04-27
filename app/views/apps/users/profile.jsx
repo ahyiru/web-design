@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react';
 import {Form, Input, Button, message, Tabs, Typography} from 'antd';
 import {UserOutlined, LockOutlined, MailOutlined} from '@ant-design/icons';
 import apiList from '@app/utils/getApis';
@@ -18,20 +17,13 @@ const formStyle = {
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
   const i18nCfg = i18ns?.main?.users ?? {};
+
+  const values = props.store.getState('profile') ?? {};
   const {
     profilePageText: {profile = {}, upProfile = {}},
   } = i18nCfg;
 
-  const [values, setValues] = useState({});
   const [form] = Form.useForm();
-  useEffect(() => {
-    props.store.subscribe('profile', (result) => {
-      if (result) {
-        // form.setFieldsValue(result);
-        setValues(result);
-      }
-    });
-  }, []);
   const onFinish = async (values) => {
     const {code, message: msg} = await apiList.upUserFn(values);
     if (code === 200) {

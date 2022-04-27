@@ -3,80 +3,80 @@ import {Tag, Space, Button} from 'antd';
 import {formatTime} from '@huxy/utils';
 import {roleList} from '@app/utils/config';
 
-export const tabs=[
+export const tabs = [
   {
-    key:1,
-    value:'已激活',
+    key: 1,
+    value: '已激活',
   },
   {
-    key:0,
-    value:'未激活',
+    key: 0,
+    value: '未激活',
   },
 ];
 
 export const apiList = {};
 
-export const formList=[
+export const formList = [
   {
-    type:'input',
-    name:'name',
-    label:'用户名',
-    props:{
-      placeholder:'请输入',
-      allowClear:true,
-      style:{width: '120px'},
+    type: 'input',
+    name: 'name',
+    label: '用户名',
+    props: {
+      placeholder: '请输入',
+      allowClear: true,
+      style: {width: '120px'},
     },
   },
   {
-    type:'select',
-    name:'role',
-    label:'等级',
-    props:{
-      placeholder:'请选择',
-      allowClear:true,
-      style:{width: '100px'},
-      options:roleList,
+    type: 'select',
+    name: 'role',
+    label: '等级',
+    props: {
+      placeholder: '请选择',
+      allowClear: true,
+      style: {width: '100px'},
+      options: roleList,
     },
   },
 ];
 
 export const actionList = (actions, disabled) => [
   {
-    key:'add',
-    type:'primary',
-    label:'新增',
-    action:actions['handleAdd'],
+    key: 'add',
+    type: 'primary',
+    label: '新增',
+    action: actions['handleAdd'],
   },
   {
-    key:'export',
-    type:'default',
-    label:'导出',
-    action:actions['handleExport'],
+    key: 'export',
+    type: 'default',
+    label: '导出',
+    action: actions['handleExport'],
   },
   {
-    key:'handleDelete',
-    type:'default',
-    label:'批量删除',
-    action:actions['handleDelete'],
+    key: 'handleDelete',
+    type: 'default',
+    label: '批量删除',
+    action: actions['handleDelete'],
     disabled,
   },
 ];
 
 export const colActions = [
   {
-    key:'handleCheck',
-    type:'link',
-    label:'设置',
+    key: 'handleCheck',
+    type: 'link',
+    label: '设置',
   },
   {
-    key:'handleEdit',
-    type:'link',
-    label:'编辑',
+    key: 'handleEdit',
+    type: 'link',
+    label: '编辑',
   },
   {
-    key:'handleDelete',
-    type:'link',
-    label:'删除',
+    key: 'handleDelete',
+    type: 'link',
+    label: '删除',
   },
 ];
 
@@ -153,16 +153,16 @@ export const colsCfg = (actions) => [
   {
     dataIndex: 'action',
     render: (text, record) => {
-      const disabled = false;// !profile.role && record._id !== profile._id;
-      const color=disabled ? 'var(--light-color)' : 'var(--red2)';
-      const acList=Object.keys(actions).map(key=>({...colActions.find(item=>item.key===key),action:actions[key]}));
+      const disabled = false; // !profile.role && record._id !== profile._id;
+      const color = disabled ? 'var(--light-color)' : 'var(--red2)';
+      const acList = Object.keys(actions).map((key) => ({...colActions.find((item) => item.key === key), action: actions[key]}));
       return (
         <Space>
-          {
-            acList.map(({key,action,type,label})=><Button key={key} type={type} size="small" disabled={disabled} style={{color:key==='handleDelete'?color:''}} onClick={() => action(record)}>
+          {acList.map(({key, action, type, label}) => (
+            <Button key={key} type={type} size="small" disabled={disabled} style={{color: key === 'handleDelete' ? color : ''}} onClick={() => action(record)}>
               {label}
-            </Button>)
-          }
+            </Button>
+          ))}
         </Space>
       );
     },

@@ -15,7 +15,7 @@ import setGlobalVar from '@app/utils/setGlobalVar';
 
 const getRouterCfgs = ({profile, permission, routerList, i18ns}) => ({...configs, routers: getRoutes({profile, i18ns, permission, routerList}), title: i18ns.title});
 
-const ConfigProvider = ({i18ns={}, language, profile={}, permission, routerList, routerCfgs}) => {
+const ConfigProvider = ({i18ns = {}, language, profile = {}, permission, routerList, routerCfgs}) => {
   const {output, loading, store, updateRouter} = useRouter(routerCfgs);
   useEffect(() => {
     const {setState, subscribe} = store;

@@ -7,7 +7,13 @@ const CustomCollapse = (props) => {
   const {width} = useWinResize();
   const [collapsed, setCollapsed] = useStore('huxy-collapse');
   return width < 1024 ? (
-    <a {...props} onClick={(e) => setCollapsed(!collapsed)}>
+    <a
+      {...props}
+      onClick={(e) => {
+        e.stopPropagation();
+        setCollapsed(!collapsed);
+      }}
+    >
       <Anico type={collapsed ? 'right' : ''} />
     </a>
   ) : null;

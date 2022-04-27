@@ -6,8 +6,8 @@ import {DownOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 
 import * as Icons from '@ant-design/icons';
 
-import {Row,Col} from '@huxy/components';
-import {arr2TreeByPath,isValidArr,traverItem} from '@huxy/utils';
+import {Row, Col} from '@huxy/components';
+import {arr2TreeByPath, isValidArr, traverItem} from '@huxy/utils';
 
 import defProject from '@app/configs/projects';
 

@@ -12,7 +12,7 @@ const getSuspense = (apis) => {
     const fetchFn = isDl ? dlApi : suspense;
     const funcName = fnName ?? `${name}Suspense`;
     const paramsKey = type || rest.method === 'post' ? 'data' : 'params';
-    suspenseApis[funcName] = (data) => fetchFn({...rest, url: typeof url==='function' ? url(data) : url, [paramsKey]: data});
+    suspenseApis[funcName] = (data) => fetchFn({...rest, url: typeof url === 'function' ? url(data) : url, [paramsKey]: data});
   });
 };
 
@@ -28,15 +28,15 @@ export const getList = async () => {
 
 export const getApiFn = async () => {
   let apis = [];
-  try{
+  try {
     apis = await getList();
-  }catch(err){}
+  } catch (err) {}
   apis.map((api) => {
     const {name, fnName, type, url, isDl, ...rest} = api;
     const fetchFn = isDl ? dlApi : fetcher;
     const funcName = fnName ?? `${name}Fn`;
     const paramsKey = type || (rest.method === 'post' ? 'data' : 'params');
-    apiList[funcName] = (data) => fetchFn({...rest, url: typeof url==='function' ? url(data) : url, [paramsKey]: data});
+    apiList[funcName] = (data) => fetchFn({...rest, url: typeof url === 'function' ? url(data) : url, [paramsKey]: data});
   });
   getSuspense(apis);
   return apiList;

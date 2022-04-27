@@ -1,4 +1,4 @@
-import {getTouchPosition,setStyle} from '@huxy/utils';
+import {getTouchPosition, setStyle} from '@huxy/utils';
 
 const createNote = (x, y, right, bottom) => {
   const textarea = document.createElement('textarea');

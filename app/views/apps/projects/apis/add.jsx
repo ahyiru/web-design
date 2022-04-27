@@ -1,6 +1,6 @@
 import {Form, Input, Button, message, Select} from 'antd';
 
-import {Row,Col} from '@huxy/components';
+import {Row, Col} from '@huxy/components';
 
 import Back from '@app/components/goBack';
 import apiList from '@app/utils/getApis';

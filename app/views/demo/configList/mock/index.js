@@ -1,7 +1,7 @@
 import {fakeFetch} from './utils';
 import {users} from './data';
 
-import {uuidv4,createStore} from '@huxy/utils';
+import {uuidv4, createStore} from '@huxy/utils';
 
 const store = createStore();
 
@@ -51,7 +51,7 @@ export const allUserFn = async ({active, current, size, name, role}) => {
   const users = store.getState('users');
   const index = size * (current - 1);
   let temp = [];
-  if (active!=null) {
+  if (active != null) {
     temp = users.filter((item) => +item.active == active);
   } else {
     temp = [...users];

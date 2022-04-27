@@ -5,21 +5,23 @@ const Index = (props) => {
   const {isPending, data} = result;
   const {total, current, size, list} = data || {};
 
-  const handlePageChange = (current, size) =>{
+  const handlePageChange = (current, size) => {
     pageChange?.(current, size);
   };
 
-  const selectionCfg = rowSelection ? {
-    columnWidth: '30px',
-    // selectedRowKeys: selectedRows.map((v) => v[rowKey]),
-    // onChange: (selectedRowKeys, selectedRows) => {
-    //   setSelectedRows?.(selectedRows);
-    // },
-    // getCheckboxProps: (record) => ({
-    //   disabled: !profile.role && record[rowKey] !== profile[rowKey],
-    // }),
-    ...(typeof rowSelection === 'object' ? rowSelection : null),
-  } : null;
+  const selectionCfg = rowSelection
+    ? {
+      columnWidth: '30px',
+      // selectedRowKeys: selectedRows.map((v) => v[rowKey]),
+      // onChange: (selectedRowKeys, selectedRows) => {
+      //   setSelectedRows?.(selectedRows);
+      // },
+      // getCheckboxProps: (record) => ({
+      //   disabled: !profile.role && record[rowKey] !== profile[rowKey],
+      // }),
+      ...(typeof rowSelection === 'object' ? rowSelection : null),
+    }
+    : null;
 
   const paginationCfg =
     pagination === false
@@ -39,6 +41,5 @@ const Index = (props) => {
 
   return <Table pagination={paginationCfg} rowSelection={selectionCfg} columns={columns} dataSource={list ?? []} loading={isPending} size="small" bordered scroll={{x: true}} {...rest} />;
 };
-
 
 export default Index;

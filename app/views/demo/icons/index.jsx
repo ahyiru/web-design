@@ -1,5 +1,5 @@
 import {message} from 'antd';
-import {Row,Col} from '@huxy/components';
+import {Row, Col} from '@huxy/components';
 import {copyToClipboard} from '@huxy/utils';
 
 import './index.less';
