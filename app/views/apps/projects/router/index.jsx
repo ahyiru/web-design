@@ -1,11 +1,9 @@
 import {useState, useCallback, useEffect} from 'react';
-import Row,{Col} from 'ihuxy-components/grid';
-import traverItem from 'ihuxy-utils/traverItem';
-import sort from 'ihuxy-utils/sort';
-import useSearch from 'ihuxy-use/useSearch';
 import {Tree, Modal, Dropdown, Menu, message, Input, Spin, Button} from 'antd';
 import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
-import HandleModal from './modal';
+import {Row,Col} from '@huxy/components';
+import {traverItem,sort} from '@huxy/utils';
+import {useSearch} from '@huxy/use';
 import apiList from '@app/utils/getApis';
 import defProject from '@app/configs/projects';
 import useFetchList from '@app/hooks/useFetchList';
@@ -13,6 +11,7 @@ import formatTree from '@app/utils/formatTree';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
 import customRender from '@app/utils/render';
+import HandleModal from './modal';
 
 const {listRouterFn, addRouterFn, editRouterFn, deleteRouterFn, listSchemaFn} = apiList;
 const {Search} = Input;
@@ -52,7 +51,7 @@ const treeDrop = (item, dropFns, actionsText) => (
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projectRouter ?? {};
+  const i18nCfg = i18ns?.main?.projectRouter ?? {};
   const {pageText = {}, actionsText = {}} = i18nCfg;
 
   const profile = props.store.getState('profile');

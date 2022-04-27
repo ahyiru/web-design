@@ -1,9 +1,8 @@
 import {useState} from 'react';
 import {Table, Space, Input, Button, Modal, Form, Tooltip, message} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
-import Row,{Col} from 'ihuxy-components/grid';
-import {formatTime} from 'ihuxy-utils/formatTime';
-import validObj from 'ihuxy-utils/validObj';
+import {Row,Col} from '@huxy/components';
+import {formatTime,validObj} from '@huxy/utils';
 import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
 
@@ -99,7 +98,7 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projectApis ?? {};
+  const i18nCfg = i18ns?.main?.projectApis ?? {};
   const {tableHeaderText = {}, actionsText = {}, searchFormText = {}} = i18nCfg;
 
   const profile = props.store.getState('profile');

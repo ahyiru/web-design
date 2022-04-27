@@ -1,9 +1,8 @@
 import {Form, Input, Button, message, Select} from 'antd';
 
+import {Row,Col} from '@huxy/components';
+
 import apiList from '@app/utils/getApis';
-
-import Row,{Col} from 'ihuxy-components/grid';
-
 import {layout, tailLayout, projectRoleList} from '@app/utils/config';
 import {nameRule} from '@app/utils/rules';
 
@@ -15,7 +14,7 @@ const {addProjectFn, editProjectFn} = apiList;
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projects ?? {};
+  const i18nCfg = i18ns?.main?.projects ?? {};
   const {addFormText = {}} = i18nCfg;
   const [form] = Form.useForm();
   const {getState} = props.history;
@@ -27,7 +26,7 @@ const Index = (props) => {
       const {code, message: msg} = await handler(values);
       if (code === 200) {
         message.success(msg);
-        props.router.push(`/projects`);
+        props.router.push(`/apps/projects`);
       }
     } catch (err) {
       console.log(err);

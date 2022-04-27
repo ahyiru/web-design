@@ -1,4 +1,4 @@
-import {default as DefRow, Col as DefCol} from 'ihuxy-components/grid';
+import {Row as DefRow, Col as DefCol} from '@huxy/components';
 
 /* const rowCfg={
   gutter:[10,10],

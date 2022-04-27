@@ -1,11 +1,9 @@
 import {Form, Input, Button, message, Select} from 'antd';
 
+import {Row,Col} from '@huxy/components';
+
 import Back from '@app/components/goBack';
-
 import apiList from '@app/utils/getApis';
-
-import Row,{Col} from 'ihuxy-components/grid';
-
 import {layout, tailLayout, roleList, methodList, paramsList} from '@app/utils/config';
 import {nameRule, pathRule} from '@app/utils/rules';
 
@@ -19,7 +17,7 @@ const formStyle = {
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projectApis ?? {};
+  const i18nCfg = i18ns?.main?.projectApis ?? {};
   const {addFormText = {}} = i18nCfg;
   const profile = props.store.getState('profile');
   const [form] = Form.useForm();

@@ -99,4 +99,28 @@
   }
 }
 
+@keyframes blinks{
+  0%,100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.cursor-blinks{
+  position:absolute;
+  top:6px;
+  right:0;
+  height:20px;
+  width:2px;
+  background:currentColor;
+  animation: blinks 1s infinite steps(1, start);
+}
+
+.fit-cover{
+  object-fit: cover;
+}
+.scroll-smooth{
+  scroll-behavior: smooth;
+}
 

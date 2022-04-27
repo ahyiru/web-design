@@ -10,14 +10,21 @@ const fs=require('fs');
 
 const app = express();
 
-const {appName,HOST,PRO_PORT,PROXY_URL,BUILD_DIR,PRD_ROOT_DIR}=require('../configs');
+const {appName,HOST,PRO_PORT,PROXY,BUILD_DIR,PRD_ROOT_DIR}=require('../configs');
 
 const {createProxyMiddleware}=require('http-proxy-middleware');
 
 const proxyCfg=require('./appProxy');
 
-const {prefix,opts}=proxyCfg(PROXY_URL);
-app.use(prefix,createProxyMiddleware(opts));
+if(Array.isArray(PROXY)){
+  PROXY.map(proxyItem=>{
+    const {prefix,opts}=proxyCfg(PROXY);
+    app.use(prefix,createProxyMiddleware(opts));
+  });
+}else{
+  const {prefix,opts}=proxyCfg(PROXY);
+  app.use(prefix,createProxyMiddleware(opts));
+}
 
 app.set('host',HOST);
 app.set('port',PRO_PORT);

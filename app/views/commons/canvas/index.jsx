@@ -107,7 +107,7 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
         <span style={{color: type === 'text' ? 'var(--red2)' : ''}}>{i18nCfg.add_text}</span>
       </Button>
       <Button
-        disabled={imgUrl}
+        // disabled={imgUrl}
         onClick={() => {
           actions.eraser();
           setType('eraser');
@@ -118,7 +118,7 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
       <Button onClick={() => actions.undo()}>{i18nCfg.undo}</Button>
       <Button onClick={() => actions.redo()}>{i18nCfg.redo}</Button>
       <Button
-        disabled={imgUrl}
+        // disabled={imgUrl}
         onClick={() => {
           actions.clean();
           setType('draw');
@@ -150,7 +150,7 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.canvas ?? {};
+  const i18nCfg = i18ns?.main?.canvas ?? {};
 
   const [imgUrl, setImgUrl] = useState(img);
   const [actions, setActions] = useState();

@@ -1,8 +1,5 @@
 import {useState, useEffect, useRef} from 'react';
-import {scrollToTop, scrollTop} from 'ihuxy-utils/scrollTo';
-import throttle from 'ihuxy-utils/throttle';
-import sort from 'ihuxy-utils/sort';
-import validObj from 'ihuxy-utils/validObj';
+import {scrollTo,scrollTop,throttle,sort,validObj} from '@huxy/utils';
 
 const Anchor = ({curName, itemList}) => {
   const timer = useRef(0);
@@ -19,7 +16,7 @@ const Anchor = ({curName, itemList}) => {
       currentName.current = curName;
       const offsetTop = itemList.current[curName]?.offsetTop ?? 0;
       isScrolling.current = true;
-      scrollToTop(offsetTop);
+      scrollTo(offsetTop);
       timer.current = setTimeout(() => (isScrolling.current = false), 500);
     }
     return () => {

@@ -1,6 +1,4 @@
-import str2code from 'ihuxy-utils/str2code';
-import matchedStr from 'ihuxy-utils/matchedStr';
-import isObject from 'ihuxy-utils/isObject';
+import {str2code} from '@huxy/utils';
 
 const typeValue = {
   boolean: (key, value) => ({[key]: !!value}),

@@ -1,6 +1,6 @@
 import {message} from 'antd';
-import Row,{Col} from 'ihuxy-components/grid';
-import copyToClipboard from 'ihuxy-utils/copyToClipboard';
+import {Row,Col} from '@huxy/components';
+import {copyToClipboard} from '@huxy/utils';
 
 import './index.less';
 const icons = [

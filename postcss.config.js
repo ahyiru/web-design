@@ -10,9 +10,9 @@ module.exports={
       },
       // autoprefixer: { grid: true }
       browsers: 'last 2 versions',
-      // importFrom:'./playground/src/layoutOpt/global.css',
+      // importFrom:'./commons/global.css',
       /* importFrom:[
-        // './playground/src/layoutOpt/global.css',
+        // './commons/global.css',
         // './configs/themeCfg.js',
         ()=>{
           const environmentVariables={'--viewport-1':'1200px'};
@@ -23,5 +23,22 @@ module.exports={
     cssnano:{},
     autoprefixer:{},
     // tailwindcss:{},
+    // 'postcss-px-to-viewport': {
+    //   unitToConvert: 'px',
+    //   viewportWidth: 750,
+    //   unitPrecision: 6,
+    //   propList: ['*'],
+    //   viewportUnit: 'vw',
+    //   fontViewportUnit: 'vw',
+    //   selectorBlackList: [],//需要忽略的CSS选择器
+    //   minPixelValue: 1,
+    //   mediaQuery: true,
+    //   replace: true,
+    //   exclude: [/node_modules/],
+    //   include: undefined,
+    //   landscape: false,
+    //   landscapeUnit: 'vw',
+    //   landscapeWidth: 568,
+    // },
   },
 };

@@ -1,9 +1,6 @@
 import {useState} from 'react';
-
-import LoadError from 'ihuxy-components/loadError';
-import {ErrorBoundary, HandleError} from 'ihuxy-components/errorBoundary';
-
 import {Button} from 'antd';
+import {LoadError,ErrorBoundary,HandleError} from '@huxy/components';
 
 import Panel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
@@ -59,7 +56,7 @@ const EB4 = ({title}) => {
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.suspense ?? {};
+  const i18nCfg = i18ns?.main?.suspense ?? {};
   return (
     <div>
       <Row>

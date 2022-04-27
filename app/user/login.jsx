@@ -1,14 +1,16 @@
 import {useEffect, useState} from 'react';
 import {Form, Input, Button, message} from 'antd';
 import {UserOutlined, LockOutlined, GithubOutlined} from '@ant-design/icons';
-import Spinner from 'ihuxy-components/spinner';
-import storage from 'ihuxy-utils/storage';
+import {Spinner} from '@huxy/components';
+import {storage} from '@huxy/utils';
 
 import apiList from '@app/utils/getApis';
 
 import {isAuthed} from '@app/utils/utils';
 
 import {nameRule} from '@app/utils/rules';
+
+import Intls from '@app/components/intl';
 
 const {activeEmailFn, githubFn, loginFn} = apiList;
 

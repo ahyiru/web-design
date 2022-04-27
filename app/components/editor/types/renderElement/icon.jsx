@@ -1,6 +1,6 @@
 import {forwardRef, useState, useRef} from 'react';
+import {useClickAway} from '@huxy/use';
 import fixIcons from '@app/utils/fixIcons';
-import useClickAway from 'ihuxy-use/useClickAway';
 
 const selectedType = {
   background: 'rgba(0,0,0,.2)',

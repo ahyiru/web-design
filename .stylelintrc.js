@@ -16,6 +16,9 @@ module.exports={
       },
     ] */,
     // 'no-invalid-double-slash-comments':true,
+    'selector-type-no-unknown': [true, {
+      'ignoreTypes': ['/^page/'],
+    }],
   },
 };
 

@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {Input, InputNumber, Switch, Button, message} from 'antd';
+import {storage} from '@huxy/utils';
+import {useDebounce} from '@huxy/use';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 // import TimeBar from '@app/components/test1';
-import storage from 'ihuxy-utils/storage';
-import useDebounce from 'ihuxy-use/useDebounce';
 
 const delay = 500;
 
@@ -76,7 +76,7 @@ const Index = (props) => {
   const [menuType, setMenuType] = useStore('huxy-menuType');
   const i18ns = store.getState('i18ns');
   const themeLang = i18ns?.theme ?? {};
-  const i18nCfg = i18ns?.main.layout ?? {};
+  const i18nCfg = i18ns?.main?.layout ?? {};
 
   const [themeList, setThemeList] = useState(theme?.list ?? []);
   const [size, setSize] = useState('10');

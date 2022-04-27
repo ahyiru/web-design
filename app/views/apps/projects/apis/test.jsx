@@ -1,8 +1,8 @@
 import {Form, Input, Button, Select} from 'antd';
 
-import Back from '@app/components/goBack';
+import {Row,Col} from '@huxy/components';
 
-import Row,{Col} from 'ihuxy-components/grid';
+import Back from '@app/components/goBack';
 
 import {layout, tailLayout, methodList} from '@app/utils/config';
 
@@ -14,7 +14,7 @@ const strToJson = (str) => new Function(`return ${str}`)();
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projectApis ?? {};
+  const i18nCfg = i18ns?.main?.projectApis ?? {};
   const {addFormText = {}} = i18nCfg;
   const [form] = Form.useForm();
   const {getState} = props.history;

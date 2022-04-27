@@ -1,15 +1,13 @@
 import {useState, useCallback, useEffect} from 'react';
 
-import Row,{Col} from 'ihuxy-components/grid';
-import {arr2TreeByPath} from 'ihuxy-utils/arr2Tree';
-import isValidArr from 'ihuxy-utils/isValidArr';
-import traverItem from 'ihuxy-utils/traverItem';
-
 import {Tree, Button, message} from 'antd';
 
 import {DownOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 
 import * as Icons from '@ant-design/icons';
+
+import {Row,Col} from '@huxy/components';
+import {arr2TreeByPath,isValidArr,traverItem} from '@huxy/utils';
 
 import defProject from '@app/configs/projects';
 
@@ -30,7 +28,7 @@ const rootNode = {
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.users ?? {};
+  const i18nCfg = i18ns?.main?.users ?? {};
   const {authFormText = {}} = i18nCfg;
 
   const {getState} = props.history;
@@ -69,7 +67,7 @@ const Index = (props) => {
     });
     if (code === 200) {
       message.success(`${msg} ${authFormText.auth_msg}`);
-      props.router.push(`/users`);
+      props.router.push(`/apps/users`);
       // update();
     }
   };

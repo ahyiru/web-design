@@ -1,14 +1,12 @@
 import {useState} from 'react';
 import {Drawer, Space, Input, InputNumber, Slider, Button, message, Select, Radio} from 'antd';
 import {SettingOutlined} from '@ant-design/icons';
-
+import {TabHeader} from '@huxy/components';
+import {useDebounce} from '@huxy/use';
+import {storage,copyToClipboard} from '@huxy/utils';
 import {Row, Col} from '@app/components/row';
 // import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';
-import TabHeader from 'ihuxy-components/tabHeader';
-import useDebounce from 'ihuxy-use/useDebounce';
-import storage from 'ihuxy-utils/storage';
-import copyToClipboard from 'ihuxy-utils/copyToClipboard';
 import getThemeList from '@app/configs/theme';
 
 const {Option} = Select;
@@ -62,7 +60,7 @@ const Index = (props) => {
   const [menuType, setMenuType] = useStore('huxy-menuType', 'vertical');
   const i18ns = store.getState('i18ns');
   const themeLang = i18ns?.theme ?? {};
-  const i18nCfg = i18ns?.main.layout ?? {};
+  const i18nCfg = i18ns?.main?.layout ?? {};
   const [size, setSize] = useState(10);
   const changeFontSize = useDebounce((value) => document.documentElement.style.setProperty('--rootSize', value), delay);
   const changeLayout = useDebounce((value, save = false) => {

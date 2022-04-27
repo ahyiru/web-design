@@ -1,9 +1,7 @@
 import {useState, useEffect} from 'react';
 import {DatePicker, Button, Input, Space} from 'antd';
-import {timeGap} from 'ihuxy-utils/timeInterval';
-import {ten2Base, base2Ten, rgba2hex, hex2rgba} from 'ihuxy-utils/baseConversion';
-import cacheData from 'ihuxy-utils/cacheData';
-import useTime from 'ihuxy-use/useTime';
+import {timeGap,ten2Base,base2Ten,rgba2hex,hex2rgba,cacheData} from '@huxy/utils';
+import {useTime} from '@huxy/use';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 import FullPage from '@app/components/fullScreen';

@@ -1,17 +1,11 @@
-const proxyCfg=url=>({
-  prefix:'/api',
+const proxyCfg=proxy=>({
+  prefix:proxy?.prefix||'/api',
   opts:{
-    target: url,
+    target: proxy?.url||proxy,
     changeOrigin: true,
     // pathRewrite: {'^/api/':'/'},
   },
 });
 
 module.exports=proxyCfg;
-
-
-
-
-
-
 

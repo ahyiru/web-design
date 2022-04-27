@@ -1,4 +1,7 @@
 import {message} from 'antd';
+import html2canvas from 'html2canvas';
+import {dlfile} from '@huxy/utils';
+
 import Settings from '@app/components/settings';
 // import getThemeList from './theme';
 import getLang from '@app/utils/getLang';
@@ -16,17 +19,11 @@ import CustomCollapse from '@app/components/customCollapse';
 import Notify from '@app/components/notify';
 import Search from '@app/components/search';
 
-import html2canvas from 'html2canvas';
-
-import dlfile from 'ihuxy-utils/dlfile';
-
 const langIcons = {zh_icon, en_icon, jp_icon};
 
 export const leftNav = ({store, useStore}) => {
   const i18ns = store.getState('i18ns');
-  const {
-    nav: {left},
-  } = i18ns;
+  const {left} = i18ns?.nav??{};
   return [
     {
       key: 'collapse',
@@ -70,7 +67,7 @@ export const leftNav = ({store, useStore}) => {
       arrowDir: 'lt',
       ChildRender: (item) => (
         <div className="follow-me">
-          <img src={wx} />
+          <img src={wx} alt="wechat" />
           <p>{left?.followMe ?? 'followMe'}：yiru_js</p>
         </div>
       ),
@@ -82,9 +79,7 @@ export const rightNav = ({store, useStore}) => {
   const i18ns = store.getState('i18ns');
   const user = store.getState('profile');
   // const themeKey=store.getState('huxy-theme')?.key;
-  const {
-    nav: {right},
-  } = i18ns;
+  const {right} = i18ns?.nav??{};
   return [
     {
       key: 'configs',
@@ -109,7 +104,7 @@ export const rightNav = ({store, useStore}) => {
           name: right?.settings ?? '设置',
           type: 'setting',
           icon: 'SettingOutlined',
-          path: '/settings',
+          path: '/profile',
         },
         {
           divider: true,
@@ -129,7 +124,7 @@ export const rightNav = ({store, useStore}) => {
       Custom: () => (
         <a>
           <div className="icon">
-            <img src={`${langIcons[language + '_icon']}`} />
+            <img src={`${langIcons[language + '_icon']}`} alt={language} />
           </div>
         </a>
       ),
@@ -141,7 +136,7 @@ export const rightNav = ({store, useStore}) => {
           active: language === 'zh',
           icon: (
             <div key="zh" className="img">
-              <img src={`${langIcons['zh_icon']}`} />
+              <img src={`${langIcons['zh_icon']}`} alt="zh" />
             </div>
           ),
         },
@@ -152,7 +147,7 @@ export const rightNav = ({store, useStore}) => {
           active: language === 'en',
           icon: (
             <div key="en" className="img">
-              <img src={`${langIcons['en_icon']}`} />
+              <img src={`${langIcons['en_icon']}`} alt="en" />
             </div>
           ),
         },
@@ -163,7 +158,7 @@ export const rightNav = ({store, useStore}) => {
           active: language === 'jp',
           icon: (
             <div key="jp" className="img">
-              <img src={`${langIcons['jp_icon']}`} />
+              <img src={`${langIcons['jp_icon']}`} alt="jp" />
             </div>
           ),
         },
@@ -202,7 +197,7 @@ export const rightNav = ({store, useStore}) => {
       icon: 'CameraOutlined',
       handle: (item) => {
         // const ele=document. getElementsByClassName('page-content')[0];
-        html2canvas(document.body, {
+        html2canvas(document.getElementById('app'), {
           useCORS: true,
           foreignObjectRendering: true,
           allowTaint: true,

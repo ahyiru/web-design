@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {EditableProTable} from '@ant-design/pro-table';
 import {Tooltip, Popconfirm} from 'antd';
-import uuidv4 from 'ihuxy-utils/uuidv4';
+import {uuidv4} from '@huxy/utils';
 
 const fmData = (data) =>
   data.map((item) => {

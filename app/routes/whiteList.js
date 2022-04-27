@@ -1,5 +1,5 @@
+import {traverItem} from '@huxy/utils';
 import staticRoutes from './routerComp/staticRoutes';
-import traverItem from 'ihuxy-utils/traverItem';
 
 const whiteList = [];
 

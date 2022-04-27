@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import cacheData from 'ihuxy-utils/cacheData';
+import {cacheData} from '@huxy/utils';
 import './index.less';
 
 const {getList,record}=cacheData();

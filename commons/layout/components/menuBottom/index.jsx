@@ -1,5 +1,5 @@
-import {Link} from 'ihuxy/router';
-import Anico from 'ihuxy-components/anico';
+import {Link} from '@huxy/router';
+import {Anico} from '@huxy/components';
 import './index.less';
 
 const Index=({useStore})=>{

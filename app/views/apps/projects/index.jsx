@@ -1,10 +1,9 @@
 import {useState} from 'react';
 import {Table, Tag, Space, Input, Button, Modal, Form, Tooltip, message} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
+import {Row,Col} from '@huxy/components';
+import {formatTime,validObj} from '@huxy/utils';
 import {projectRoleList} from '@app/utils/config';
-import Row,{Col} from 'ihuxy-components/grid';
-import {formatTime} from 'ihuxy-utils/formatTime';
-import validObj from 'ihuxy-utils/validObj';
 import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
 
@@ -99,10 +98,10 @@ const Index = (props) => {
   const [selectedRows, setSelectedRows] = useState([]);
   // const [modalItem,setModalItem]=useState(null);
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projects ?? {};
+  const i18nCfg = i18ns?.main?.projects ?? {};
   const {tableHeaderText = {}, actionsText = {}, searchFormText = {}} = i18nCfg;
   const pageParams = props.params;
-  const [result, update, pageChange, searchList] = useHandleList(listProjectFn, null, {current: pageParams?.current, size: pageParams?.size});
+  const [result, update, pageChange, searchList] = useHandleList(listProjectFn, {current: pageParams?.current, size: pageParams?.size});
 
   const handleRouter = (item) => {
     props.router.push({

@@ -1,6 +1,4 @@
-import str2code from 'ihuxy-utils/str2code';
-import matchedStr from 'ihuxy-utils/matchedStr';
-import isObject from 'ihuxy-utils/isObject';
+import {str2code,matchedStr,isObject} from '@huxy/utils';
 
 export const formatProps = (props, params) => {
   const matched = matchedStr(props || {});

@@ -1,7 +1,7 @@
-import isTouch from 'ihuxy-utils/isTouch';
+import {isTouch} from '@huxy/utils';
 
 const eventTargets = () =>
-  isTouch
+  isTouch()
     ? {
       startEvt: 'touchstart',
       moveEvt: 'touchmove',

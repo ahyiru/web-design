@@ -1,4 +1,4 @@
-import {Link} from 'ihuxy/router';
+import {Link} from '@huxy/router';
 const renderMenu = (menu, curName) =>
   menu.map((item) => {
     const {path, name, open, children} = item;

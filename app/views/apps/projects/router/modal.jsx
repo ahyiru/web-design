@@ -1,6 +1,6 @@
 import {Modal, Form, Input, Switch} from 'antd';
 
-import fixRoute from 'ihuxy-utils/fixRoute';
+import {fixRoute} from '@huxy/utils';
 
 import {layout} from '@app/utils/config';
 
@@ -43,7 +43,7 @@ const ModalForm = (props) => {
 
 const HandleModal = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projectRouter ?? {};
+  const i18nCfg = i18ns?.main?.projectRouter ?? {};
   const {addFormText = {}} = i18nCfg;
 
   const [form] = Form.useForm();

@@ -1,5 +1,5 @@
 import {useState, useEffect, useRef} from 'react';
-import Row,{Col} from 'ihuxy-components/grid';
+import {Row,Col} from '@huxy/components';
 
 const TimeBar = ({lastTime, lastText}) => {
   const timeRef = useRef();

@@ -1,5 +1,4 @@
-import uuidv4 from 'ihuxy-utils/uuidv4';
-import {randNum, randTrue} from 'ihuxy-utils/rand';
+import {uuidv4,randNum,randTrue} from '@huxy/utils';
 
 const userSchema = {
   name: 'demo',

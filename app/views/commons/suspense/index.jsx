@@ -1,6 +1,6 @@
 import {Suspense} from 'react';
-import Spinner from 'ihuxy-components/spinner';
 import {Table} from 'antd';
+import {Spinner} from '@huxy/components';
 import Panel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
 import {suspenseApis} from '@app/utils/getApis';
@@ -45,7 +45,7 @@ const Allusers = ({users, title, i18nCfg}) => {
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.suspense ?? {};
+  const i18nCfg = i18ns?.main?.suspense ?? {};
   return (
     <div>
       <Row>

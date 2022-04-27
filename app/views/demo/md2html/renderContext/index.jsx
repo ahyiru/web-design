@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
-import Spinner from 'ihuxy-components/spinner';
-import str2React from 'ihuxy-components/str2React';
+import {Spinner,str2React} from '@huxy/components';
 import getContext from '../getFiles/getContext';
 import replacePath from '../getFiles/replacePath';
 

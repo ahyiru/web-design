@@ -1,4 +1,4 @@
-import {useRoute} from 'ihuxy/router';
+import {useRoute} from '@huxy/router';
 const formatMenu=(menu,curPath,type='vertical',cb=null)=>{
   const menuConfig={
     vertical:[],

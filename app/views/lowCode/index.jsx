@@ -1,13 +1,13 @@
 import {Button} from 'antd';
+import {Spinner} from '@huxy/components';
 import customRender from '@app/utils/render';
-import Spinner from 'ihuxy-components/spinner';
 const Index = (props) => {
   const {pageSchema, id, path, name} = props;
   if (pageSchema == null || pageSchema.pending) {
     return <Spinner global />;
   }
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projectRouter ?? {};
+  const i18nCfg = i18ns?.main?.projectRouter ?? {};
   const {pageText = {}} = i18nCfg;
   const key = path.indexOf('#') === 0 ? path.slice(1) : path;
   return (

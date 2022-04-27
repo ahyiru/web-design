@@ -1,13 +1,13 @@
 import {useState, useEffect} from 'react';
 import ECharts from 'echarts-for-react';
 import {Table as AntTable} from 'antd';
+import {Spinner} from '@huxy/components';
 import DefPanel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
 // import ScreenHeader from '@app/components/screenHeader';
 import {option1, option2, option3, option4, option5, option6, option7, option8, option9, option10, option11, option12, columns1, columns2, dataSource1, dataSource2} from '@app/models/screen1';
 import defaultOpts from '@app/models/screen1/defaultOpts';
 import {tableCfg} from '@app/utils/config';
-import Spinner from 'ihuxy-components/spinner';
 
 const Panel = (props) => <DefPanel {...props} style={{borderColor: 'rgba(0,180,220,0.08)'}} />;
 

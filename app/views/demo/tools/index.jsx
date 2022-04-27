@@ -1,7 +1,7 @@
 import {useEffect, useRef} from 'react';
-import watermark from 'ihuxy-utils/watermark';
-import Panel from 'ihuxy-components/panel';
-import {useEleResize} from 'ihuxy-use/useViewSize';
+import {watermark} from '@huxy/utils';
+import {Panel} from '@huxy/components';
+import {useEleResize} from '@huxy/use';
 import {Row, Col} from '@app/components/row';
 
 import SkeletonContent from '@app/components/skeletonContent';

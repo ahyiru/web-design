@@ -1,4 +1,4 @@
-import fetcher, {suspense} from '@app/apis/fetcher';
+import fetcher, {dlApi, suspense} from '@app/apis/fetcher';
 import getApis from '@app/apis/getApis';
 
 const apiList = {};
@@ -8,10 +8,11 @@ const suspenseApis = {};
 const getSuspense = (apis) => {
   const susList = apis.filter((api) => ['profile', 'allUser'].includes(api.name));
   susList.map((sus) => {
-    const {name, type, ...rest} = sus;
-    const funcName = `${name}Suspense`;
+    const {name, fnName, type, url, isDl, ...rest} = sus;
+    const fetchFn = isDl ? dlApi : suspense;
+    const funcName = fnName ?? `${name}Suspense`;
     const paramsKey = type || rest.method === 'post' ? 'data' : 'params';
-    suspenseApis[funcName] = (data) => suspense({...rest, [paramsKey]: data});
+    suspenseApis[funcName] = (data) => fetchFn({...rest, url: typeof url==='function' ? url(data) : url, [paramsKey]: data});
   });
 };
 
@@ -26,12 +27,16 @@ export const getList = async () => {
 };
 
 export const getApiFn = async () => {
-  const apis = await getList();
+  let apis = [];
+  try{
+    apis = await getList();
+  }catch(err){}
   apis.map((api) => {
-    const {name, type, ...rest} = api;
-    const funcName = `${name}Fn`;
+    const {name, fnName, type, url, isDl, ...rest} = api;
+    const fetchFn = isDl ? dlApi : fetcher;
+    const funcName = fnName ?? `${name}Fn`;
     const paramsKey = type || (rest.method === 'post' ? 'data' : 'params');
-    apiList[funcName] = (data) => fetcher({...rest, [paramsKey]: data});
+    apiList[funcName] = (data) => fetchFn({...rest, url: typeof url==='function' ? url(data) : url, [paramsKey]: data});
   });
   getSuspense(apis);
   return apiList;

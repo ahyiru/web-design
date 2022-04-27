@@ -46,6 +46,12 @@ const routes = [
     hideMenu: true,
     component: () => import('@app/views/commons/canvas/panorama'),
   },
+  /* {
+    path: '/h5',
+    name: 'h5',
+    hideMenu: true,
+    component: () => import('@app/h5/configList'),
+  }, */
 ];
 
 export default routes;

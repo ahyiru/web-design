@@ -1,6 +1,6 @@
-import {useRoute} from 'ihuxy/router';
-import {useWinResize} from 'ihuxy-use/useViewSize';
-import Anico from 'ihuxy-components/anico';
+import {useRoute} from '@huxy/router';
+import {useWinResize} from '@huxy/use';
+import {Anico} from '@huxy/components';
 
 const CustomCollapse = (props) => {
   const {useStore} = useRoute();

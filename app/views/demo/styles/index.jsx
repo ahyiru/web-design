@@ -1,12 +1,8 @@
 import {useState, useRef} from 'react';
-import {Button} from 'antd';
-import Spinner from 'ihuxy-components/spinner';
-import Anico from 'ihuxy-components/anico';
-import loadError from 'ihuxy-components/loadError';
-import {HandleError} from 'ihuxy-components/errorBoundary';
-import traverItem from 'ihuxy-utils/traverItem';
-import useClickAway from 'ihuxy-use/useClickAway';
-import useUpdate from 'ihuxy-use/useUpdate';
+import {Button,Space} from 'antd';
+import {Spinner,Anico,LoadError,HandleError} from '@huxy/components';
+import {traverItem} from '@huxy/utils';
+import {useClickAway,useUpdate} from '@huxy/use';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 import Ellipsis from '@app/components/ellipsis';
@@ -58,11 +54,13 @@ const Index = (props) => {
             <Anico type={type} />
           </div>
           <div>
-            {typeList.map(({key, name}) => (
-              <Button key={key} type={key === type ? 'primary' : ''} onClick={(e) => setType(key)}>
-                {name}
-              </Button>
-            ))}
+            <Space>
+              {typeList.map(({key, name}) => (
+                <Button key={key} type={key === type ? 'primary' : ''} onClick={(e) => setType(key)}>
+                  {name}
+                </Button>
+              ))}
+            </Space>
           </div>
         </Panel>
       </Col>
@@ -73,11 +71,11 @@ const Index = (props) => {
       </Col>
       <Col span={6}>
         <Panel>
-          <div>{loadError({error: 'load error demo'})}</div>
+          <div>{LoadError({error: 'load error demo'})}</div>
           <HandleError>
             <ErrorComp state={demoError} name="eb" />
           </HandleError>
-          <Button onClick={(e) => setDemoError(null)}>load</Button>
+          {demoError && <Button onClick={(e) => setDemoError(null)}>load</Button>}
         </Panel>
       </Col>
       <Col>
@@ -100,10 +98,10 @@ const LiItem = ({li, itemClick}) => {
     <li ref={liRef} className={`${li.open ? 'open' : ''}`} onClick={(e) => itemClick(e, li)}>
       <a className={`demo-follow${li.active ? ' active' : ''}`}>
         <span>{li.name}</span>
-        {li.list?.length ? <i className={`demo-angle-${open ? 'top' : 'bt'}`} /> : null}
+        {li.list?.length ? <i className={`demo-angle-${li.open ? 'top' : 'bt'}`} /> : null}
       </a>
       {li.list?.length ? (
-        <ul className="huxy-arrow-rt">
+        <ul className="demo-arrow-rt">
           {li.list.map((item) => (
             <li key={item.value}>
               <a className="demo-tooltip" tooltips={item.name}>

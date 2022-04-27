@@ -16,11 +16,9 @@ const webpackHotMiddleware=require('webpack-hot-middleware');
 
 const webpackConfig=require('./webpack.development');
 
-const {appName,HOST,PORT,PROXY_URL,MOCK}=require('../configs');
+const {appName,HOST,PORT,PROXY,MOCK}=require('../configs');
 
 const getIPs=require('./getIPs');
-
-// const request=require('request');
 
 const {createProxyMiddleware}=require('http-proxy-middleware');
 
@@ -32,18 +30,15 @@ const proxyCfg=require('./appProxy');
 
 const mocks=require('./mock');
 
-const {prefix,opts}=proxyCfg(PROXY_URL);
-app.use(prefix,createProxyMiddleware(opts));
-
-/* app.use('/v1',createProxyMiddleware({
-  target: 'https://zbx.cactifans.com',
-  changeOrigin: true,
-}));
-
-app.use('/mocks',createProxyMiddleware({
-  target: MOCK,
-  changeOrigin: true,
-})); */
+if(Array.isArray(PROXY)){
+  PROXY.map(proxyItem=>{
+    const {prefix,opts}=proxyCfg(PROXY);
+    app.use(prefix,createProxyMiddleware(opts));
+  });
+}else{
+  const {prefix,opts}=proxyCfg(PROXY);
+  app.use(prefix,createProxyMiddleware(opts));
+}
 
 const devMiddleware=webpackDevMiddleware(compiler,{
   publicPath:webpackConfig.output.publicPath,

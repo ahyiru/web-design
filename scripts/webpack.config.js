@@ -19,7 +19,7 @@ const entry={
   ...frame,
 };
 const templ=path.resolve(publics,'index.html');
-const icon=path.resolve(publics,'favicon.png');
+const icon=path.resolve(publics,'favicon.ico');
 
 const htmlPlugin=()=>new HtmlWebpackPlugin({
   title:projectName||appName,
@@ -205,13 +205,14 @@ module.exports={
     // globalObject:'this',
   },
   optimization:{
-    // minimize:true,
-    concatenateModules:false,
-    usedExports:false,
-    sideEffects:false,
     splitChunks:false,
+    minimize:false,
+    providedExports:false,
+    usedExports:false,
+    concatenateModules:false,
+    sideEffects:'flag',
     runtimeChunk:'single',
-    moduleIds:'deterministic',
+    moduleIds:'named',
     chunkIds:'named',
   },
   externals:{
@@ -227,12 +228,8 @@ module.exports={
       '@app':app,
       '@configs':path.resolve(__dirname, '../configs'),
       '@common':path.resolve(__dirname, '../commons'),
-      ihuxy:path.resolve(__dirname, '../node_modules/@huxy'),
-      'ihuxy-utils':path.resolve(__dirname, '../node_modules/@huxy/utils/src'),
-      'ihuxy-use':path.resolve(__dirname, '../node_modules/@huxy/use/src'),
-      'ihuxy-components':path.resolve(__dirname, '../node_modules/@huxy/components/src'),
     },
-    extensions:['.jsx','.js','.less','.css','.scss','.json','.ts','.tsx','.vue','.mjs'],
+    extensions:['.jsx','.js','.less','.css','.scss','.json','.ts','.tsx','.vue','.cjs'],
     fallback: {
       path: false,//require.resolve('path-browserify'),
       process: false,

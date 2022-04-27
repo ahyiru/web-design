@@ -1,8 +1,7 @@
 import {useState, useEffect} from 'react';
 import {EditableProTable} from '@ant-design/pro-table';
 import {Popconfirm} from 'antd';
-import {arr2obj} from 'ihuxy-utils/obj2arr';
-import uuidv4 from 'ihuxy-utils/uuidv4';
+import {arr2obj,uuidv4} from '@huxy/utils';
 import apiList from '@app/utils/getApis';
 
 const fmData = (data) => data.map((item) => ({...item, uuid: uuidv4()}));

@@ -1,5 +1,5 @@
 import {Tooltip} from 'antd';
-import isObject from 'ihuxy-utils/isObject';
+import {isObject} from '@huxy/utils';
 import fixIcons from './fixIcons';
 const tooltipIcon = (icon) => {
   if (isObject(icon)) {

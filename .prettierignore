@@ -1,0 +1,10 @@
+node_modules
+.nyc_output
+.DS_Store
+coverage
+dist
+build
+/__tests__/
+doc
+public
+demo1/app

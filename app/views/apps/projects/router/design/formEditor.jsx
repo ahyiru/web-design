@@ -1,13 +1,9 @@
 import {useState, useEffect} from 'react';
-
-import Row,{Col} from 'ihuxy-components/grid';
-import updateId from 'ihuxy-utils/updateId';
-import {addNodes, editNodes, deleteNodes, moveNodes} from 'ihuxy-utils/handleTree';
-import selectedHandle from 'ihuxy-utils/selectedHandle';
-
 import {Tree, Modal, Dropdown, Menu, Spin} from 'antd';
-
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
+
+import {Row,Col} from '@huxy/components';
+import {updateId,addNodes,editNodes,deleteNodes,selectedHandle} from '@huxy/utils';
 
 import Panel from '@app/components/panel';
 

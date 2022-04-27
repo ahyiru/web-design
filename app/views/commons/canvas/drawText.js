@@ -1,5 +1,4 @@
-import {getTouchPosition} from 'ihuxy-utils/getTouchPosition';
-import setStyle from 'ihuxy-utils/setStyle';
+import {getTouchPosition,setStyle} from '@huxy/utils';
 
 const createNote = (x, y, right, bottom) => {
   const textarea = document.createElement('textarea');

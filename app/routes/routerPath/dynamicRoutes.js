@@ -346,6 +346,31 @@ export const playgroundRoutes = {
   icon: 'ConsoleSqlOutlined',
   children: [
     {
+      path: '/demo',
+      name: 'demo',
+      icon: 'MergeCellsOutlined',
+      denied: browserRouter,
+      componentPath: '/demo',
+    },
+    {
+      path: '/tools',
+      name: '常用工具',
+      icon: 'ToolOutlined',
+      denied: browserRouter,
+      children: [
+        {
+          path: '/demo1',
+          name: 'demo1',
+          component: () => import(`@app/draft/tools/demo1`),
+        },
+        {
+          path: '/demo2',
+          name: 'demo2',
+          component: () => import(`@app/draft/tools/demo2`),
+        },
+      ],
+    },
+    {
       path: '/icons',
       name: 'icons',
       icon: 'PictureOutlined',

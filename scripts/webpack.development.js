@@ -14,7 +14,7 @@ const postcssOptions={
   // autoprefixer: { grid: true }
   browsers: 'last 2 versions',
   importFrom:[
-    // './playground/src/layoutOpt/global.css',
+    // './commons/global.css',
     // './configs/themeCfg.js',
     ()=>{
       const environmentVariables={
@@ -65,7 +65,7 @@ const devConfig=merge(webpackConfig,{
             },
           },
         ],
-        // include:[/node_modules/],
+        // include:[app],
         // exclude:[/node_modules/],
       },
       {
@@ -151,19 +151,6 @@ const devConfig=merge(webpackConfig,{
       VERSION:JSON.stringify('0.0.x'),
     }),
     new OpenBrowserWebpackPlugin({target:`${HOST}:${PORT}`}),
-    /*new GenerateSW({
-      // include: [/\.html$/, /\.js$/, /\.css$/],
-      // exclude: '/node_modules/',
-      // swDest: 'service-worker.js',
-      // swDest:path.join(configs.BUILD_DIR, 'js/sw.js'),
-      // navigateFallback: '/index.html', // SPA fallback
-      // globDirectory:configs.BUILD_DIR,
-      // importsDirectory: '/',
-      // importWorkboxFrom: 'local',
-      cacheId: 'demo-pwa',
-      clientsClaim: true,
-      skipWaiting: true,
-    }),*/
   ],
 });
 

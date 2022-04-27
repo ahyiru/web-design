@@ -1,8 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
-import {useEleResize} from 'ihuxy-use/useViewSize';
-import getTextSize from 'ihuxy-utils/getTextSize';
-import getPosition from 'ihuxy-utils/getPosition';
 import {Tooltip} from 'antd';
+import {useEleResize} from '@huxy/use';
+import {getTextSize,getPosition} from '@huxy/utils';
 
 const style = {
   overflow: 'hidden',

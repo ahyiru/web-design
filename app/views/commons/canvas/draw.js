@@ -1,6 +1,4 @@
-import {getRelative} from 'ihuxy-utils/getTouchPosition';
-import dlfile from 'ihuxy-utils/dlfile';
-import cacheData from 'ihuxy-utils/cacheData';
+import {getRelative,dlfile,cacheData} from '@huxy/utils';
 import initStart from '@app/utils/handleEvts';
 import drawText from './drawText';
 
@@ -23,12 +21,47 @@ const loadImg = (imgCanvas, imgUrl, canvas) => {
   imgCanvas.width = width;
   imgCanvas.height = height;
   // createImg(imgCanvas,imgUrl);
-  const ctx = canvas.getContext('2d');
+  // const ctx = canvas.getContext('2d');
+  const ctx = imgCanvas.getContext('2d');
   const img = new Image();
   img.src = imgUrl;
   img.onload = function () {
     ctx.drawImage(img, 0, 0, width, height);
     saveData(canvas);
+  };
+};
+const createImg = (canvas, url) => {
+  const {width, height} = canvas;
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  img.src = url;
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0, width, height);
+    // ctx.drawImage(img,0,0,img.width,img.height,0,0,width,height);
+  };
+  return img;
+};
+const downloadImg = (imgCanvas, canvas, name) => {
+  const {width, height} = canvas;
+  const tempUrl = imgCanvas.toDataURL();
+  const ctx = imgCanvas.getContext('2d');
+  const img = new Image();
+  img.src = canvas.toDataURL();
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0, width, height);
+    dlfile(imgCanvas.toDataURL(), name);
+    resetImg(imgCanvas, canvas, tempUrl);
+  };
+};
+
+const resetImg=(imgCanvas, canvas, tempUrl)=>{
+  const {width, height} = canvas;
+  const ctx = imgCanvas.getContext('2d');
+  ctx.clearRect(0, 0, width, height);
+  const img = new Image();
+  img.src = tempUrl;
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0, width, height);
   };
 };
 
@@ -76,17 +109,6 @@ const endEvent = (evt, canvas) => {
   }
 };
 
-const createImg = (canvas, url) => {
-  const {width, height} = canvas;
-  const ctx = canvas.getContext('2d');
-  const img = new Image();
-  img.src = url;
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0, width, height);
-    // ctx.drawImage(img,0,0,img.width,img.height,0,0,width,height);
-  };
-  return img;
-};
 const prev = (canvas) => {
   clearRect(canvas);
   const {data} = undo();
@@ -99,8 +121,12 @@ const next = (canvas) => {
 };
 
 const init = (ref, defCfg, imgRef, imgUrl) => {
-  setCfg(defCfg);
-  imgUrl && loadImg(imgRef, imgUrl, ref);
+  setCfg({...defCfg,imgRef});
+  if(imgUrl){
+    loadImg(imgRef, imgUrl, ref);
+  }else{
+    clearRect(imgRef);
+  }
   const destroy = initStart(ref, startEvent, moveEvent, endEvent);
   return {
     destroy,
@@ -111,10 +137,11 @@ const init = (ref, defCfg, imgRef, imgUrl) => {
     clean: () => {
       clearRect(ref);
       setCfg({type: 'draw'});
+      saveData(ref);
     },
     undo: () => prev(ref),
     redo: () => next(ref),
-    save: (name) => dlfile(ref.toDataURL(), name),
+    save: (name) => downloadImg(imgRef, ref, name),
   };
 };
 

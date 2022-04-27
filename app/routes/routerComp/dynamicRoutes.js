@@ -4,111 +4,113 @@ import pageSchema from '@app/utils/getPageSchema';
 import LowCode from '@app/views/lowCode';
 import Page from '@app/views/page';
 
-export const appRoutes = {
-  path: '/apps',
-  name: ' App',
-  icon: 'AppstoreAddOutlined',
-  children: [
-    {
-      path: '/projects',
-      name: '项目管理',
-      icon: 'ConsoleSqlOutlined',
-      component: () => import('@app/views/apps/projects'),
-    },
-    {
-      path: '/projects/add',
-      name: '添加项目',
-      hideMenu: true,
-      component: () => import('@app/views/apps/projects/add'),
-    },
-    {
-      path: '/projects/edit/:projectId',
-      name: '编辑项目',
-      component: () => import('@app/views/apps/projects/add'),
-    },
-    {
-      path: '/projects/router/:projectId',
-      name: '项目路由设置',
-      component: () => import('@app/views/apps/projects/router'),
-    },
-    {
-      path: '/projects/router/:projectId/:routerId',
-      name: '页面设计',
-      component: () => import('@app/views/apps/projects/router/design'),
-    },
-    {
-      path: '/projects/api/:projectId',
-      name: '项目接口管理',
-      component: () => import('@app/views/apps/projects/apis'),
-    },
-    {
-      path: '/projects/api/:projectId/add',
-      name: '添加接口',
-      component: () => import('@app/views/apps/projects/apis/add'),
-    },
-    {
-      path: '/projects/api/:projectId/edit/:id',
-      name: '编辑接口',
-      component: () => import('@app/views/apps/projects/apis/add'),
-    },
-    {
-      path: '/projects/api/:projectId/test/:id',
-      name: '接口测试',
-      component: () => import('@app/views/apps/projects/apis/test'),
-    },
-    {
-      path: '/users',
-      name: '用户管理',
-      icon: 'UsergroupAddOutlined',
-      component: () => import('@app/views/apps/users'),
-    },
-    {
-      path: '/users/add',
-      name: '添加用户',
-      hideMenu: true,
-      component: () => import('@app/views/apps/users/add'),
-    },
-    {
-      path: '/users/edit/:id',
-      name: '编辑用户',
-      component: () => import('@app/views/apps/users/add'),
-    },
-    {
-      path: '/users/auth/:id',
-      name: '路由权限设置',
-      component: () => import('@app/views/apps/users/auth'),
-    },
-    {
-      path: '/profile',
-      name: '个人中心',
-      title: '个人中心',
-      hideMenu: true,
-      component: () => import('@app/views/apps/users/profile'),
-    },
-    {
-      path: '/apis',
-      name: '接口管理',
-      icon: 'ClusterOutlined',
-      component: () => import('@app/views/apps/projects/apis'),
-    },
-    {
-      path: '/apis/add',
-      name: '添加接口',
-      hideMenu: true,
-      component: () => import('@app/views/apps/projects/apis/add'),
-    },
-    {
-      path: '/apis/edit/:id',
-      name: '编辑接口',
-      component: () => import('@app/views/apps/projects/apis/add'),
-    },
-    {
-      path: '/apis/test/:id',
-      name: '接口测试',
-      component: () => import('@app/views/apps/projects/apis/test'),
-    },
-  ],
-};
+export const appRoutes = [
+  {
+    path: '/apps',
+    name: ' App',
+    icon: 'AppstoreAddOutlined',
+    children: [
+      {
+        path: '/projects',
+        name: '项目管理',
+        icon: 'ConsoleSqlOutlined',
+        component: () => import('@app/views/apps/projects'),
+      },
+      {
+        path: '/projects/add',
+        name: '添加项目',
+        hideMenu: true,
+        component: () => import('@app/views/apps/projects/add'),
+      },
+      {
+        path: '/projects/edit/:projectId',
+        name: '编辑项目',
+        component: () => import('@app/views/apps/projects/add'),
+      },
+      {
+        path: '/projects/router/:projectId',
+        name: '项目路由设置',
+        component: () => import('@app/views/apps/projects/router'),
+      },
+      {
+        path: '/projects/router/:projectId/:routerId',
+        name: '页面设计',
+        component: () => import('@app/views/apps/projects/router/design'),
+      },
+      {
+        path: '/projects/api/:projectId',
+        name: '项目接口管理',
+        component: () => import('@app/views/apps/projects/apis'),
+      },
+      {
+        path: '/projects/api/:projectId/add',
+        name: '添加接口',
+        component: () => import('@app/views/apps/projects/apis/add'),
+      },
+      {
+        path: '/projects/api/:projectId/edit/:id',
+        name: '编辑接口',
+        component: () => import('@app/views/apps/projects/apis/add'),
+      },
+      {
+        path: '/projects/api/:projectId/test/:id',
+        name: '接口测试',
+        component: () => import('@app/views/apps/projects/apis/test'),
+      },
+      {
+        path: '/users',
+        name: '用户管理',
+        icon: 'UsergroupAddOutlined',
+        component: () => import('@app/views/apps/users'),
+      },
+      {
+        path: '/users/add',
+        name: '添加用户',
+        hideMenu: true,
+        component: () => import('@app/views/apps/users/add'),
+      },
+      {
+        path: '/users/edit/:id',
+        name: '编辑用户',
+        component: () => import('@app/views/apps/users/add'),
+      },
+      {
+        path: '/users/auth/:id',
+        name: '路由权限设置',
+        component: () => import('@app/views/apps/users/auth'),
+      },
+      {
+        path: '/apis',
+        name: '接口管理',
+        icon: 'ClusterOutlined',
+        component: () => import('@app/views/apps/projects/apis'),
+      },
+      {
+        path: '/apis/add',
+        name: '添加接口',
+        hideMenu: true,
+        component: () => import('@app/views/apps/projects/apis/add'),
+      },
+      {
+        path: '/apis/edit/:id',
+        name: '编辑接口',
+        component: () => import('@app/views/apps/projects/apis/add'),
+      },
+      {
+        path: '/apis/test/:id',
+        name: '接口测试',
+        component: () => import('@app/views/apps/projects/apis/test'),
+      },
+    ],
+  },
+  {
+    path: '/profile',
+    name: '个人中心',
+    title: '个人中心',
+    hideMenu: true,
+    component: () => import('@app/views/apps/users/profile'),
+  },
+];
 export const commonRoutes = {
   path: '/commons',
   name: ' Common',
@@ -173,40 +175,22 @@ export const commonRoutes = {
       component: () => import('@app/views/commons/graph/graphin'),
     },
     {
-      path: '/editor',
-      name: '富文本编辑器',
+      path: '/slate',
+      name: '富文本编辑器-slate',
       icon: 'EditOutlined',
-      component: () => import('@app/views/commons/slate/test1'),
+      component: () => import('@app/views/commons/slate'),
+    },
+    {
+      path: '/lexical',
+      name: '富文本编辑器-lexical',
+      icon: 'EditOutlined',
+      component: () => import('@app/views/commons/lexical'),
     },
     {
       path: '/virtualList',
       name: '虚拟列表',
       icon: 'UnorderedListOutlined',
       component: () => import('@app/views/commons/virtualList'),
-    },
-    {
-      path: '/components',
-      name: '组件',
-      icon: 'LayoutOutlined',
-      children: [
-        {
-          path: '/table',
-          name: 'table',
-          icon: 'TableOutlined',
-          component: () => import('@app/views/apps/users'),
-        },
-        {
-          path: '/table/auth/:id',
-          name: '添加用户',
-          hideMenu: true,
-          component: () => import('@app/views/apps/users/auth'),
-        },
-        {
-          path: '/table/edit/:id',
-          name: '编辑用户',
-          component: () => import('@app/views/apps/users/add'),
-        },
-      ],
     },
   ],
 };
@@ -405,6 +389,27 @@ export const playgroundRoutes = {
       path: '/bagua',
       name: 'bagua',
       component: () => import('@app/views/demo/bagua'),
+    },
+    {
+      path: '/configTable',
+      name: 'configTable',
+      component: () => import('@app/views/demo/configList'),
+    },
+    {
+      path: '/configTable/add',
+      name: '添加用户',
+      hideMenu: true,
+      component: () => import('@app/views/demo/configList/add'),
+    },
+    {
+      path: '/configTable/edit/:id',
+      name: '编辑用户',
+      component: () => import('@app/views/demo/configList/add'),
+    },
+    {
+      path: '/configTable/auth/:id',
+      name: '路由权限设置',
+      component: () => import('@app/views/demo/configList/auth'),
     },
   ],
 };

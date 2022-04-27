@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
-import Spinner from 'ihuxy-components/spinner';
+import {Spinner} from '@huxy/components';
+
 const Index = (props) => {
   let camera, controls;
   let renderer;

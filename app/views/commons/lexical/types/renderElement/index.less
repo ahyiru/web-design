@@ -1,0 +1,52 @@
+@import "~@common/styles/common/style-func.less";
+
+.tools-bar {
+  position: relative;
+  padding: 10px 0;
+}
+
+.tools-bar-icon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  color: #777;
+  &:hover,
+  &.active {
+    border-color: rgba(0, 0, 0, 0.03);
+    color: var(--blue1);
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .tooltip-lb(#eee,rgba(0,0,0,0.2),#444,10px,8px);
+  &.dividing {
+    margin-right: 9px;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      right: 5px;
+      width: 1px;
+      height: calc(100% - 8px);
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+  .icon-drop-area {
+    display: block;
+    padding: 10px 15px;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 2px);
+    max-width: 200px;
+    max-height: 400px;
+    overflow: auto;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #f3f3f3;
+    color: #555;
+    z-index: 2000;
+  }
+}

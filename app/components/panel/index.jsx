@@ -1,4 +1,4 @@
-import Panel from 'ihuxy-components/panel';
+import {Panel} from '@huxy/components';
 
 const Index = ({style, children, ...rest}) => (
   <Panel style={{background: 'var(--panelBgColor)', ...style}} {...rest}>

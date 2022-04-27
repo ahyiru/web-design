@@ -17,7 +17,7 @@ const formStyle = {
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.users ?? {};
+  const i18nCfg = i18ns?.main?.users ?? {};
   const {
     profilePageText: {profile = {}, upProfile = {}},
   } = i18nCfg;

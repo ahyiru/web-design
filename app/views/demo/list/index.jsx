@@ -1,11 +1,10 @@
 import {useState} from 'react';
 import {Table, Tag, Space, Input, Button, Modal, Form, message, Select} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
-import {roleList} from '@app/utils/config';
-import Row,{Col} from 'ihuxy-components/grid';
-import {formatTime} from 'ihuxy-utils/formatTime';
-import validObj from 'ihuxy-utils/validObj';
+import {Row,Col} from '@huxy/components';
+import {formatTime,validObj} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
+import {roleList} from '@app/utils/config';
 
 import Panel from '@app/components/panel';
 
@@ -81,12 +80,12 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.users ?? {};
+  const i18nCfg = i18ns?.main?.users ?? {};
   const {tableHeaderText = {}, actionsText = {}, searchFormText = {}} = i18nCfg;
 
   const [selectedRows, setSelectedRows] = useState([]);
   const pageParams = props.params;
-  const [result, update, pageChange, searchList] = useHandleList(allUser, null, {current: pageParams?.current, size: pageParams?.size});
+  const [result, update, pageChange, searchList] = useHandleList(allUser, {current: pageParams?.current, size: pageParams?.size});
 
   const handleCheck = (item) => {
     props.router.push({

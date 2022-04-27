@@ -1,9 +1,9 @@
 import {message} from 'antd';
-import {fetcher} from 'ihuxy-utils/baseFetch';
-import storage from 'ihuxy-utils/storage';
-import wrapPromise from 'ihuxy-utils/wrapPromise';
+import {fetcher,storage,wrapPromise} from '@huxy/utils';
 
-const {TARGET} = require('@configs');
+const {PROXY} = require('@configs');
+
+const TARGET = PROXY?.prefix ?? '/api';
 
 import {logout} from '@app/utils/utils';
 

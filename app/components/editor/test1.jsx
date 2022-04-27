@@ -1,15 +1,16 @@
 import {useState, useMemo, useCallback} from 'react';
 import {Editor, Transforms, createEditor} from 'slate';
 import {Editable, withReact, Slate} from 'slate-react';
-import {CodeElement, DefaultElement} from './comps';
 
 import {withHistory} from 'slate-history';
 
-import firstUpper from 'ihuxy-utils/firstUpper';
-
-import * as elements from './types/components/text';
+import {firstUpper} from '@huxy/utils';
 
 import Panel from '@app/components/panel';
+
+import {CodeElement, DefaultElement} from './comps';
+
+import * as elements from './types/components/text';
 
 import Toolsbar from './types/renderElement/toolsbar';
 

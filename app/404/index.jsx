@@ -1,4 +1,5 @@
 import {logout} from '@app/utils/utils';
+import Intls from '@app/components/intl';
 import './index.less';
 const NotFound = (props) => {
   return (
@@ -8,10 +9,10 @@ const NotFound = (props) => {
           <b style={{color: 'red'}}>{props.inputPath}</b> is not found.
         </h2>
         <h2>
-          返回<a onClick={(e) => props.router.push('/')}>首页</a>
+          <Intls>返回</Intls><a onClick={(e) => props.router.push('/')}><Intls>首页</Intls></a>
         </h2>
         <h2>
-          <a onClick={(e) => logout()}>切换用户</a>
+          <a onClick={(e) => logout()}><Intls>切换用户</Intls></a>
         </h2>
       </div>
     </div>

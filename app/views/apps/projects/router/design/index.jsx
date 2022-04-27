@@ -1,12 +1,8 @@
 import {useState, useEffect, useMemo} from 'react';
-import Row,{Col} from 'ihuxy-components/grid';
-import updateId from 'ihuxy-utils/updateId';
-import {addNodes, editNodes, deleteNodes, moveNodes} from 'ihuxy-utils/handleTree';
-import cacheData from 'ihuxy-utils/cacheData';
-import selectedHandle from 'ihuxy-utils/selectedHandle';
-import session from 'ihuxy-utils/session';
 import {Tree, Modal, Dropdown, Menu, message, Spin} from 'antd';
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
+import {Row,Col} from '@huxy/components';
+import {updateId,addNodes,editNodes,deleteNodes,moveNodes,cacheData,selectedHandle,session} from '@huxy/utils';
 import apiList from '@app/utils/getApis';
 import defProject from '@app/configs/projects';
 import Back from '@app/components/goBack';
@@ -56,7 +52,7 @@ const getSelected = (data, id) => {
 
 const Index = (props) => {
   const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main.projectDesign ?? {};
+  const i18nCfg = i18ns?.main?.projectDesign ?? {};
   const {pageText = {}, actionsText = {}, topActionText = {}, addFormText = {}, designConfigText} = i18nCfg;
   const {editorI18n = {}} = designConfigText || {};
 

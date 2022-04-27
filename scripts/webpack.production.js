@@ -34,7 +34,7 @@ const postcssOptions={
   // autoprefixer: { grid: true }
   browsers: 'last 2 versions',
   importFrom:[
-    // './playground/src/layoutOpt/global.css',
+    // './commons/global.css',
     // './configs/themeCfg.js',
     ()=>{
       const environmentVariables={
@@ -119,32 +119,6 @@ const prodConfig=merge(webpackConfig, {
     chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
   },
   optimization:{
-    minimize:true,
-    minimizer:[
-      new TerserPlugin({
-        // cache: true,
-        parallel: true,
-        // sourceMap: true,
-        terserOptions: {
-          ecma: undefined,
-          warnings: false,
-          parse: {},
-          compress: {
-            drop_console:true,
-          },
-          mangle: true,
-        },
-      }),
-      new CssMinimizerPlugin({
-        minimizerOptions: {
-          preset:['default',{
-            discardComments:{removeAll:true},
-            // calc: false,
-            // normalizePositions: false,
-          }],
-        },
-      }),
-    ],
     splitChunks:{
       chunks:'all',//'async','initial'
       // minSize:0,
@@ -153,8 +127,8 @@ const prodConfig=merge(webpackConfig, {
         style:8000,
       },
       maxSize:{
-        javascript:1000000,
-        style:1000000,
+        javascript:800000,
+        style:800000,
       },
       minChunks:2,
       maxInitialRequests:10,
@@ -197,6 +171,39 @@ const prodConfig=merge(webpackConfig, {
         },
       },
     },
+    minimizer:[
+      new TerserPlugin({
+        // cache: true,
+        parallel: true,
+        // sourceMap: true,
+        terserOptions: {
+          ecma: undefined,
+          warnings: false,
+          parse: {},
+          compress: {
+            drop_console:true,
+          },
+          mangle: true,
+        },
+      }),
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset:['default',{
+            discardComments:{removeAll:true},
+            // calc: false,
+            // normalizePositions: false,
+          }],
+        },
+      }),
+    ],
+    minimize:true,
+    providedExports:true,
+    usedExports:true,
+    concatenateModules:false,
+    sideEffects:true,
+    runtimeChunk:false,
+    moduleIds:'deterministic',
+    chunkIds:'deterministic',
   },
   module:{
     rules:[

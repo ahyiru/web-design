@@ -1,5 +1,4 @@
-import storage from 'ihuxy-utils/storage';
-import {sysLang} from 'ihuxy-utils/sysInfo';
+import {storage,sysLang} from '@huxy/utils';
 
 const getLang = () => storage.get('language') || sysLang();
 

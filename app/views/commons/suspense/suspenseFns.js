@@ -1,5 +1,4 @@
-import wrapPromise from 'ihuxy-utils/wrapPromise';
-import sleep from 'ihuxy-utils/sleep';
+import {wrapPromise,sleep} from '@huxy/utils';
 
 const sus1 = async (params) => {
   await sleep(2500);

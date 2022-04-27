@@ -356,6 +356,7 @@
   }
   &::before{
     content:attr(tooltips);
+    z-index: 100002;
     padding:4px 10px;
     text-align: left;
     max-width:200px;
@@ -384,7 +385,7 @@
     }
     &::after{
       left:@position;
-      bottom:calc(100% + @arrowSize/2);
+      bottom:calc(100% + @arrowSize / 2);
       transform:rotate(135deg);
     }
   }
