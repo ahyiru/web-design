@@ -12,7 +12,7 @@
 可自行配置运行项目，如运行 `template` 项目：
 
 ```js
-npm start ---dirname=app
+npm start ---dirname=template
 
 ```
 
