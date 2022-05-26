@@ -1,0 +1,7 @@
+export const GROUP_HORIZONTAL__PADDING = 24;
+export const GROUP_VERTICAL__PADDING = 40;
+export const NODE_WIDTH = 180;
+export const NODE_HEIGHT = 32;
+export const RERENDER_EVENT = 'RERENDER_EVENT';
+export const DRAGGABLE_ALGO_COMPONENT = 'ALGO_COMPONENT';
+export const DRAGGABLE_MODEL = 'MODEL';

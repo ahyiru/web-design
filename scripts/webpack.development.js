@@ -144,11 +144,10 @@ const devConfig=merge(webpackConfig,{
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env':{
-        // NODE_ENV:JSON.stringify('development'),
         isDev:true,
       },
       EMAIL:JSON.stringify('ah.yiru@gmail.com'),
-      VERSION:JSON.stringify('0.0.x'),
+      VERSION:JSON.stringify('1.1.x'),
     }),
     new OpenBrowserWebpackPlugin({target:`${HOST}:${PORT}`}),
   ],

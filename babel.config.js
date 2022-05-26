@@ -40,6 +40,16 @@ const config=api=>{
     [
       'import',
       {
+        libraryName: '@antv/x6-react-components',
+        libraryDirectory: 'es',
+        style: true,
+        transformToDefaultImport: false,
+      },
+      'x6',
+    ],
+    [
+      'import',
+      {
         libraryName: '@huxy/utils',
         libraryDirectory: 'src',
         camel2DashComponentName: false,
@@ -59,8 +69,6 @@ const config=api=>{
       'import',
       {
         libraryName: '@huxy/components',
-        // libraryDirectory: 'src',
-        // camel2DashComponentName: false,
         customName: name => `@huxy/components/src/${dash2camel(name)}`,
       },
       '@huxy/components',

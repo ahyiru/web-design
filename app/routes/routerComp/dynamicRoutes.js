@@ -175,6 +175,12 @@ export const commonRoutes = {
       component: () => import('@app/views/commons/graph/graphin'),
     },
     {
+      path: '/x6-demo',
+      name: 'x6',
+      icon: 'FundOutlined',
+      component: () => import('@app/views/commons/x6-demo/pages'),
+    },
+    {
       path: '/slate',
       name: '富文本编辑器-slate',
       icon: 'EditOutlined',

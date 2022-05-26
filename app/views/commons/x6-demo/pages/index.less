@@ -1,0 +1,60 @@
+@import "~@app/assets/var.less";
+
+:local{
+  @border: 1px solid rgba(0, 0, 0, 0.08);
+
+  .flex {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .layout {
+    --main-height:@mainHeight;
+    &.full{
+      --main-height:100vh;
+    }
+    width: 100%;
+    // height: 100%;
+    height: var(--main-height);
+    overflow: hidden;
+  }
+
+  .content {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    max-height: calc(100% - 48px);
+    font-size: 12px;
+  }
+
+  .experiment {
+    .flex();
+
+    .nodeSourceTree {
+      flex-basis: 290px;
+      width: 290px;
+      // max-height: calc(100% - 48px);
+      border-right: @border;
+    }
+
+    .editPanel {
+      display: flex;
+      flex-grow: 1;
+      align-items: stretch;
+      justify-content: space-between;
+      overflow: hidden;
+
+      .dagCanvas {
+        flex-grow: 1;
+        border-right: @border;
+      }
+
+      .confPanel {
+        width: 290px;
+        min-width: 290px;
+      }
+    }
+  }
+}

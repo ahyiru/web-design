@@ -69,11 +69,10 @@ const plugins=[
   }),
   new webpack.DefinePlugin({
     'process.env':{
-      // NODE_ENV:JSON.stringify('production'),
       isDev:false,
     },
     EMAIL:JSON.stringify('ah.yiru@gmail.com'),
-    VERSION:JSON.stringify('0.0.x'),
+    VERSION:JSON.stringify('1.1.x'),
   }),
   new GenerateSW({
     // importWorkboxFrom: 'local',
@@ -173,20 +172,23 @@ const prodConfig=merge(webpackConfig, {
     },
     minimizer:[
       new TerserPlugin({
-        // cache: true,
         parallel: true,
-        // sourceMap: true,
+        extractComments: false,
         terserOptions: {
-          ecma: undefined,
-          warnings: false,
-          parse: {},
+          ecma: 5,
           compress: {
             drop_console:true,
           },
+          format: {
+            comments: false,
+          },
+          parse: {},
           mangle: true,
+          module: false,
         },
       }),
       new CssMinimizerPlugin({
+        parallel: true,
         minimizerOptions: {
           preset:['default',{
             discardComments:{removeAll:true},

@@ -46,6 +46,15 @@ const routes = [
     hideMenu: true,
     component: () => import('@app/views/commons/canvas/panorama'),
   },
+  {
+    path: '/x6-demo/:id',
+    name: 'x6',
+    hideMenu: true,
+    component: () => import('@app/views/commons/x6-demo/pages'),
+    linkProps: {
+      target: '_blank',
+    },
+  },
   /* {
     path: '/h5',
     name: 'h5',
