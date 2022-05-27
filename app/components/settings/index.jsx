@@ -137,7 +137,7 @@ const Index = (props) => {
       </>
     ),
     color: getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
-      <Row key={key} style={{marginTop: 12}}>
+      <Row key={key} gutter={[10,16]}>
         <Col span={5}>
           <span style={labelStyle}>{themeLang[key]}：</span>
         </Col>
@@ -165,7 +165,7 @@ const Index = (props) => {
       </Row>
     )),
     size: Object.keys(theme.list.colors).map((key) => (
-      <Row key={key} style={{marginTop: 12}}>
+      <Row key={key} gutter={[10,16]}>
         <Col span={5}>
           <span style={labelStyle}>{themeLang[key]}：</span>
         </Col>

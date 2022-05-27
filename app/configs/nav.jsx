@@ -72,6 +72,12 @@ export const leftNav = ({store, useStore}) => {
         </div>
       ),
     },
+    {
+      key: 'configs',
+      icon: 'ToolOutlined',
+      type: 'configs',
+      Custom: () => <Settings store={store} useStore={useStore} />,
+    },
   ];
 };
 export const rightNav = ({store, useStore}) => {
@@ -81,12 +87,6 @@ export const rightNav = ({store, useStore}) => {
   // const themeKey=store.getState('huxy-theme')?.key;
   const {right} = i18ns?.nav ?? {};
   return [
-    {
-      key: 'configs',
-      icon: 'ToolOutlined',
-      type: 'configs',
-      Custom: () => <Settings store={store} useStore={useStore} />,
-    },
     {
       key: 'username',
       name: user?.name ?? right?.user,

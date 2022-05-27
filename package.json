@@ -115,17 +115,17 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@ant-design/pro-table": "^2.75.1",
+    "@ant-design/pro-table": "^2.76.1",
     "@antv/graphin": "^2.6.6",
     "@antv/graphin-components": "^2.4.0",
     "@antv/x6": "^1.32.2",
     "@antv/x6-react-components": "^1.1.15",
     "@antv/x6-react-shape": "^1.6.0",
-    "@huxy/components": "^1.1.7",
-    "@huxy/layout": "^1.1.7",
-    "@huxy/router": "^1.1.7",
-    "@huxy/use": "^1.1.7",
-    "@huxy/utils": "^1.1.7",
+    "@huxy/components": "^1.1.8",
+    "@huxy/layout": "^1.1.8",
+    "@huxy/router": "^1.1.8",
+    "@huxy/use": "^1.1.8",
+    "@huxy/utils": "^1.1.8",
     "antd": "^4.20.6",
     "core-js": "^3.22.7",
     "echarts": "^5.3.2",
@@ -145,7 +145,7 @@
     "slate": "^0.80.0",
     "slate-history": "^0.66.0",
     "slate-react": "^0.80.0",
-    "three": "^0.140.2"
+    "three": "^0.141.0"
   },
   "browserslist": [
     "defaults",

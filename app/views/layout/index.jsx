@@ -134,7 +134,7 @@ const Index = (props) => {
               <Panel>
                 <h3>{i18nCfg.sizeDesign}</h3>
                 {getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
-                  <Row key={key} style={{marginTop: 8}}>
+                  <Row key={key} gutter={[10,16]}>
                     <Col span={5}>
                       <span style={labelStyle}>{themeLang[key]}：</span>
                     </Col>
@@ -167,7 +167,7 @@ const Index = (props) => {
               <Panel className="color-picker-panel">
                 <h3>{i18nCfg.colorDesign}</h3>
                 {Object.keys(theme.list.colors).map((key) => (
-                  <Row key={key} style={{marginTop: 8}}>
+                  <Row key={key} gutter={[10,16]}>
                     <Col span={5}>
                       <span style={labelStyle}>{themeLang[key]}：</span>
                     </Col>
