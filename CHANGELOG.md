@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/ahyiru/web-design/compare/v1.1.1...v1.2.0) (2022-06-27)
+
+
+### Features
+
+* update packages ([8a0085e](https://github.com/ahyiru/web-design/commit/8a0085ea479bd401ba69f4dd3b0018d121b4dada))
+
+
+### Bug Fixes
+
+* fix row ([7ac030e](https://github.com/ahyiru/web-design/commit/7ac030e04452288daacc73a07125ba20bbbf22ea))
+
 ### [1.1.1](https://github.com/ahyiru/web-design/compare/v0.1.0...v1.1.1) (2022-04-27)
 
 ## [0.1.0](https://github.com/ahyiru/web-design/compare/v0.0.9...v0.1.0) (2022-03-27)
