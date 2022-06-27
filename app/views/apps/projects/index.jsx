@@ -34,7 +34,7 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
   {
     title: i18ns.role,
     dataIndex: 'role',
-    width: 50,
+    width: 40,
     render: (text) => {
       const {label, color} = projectRoleList.find((v) => v.value == text) || {};
       return label ? <Tag color={color}>{label}</Tag> : '-';
@@ -49,7 +49,7 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
   {
     title: i18ns.updatetime,
     dataIndex: 'updatetime',
-    width: 80,
+    width: 60,
     ellipsis: true,
     render: (text, record) => {
       const time = text || record.createtime || +new Date();
@@ -61,14 +61,14 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
   {
     title: i18ns.updater,
     dataIndex: 'updater',
-    width: 60,
+    width: 40,
     render: (text, record) => text || record.creator,
   },
   {
     title: i18ns.action,
     dataIndex: 'action',
     align: 'center',
-    width: 150,
+    width: 160,
     render: (text, record) => {
       const disabled = false; //!profile.role&&record._id!==profile.projectId;
       return (

@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { message } from 'antd';
+import {useCallback, useEffect, useRef} from 'react';
+import {message} from 'antd';
 import '@antv/x6-react-shape';
-import { useDrop } from 'react-dnd';
-import { DRAGGABLE_ALGO_COMPONENT, DRAGGABLE_MODEL } from '@app/views/commons/x6-demo/constants/graph';
-import { useExperimentGraph } from '@app/views/commons/x6-demo/pages/rx-models/experiment-graph';
-import { FloatingContextMenu } from './elements/floating-context-menu';
-import { CanvasHandler } from '../common/canvas-handler';
-import { GraphRunningStatus } from './elements/graph-running-status';
+import {useDrop} from 'react-dnd';
+import {DRAGGABLE_ALGO_COMPONENT, DRAGGABLE_MODEL} from '@app/views/commons/x6-demo/constants/graph';
+import {useExperimentGraph} from '@app/views/commons/x6-demo/pages/rx-models/experiment-graph';
+import {FloatingContextMenu} from './elements/floating-context-menu';
+import {CanvasHandler} from '../common/canvas-handler';
+import {GraphRunningStatus} from './elements/graph-running-status';
 import styles from './canvas-content.less';
 export const CanvasContent = (props) => {
-  const { experimentId, className='' } = props;
+  const {experimentId, className = ''} = props;
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const expGraph = useExperimentGraph(experimentId);
@@ -32,45 +32,48 @@ export const CanvasContent = (props) => {
           clientY: y,
           nodeMeta: item.component,
         });
-      }
-      else {
+      } else {
         message.info('实验数据建立中，请稍后再尝试添加节点');
       }
     },
   });
-  const onHandleSideToolbar = useCallback((action) => () => {
-    if (expGraph.isGraphReady()) {
-      switch (action) {
-      case 'in':
-        expGraph.zoomGraph(0.1);
-        break;
-      case 'out':
-        expGraph.zoomGraph(-0.1);
-        break;
-      case 'fit':
-        expGraph.zoomGraphToFit();
-        break;
-      case 'real':
-        expGraph.zoomGraphRealSize();
-        break;
-      default:
+  const onHandleSideToolbar = useCallback(
+    (action) => () => {
+      if (expGraph.isGraphReady()) {
+        switch (action) {
+        case 'in':
+          expGraph.zoomGraph(0.1);
+          break;
+        case 'out':
+          expGraph.zoomGraph(-0.1);
+          break;
+        case 'fit':
+          expGraph.zoomGraphToFit();
+          break;
+        case 'real':
+          expGraph.zoomGraphRealSize();
+          break;
+        default:
+        }
       }
-    }
-  }, [expGraph]);
-  return (<div ref={(elem) => {
-    containerRef.current = elem;
-    dropRef(elem);
-  }} className={`${styles.canvasContent} ${className}`}>
-      
-    <FloatingContextMenu experimentId={experimentId}/>
+    },
+    [expGraph],
+  );
+  return (
+    <div
+      ref={(elem) => {
+        containerRef.current = elem;
+        dropRef(elem);
+      }}
+      className={`${styles.canvasContent} ${className}`}
+    >
+      <FloatingContextMenu experimentId={experimentId} />
 
-      
-    <CanvasHandler onZoomIn={onHandleSideToolbar('in')} onZoomOut={onHandleSideToolbar('out')} onFitContent={onHandleSideToolbar('fit')} onRealContent={onHandleSideToolbar('real')}/>
+      <CanvasHandler onZoomIn={onHandleSideToolbar('in')} onZoomOut={onHandleSideToolbar('out')} onFitContent={onHandleSideToolbar('fit')} onRealContent={onHandleSideToolbar('real')} />
 
-      
-    <GraphRunningStatus className={styles.runningStatus} experimentId={experimentId}/>
+      <GraphRunningStatus className={styles.runningStatus} experimentId={experimentId} />
 
-      
-    <div ref={canvasRef}/>
-  </div>);
+      <div ref={canvasRef} />
+    </div>
+  );
 };

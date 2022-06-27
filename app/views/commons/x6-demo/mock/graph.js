@@ -1,5 +1,5 @@
 import {randNum} from '@huxy/utils';
-export const copyNode = ({ name, x, y }) => {
+export const copyNode = ({name, x, y}) => {
   const id = `${Date.now()}`;
   return {
     id,
@@ -42,7 +42,7 @@ export const copyNode = ({ name, x, y }) => {
     groupId: 0,
   };
 };
-export const addNode = ({ name, x, y }) => {
+export const addNode = ({name, x, y}) => {
   const id = `${Date.now()}`;
   return {
     id,

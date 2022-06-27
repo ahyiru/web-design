@@ -1,11 +1,11 @@
-import { Graph } from '@antv/x6';
-import { BehaviorSubject, fromEventPattern, merge } from 'rxjs';
-import { debounceTime, map, tap, scan } from 'rxjs/operators';
+import {Graph} from '@antv/x6';
+import {BehaviorSubject, fromEventPattern, merge} from 'rxjs';
+import {debounceTime, map, tap, scan} from 'rxjs/operators';
 import './graph-core.less';
 function setCellsSelectedStatus(cells, selected) {
   cells.forEach((cell) => {
     const data = cell.getData() || {};
-    cell.setData({ ...data, selected });
+    cell.setData({...data, selected});
   });
 }
 export class GraphCore {
@@ -28,12 +28,12 @@ export class GraphCore {
   deleteNodeOrEdgeSub;
   copyNodeSub;
   constructor(options) {
-    const { wrapper, container, nodes, edges, ...others } = options;
+    const {wrapper, container, nodes, edges, ...others} = options;
     this.setMeta(options);
     this.options = others;
   }
   setMeta(params) {
-    const { wrapper, container, nodes, edges } = params;
+    const {wrapper, container, nodes, edges} = params;
     if (wrapper) {
       this.setWrapper(wrapper);
     }
@@ -48,11 +48,11 @@ export class GraphCore {
     }
   }
   get isMetaValid() {
-    const { wrapper, container, nodeMetas, edgeMetas } = this;
+    const {wrapper, container, nodeMetas, edgeMetas} = this;
     return !!wrapper && !!container && !!nodeMetas && !!edgeMetas;
   }
   get nodes() {
-    return (this.graph?.getNodes() || []);
+    return this.graph?.getNodes() || [];
   }
   setWrapper(wrapper) {
     this.wrapper = wrapper;
@@ -70,10 +70,10 @@ export class GraphCore {
   render(params) {
     this.setMeta(params);
     if (this.isMetaValid) {
-      const { wrapper, options, nodeMetas, edgeMetas } = this;
+      const {wrapper, options, nodeMetas, edgeMetas} = this;
       const width = wrapper.clientWidth;
       const height = wrapper.clientHeight;
-      const graph = new Graph({ ...options, width, height });
+      const graph = new Graph({...options, width, height});
       this.graph = graph;
       nodeMetas.forEach((nodeMeta) => this.renderNode(nodeMeta));
       edgeMetas.forEach((edgeMeta) => this.renderEdge(edgeMeta));
@@ -83,34 +83,46 @@ export class GraphCore {
       }
       requestAnimationFrame(() => {
         // graph.centerContent();
-        graph.zoomToFit({ padding: 12 });
+        graph.zoomToFit({padding: 12});
       });
-      this.windowResizeSub = fromEventPattern((handler) => {
-        window.addEventListener('resize', handler);
-      }, (handler) => {
-        window.removeEventListener('resize', handler);
-      }).subscribe(this.resizeGraph);
-      const nodeContextMenuObs = fromEventPattern((handler) => {
-        graph.on('node:contextmenu', (data) => {
-          handler({ type: 'node', data });
-        });
-      }, (handler) => {
-        graph.off('node:contextmenu', handler);
-      });
-      const edgeContextMenuObs = fromEventPattern((handler) => {
-        graph.on('edge:contextmenu', (data) => {
-          handler({ type: 'edge', data });
-        });
-      }, (handler) => {
-        graph.off('edge:contextmenu', handler);
-      });
-      const graphContextMenuObs = fromEventPattern((handler) => {
-        graph.on('blank:contextmenu', (data) => {
-          handler({ type: 'graph', data });
-        });
-      }, (handler) => {
-        graph.off('edge:contextmenu', handler);
-      });
+      this.windowResizeSub = fromEventPattern(
+        (handler) => {
+          window.addEventListener('resize', handler);
+        },
+        (handler) => {
+          window.removeEventListener('resize', handler);
+        },
+      ).subscribe(this.resizeGraph);
+      const nodeContextMenuObs = fromEventPattern(
+        (handler) => {
+          graph.on('node:contextmenu', (data) => {
+            handler({type: 'node', data});
+          });
+        },
+        (handler) => {
+          graph.off('node:contextmenu', handler);
+        },
+      );
+      const edgeContextMenuObs = fromEventPattern(
+        (handler) => {
+          graph.on('edge:contextmenu', (data) => {
+            handler({type: 'edge', data});
+          });
+        },
+        (handler) => {
+          graph.off('edge:contextmenu', handler);
+        },
+      );
+      const graphContextMenuObs = fromEventPattern(
+        (handler) => {
+          graph.on('blank:contextmenu', (data) => {
+            handler({type: 'graph', data});
+          });
+        },
+        (handler) => {
+          graph.off('edge:contextmenu', handler);
+        },
+      );
       this.nodeContextMenuSub = nodeContextMenuObs.subscribe((data) => {
         this.onNodeContextMenu(data);
       });
@@ -120,77 +132,101 @@ export class GraphCore {
           this.onContextMenu(data);
         }
       });
-      this.selectNodeSub = fromEventPattern((handler) => {
-        graph.on('selection:changed', handler);
-      }, (handler) => {
-        graph.off('selection:changed', handler);
-      }).subscribe((args) => {
-        const { removed, selected } = args;
+      this.selectNodeSub = fromEventPattern(
+        (handler) => {
+          graph.on('selection:changed', handler);
+        },
+        (handler) => {
+          graph.off('selection:changed', handler);
+        },
+      ).subscribe((args) => {
+        const {removed, selected} = args;
         setCellsSelectedStatus(removed, false);
         setCellsSelectedStatus(selected, true);
         this.onSelectNodes(selected);
       });
-      this.connectNodeSub = fromEventPattern((handler) => {
-        graph.on('edge:connected', handler);
-      }, (handler) => {
-        graph.off('edge:connected', handler);
-      }).subscribe((args) => {
+      this.connectNodeSub = fromEventPattern(
+        (handler) => {
+          graph.on('edge:connected', handler);
+        },
+        (handler) => {
+          graph.off('edge:connected', handler);
+        },
+      ).subscribe((args) => {
         this.onConnectNode(args);
       });
-      this.connectionRemovedSub = fromEventPattern((handler) => {
-        graph.on('edge:removed', handler);
-      }, (handler) => {
-        graph.off('edge:removed', handler);
-      }).subscribe((args) => {
+      this.connectionRemovedSub = fromEventPattern(
+        (handler) => {
+          graph.on('edge:removed', handler);
+        },
+        (handler) => {
+          graph.off('edge:removed', handler);
+        },
+      ).subscribe((args) => {
         this.onConnectionRemoved(args);
       });
       let moveStarted = false;
-      this.moveNodesSub = fromEventPattern((handler) => {
-        graph.on('node:change:position', handler);
-      }, (handler) => {
-        graph.off('node:change:position', handler);
-      })
-        .pipe(tap((args) => {
-          this.onMoveNodeStart(args);
-        }), scan((accum, args) => {
-          const currentAccum = !moveStarted ? [] : accum;
-          const { node } = args;
-          const { id } = node;
-          const matchItemIndex = currentAccum.findIndex((item) => item.id === id);
-          if (matchItemIndex > -1) {
-            currentAccum.splice(matchItemIndex, 1, { id, data: args });
-          }
-          else {
-            currentAccum.push({ id, data: args });
-          }
-          return currentAccum;
-        }, []), tap(() => {
-          if (!moveStarted) {
-            moveStarted = true;
-          }
-        }), debounceTime(300), tap(() => {
-          if (moveStarted) {
-            moveStarted = false;
-          }
-        }), map((items) => items.map((item) => item.data)))
+      this.moveNodesSub = fromEventPattern(
+        (handler) => {
+          graph.on('node:change:position', handler);
+        },
+        (handler) => {
+          graph.off('node:change:position', handler);
+        },
+      )
+        .pipe(
+          tap((args) => {
+            this.onMoveNodeStart(args);
+          }),
+          scan((accum, args) => {
+            const currentAccum = !moveStarted ? [] : accum;
+            const {node} = args;
+            const {id} = node;
+            const matchItemIndex = currentAccum.findIndex((item) => item.id === id);
+            if (matchItemIndex > -1) {
+              currentAccum.splice(matchItemIndex, 1, {id, data: args});
+            } else {
+              currentAccum.push({id, data: args});
+            }
+            return currentAccum;
+          }, []),
+          tap(() => {
+            if (!moveStarted) {
+              moveStarted = true;
+            }
+          }),
+          debounceTime(300),
+          tap(() => {
+            if (moveStarted) {
+              moveStarted = false;
+            }
+          }),
+          map((items) => items.map((item) => item.data)),
+        )
         .subscribe((movedNodes) => {
           this.onMoveNodes(movedNodes);
         });
-      this.deleteNodeOrEdgeSub = fromEventPattern((handler) => {
-        graph.bindKey(['delete', 'backspace'], handler);
-      }, () => {
-        graph.unbindKey(['delete', 'backspace']);
-      }).subscribe(() => {
+      this.deleteNodeOrEdgeSub = fromEventPattern(
+        (handler) => {
+          graph.bindKey(['delete', 'backspace'], handler);
+        },
+        () => {
+          graph.unbindKey(['delete', 'backspace']);
+        },
+      ).subscribe(() => {
         const selectedCells = graph.getSelectedCells();
         const selectedNodes = selectedCells.filter((cell) => cell.isNode());
         const selectedEdges = selectedCells.filter((cell) => cell.isEdge());
-        this.onDeleteNodeOrEdge({ nodes: selectedNodes, edges: selectedEdges });
+        this.onDeleteNodeOrEdge({nodes: selectedNodes, edges: selectedEdges});
       });
-      this.copyNodeSub = fromEventPattern((handler) => {
-        graph.bindKey(['command+c', 'ctrl+c', 'command+v', 'ctrl+v'], handler);
-      }, () => {
-        graph.unbindKey(['command+c', 'ctrl+c', 'command+v', 'ctrl+v']);
-      }).subscribe((args) => {
+      this.copyNodeSub = fromEventPattern(
+        (handler) => {
+          graph.bindKey(['command+c', 'ctrl+c', 'command+v', 'ctrl+v'], handler);
+        },
+        () => {
+          graph.unbindKey(['command+c', 'ctrl+c', 'command+v', 'ctrl+v']);
+        },
+      ).subscribe((args) => {
         const [, action] = args;
         const selectedCells = graph.getSelectedCells().filter((cell) => this.validateNodeCopyable(cell));
         const copyableNodeId = this.copyableNodeId$.getValue();
@@ -214,8 +250,7 @@ export class GraphCore {
         default:
         }
       });
-    }
-    else {
+    } else {
       this.throwRenderError();
     }
   }
@@ -231,7 +266,7 @@ export class GraphCore {
     }
   }
   resizeGraph = () => {
-    const { graph, wrapper } = this;
+    const {graph, wrapper} = this;
     if (graph && wrapper) {
       requestAnimationFrame(() => {
         const width = wrapper.clientWidth;
@@ -343,8 +378,7 @@ export class GraphCore {
     const edge = this.graph?.getCellById(edgeId);
     if (edge?.isEdge()) {
       handler(edge);
-    }
-    else {
+    } else {
       handler(undefined);
     }
   };
@@ -369,31 +403,28 @@ export class GraphCore {
   zoom = (factor) => {
     if (typeof factor === 'number') {
       this.graph?.zoom(factor);
-    }
-    else if (factor === 'fit') {
-      this.graph?.zoomToFit({ padding: 12 });
-    }
-    else if (factor === 'real') {
+    } else if (factor === 'fit') {
+      this.graph?.zoomToFit({padding: 12});
+    } else if (factor === 'real') {
       this.graph?.scale(1);
       this.graph?.centerContent();
     }
   };
   toggleSelectionEnabled = (enabled) => {
-    const { graph } = this;
+    const {graph} = this;
     if (graph) {
       const needEnableRubberBand = typeof enabled === 'undefined' ? !graph.isRubberbandEnabled() : enabled;
       if (needEnableRubberBand) {
         graph.disablePanning();
         graph.enableRubberband();
-      }
-      else {
+      } else {
         graph.enablePanning();
         graph.disableRubberband();
       }
     }
   };
   selectNodes = (ids) => {
-    const { graph } = this;
+    const {graph} = this;
     if (graph) {
       const target = [].concat(ids).map((i) => i.toString());
       graph.cleanSelection();
@@ -405,19 +436,19 @@ export class GraphCore {
     }
   };
   unSelectNode = () => {
-    const { graph } = this;
+    const {graph} = this;
     if (graph) {
       graph.cleanSelection();
     }
   };
   redo = () => {
-    const { graph } = this;
+    const {graph} = this;
     if (graph) {
       graph.redo();
     }
   };
   undo = () => {
-    const { graph } = this;
+    const {graph} = this;
     if (graph) {
       graph.undo();
     }

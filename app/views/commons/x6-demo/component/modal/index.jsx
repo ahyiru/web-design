@@ -1,11 +1,11 @@
 import {createRoot} from 'react-dom/client';
-import { Modal, ConfigProvider } from 'antd';
-import { isPromise } from '@app/views/commons/x6-demo/common/utils';
-import { ANT_PREFIX } from '@app/views/commons/x6-demo/constants/global';
+import {Modal, ConfigProvider} from 'antd';
+import {isPromise} from '@app/views/commons/x6-demo/common/utils';
+import {ANT_PREFIX} from '@app/views/commons/x6-demo/constants/global';
 export const showModal = (props) => {
   const div = document.createElement('div');
   document.body.appendChild(div);
-  const rootNode=createRoot(div);
+  const rootNode = createRoot(div);
   let config = {
     ...props,
     visible: true,
@@ -14,13 +14,11 @@ export const showModal = (props) => {
       if (typeof props.onOk === 'function') {
         const ret = props.onOk(e);
         if (isPromise(ret)) {
-                    
           ret.then(() => {
             close();
           });
         }
-      }
-      else {
+      } else {
         close();
       }
     },
@@ -50,11 +48,13 @@ export const showModal = (props) => {
     update(nextConfig);
   }
   function render(usedConfig) {
-    const { children, ...others } = usedConfig;
+    const {children, ...others} = usedConfig;
     setTimeout(() => {
-      rootNode.render(<ConfigProvider prefixCls={ANT_PREFIX}>
-        <Modal {...others}>{children}</Modal>
-      </ConfigProvider>);
+      rootNode.render(
+        <ConfigProvider prefixCls={ANT_PREFIX}>
+          <Modal {...others}>{children}</Modal>
+        </ConfigProvider>,
+      );
     }, 0);
   }
   render(config);

@@ -55,7 +55,7 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
   const [schema, setSchema] = useState(formData(data));
 
   useEffect(() => {
-    setSchema(formData(data));
+    setSchema([...formData(data)]);
   }, [data]);
 
   const schemaTree = updateId(schema, 'key');
@@ -83,7 +83,7 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
       cancelText: actionsText.delete_confirm_cancel,
       onOk: () => {
         const tree = deleteNodes(schemaTree, item.key, 'key');
-        setSchema(tree);
+        setSchema([...tree]);
         getValues?.(tree);
       },
       onCancel() {
@@ -93,13 +93,13 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
   };
   const onModalOk = (values) => {
     const tree = addNodes(schemaTree, selectedKey, [values], 'key');
-    setSchema(tree);
+    setSchema([...tree]);
     getValues?.(tree);
   };
 
   const editProps = (values) => {
     const tree = editNodes(schemaTree, selectedKey, {props: values}, 'key');
-    setSchema(tree);
+    setSchema([...tree]);
     getValues?.({schema: tree[0]});
   };
 

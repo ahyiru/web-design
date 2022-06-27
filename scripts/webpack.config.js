@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 // const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
@@ -86,6 +87,7 @@ const plugins=[
   new SimpleProgressWebpackPlugin({
     format: 'compact',
   }),
+  new NodePolyfillPlugin(),
 ];
 
 const rules=[

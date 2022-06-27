@@ -2,8 +2,8 @@ export function calcPointsInfo(points) {
   if (!Array.isArray(points) || !points.length) {
     throw new Error('计算坐标边缘必须传入一组坐标');
   }
-  const Xs = points.map(({x})=>x);
-  const Ys = points.map(({y})=>y);
+  const Xs = points.map(({x}) => x);
+  const Ys = points.map(({y}) => y);
   const minX = Math.min(Xs);
   const minY = Math.min(Ys);
   const maxX = Math.max(Xs);
@@ -34,7 +34,7 @@ export function revertPointsToOrigin(points, origin) {
   }));
 }
 export function formatNodeToGraphNodeConf(originNode) {
-  const { id, nodeInstanceId, positionX, positionY } = originNode;
+  const {id, nodeInstanceId, positionX, positionY} = originNode;
   return {
     ...originNode,
     x: positionX || 0,
@@ -94,10 +94,10 @@ export function formatNodeToGraphNodeConf(originNode) {
   };
 }
 export function formatExperimentGraph(graph = {}) {
-  const { nodes = [], links = [], groups = [] } = graph;
+  const {nodes = [], links = [], groups = []} = graph;
   const formattedNodes = nodes.map((node) => formatNodeToGraphNodeConf(node));
   const formattedEdges = links.map((link) => {
-    const { source, target } = link;
+    const {source, target} = link;
     return {
       ...link,
       source: source.toString(),
@@ -106,7 +106,7 @@ export function formatExperimentGraph(graph = {}) {
     };
   });
   const groupNodeMap = groups.reduce((mapResult, currentGroup) => {
-    const { id } = currentGroup;
+    const {id} = currentGroup;
     return {
       ...mapResult,
       [id]: formattedNodes.filter((node) => node.groupId.toString() === id.toString()) || [],

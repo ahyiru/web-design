@@ -10,6 +10,12 @@ import Panel from '@app/components/panel';
 
 import {testFetcher} from '@app/apis/fetcher';
 
+import {storage} from '@huxy/utils';
+
+const {PROXY} = require('@configs');
+
+const token = storage.get('token');
+
 const strToJson = (str) => new Function(`return ${str}`)();
 
 const Index = (props) => {
@@ -49,13 +55,19 @@ const Index = (props) => {
               name="addApi"
               onFinish={onFinish}
               form={form}
-              initialValues={{method: 'get', ...item}}
+              initialValues={{method: 'get', ...item, service: PROXY, token}}
               {...layout}
               // style={formStyle}
             >
               {/* <Form.Item label="接口名" name="name">
               <Input disabled placeholder="用户名" style={{width:'80%'}} />
             </Form.Item> */}
+              <Form.Item label="服务地址" name="service" labelCol={{span: 2}} wrapperCol={{span: 20}}>
+                <Input disabled />
+              </Form.Item>
+              <Form.Item label="Token" name="token" labelCol={{span: 2}} wrapperCol={{span: 20}}>
+                <Input disabled />
+              </Form.Item>
               <Row>
                 <Col span={6}>
                   <Form.Item label={addFormText.url} name="url">

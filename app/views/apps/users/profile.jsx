@@ -29,7 +29,7 @@ const Index = (props) => {
     if (code === 200) {
       message.success(msg);
       // props.router.push('/');
-      location.href = '#/profile';
+      location.href = location.hash ? `#/profile` : `/profile`;
     }
   };
 

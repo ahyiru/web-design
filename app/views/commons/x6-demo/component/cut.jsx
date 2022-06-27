@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
+import {useCallback} from 'react';
 import styles from './cut.less';
 export const Cut = (props) => {
-  const { left, right = 0, max, children } = props;
+  const {left, right = 0, max, children} = props;
   const getText = useCallback(() => {
     const len = children.length;
     const ellipsis = '...';
@@ -10,8 +10,7 @@ export const Cut = (props) => {
     if (len > max) {
       if (left && len) {
         leftStr = children.substr(0, left);
-      }
-      else {
+      } else {
         leftStr = children.substr(0, max);
       }
       if (right) {

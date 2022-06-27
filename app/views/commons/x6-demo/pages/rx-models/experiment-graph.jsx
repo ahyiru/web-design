@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import {createRoot} from 'react-dom/client';
-import { ANT_PREFIX } from '@app/views/commons/x6-demo/constants/global';
-import { BehaviorSubject, fromEventPattern, timer } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import {ANT_PREFIX} from '@app/views/commons/x6-demo/constants/global';
+import {BehaviorSubject, fromEventPattern, timer} from 'rxjs';
+import {filter, take} from 'rxjs/operators';
 import produce from 'immer';
-import { ConfigProvider, message, Tooltip } from 'antd';
-import { RERENDER_EVENT } from '@app/views/commons/x6-demo/constants/graph';
-import { GraphCore } from './graph-core';
-import { X6DemoGroupNode, X6DemoNode } from '../common/graph-common/shape/node';
-import { GuideEdge, X6DemoGroupEdge } from '../common/graph-common/shape/edge';
-import { NodeElement } from '../dag-canvas/elements/node-element';
-import { NodeGroup } from '../dag-canvas/elements/node-group';
-import { expandGroupAccordingToNodes, formatGraphData, formatNodeInfoToNodeMeta } from './graph-util';
-import { queryGraph, addNode, copyNode } from '@app/views/commons/x6-demo/mock/graph';
-import { queryGraphStatus, runGraph, stopGraphRun } from '@app/views/commons/x6-demo/mock/status';
+import {ConfigProvider, message, Tooltip} from 'antd';
+import {RERENDER_EVENT} from '@app/views/commons/x6-demo/constants/graph';
+import {GraphCore} from './graph-core';
+import {X6DemoGroupNode, X6DemoNode} from '../common/graph-common/shape/node';
+import {GuideEdge, X6DemoGroupEdge} from '../common/graph-common/shape/edge';
+import {NodeElement} from '../dag-canvas/elements/node-element';
+import {NodeGroup} from '../dag-canvas/elements/node-group';
+import {expandGroupAccordingToNodes, formatGraphData, formatNodeInfoToNodeMeta} from './graph-util';
+import {queryGraph, addNode, copyNode} from '@app/views/commons/x6-demo/mock/graph';
+import {queryGraphStatus, runGraph, stopGraphRun} from '@app/views/commons/x6-demo/mock/status';
 export function parseStatus(data) {
-  const { execInfo, instStatus } = data;
+  const {execInfo, instStatus} = data;
   Object.entries(execInfo).forEach(([id, val]) => {
     val.jobStatus = instStatus[id];
   });
@@ -53,7 +53,7 @@ class ExperimentGraph extends GraphCore {
         enabled: true,
       },
       connecting: {
-        snap: { radius: 10 },
+        snap: {radius: 10},
         allowBlank: false,
         highlight: true,
         connector: 'pai',
@@ -78,22 +78,20 @@ class ExperimentGraph extends GraphCore {
           });
         },
         validateEdge: (args) => {
-          const { edge } = args;
+          const {edge} = args;
           return !!edge?.target?.port;
         },
-        validateMagnet({ magnet }) {
+        validateMagnet({magnet}) {
           return magnet.getAttribute('port-group') !== 'in';
         },
-        validateConnection({ sourceView, targetView, sourceMagnet, targetMagnet }) {
+        validateConnection({sourceView, targetView, sourceMagnet, targetMagnet}) {
           if (sourceView === targetView) {
             return false;
           }
-          if (!sourceMagnet ||
-                        sourceMagnet.getAttribute('port-group') === 'in') {
+          if (!sourceMagnet || sourceMagnet.getAttribute('port-group') === 'in') {
             return false;
           }
-          if (!targetMagnet ||
-                        targetMagnet.getAttribute('port-group') !== 'in') {
+          if (!targetMagnet || targetMagnet.getAttribute('port-group') !== 'in') {
             return false;
           }
           const portId = targetMagnet.getAttribute('port');
@@ -129,17 +127,19 @@ class ExperimentGraph extends GraphCore {
         },
       },
       onPortRendered(args) {
-        const { port } = args;
-        const { contentSelectors } = args;
+        const {port} = args;
+        const {contentSelectors} = args;
         const container = contentSelectors && contentSelectors.content;
         const placement = port.group === 'in' ? 'top' : 'bottom';
-        const cls = port.connected?'ais-port connected':'ais-port';
+        const cls = port.connected ? 'ais-port connected' : 'ais-port';
         if (container) {
-          createRoot(container).render(<ConfigProvider prefixCls={ANT_PREFIX}>
-            <Tooltip title={port.description} placement={placement}>
-              <span className={cls}/>
-            </Tooltip>
-          </ConfigProvider>);
+          createRoot(container).render(
+            <ConfigProvider prefixCls={ANT_PREFIX}>
+              <Tooltip title={port.description} placement={placement}>
+                <span className={cls} />
+              </Tooltip>
+            </ConfigProvider>,
+          );
         }
       },
     });
@@ -147,15 +147,14 @@ class ExperimentGraph extends GraphCore {
     this.initialize();
   }
   async initialize() {
-    const { experimentId } = this;
+    const {experimentId} = this;
     this.loading$.next(true);
     try {
       await this.loadExperiment(experimentId);
       await this.loadExperimentGraph(experimentId);
       await this.loadExecutionStatus(experimentId);
       this.loading$.next(false);
-    }
-    catch (e) {
+    } catch (e) {
       this.loading$.next(false);
       console.error('加载实验错误', e);
     }
@@ -174,11 +173,10 @@ class ExperimentGraph extends GraphCore {
         id: 353355,
       };
       this.experiment$.next(res);
-      return { success: true };
-    }
-    catch (e) {
+      return {success: true};
+    } catch (e) {
       console.error('加载实验错误', e);
-      return { success: false };
+      return {success: false};
     }
   }
   async loadExperimentGraph(experimentId) {
@@ -203,12 +201,10 @@ class ExperimentGraph extends GraphCore {
       if (nodes.length) {
         nextGraph.nodes = oldGraph.nodes.filter((node) => !nodes.includes(node.id.toString()));
         nextGraph.links = oldGraph.links.filter((link) => !nodes.find((node) => [link.source.toString(), link.target.toString()].includes(node)));
-      }
-      else {
+      } else {
         nextGraph.links = oldGraph.links.filter((link) => {
           return !links.find((delLink) => {
-            return (delLink.inputPortId.toString() === link.inputPortId.toString() &&
-                            delLink.outputPortId.toString() === link.outputPortId.toString());
+            return delLink.inputPortId.toString() === link.inputPortId.toString() && delLink.outputPortId.toString() === link.outputPortId.toString();
           });
         });
       }
@@ -221,12 +217,11 @@ class ExperimentGraph extends GraphCore {
       const execStatusRes = await queryGraphStatus();
       this.executionStatus$.next(execStatusRes.data);
       this.updateEdgeStatus();
-      const { status } = execStatusRes.data;
+      const {status} = execStatusRes.data;
       if (status === 'default') {
         this.running$.next(false);
         this.executionStatusQuerySub?.unsubscribe();
-      }
-      else {
+      } else {
         this.running$.next(true);
       }
     });
@@ -236,10 +231,13 @@ class ExperimentGraph extends GraphCore {
   }
   renderGraph = (wrapper, container) => {
     this.experimentGraphSub = this.experimentGraph$
-      .pipe(filter((x) => !!x), take(1))
+      .pipe(
+        filter((x) => !!x),
+        take(1),
+      )
       .subscribe((graphData) => {
         if (!this.graph) {
-          const { nodes, edges } = formatGraphData(graphData);
+          const {nodes, edges} = formatGraphData(graphData);
           super.render({
             wrapper,
             container,
@@ -248,33 +246,40 @@ class ExperimentGraph extends GraphCore {
           });
         }
       });
-    this.reRenderSub = fromEventPattern((handler) => {
-      window.addEventListener(RERENDER_EVENT, handler);
-    }, (handler) => {
-      window.removeEventListener(RERENDER_EVENT, handler);
-    }).subscribe(this.handlerResize);
+    this.reRenderSub = fromEventPattern(
+      (handler) => {
+        window.addEventListener(RERENDER_EVENT, handler);
+      },
+      (handler) => {
+        window.removeEventListener(RERENDER_EVENT, handler);
+      },
+    ).subscribe(this.handlerResize);
   };
   renderNode(nodeMeta) {
-    const { experimentId } = this;
-    const { data } = nodeMeta;
-    const { type, includedNodes = [] } = data;
+    const {experimentId} = this;
+    const {data} = nodeMeta;
+    const {type, includedNodes = []} = data;
     if (type === 'node') {
-      const node = this.graph.addNode(new X6DemoNode({
-        ...nodeMeta,
-        shape: 'ais-rect-port',
-        component: <NodeElement experimentId={experimentId}/>,
-      }));
+      const node = this.graph.addNode(
+        new X6DemoNode({
+          ...nodeMeta,
+          shape: 'ais-rect-port',
+          component: <NodeElement experimentId={experimentId} />,
+        }),
+      );
       if (nodeMeta.data.hide) {
         this.pendingNodes.push(node);
       }
       return node;
     }
     if (type === 'group' && includedNodes?.length) {
-      const group = this.graph.addNode(new X6DemoGroupNode({
-        ...nodeMeta,
-        shape: 'react-shape',
-        component: <NodeGroup experimentId={experimentId}/>,
-      }));
+      const group = this.graph.addNode(
+        new X6DemoGroupNode({
+          ...nodeMeta,
+          shape: 'react-shape',
+          component: <NodeGroup experimentId={experimentId} />,
+        }),
+      );
       includedNodes.forEach((normalNode) => {
         const targetNode = this.getNodeById(normalNode.id);
         group.addChild(targetNode);
@@ -291,7 +296,7 @@ class ExperimentGraph extends GraphCore {
     this.pendingNodes = [];
   }
   renderEdge(edgeMeta) {
-    const { type } = edgeMeta;
+    const {type} = edgeMeta;
     if (type === 'group') {
       return this.graph.addEdge(new X6DemoGroupEdge(edgeMeta));
     }
@@ -310,15 +315,13 @@ class ExperimentGraph extends GraphCore {
       if (currentActiveNode?.id !== nodeData?.id) {
         this.activeNodeInstance$.next(nodeData);
       }
-    }
-    else {
+    } else {
       this.selectedNodes$.next(selectedNodes);
       this.activeNodeInstance$.next(null);
     }
     if (selectedGroups.length === 1) {
       this.selectedGroup$.next(selectedGroups[0]);
-    }
-    else {
+    } else {
       this.selectedGroup$.next(undefined);
     }
   }
@@ -328,8 +331,8 @@ class ExperimentGraph extends GraphCore {
     }
   };
   async onConnectNode(args) {
-    const { edge = {}, isNew } = args;
-    const { source, target } = edge;
+    const {edge = {}, isNew} = args;
+    const {source, target} = edge;
     if (isNew) {
       const node = args.currentCell;
       const portId = edge.getTargetPortId();
@@ -352,44 +355,43 @@ class ExperimentGraph extends GraphCore {
         this.updateExperimentGraph([], [data]);
       }
     }
-    return { success: true };
+    return {success: true};
   }
   onConnectionRemoved(args) {
     try {
-      const { edge } = args;
-      const { target } = edge;
-      const { cell: nodeId, port: portId } = target;
+      const {edge} = args;
+      const {target} = edge;
+      const {cell: nodeId, port: portId} = target;
       if (nodeId) {
         const targetCell = this.getNodeById(nodeId);
         if (targetCell) {
           targetCell.setPortProp(portId, 'connected', false);
         }
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.warn(error);
     }
   }
   onMoveNodeStart(args) {
-    const { node } = args;
+    const {node} = args;
     const parent = node.getParent();
     const parentData = parent?.getData();
     if (parentData && !parentData?.isCollapsed) {
-      expandGroupAccordingToNodes({ moveNodes: [node] });
+      expandGroupAccordingToNodes({moveNodes: [node]});
     }
   }
   async onMoveNodes(movedNodes) {
     const targetNodes = movedNodes.filter((arg) => {
-      const { node } = arg;
+      const {node} = arg;
       return !node.isGroup();
     });
     if (targetNodes?.length) {
       const newPos = targetNodes.map((moveNode) => {
-        const { current, node } = moveNode;
-        const { x, y } = current;
-        const { id } = node;
+        const {current, node} = moveNode;
+        const {x, y} = current;
+        const {id} = node;
         this.updateNodeById(id, (node) => {
-          node.setData({ x, y });
+          node.setData({x, y});
         });
         return {
           nodeInstanceId: id,
@@ -400,7 +402,7 @@ class ExperimentGraph extends GraphCore {
       const oldGraph = this.experimentGraph$.getValue();
       const newGraph = produce(oldGraph, (nextGraph) => {
         newPos.forEach((position) => {
-          const { nodeInstanceId, posX, posY } = position;
+          const {nodeInstanceId, posX, posY} = position;
           const matchNode = nextGraph.nodes.find((item) => item.id.toString() === nodeInstanceId.toString());
           if (matchNode) {
             matchNode.positionX = posX;
@@ -412,7 +414,7 @@ class ExperimentGraph extends GraphCore {
     }
   }
   onDeleteNodeOrEdge(args) {
-    const { nodes, edges } = args;
+    const {nodes, edges} = args;
     const normalNodes = nodes.filter((node) => !node.isGroup());
     if (normalNodes?.length) {
       this.requestDeleteNodes(normalNodes.map((node) => node.id));
@@ -431,31 +433,30 @@ class ExperimentGraph extends GraphCore {
       const newNode = formatNodeInfoToNodeMeta(res);
       this.addNode(newNode);
       this.clearContextMenuInfo();
-    }
-    catch (error) {
+    } catch (error) {
       message.error('复制节点失败，请重试');
     }
   }
   updateEdgeStatus = () => {
     if (this.graph) {
-      const { graph } = this;
+      const {graph} = this;
       const executionStatus = this.executionStatus$.getValue();
-      const { instStatus } = executionStatus;
+      const {instStatus} = executionStatus;
       const nodeIds = Object.keys(instStatus);
-      const runningNodeIds = nodeIds
-        .filter((id) => instStatus[id] === 'running')
-        .map((i) => i.toString());
+      const runningNodeIds = nodeIds.filter((id) => instStatus[id] === 'running').map((i) => i.toString());
       this.updateEdges((edges) => {
         edges.forEach((edge) => {
-          const { target: { cell: nodeId }, id } = edge;
+          const {
+            target: {cell: nodeId},
+            id,
+          } = edge;
           const view = graph?.findViewByCell(id);
           if (!view) {
             return;
           }
           if (runningNodeIds.includes(nodeId.toString())) {
             view.addClass('edgeProcessing');
-          }
-          else {
+          } else {
             view.removeClass('edgeProcessing');
           }
         });
@@ -464,30 +465,28 @@ class ExperimentGraph extends GraphCore {
   };
   runGraph = async () => {
     try {
-      const { experimentId, nodeMetas = [] } = this;
+      const {experimentId, nodeMetas = []} = this;
       await runGraph(nodeMetas);
       this.running$.next(true);
       this.clearContextMenuInfo();
       this.loadExecutionStatus(experimentId);
-      return { success: true };
-    }
-    catch (e) {
+      return {success: true};
+    } catch (e) {
       console.error(`执行失败`, e);
-      return { success: false };
+      return {success: false};
     }
   };
   stopRunGraph = async () => {
     try {
-      const { experimentId } = this;
+      const {experimentId} = this;
       const stopRes = await stopGraphRun();
       this.running$.next(false);
       this.clearContextMenuInfo();
       this.loadExecutionStatus(experimentId);
       return stopRes;
-    }
-    catch (e) {
+    } catch (e) {
       console.error(`停止失败`, e);
-      return { success: false };
+      return {success: false};
     }
   };
   setActiveAlgoData = (data) => {
@@ -496,20 +495,20 @@ class ExperimentGraph extends GraphCore {
       return;
     }
     const oldData = this.activeNodeInstance$.getValue();
-    this.activeNodeInstance$.next({ ...oldData, ...data });
+    this.activeNodeInstance$.next({...oldData, ...data});
   };
   requestAddNode = async (param) => {
-    const { graph } = this;
+    const {graph} = this;
     if (graph) {
-      const { nodeMeta, clientX, clientY } = param;
+      const {nodeMeta, clientX, clientY} = param;
       const pos = graph.clientToLocal(clientX, clientY);
-      const nodeRes = await addNode({ ...nodeMeta, ...pos });
+      const nodeRes = await addNode({...nodeMeta, ...pos});
       this.updateExperimentGraph([nodeRes]);
       const newNode = formatNodeInfoToNodeMeta(nodeRes);
       this.addNode(newNode);
-      return { success: true };
+      return {success: true};
     }
-    return { success: false };
+    return {success: false};
   };
   requestDeleteNodes = async (ids) => {
     const nodeInstanceIds = [].concat(ids);
@@ -517,33 +516,33 @@ class ExperimentGraph extends GraphCore {
       this.deleteNodes(nodeInstanceIds);
       this.clearContextMenuInfo();
       const activeNodeInstance = this.activeNodeInstance$.getValue();
-      if (activeNodeInstance &&
-                nodeInstanceIds
-                  .map((i) => i.toString())
-                  .includes(activeNodeInstance.id.toString())) {
+      if (activeNodeInstance && nodeInstanceIds.map((i) => i.toString()).includes(activeNodeInstance.id.toString())) {
         this.activeNodeInstance$.next(null);
       }
       this.delExperimentGraphElement(nodeInstanceIds, []);
-      return { success: true };
+      return {success: true};
     }
-    return { success: false };
+    return {success: false};
   };
   requestDeleteEdges = async (edges) => {
     const targetEdges = [].concat(edges);
     console.log(targetEdges);
     this.deleteEdges(targetEdges);
-    this.delExperimentGraphElement([], targetEdges.map((cell) => cell.getData()));
-    return { success: true };
+    this.delExperimentGraphElement(
+      [],
+      targetEdges.map((cell) => cell.getData()),
+    );
+    return {success: true};
   };
   undoDeleteNode = async () => {
     this.undo();
   };
   renameNode = async (nodeInstanceId, newName) => {
-    const renameRes = await { success: true };
+    const renameRes = await {success: true};
     if (renameRes.success) {
       const cell = this.getCellById(nodeInstanceId);
       const data = cell.getData();
-      const newData = { ...data, name: newName };
+      const newData = {...data, name: newName};
       cell.setData(newData);
       this.updateExperimentGraph([newData]);
     }
@@ -563,7 +562,7 @@ class ExperimentGraph extends GraphCore {
     this.clearContextMenuInfo();
   };
   unSelectNode = () => {
-    const { graph } = this;
+    const {graph} = this;
     if (graph) {
       graph.cleanSelection();
     }

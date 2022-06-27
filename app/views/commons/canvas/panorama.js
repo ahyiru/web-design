@@ -1,10 +1,27 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import {Spinner} from '@huxy/components';
 
+const pics = [
+  require('@common/images/webgl/front.jpg'),
+  require('@common/images/webgl/back.jpg'),
+  require('@common/images/webgl/up.jpg'),
+  require('@common/images/webgl/down.jpg'),
+  require('@common/images/webgl/left1.jpg'),
+  require('@common/images/webgl/right.jpg'),
+];
+
+/* const styles={
+  position:'fixed',
+  left:0,
+  top:0,
+  width:'100vw',
+  height:'100vh',
+  zIndex:10003,
+}; */
+
 const Index = (props) => {
-  let camera, controls;
-  let renderer;
-  let scene;
+  let renderer, scene, camera, controls;
+  const panorama = useRef();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const getThree = async () => {
@@ -16,70 +33,45 @@ const Index = (props) => {
       animate();
     };
     getThree();
+    return () => {
+      window.removeEventListener('resize', onWindowResize);
+    };
   }, []);
-  const init = async (THREE, OrbitControls) => {
-    // const container = panorama.current;
-    const mounted = document.body;
-
+  const getMaterial = (THREE) => {
+    const materialArray = [];
+    pics.map((pic) => {
+      const texture = new THREE.TextureLoader().load(pic);
+      const material = new THREE.MeshBasicMaterial({map: texture});
+      materialArray.push(material);
+      material.side = THREE.BackSide;
+    });
+    return materialArray;
+  };
+  const init = (THREE, OrbitControls) => {
     renderer = new THREE.WebGLRenderer();
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 100);
+    controls = new OrbitControls(camera, renderer.domElement);
+
+    const mounted = panorama.current; // document.body;
+
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     mounted.appendChild(renderer.domElement);
 
-    scene = new THREE.Scene();
-
-    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 100);
-
     camera.position.z = 0.01;
 
-    controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
     controls.enablePan = false;
     controls.enableDamping = true;
     controls.rotateSpeed = -1.0;
     controls.maxDistance = 0.5;
 
-    // const textures = getTexturesFromAtlasFile( "images/cubemap-miami.jpg", 6 );
+    const materialArray = getMaterial(THREE);
 
-    // const materials = [];
-
-    // for ( let i = 0; i < 6; i ++ ) {
-
-    //   materials.push( new THREE.MeshBasicMaterial( { map: textures[ i ] } ) );
-
-    // }
-    const front = await import('@common/images/webgl/front.jpg');
-    const back = await import('@common/images/webgl/back.jpg');
-    const up = await import('@common/images/webgl/up.jpg');
-    const down = await import('@common/images/webgl/down.jpg');
-    const left1 = await import('@common/images/webgl/left1.jpg');
-    const right = await import('@common/images/webgl/right.jpg');
-    let materialArray = [];
-    let texture_ft = new THREE.TextureLoader().load(front.default);
-    let texture_bk = new THREE.TextureLoader().load(back.default);
-    let texture_up = new THREE.TextureLoader().load(up.default);
-    let texture_dn = new THREE.TextureLoader().load(down.default);
-    let texture_rt = new THREE.TextureLoader().load(left1.default);
-    let texture_lf = new THREE.TextureLoader().load(right.default);
-
-    materialArray.push(new THREE.MeshBasicMaterial({map: texture_ft}));
-    materialArray.push(new THREE.MeshBasicMaterial({map: texture_bk}));
-    materialArray.push(new THREE.MeshBasicMaterial({map: texture_up}));
-    materialArray.push(new THREE.MeshBasicMaterial({map: texture_dn}));
-    materialArray.push(new THREE.MeshBasicMaterial({map: texture_rt}));
-    materialArray.push(new THREE.MeshBasicMaterial({map: texture_lf}));
-
-    for (let i = 0; i < 6; i++) {
-      materialArray[i].side = THREE.BackSide;
-    }
-
-    let skyboxGeo = new THREE.BoxGeometry(1, 1, 1);
-    let skybox = new THREE.Mesh(skyboxGeo, materialArray);
+    const skyboxGeo = new THREE.BoxGeometry(1, 1, 1);
+    const skybox = new THREE.Mesh(skyboxGeo, materialArray);
     scene.add(skybox);
-
-    // const skyBox = new THREE.Mesh( new THREE.BoxGeometry( 1, 1, 1 ), materials );
-    // skyBox.geometry.scale( 1, 1, - 1 );
-    // scene.add( skyBox );
 
     window.addEventListener('resize', onWindowResize);
   };
@@ -95,7 +87,12 @@ const Index = (props) => {
     controls.update();
     renderer.render(scene, camera);
   };
-  return loading ? <Spinner global /> : <div />;
+  return (
+    <>
+      {loading && <Spinner global />}
+      <div ref={panorama} />
+    </>
+  );
 };
 
 export default Index;

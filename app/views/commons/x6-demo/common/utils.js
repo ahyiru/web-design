@@ -1,4 +1,4 @@
-export { unescapeHTML } from '@huxy/utils';
+export {unescapeHTML} from '@huxy/utils';
 export class Deferred {
   resolve;
   reject;
@@ -13,8 +13,7 @@ export class Deferred {
 export const safeJson = (jsonStr = '{}', defaultVal = {}) => {
   try {
     return JSON.parse(jsonStr);
-  }
-  catch (error) {
+  } catch (error) {
     console.warn(`${jsonStr} is not valid json`);
     return defaultVal;
   }
@@ -30,10 +29,8 @@ export class CodeName {
     return list.some((c1) => CodeName.equal(c1, c2));
   }
   static getFromNode(node = {}) {
-    const { codeName = '' } = node;
+    const {codeName = ''} = node;
     return CodeName.parse(codeName);
   }
 }
-export const isPromise = (obj) => !!obj &&
-    (typeof obj === 'object' || typeof obj === 'function') &&
-    typeof obj.then === 'function';
+export const isPromise = (obj) => !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';

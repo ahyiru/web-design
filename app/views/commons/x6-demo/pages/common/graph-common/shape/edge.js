@@ -1,15 +1,14 @@
-import { Shape, Edge } from '@antv/x6';
+import {Shape, Edge} from '@antv/x6';
 import './edge.less';
 export class BaseEdge extends Shape.Edge {
   isGroupEdge() {
     return false;
   }
 }
-export class GuideEdge extends BaseEdge {
-}
+export class GuideEdge extends BaseEdge {}
 GuideEdge.config({
   shape: 'GuideEdge',
-  connector: { name: 'pai' },
+  connector: {name: 'pai'},
   zIndex: 2,
   attrs: {
     line: {

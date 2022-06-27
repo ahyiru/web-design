@@ -66,33 +66,33 @@ export const runGraph = async (nodes) => {
   state.running = true;
   state.idx = 0;
   state.statusRes = newState;
-  return { success: true };
+  return {success: true};
 };
 export const stopGraphRun = () => {
   state.running = false;
   state.idx = 0;
-  return { success: true };
+  return {success: true};
 };
 const getStatus = () => clone(state.statusRes);
 export const queryGraphStatus = async () => {
   const newState = getStatus();
   if (state.running) {
-    const { instStatus, execInfo } = newState.data;
+    const {instStatus, execInfo} = newState.data;
     const idList = Object.keys(instStatus);
     if (state.idx === idList.length) {
       state.idx = 0;
       state.running = false;
       idList.forEach((id) => {
-        instStatus[id]='success';
-        execInfo[id]['jobStatus']='success';
-        newState['data']['status']='success';
+        instStatus[id] = 'success';
+        execInfo[id]['jobStatus'] = 'success';
+        newState['data']['status'] = 'success';
       });
       return newState;
     }
     const key = idList[state.idx];
-    instStatus[key]='running';
-    execInfo[key]['jobStatus']='running';
-    newState['data']['status']='running';
+    instStatus[key] = 'running';
+    execInfo[key]['jobStatus'] = 'running';
+    newState['data']['status'] = 'running';
     state.idx += 1;
     return newState;
   }

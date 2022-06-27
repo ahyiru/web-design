@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import {str2Html} from '@huxy/utils';
 export const useSafeSetHTML = (ref, htmlStr = '') => {
   useEffect(() => {

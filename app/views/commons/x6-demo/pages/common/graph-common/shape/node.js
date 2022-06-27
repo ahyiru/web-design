@@ -1,6 +1,6 @@
-import { Dom, Node } from '@antv/x6';
-import { ReactShape } from '@antv/x6-react-shape';
-import { NODE_WIDTH, NODE_HEIGHT } from '@app/views/commons/x6-demo/constants/graph';
+import {Dom, Node} from '@antv/x6';
+import {ReactShape} from '@antv/x6-react-shape';
+import {NODE_WIDTH, NODE_HEIGHT} from '@app/views/commons/x6-demo/constants/graph';
 export class BaseNode extends ReactShape {
   isGroup() {
     return false;
@@ -22,11 +22,11 @@ X6DemoNode.config({
   ports: {
     groups: {
       in: {
-        position: { name: 'top' },
+        position: {name: 'top'},
         zIndex: 2,
       },
       out: {
-        position: { name: 'bottom' },
+        position: {name: 'bottom'},
         zIndex: 2,
       },
     },
@@ -89,11 +89,11 @@ X6DemoGroupNode.config({
   ports: {
     groups: {
       in: {
-        position: { name: 'top' },
+        position: {name: 'top'},
         zIndex: 2,
       },
       out: {
-        position: { name: 'bottom' },
+        position: {name: 'bottom'},
         zIndex: 2,
       },
     },

@@ -29,7 +29,7 @@ const handleClick = ({addFn, editFn, deleteFn}, item, actionsText) => (
       <Menu.Item key="delete" onClick={() => deleteFn(item)}>
         <a>
           <DeleteOutlined />
-          <span style={{padding: '0 4px'}}>{actionsText.delete_confirm}</span>
+          <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>
         </a>
       </Menu.Item>
     )}
@@ -99,7 +99,7 @@ const Index = (props) => {
       cancelText: actionsText.delete_confirm_cancel,
       onOk: () => {
         const tree = deleteNodes(schemaTree, item.key, 'key');
-        setSchema(tree);
+        setSchema([...tree]);
       },
       onCancel() {
         console.log('Cancel');
@@ -108,12 +108,12 @@ const Index = (props) => {
   };
   const onModalOk = (values) => {
     const tree = addNodes(schemaTree, selectedKey, [values], 'key');
-    setSchema(tree);
+    setSchema([...tree]);
   };
 
   const editProps = (values) => {
     const tree = editNodes(schemaTree, selectedKey, {props: values}, 'key');
-    setSchema(tree);
+    setSchema([...tree]);
     record(tree);
     setDisableUndo(false);
   };
@@ -153,7 +153,7 @@ const Index = (props) => {
     const toId = info.node.key;
     const dropPosition = info.dropPosition;
     const tree = moveNodes(schemaTree, fromId, toId, dropPosition, 'key');
-    setSchema(tree);
+    setSchema([...tree]);
   };
 
   const undoDesign = () => {

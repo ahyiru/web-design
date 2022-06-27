@@ -203,7 +203,7 @@ const Index = (props) => {
           </Panel>
         </Col>
       </Row>
-      {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} isRoot={!data?.length} />}
+      {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} isRoot={!data?.length} store={props.store} />}
     </div>
   );
 };

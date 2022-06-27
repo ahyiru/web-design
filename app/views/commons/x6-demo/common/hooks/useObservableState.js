@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
-import { BehaviorSubject } from 'rxjs';
+import {useEffect, useMemo, useState} from 'react';
+import {BehaviorSubject} from 'rxjs';
 export const useObservableState = (source$, initialState) => {
   const source = useMemo(() => {
     if (typeof source$ === 'function') {
