@@ -9,7 +9,7 @@ const Anchor = ({curName, itemList}) => {
   useEffect(() => {
     itemList.current = validObj(itemList.current);
     if (!curName) {
-      const items = Object.keys(itemList.current).map((key) => ({name: key, offsetTop: itemList.current[key]?.offsetTop ?? 0}));
+      const items = Object.keys(itemList.current).map(key => ({name: key, offsetTop: itemList.current[key]?.offsetTop ?? 0}));
       setName(items[0]?.name);
     }
     if (currentName.current !== curName) {
@@ -27,11 +27,11 @@ const Anchor = ({curName, itemList}) => {
     const scrollToAnchor = throttle(() => {
       if (!isScrolling.current) {
         const offsetTops = sort(
-          Object.keys(itemList.current).map((key) => ({name: key, offsetTop: itemList.current[key]?.offsetTop ?? 0})),
+          Object.keys(itemList.current).map(key => ({name: key, offsetTop: itemList.current[key]?.offsetTop ?? 0})),
           'offsetTop',
           true,
         );
-        const name = offsetTops.find((item) => item.offsetTop < scrollTop())?.name;
+        const name = offsetTops.find(item => item.offsetTop < scrollTop())?.name;
         if (currentName.current !== name) {
           currentName.current = name;
           setName(name);

@@ -1,6 +1,6 @@
 import {sleep, uuidv4} from '@huxy/utils';
 
-export const fakeFetch = async (params) => {
+export const fakeFetch = async params => {
   await sleep();
   return {
     code: 200,

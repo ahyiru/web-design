@@ -1,5 +1,5 @@
 import styles from './keyword.less';
-export const Keyword = (props) => {
+export const Keyword = props => {
   const {raw, keyword, className = ''} = props;
   if (keyword) {
     const regex = new RegExp(keyword, 'ig');

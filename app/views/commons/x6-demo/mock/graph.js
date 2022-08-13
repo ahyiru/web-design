@@ -85,7 +85,7 @@ export const addNode = ({name, x, y}) => {
     groupId: 0,
   };
 };
-export const queryGraph = (id) => {
+export const queryGraph = id => {
   return {
     lang: 'zh_CN',
     success: true,
@@ -93,7 +93,7 @@ export const queryGraph = (id) => {
     Lang: 'zh_CN',
   };
 };
-export const addNodeGroup = async (groupName) => {
+export const addNodeGroup = async groupName => {
   return {
     success: true,
     data: {

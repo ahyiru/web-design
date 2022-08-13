@@ -1,7 +1,7 @@
 import {Popover} from 'antd';
 import {CompressOutlined, OneToOneOutlined, ZoomInOutlined, ZoomOutOutlined} from '@ant-design/icons';
 import styles from './index.less';
-export const CanvasHandler = (props) => {
+export const CanvasHandler = props => {
   const {className = '', onZoomIn, onZoomOut, onFitContent, onRealContent} = props;
   return (
     <ul className={`${styles.handler} ${className}`}>

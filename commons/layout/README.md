@@ -1,52 +1,37 @@
 ## layout
 
-logo
+logo: String,
 
-menuType: sideMenu | navMenu, 默认 sideMenu
+headerStyle: {},
 
-headerStyle
+asideStyle: {},
 
-asideStyle
+menuStyle: {},
 
-menuStyle
+MainTop: Component
 
-contentStyle
+MenuBottom: Component
 
-MainTop
+leftList: [],
 
-MenuTop
+rightList: [],
 
-MenuBottom
+handleNavClick: Function,
 
-leftList: list props
-
-rightList: list props
-
-handleNavClick
-
-fixIcons
-
+iconList: {},
 
 ```js
-const layoutStore={
-  Link:()=>{},
-  fixIcons:()=>{},
-  useCollapsed:()=>{},
-  handleNavClick:()=>{},
-  toggleMenu:()=>{},
-  logo:'',
-  title:'',
-  sideMenu:[],
-  navMenu:[],
-  leftList:[],
-  rightList:[],
-  theme:{},
-  collapsed:false,
-  menuWidth:'',
-  itemMaxHeight:'',
-  current:[],
-  curPath:'',
+const layoutConfigs = {
+  MainTop: () => {},
+  MenuBottom: () => {},
+  Link: () => {},
+  handleNavClick: () => {},
+  logo: '',
+  leftList: [],
+  rightList: [],
+  headerStyle: {},
+  menuStyle: {},
+  iconList: {},
+  ...
 };
-
-
 ```

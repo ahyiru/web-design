@@ -8,7 +8,7 @@ import {FloatingContextMenu} from './elements/floating-context-menu';
 import {CanvasHandler} from '../common/canvas-handler';
 import {GraphRunningStatus} from './elements/graph-running-status';
 import styles from './canvas-content.less';
-export const CanvasContent = (props) => {
+export const CanvasContent = props => {
   const {experimentId, className = ''} = props;
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -38,7 +38,7 @@ export const CanvasContent = (props) => {
     },
   });
   const onHandleSideToolbar = useCallback(
-    (action) => () => {
+    action => () => {
       if (expGraph.isGraphReady()) {
         switch (action) {
         case 'in':
@@ -61,7 +61,7 @@ export const CanvasContent = (props) => {
   );
   return (
     <div
-      ref={(elem) => {
+      ref={elem => {
         containerRef.current = elem;
         dropRef(elem);
       }}

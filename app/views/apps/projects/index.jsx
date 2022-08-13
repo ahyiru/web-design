@@ -10,6 +10,9 @@ import useHandleList from '@app/hooks/useHandleList';
 import Panel from '@app/components/panel';
 import Ellipsis from '@app/components/ellipsis';
 
+import {userInfoStore} from '@app/store/stores';
+import {useIntls} from '@app/components/intl';
+
 const {listProjectFn, deleteProjectFn} = apiList;
 
 const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profile, i18ns) => [
@@ -29,14 +32,14 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
     width: 80,
     ellipsis: true,
     // render: text => <Tooltip title={text}>{text}</Tooltip>,
-    render: (text) => <Ellipsis>{text}</Ellipsis>,
+    render: text => <Ellipsis>{text}</Ellipsis>,
   },
   {
     title: i18ns.role,
     dataIndex: 'role',
     width: 40,
-    render: (text) => {
-      const {label, color} = projectRoleList.find((v) => v.value == text) || {};
+    render: text => {
+      const {label, color} = projectRoleList.find(v => v.value == text) || {};
       return label ? <Tag color={color}>{label}</Tag> : '-';
     },
   },
@@ -94,28 +97,30 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
   },
 ];
 
-const Index = (props) => {
+const Index = props => {
+  const getIntls = useIntls();
+  const i18nCfg = getIntls('main.projects', {});
+  const profile = userInfoStore.getState();
   const [selectedRows, setSelectedRows] = useState([]);
   // const [modalItem,setModalItem]=useState(null);
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.projects ?? {};
+
   const {tableHeaderText = {}, actionsText = {}, searchFormText = {}} = i18nCfg;
   const pageParams = props.params;
   const [result, update, pageChange, searchList] = useHandleList(listProjectFn, {current: pageParams?.current, size: pageParams?.size});
 
-  const handleRouter = (item) => {
+  const handleRouter = item => {
     props.router.push({
       path: `./router/${item._id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
-  const handleApis = (item) => {
+  const handleApis = item => {
     props.router.push({
       path: `./api/${item._id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
-  const handleEdit = (item) => {
+  const handleEdit = item => {
     // setModalItem(item);
     props.router.push({
       path: `./edit/${item._id}`,
@@ -127,13 +132,13 @@ const Index = (props) => {
     // update();
     props.router.push(`./add`);
   };
-  const handleDelete = (item) => {
+  const handleDelete = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map((v) => v._id);
+    const ids = items.map(v => v._id);
     Modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
-      content: `name: ${items.map((v) => v.name)}`,
+      content: `name: ${items.map(v => v.name)}`,
       okText: actionsText.delete_confirm_ok,
       okType: 'danger',
       cancelText: actionsText.delete_confirm_cancel,
@@ -150,18 +155,16 @@ const Index = (props) => {
       },
     });
   };
-  const handleModalOk = (values) => {
+  const handleModalOk = values => {
     console.log(values);
   };
 
-  const profile = props.store.getState('profile');
-
   const rowSelection = {
-    selectedRowKeys: selectedRows.map((v) => v._id),
+    selectedRowKeys: selectedRows.map(v => v._id),
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
-    getCheckboxProps: (record) => ({
+    getCheckboxProps: record => ({
       disabled: !profile.role && record._id !== profile._id,
     }),
     columnWidth: '30px',
@@ -222,11 +225,11 @@ const Index = (props) => {
   );
 };
 
-const SearchForm = (props) => {
+const SearchForm = props => {
   const {submit, loading, searchFormText} = props;
   const [form] = Form.useForm();
   return (
-    <Form layout="inline" form={form} initialValues={{}} onFinish={(value) => submit(validObj(value))}>
+    <Form layout="inline" form={form} initialValues={{}} onFinish={value => submit(validObj(value))}>
       <Form.Item name="name" /* label={searchFormText.name} */>
         <Input placeholder={searchFormText.name} allowClear style={{width: '120px'}} />
       </Form.Item>

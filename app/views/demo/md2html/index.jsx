@@ -5,7 +5,7 @@ import RenderPage from './renderPage';
 import listFiles from './getFiles';
 import './index.less';
 
-const Index = (props) => {
+const Index = props => {
   const {params, router} = props;
   const {folder, name} = params;
   const [list, setList] = useState([]);
@@ -19,7 +19,7 @@ const Index = (props) => {
     };
     getFiles();
   }, []);
-  const sidebar = list.find((item) => item.name === folder)?.children ?? [];
+  const sidebar = list.find(item => item.name === folder)?.children ?? [];
   return (
     <div className="doc-frame">
       <div className="doc-header">

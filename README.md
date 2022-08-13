@@ -1,13 +1,16 @@
-## huxy
-
+## React template
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ahyiru/ihuxy/blob/develop/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@huxy/router.svg)](https://www.npmjs.com/package/@huxy/router)
-[![Build Status](https://api.travis-ci.com/ahyiru/ihuxy.svg?branch=develop)](https://app.travis-ci.com/github/ahyiru/ihuxy)
 [![](https://img.shields.io/badge/blog-ihuxy-blue.svg)](http://ihuxy.com/)
 
+基于 [huxy-admi](https://github.com/ahyiru/huxy-admin) 模板创建。
 
 ### 运行
+
+#### 依赖安装：`pnpm i`
+
+#### 项目运行
 
 可自行配置运行项目，如运行 `template` 项目：
 
@@ -16,73 +19,250 @@ npm start ---dirname=template
 
 ```
 
-默认运行 `app` 目录。`npm start`。
-
-其它一些命令：
+运行 `blog` 目录下的 `router` 项目：
 
 ```js
+npm start ---dirname=blog/router
+
+```
+
+默认运行 `app` 目录。`npm start`。
+
+#### 其它
+
+其它一些命令：主要有 打包、文件分析、运行打包的资源、jest 测试、eslint、stylelint、lint-fix、prettier、release 等。
+
+```json
+"start": "nodemon scripts/index.js --watch scripts/index.js",
 "build": "webpack --config scripts/webpack.production.js --progress",
 "analyze": "ANALYZE=1 webpack --config scripts/webpack.production.js --progress",
 "server": "nodemon scripts/server.js --watch scripts/server.js",
 "test": "jest --colors --coverage",
 "eslint": "eslint 'app/**/*.{js,jsx}'",
 "stylelint": "stylelint 'app/**/*.{css,less}'",
-"prettier": "prettier 'app/**/*' --write --ignore-unknown",
-"prettier-md": "prettier 'app/**/*.md' --write --ignore-unknown",
-"stylelintLayout": "stylelint 'commons/styles/*.{css,less}'",
 "lint": "npm run eslint && npm run stylelint",
 "lint-fix": "eslint --fix 'app/**/*.{js,jsx}' && stylelint --fix 'app/**/*.{css,less}'",
+"prettier": "prettier 'app/**/*' --write --ignore-unknown && npm run lint-fix",
 "release": "standard-version",
 
 ```
 
-[low-code](./low-code.md)
+- `npm run build`：打包
+- `npm run analyze`：打包文件分析
+- `npm test`：单元测试
+- `npm run lint`：代码规范检查，包含 `eslint` 和 `stylelint`
+- `npm run lint-fix`：代码规范修正
+- `npm run prettier`：代码美化
+- `npm run release`：自动打 `tag` 并生成 `CHANGELOG`
 
-### 配置
+提供了 `git` 代码提交钩子 `husky` ，`git` 提交信息规范 `commitlint` ，支持 `pnpm` 安装依赖。
+
+### 全局配置
+
+#### 全局配置
+
+主要有 运行端口、资源路径、打包路径、basepath、代理、mock 等。
 
 `configs/app.js`
 
-主要配置有：运行端口、资源路径、打包路径、代理地址等。
-
 ```js
-const app={
-  HOST:process.env.IP||'http://localhost',
-  PORT:process.env.PORT||7500,
-  PRO_PORT:process.env.PRO_PORT||7501,
-  BUILD_DIR:'./build',
-  PUBLIC_DIR:'../public',
-  DEV_ROOT_DIR:'/',
-  PRD_ROOT_DIR:'/',
-  PROXY:{url: 'http://47.105.94.51:9202', prefix: '/api'},
-  MOCK:'http://localhost:7502',
-  SERVER_PORT:7202,
-  basepath:'/',
-  platform:'pc',
-  projectName:'',
+const app = {
+  HOST: process.env.IP || 'http://localhost',
+  PORT: process.env.PORT || 9500, // 开发环境运行端口
+  PRO_PORT: process.env.PRO_PORT || 9501, // 打包运行端口
+  BUILD_DIR: './build', // 打包路径
+  PUBLIC_DIR: '../public', // 静态资源路径
+  DEV_ROOT_DIR: '/', // dev basepath
+  PRD_ROOT_DIR: '/', // prod basepath
+  PROXY: {
+    url: 'http://47.105.94.51:9202', // 服务代理
+    prefix: '/api', // 代理前缀
+  },
+  MOCK: 'http://localhost:9502', // mock 地址
+  SERVER_PORT: 9503, // nodejs 本地服务端口
+  projectName: '...', // 项目名称
 };
-
 ```
 
-### 请求
+### 项目配置
+
+主要是路由、导航栏、主题、i18ns 等配置。
+
+`app/configs`
+
+#### 环境配置
+
+路由类型、basepath 通过全局配置获取。
+
+```js
+export const browserRouter = !process.env.isDev;
+
+export const basepath = browserRouter ? PRD_ROOT_DIR : DEV_ROOT_DIR;
+```
+
+#### 路由
+
+`app/configs/router`：路由钩子 `beforeRender` 可控制路由跳转。
+
+```js
+const beforeRender = (input, next) => {
+  const {path, prevPath} = input;
+  const validPath = path.split('?')[0];
+  if (validPath === initPath) {
+    return next({path: '/'});
+  }
+  if (!token && !whiteRoutes.includes(validPath)) {
+    return next({path: '/user/signin'});
+  }
+  next();
+};
+
+export default {
+  browserRouter,
+  beforeRender,
+  basepath,
+};
+```
+
+#### 导航栏
+
+`app/configs/nav`：导航栏可分为左侧导航栏和右侧导航栏。
+
+```js
+export const leftNav = () => {
+  const left = getIntls('nav.left', {});
+  return [
+    {
+      key: 'collapse',
+      name: left?.collapse ?? 'collapse',
+      type: 'collapse',
+      Custom: () => <CustomCollapse />,
+    },
+  ];
+};
+export const rightNav = () => {
+  const right = getIntls('nav.right', {});
+  return [
+    {
+      key: 'username',
+      name: user?.name ?? right?.user,
+      img: user?.avatar ?? defUser,
+      children: [
+        {
+          key: 'profile',
+          name: right?.profile ?? '个人中心',
+          icon: 'UserOutlined',
+          path: '/profile',
+        },
+        {
+          key: 'settings',
+          name: right?.settings ?? '设置',
+          icon: 'SettingOutlined',
+          path: '/profile',
+        },
+        {
+          divider: true,
+          key: 'logout',
+          name: right?.logout ?? '退出',
+          icon: 'PoweroffOutlined',
+          handle: item => {
+            logout();
+          },
+        },
+      ],
+    },
+  ];
+};
+```
+
+#### 主题
+
+`app/configs/theme`：主题列表包含主题名和主题配置表等。
+
+```js
+const themeList = getIntls => [
+  {
+    name: getIntls('theme.dark', 'dark'),
+    key: 'dark',
+    list: dark,
+    type: 'theme',
+  },
+  {
+    name: getIntls('theme.dark1', 'dark1'),
+    key: 'dark1',
+    list: dark1,
+    type: 'theme',
+  },
+  {
+    name: getIntls('theme.dark', 'light'),
+    key: 'light',
+    list: light,
+    type: 'theme',
+  },
+  {
+    name: getIntls('theme.light1', 'light1'),
+    key: 'light1',
+    list: light1,
+    type: 'theme',
+  },
+  {
+    name: getIntls('theme.portal', 'portal'),
+    key: 'portal',
+    list: portal,
+    type: 'theme',
+  },
+];
+```
+
+#### 语言
+
+`app/configs/i18ns`：
+
+```js
+const langList = [
+  {
+    key: 'zh',
+    name: '汉语',
+    icon: zh_icon,
+  },
+  {
+    key: 'en',
+    name: '英语',
+    icon: en_icon,
+  },
+  {
+    key: 'jp',
+    name: '日语',
+    icon: jp_icon,
+  },
+];
+```
+
+### Api 请求
 
 `app/apis`
 
-请求参数处理。可自行配置路径 `prefix` 、`headers`、`credentials` 等
+#### 请求参数处理
+
+可自行配置路径 `prefix` 、`headers`、`token` 、`credentials` 等。
 
 ```js
 const getToken = () => ({Authorization: `test ${storage.get('token') || ''}`});
 
 const fetch = ({method, url, ...opt}) => fetchApi(method)(`${TARGET}${url}`, {...opt, headers: getToken(), credentials: 'omit'});
-
 ```
 
-返回结果处理。根据约定返回 `code` 码配置不同操作。
+#### 返回结果处理
+
+根据约定返回 `code` 码配置不同操作。可设置通用提示信息、数据格式化等。
 
 ```js
-const handler = (response) => {
+const success_code = [200, 10000];
+
+const handler = response => {
   return response
     .json()
-    .then((result) => {
+    .then(result => {
       result.code = result.code ?? response.status;
       result.msg = result.message ?? result.msg ?? response.statusText;
       const {msg, code} = result;
@@ -96,68 +276,58 @@ const handler = (response) => {
       }
       return result;
     })
-    .catch((error) => {
+    .catch(error => {
       message.error(error.message);
       throw error.message;
     });
 };
-
 ```
-接口配置：
+
+#### 接口配置
 
 ```js
 const apiList = [
   {
     name: 'login',
-    url:'/auth/signup',
-    method:'post',
+    url: '/auth/signup',
+    method: 'post',
   },
   {
     fnName: 'getProfile',
-    url:'/users/profile',
+    url: '/users/profile',
   },
 ];
-
 ```
 
-根据后台提供API文档来配置。`schema` 数据，方便同构。
+- fnName：自定义前端调用的函数名
+- name：默认前端调用的函数名 `${name}Fn`
+- url：接口地址
+- method：请求方式，默认 `get`
+- type：数据类型，json\formData\form\query，默认 json。
 
-### 项目配置
-
-`app/configs`
-
-路由类型、白名单、权限等配置。
-
-```js
-export const browserRouter = !process.env.isDev;
-
-const beforeRender = (input, next) => {
-  const {path, prevPath} = input;
-  const validPath = path.split('?')[0];
-  if (validPath === initPath) {
-    return next({path: '/'});
-  }
-  if (!token && !whiteRoutes.includes(validPath)) {
-    return next({path: '/user/signin'});
-  }
-  if (path !== prevPath && demoBackReg.test(prevPath)) {
-    // designReg
-    return confirmDesignPage(next);
-  }
-  next();
-  // routerListenFn(path,prevPath);
-};
-
-```
-
-- `app/theme`：主题配置
-- `app/nav`：导航栏配置
+可根据后台提供 API 文档来配置。`schema` 数据，方便同构。
 
 ### 路由
 
 `app/routes`
 
-支持动态路由、权限路由等。
+支持动态路由、权限路由、路由白名单等。
+
+#### 基本配置
+
+```js
+{
+  path: '/demo',
+  name: 'demo',
+  icon: 'MergeCellsOutlined',
+  denied: !isDev,
+  component: () => import('@app/views/demo'),
+},
+```
+
+可通过 `denied` 属性来控制是否渲染路由。可将 `staticRoutes` 设置为白名单路由。
+
+可根据后台返回路由配置来做控制，也可根据后台返回权限码来控制。白名单一般就是登录注册页面，也可自行配置。
 
 ```js
 const allRoutes = [
@@ -168,8 +338,9 @@ const allRoutes = [
   },
   ...staticRoutes,
 ];
-
 ```
+
+#### 组件加载方式
 
 路由组件可按需加载，可根据目录地址加载。
 
@@ -199,16 +370,180 @@ export const playgroundRoutes = {
     },
   ],
 };
-
 ```
+
+详情见[简单实现 react router](https://zhuanlan.zhihu.com/p/106989011)
+
+#### useRouter 使用：
+
+```js
+const output = useRouter(input);
+```
+
+通过传入一些配置（主要是路由类型、路由列表、路由拦截函数等），返回给我们当前路径下的渲染组件以及 menu 菜单的处理数据和面包屑数据。
+
+提供 `Link` 、 `useRoute` 。`Link` 为路由跳转组件，`useRoute` 可获取到当前路由下的信息。
+
+详情见[useRouter 使用](https://zhuanlan.zhihu.com/p/373920768)
+
+### 主题配置
+
+`app/theme`
+
+```js
+const sizes = {
+  '--maxWidth': '100vw',
+  '--menuWidth': '240px',
+  '--collapseWidth': '68px',
+  '--collapseMenuWidth': '180px',
+  '--headerHeight': '68px',
+  '--footerHeight': '60px',
+  '--breadHeight': '50px',
+  '--menuItemHeight': '48px',
+};
+const colors = {
+  '--bannerBgColor': '#37424c',
+  '--navBgColor': '#3c4752',
+  '--menuBgColor': '#37424c',
+  '--appBgColor': '#303841',
+  '--pageBgColor': '#303841',
+  '--panelBgColor': '#36404a',
+  '--appColor': '#8c98a5',
+  '--linkColor': '#9097a7',
+  '--pageLinkColor': '#8c98a5',
+  '--linkHoverColor': '#c8cddc',
+  '--linkActiveColor': '#ffffff',
+  '--borderColor': '#424e5a',
+};
+```
+
+通过 `css` 变量自行设置大小和颜色，在系统中直接使用即可。
+
+### layout 配置
+
+`layout` 可自己设计，整体框架无非就是头部导航栏和侧边菜单栏。
+
+我提供了一个管理平台 `layout` 模板，菜单通过路由返回 `menu` 数据渲染，头部导航栏可根据 `nav` 配置数据渲染，面包屑也在路由返回数据 `current` 里面。
+
+#### 通用配置
+
+`commons/layout`
+
+```js
+const layoutConfigs = {
+  MainTop: () => {},
+  MenuBottom: () => {},
+  Link: () => {},
+  handleNavClick: () => {},
+  logo: '',
+  leftList: [],
+  rightList: [],
+  headerStyle: {},
+  menuStyle: {},
+  ...
+};
+```
+
+#### 全局 UI `i18n` 配置
+
+```jsx
+const Index = props => (
+  <UiI18n>
+    <Layout {...props} />
+  </UiI18n>
+);
+```
+
+### i18ns 配置
+
+`app/i18ns`
+
+#### 加载
+
+`i18ns` 目录存放语言包，以语言 `key` 命名，通过 `key` 值按需加载语言包。
+
+```js
+const getI18n = async () => {
+  const language = getLang();
+  let i18ns = await import(`@app/i18ns/${language}`);
+  i18ns = i18ns.default ?? i18ns;
+  return {i18ns, language};
+};
+```
+
+语言包配置，可以使用页面或模块命名文件，然后分别做配置，如：
+
+- zh
+  - main
+  - nav
+  - router
+  - theme
+  - login
+
+#### 具体配置
+
+```js
+const layout = {
+  saveConfig: '保存配置',
+  copyConfig: '拷贝配置',
+  menuType: '菜单类型：',
+  vertical: '纵向',
+  horizontal: '横向',
+  compose: '横纵组合',
+  fontSize: '字体大小：',
+  layoutDesign: '布局',
+  sizeDesign: '大小',
+  colorDesign: '颜色',
+  save_cfg_msg: '主题保存成功！',
+  copy_cfg_msg: '主题拷贝成功！',
+  data_valid_msg: '请输入合法数据！',
+  data_px_msg: '请输入500-5000内数据！',
+  data_percent_msg: '请输入50-100内数据！',
+  menu_width_msg: '请输入0-300内数据！',
+};
+```
+
+#### 使用
+
+提供 3 种使用方式：
+
+**_组件_**
+
+```jsx
+<Intls keys="login.email">邮箱</Intls>
+```
+
+通过 `key` 来获取语言数据，如果获取失败则展示 `children` 文本。
+
+**_hook_**
+
+```jsx
+const getIntls = useIntls();
+message.success(getIntls('main.layout.save_cfg_msg', '成功！'));
+```
+
+`hook` 返回一个函数 `getIntls` ,第一个参数为文本 `key` 值，第二个参数是返回为空时的默认值。
+
+**_函数_**
+
+`getIntls` 函数和 `useIntls` 返回的函数一致，不同的是此函数可在任何地方使用，如纯 `js` 代码里。
 
 ### 状态管理
 
+`app/store`
+
+基于 `flux` 理念，使用发布订阅模式来实现。主要提供 3 个函数：
+
+- getState：获取数据
+- setState：设置数据
+- subscribe：监听数据
+
+#### 通用方式
+
 ```js
-const {useStore} = props
+const {useStore} = props;
 
-const [list,update,subscribe]=useStore('userList',{});
-
+const [list, update, subscribe] = useStore('userList', {});
 ```
 
 - key：userList
@@ -218,22 +553,284 @@ const [list,update,subscribe]=useStore('userList',{});
 - subscribe：监听函数
 
 ```js
-const Page1 = (props) => {
+const Page1 = props => {
   const [list, update] = useStore('userList', []);
-  const deleteUse = async (id) => {
+  const deleteUse = async id => {
     await fetchDel({id});
     update();
   };
 };
 
-const Page2 = (props) => {
+const Page2 = props => {
   const [, , subscribe] = useStore('userList', []);
   useEffect(() => {
-    subscribe((result) => {
+    subscribe(result => {
       console.log(result);
     });
   }, []);
 };
 ```
 
+#### 组合
 
+有 2 中使用方式，函数和 `hook`。当创建时使用的是同一个 `store` 时，二者数据可通用。如：
+
+```js
+// a.jsx 可检测到数据更新
+const [state] = useStore('store-test');
+// b.jsx 设置数据
+store.setState({'store-test', 'test data'});
+```
+
+#### 创建 `store`
+
+```js
+import createStore from '@huxy/utils/createStore';
+import createContainer from '@huxy/utils/createContainer';
+import createUseContainer from '@huxy/use/createContainer';
+
+export const container = createStore();
+
+export const store = createContainer(container);
+export const useStore = createUseContainer(container);
+```
+
+#### 数据名（key）
+
+```js
+export const langName = 'lang-store';
+export const themeName = 'theme-store';
+export const menuTypeName = 'menuType-store';
+export const i18nsName = 'i18ns-store';
+export const userInfoName = 'userInfo-store';
+export const permissionName = 'permission-store';
+export const routersName = 'routers-store';
+```
+
+#### 创建函数（hooks）
+
+```js
+export const langStore = store(langName);
+export const themeStore = store(themeName);
+export const menuTypeStore = store(menuTypeName);
+export const i18nsStore = store(i18nsName);
+export const userInfoStore = store(userInfoName);
+export const permissionStore = store(permissionName);
+
+export const useLangStore = initState => useStore(langName, initState);
+export const useThemeStore = initState => useStore(themeName, initState);
+export const useMenuTypeStore = initState => useStore(menuTypeName, initState);
+export const useI18nsStore = initState => useStore(i18nsName, initState);
+export const useUserInfoStore = initState => useStore(userInfoName, initState);
+export const usePermissionStore = initState => useStore(permissionName, initState);
+```
+
+#### 使用
+
+```jsx
+// useI18nsStore
+const Intls = ({keys, children}) => {
+  const [i18ns] = useI18nsStore();
+  return (keys && i18ns?.getValue(keys)) ?? children ?? '';
+};
+// i18nsStore
+export const getIntls = (keys, def) => (keys && i18nsStore.getState()?.getValue(keys)) ?? def ?? '';
+```
+
+### utils、components、hooks
+
+组件可分为基础组件、业务组件，基础组件粒度低、通用性高，业务组件包含了一些业务场景，在某一领域模型内通用，通常是基础组件组合而来。
+
+#### utils
+
+例如：格式化树
+
+```js
+// formatTree
+const fixIcon = router =>
+  router.map(item => {
+    item.key = item.key || item.path;
+    item.icon = fixIcons(item.iconKey || 'EyeInvisibleOutlined');
+    return item;
+  });
+
+const formatTree = arr =>
+  traverItem(item => {
+    if (!isValidArr(item.children)) {
+      item.isLeaf = true;
+    }
+  })(arr2TreeByPath(fixIcon(arr)));
+
+export default formatTree;
+```
+
+详情见 [utils](https://github.com/ahyiru/utils)
+
+#### components
+
+例如：超出宽度文本自动省略并展示 `tooltip`
+
+```jsx
+const style = {
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  display: 'inline-block',
+  width: '100%',
+};
+
+const Ellipsis = ({children, ttProps}) => {
+  const span = useRef();
+  const [ellipsis, setEllipsis] = useState(false);
+  const state = useEleResize(span, 250);
+  useEffect(() => {
+    if (span.current) {
+      const {width: tWidth} = getTextSize(children);
+      const {width} = getPosition(span.current);
+      const isEllipsis = tWidth > width;
+      if (isEllipsis !== ellipsis) {
+        setEllipsis(isEllipsis);
+      }
+    }
+  }, [children, state.width]);
+  return (
+    <span ref={span} style={style}>
+      {ellipsis ? (
+        <Tooltip placement="topLeft" title={children} {...ttProps}>
+          {children}
+        </Tooltip>
+      ) : (
+        <span>{children}</span>
+      )}
+    </span>
+  );
+};
+```
+
+**_Input_**
+
+```jsx
+const Input = ({className, ...rest}) => {
+  const cls = ['h-input', ...(className?.split(' ') ?? [])]
+    .filter(Boolean)
+    .map(c => styles[c])
+    .join(' ');
+  return <input className={cls} {...rest} />;
+};
+
+export default Input;
+```
+
+**_Radio_**
+
+```jsx
+const Radio = ({options, name, value: checked, onChange, ...rest}) => (
+  <div className="radio-wrap" {...rest} style={{display: 'flex'}}>
+    {options.map(({value, label}) => (
+      <div key={value} className="radio-item" onClick={e => onChange?.(value, e)} style={{display: 'flex', alignItems: 'center', marginRight: '12px', cursor: 'pointer'}}>
+        <input type="radio" name={name} value={value} checked={value === checked} readOnly />
+        <span style={{marginLeft: '6px'}}>{value}</span>
+      </div>
+    ))}
+  </div>
+);
+
+export default Radio;
+```
+
+**_Tooltip_**
+
+```jsx
+const Tooltip = ({children, title, placement}) => (
+  <span className={`tooltip-${placement}`} tooltips={title}>
+    {children}
+  </span>
+);
+
+export default Tooltip;
+```
+
+**_Drawer_**
+
+```jsx
+const Drawer = ({visible, onClose, footer, header, className, children, width = '300px'}) => {
+  const cls = ['drawer-wrap', visible ? 'open' : '', ...(className?.split(' ') ?? [])]
+    .filter(Boolean)
+    .map(c => styles[c])
+    .join(' ');
+  return (
+    <Mask open={visible} close={onClose} delay={250} hasMask={true} className="huxy-drawer">
+      <div className={cls} style={{width}}>
+        <div className={styles['drawer-container']}>
+          <div className={styles['drawer-header']}>
+            <a className={styles['ico-close']} onClick={onClose} />
+            {header}
+          </div>
+          <div className={styles['drawer-content']}>{children}</div>
+          {footer ? <div className={styles['drawer-footer']}>{footer}</div> : null}
+        </div>
+      </div>
+    </Mask>
+  );
+};
+
+export default Drawer;
+```
+
+详情见 [components](https://github.com/ahyiru/components)
+
+#### hooks
+
+例如：请求列表数据 `hook` ，包含返回结果处理、分页、搜索、更新等。
+
+useFetchList：
+
+```jsx
+const useFetchList = (fetchList, initParams = null, handleResult, commonParams = null) => {
+  const [result, updateResult] = useAsync({});
+  const update = useCallback(params => updateResult({res: fetchList({...commonParams, ...params})}, handleResult), []);
+  useEffect(() => {
+    update({...initParams});
+  }, []);
+  const {res} = result;
+  const isPending = !res || res.pending;
+
+  return [{isPending, data: res?.result}, update];
+};
+```
+
+useHandleList：
+
+```jsx
+const useHandleList = (fetchList, initParams = null, handleResult, commonParams = null) => {
+  const {current, size, ...rest} = initParams || {};
+  const search = useRef(rest || {});
+  const page = useRef({current: current || 1, size: size || 10});
+  const [result, update] = useFetchList(fetchList, {...page.current, ...search.current}, handleResult, commonParams);
+
+  const pageChange = (current, size) => {
+    page.current = {current, size};
+    update({
+      ...page.current,
+      ...search.current,
+    });
+  };
+  const searchList = values => {
+    search.current = values;
+    page.current = {...page.current, current: 1};
+    update({...page.current, ...search.current});
+  };
+  const handleUpdate = params => {
+    const {current, size, ...rest} = params;
+    page.current = {current: current ?? page.current.current, size: size ?? page.current.size};
+    search.current = {...search.current, ...rest};
+    update({...page.current, ...search.current});
+  };
+
+  return [result, handleUpdate, pageChange, searchList];
+};
+```
+
+详情见 [use](https://github.com/ahyiru/use)
+
+### [low-code](./doc/low-code.md)

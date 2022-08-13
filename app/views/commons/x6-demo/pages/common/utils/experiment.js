@@ -20,14 +20,14 @@ export function calcPointsInfo(points) {
   };
 }
 export function transformPointsToOrigin(points, origin) {
-  return points.map((point) => ({
+  return points.map(point => ({
     ...point,
     x: point.x - origin.x,
     y: point.y - origin.y,
   }));
 }
 export function revertPointsToOrigin(points, origin) {
-  return points.map((point) => ({
+  return points.map(point => ({
     ...point,
     x: point.x + origin.x,
     y: point.y + origin.y,
@@ -95,8 +95,8 @@ export function formatNodeToGraphNodeConf(originNode) {
 }
 export function formatExperimentGraph(graph = {}) {
   const {nodes = [], links = [], groups = []} = graph;
-  const formattedNodes = nodes.map((node) => formatNodeToGraphNodeConf(node));
-  const formattedEdges = links.map((link) => {
+  const formattedNodes = nodes.map(node => formatNodeToGraphNodeConf(node));
+  const formattedEdges = links.map(link => {
     const {source, target} = link;
     return {
       ...link,
@@ -109,7 +109,7 @@ export function formatExperimentGraph(graph = {}) {
     const {id} = currentGroup;
     return {
       ...mapResult,
-      [id]: formattedNodes.filter((node) => node.groupId.toString() === id.toString()) || [],
+      [id]: formattedNodes.filter(node => node.groupId.toString() === id.toString()) || [],
     };
   }, {});
   return {

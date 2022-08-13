@@ -4,34 +4,34 @@ const routes = [
     title: '登录注册',
     icon: 'TeamOutlined',
     hideMenu: true,
-    component: () => import('@app/user'),
+    component: () => import('@app/views/user'),
     children: [
       {
         path: '/signin',
         name: '登录',
-        component: () => import('@app/user/login'),
+        component: () => import('@app/views/user/login'),
       },
       {
         path: '/signup',
         name: '注册',
-        component: () => import('@app/user/signup'),
+        component: () => import('@app/views/user/signup'),
       },
       {
         path: '/verifyEmail',
         name: '验证邮箱',
-        component: () => import('@app/user/verifyEmail'),
+        component: () => import('@app/views/user/verifyEmail'),
       },
       {
         path: '/setNewPwd',
         name: '重置密码',
-        component: () => import('@app/user/setNewPwd'),
+        component: () => import('@app/views/user/setNewPwd'),
       },
     ],
   },
   {
     path: '/404',
     name: '404',
-    component: import('@app/404'),
+    component: import('@app/views/404'),
     hideMenu: true,
   },
   {

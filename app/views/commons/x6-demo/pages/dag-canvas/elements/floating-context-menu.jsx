@@ -4,7 +4,7 @@ import {EdgeContextMenu} from './context-menu/edge-context-menu';
 import {GraphContextMenu} from './context-menu/graph-context-menu';
 import {NodeContextMenu} from './context-menu/node-context-menu';
 import css from './floating-context-menu.less';
-export const ContextMenu = (props) => {
+export const ContextMenu = props => {
   const {experimentId, menuType, menuData} = props;
   switch (menuType) {
   case 'edge':
@@ -17,7 +17,7 @@ export const ContextMenu = (props) => {
     return null;
   }
 };
-export const FloatingContextMenu = (props) => {
+export const FloatingContextMenu = props => {
   const {experimentId} = props;
   const expGraph = useExperimentGraph(experimentId);
   const [contextMenuInfo] = useObservableState(() => expGraph.contextMenuInfo$);

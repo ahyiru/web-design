@@ -11,26 +11,26 @@ export const columns = [
     title: '邮箱',
     dataIndex: 'email',
     ellipsis: true,
-    render: (text) => text.replace(/\S+(@\S+)/, '*****$1'),
+    render: text => text.replace(/\S+(@\S+)/, '*****$1'),
   },
   {
     title: '状态',
     dataIndex: 'active',
     ellipsis: true,
-    render: (text) => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
+    render: text => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
   },
   {
     title: '是否绑定GitHub',
     dataIndex: 'github',
     ellipsis: true,
-    render: (text) => (text ? <Tag color="green">已绑定</Tag> : <Tag color="red">未绑定</Tag>),
+    render: text => (text ? <Tag color="green">已绑定</Tag> : <Tag color="red">未绑定</Tag>),
   },
   {
     title: '等级',
     dataIndex: 'role',
     ellipsis: true,
     render: (text, record) => {
-      return roleList.find((v) => v.value === text)?.label ?? '-';
+      return roleList.find(v => v.value === text)?.label ?? '-';
     },
   },
   {

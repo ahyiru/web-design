@@ -4,7 +4,7 @@ import {CanvasContent} from './canvas-content';
 import {CanvasToolbar} from './canvas-toolbar';
 import {BottomToolbar} from './bottom-toolbar';
 import styles from './index.less';
-export const DAGCanvas = (props) => {
+export const DAGCanvas = props => {
   const {experimentId, className = ''} = props;
   const expGraph = useExperimentGraph(experimentId);
   useUnmountExperimentGraph(experimentId);

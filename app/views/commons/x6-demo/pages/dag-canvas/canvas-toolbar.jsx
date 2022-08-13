@@ -18,7 +18,7 @@ let Operations;
   Operations['NEW_GROUP'] = 'NEW_GROUP';
   Operations['UNGROUP'] = 'UNGROUP';
 })(Operations || (Operations = {}));
-export const CanvasToolbar = (props) => {
+export const CanvasToolbar = props => {
   const {experimentId} = props;
   const [selectionEnabled, setSelectionEnabled] = useState(false);
   const expGraph = useExperimentGraph(experimentId);
@@ -26,14 +26,14 @@ export const CanvasToolbar = (props) => {
   const [selectedNodes] = useObservableState(() => expGraph.selectedNodes$);
   const [selectedGroup] = useObservableState(() => expGraph.selectedGroup$);
   const onClickItem = useCallback(
-    (itemName) => {
+    itemName => {
       switch (itemName) {
       case Operations.UNDO_DELETE:
         expGraph.undoDeleteNode();
         break;
       case Operations.GROUP_SELECT:
         expGraph.toggleSelectionEnabled();
-        setSelectionEnabled((enabled) => !enabled);
+        setSelectionEnabled(enabled => !enabled);
         break;
       case Operations.RUN_SELECTED:
         expGraph.runGraph();
@@ -50,7 +50,7 @@ export const CanvasToolbar = (props) => {
               <div style={{width: 50, marginBottom: 8}}>组名：</div>
               <RxInput
                 value={value$}
-                onChange={(e) => {
+                onChange={e => {
                   value$.next(e.target.value);
                 }}
               />
@@ -59,13 +59,13 @@ export const CanvasToolbar = (props) => {
           onOk: () => {
             modal.update({okButtonProps: {loading: true}});
             addNodeGroup(value$.getValue())
-              .then((res) => {
+              .then(res => {
                 modal.close();
-                selectedNodes.forEach((node) => {
+                selectedNodes.forEach(node => {
                   const nodeData = node.getData();
                   node.setData({...nodeData, groupId: res.data.group.id});
                 });
-                const nodeMetas = selectedNodes.map((node) => node.getData());
+                const nodeMetas = selectedNodes.map(node => node.getData());
                 expGraph.addNode(formatGroupInfoToNodeMeta(res.data.group, nodeMetas));
                 expGraph.unSelectNode();
               })
@@ -78,8 +78,8 @@ export const CanvasToolbar = (props) => {
       }
       case Operations.UNGROUP: {
         const descendantNodes = selectedGroup.getDescendants();
-        const childNodes = descendantNodes.filter((node) => node.isNode());
-        childNodes.forEach((node) => {
+        const childNodes = descendantNodes.filter(node => node.isNode());
+        childNodes.forEach(node => {
           const nodeData = node.getData();
           node.setData({...nodeData, groupId: 0});
         });
@@ -97,7 +97,7 @@ export const CanvasToolbar = (props) => {
     !!selectedNodes &&
     !!selectedNodes.length &&
     selectedNodes.length > 1 &&
-    selectedNodes.every((node) => {
+    selectedNodes.every(node => {
       return node.isNode() && !node.getData().groupId;
     });
   const unGroupEnabled = !selectedNodes?.length && !!selectedGroup;

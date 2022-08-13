@@ -4,7 +4,7 @@ import {useExperimentGraph} from '@app/views/commons/x6-demo/pages/rx-models/exp
 import {ExperimentForm} from './form/experiment-config';
 import {NodeFormDemo} from './form/node-config';
 import css from './index.less';
-export const ComponentConfigPanel = (props) => {
+export const ComponentConfigPanel = props => {
   const {experimentId, className} = props;
   const expGraph = useExperimentGraph(experimentId);
   const [activeNodeInstance] = useObservableState(() => expGraph.activeNodeInstance$);

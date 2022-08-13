@@ -3,7 +3,7 @@ import {useAsync} from '@huxy/use';
 
 const useFetchList = (fetchList, initParams = null, handleResult, commonParams = null) => {
   const [result, updateResult] = useAsync({});
-  const update = useCallback((params) => updateResult({res: fetchList({...commonParams, ...params})}, handleResult), []);
+  const update = useCallback(params => updateResult({res: fetchList({...commonParams, ...params})}, handleResult), []);
   useEffect(() => {
     update({...initParams});
   }, []);

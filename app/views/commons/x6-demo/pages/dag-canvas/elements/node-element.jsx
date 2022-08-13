@@ -7,14 +7,14 @@ import {useExperimentGraph} from '@app/views/commons/x6-demo/pages/rx-models/exp
 import {NodeStatus} from '@app/views/commons/x6-demo/pages/common/graph-common/node-status';
 import {NodePopover} from '../../common/graph-common/node-popover';
 import styles from './node-element.less';
-export const NodeElement = (props) => {
+export const NodeElement = props => {
   const {experimentId, node} = props;
   const experimentGraph = useExperimentGraph(experimentId);
   const [instanceStatus] = useObservableState(
     () =>
       experimentGraph.executionStatus$.pipe(
-        filter((x) => !!x),
-        map((x) => x.execInfo),
+        filter(x => !!x),
+        map(x => x.execInfo),
       ),
     {},
   );

@@ -7,7 +7,7 @@ import {ComponentConfigPanel} from './component-config-panel';
 import {DAGCanvas} from './dag-canvas';
 import styles from './index.less';
 const {Content} = Layout;
-const DagDemo = (props) => {
+const DagDemo = props => {
   const {id} = props.params;
   const {experimentId = '1'} = props;
   return (

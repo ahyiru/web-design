@@ -1,4 +1,4 @@
-export const sizes = {
+const sizes = {
   '--maxWidth': '100vw',
   '--menuWidth': '200px',
   '--collapseWidth': '60px',
@@ -8,7 +8,7 @@ export const sizes = {
   '--breadHeight': '40px',
   '--menuItemHeight': '50px',
 };
-export const colors = {
+const colors = {
   '--bannerBgColor': '#2a3042',
   '--navBgColor': '#262b3c',
   '--menuBgColor': '#2a3042',

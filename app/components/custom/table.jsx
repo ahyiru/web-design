@@ -9,9 +9,11 @@ import useHandleList from '@app/hooks/useHandleList';
 
 import Panel from '@app/components/panel';
 
-import fixIcons from '@app/utils/fixIcons';
+import Icon from '@app/components/icon';
 
 import customRender from '@app/utils/render';
+
+import {userInfoStore} from '@app/store/stores';
 
 const actionsRender = {
   handleCheck: {
@@ -52,12 +54,12 @@ const actionsRender = {
 };
 
 const formatColums = (data, actions) => {
-  return data.map((item) => {
+  return data.map(item => {
     const {render, ...rest} = item;
     if (item.dataIndex === 'action') {
       const tools = typeof item.tools === 'string' ? item.tools.split(',') : item.tools;
       const children = [];
-      Object.keys(actionsRender).map((key) => {
+      Object.keys(actionsRender).map(key => {
         if (tools?.includes(key)) {
           children.push(actionsRender[key]);
         }
@@ -81,12 +83,12 @@ const formatColums = (data, actions) => {
 };
 
 const Index = ({commonprops, ...props}) => {
-  const profile = commonprops.store.getState('profile');
+  const profile = userInfoStore.getState();
   const {pagination, rowSelection, columns, actions, searchSchema, modalSchema, rowKey = '_id'} = props;
 
-  const listInfo = actions.find((item) => item.name === 'listFn');
-  const deleteInfo = actions.find((item) => item.name === 'deleteFn');
-  const addInfo = actions.find((item) => item.name === 'addFn');
+  const listInfo = actions.find(item => item.name === 'listFn');
+  const deleteInfo = actions.find(item => item.name === 'deleteFn');
+  const addInfo = actions.find(item => item.name === 'addFn');
 
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -94,32 +96,32 @@ const Index = ({commonprops, ...props}) => {
 
   const [result, update, pageChange, handleSearch] = useHandleList(apiList[listInfo?.apiName]);
 
-  const handleCheck = (item) => {
+  const handleCheck = item => {
     setModalItem(item);
   };
   const handleAdd = () => {
-    const {apiName, handlePath} = actions.find((item) => item.name === 'addFn') || {};
+    const {apiName, handlePath} = actions.find(item => item.name === 'addFn') || {};
     const path = handlePath || '/apps/users/add';
     commonprops.router.push({
       path,
       state: {apiName},
     });
   };
-  const handleEdit = (item) => {
-    const {apiName, handlePath} = actions.find((item) => item.name === 'editFn') || {};
+  const handleEdit = item => {
+    const {apiName, handlePath} = actions.find(item => item.name === 'editFn') || {};
     const path = handlePath || '/apps/users/edit';
     commonprops.router.push({
       path: `${path}/${item[rowKey]}`,
       state: {item, apiName},
     });
   };
-  const handleDelete = (item) => {
+  const handleDelete = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map((v) => v[rowKey]);
+    const ids = items.map(v => v[rowKey]);
     Modal.confirm({
       title: '确定执行此操作吗？',
-      icon: fixIcons('ExclamationCircleOutlined'),
-      content: `name: ${items.map((v) => v.name)}`,
+      icon: <Icon icon="ExclamationCircleOutlined" />,
+      content: `name: ${items.map(v => v.name)}`,
       okText: '确定',
       okType: 'danger',
       cancelText: '取消',
@@ -141,11 +143,11 @@ const Index = ({commonprops, ...props}) => {
     rowSelection === false || !deleteInfo?.isBatch
       ? false
       : {
-        selectedRowKeys: selectedRows.map((v) => v[rowKey]),
+        selectedRowKeys: selectedRows.map(v => v[rowKey]),
         onChange: (selectedRowKeys, selectedRows) => {
           setSelectedRows(selectedRows);
         },
-        getCheckboxProps: (record) => ({
+        getCheckboxProps: record => ({
           disabled: !profile.role && record[rowKey] !== profile[rowKey],
         }),
         columnWidth: '30px',
@@ -176,13 +178,13 @@ const Index = ({commonprops, ...props}) => {
       };
 
   const searchFormProps = {
-    submit: (values) => handleSearch(validObj(values)),
+    submit: values => handleSearch(validObj(values)),
     loading: isPending,
   };
   const modalFormProps = {
     title: '查看',
     modalItem,
-    handleOk: (value) => console.log(value),
+    handleOk: value => console.log(value),
     onCancel: () => setModalItem(null),
   };
 
@@ -213,12 +215,12 @@ const Index = ({commonprops, ...props}) => {
             <div style={{float: 'left'}}>
               <Space size="small">
                 {addInfo.btnText && (
-                  <Button loading={isPending} onClick={() => handleAdd()} type="primary" icon={fixIcons('PlusOutlined')}>
+                  <Button loading={isPending} onClick={() => handleAdd()} type="primary" icon={<Icon icon="PlusOutlined" />}>
                     {addInfo.btnText}
                   </Button>
                 )}
                 {deleteInfo?.isBatch && (
-                  <Button loading={isPending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={fixIcons('DeleteOutlined')}>
+                  <Button loading={isPending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<Icon icon="DeleteOutlined" />}>
                     {deleteInfo.btnText}
                   </Button>
                 )}

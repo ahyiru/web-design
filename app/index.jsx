@@ -10,6 +10,4 @@ const mountNode = document.getElementById('app');
 
 createRoot(mountNode).render(<App />);
 
-// render(<App />, mountNode);
-
 initSW();

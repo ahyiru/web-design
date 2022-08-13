@@ -2,7 +2,7 @@ import {Form, Button, Table} from 'antd';
 
 import './index.less';
 
-const SearchForm = (props) => {
+const SearchForm = props => {
   const [form] = Form.useForm();
   const {submit, formItems} = props;
   return (
@@ -17,7 +17,7 @@ const SearchForm = (props) => {
   );
 };
 
-const Index = (props) => {
+const Index = props => {
   const {columns, pageChange, searchList, list, rowSelection, selectedRows, handleBatch, formItems} = props;
   const {data, pending} = list || {};
   const paginationCfg = {
@@ -36,7 +36,7 @@ const Index = (props) => {
         <div className="list-topbar">
           {handleBatch?.length && (
             <div className="list-handle">
-              {handleBatch.map((v) => (
+              {handleBatch.map(v => (
                 <Button type="primary" onClick={v.fn} disabled={!selectedRows?.length}>
                   {v.text}
                 </Button>

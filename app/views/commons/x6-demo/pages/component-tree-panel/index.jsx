@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {ComponentSourceTree} from './component-source-tree';
 import styles from './index.less';
-export const ComponentTreePanel = (props) => {
+export const ComponentTreePanel = props => {
   const {className = ''} = props;
   const [activeTab, setActiveTab] = useState('component');
   const tabCls = activeTab === 'component' ? `${styles.tab} ${styles.active}` : styles.tab;

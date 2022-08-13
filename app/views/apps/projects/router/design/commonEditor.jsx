@@ -3,7 +3,7 @@ import {EditableProTable} from '@ant-design/pro-table';
 import {Popconfirm} from 'antd';
 import {obj2arr, arr2obj, uuidv4} from '@huxy/utils';
 
-const fmData = (data) => obj2arr(data || {}).map((item) => ({...item, uuid: uuidv4()}));
+const fmData = data => obj2arr(data || {}).map(item => ({...item, uuid: uuidv4()}));
 
 export default ({data, getValues, selectedKey, title, editorI18n}) => {
   const [editableKeys, setEditableRowKeys] = useState([]);
@@ -11,12 +11,12 @@ export default ({data, getValues, selectedKey, title, editorI18n}) => {
   useEffect(() => {
     setDataSource(fmData(data) || []);
   }, [data]);
-  const onChange = (value) => {
+  const onChange = value => {
     setDataSource(value);
     getValues?.(arr2obj(value));
   };
-  const deleteRow = (record) => {
-    const value = dataSource.filter((item) => item.uuid !== record.uuid);
+  const deleteRow = record => {
+    const value = dataSource.filter(item => item.uuid !== record.uuid);
     setDataSource(value);
     getValues?.(arr2obj(value));
   };

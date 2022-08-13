@@ -3,7 +3,7 @@ import {BehaviorSubject, fromEventPattern, merge} from 'rxjs';
 import {debounceTime, map, tap, scan} from 'rxjs/operators';
 import './graph-core.less';
 function setCellsSelectedStatus(cells, selected) {
-  cells.forEach((cell) => {
+  cells.forEach(cell => {
     const data = cell.getData() || {};
     cell.setData({...data, selected});
   });
@@ -75,8 +75,8 @@ export class GraphCore {
       const height = wrapper.clientHeight;
       const graph = new Graph({...options, width, height});
       this.graph = graph;
-      nodeMetas.forEach((nodeMeta) => this.renderNode(nodeMeta));
-      edgeMetas.forEach((edgeMeta) => this.renderEdge(edgeMeta));
+      nodeMetas.forEach(nodeMeta => this.renderNode(nodeMeta));
+      edgeMetas.forEach(edgeMeta => this.renderEdge(edgeMeta));
       this.afterLayout();
       if (graph.isFrozen()) {
         graph.unfreeze();
@@ -86,103 +86,103 @@ export class GraphCore {
         graph.zoomToFit({padding: 12});
       });
       this.windowResizeSub = fromEventPattern(
-        (handler) => {
+        handler => {
           window.addEventListener('resize', handler);
         },
-        (handler) => {
+        handler => {
           window.removeEventListener('resize', handler);
         },
       ).subscribe(this.resizeGraph);
       const nodeContextMenuObs = fromEventPattern(
-        (handler) => {
-          graph.on('node:contextmenu', (data) => {
+        handler => {
+          graph.on('node:contextmenu', data => {
             handler({type: 'node', data});
           });
         },
-        (handler) => {
+        handler => {
           graph.off('node:contextmenu', handler);
         },
       );
       const edgeContextMenuObs = fromEventPattern(
-        (handler) => {
-          graph.on('edge:contextmenu', (data) => {
+        handler => {
+          graph.on('edge:contextmenu', data => {
             handler({type: 'edge', data});
           });
         },
-        (handler) => {
+        handler => {
           graph.off('edge:contextmenu', handler);
         },
       );
       const graphContextMenuObs = fromEventPattern(
-        (handler) => {
-          graph.on('blank:contextmenu', (data) => {
+        handler => {
+          graph.on('blank:contextmenu', data => {
             handler({type: 'graph', data});
           });
         },
-        (handler) => {
+        handler => {
           graph.off('edge:contextmenu', handler);
         },
       );
-      this.nodeContextMenuSub = nodeContextMenuObs.subscribe((data) => {
+      this.nodeContextMenuSub = nodeContextMenuObs.subscribe(data => {
         this.onNodeContextMenu(data);
       });
-      this.contextMenuSub = merge(nodeContextMenuObs, edgeContextMenuObs, graphContextMenuObs).subscribe((data) => {
+      this.contextMenuSub = merge(nodeContextMenuObs, edgeContextMenuObs, graphContextMenuObs).subscribe(data => {
         if (this.validateContextMenu(data)) {
           this.contextMenuInfo$.next(data);
           this.onContextMenu(data);
         }
       });
       this.selectNodeSub = fromEventPattern(
-        (handler) => {
+        handler => {
           graph.on('selection:changed', handler);
         },
-        (handler) => {
+        handler => {
           graph.off('selection:changed', handler);
         },
-      ).subscribe((args) => {
+      ).subscribe(args => {
         const {removed, selected} = args;
         setCellsSelectedStatus(removed, false);
         setCellsSelectedStatus(selected, true);
         this.onSelectNodes(selected);
       });
       this.connectNodeSub = fromEventPattern(
-        (handler) => {
+        handler => {
           graph.on('edge:connected', handler);
         },
-        (handler) => {
+        handler => {
           graph.off('edge:connected', handler);
         },
-      ).subscribe((args) => {
+      ).subscribe(args => {
         this.onConnectNode(args);
       });
       this.connectionRemovedSub = fromEventPattern(
-        (handler) => {
+        handler => {
           graph.on('edge:removed', handler);
         },
-        (handler) => {
+        handler => {
           graph.off('edge:removed', handler);
         },
-      ).subscribe((args) => {
+      ).subscribe(args => {
         this.onConnectionRemoved(args);
       });
       let moveStarted = false;
       this.moveNodesSub = fromEventPattern(
-        (handler) => {
+        handler => {
           graph.on('node:change:position', handler);
         },
-        (handler) => {
+        handler => {
           graph.off('node:change:position', handler);
         },
       )
         .pipe(
-          tap((args) => {
+          tap(args => {
             this.onMoveNodeStart(args);
           }),
           scan((accum, args) => {
             const currentAccum = !moveStarted ? [] : accum;
             const {node} = args;
             const {id} = node;
-            const matchItemIndex = currentAccum.findIndex((item) => item.id === id);
+            const matchItemIndex = currentAccum.findIndex(item => item.id === id);
             if (matchItemIndex > -1) {
               currentAccum.splice(matchItemIndex, 1, {id, data: args});
             } else {
@@ -201,13 +201,13 @@ export class GraphCore {
               moveStarted = false;
             }
           }),
-          map((items) => items.map((item) => item.data)),
+          map(items => items.map(item => item.data)),
         )
-        .subscribe((movedNodes) => {
+        .subscribe(movedNodes => {
           this.onMoveNodes(movedNodes);
         });
       this.deleteNodeOrEdgeSub = fromEventPattern(
-        (handler) => {
+        handler => {
           graph.bindKey(['delete', 'backspace'], handler);
         },
         () => {
@@ -215,20 +215,20 @@ export class GraphCore {
         },
       ).subscribe(() => {
         const selectedCells = graph.getSelectedCells();
-        const selectedNodes = selectedCells.filter((cell) => cell.isNode());
-        const selectedEdges = selectedCells.filter((cell) => cell.isEdge());
+        const selectedNodes = selectedCells.filter(cell => cell.isNode());
+        const selectedEdges = selectedCells.filter(cell => cell.isEdge());
         this.onDeleteNodeOrEdge({nodes: selectedNodes, edges: selectedEdges});
       });
       this.copyNodeSub = fromEventPattern(
-        (handler) => {
+        handler => {
           graph.bindKey(['command+c', 'ctrl+c', 'command+v', 'ctrl+v'], handler);
         },
         () => {
           graph.unbindKey(['command+c', 'ctrl+c', 'command+v', 'ctrl+v']);
         },
-      ).subscribe((args) => {
+      ).subscribe(args => {
         const [, action] = args;
-        const selectedCells = graph.getSelectedCells().filter((cell) => this.validateNodeCopyable(cell));
+        const selectedCells = graph.getSelectedCells().filter(cell => this.validateNodeCopyable(cell));
         const copyableNodeId = this.copyableNodeId$.getValue();
         let copyableNode;
         if (copyableNodeId) {
@@ -330,15 +330,15 @@ export class GraphCore {
       console.log('[GraphCore] copy node:', copyNode);
     }
   }
-  addNode = (nodeMeta) => {
+  addNode = nodeMeta => {
     this.nodeMetas?.push(nodeMeta);
     return this.renderNode(nodeMeta);
   };
-  addEdge = (edgeMeta) => {
+  addEdge = edgeMeta => {
     this.edgeMetas?.push(edgeMeta);
     return this.renderEdge(edgeMeta);
   };
-  getNodeById = (nodeId) => {
+  getNodeById = nodeId => {
     const node = this.graph?.getCellById(nodeId);
     if (node?.isNode()) {
       return node;
@@ -348,7 +348,7 @@ export class GraphCore {
   getNodes = () => {
     return this.graph?.getNodes() || [];
   };
-  getEdgeById = (nodeId) => {
+  getEdgeById = nodeId => {
     const edge = this.graph?.getCellById(nodeId);
     if (edge?.isEdge()) {
       return edge;
@@ -358,7 +358,7 @@ export class GraphCore {
   getEdges = () => {
     return this.graph?.getEdges() || [];
   };
-  getCellById = (cellId) => {
+  getCellById = cellId => {
     const cell = this.graph?.getCellById(cellId);
     if (cell?.isNode() || cell?.isEdge()) {
       return cell;
@@ -371,7 +371,7 @@ export class GraphCore {
   updateNodeById = (nodeId, handler) => {
     handler(this.getNodeById(nodeId));
   };
-  updateNodes = (handler) => {
+  updateNodes = handler => {
     handler(this.getNodes());
   };
   updateEdgeById = (edgeId, handler) => {
@@ -382,25 +382,25 @@ export class GraphCore {
       handler(undefined);
     }
   };
-  updateEdges = (handler) => {
+  updateEdges = handler => {
     const edges = this.graph?.getEdges() || [];
     handler(edges);
   };
-  deleteNodes = (nodes) => {
+  deleteNodes = nodes => {
     const target = [].concat(nodes);
-    this.nodeMetas = this.nodeMetas.filter((nodeMeta) => !target.includes(nodeMeta.id));
+    this.nodeMetas = this.nodeMetas.filter(nodeMeta => !target.includes(nodeMeta.id));
     this.graph?.removeCells(target);
   };
-  deleteEdges = (edges) => {
+  deleteEdges = edges => {
     const target = [].concat(edges);
-    const targetIds = target.map((i) => (typeof i === 'string' ? i : i.id));
-    this.edgeMetas = this.edgeMetas.filter((edgeMeta) => !targetIds.includes(edgeMeta.id));
+    const targetIds = target.map(i => (typeof i === 'string' ? i : i.id));
+    this.edgeMetas = this.edgeMetas.filter(edgeMeta => !targetIds.includes(edgeMeta.id));
     this.graph?.removeCells(target);
   };
   clearContextMenuInfo = () => {
     this.contextMenuInfo$.next(null);
   };
-  zoom = (factor) => {
+  zoom = factor => {
     if (typeof factor === 'number') {
       this.graph?.zoom(factor);
     } else if (factor === 'fit') {
@@ -410,7 +410,7 @@ export class GraphCore {
       this.graph?.centerContent();
     }
   };
-  toggleSelectionEnabled = (enabled) => {
+  toggleSelectionEnabled = enabled => {
     const {graph} = this;
     if (graph) {
       const needEnableRubberBand = typeof enabled === 'undefined' ? !graph.isRubberbandEnabled() : enabled;
@@ -423,10 +423,10 @@ export class GraphCore {
       }
     }
   };
-  selectNodes = (ids) => {
+  selectNodes = ids => {
     const {graph} = this;
     if (graph) {
-      const target = [].concat(ids).map((i) => i.toString());
+      const target = [].concat(ids).map(i => i.toString());
       graph.cleanSelection();
       graph.select(target);
       if (!Array.isArray(ids)) {
@@ -453,7 +453,7 @@ export class GraphCore {
       graph.undo();
     }
   };
-  setCopyableNodeId = (id) => {
+  setCopyableNodeId = id => {
     this.copyableNodeId$.next(id);
   };
   throwRenderError = () => {

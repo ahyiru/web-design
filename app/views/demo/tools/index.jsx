@@ -6,7 +6,7 @@ import {Row, Col} from '@app/components/row';
 
 import SkeletonContent from '@app/components/skeletonContent';
 
-const Index = (props) => {
+const Index = props => {
   const watermarkRef = useRef();
   const skeletonRef = useRef();
   const {width} = useEleResize(skeletonRef, 250);

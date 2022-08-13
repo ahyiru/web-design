@@ -12,6 +12,10 @@ import Panel from '@app/components/panel';
 
 import Back from '@app/components/goBack';
 
+import {userInfoStore} from '@app/store/stores';
+
+import {useIntls} from '@app/components/intl';
+
 const {listApiFn, deleteApiFn} = apiList;
 
 /* const searchFormItems=()=><>
@@ -96,12 +100,12 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
   },
 ];
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.projectApis ?? {};
+const Index = props => {
+  const getIntls = useIntls();
+  const profile = userInfoStore.getState();
+  const i18nCfg = getIntls('main.projectApis', {});
   const {tableHeaderText = {}, actionsText = {}, searchFormText = {}} = i18nCfg;
 
-  const profile = props.store.getState('profile');
   const backState = props.history.getState()?.backState;
   const selItem = props.history.getState()?.item;
   const stateItem = selItem || (profile.projectId ? {_id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
@@ -111,14 +115,14 @@ const Index = (props) => {
   const pageParams = props.params;
   const [result, update, pageChange, searchList] = useHandleList(listApiFn, {projectId: stateItem._id}, {current: pageParams?.current, size: pageParams?.size});
 
-  const handleTest = (item) => {
+  const handleTest = item => {
     // console.log(item);
     props.router.push({
       path: `./test/${item._id}`,
       state: {item, backState: {path: props.path, params: {current, size}, state: {item: selItem, backState}}},
     });
   };
-  const handleEdit = (item) => {
+  const handleEdit = item => {
     // setModalItem(item);
     props.router.push({
       path: `./edit/${item._id}`,
@@ -130,13 +134,13 @@ const Index = (props) => {
     // update();
     props.router.push(`./add`);
   };
-  const handleDelete = (item) => {
+  const handleDelete = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map((v) => v._id);
+    const ids = items.map(v => v._id);
     Modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
-      content: `name: ${items.map((v) => v.name)}`,
+      content: `name: ${items.map(v => v.name)}`,
       okText: actionsText.delete_confirm_ok,
       okType: 'danger',
       cancelText: actionsText.delete_confirm_cancel,
@@ -153,7 +157,7 @@ const Index = (props) => {
       },
     });
   };
-  const handleModalOk = (values) => {
+  const handleModalOk = values => {
     console.log(values);
   };
 
@@ -162,11 +166,11 @@ const Index = (props) => {
   };
 
   const rowSelection = {
-    selectedRowKeys: selectedRows.map((v) => v._id),
+    selectedRowKeys: selectedRows.map(v => v._id),
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
-    getCheckboxProps: (record) => ({
+    getCheckboxProps: record => ({
       // disabled:!profile.role&&record._id!==profile._id,
     }),
     columnWidth: '30px',
@@ -242,11 +246,11 @@ const Index = (props) => {
   );
 };
 
-const SearchForm = (props) => {
+const SearchForm = props => {
   const {submit, loading, searchFormText} = props;
   const [form] = Form.useForm();
   return (
-    <Form layout="inline" form={form} initialValues={{}} onFinish={(value) => submit(validObj(value))}>
+    <Form layout="inline" form={form} initialValues={{}} onFinish={value => submit(validObj(value))}>
       <Form.Item name="url" label={searchFormText.url}>
         <Input placeholder={searchFormText.url_placeholder} allowClear style={{width: '120px'}} />
       </Form.Item>

@@ -4,7 +4,7 @@ import {CloudUploadOutlined, LogoutOutlined, PlayCircleOutlined} from '@ant-desi
 import {useObservableState} from '@app/views/commons/x6-demo/common/hooks/useObservableState';
 import {useExperimentGraph} from '@app/views/commons/x6-demo/pages/rx-models/experiment-graph';
 import styles from './bottom-toolbar.less';
-export const BottomToolbar = (props) => {
+export const BottomToolbar = props => {
   const {experimentId} = props;
   const expGraph = useExperimentGraph(experimentId);
   const [running] = useObservableState(expGraph.running$);
@@ -16,7 +16,7 @@ export const BottomToolbar = (props) => {
   }, [running]);
   const onRunExperiment = useCallback(() => {
     setPreparingRun(true);
-    expGraph.runGraph().then((res) => {
+    expGraph.runGraph().then(res => {
       if (!res.success) {
         setPreparingRun(false);
       }
@@ -24,7 +24,7 @@ export const BottomToolbar = (props) => {
   }, [expGraph]);
   const onStopRunExperiment = useCallback(() => {
     setPreparingStop(true);
-    expGraph.stopRunGraph().then((res) => {
+    expGraph.stopRunGraph().then(res => {
       if (!res.success) {
         setPreparingStop(false);
       }

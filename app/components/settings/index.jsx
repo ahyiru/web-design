@@ -8,6 +8,9 @@ import {Row, Col} from '@app/components/row';
 // import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';
 import getThemeList from '@app/configs/theme';
+import {useMenuTypeStore, useThemeStore} from '@app/store/stores';
+
+import {useIntls} from '@app/components/intl';
 
 const {Option} = Select;
 
@@ -19,8 +22,8 @@ const labelStyle = {
   lineHeight: '32px',
 };
 
-const getSizeList = (list) =>
-  Object.keys(list).map((key) => {
+const getSizeList = list =>
+  Object.keys(list).map(key => {
     const size = list[key];
     const value = size.replace(/[^0-9]/gi, '') - 0;
     const unit = size.replace(value, '');
@@ -36,7 +39,7 @@ const getSizeList = (list) =>
     };
   });
 
-const tabs = (i18nCfg) => [
+const tabs = i18nCfg => [
   {
     key: 'layout',
     value: i18nCfg.layoutDesign,
@@ -51,18 +54,18 @@ const tabs = (i18nCfg) => [
   },
 ];
 
-const Index = (props) => {
+const Index = props => {
+  const getIntls = useIntls();
+  const themeLang = getIntls('theme', {});
+  const i18nCfg = getIntls('main.layout', {});
+  const [theme, setTheme] = useThemeStore();
+  const [menuType, setMenuType] = useMenuTypeStore('vertical');
+
   const [active, setActive] = useState('layout');
   const [visible, setVisible] = useState(false);
 
-  const {store, useStore} = props;
-  const [theme, setTheme] = useStore('huxy-theme');
-  const [menuType, setMenuType] = useStore('huxy-menuType', 'vertical');
-  const i18ns = store.getState('i18ns');
-  const themeLang = i18ns?.theme ?? {};
-  const i18nCfg = i18ns?.main?.layout ?? {};
   const [size, setSize] = useState(10);
-  const changeFontSize = useDebounce((value) => document.documentElement.style.setProperty('--rootSize', value), delay);
+  const changeFontSize = useDebounce(value => document.documentElement.style.setProperty('--rootSize', value), delay);
   const changeLayout = useDebounce((value, save = false) => {
     const newTheme = {
       name: 'custom',
@@ -86,11 +89,11 @@ const Index = (props) => {
     message.success(i18nCfg.copy_cfg_msg);
   };
 
-  const changeFont = (value) => {
+  const changeFont = value => {
     setSize(value);
     changeFontSize(`${(value * 100) / 16}%`);
   };
-  const selectTheme = (current) => {
+  const selectTheme = current => {
     storage.set('theme', current);
     setTheme(current);
   };
@@ -117,7 +120,7 @@ const Index = (props) => {
       <>
         <div className="vertical-item">
           <label>{i18nCfg.menuType}</label>
-          <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={(e) => setMenuType(e.target.value)}>
+          <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => setMenuType(e.target.value)}>
             <Radio value="vertical">{i18nCfg.vertical}</Radio>
             <Radio value="horizontal">{i18nCfg.horizontal}</Radio>
             <Radio value="compose">{i18nCfg.compose}</Radio>
@@ -125,11 +128,11 @@ const Index = (props) => {
         </div>
         <div className="vertical-item">
           <label>{i18nCfg.fontSize}</label>
-          <Slider min={6} max={16} value={size} onChange={(e) => changeFont(e)} />
+          <Slider min={6} max={16} value={size} onChange={e => changeFont(e)} />
         </div>
         <Row className="select-item">
-          {getThemeList(themeLang).map((item) => (
-            <Col key={item.key} span={6} onClick={(e) => selectTheme(item)}>
+          {getThemeList(getIntls).map(item => (
+            <Col key={item.key} span={6} onClick={e => selectTheme(item)}>
               <a className={`item${item.key === theme.key ? ' selected' : ''}`}>{item.name}</a>
             </Col>
           ))}
@@ -146,11 +149,11 @@ const Index = (props) => {
             min={min}
             max={max}
             value={value}
-            onChange={(value) => changeSizes(key, value, unit)}
+            onChange={value => changeSizes(key, value, unit)}
             addonAfter={
               units.length > 1 ? (
-                <Select value={unit} onChange={(val) => changeUnit(key, val)}>
-                  {units.map((u) => (
+                <Select value={unit} onChange={val => changeUnit(key, val)}>
+                  {units.map(u => (
                     <Option key={u} value={u}>
                       {u}
                     </Option>
@@ -164,13 +167,13 @@ const Index = (props) => {
         </Col>
       </Row>
     )),
-    size: Object.keys(theme.list.colors).map((key) => (
+    size: Object.keys(theme.list.colors).map(key => (
       <Row key={key} gutter={[10, 16]}>
         <Col span={5}>
           <span style={labelStyle}>{themeLang[key]}：</span>
         </Col>
         <Col span={6}>
-          <Input type="color" value={theme.list.colors[key]} onChange={(e) => changeColors(e, key)} />
+          <Input type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
         </Col>
       </Row>
     )),
@@ -178,7 +181,7 @@ const Index = (props) => {
 
   return (
     <>
-      <a className={visible ? 'active' : ''} onClick={(e) => setVisible(true)}>
+      <a className={visible ? 'active' : ''} onClick={e => setVisible(true)}>
         <SettingOutlined />
       </a>
       <Drawer
@@ -195,7 +198,7 @@ const Index = (props) => {
           </Space>
         }
       >
-        <TabHeader flex tabs={tabs(i18nCfg)} switchTab={(key) => setActive(key)} />
+        <TabHeader flex tabs={tabs(i18nCfg)} switchTab={key => setActive(key)} />
         <div className="layout-setting" style={{padding: '15px 0'}}>
           {comps[active]}
         </div>

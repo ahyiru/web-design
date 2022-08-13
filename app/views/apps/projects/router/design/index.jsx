@@ -1,5 +1,5 @@
 import {useState, useEffect, useMemo} from 'react';
-import {Tree, Modal, Dropdown, Menu, message, Spin} from 'antd';
+import {Tree, Modal, Dropdown, Menu, message, Spin, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {updateId, addNodes, editNodes, deleteNodes, moveNodes, cacheData, selectedHandle, session} from '@huxy/utils';
@@ -7,6 +7,8 @@ import apiList from '@app/utils/getApis';
 import defProject from '@app/configs/projects';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
+import {userInfoStore} from '@app/store/stores';
+import {useIntls} from '@app/components/intl';
 import HandleModal from './modal';
 import CommonEditor from './commonEditor';
 import FormEditor from './formEditor';
@@ -50,13 +52,13 @@ const getSelected = (data, id) => {
   return selected;
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.projectDesign ?? {};
+const Index = props => {
+  const getIntls = useIntls();
+  const i18nCfg = getIntls('main.projectDesign', {});
   const {pageText = {}, actionsText = {}, topActionText = {}, addFormText = {}, designConfigText} = i18nCfg;
   const {editorI18n = {}} = designConfigText || {};
 
-  const profile = props.store.getState('profile');
+  const profile = userInfoStore.getState();
   const backState = props.history.getState()?.backState;
   const selItem = props.history.getState()?.item;
   const stateItem = selItem || (profile.projectId ? {_id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
@@ -64,6 +66,7 @@ const Index = (props) => {
     type: stateItem?.name,
     isRoot: true,
     key: '-1',
+    selectable: false,
   };
   const [visible, setVisible] = useState(false);
   const [modalType, setModalType] = useState('');
@@ -81,15 +84,15 @@ const Index = (props) => {
     return () => clean();
   }, []);
 
-  const addFn = (item) => {
+  const addFn = item => {
     setVisible(true);
     setModalType('add');
   };
-  const editFn = (item) => {
+  const editFn = item => {
     setVisible(true);
     setModalType('edit');
   };
-  const deleteFn = (item) => {
+  const deleteFn = item => {
     Modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
@@ -106,12 +109,12 @@ const Index = (props) => {
       },
     });
   };
-  const onModalOk = (values) => {
+  const onModalOk = values => {
     const tree = addNodes(schemaTree, selectedKey, [values], 'key');
     setSchema([...tree]);
   };
 
-  const editProps = (values) => {
+  const editProps = values => {
     const tree = editNodes(schemaTree, selectedKey, {props: values}, 'key');
     setSchema([...tree]);
     record(tree);
@@ -148,7 +151,7 @@ const Index = (props) => {
     window.open(url);
   };
 
-  const onDrop = (info) => {
+  const onDrop = info => {
     const fromId = info.dragNode.key;
     const toId = info.node.key;
     const dropPosition = info.dropPosition;
@@ -244,14 +247,14 @@ const Index = (props) => {
             <Back actions={topActions} back={back} />
           </Col>
         )}
-        <Col width="240px">
+        <Col width="260px">
           <Panel>
             <Spin spinning={false}>
               <Tree
                 showIcon
                 defaultExpandAll
                 switcherIcon={<DownOutlined />}
-                titleRender={(item) => treeDrop(item, dropFns, actionsText)}
+                titleRender={item => treeDrop(item, dropFns, actionsText)}
                 treeData={schemaTree}
                 onSelect={onSelect}
                 virtual={false}
@@ -261,8 +264,19 @@ const Index = (props) => {
             </Spin>
           </Panel>
         </Col>
-        <Col auto offsetWidth="240px">
-          {Comp}
+        <Col auto offsetWidth="260px">
+          {selectedKey ? (
+            Comp
+          ) : (
+            <div style={{padding: 12}}>
+              <Alert
+                type="warning"
+                showIcon
+                message="请选中左侧DOM树节点！"
+                description="请选中左侧DOM树节点，来对当前节点属性进行增删改操作，如添加属性‘style’、‘onClick’等。根节点不可设置属性！DOM树节点右键可添加或删除节点，节点可自由拖动！"
+              />
+            </div>
+          )}
         </Col>
       </Row>
       {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} addFormText={addFormText} />}

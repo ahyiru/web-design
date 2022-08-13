@@ -1,6 +1,5 @@
-import icons from './icons';
 import fixEle from './fixEle';
 
-const fixIcons = fixEle(icons);
+const fixIcons = iconList => fixEle(iconList);
 
 export default fixIcons;

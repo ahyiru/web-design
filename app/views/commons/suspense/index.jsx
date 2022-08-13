@@ -4,6 +4,7 @@ import {Spinner} from '@huxy/components';
 import Panel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
 import {suspenseApis} from '@app/utils/getApis';
+import {useIntls} from '@app/components/intl';
 import {susTest1, susTest2} from './suspenseFns';
 
 const {profileSuspense, allUserSuspense} = suspenseApis;
@@ -13,14 +14,14 @@ const users = susTest2();
 const userinfo1 = profileSuspense();
 const users1 = allUserSuspense();
 
-const columns = (i18nCfg) => [
+const columns = i18nCfg => [
   {dataIndex: 'name', title: i18nCfg.columns_title},
   {dataIndex: 'email', title: i18nCfg.columns_email},
 ];
 
 const UserInfo = ({userinfo, title}) => {
   const {result} = userinfo.read();
-  const info = Object.keys(result).map((v) => ({key: v, value: result[v]}));
+  const info = Object.keys(result).map(v => ({key: v, value: result[v]}));
   return (
     <Panel>
       <h2>{title}</h2>
@@ -43,9 +44,9 @@ const Allusers = ({users, title, i18nCfg}) => {
   );
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.suspense ?? {};
+const Index = props => {
+  const getIntls = useIntls();
+  const i18nCfg = getIntls('main.suspense', {});
   return (
     <div>
       <Row>

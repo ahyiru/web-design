@@ -1,6 +1,6 @@
 import {Link} from '@huxy/router';
 const renderMenu = (menu, curName) =>
-  menu.map((item) => {
+  menu.map(item => {
     const {path, name, open, children} = item;
     const active = name === curName;
     if (children?.length) {

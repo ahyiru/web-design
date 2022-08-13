@@ -1,6 +1,6 @@
 import {forwardRef, useState, useRef} from 'react';
 import {useClickAway} from '@huxy/use';
-import fixIcons from '@app/utils/fixIcons';
+import Icon from '@app/components/icon';
 
 const selectedType = {
   background: 'rgba(0,0,0,.2)',
@@ -12,11 +12,11 @@ const Index = ({icon, name, format, active, className, dropList, selectedKey, de
   // ref=iconRef;
   const activeCls = active ? ` active` : '';
   const cls = className ? `${activeCls} ${className}` : activeCls;
-  useClickAway(iconRef, (e) => show && setShow(false));
+  useClickAway(iconRef, e => show && setShow(false));
   const handleClick = (e, hasDrop) => {
     e.preventDefault();
     if (hasDrop) {
-      setShow((prev) => !prev);
+      setShow(prev => !prev);
     } else {
       onClick();
     }
@@ -35,11 +35,11 @@ const Index = ({icon, name, format, active, className, dropList, selectedKey, de
       )}
     </>
   ) : (
-    fixIcons(icon)
+    <Icon icon={icon} />
   );
 
   return (
-    <span {...rest} ref={iconRef} className={`tools-bar-icon${cls}`} tooltips={name} onMouseDown={(e) => handleClick(e, dropList?.length)}>
+    <span {...rest} ref={iconRef} className={`tools-bar-icon${cls}`} tooltips={name} onMouseDown={e => handleClick(e, dropList?.length)}>
       {showIcon}
     </span>
   );

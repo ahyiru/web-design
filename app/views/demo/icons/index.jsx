@@ -70,8 +70,8 @@ const icons = [
   'border-outer',
 ];
 
-const Index = (props) => {
-  const copyText = (v) => {
+const Index = props => {
+  const copyText = v => {
     copyToClipboard(v);
     message.success('拷贝成功！');
   };

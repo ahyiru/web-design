@@ -23,8 +23,8 @@ export const CategoryTree = () => {
       return (<TreeNode isLeaf={true} key={key} icon={<span />} title={title} className={styles.treeNode}/>);
     });
   }, []); */
-  const treeList = componentTreeNodes.filter((node) => node.status !== 4);
-  const treeData = traverItem((item) => {
+  const treeList = componentTreeNodes.filter(node => node.status !== 4);
+  const treeData = traverItem(item => {
     const {isDir, id} = item;
     item.key = id.toString();
     item.title = <NodeTitle node={item} searchKey={searchKey} />;

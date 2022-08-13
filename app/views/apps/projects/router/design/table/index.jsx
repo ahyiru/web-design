@@ -4,25 +4,25 @@ import Columns from './columns';
 import FormEditor from '../formEditor';
 import Panel from '@app/components/panel';
 
-const TableEditor = (props) => {
+const TableEditor = props => {
   const {data = {}, getValues, designConfigText} = props;
   const {editorI18n = {}, actionI18n = {}, columnI18n = {}} = designConfigText || {};
-  const getActions = (values) => {
+  const getActions = values => {
     // console.log(1,values);
     data.actions = values;
     getValues?.(data);
   };
-  const getColumns = (values) => {
+  const getColumns = values => {
     // console.log(2,values);
     data.columns = values;
     getValues?.(data);
   };
-  const getSearchForm = (values) => {
+  const getSearchForm = values => {
     // console.log(3,values);
     data.searchSchema = values;
     getValues?.(data);
   };
-  const getModalForm = (values) => {
+  const getModalForm = values => {
     // console.log(4,values);
     data.modalSchema = values;
     getValues?.(data);

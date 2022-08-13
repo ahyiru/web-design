@@ -26,11 +26,11 @@ export class CodeName {
     return CodeName.parse(c1) === CodeName.parse(c2);
   }
   static some(list, c2) {
-    return list.some((c1) => CodeName.equal(c1, c2));
+    return list.some(c1 => CodeName.equal(c1, c2));
   }
   static getFromNode(node = {}) {
     const {codeName = ''} = node;
     return CodeName.parse(codeName);
   }
 }
-export const isPromise = (obj) => !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';
+export const isPromise = obj => !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function';

@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'react';
 import {FixedSizeList as List} from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 
-const Index = (props) => {
+const Index = props => {
   const {result, pageChange, RenderItem, itemSize = 45, paramsKey, width = '100%', height = 600} = props;
   const {isPending, data} = result;
   const {list = [], total = 1, size = 10, current = 1} = data || {};
@@ -31,12 +31,12 @@ const Index = (props) => {
     tempList.current[current] = list;
   }
   const totalList = [];
-  Object.keys(tempList.current).map((key) => totalList.push(...tempList.current[key]));
+  Object.keys(tempList.current).map(key => totalList.push(...tempList.current[key]));
 
   const len = totalList.length;
   const hasNextPage = len < total;
   const itemCount = hasNextPage ? len + size : len;
-  const isItemLoaded = (index) => !hasNextPage || index < len;
+  const isItemLoaded = index => !hasNextPage || index < len;
 
   return (
     <InfiniteLoader ref={listRef} isItemLoaded={isItemLoaded} itemCount={itemCount} loadMoreItems={handlePageChange}>

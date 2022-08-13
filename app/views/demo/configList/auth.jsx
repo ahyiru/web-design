@@ -4,8 +4,6 @@ import {Tree, Button, message, Input, Spin} from 'antd';
 
 import {DownOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 
-import * as Icons from '@ant-design/icons';
-
 import {Row, Col} from '@huxy/components';
 import {arr2TreeByPath, isValidArr, traverItem} from '@huxy/utils';
 import {useSearch, useDebounce} from '@huxy/use';
@@ -18,6 +16,10 @@ import Back from '@app/components/goBack';
 
 import Panel from '@app/components/panel';
 
+import Icons from '@app/utils/icons';
+
+import {useIntls} from '@app/components/intl';
+
 import {getRouter, getAuthedRouter, setAuthedRouter} from '../mock';
 
 const {Search} = Input;
@@ -27,11 +29,8 @@ const rootNode = {
   iconKey: 'LayoutOutlined',
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.users ?? {};
-  const {authFormText = {}} = i18nCfg;
-
+const Index = props => {
+  const getIntls = useIntls();
   const {getState} = props.history;
   const {backState} = getState();
 
@@ -40,7 +39,7 @@ const Index = (props) => {
   const [filterTree, setFilterTree] = useSearch(null);
 
   const [routerList] = useFetchList(getRouter, {projectId: defProject._id}, ({result}) => {
-    const arr = [{...rootNode, name: authFormText.root_name}, ...(result || [])].map((item) => {
+    const arr = [{...rootNode, name: getIntls('main.layout.users.authFormText.root_name')}, ...(result || [])].map(item => {
       item.key = item.path;
       const Icon = Icons[item.iconKey] || EyeInvisibleOutlined;
       item.icon = <Icon />;
@@ -83,12 +82,12 @@ const Index = (props) => {
       authKeys: checkedKeys.filter(Boolean),
     });
     if (code === 200) {
-      message.success(`${msg} ${authFormText.auth_msg}`);
-      props.router.push(`/users`);
+      message.success(`${msg} ${getIntls('main.layout.users.authFormText.auth_msg')}`);
+      props.router.push(`/playground/configTable`);
     }
   };
 
-  const onCheck = (checkedKeysValue) => {
+  const onCheck = checkedKeysValue => {
     setCheckedKeys(checkedKeysValue);
   };
 
@@ -99,12 +98,12 @@ const Index = (props) => {
   const {isPending, data} = routerList;
   const treeData = filterTree || data || [];
   const nodes = [];
-  traverItem((item) => {
+  traverItem(item => {
     if (isValidArr(item.children)) {
       nodes.push(item.path);
     }
   })(treeData);
-  const leafKeys = checkedKeys.filter((v) => !nodes.includes(v));
+  const leafKeys = checkedKeys.filter(v => !nodes.includes(v));
 
   return (
     <div>
@@ -115,24 +114,14 @@ const Index = (props) => {
         <Col>
           <Panel>
             <Spin spinning={isPending}>
-              <Search placeholder="搜索..." allowClear enterButton style={{maxWidth: '240px', marginBottom: '12px'}} /* onSearch={searchTree} */ onChange={(e) => searchChange(e, data)} />
-              <Tree
-                showIcon
-                defaultExpandAll
-                switcherIcon={<DownOutlined />}
-                titleRender={(item) => item.name}
-                treeData={treeData}
-                virtual={false}
-                checkable
-                onCheck={onCheck}
-                checkedKeys={leafKeys}
-              />
+              <Search placeholder="搜索..." allowClear enterButton style={{maxWidth: '240px', marginBottom: '12px'}} /* onSearch={searchTree} */ onChange={e => searchChange(e, data)} />
+              <Tree showIcon defaultExpandAll switcherIcon={<DownOutlined />} titleRender={item => item.name} treeData={treeData} virtual={false} checkable onCheck={onCheck} checkedKeys={leafKeys} />
               <div style={{padding: '12px 16px'}}>
-                <Button type="primary" htmlType="submit" onClick={(e) => handleAuth()}>
-                  {authFormText.submit}
+                <Button type="primary" htmlType="submit" onClick={e => handleAuth()}>
+                  {getIntls('main.layout.users.authFormText.submit')}
                 </Button>
                 <Button style={{marginLeft: '12px'}} onClick={() => setCheckedKeys([])}>
-                  {authFormText.reset}
+                  {getIntls('main.layout.users.authFormText.reset')}
                 </Button>
               </div>
             </Spin>

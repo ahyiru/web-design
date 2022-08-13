@@ -25,7 +25,7 @@ const HoriList = () => (
   </List>
 );
 
-const VirtualList = (props) => {
+const VirtualList = props => {
   return (
     <div className="virtual-list">
       <div>

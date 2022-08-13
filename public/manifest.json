@@ -1,32 +1,38 @@
 {
-  "name":"huxy",
-  "short_name":"huxy",
-  "description":"huxy",
-  "lang":"cn",
-  "display":"standalone",
-  "orientation":"any",
-  "start_url":".",
-  "theme_color":"#313131",
-  "background_color":"#313131",
-  "icons":[{
-    "src":"./src/images/150.png",
-    "type":"image/png",
-    "sizes":"150x150"
-  },{
-    "src":"./src/images/300.png",
-    "sizes":"300x300",
-    "type":"image/png"
-  },{
-    "src":"./src/images/450.png",
-    "type":"image/png",
-    "sizes":"450x450"
-  },{
-    "src":"./src/images/600.png",
-    "type":"image/png",
-    "sizes":"600x600"
-  },{
-    "src":"./src/images/900.png",
-    "type":"image/png",
-    "sizes":"900x900"
-  }]
+  "name": "huxy",
+  "short_name": "huxy",
+  "description": "huxy",
+  "lang": "cn",
+  "display": "standalone",
+  "orientation": "any",
+  "start_url": ".",
+  "theme_color": "#313131",
+  "background_color": "#313131",
+  "icons": [
+    {
+      "src": "/src/images/150.png",
+      "type": "image/png",
+      "sizes": "150x150"
+    },
+    {
+      "src": "/src/images/300.png",
+      "sizes": "300x300",
+      "type": "image/png"
+    },
+    {
+      "src": "/src/images/450.png",
+      "type": "image/png",
+      "sizes": "450x450"
+    },
+    {
+      "src": "/src/images/600.png",
+      "type": "image/png",
+      "sizes": "600x600"
+    },
+    {
+      "src": "/src/images/900.png",
+      "type": "image/png",
+      "sizes": "900x900"
+    }
+  ]
 }

@@ -31,12 +31,12 @@ const handleEnd = (moveEvt, endEvt, ref, moveEvent, endEvent) => {
 const init = (ref, startEvent, moveEvent, endEvent) => {
   const {startEvt, moveEvt, endEvt} = eventTargets();
 
-  const start = (event) => {
+  const start = event => {
     startEvent(event, ref);
     handleStart(moveEvt, endEvt, ref, move, end);
   };
-  const move = (event) => moveEvent(event, ref);
-  const end = (event) => {
+  const move = event => moveEvent(event, ref);
+  const end = event => {
     endEvent(event, ref);
     handleEnd(moveEvt, endEvt, ref, move, end);
   };

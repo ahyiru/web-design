@@ -2,28 +2,30 @@ import {message} from 'antd';
 import html2canvas from 'html2canvas';
 import {dlfile} from '@huxy/utils';
 
+import {langStore, userInfoStore} from '@app/store/stores';
+import {getIntls} from '@app/components/intl';
+
 import Settings from '@app/components/settings';
-// import getThemeList from './theme';
-import getLang from '@app/utils/getLang';
-import {logout} from '@app/utils/utils';
-
-import defUser from '@app/assets/images/user/2.png';
-import wx from '@app/assets/images/wx.jpg/';
-
-import zh_icon from '@app/assets/icons/zh.png';
-import en_icon from '@app/assets/icons/en.png';
-import jp_icon from '@app/assets/icons/jp.png';
-
 import FullPage from '@app/components/fullScreen';
 import CustomCollapse from '@app/components/customCollapse';
 import Notify from '@app/components/notify';
 import Search from '@app/components/search';
 
-const langIcons = {zh_icon, en_icon, jp_icon};
+import getLang from '@app/utils/getLang';
+import {logout} from '@app/utils/utils';
+import getWeb3 from '@app/web3/getWeb3';
 
-export const leftNav = ({store, useStore}) => {
-  const i18ns = store.getState('i18ns');
-  const {left} = i18ns?.nav ?? {};
+import GithubIcon from '@app/components/githubIcon';
+
+import defUser from '@app/assets/images/user/2.png';
+import wx from '@app/assets/images/wx.jpg';
+import metamask from '@app/assets/images/metamask.svg';
+import langList from './langList';
+
+const changeLang = ({key}) => langStore.setState(key);
+
+export const leftNav = () => {
+  const left = getIntls('nav.left', {});
   return [
     {
       key: 'collapse',
@@ -65,7 +67,7 @@ export const leftNav = ({store, useStore}) => {
       key: 'wechat',
       icon: 'WechatOutlined',
       arrowDir: 'lt',
-      ChildRender: (item) => (
+      ChildRender: item => (
         <div className="follow-me">
           <img src={wx} alt="wechat" />
           <p>{left?.followMe ?? 'followMe'}：yiru_js</p>
@@ -76,16 +78,14 @@ export const leftNav = ({store, useStore}) => {
       key: 'configs',
       icon: 'ToolOutlined',
       type: 'configs',
-      Custom: () => <Settings store={store} useStore={useStore} />,
+      Custom: () => <Settings />,
     },
   ];
 };
-export const rightNav = ({store, useStore}) => {
+export const rightNav = () => {
   const language = getLang();
-  const i18ns = store.getState('i18ns');
-  const user = store.getState('profile');
-  // const themeKey=store.getState('huxy-theme')?.key;
-  const {right} = i18ns?.nav ?? {};
+  const user = userInfoStore.getState();
+  const right = getIntls('nav.right', {});
   return [
     {
       key: 'username',
@@ -112,7 +112,7 @@ export const rightNav = ({store, useStore}) => {
           name: right?.logout ?? '退出',
           type: 'logout',
           icon: 'PoweroffOutlined',
-          handle: (item) => {
+          handle: item => {
             logout();
           },
         },
@@ -124,61 +124,50 @@ export const rightNav = ({store, useStore}) => {
       Custom: () => (
         <a>
           <div className="icon">
-            <img src={`${langIcons[language + '_icon']}`} alt={language} />
+            <img src={langList.find(({key}) => key === language)?.icon} alt={language} />
           </div>
         </a>
       ),
-      children: [
-        {
-          key: 'zh',
-          name: right?.zh ?? '汉语',
-          type: 'language',
-          active: language === 'zh',
-          icon: (
-            <div key="zh" className="img">
-              <img src={`${langIcons['zh_icon']}`} alt="zh" />
-            </div>
-          ),
-        },
-        {
-          key: 'en',
-          name: right?.en ?? '英语',
-          type: 'language',
-          active: language === 'en',
-          icon: (
-            <div key="en" className="img">
-              <img src={`${langIcons['en_icon']}`} alt="en" />
-            </div>
-          ),
-        },
-        {
-          key: 'jp',
-          name: right?.jp ?? '日语',
-          type: 'language',
-          active: language === 'jp',
-          icon: (
-            <div key="jp" className="img">
-              <img src={`${langIcons['jp_icon']}`} alt="jp" />
-            </div>
-          ),
-        },
-      ],
+      children: langList.map(({key, name, icon}) => ({
+        key,
+        name: right?.[key] ?? name,
+        type: 'language',
+        icon: (
+          <div key={key} className="img">
+            <img src={icon} alt={key} />
+          </div>
+        ),
+        handle: changeLang,
+      })),
     },
-    /* {
-      key:'themeList',
-      title:right?.themeList??'主题设置',
-      icon:'SettingOutlined',
-      type:'themeList',
-      // arrowDir:'lt',
-      children:getThemeList(theme).map(v=>{
-        v.key===themeKey&&(v.active=true);
-        return v;
-      }),
-    }, */
+    {
+      key: 'MetaMask',
+      title: right?.metamask ?? 'MetaMask',
+      Custom: () => {
+        const hanlder = async () => {
+          try {
+            const result = await getWeb3();
+            const addr = result.accounts?.[0];
+            if (addr) {
+              message.success(`已连接${addr}`);
+            }
+          } catch (error) {
+            message.error('未检测到MetaMask插件！');
+          }
+        };
+        return (
+          <a onClick={e => hanlder()}>
+            <div className="icon">
+              <img src={metamask} alt="metamask" />
+            </div>
+          </a>
+        );
+      },
+    },
     {
       key: 'github',
       title: right?.github ?? 'Github',
-      icon: 'GithubOutlined',
+      icon: GithubIcon,
       type: 'link',
       link: 'https://github.com/ahyiru/web-design',
     },
@@ -189,13 +178,17 @@ export const rightNav = ({store, useStore}) => {
     },
     {
       key: 'fullscreen',
-      Custom: () => <FullPage />,
+      Custom: () => (
+        <a>
+          <FullPage />
+        </a>
+      ),
     },
     {
       title: right?.screenshot ?? '截屏',
       key: 'screencapture',
       icon: 'CameraOutlined',
-      handle: (item) => {
+      handle: item => {
         // const ele=document. getElementsByClassName('page-content')[0];
         html2canvas(document.getElementById('app'), {
           useCORS: true,
@@ -203,24 +196,15 @@ export const rightNav = ({store, useStore}) => {
           allowTaint: true,
           logging: false,
         })
-          .then((canvas) => {
+          .then(canvas => {
             dlfile(canvas.toDataURL());
             message.success(right?.screencapture_msg ?? '下载成功！');
           })
-          .catch((error) => {
+          .catch(error => {
             message.error(error);
           });
       },
     },
-    // {
-    //   name:right['clean_cookie'],
-    //   icon:<RestOutlined />,
-    //   type:'button',
-    //   handle:item=>{
-    //     storage.clear();
-    //     location.href='/';
-    //   },
-    // },
     {
       key: 'search',
       title: right?.search ?? '搜索',

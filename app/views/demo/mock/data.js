@@ -369,4 +369,4 @@ export const fakeUsers = (schema, num = 10) =>
 
 export const users = fakeUsers(userSchema, 36);
 
-export const routers = routerList.map((route) => ({...routerSchema, ...route, _id: uuidv4()}));
+export const routers = routerList.map(route => ({...routerSchema, ...route, _id: uuidv4()}));

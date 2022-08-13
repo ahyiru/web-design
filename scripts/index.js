@@ -1,54 +1,54 @@
-const express=require('express');
-const webpack=require('webpack');
-const colors=require('colors');
+const express = require('express');
+const webpack = require('webpack');
+const colors = require('colors');
 
 // const https=require('https');
 // const fs=require('fs');
 // const path=require('path');
 
-const cors=require('cors');
-const logger=require('morgan');
-const bodyParser=require('body-parser');
-const compression=require('compression');
+const cors = require('cors');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const compression = require('compression');
 
-const webpackDevMiddleware=require('webpack-dev-middleware');
-const webpackHotMiddleware=require('webpack-hot-middleware');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const webpackConfig=require('./webpack.development');
+const webpackConfig = require('./webpack.development');
 
-const {appName,HOST,PORT,PROXY,MOCK}=require('../configs');
+const {appName, HOST, PORT, PROXY, MOCK} = require('../configs');
 
-const getIPs=require('./getIPs');
+const getIPs = require('./getIPs');
 
-const {createProxyMiddleware}=require('http-proxy-middleware');
+const {createProxyMiddleware} = require('http-proxy-middleware');
 
 const app = express();
 
 const compiler = webpack(webpackConfig);
 
-const proxyCfg=require('./appProxy');
+const proxyCfg = require('./appProxy');
 
-const mocks=require('./mock');
+const mocks = require('./mock');
 
-if(Array.isArray(PROXY)){
-  PROXY.map(proxyItem=>{
-    const {prefix,opts}=proxyCfg(PROXY);
-    app.use(prefix,createProxyMiddleware(opts));
+if (Array.isArray(PROXY)) {
+  PROXY.map(proxyItem => {
+    const {prefix, opts} = proxyCfg(PROXY);
+    app.use(prefix, createProxyMiddleware(opts));
   });
-}else{
-  const {prefix,opts}=proxyCfg(PROXY);
-  app.use(prefix,createProxyMiddleware(opts));
+} else {
+  const {prefix, opts} = proxyCfg(PROXY);
+  app.use(prefix, createProxyMiddleware(opts));
 }
 
-const devMiddleware=webpackDevMiddleware(compiler,{
-  publicPath:webpackConfig.output.publicPath,
+const devMiddleware = webpackDevMiddleware(compiler, {
+  publicPath: webpackConfig.output.publicPath,
   // index:'index.html',
   // outputFileSystem:{},
   stats: {
     preset: 'minimal',
     moduleTrace: true,
     errorDetails: true,
-    colors:true,
+    colors: true,
   },
 });
 
@@ -60,14 +60,14 @@ app.set('port', PORT);
 
 app.use(cors());
 app.use(logger('dev'));
-app.use(bodyParser.json({limit:'20mb'}));
-app.use(bodyParser.urlencoded({limit:'20mb',extended:true}));
+app.use(bodyParser.json({limit: '20mb'}));
+app.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
 app.use(compression());
 
 // browserRouter
-app.use('*',(req,res,next)=>{
-  const htmlBuffer=compiler.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
-  res.set('Content-Type','text/html');
+app.use('*', (req, res, next) => {
+  const htmlBuffer = compiler.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
+  res.set('Content-Type', 'text/html');
   res.send(htmlBuffer);
   res.end();
 });
@@ -87,25 +87,25 @@ const options={
 const httpsServer=https.createServer(options,app); */
 /* https */
 
-app.listen(app.get('port'),err=>{
-  if(err){
+app.listen(app.get('port'), err => {
+  if (err) {
     console.log(err);
     return false;
   }
-  const ips=getIPs().map(ip=>`${ip}:${app.get('port')}`).join('\n');
+  const ips = getIPs().map(ip => `${ip}:${app.get('port')}`).join('\n');
   // open(`http://${app.get('host')}:${app.get('port')}`);
-  console.log('\n'+appName.magenta+': 服务已启动! '.cyan+'✓'.green);
+  console.log('\n' + appName.magenta + ': 服务已启动! '.cyan + '✓'.green);
   console.log(`\n监听端口: ${app.get('port')} ,正在构建,请稍后...`.cyan);
   console.log('-----------------------------------'.blue);
   // console.log(` 本地地址: http://${app.get('host')}:${app.get('port')}`.magenta);
   console.log(`运行地址: \n`.magenta);
   console.log(`${ips} \n`.magenta);
-  console.log(`如需打包部署到生产环境，请运行 `.cyan+`npm run build`.green);
+  console.log(`如需打包部署到生产环境，请运行 `.cyan + `npm run build`.green);
   console.log('-----------------------------------'.blue);
   console.log('\n按下 CTRL-C 停止服务\n'.blue);
 });
 
-if(appName==='demo'){
+if (appName === 'demo') {
   mocks();
 }
 /* app.get('test',(req,res)=>{
@@ -116,7 +116,3 @@ app.get('/users/test1',(req,res)=>{
   console.log(req.originalUrl);
   res.send({users:'huy'});
 }); */
-
-
-
-

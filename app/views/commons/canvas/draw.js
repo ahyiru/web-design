@@ -4,11 +4,11 @@ import drawText from './drawText';
 
 const {record, undo, redo} = cacheData();
 
-const cfgStore = (defCfg) => {
+const cfgStore = defCfg => {
   const configs = {...defCfg};
-  const getCfg = (key) => configs[key];
+  const getCfg = key => configs[key];
   const setCfg = ({...confs}) =>
-    Object.keys(confs).map((key) => {
+    Object.keys(confs).map(key => {
       configs[key] = confs[key];
     });
   return {getCfg, setCfg};
@@ -65,9 +65,9 @@ const resetImg = (imgCanvas, canvas, tempUrl) => {
   };
 };
 
-const saveData = (canvas) => record(canvas.toDataURL());
+const saveData = canvas => record(canvas.toDataURL());
 
-const clearRect = (canvas) => {
+const clearRect = canvas => {
   const {width, height} = canvas;
   const ctx = canvas.getContext('2d');
   // ctx.fillStyle='#c5c5c5';
@@ -109,12 +109,12 @@ const endEvent = (evt, canvas) => {
   }
 };
 
-const prev = (canvas) => {
+const prev = canvas => {
   clearRect(canvas);
   const {data} = undo();
   data && createImg(canvas, data);
 };
-const next = (canvas) => {
+const next = canvas => {
   clearRect(canvas);
   const {data} = redo();
   data && createImg(canvas, data);
@@ -130,8 +130,8 @@ const init = (ref, defCfg, imgRef, imgUrl) => {
   const destroy = initStart(ref, startEvent, moveEvent, endEvent);
   return {
     destroy,
-    color: (value) => setCfg({color: value, type: 'draw'}),
-    size: (value) => setCfg({size: value, type: 'draw'}),
+    color: value => setCfg({color: value, type: 'draw'}),
+    size: value => setCfg({size: value, type: 'draw'}),
     eraser: () => setCfg({type: 'eraser'}),
     text: () => setCfg({type: 'text'}),
     clean: () => {
@@ -141,7 +141,7 @@ const init = (ref, defCfg, imgRef, imgUrl) => {
     },
     undo: () => prev(ref),
     redo: () => next(ref),
-    save: (name) => downloadImg(imgRef, ref, name),
+    save: name => downloadImg(imgRef, ref, name),
   };
 };
 

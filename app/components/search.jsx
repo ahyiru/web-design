@@ -1,7 +1,7 @@
 import {Input} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
-const GlobalSearch = (props) => {
-  const onChange = (value) => {
+const GlobalSearch = props => {
+  const onChange = value => {
     console.log(value);
   };
   return (

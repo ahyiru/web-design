@@ -7,7 +7,7 @@ const store = createStore();
 
 store.setState({users});
 
-export const addUserFn = async (data) => {
+export const addUserFn = async data => {
   const res = await fakeFetch();
   const item = {...data, _id: uuidv4()};
   const users = store.getState('users');
@@ -19,10 +19,10 @@ export const addUserFn = async (data) => {
   };
 };
 
-export const editUserFn = async (data) => {
+export const editUserFn = async data => {
   const res = await fakeFetch();
   const users = store.getState('users');
-  let user = users.find((item) => item._id === data._id);
+  let user = users.find(item => item._id === data._id);
   if (user) {
     user = {...user, ...data};
     store.setState({users});
@@ -35,8 +35,8 @@ export const editUserFn = async (data) => {
 export const deleteUserFn = async ({ids}) => {
   const res = await fakeFetch();
   const users = store.getState('users');
-  (ids || []).map((id) => {
-    const userIndex = users.findIndex((item) => item._id === id);
+  (ids || []).map(id => {
+    const userIndex = users.findIndex(item => item._id === id);
     if (userIndex > -1) {
       users.splice(userIndex, 1);
     }
@@ -52,16 +52,16 @@ export const allUserFn = async ({active, current, size, name, role}) => {
   const index = size * (current - 1);
   let temp = [];
   if (active != null) {
-    temp = users.filter((item) => +item.active == active);
+    temp = users.filter(item => +item.active == active);
   } else {
     temp = [...users];
   }
   if (role) {
-    temp = temp.filter((item) => item.role === role);
+    temp = temp.filter(item => item.role === role);
   }
   if (name) {
     const reg = new RegExp(name, 'gi');
-    temp = temp.filter((item) => item.name.toString().match(reg));
+    temp = temp.filter(item => item.name.toString().match(reg));
   }
   const list = temp.slice(index, index + size);
   return {
@@ -75,7 +75,7 @@ export const allUserFn = async ({active, current, size, name, role}) => {
   };
 };
 
-export const exportFn = async (params) => {
+export const exportFn = async params => {
   const res = await fakeFetch();
   return res;
 };

@@ -12,20 +12,21 @@ import {testFetcher} from '@app/apis/fetcher';
 
 import {storage} from '@huxy/utils';
 
+import {useIntls} from '@app/components/intl';
+
 const {PROXY} = require('@configs');
 
 const token = storage.get('token');
 
-const strToJson = (str) => new Function(`return ${str}`)();
+const strToJson = str => new Function(`return ${str}`)();
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.projectApis ?? {};
-  const {addFormText = {}} = i18nCfg;
+const Index = props => {
+  const getIntls = useIntls();
+  const addFormText = getIntls('main.projectApis.addFormText', {});
   const [form] = Form.useForm();
   const {getState} = props.history;
   const {item, backState} = getState();
-  const onFinish = async (values) => {
+  const onFinish = async values => {
     try {
       const input = strToJson(values.input || '{}');
       const {url, method, type} = item;
@@ -75,7 +76,7 @@ const Index = (props) => {
                   </Form.Item>
                   <Form.Item label={addFormText.method} name="method">
                     <Select disabled placeholder={addFormText.method} allowClear style={{width: '60%'}}>
-                      {methodList.map((v) => (
+                      {methodList.map(v => (
                         <Select.Option key={v.value} value={v.value}>
                           {v.label}
                         </Select.Option>

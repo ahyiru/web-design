@@ -1,0 +1,82 @@
+@import "~@common/styles/common/style-func.less";
+
+@keyframes menu-animate-top-in {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, -30px, 0);
+  }
+  100% {
+    opacity: 0.98;
+    visibility: visible;
+    transform: translate3d(0, 2px, 0);
+  }
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > li {
+    position: relative;
+    > a {
+      padding: 4px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &.active {
+        color: var(--blue2);
+      }
+      > i {
+        display: block;
+        margin-left: 4px;
+      }
+    }
+    > ul {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 135px;
+      box-shadow: 0 2px 6px var(--borderColor);
+      padding: 10px 0;
+      border-radius: 2px;
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+      a {
+        padding: 6px 20px;
+        display: block;
+      }
+    }
+    &.open {
+      ul {
+        display: block;
+        animation: menu-animate-top-in 0.2s forwards;
+      }
+    }
+  }
+}
+
+.menu-follow {
+  .follow(3px,currentColor,10px);
+}
+.menu-angle-top {
+  .angle-top(5px,1px);
+}
+.menu-angle-bt {
+  .angle-bt(5px,1px);
+}
+.menu-arrow-lt {
+  .arrow-lt(var(--navBgColor),var(--borderColor),8px,16px);
+  right: auto;
+  left: 0;
+}
+.menu-arrow-rt {
+  .arrow-rt(var(--navBgColor),var(--borderColor),8px,16px);
+  right: 0;
+  left: auto;
+}
+.menu-tooltip {
+  .tooltip-lb();
+}

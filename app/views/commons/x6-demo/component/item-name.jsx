@@ -1,7 +1,7 @@
 import {unescapeHTML} from '@huxy/utils';
 import {Cut} from '@app/views/commons/x6-demo/component/cut';
 import {Keyword} from '@app/views/commons/x6-demo/component/keyword';
-export const ItemName = (props) => {
+export const ItemName = props => {
   const {data} = props;
   const {keyword, cutParas = {}} = data;
   const name = unescapeHTML(data.name);

@@ -22,7 +22,7 @@ const createNote = (x, y, right, bottom) => {
   document.body.appendChild(textarea);
   return textarea;
 };
-const removeNote = (note) => {
+const removeNote = note => {
   document.body.removeChild(note);
 };
 
@@ -34,7 +34,7 @@ const drawText = (evt, canvas) => {
   textArea.focus();
   textArea.addEventListener(
     'blur',
-    (event) => {
+    event => {
       const txt = textArea.value;
       ctx.font = '12px 微软雅黑';
       ctx.fillStyle = 'red';

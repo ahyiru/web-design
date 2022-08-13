@@ -6,7 +6,7 @@ export const toggleBlock = (editor, format) => {
   const isActive = isBlockActive(editor, format);
   const isList = LIST_TYPES.includes(format);
   Transforms.unwrapNodes(editor, {
-    match: (n) => LIST_TYPES.includes(!Editor.isEditor(n) && Element.isElement(n) && n.type),
+    match: n => LIST_TYPES.includes(!Editor.isEditor(n) && Element.isElement(n) && n.type),
     split: true,
   });
   const newProperties = {
@@ -21,7 +21,7 @@ export const toggleBlock = (editor, format) => {
 
 export const isBlockActive = (editor, format) => {
   const [match] = Editor.nodes(editor, {
-    match: (n) => !Editor.isEditor(n) && Element.isElement(n) && n.type === format,
+    match: n => !Editor.isEditor(n) && Element.isElement(n) && n.type === format,
   });
   return !!match;
 };

@@ -9,7 +9,7 @@ import {option1, option2, option3, option4, option5, option6, option7, option8, 
 import defaultOpts from '@app/models/screen1/defaultOpts';
 import {tableCfg} from '@app/utils/config';
 
-const Panel = (props) => <DefPanel {...props} style={{borderColor: 'rgba(0,180,220,0.08)'}} />;
+const Panel = props => <DefPanel {...props} style={{borderColor: 'rgba(0,180,220,0.08)'}} />;
 
 const Table = ({style, ...rest}) => (
   <div style={{height: style?.height ?? 300, overflow: 'auto'}}>
@@ -17,9 +17,9 @@ const Table = ({style, ...rest}) => (
   </div>
 );
 
-const ReactECharts = (props) => <ECharts {...props} /* option={merge(props.option,defaultOpts)} */ theme="dark-screen" />;
+const ReactECharts = props => <ECharts {...props} /* option={merge(props.option,defaultOpts)} */ theme="dark-screen" />;
 
-const Index = (props) => {
+const Index = props => {
   const [charts, setCharts] = useState(null);
   useEffect(() => {
     const getCharts = async () => {

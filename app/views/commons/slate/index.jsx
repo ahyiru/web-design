@@ -8,6 +8,8 @@ import {firstUpper} from '@huxy/utils';
 
 import Panel from '@app/components/panel';
 
+import {useIntls} from '@app/components/intl';
+
 import * as elements from './types/components/text';
 
 import Toolsbar from './types/renderElement/toolsbar';
@@ -63,7 +65,7 @@ const Leaf = ({attributes, children, leaf}) => {
   const {text, ...rest} = leaf;
   Object.keys(rest)
     .filter(Boolean)
-    .map((key) => {
+    .map(key => {
       const LeafComp = elements[firstUpper(key)];
       children = <LeafComp>{children}</LeafComp>;
       // console.log(333,rest,key,children);
@@ -71,18 +73,18 @@ const Leaf = ({attributes, children, leaf}) => {
   return <span {...attributes}>{children}</span>;
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.editor ?? {};
+const Index = props => {
+  const getIntls = useIntls();
+  const i18nCfg = getIntls('main.editor', {});
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const [value, setValue] = useState(initialValue);
 
-  const renderElement = useCallback((params) => {
+  const renderElement = useCallback(params => {
     const Comp = elements[firstUpper(params.element.type)] || elements.DefaultElement;
     // console.log('renderElement',params,Comp);
     return <Comp {...params} />;
   }, []);
-  const renderLeaf = useCallback((params) => {
+  const renderLeaf = useCallback(params => {
     const {text, ...rest} = params.leaf;
     // const Comp=elements[params.element.format]||elements.DefaultElement;
     // console.log('renderLeaf',params);
@@ -93,7 +95,7 @@ const Index = (props) => {
 
   return (
     <Panel title="slate editor - 未完成！">
-      <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
+      <Slate editor={editor} value={value} onChange={value => setValue(value)}>
         <Toolsbar i18nCfg={i18nCfg} />
         <Editable
           renderElement={renderElement}

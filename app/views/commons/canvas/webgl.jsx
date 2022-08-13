@@ -76,7 +76,7 @@ const initThree = () => {
   this.controls.enableZoom = false;
 };
 
-const Index = (props) => {
+const Index = props => {
   useEffect(() => {
     window.addEventListener(
       'resize',

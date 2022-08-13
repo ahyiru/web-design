@@ -1,8 +1,8 @@
 import Ellipsis from '@app/components/ellipsis';
 
-const defCols = () => ({render: (text) => <Ellipsis>{text}</Ellipsis>});
+const defCols = () => ({render: text => <Ellipsis>{text}</Ellipsis>});
 
-const getColumns = (columns, colsCfg, initCols = defCols()) => columns.map((col) => ({...initCols, ...col, ...colsCfg?.find(({dataIndex}) => dataIndex === col.dataIndex)}));
+const getColumns = (columns, colsCfg, initCols = defCols()) => columns.map(col => ({...initCols, ...col, ...colsCfg?.find(({dataIndex}) => dataIndex === col.dataIndex)}));
 
 export default getColumns;
 

@@ -12,67 +12,70 @@ const rimraf = require('rimraf');
 
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
-const {GenerateSW}=require('workbox-webpack-plugin');
+const {GenerateSW} = require('workbox-webpack-plugin');
 
 const webpackConfig = require('./webpack.config');
 
-const {appName,PRD_ROOT_DIR,BUILD_DIR,PUBLIC_DIR}=require('../configs');
+const {appName, PRD_ROOT_DIR, BUILD_DIR, PUBLIC_DIR} = require('../configs');
 
-const rootDir=['/','./'].includes(PRD_ROOT_DIR)?PRD_ROOT_DIR:`${PRD_ROOT_DIR}/`;
+const rootDir = ['/', './'].includes(PRD_ROOT_DIR) ? PRD_ROOT_DIR : `${PRD_ROOT_DIR}/`;
 
-const publics=path.resolve(__dirname,PUBLIC_DIR);
-const app=path.resolve(__dirname,`../${appName}`);
-const build=path.resolve(app,BUILD_DIR);
+const publics = path.resolve(__dirname, PUBLIC_DIR);
+const app = path.resolve(__dirname, `../${appName}`);
+const build = path.resolve(app, BUILD_DIR);
 
-rimraf(build,err=>console.log(err));
+rimraf(build, err => console.log(err));
 
-const postcssOptions={
+const postcssOptions = {
   stage: 0,
   features: {
     'nesting-rules': true,
   },
   // autoprefixer: { grid: true }
   browsers: 'last 2 versions',
-  importFrom:[
+  importFrom: [
     // './commons/global.css',
     // './configs/themeCfg.js',
-    ()=>{
-      const environmentVariables={
-        '--viewport-1':'1200px',
+    () => {
+      const environmentVariables = {
+        '--viewport-1': '1200px',
       };
       return {environmentVariables};
     },
   ],
 };
 
-const frameChunks=appName==='vue'?{
-  vue:{
-    idHint:'vue',
-    test: /[\\/]node_modules[\\/]vue[\\/]/,
-    enforce:true,
-    priority:15,
-  },
-}:{
-  react:{
-    idHint:'react',
-    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-    enforce:true,
-    priority:15,
-  },
-};
+const frameChunks =
+  appName === 'vue'
+    ? {
+      vue: {
+        idHint: 'vue',
+        test: /[\\/]node_modules[\\/]vue[\\/]/,
+        enforce: true,
+        priority: 15,
+      },
+    }
+    : {
+      react: {
+        idHint: 'react',
+        test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+        enforce: true,
+        priority: 15,
+      },
+    };
 
-const plugins=[
+const plugins = [
   new MiniCssExtractPlugin({
-    filename:'css/[name]_[contenthash:8].css',
-    chunkFilename:'css/[id]_[name]_[contenthash:8].css',
+    filename: 'css/[name]_[contenthash:8].css',
+    chunkFilename: 'css/[id]_[name]_[contenthash:8].css',
     // publicPath:'../',
   }),
   new webpack.DefinePlugin({
-    'process.env':{
-      isDev:false,
+    'process.env': {
+      isDev: false,
     },
-    EMAIL:JSON.stringify('ah.yiru@gmail.com'),
-    VERSION:JSON.stringify('1.1.x'),
+    EMAIL: JSON.stringify('ah.yiru@gmail.com'),
+    VERSION: JSON.stringify('1.2.x'),
   }),
   new GenerateSW({
     // importWorkboxFrom: 'local',
@@ -87,9 +90,9 @@ const plugins=[
     },{
       from:path.resolve(publics,'manifest.json'),
       to:path.resolve(app,`${BUILD_DIR}/manifest.json`),
-    }, */{
-      from:path.resolve(publics,'robots.txt'),
-      to:path.resolve(app,`${BUILD_DIR}/robots.txt`),
+    }, */ {
+      from: path.resolve(publics, 'robots.txt'),
+      to: path.resolve(app, `${BUILD_DIR}/robots.txt`),
     },
   ]),
   /* new CompressionPlugin({
@@ -102,82 +105,82 @@ const plugins=[
   }), */
 ];
 
-const {ANALYZE}=process.env;
+const {ANALYZE} = process.env;
 
-if(ANALYZE){
+if (ANALYZE) {
   plugins.push(new BundleAnalyzerPlugin());
 }
 
-const prodConfig=merge(webpackConfig, {
-  mode:'production',
+const prodConfig = merge(webpackConfig, {
+  mode: 'production',
   // devtool:'nosources-source-map',
-  output:{
-    path:build,
-    publicPath:rootDir,
-    filename:'js/[name]_[contenthash:8].js',
-    chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
+  output: {
+    path: build,
+    publicPath: rootDir,
+    filename: 'js/[name]_[contenthash:8].js',
+    chunkFilename: 'js/[name]_[chunkhash:8].chunk.js',
   },
-  optimization:{
-    splitChunks:{
-      chunks:'all',//'async','initial'
+  optimization: {
+    splitChunks: {
+      chunks: 'all', //'async','initial'
       // minSize:0,
-      minSize:{
-        javascript:8000,
-        style:8000,
+      minSize: {
+        javascript: 8000,
+        style: 8000,
       },
-      maxSize:{
-        javascript:800000,
-        style:800000,
+      maxSize: {
+        javascript: 800000,
+        style: 800000,
       },
-      minChunks:2,
-      maxInitialRequests:10,
-      maxAsyncRequests:10,
+      minChunks: 2,
+      maxInitialRequests: 10,
+      maxAsyncRequests: 10,
       // automaticNameDelimiter: '~',
-      cacheGroups:{
-        commons:{
+      cacheGroups: {
+        commons: {
           // chunks:'initial',
           // minSize:30000,
-          idHint:'commons',
-          test:app,
+          idHint: 'commons',
+          test: app,
           priority: 5,
-          reuseExistingChunk:true,
+          reuseExistingChunk: true,
         },
-        defaultVendors:{
+        defaultVendors: {
           // chunks:'initial',
-          idHint:'vendors',
-          test:/[\\/]node_modules[\\/]/,
-          enforce:true,
-          priority:10,
+          idHint: 'vendors',
+          test: /[\\/]node_modules[\\/]/,
+          enforce: true,
+          priority: 10,
         },
         ...frameChunks,
         echarts: {
-          idHint:'echarts',
-          chunks:'all',
-          priority:20,
-          test: function(module){
+          idHint: 'echarts',
+          chunks: 'all',
+          priority: 20,
+          test: function (module) {
             const context = module.context;
             return context && (context.indexOf('echarts') >= 0 || context.indexOf('zrender') >= 0);
           },
         },
         antd: {
-          idHint:'antd',
-          chunks:'all',
-          priority:25,
-          test: function(module){
+          idHint: 'antd',
+          chunks: 'all',
+          priority: 25,
+          test: function (module) {
             const context = module.context;
             return context && (context.indexOf('@ant-design') >= 0 || context.indexOf('antd') >= 0);
           },
         },
       },
     },
-    minimizer:[
+    minimizer: [
       new TerserPlugin({
         parallel: true,
         extractComments: false,
         terserOptions: {
           ecma: 5,
           compress: {
-            drop_console:true,
+            drop_console: true,
           },
           format: {
             comments: false,
@@ -190,31 +193,34 @@ const prodConfig=merge(webpackConfig, {
       new CssMinimizerPlugin({
         parallel: true,
         minimizerOptions: {
-          preset:['default',{
-            discardComments:{removeAll:true},
-            // calc: false,
-            // normalizePositions: false,
-          }],
+          preset: [
+            'default',
+            {
+              discardComments: {removeAll: true},
+              // calc: false,
+              // normalizePositions: false,
+            },
+          ],
         },
       }),
     ],
-    minimize:true,
-    providedExports:true,
-    usedExports:true,
-    concatenateModules:false,
-    sideEffects:true,
-    runtimeChunk:false,
-    moduleIds:'deterministic',
-    chunkIds:'deterministic',
+    minimize: true,
+    providedExports: true,
+    usedExports: true,
+    concatenateModules: false,
+    sideEffects: true,
+    runtimeChunk: false,
+    moduleIds: 'deterministic',
+    chunkIds: 'deterministic',
   },
-  module:{
-    rules:[
+  module: {
+    rules: [
       {
-        test:/\.css$/,
-        use:[
+        test: /\.css$/,
+        use: [
           {
-            loader:MiniCssExtractPlugin.loader,
-            options:{
+            loader: MiniCssExtractPlugin.loader,
+            options: {
               // publicPath: '../',
             },
           },
@@ -222,22 +228,20 @@ const prodConfig=merge(webpackConfig, {
             loader:'isomorphic-style-loader',
           }, */
           {
-            loader:'css-loader',
-            options:{
-              importLoaders:1,
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
               modules: {
-                mode:'global',
-                localIdentName:'[hash:base64:5]',
+                mode: 'global',
+                localIdentName: '[hash:base64:5]',
               },
             },
           },
           {
             loader: 'postcss-loader',
             options: {
-              postcssOptions:{
-                plugins:()=>[
-                  postcssPresetEnv(postcssOptions),
-                ],
+              postcssOptions: {
+                plugins: () => [postcssPresetEnv(postcssOptions)],
               },
             },
           },
@@ -245,31 +249,29 @@ const prodConfig=merge(webpackConfig, {
         // exclude: /components/,
       },
       {
-        test:/\.less$/,
-        use:[
+        test: /\.less$/,
+        use: [
           {
-            loader:MiniCssExtractPlugin.loader,
-            options:{
+            loader: MiniCssExtractPlugin.loader,
+            options: {
               // publicPath: '../',
             },
           },
           {
-            loader:'css-loader',
-            options:{
-              importLoaders:1,
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
               modules: {
-                mode:'global',
-                localIdentName:'[hash:base64:5]',
+                mode: 'global',
+                localIdentName: '[hash:base64:5]',
               },
             },
           },
           {
             loader: 'postcss-loader',
             options: {
-              postcssOptions:{
-                plugins:()=>[
-                  postcssPresetEnv(postcssOptions),
-                ],
+              postcssOptions: {
+                plugins: () => [postcssPresetEnv(postcssOptions)],
                 /* plugins:[
                   'postcss-preset-env',
                   {
@@ -280,15 +282,15 @@ const prodConfig=merge(webpackConfig, {
             },
           },
           {
-            loader:'less-loader',
-            options:{
-              lessOptions:{
-                javascriptEnabled:true,
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
               },
             },
           },
         ],
-        // exclude: /components/,
+        // exclude:[/node_modules/],
       },
       /* {
         test:/\.s[ac]ss$/i,
@@ -327,6 +329,4 @@ const prodConfig=merge(webpackConfig, {
   plugins,
 });
 
-module.exports=prodConfig;
-
-
+module.exports = prodConfig;

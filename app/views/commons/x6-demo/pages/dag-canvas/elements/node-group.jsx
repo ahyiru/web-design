@@ -7,7 +7,7 @@ import {useExperimentGraph} from '@app/views/commons/x6-demo/pages/rx-models/exp
 import {X6DemoGroupNode} from '@app/views/commons/x6-demo/pages/common/graph-common/shape/node';
 import {X6DemoGroupEdge} from '../../common/graph-common/shape/edge';
 import styles from './node-group.less';
-export const NodeGroup = (props) => {
+export const NodeGroup = props => {
   const {experimentId, node} = props;
   const data = node.getData();
   const {name, isCollapsed = false} = data;
@@ -15,17 +15,17 @@ export const NodeGroup = (props) => {
   const onCollapseGroup = useCallback(() => {
     const {graph} = experimentGraph;
     const children = node.getDescendants();
-    const childNodes = children.filter((child) => child.isNode());
+    const childNodes = children.filter(child => child.isNode());
     const {x, y, width, height} = calcNodeScale(
       {isCollapsed: true},
-      childNodes.map((i) => i.getData()),
+      childNodes.map(i => i.getData()),
     );
     node.setProp({
       position: {x, y},
       size: {width, height},
     });
     node?.updateData({isCollapsed: true});
-    children.forEach((child) => {
+    children.forEach(child => {
       child.hide();
       child.updateData({hide: true});
     });
@@ -55,8 +55,8 @@ export const NodeGroup = (props) => {
       const inputPortId = Date.now().toString();
       node.addPort({group: 'in', id: inputPortId, connected: true});
       incomingEdges
-        .filter((edge) => !childNodes.map((i) => i.id).includes(edge.getSourceCellId()))
-        .forEach((edge) => {
+        .filter(edge => !childNodes.map(i => i.id).includes(edge.getSourceCellId()))
+        .forEach(edge => {
           let sourceNodeId = edge.getSourceCellId();
           let sourcePortId = edge.getSourcePortId();
           const sourceNode = edge.getSourceCell();
@@ -96,8 +96,8 @@ export const NodeGroup = (props) => {
       const outputPortId = Date.now().toString();
       node.addPort({group: 'out', id: outputPortId, connected: false});
       outgoingEdges
-        .filter((edge) => !childNodes.map((i) => i.id).includes(edge.getTargetCellId()))
-        .forEach((edge) => {
+        .filter(edge => !childNodes.map(i => i.id).includes(edge.getTargetCellId()))
+        .forEach(edge => {
           let targetNodeId = edge.getTargetCellId();
           let targetPortId = edge.getTargetPortId();
           const targetNode = edge.getTargetCell();
@@ -137,10 +137,10 @@ export const NodeGroup = (props) => {
   const onExpandGroup = useCallback(() => {
     const {graph} = experimentGraph;
     const children = node.getDescendants();
-    const childNodes = children.filter((child) => child.isNode());
+    const childNodes = children.filter(child => child.isNode());
     const {x, y, width, height} = calcNodeScale(
       {isCollapsed: false},
-      children.filter((i) => i.isNode()).map((i) => i.getData()),
+      children.filter(i => i.isNode()).map(i => i.getData()),
     );
     node.setProp({
       position: {x, y},
@@ -148,7 +148,7 @@ export const NodeGroup = (props) => {
     });
     const prevData = node.getData();
     node?.setData({...prevData, isCollapsed: false});
-    childNodes.forEach((child) => {
+    childNodes.forEach(child => {
       child.show();
       child.updateData({hide: false});
     });
@@ -176,8 +176,8 @@ export const NodeGroup = (props) => {
     }, []);
     if (childIncomingEdges?.length) {
       childIncomingEdges
-        .filter((edge) => !childNodes.map((i) => i.id).includes(edge.getSourceCellId()))
-        .forEach((edge) => {
+        .filter(edge => !childNodes.map(i => i.id).includes(edge.getSourceCellId()))
+        .forEach(edge => {
           const sourceNode = edge.getSourceCell();
           if (sourceNode instanceof X6DemoGroupNode) {
             experimentGraph.deleteEdges(edge);
@@ -215,8 +215,8 @@ export const NodeGroup = (props) => {
     }
     if (childOutgoingEdges?.length) {
       childOutgoingEdges
-        .filter((edge) => !childNodes.map((i) => i.id).includes(edge.getTargetCellId()))
-        .forEach((edge) => {
+        .filter(edge => !childNodes.map(i => i.id).includes(edge.getTargetCellId()))
+        .forEach(edge => {
           const targetNode = edge.getTargetCell();
           if (targetNode instanceof X6DemoGroupNode) {
             experimentGraph.deleteEdges(edge);

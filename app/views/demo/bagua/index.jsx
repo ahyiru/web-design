@@ -58,7 +58,7 @@ const bg = [
     details: '坤六断',
   },
 ];
-const Index = (props) => {
+const Index = props => {
   const [rand, setRand] = useState(0);
   return (
     <div className="taiji-container">

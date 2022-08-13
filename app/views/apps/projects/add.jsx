@@ -10,16 +10,17 @@ import Back from '@app/components/goBack';
 
 import Panel from '@app/components/panel';
 
+import {useIntls} from '@app/components/intl';
+
 const {addProjectFn, editProjectFn} = apiList;
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.projects ?? {};
-  const {addFormText = {}} = i18nCfg;
+const Index = props => {
+  const getIntls = useIntls();
+  const addFormText = getIntls('main.projects.addFormText', {});
   const [form] = Form.useForm();
   const {getState} = props.history;
   const {item, backState} = getState() || {};
-  const onFinish = async (values) => {
+  const onFinish = async values => {
     const handler = item ? editProjectFn : addProjectFn;
     values = item ? {...item, ...values} : values;
     try {
@@ -55,7 +56,7 @@ const Index = (props) => {
               </Form.Item>
               <Form.Item label={addFormText.role} name="role">
                 <Select placeholder={addFormText.role_placeholder} allowClear style={{maxWidth: '250px'}}>
-                  {projectRoleList.map((v) => (
+                  {projectRoleList.map(v => (
                     <Select.Option key={v.value} value={v.value}>
                       {v.label}
                     </Select.Option>

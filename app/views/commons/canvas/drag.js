@@ -44,6 +44,6 @@ const endEvent = (evt, ref) => {
   setStyle(ref, dragableStyles, true);
 };
 
-const init = (ref) => initStart(ref, startEvent, moveEvent, endEvent);
+const init = ref => initStart(ref, startEvent, moveEvent, endEvent);
 
 export default init;

@@ -1,44 +1,44 @@
-import {dark, dark1, light, light1, portal, lightPortal, gradient} from './themes';
+import {dark, dark1, gradient, light, light1, lightPortal, portal} from './themes';
 
-const themeList = (nameList) => [
+const themeList = getIntls => [
   {
-    name: nameList?.['dark'] ?? 'dark',
+    name: getIntls('theme.dark', 'dark'),
     key: 'dark',
     list: dark,
     type: 'theme',
   },
   {
-    name: nameList?.['dark1'] ?? 'dark1',
+    name: getIntls('theme.dark1', 'dark1'),
     key: 'dark1',
     list: dark1,
     type: 'theme',
   },
   {
-    name: nameList?.['light'] ?? 'light',
+    name: getIntls('theme.dark', 'light'),
     key: 'light',
     list: light,
     type: 'theme',
   },
   {
-    name: nameList?.['light1'] ?? 'light1',
+    name: getIntls('theme.light1', 'light1'),
     key: 'light1',
     list: light1,
     type: 'theme',
   },
   {
-    name: nameList?.['portal'] ?? 'portal',
+    name: getIntls('theme.portal', 'portal'),
     key: 'portal',
     list: portal,
     type: 'theme',
   },
   {
-    name: nameList?.['lightPortal'] ?? 'lightPortal',
+    name: getIntls('theme.lightPortal', 'lightPortal'),
     key: 'lightPortal',
     list: lightPortal,
     type: 'theme',
   },
   {
-    name: nameList?.['gradient'] ?? 'gradient',
+    name: getIntls('theme.gradient', 'gradient'),
     key: 'gradient',
     list: gradient,
     type: 'theme',

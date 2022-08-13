@@ -6,7 +6,9 @@ import {layout} from '@app/utils/config';
 
 import {pathRule} from '@app/utils/rules';
 
-const ModalForm = (props) => {
+import {useIntls} from '@app/components/intl';
+
+const ModalForm = props => {
   const {form, item, isEdit, isRoot, addFormText} = props;
   const editRoot = isEdit && item.path === '/';
   const newParent = fixRoute(item.parentId);
@@ -41,10 +43,9 @@ const ModalForm = (props) => {
   );
 };
 
-const HandleModal = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.projectRouter ?? {};
-  const {addFormText = {}} = i18nCfg;
+const HandleModal = props => {
+  const getIntls = useIntls();
+  const addFormText = getIntls('main.projectRouter.addFormText', {});
 
   const [form] = Form.useForm();
   const {onModalOk, modalVisible, onModalCancel, type, item, isRoot} = props;
@@ -53,12 +54,12 @@ const HandleModal = (props) => {
   const handleSubmit = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(values => {
         const newParent = fixRoute(values.parentId);
         const value = isEdit ? {...item, ...values, path: `${newParent}${values.path}`} : {...values, path: `${newParent}${values.path}`};
         onModalOk(value);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };

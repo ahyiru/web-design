@@ -11,7 +11,7 @@ import {tabs, formList, actionList, colsCfg, tableHeader} from './configs';
 
 import './index.less';
 
-const Index = (props) => {
+const Index = props => {
   const [listType, setListType] = useState('table');
   const [active, setActive] = useState(1);
   const [searchParmas, setSearchParmas] = useState('');
@@ -20,38 +20,38 @@ const Index = (props) => {
 
   const {current, size} = result.data || {};
 
-  const switchListType = (type) => {
+  const switchListType = type => {
     setListType(type);
     update({current: 1, size: 10, active});
   };
-  const switchTab = (active) => {
+  const switchTab = active => {
     setActive(active);
     update({current: 1, size: 10, active});
   };
-  const handleSearchList = (values) => {
+  const handleSearchList = values => {
     setSearchParmas(values);
     searchList(values);
   };
 
-  const handleCheck = (item) => {
+  const handleCheck = item => {
     props.router.push({
       path: `./auth/${item._id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
-  const handleEdit = (item) => {
+  const handleEdit = item => {
     props.router.push({
       path: `./edit/${item._id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
-  const handleDelete = (item) => {
+  const handleDelete = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map((v) => v._id);
+    const ids = items.map(v => v._id);
     Modal.confirm({
       title: '确定删除吗？',
       icon: <ExclamationCircleOutlined />,
-      content: `name: ${items.map((v) => v.name)}`,
+      content: `name: ${items.map(v => v.name)}`,
       okText: '删除',
       okType: 'danger',
       cancelText: '取消',
@@ -79,7 +79,7 @@ const Index = (props) => {
   };
 
   const rowSelection = {
-    selectedRowKeys: selectedRows.map((v) => v._id),
+    selectedRowKeys: selectedRows.map(v => v._id),
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
@@ -116,10 +116,10 @@ const Index = (props) => {
       <TabHeader tabs={tabs} switchTab={switchTab} />
       <List {...tableProps} />
       <div className="handle-bar">
-        <a className={listType === 'table' ? 'active' : ''} onClick={(e) => switchListType('table')}>
+        <a className={listType === 'table' ? 'active' : ''} onClick={e => switchListType('table')}>
           <TableOutlined />
         </a>
-        <a className={listType === 'list' ? 'active' : ''} onClick={(e) => switchListType('list')}>
+        <a className={listType === 'list' ? 'active' : ''} onClick={e => switchListType('list')}>
           <BarsOutlined />
         </a>
       </div>

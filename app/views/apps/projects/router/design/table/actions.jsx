@@ -4,7 +4,7 @@ import {Popconfirm} from 'antd';
 import {arr2obj, uuidv4} from '@huxy/utils';
 import apiList from '@app/utils/getApis';
 
-const fmData = (data) => data.map((item) => ({...item, uuid: uuidv4()}));
+const fmData = data => data.map(item => ({...item, uuid: uuidv4()}));
 
 const fnNames = {
   listFn: 'listFn',
@@ -26,12 +26,12 @@ export default ({data, getValues, actionI18n}) => {
   useEffect(() => {
     setDataSource(fmData(data) || []);
   }, [data]);
-  const onChange = (value) => {
+  const onChange = value => {
     setDataSource(value);
     getValues?.(value.map(({name, apiName, handlePath, btnText, isBatch}) => ({name, apiName, handlePath, btnText, isBatch})));
   };
-  const deleteRow = (record) => {
-    const value = dataSource.filter((item) => item.uuid !== record.uuid);
+  const deleteRow = record => {
+    const value = dataSource.filter(item => item.uuid !== record.uuid);
     setDataSource(value);
     getValues?.(value.map(({name, apiName, handlePath, btnText, isBatch}) => ({name, apiName, handlePath, btnText, isBatch})));
   };
@@ -51,7 +51,7 @@ export default ({data, getValues, actionI18n}) => {
       title: actionI18n.apiName,
       dataIndex: 'apiName',
       valueType: 'select',
-      valueEnum: arr2obj(Object.keys(apiList).map((api) => ({name: api, value: api}))),
+      valueEnum: arr2obj(Object.keys(apiList).map(api => ({name: api, value: api}))),
       formItemProps: (form, {rowIndex}) => {
         return {
           rules: [{required: true, message: actionI18n.required_msg}],

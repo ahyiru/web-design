@@ -22,13 +22,13 @@ Graph.registerConnector(
 export function expandGroupAccordingToNodes(params) {
   const {moveNodes} = params;
   const parentNodes = [];
-  moveNodes.forEach((node) => {
+  moveNodes.forEach(node => {
     const parentNode = node.getParent();
     if (parentNode && !parentNodes.includes(parentNode)) {
       parentNodes.push(parentNode);
     }
   });
-  parentNodes.forEach((parent) => {
+  parentNodes.forEach(parent => {
     const originSize = parent.getSize();
     const originPosition = parent.getPosition();
     const originX = originPosition.x;
@@ -36,9 +36,9 @@ export function expandGroupAccordingToNodes(params) {
     const originWidth = originSize.width;
     const originHeight = originSize.height;
     const children = parent.getChildren();
-    const childNodes = children.filter((child) => child.isNode());
+    const childNodes = children.filter(child => child.isNode());
     if (childNodes?.length) {
-      const positions = childNodes.map((childNode) => childNode.getPosition());
+      const positions = childNodes.map(childNode => childNode.getPosition());
       const Xs = positions.map(({x}) => x);
       const Ys = positions.map(({y}) => y);
       const minX = Math.min(Xs);
@@ -61,7 +61,7 @@ export function expandGroupAccordingToNodes(params) {
 export function formatNodeInfoToNodeMeta(nodeData, inputPortConnectedMap = {}) {
   const portItems = [];
   const {id, nodeInstanceId, positionX, positionY, inPorts, outPorts} = nodeData;
-  sort(inPorts, 'sequence').forEach((inPort) => {
+  sort(inPorts, 'sequence').forEach(inPort => {
     portItems.push({
       ...inPort,
       group: 'in',
@@ -69,7 +69,7 @@ export function formatNodeInfoToNodeMeta(nodeData, inputPortConnectedMap = {}) {
       connected: !!inputPortConnectedMap[inPort.id.toString()],
     });
   });
-  sort(outPorts, 'sequence').forEach((outPort) => {
+  sort(outPorts, 'sequence').forEach(outPort => {
     portItems.push({
       ...outPort,
       group: 'out',
@@ -128,18 +128,18 @@ export function calcNodeScale(groupData, children) {
 }
 export function formatGroupInfoToNodeMeta(groupData, nodeDatas, edges) {
   const {id, isCollapsed = false} = groupData;
-  const includedNodes = nodeDatas.filter((nodeMeta) => nodeMeta.groupId.toString() === id.toString());
+  const includedNodes = nodeDatas.filter(nodeMeta => nodeMeta.groupId.toString() === id.toString());
   const {x, y, width, height} = calcNodeScale(groupData, includedNodes);
   if (isCollapsed && edges) {
-    includedNodes.forEach((node) => {
+    includedNodes.forEach(node => {
       node.data.hide = true;
     });
-    const includedNodeIds = includedNodes.map((nodeData) => nodeData.id.toString());
-    const edgesFromOutside = edges.filter((edge) => {
+    const includedNodeIds = includedNodes.map(nodeData => nodeData.id.toString());
+    const edgesFromOutside = edges.filter(edge => {
       const {source, target} = edge;
       return includedNodeIds.includes(target.cell.toString()) && !includedNodeIds.includes(source.cell.toString());
     });
-    const edgesToOutside = edges.filter((edge) => {
+    const edgesToOutside = edges.filter(edge => {
       const {source, target} = edge;
       return includedNodeIds.includes(source.cell.toString()) && !includedNodeIds.includes(target.cell.toString());
     });
@@ -147,7 +147,7 @@ export function formatGroupInfoToNodeMeta(groupData, nodeDatas, edges) {
     if (edgesFromOutside?.length) {
       const portId = Date.now().toString();
       portItems.push({group: 'in', id: portId, connected: true});
-      edgesFromOutside.forEach((edge) => {
+      edgesFromOutside.forEach(edge => {
         const {source, outputPortId} = edge;
         edges.push({
           sourceAnchor: 'bottom',
@@ -173,7 +173,7 @@ export function formatGroupInfoToNodeMeta(groupData, nodeDatas, edges) {
     if (edgesToOutside?.length) {
       const portId = (Date.now() + 1).toString();
       portItems.push({group: 'out', id: portId, connected: false});
-      edgesToOutside.forEach((edge) => {
+      edgesToOutside.forEach(edge => {
         const {target, inputPortId} = edge;
         edges.push({
           type: 'group',
@@ -226,7 +226,7 @@ export function formatGroupInfoToNodeMeta(groupData, nodeDatas, edges) {
 }
 export function formatGraphData(graphData = {}) {
   const {nodes = [], links = [], groups = []} = graphData;
-  const formattedEdges = links.map((link) => {
+  const formattedEdges = links.map(link => {
     const {source, outputPortId, target, inputPortId} = link;
     return {
       ...link,
@@ -254,10 +254,10 @@ export function formatGraphData(graphData = {}) {
     acc[edge.inputPortId] = true;
     return acc;
   }, {});
-  const formattedNodes = nodes.map((nodeData) => formatNodeInfoToNodeMeta(nodeData, inputPortConnectedMap));
-  const formattedGroups = groups.map((groupData) => formatGroupInfoToNodeMeta(groupData, formattedNodes, formattedEdges));
+  const formattedNodes = nodes.map(nodeData => formatNodeInfoToNodeMeta(nodeData, inputPortConnectedMap));
+  const formattedGroups = groups.map(groupData => formatGroupInfoToNodeMeta(groupData, formattedNodes, formattedEdges));
   return {
-    nodes: [...formattedNodes, ...formattedGroups.filter((group) => !!group?.data?.includedNodes?.length)],
+    nodes: [...formattedNodes, ...formattedGroups.filter(group => !!group?.data?.includedNodes?.length)],
     edges: formattedEdges,
   };
 }

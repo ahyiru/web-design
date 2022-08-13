@@ -11,9 +11,7 @@ chore: 改变构建流程、或者增加依赖库、工具等，包括打包和�
 build: 影响构建系统或外部依赖项的更改（gulp，npm等）
 ci: 对CI配置文件和脚本的更改
 revert: 回滚到上一个版本
-conflict: 解决合并过程中的冲突
-release: 发布新版本
-workflow: 工作流相关文件修改
+conflict: 解决合并过程中
 
  */
 
@@ -25,19 +23,15 @@ module.exports = {
     },
   },
   rules: {
-    'type-enum':[2,'always',
-      [
-        'feat','fix','docs','style','perf','refactor','test','chore','build','ci','revert','conflict',
-      ],
-    ],
-    'type-case':[2,'always','lower-case'],
-    'type-empty':[0,'never'],
-    'scope-case':[0],
-    'scope-empty':[0],
-    'subject-case':[2,'never',['sentence-case','start-case','pascal-case','upper-case']],
-    'subject-empty':[0,'never'],
-    'subject-full-stop':[2,'never','.'],
-    'header-max-length':[2,'always',100],
+    'type-enum': [2, 'always', ['feat', 'fix', 'docs', 'style', 'perf', 'refactor', 'test', 'chore', 'build', 'ci', 'revert', 'conflict']],
+    'type-case': [2, 'always', 'lower-case'],
+    'type-empty': [2, 'never'],
+    'scope-case': [0],
+    'scope-empty': [0],
+    'subject-case': [2, 'never', ['sentence-case', 'start-case', 'pascal-case', 'upper-case']],
+    'subject-empty': [2, 'never'],
+    'subject-full-stop': [2, 'never', '.'],
+    'header-max-length': [2, 'always', 100],
   },
   prompt: {
     messages: {

@@ -14,7 +14,7 @@ export const useObservableState = (source$, initialState) => {
     return initialState;
   });
   useEffect(() => {
-    const sub = source.subscribe((v) => {
+    const sub = source.subscribe(v => {
       setState(v);
     });
     return () => {

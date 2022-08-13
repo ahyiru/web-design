@@ -1,6 +1,6 @@
 import {DatePicker} from 'antd';
 const {RangePicker} = DatePicker;
-const DateSelect = (props) => {
+const DateSelect = props => {
   const onChange = (dates, dateStrings) => {
     console.log(dates, dateStrings);
   };

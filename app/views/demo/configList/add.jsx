@@ -5,25 +5,24 @@ import {layout, tailLayout} from '@app/utils/config';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';
 import Panel from '@app/components/panel';
 
+import {useIntls} from '@app/components/intl';
+
 import {addUser, editUser, projectList} from '../mock';
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.users ?? {};
-  const {addFormText = {}} = i18nCfg;
-
+const Index = props => {
+  const getIntls = useIntls();
   const [form] = Form.useForm();
   const {getState} = props.history;
   const {item, backState} = getState() || {};
-  const onFinish = async (values) => {
+  const onFinish = async values => {
     const handler = item ? editUser : addUser;
     values = item ? {...item, ...values} : values;
-    const projectName = projectList.find((v) => v._id === values.projectId)?.name;
+    const projectName = projectList.find(v => v._id === values.projectId)?.name;
     try {
       const {code, message: msg} = await handler({...values, projectName});
       if (code === 200) {
         message.success(msg);
-        props.router.push(`/users`);
+        props.router.push(`/playground/configTable`);
       }
     } catch (err) {
       console.log(err);
@@ -41,24 +40,24 @@ const Index = (props) => {
         <Col>
           <Panel>
             <Form name="addUser" onFinish={onFinish} form={form} initialValues={item ?? {}} {...layout} style={{width: '50%'}} autoComplete="off">
-              <Form.Item label={addFormText.name} name="name" rules={nameRule}>
-                <Input placeholder={addFormText.name} />
+              <Form.Item label={getIntls('main.layout.users.addFormText.name')} name="name" rules={nameRule}>
+                <Input placeholder={getIntls('main.layout.users.addFormText.name')} />
               </Form.Item>
-              <Form.Item label={addFormText.email} name="email" rules={emailRule}>
-                <Input placeholder={addFormText.email} />
+              <Form.Item label={getIntls('main.layout.users.addFormText.email')} name="email" rules={emailRule}>
+                <Input placeholder={getIntls('main.layout.users.addFormText.email')} />
               </Form.Item>
-              <Form.Item label={addFormText.password} name="password" rules={passwordRule}>
-                <Input type="password" placeholder={addFormText.password} autoComplete="new-password" />
+              <Form.Item label={getIntls('main.layout.users.addFormText.password')} name="password" rules={passwordRule}>
+                <Input type="password" placeholder={getIntls('main.layout.users.addFormText.password')} autoComplete="new-password" />
               </Form.Item>
-              <Form.Item label={addFormText.role} name="role" rules={roleRule}>
-                <InputNumber placeholder={addFormText.role} />
+              <Form.Item label={getIntls('main.layout.users.addFormText.role')} name="role" rules={roleRule}>
+                <InputNumber placeholder={getIntls('main.layout.users.addFormText.role')} />
               </Form.Item>
-              <Form.Item label={addFormText.avatar} name="avatar">
-                <Input placeholder={addFormText.avatar} />
+              <Form.Item label={getIntls('main.layout.users.addFormText.avatar')} name="avatar">
+                <Input placeholder={getIntls('main.layout.users.addFormText.avatar')} />
               </Form.Item>
-              <Form.Item label={addFormText.projectId} name="projectId">
-                <Select placeholder={addFormText.projectId} allowClear style={{width: '80%'}}>
-                  {projectList.map((v) => (
+              <Form.Item label={getIntls('main.layout.users.addFormText.projectId')} name="projectId">
+                <Select placeholder={getIntls('main.layout.users.addFormText.projectId')} allowClear style={{width: '80%'}}>
+                  {projectList.map(v => (
                     <Select.Option key={v._id} value={v._id}>
                       {v.name}
                     </Select.Option>
@@ -67,10 +66,10 @@ const Index = (props) => {
               </Form.Item>
               <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit">
-                  {addFormText.submit}
+                  {getIntls('main.layout.users.addFormText.submit')}
                 </Button>
                 <Button style={{marginLeft: '12px'}} onClick={() => form.resetFields()}>
-                  {addFormText.reset}
+                  {getIntls('main.layout.users.addFormText.reset')}
                 </Button>
               </Form.Item>
             </Form>

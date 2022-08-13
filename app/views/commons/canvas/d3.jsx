@@ -1,4 +1,4 @@
-const Index = (props) => {
+const Index = props => {
   return <div>d3</div>;
 };
 

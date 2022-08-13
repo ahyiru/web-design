@@ -7,9 +7,9 @@ const TARGET = PROXY?.prefix ?? '/api';
 
 import {logout} from '@app/utils/utils';
 
-const success_code = [200];
+const success_code = [200, 10000];
 
-const handler = (response) => {
+const handler = response => {
   /* if(response.status===401){
     message.error(response.statusText);
     logout(true);
@@ -21,7 +21,7 @@ const handler = (response) => {
   } */
   return response
     .json()
-    .then((result) => {
+    .then(result => {
       result.code = result.code ?? response.status;
       result.msg = result.message ?? result.msg ?? response.statusText;
       const {msg, code} = result;
@@ -35,13 +35,13 @@ const handler = (response) => {
       }
       return result;
     })
-    .catch((error) => {
+    .catch(error => {
       message.error(error.message);
       throw error.message;
     });
 };
 
-const dlHandler = (response) => {
+const dlHandler = response => {
   if (response.status !== 200) {
     message.error(response.statusText);
     throw {message: response.statusText};
@@ -51,7 +51,7 @@ const dlHandler = (response) => {
   const fileInfo = decodeURIComponent(disposition);
   return response
     .blob()
-    .then((result) => {
+    .then(result => {
       result.code = result.code ?? response.status;
       const {message: mesg, msg, code} = result;
       if (!success_code.includes(code)) {
@@ -59,7 +59,7 @@ const dlHandler = (response) => {
       }
       return {result, fileInfo};
     })
-    .catch((error) => {
+    .catch(error => {
       message.error(error.message);
       throw error;
     });

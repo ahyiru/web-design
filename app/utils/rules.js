@@ -1,9 +1,4 @@
-import {namePattern, emailPattern, passwordPattern, pathPattern} from './patterns';
-
-const required = {
-  required: true,
-  message: '请输入!',
-};
+import {required, namePattern, emailPattern, passwordPattern, pathPattern} from './patterns';
 
 export const nameRule = [required, namePattern];
 export const emailRule = [required, emailPattern];
@@ -22,3 +17,12 @@ export const confirmRule = [
 ];
 
 export const pathRule = [required, pathPattern];
+
+export const checkVolid = (rules, value) => {
+  for (let i = 0, l = rules.length; i < l; i++) {
+    const rule = rules[i];
+    if (!rule.pattern.test(value)) {
+      return rule.message;
+    }
+  }
+};

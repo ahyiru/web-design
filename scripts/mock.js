@@ -1,13 +1,14 @@
-const {sleep,uuidv4}=require('@huxy/utils');
+const sleep = require('@huxy/utils/src/sleep');
+const uuidv4 = require('@huxy/utils/src/uuidv4');
 
-const mock=app=>{
-  app.get('/api/api/list',async (req,res)=>{
+const mock = app => {
+  app.get('/api/api/list', async (req, res) => {
     await sleep();
     res.json({
-      code:200,
-      message:'success！',
-      result:{
-        list:[
+      code: 200,
+      message: 'success！',
+      result: {
+        list: [
           {
             name: 'login',
             url: '/auth/login',
@@ -42,89 +43,89 @@ const mock=app=>{
       },
     });
   });
-  app.post('/api/auth/login',async (req,res)=>{
+  app.post('/api/auth/login', async (req, res) => {
     await sleep();
     res.json({
-      code:200,
-      message:'success！',
-      result:{
-        token:uuidv4(),
+      code: 200,
+      message: 'success！',
+      result: {
+        token: uuidv4(),
       },
     });
   });
-  app.post('/api/auth/logout',async (req,res)=>{
+  app.post('/api/auth/logout', async (req, res) => {
     await sleep();
     res.json({
-      code:200,
-      message:'success！',
-      result:{},
+      code: 200,
+      message: 'success！',
+      result: {},
     });
   });
-  app.get('/api/auth/list',async (req,res)=>{
+  app.get('/api/auth/list', async (req, res) => {
     await sleep();
     res.json({
-      code:200,
-      message:'success！',
-      result:[],
+      code: 200,
+      message: 'success！',
+      result: [],
     });
   });
-  app.get('/api/users/profile',async (req,res)=>{
+  app.get('/api/users/profile', async (req, res) => {
     await sleep();
     res.json({
-      code:200,
-      message:'success！',
-      result:{
-        id:uuidv4(),
-        name:'test',
-        role:5,
-        email:'test@test.com',
+      code: 200,
+      message: 'success！',
+      result: {
+        id: uuidv4(),
+        name: 'test',
+        role: 5,
+        email: 'test@test.com',
       },
     });
   });
-  app.get('/api/router/list',async (req,res)=>{
+  app.get('/api/router/list', async (req, res) => {
     await sleep();
     res.json({
-      code:200,
-      message:'success！',
-      result:[],
+      code: 200,
+      message: 'success！',
+      result: [],
     });
   });
-  app.get('/api/users/allUser',async (req,res)=>{
+  app.get('/api/users/allUser', async (req, res) => {
     await sleep();
     res.json({
-      code:200,
-      message:'success！',
-      result:{
-        list:[
+      code: 200,
+      message: 'success！',
+      result: {
+        list: [
           {
-            id:uuidv4(),
-            name:'admin',
-            role:1,
-            email:'admin@test.com',
+            id: uuidv4(),
+            name: 'admin',
+            role: 1,
+            email: 'admin@test.com',
           },
           {
-            id:uuidv4(),
-            name:'张三',
-            role:0,
-            email:'zs@test.com',
+            id: uuidv4(),
+            name: '张三',
+            role: 0,
+            email: 'zs@test.com',
           },
           {
-            id:uuidv4(),
-            name:'管理员',
-            role:3,
-            email:'huy@test.com',
+            id: uuidv4(),
+            name: '管理员',
+            role: 3,
+            email: 'huy@test.com',
           },
           {
-            id:uuidv4(),
-            name:'visitor',
-            role:0,
-            email:'visitor@test.com',
+            id: uuidv4(),
+            name: 'visitor',
+            role: 0,
+            email: 'visitor@test.com',
           },
           {
-            id:uuidv4(),
-            name:'demo',
-            role:0,
-            email:'demo@test.com',
+            id: uuidv4(),
+            name: 'demo',
+            role: 0,
+            email: 'demo@test.com',
           },
         ],
       },
@@ -133,21 +134,21 @@ const mock=app=>{
 };
 
 const express = require('express');
-const colors=require('colors');
-const cors=require('cors');
-const logger=require('morgan');
-const bodyParser=require('body-parser');
-const compression=require('compression');
+const colors = require('colors');
+const cors = require('cors');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const compression = require('compression');
 const app = express();
-const {HOST,SERVER_PORT}=require('../configs');
-app.set('host',HOST);
-app.set('port',SERVER_PORT);
+const {HOST, SERVER_PORT} = require('../configs');
+app.set('host', HOST);
+app.set('port', SERVER_PORT);
 app.use(cors());
 app.use(logger('combined'));
-app.use(bodyParser.json({limit:'20mb'}));
-app.use(bodyParser.urlencoded({limit:'20mb',extended:true}));
+app.use(bodyParser.json({limit: '20mb'}));
+app.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
 app.use(compression());
-app.listen(SERVER_PORT,(err)=>{
+app.listen(SERVER_PORT, err => {
   if (err) {
     console.log(err);
     return false;
@@ -155,6 +156,6 @@ app.listen(SERVER_PORT,(err)=>{
   console.log(`\n MOCK服务已启动！ `.cyan);
 });
 
-module.exports=()=>{
+module.exports = () => {
   mock(app);
 };

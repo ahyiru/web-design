@@ -1,7 +1,7 @@
 import {SearchInput} from './search-input';
 import {ComponentTree} from './component-tree';
 import styles from './index.less';
-export const ComponentSourceTree = (props) => {
+export const ComponentSourceTree = props => {
   const {className = ''} = props;
   return (
     <div className={`${styles.componentSourceTree} ${className}`}>

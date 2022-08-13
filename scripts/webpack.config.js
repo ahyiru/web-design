@@ -6,46 +6,45 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 // const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
-const {appName,projectName,PUBLIC_DIR,BUILD_DIR,DEV_ROOT_DIR}=require('../configs');
+const {appName, projectName, PUBLIC_DIR, BUILD_DIR, DEV_ROOT_DIR} = require('../configs');
 
-const publics=path.resolve(__dirname,PUBLIC_DIR);
-const app=path.resolve(__dirname,`../${appName}`);
+const publics = path.resolve(__dirname, PUBLIC_DIR);
+const app = path.resolve(__dirname, `../${appName}`);
 
-// const rootDir=DEV_ROOT_DIR==='/'?DEV_ROOT_DIR:`${DEV_ROOT_DIR}/`;
+const frame = appName === 'vue' ? {uiframe: ['vue']} : {uiframe: ['react', 'react-dom']};
 
-const frame=appName==='vue'?{uiframe:['vue']}:{uiframe:['react','react-dom']};
-
-const entry={
-  app:[path.resolve(app,'index.jsx')],
+const entry = {
+  app: [path.resolve(app, 'index.jsx')],
   ...frame,
 };
-const templ=path.resolve(publics,'index.html');
-const icon=path.resolve(publics,'favicon.ico');
+const templ = path.resolve(publics, 'index.html');
+const icon = path.resolve(publics, 'favicon.ico');
 
-const htmlPlugin=()=>new HtmlWebpackPlugin({
-  title:projectName||appName,
-  template:templ,
-  favicon:icon,
-  inject:true,
-  minify:{
-    html5:true,
-    collapseWhitespace:true,
-    // conservativeCollapse:true,
-    removeScriptTypeAttributes:true,
-    removeStyleLinkTypeAttributes:true,
-    removeComments:true,
-    removeTagWhitespace:true,
-    removeEmptyAttributes:true,
-    removeRedundantAttributes:true,
-    useShortDoctype:true,
-    keepClosingSlash:true,
-    minifyJS:true,
-    minifyCSS:true,
-    minifyURLs:true,
-  },
-});
+const htmlPlugin = () =>
+  new HtmlWebpackPlugin({
+    title: projectName || appName,
+    template: templ,
+    favicon: icon,
+    inject: true,
+    minify: {
+      html5: true,
+      collapseWhitespace: true,
+      // conservativeCollapse:true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      removeComments: true,
+      removeTagWhitespace: true,
+      removeEmptyAttributes: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true,
+    },
+  });
 
-const plugins=[
+const plugins = [
   htmlPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: false,
@@ -90,112 +89,112 @@ const plugins=[
   new NodePolyfillPlugin(),
 ];
 
-const rules=[
+const rules = [
   {
-    test:/\.m?js/,
-    resolve:{
-      fullySpecified:false,
+    test: /\.m?js/,
+    resolve: {
+      fullySpecified: false,
     },
   },
   {
-    test:/\.tsx?$/,
-    use:[
-      {loader:'babel-loader'},
-      {loader:'ts-loader'},
-    ],
-    exclude:[/node_modules/,/draft/],
+    test: /\.tsx?$/,
+    use: [{loader: 'babel-loader'}, {loader: 'ts-loader'}],
+    exclude: [/node_modules/, /draft/],
   },
   {
-    test:/\.jsx?$/,
-    loader:'babel-loader',
-    options:{
-      cacheDirectory:true,
+    test: /\.jsx?$/,
+    loader: 'babel-loader',
+    options: {
+      cacheDirectory: true,
     },
-    exclude:[/node_modules//* ,/draft/ */,path.resolve(__dirname,'node')],
+    exclude: [/node_modules/ /* ,/draft/ */, path.resolve(__dirname, 'node')],
   },
   {
-    test:/\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)$/i,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'img/img_[hash:8].[ext]',
+    test: /\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)$/i,
+    loader: 'url-loader',
+    options: {
+      limit: 20480,
+      name: 'img/img_[hash:8].[ext]',
       // publicPath:'../',
-      esModule:false,
+      esModule: false,
     },
-    type:'javascript/auto',
-    exclude:[/node_modules/],
+    type: 'javascript/auto',
+    exclude: [/node_modules/],
   },
   {
-    test:/\.(ttf|eot|svg|woff|woff2|otf)$/,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'fonts/[hash:8].[ext]',
-      publicPath:'../',
-      esModule:false,
+    test: /\.(ttf|eot|svg|woff|woff2|otf)$/,
+    loader: 'url-loader',
+    options: {
+      limit: 20480,
+      name: 'fonts/[hash:8].[ext]',
+      publicPath: '../',
+      esModule: false,
     },
-    exclude:[/images/],
+    exclude: [/images/],
   },
   {
     test: /\.html$/,
     use: {
       loader: 'html-loader',
       options: {
-        minimize:true,
+        minimize: true,
       },
     },
-    include:[app],
+    include: [app],
   },
   {
-    test:/\.md$/,
-    use:[
+    test: /\.md$/,
+    use: [
       {
-        loader:'html-loader',
-        options:{
-          minimize:false,
+        loader: 'html-loader',
+        options: {
+          minimize: false,
         },
       },
     ],
+    exclude: [/node_modules/],
   },
   {
-    test:/\.pdf$/,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'pdf/[hash].[ext]',
+    test: /\.pdf$/,
+    loader: 'url-loader',
+    options: {
+      limit: 20480,
+      name: 'pdf/[hash].[ext]',
     },
+    exclude: [/node_modules/],
   },
   {
-    test:/\.(swf|xap|mp4|webm)$/,
-    loader:'url-loader',
-    options:{
-      limit:20480,
-      name:'video/[hash].[ext]',
+    test: /\.(swf|xap|mp4|webm)$/,
+    loader: 'url-loader',
+    options: {
+      limit: 20480,
+      name: 'video/[hash].[ext]',
     },
+    exclude: [/node_modules/],
   },
 ];
 
-module.exports={
-  context:app,
+module.exports = {
+  context: app,
   cache: {
     type: 'filesystem',
     buildDependencies: {
-      config: [ __filename ],
+      config: [__filename],
     },
   },
-  experiments:{
-    topLevelAwait:true,
+  experiments: {
+    topLevelAwait: true,
     // outputModule:true,
     // syncWebAssembly:true,
     // asyncWebAssembly:true,
     // layers:true,
     // lazyCompilation:true,
   },
-  entry:entry,
-  output:{
-    path:path.resolve(app,BUILD_DIR),
-    publicPath:DEV_ROOT_DIR,
-    filename:'js/[name].js',
+  entry: entry,
+  output: {
+    path: path.resolve(app, BUILD_DIR),
+    publicPath: DEV_ROOT_DIR,
+    filename: 'js/[name].js',
     // chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
     // assetModuleFilename: 'assets/[contenthash][ext]',
     /* library:{
@@ -206,43 +205,38 @@ module.exports={
     // umdNamedDefine:true,
     // globalObject:'this',
   },
-  optimization:{
-    splitChunks:false,
-    minimize:false,
-    providedExports:false,
-    usedExports:false,
-    concatenateModules:false,
-    sideEffects:'flag',
-    runtimeChunk:'single',
-    moduleIds:'named',
-    chunkIds:'named',
+  optimization: {
+    splitChunks: false,
+    minimize: false,
+    providedExports: false,
+    usedExports: false,
+    concatenateModules: false,
+    sideEffects: 'flag',
+    runtimeChunk: 'single',
+    moduleIds: 'named',
+    chunkIds: 'named',
   },
-  externals:{
+  externals: {
     // react:'react',
     // vue:'vue',
   },
-  resolve:{
-    modules:[
-      app,
-      'node_modules',
-    ],
-    alias:{
-      '@app':app,
-      '@configs':path.resolve(__dirname, '../configs'),
-      '@common':path.resolve(__dirname, '../commons'),
+  resolve: {
+    modules: [app, 'node_modules'],
+    alias: {
+      '@app': app,
+      '@configs': path.resolve(__dirname, '../configs'),
+      '@common': path.resolve(__dirname, '../commons'),
     },
-    extensions:['.jsx','.js','.less','.css','.scss','.json','.ts','.tsx','.vue','.cjs'],
+    extensions: ['.jsx', '.js', '.less', '.css', '.scss', '.json', '.ts', '.tsx', '.vue', '.mjs'],
     fallback: {
-      path: false,//require.resolve('path-browserify'),
+      path: false, //require.resolve('path-browserify'),
       process: false,
     },
-    symlinks:false,
-    cacheWithContext:false,
+    symlinks: false,
+    cacheWithContext: false,
   },
-  module:{
-    rules:rules,
+  module: {
+    rules: rules,
   },
-  plugins:plugins,
+  plugins: plugins,
 };
-
-

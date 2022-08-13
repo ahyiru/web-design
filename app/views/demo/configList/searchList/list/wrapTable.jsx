@@ -1,6 +1,6 @@
 import {Table} from 'antd';
 
-const Index = (props) => {
+const Index = props => {
   const {result, pageChange, columns, rowSelection, pagination, ...rest} = props;
   const {isPending, data} = result;
   const {total, current, size, list} = data || {};

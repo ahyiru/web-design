@@ -6,7 +6,7 @@ import {SimpleLogo} from './logo';
 import {ExperimentTitle} from './experiment-title';
 import css from './index.less';
 const {Header} = Layout;
-export const GuideHeader = (props) => {
+export const GuideHeader = props => {
   const expGraph = useExperimentGraph(props.experimentId);
   const [activeExperiment] = useObservableState(expGraph.experiment$);
   const openGithub = () => {

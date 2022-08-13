@@ -7,6 +7,10 @@ import {nameRule, emailRule, passwordRule} from '@app/utils/rules';
 
 import Panel from '@app/components/panel';
 
+import {userInfoStore} from '@app/store/stores';
+
+import {useIntls} from '@app/components/intl';
+
 const {TabPane} = Tabs;
 
 const formStyle = {
@@ -14,17 +18,14 @@ const formStyle = {
   maxWidth: '600px',
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.users ?? {};
-
-  const values = props.store.getState('profile') ?? {};
-  const {
-    profilePageText: {profile = {}, upProfile = {}},
-  } = i18nCfg;
+const Index = props => {
+  const getIntls = useIntls();
+  const profile = getIntls('main.users.profilePageText.profile', {});
+  const upProfile = getIntls('main.users.profilePageText.upProfile', {});
+  const values = userInfoStore.getState();
 
   const [form] = Form.useForm();
-  const onFinish = async (values) => {
+  const onFinish = async values => {
     const {code, message: msg} = await apiList.upUserFn(values);
     if (code === 200) {
       message.success(msg);

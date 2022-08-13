@@ -14,12 +14,12 @@ const useHandleList = (fetchList, initParams = null, handleResult, commonParams 
       ...search.current,
     });
   };
-  const searchList = (values) => {
+  const searchList = values => {
     search.current = values;
     page.current = {...page.current, current: 1};
     update({...page.current, ...search.current});
   };
-  const handleUpdate = (params) => {
+  const handleUpdate = params => {
     const {current, size, ...rest} = params;
     page.current = {current: current ?? page.current.current, size: size ?? page.current.size};
     search.current = {...search.current, ...rest};

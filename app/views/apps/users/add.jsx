@@ -6,13 +6,13 @@ import apiList from '@app/utils/getApis';
 import {layout, tailLayout} from '@app/utils/config';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';
 import Panel from '@app/components/panel';
+import {useIntls} from '@app/components/intl';
 
 const {addUserFn, editUserFn, listProjectFn} = apiList;
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.users ?? {};
-  const {addFormText = {}} = i18nCfg;
+const Index = props => {
+  const getIntls = useIntls();
+  const addFormText = getIntls('main.users.addFormText', {});
 
   const [form] = Form.useForm();
   const {getState} = props.history;
@@ -27,10 +27,10 @@ const Index = (props) => {
     };
     getProjects();
   }, []);
-  const onFinish = async (values) => {
+  const onFinish = async values => {
     const handler = item ? editUserFn : addUserFn;
     values = item ? {...item, ...values} : values;
-    const projectName = projectList.find((v) => v._id === values.projectId)?.name;
+    const projectName = projectList.find(v => v._id === values.projectId)?.name;
     try {
       const {code, message: msg} = await handler({...values, projectName});
       if (code === 200) {
@@ -70,7 +70,7 @@ const Index = (props) => {
               </Form.Item>
               <Form.Item label={addFormText.projectId} name="projectId">
                 <Select placeholder={addFormText.projectId} allowClear style={{width: '80%'}}>
-                  {projectList.map((v) => (
+                  {projectList.map(v => (
                     <Select.Option key={v._id} value={v._id}>
                       {v.name}
                     </Select.Option>

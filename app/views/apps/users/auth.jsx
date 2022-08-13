@@ -1,13 +1,12 @@
 import {useState, useCallback, useEffect} from 'react';
 
-import {Tree, Button, message} from 'antd';
+import {Tree, Button, message, Input, Spin} from 'antd';
 
 import {DownOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 
-import * as Icons from '@ant-design/icons';
-
 import {Row, Col} from '@huxy/components';
 import {arr2TreeByPath, isValidArr, traverItem} from '@huxy/utils';
+import {useSearch, useDebounce} from '@huxy/use';
 
 import defProject from '@app/configs/projects';
 
@@ -19,24 +18,39 @@ import Back from '@app/components/goBack';
 
 import Panel from '@app/components/panel';
 
+import Icons from '@app/utils/icons';
+
+import {useIntls} from '@app/components/intl';
+
 const {listRouterFn, listAuthFn, setAuthFn} = apiList;
+
+const {Search} = Input;
 
 const rootNode = {
   path: '',
   iconKey: 'LayoutOutlined',
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.users ?? {};
-  const {authFormText = {}} = i18nCfg;
+const Index = props => {
+  const getIntls = useIntls();
+  const authFormText = getIntls('main.users.authFormText', {});
 
   const {getState} = props.history;
   const {backState} = getState();
 
   const [checkedKeys, setCheckedKeys] = useState([]);
 
-  const [routerList] = useFetchList(listRouterFn, {projectId: defProject._id});
+  const [filterTree, setFilterTree] = useSearch(null);
+
+  const [routerList] = useFetchList(listRouterFn, {projectId: defProject._id}, ({result}) => {
+    const arr = [{...rootNode, name: authFormText.root_name}, ...(result || [])].map(item => {
+      item.key = item.path;
+      const Icon = Icons[item.iconKey] || EyeInvisibleOutlined;
+      item.icon = <Icon />;
+      return item;
+    });
+    return {result: arr2TreeByPath(arr)};
+  });
 
   const update = useCallback(async () => {
     const {
@@ -55,8 +69,12 @@ const Index = (props) => {
     update();
   }, []);
 
+  const searchChange = useDebounce((e, data) => {
+    const {value} = e.target;
+    setFilterTree(data, value, 'name', 'path');
+  }, 500);
+
   const handleAuth = async () => {
-    console.log(checkedKeys);
     const {
       code,
       result,
@@ -72,8 +90,7 @@ const Index = (props) => {
     }
   };
 
-  const onCheck = (checkedKeysValue) => {
-    console.log('onCheck', checkedKeysValue);
+  const onCheck = checkedKeysValue => {
     setCheckedKeys(checkedKeysValue);
   };
 
@@ -82,20 +99,14 @@ const Index = (props) => {
   };
 
   const {isPending, data} = routerList;
-  const arr = [{...rootNode, name: authFormText.root_name}, ...(data || [])].map((item) => {
-    item.key = item.path;
-    const Icon = Icons[item.iconKey] || EyeInvisibleOutlined;
-    item.icon = <Icon />;
-    return item;
-  });
-  const treeData = arr2TreeByPath(arr);
+  const treeData = filterTree || data || [];
   const nodes = [];
-  traverItem((item) => {
+  traverItem(item => {
     if (isValidArr(item.children)) {
       nodes.push(item.path);
     }
   })(treeData);
-  const leafKeys = checkedKeys.filter((v) => !nodes.includes(v));
+  const leafKeys = checkedKeys.filter(v => !nodes.includes(v));
 
   return (
     <div>
@@ -105,15 +116,18 @@ const Index = (props) => {
         </Col>
         <Col>
           <Panel>
-            <Tree showIcon defaultExpandAll switcherIcon={<DownOutlined />} titleRender={(item) => item.name} treeData={treeData} virtual={false} checkable onCheck={onCheck} checkedKeys={leafKeys} />
-            <div style={{padding: '12px 16px'}}>
-              <Button type="primary" htmlType="submit" onClick={(e) => handleAuth()}>
-                {authFormText.submit}
-              </Button>
-              <Button style={{marginLeft: '12px'}} onClick={() => setCheckedKeys([])}>
-                {authFormText.reset}
-              </Button>
-            </div>
+            <Spin spinning={isPending}>
+              <Search placeholder="搜索..." allowClear enterButton style={{maxWidth: '240px', marginBottom: '12px'}} /* onSearch={searchTree} */ onChange={e => searchChange(e, data)} />
+              <Tree showIcon defaultExpandAll switcherIcon={<DownOutlined />} titleRender={item => item.name} treeData={treeData} virtual={false} checkable onCheck={onCheck} checkedKeys={leafKeys} />
+              <div style={{padding: '12px 16px'}}>
+                <Button type="primary" htmlType="submit" onClick={e => handleAuth()}>
+                  {authFormText.submit}
+                </Button>
+                <Button style={{marginLeft: '12px'}} onClick={() => setCheckedKeys([])}>
+                  {authFormText.reset}
+                </Button>
+              </div>
+            </Spin>
           </Panel>
         </Col>
       </Row>

@@ -13,7 +13,7 @@ import {algoData, searchByKeyword} from '../mock/algo';
     }
   });
 } */
-const useModel = (name) => {
+const useModel = name => {
   const [state, setState] = useStore(name, {
     keyword: '',
     loading: false,
@@ -23,7 +23,7 @@ const useModel = (name) => {
   const setItem = (key, value) => {
     setState({[key]: typeof value === 'function' ? value(state[key]) : value});
   };
-  const setKeyword = useCallback((value) => {
+  const setKeyword = useCallback(value => {
     setItem('keyword', value);
   }, []);
   const loadComponentNodes = useCallback(() => {
@@ -39,7 +39,7 @@ const useModel = (name) => {
     };
     return load();
   }, []);
-  const search = useCallback((params) => {
+  const search = useCallback(params => {
     setKeyword(params.keyword ? params.keyword : '');
     if (!params.keyword) {
       return;

@@ -45,7 +45,7 @@ const barList = [
   },
 ];
 
-const Index = (props) => {
+const Index = props => {
   return (
     <div className="skeleton-content">
       {/* <Setting {...props} /> */}

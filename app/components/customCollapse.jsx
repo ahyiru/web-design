@@ -2,14 +2,14 @@ import {useRoute} from '@huxy/router';
 import {useWinResize} from '@huxy/use';
 import {Anico} from '@huxy/components';
 
-const CustomCollapse = (props) => {
+const CustomCollapse = props => {
   const {useStore} = useRoute();
   const {width} = useWinResize();
   const [collapsed, setCollapsed] = useStore('huxy-collapse');
   return width < 1024 ? (
     <a
       {...props}
-      onClick={(e) => {
+      onClick={e => {
         e.stopPropagation();
         setCollapsed(!collapsed);
       }}

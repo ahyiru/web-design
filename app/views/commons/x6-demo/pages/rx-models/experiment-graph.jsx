@@ -77,7 +77,7 @@ class ExperimentGraph extends GraphCore {
             },
           });
         },
-        validateEdge: (args) => {
+        validateEdge: args => {
           const {edge} = args;
           return !!edge?.target?.port;
         },
@@ -185,7 +185,7 @@ class ExperimentGraph extends GraphCore {
   }
   async updateExperimentGraph(nodes = [], links = []) {
     const oldGraph = this.experimentGraph$.getValue();
-    const newGraph = produce(oldGraph, (nextGraph) => {
+    const newGraph = produce(oldGraph, nextGraph => {
       if (nodes.length) {
         nextGraph.nodes.push(...nodes);
       }
@@ -197,13 +197,13 @@ class ExperimentGraph extends GraphCore {
   }
   async delExperimentGraphElement(nodes = [], links = []) {
     const oldGraph = this.experimentGraph$.getValue();
-    const newGraph = produce(oldGraph, (nextGraph) => {
+    const newGraph = produce(oldGraph, nextGraph => {
       if (nodes.length) {
-        nextGraph.nodes = oldGraph.nodes.filter((node) => !nodes.includes(node.id.toString()));
-        nextGraph.links = oldGraph.links.filter((link) => !nodes.find((node) => [link.source.toString(), link.target.toString()].includes(node)));
+        nextGraph.nodes = oldGraph.nodes.filter(node => !nodes.includes(node.id.toString()));
+        nextGraph.links = oldGraph.links.filter(link => !nodes.find(node => [link.source.toString(), link.target.toString()].includes(node)));
       } else {
-        nextGraph.links = oldGraph.links.filter((link) => {
-          return !links.find((delLink) => {
+        nextGraph.links = oldGraph.links.filter(link => {
+          return !links.find(delLink => {
             return delLink.inputPortId.toString() === link.inputPortId.toString() && delLink.outputPortId.toString() === link.outputPortId.toString();
           });
         });
@@ -211,9 +211,9 @@ class ExperimentGraph extends GraphCore {
     });
     this.experimentGraph$.next(newGraph);
   }
-  loadExecutionStatus = async (experimentId) => {
+  loadExecutionStatus = async experimentId => {
     this.executionStatusQuerySub?.unsubscribe();
-    this.executionStatusQuerySub = timer(0, 5000).subscribe(async (resPromise) => {
+    this.executionStatusQuerySub = timer(0, 5000).subscribe(async resPromise => {
       const execStatusRes = await queryGraphStatus();
       this.executionStatus$.next(execStatusRes.data);
       this.updateEdgeStatus();
@@ -232,10 +232,10 @@ class ExperimentGraph extends GraphCore {
   renderGraph = (wrapper, container) => {
     this.experimentGraphSub = this.experimentGraph$
       .pipe(
-        filter((x) => !!x),
+        filter(x => !!x),
         take(1),
       )
-      .subscribe((graphData) => {
+      .subscribe(graphData => {
         if (!this.graph) {
           const {nodes, edges} = formatGraphData(graphData);
           super.render({
@@ -247,10 +247,10 @@ class ExperimentGraph extends GraphCore {
         }
       });
     this.reRenderSub = fromEventPattern(
-      (handler) => {
+      handler => {
         window.addEventListener(RERENDER_EVENT, handler);
       },
-      (handler) => {
+      handler => {
         window.removeEventListener(RERENDER_EVENT, handler);
       },
     ).subscribe(this.handlerResize);
@@ -280,7 +280,7 @@ class ExperimentGraph extends GraphCore {
           component: <NodeGroup experimentId={experimentId} />,
         }),
       );
-      includedNodes.forEach((normalNode) => {
+      includedNodes.forEach(normalNode => {
         const targetNode = this.getNodeById(normalNode.id);
         group.addChild(targetNode);
       });
@@ -290,7 +290,7 @@ class ExperimentGraph extends GraphCore {
   }
   afterLayout() {
     super.afterLayout();
-    this.pendingNodes.forEach((node) => {
+    this.pendingNodes.forEach(node => {
       node.hide();
     });
     this.pendingNodes = [];
@@ -302,12 +302,12 @@ class ExperimentGraph extends GraphCore {
     }
     return this.graph.addEdge(new GuideEdge(edgeMeta));
   }
-  validateContextMenu = (info) => {
+  validateContextMenu = info => {
     return !(info.type === 'edge' && info?.data?.edge?.isGroupEdge());
   };
   onSelectNodes(nodes) {
-    const selectedNodes = nodes.filter((cell) => cell.isNode() && !cell.isGroup());
-    const selectedGroups = nodes.filter((cell) => cell.isNode() && cell.isGroup());
+    const selectedNodes = nodes.filter(cell => cell.isNode() && !cell.isGroup());
+    const selectedGroups = nodes.filter(cell => cell.isNode() && cell.isGroup());
     if (selectedNodes.length === 1) {
       const cell = selectedNodes[0];
       const nodeData = cell.getData();
@@ -325,7 +325,7 @@ class ExperimentGraph extends GraphCore {
       this.selectedGroup$.next(undefined);
     }
   }
-  handlerResize = (e) => {
+  handlerResize = e => {
     if (e.detail === this.experimentId) {
       this.resizeGraph();
     }
@@ -381,16 +381,16 @@ class ExperimentGraph extends GraphCore {
     }
   }
   async onMoveNodes(movedNodes) {
-    const targetNodes = movedNodes.filter((arg) => {
+    const targetNodes = movedNodes.filter(arg => {
       const {node} = arg;
       return !node.isGroup();
     });
     if (targetNodes?.length) {
-      const newPos = targetNodes.map((moveNode) => {
+      const newPos = targetNodes.map(moveNode => {
         const {current, node} = moveNode;
         const {x, y} = current;
         const {id} = node;
-        this.updateNodeById(id, (node) => {
+        this.updateNodeById(id, node => {
           node.setData({x, y});
         });
         return {
@@ -400,10 +400,10 @@ class ExperimentGraph extends GraphCore {
         };
       });
       const oldGraph = this.experimentGraph$.getValue();
-      const newGraph = produce(oldGraph, (nextGraph) => {
-        newPos.forEach((position) => {
+      const newGraph = produce(oldGraph, nextGraph => {
+        newPos.forEach(position => {
           const {nodeInstanceId, posX, posY} = position;
-          const matchNode = nextGraph.nodes.find((item) => item.id.toString() === nodeInstanceId.toString());
+          const matchNode = nextGraph.nodes.find(item => item.id.toString() === nodeInstanceId.toString());
           if (matchNode) {
             matchNode.positionX = posX;
             matchNode.positionY = posY;
@@ -415,9 +415,9 @@ class ExperimentGraph extends GraphCore {
   }
   onDeleteNodeOrEdge(args) {
     const {nodes, edges} = args;
-    const normalNodes = nodes.filter((node) => !node.isGroup());
+    const normalNodes = nodes.filter(node => !node.isGroup());
     if (normalNodes?.length) {
-      this.requestDeleteNodes(normalNodes.map((node) => node.id));
+      this.requestDeleteNodes(normalNodes.map(node => node.id));
     }
     if (edges?.length) {
       this.requestDeleteEdges(edges);
@@ -443,9 +443,9 @@ class ExperimentGraph extends GraphCore {
       const executionStatus = this.executionStatus$.getValue();
       const {instStatus} = executionStatus;
       const nodeIds = Object.keys(instStatus);
-      const runningNodeIds = nodeIds.filter((id) => instStatus[id] === 'running').map((i) => i.toString());
-      this.updateEdges((edges) => {
-        edges.forEach((edge) => {
+      const runningNodeIds = nodeIds.filter(id => instStatus[id] === 'running').map(i => i.toString());
+      this.updateEdges(edges => {
+        edges.forEach(edge => {
           const {
             target: {cell: nodeId},
             id,
@@ -489,7 +489,7 @@ class ExperimentGraph extends GraphCore {
       return {success: false};
     }
   };
-  setActiveAlgoData = (data) => {
+  setActiveAlgoData = data => {
     if (!data) {
       this.activeNodeInstance$.next(null);
       return;
@@ -497,7 +497,7 @@ class ExperimentGraph extends GraphCore {
     const oldData = this.activeNodeInstance$.getValue();
     this.activeNodeInstance$.next({...oldData, ...data});
   };
-  requestAddNode = async (param) => {
+  requestAddNode = async param => {
     const {graph} = this;
     if (graph) {
       const {nodeMeta, clientX, clientY} = param;
@@ -510,13 +510,13 @@ class ExperimentGraph extends GraphCore {
     }
     return {success: false};
   };
-  requestDeleteNodes = async (ids) => {
+  requestDeleteNodes = async ids => {
     const nodeInstanceIds = [].concat(ids);
     if (this.graph && nodeInstanceIds.length) {
       this.deleteNodes(nodeInstanceIds);
       this.clearContextMenuInfo();
       const activeNodeInstance = this.activeNodeInstance$.getValue();
-      if (activeNodeInstance && nodeInstanceIds.map((i) => i.toString()).includes(activeNodeInstance.id.toString())) {
+      if (activeNodeInstance && nodeInstanceIds.map(i => i.toString()).includes(activeNodeInstance.id.toString())) {
         this.activeNodeInstance$.next(null);
       }
       this.delExperimentGraphElement(nodeInstanceIds, []);
@@ -524,13 +524,13 @@ class ExperimentGraph extends GraphCore {
     }
     return {success: false};
   };
-  requestDeleteEdges = async (edges) => {
+  requestDeleteEdges = async edges => {
     const targetEdges = [].concat(edges);
     console.log(targetEdges);
     this.deleteEdges(targetEdges);
     this.delExperimentGraphElement(
       [],
-      targetEdges.map((cell) => cell.getData()),
+      targetEdges.map(cell => cell.getData()),
     );
     return {success: true};
   };
@@ -548,7 +548,7 @@ class ExperimentGraph extends GraphCore {
     }
     return renameRes;
   };
-  zoomGraph = (factor) => {
+  zoomGraph = factor => {
     this.zoom(factor);
   };
   zoomGraphToFit = () => {
@@ -557,7 +557,7 @@ class ExperimentGraph extends GraphCore {
   zoomGraphRealSize = () => {
     this.zoom('real');
   };
-  deleteEdgeFromContextMenu = async (edge) => {
+  deleteEdgeFromContextMenu = async edge => {
     await this.requestDeleteEdges(edge);
     this.clearContextMenuInfo();
   };
@@ -580,7 +580,7 @@ class ExperimentGraph extends GraphCore {
   }
 }
 export const gModelMap = new Map();
-export const useExperimentGraph = (experimentId) => {
+export const useExperimentGraph = experimentId => {
   const expId = experimentId.toString();
   let existedExperimentGraph = gModelMap.get(expId);
   if (!existedExperimentGraph) {
@@ -589,7 +589,7 @@ export const useExperimentGraph = (experimentId) => {
   }
   return existedExperimentGraph;
 };
-export const useUnmountExperimentGraph = (experimentId) => {
+export const useUnmountExperimentGraph = experimentId => {
   useEffect(() => {
     return () => {
       const existedExperimentGraph = gModelMap.get(experimentId);

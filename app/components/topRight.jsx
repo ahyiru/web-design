@@ -6,7 +6,7 @@ const btnStyls = {
   lineHeight: '100%',
   marginLeft: '10px',
 };
-const TopRight = (props) => {
+const TopRight = props => {
   return (
     <div style={{display: 'flex', height: '100%'}}>
       <DateSelect />

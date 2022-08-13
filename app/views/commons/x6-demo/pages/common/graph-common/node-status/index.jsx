@@ -1,5 +1,5 @@
 import {CheckCircleOutlined, CloseCircleOutlined, SyncOutlined} from '@ant-design/icons';
-export const NodeStatus = (props) => {
+export const NodeStatus = props => {
   const {className, status} = props;
   switch (status) {
   case 'fail':

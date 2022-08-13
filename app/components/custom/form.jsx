@@ -49,7 +49,7 @@ const Index = ({commonprops, ...props}) => {
     typeof getValues === 'function' && getValues(changedValues, allValues);
   };
   const resetFields = () => form.resetFields();
-  const onFinish = async (values) => {
+  const onFinish = async values => {
     if (modalItem) {
       return;
     }
@@ -73,11 +73,11 @@ const Index = ({commonprops, ...props}) => {
   const modalOk = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(values => {
         handleOk(values);
         onCancel();
       })
-      .catch((info) => {
+      .catch(info => {
         onCancel();
       });
   };

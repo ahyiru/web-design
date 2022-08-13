@@ -13,7 +13,7 @@ const RenderPage = ({router, curName, context}) => {
   return (
     <div className="anchor-page">
       {context.map((item, i) => (
-        <div key={item.name} className="anchor-item" ref={(ref) => (itemList.current[item.name] = ref)}>
+        <div key={item.name} className="anchor-item" ref={ref => (itemList.current[item.name] = ref)}>
           <h2>{`${item.name}`}</h2>
           <RenderContext item={item} />
         </div>

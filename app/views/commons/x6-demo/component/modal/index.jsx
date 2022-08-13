@@ -2,7 +2,7 @@ import {createRoot} from 'react-dom/client';
 import {Modal, ConfigProvider} from 'antd';
 import {isPromise} from '@app/views/commons/x6-demo/common/utils';
 import {ANT_PREFIX} from '@app/views/commons/x6-demo/constants/global';
-export const showModal = (props) => {
+export const showModal = props => {
   const div = document.createElement('div');
   document.body.appendChild(div);
   const rootNode = createRoot(div);
@@ -10,7 +10,7 @@ export const showModal = (props) => {
     ...props,
     visible: true,
     onCancel: close,
-    onOk: (e) => {
+    onOk: e => {
       if (typeof props.onOk === 'function') {
         const ret = props.onOk(e);
         if (isPromise(ret)) {

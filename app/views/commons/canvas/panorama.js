@@ -19,7 +19,7 @@ const pics = [
   zIndex:10003,
 }; */
 
-const Index = (props) => {
+const Index = props => {
   let renderer, scene, camera, controls;
   const panorama = useRef();
   const [loading, setLoading] = useState(false);
@@ -37,9 +37,9 @@ const Index = (props) => {
       window.removeEventListener('resize', onWindowResize);
     };
   }, []);
-  const getMaterial = (THREE) => {
+  const getMaterial = THREE => {
     const materialArray = [];
-    pics.map((pic) => {
+    pics.map(pic => {
       const texture = new THREE.TextureLoader().load(pic);
       const material = new THREE.MeshBasicMaterial({map: texture});
       materialArray.push(material);

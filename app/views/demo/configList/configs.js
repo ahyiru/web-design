@@ -116,27 +116,27 @@ export const tableHeader = [
   },
 ];
 
-export const colsCfg = (actions) => [
+export const colsCfg = actions => [
   {
     dataIndex: 'name',
     render: (text, record) => <a onClick={() => actions.handleCheck(record)}>{text}</a>,
   },
   {
     dataIndex: 'email',
-    render: (text) => text.replace(/\S+(@\S+)/, '*****$1'),
+    render: text => text.replace(/\S+(@\S+)/, '*****$1'),
   },
   {
     dataIndex: 'active',
-    render: (text) => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
+    render: text => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
   },
   {
     dataIndex: 'github',
-    render: (text) => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
+    render: text => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
   },
   {
     dataIndex: 'role',
     render: (text, record) => {
-      return roleList.find((v) => v.value === text)?.label ?? '-';
+      return roleList.find(v => v.value === text)?.label ?? '-';
     },
   },
   {
@@ -155,7 +155,7 @@ export const colsCfg = (actions) => [
     render: (text, record) => {
       const disabled = false; // !profile.role && record._id !== profile._id;
       const color = disabled ? 'var(--light-color)' : 'var(--red2)';
-      const acList = Object.keys(actions).map((key) => ({...colActions.find((item) => item.key === key), action: actions[key]}));
+      const acList = Object.keys(actions).map(key => ({...colActions.find(item => item.key === key), action: actions[key]}));
       return (
         <Space>
           {acList.map(({key, action, type, label}) => (

@@ -9,7 +9,7 @@ const dragStyles = {
   cursor: 'move',
 };
 
-const Index = (props) => {
+const Index = props => {
   const panel1 = useRef();
   const panel2 = useRef();
   useEffect(() => {

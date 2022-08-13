@@ -6,7 +6,7 @@ import {Menu} from '@antv/x6-react-components';
 import {useExperimentGraph} from '@app/views/commons/x6-demo/pages/rx-models/experiment-graph';
 import {graphPointToOffsetPoint} from '@app/views/commons/x6-demo/pages/common//utils/graph';
 import styles from './index.less';
-export const NodeContextMenu = (props) => {
+export const NodeContextMenu = props => {
   const {experimentId, data} = props;
   const containerRef = useRef(null);
   const expGraph = useExperimentGraph(experimentId);

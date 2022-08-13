@@ -12,7 +12,7 @@ marked.setOptions({
   gfm: true,
   breaks: true,
 });
-const Document = (props) => {
+const Document = props => {
   const {node} = props;
   const descriptionNodeRef = useRef(null);
   const {description, id, tag = ''} = node;
@@ -23,7 +23,7 @@ const Document = (props) => {
       {tag ? (
         <div className={styles.tag}>
           <span className={styles.label}> 标签: </span>
-          {tag.split(',').map((str) => (
+          {tag.split(',').map(str => (
             <Tag key={str}>{str}</Tag>
           ))}
         </div>

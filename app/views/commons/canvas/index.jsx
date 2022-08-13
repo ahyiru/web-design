@@ -1,6 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import {Dropdown, Menu, Button, Tag, Upload, message} from 'antd';
 import {FontColorsOutlined, BgColorsOutlined} from '@ant-design/icons';
+import {useIntls} from '@app/components/intl';
 import draw from './draw';
 import img from './1.jpg';
 
@@ -61,20 +62,20 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
   const [size, setSize] = useState(defCfg.size);
   const [type, setType] = useState(defCfg.type);
 
-  const handleColorMenuClick = (value) => {
+  const handleColorMenuClick = value => {
     setType('draw');
     actions.color(value.key);
-    setColor(colorCfg.find((item) => item.key === value.key));
+    setColor(colorCfg.find(item => item.key === value.key));
   };
-  const handleSizeMenuClick = (value) => {
+  const handleSizeMenuClick = value => {
     setType('draw');
     actions.size(value.key);
-    setSize(sizeCfg.find((item) => item.key === value.key));
+    setSize(sizeCfg.find(item => item.key === value.key));
   };
 
   const colorMenu = (
     <Menu onClick={handleColorMenuClick}>
-      {colorCfg.map((item) => (
+      {colorCfg.map(item => (
         <Menu.Item key={item.key} icon={<BgColorsOutlined style={{color: type === 'draw' ? item.key : ''}} />}>
           <Tag color={item.key}>{i18nCfg[item.name]}</Tag>
         </Menu.Item>
@@ -83,7 +84,7 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
   );
   const sizeMenu = (
     <Menu onClick={handleSizeMenuClick}>
-      {sizeCfg.map((item) => (
+      {sizeCfg.map(item => (
         <Menu.Item key={item.key} icon={<FontColorsOutlined />}>
           {i18nCfg[item.name]}
         </Menu.Item>
@@ -133,7 +134,7 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
       >
         {i18nCfg.save_canvas}
       </Button>
-      <Upload maxCount={1} beforeUpload={(file) => beforeUpload(file, () => setType('draw'))} showUploadList={false}>
+      <Upload maxCount={1} beforeUpload={file => beforeUpload(file, () => setType('draw'))} showUploadList={false}>
         <Button>{i18nCfg.replace_pic}</Button>
       </Upload>
       <Button
@@ -148,10 +149,8 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
   );
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.canvas ?? {};
-
+const Index = props => {
+  const getIntls = useIntls();
   const [imgUrl, setImgUrl] = useState(img);
   const [actions, setActions] = useState();
   const defCfg = {color: colorCfg[0], size: sizeCfg[0], type: 'draw'};
@@ -170,20 +169,22 @@ const Index = (props) => {
     const isImg = imgList.includes(file.type);
     const isLt8M = file.size / 1024 / 1024 < 8;
     if (!isImg) {
-      message.error(i18nCfg.up_image_msg);
+      message.error(getIntls('main.canvas.up_image_msg'));
       return false;
     }
     if (!isLt8M) {
-      message.error(i18nCfg.up_image_size_msg);
+      message.error(getIntls('main.canvas.up_image_size_msg'));
       return false;
     }
-    getBase64(file, (imgUrl) => setImgUrl(imgUrl));
+    getBase64(file, imgUrl => setImgUrl(imgUrl));
     cb();
     return false;
   };
   return (
     <div className="page">
-      <div className="tools-bar">{actions && <ToolsBar actions={actions} defCfg={defCfg} beforeUpload={beforeUpload} imgUrl={imgUrl} rmImg={() => setImgUrl(null)} i18nCfg={i18nCfg} />}</div>
+      <div className="tools-bar">
+        {actions && <ToolsBar actions={actions} defCfg={defCfg} beforeUpload={beforeUpload} imgUrl={imgUrl} rmImg={() => setImgUrl(null)} i18nCfg={getIntls('main.canvas')} />}
+      </div>
       <div ref={container} className="canvas-container">
         <canvas ref={imgCanvas} />
         <canvas ref={canvas} />

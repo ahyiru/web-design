@@ -5,6 +5,8 @@ import {LoadError, ErrorBoundary, HandleError} from '@huxy/components';
 import Panel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
 
+import {useIntls} from '@app/components/intl';
+
 const Temp = ({state, name}) => <div>{state[name]}</div>;
 
 const EB1 = ({title}) => {
@@ -54,25 +56,24 @@ const EB4 = ({title}) => {
   );
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.suspense ?? {};
+const Index = props => {
+  const getIntls = useIntls();
   return (
     <div>
       <Row>
         <Col span={6}>
-          <EB1 title={i18nCfg.loadError} />
+          <EB1 title={getIntls('main.suspense.loadError')} />
         </Col>
         <Col span={6}>
-          <EB2 title={i18nCfg.errorBoundary} />
+          <EB2 title={getIntls('main.suspense.errorBoundary')} />
         </Col>
       </Row>
       <Row>
         <Col span={6}>
-          <EB3 title={i18nCfg.handleErrorBoundary} />
+          <EB3 title={getIntls('main.suspense.handleErrorBoundary')} />
         </Col>
         <Col span={6}>
-          <EB4 title={i18nCfg.handleError} />
+          <EB4 title={getIntls('main.suspense.handleError')} />
         </Col>
       </Row>
     </div>

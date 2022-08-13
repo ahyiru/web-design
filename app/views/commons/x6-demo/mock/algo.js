@@ -219,7 +219,7 @@ export const algoData = [
     parentId: 'platformAlgo',
   },
 ];
-export const searchByKeyword = async (keyword) => {
+export const searchByKeyword = async keyword => {
   return Array(10)
     .fill(null)
     .map((i, idx) => {

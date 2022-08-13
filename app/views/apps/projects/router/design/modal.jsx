@@ -48,13 +48,13 @@ const compNames = Object.keys(components);
 
 const nameList = [...compNames, ...ele];
 
-const ModalForm = (props) => {
+const ModalForm = props => {
   const {form, item, isEdit, addFormText} = props;
   return (
     <Form form={form} {...layout} initialValues={{}}>
       <Form.Item name="type" label={addFormText.type}>
         <Select placeholder={addFormText.type} showSearch>
-          {nameList.map((name) => (
+          {nameList.map(name => (
             <Select.Option key={name} value={name}>
               {name}
             </Select.Option>
@@ -68,7 +68,7 @@ const ModalForm = (props) => {
   );
 };
 
-const HandleModal = (props) => {
+const HandleModal = props => {
   const [form] = Form.useForm();
   const {onModalOk, modalVisible, onModalCancel, type, item, addFormText} = props;
   const title = {add: addFormText.add_title, edit: addFormText.edit_title};
@@ -76,11 +76,11 @@ const HandleModal = (props) => {
   const handleSubmit = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(values => {
         onModalOk(values);
         onModalCancel();
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
   };

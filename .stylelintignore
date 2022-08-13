@@ -7,4 +7,4 @@ build
 /__tests__/
 doc
 public
-demo1/app
+**/draft/

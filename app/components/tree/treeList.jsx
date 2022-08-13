@@ -1,10 +1,8 @@
-import {useState, useCallback} from 'react';
+import {useState} from 'react';
 
-import {Tree, Modal, Form, Dropdown, Menu, message, Input, Spin} from 'antd';
+import {Tree, Modal, Dropdown, Menu, message, Input, Spin} from 'antd';
 
-import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined, EyeInvisibleOutlined, LayoutOutlined} from '@ant-design/icons';
-
-import * as Icons from '@ant-design/icons';
+import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 
 import {useSearch} from '@huxy/use';
 import {traverItem, arr2TreeByPath, isValidArr} from '@huxy/utils';
@@ -13,13 +11,14 @@ import apiList from '@app/utils/getApis';
 
 import useFetchList from '@app/utils/useFetchList';
 
+import Icons from '@app/utils/icons';
+
 import HandleModal from './modal';
 
 const {listRouterFn, addRouterFn, editRouterFn, deleteRouterFn} = apiList;
 
 const {TreeNode} = Tree;
 const {Search} = Input;
-const {confirm} = Modal;
 
 const nodeStyle = {
   overflow: 'hidden',
@@ -65,7 +64,7 @@ const treeDrop = (item, dropFns) => (
 );
 
 const renderTree = (data, dropFns, childKey = 'children') =>
-  data.map((item) => {
+  data.map(item => {
     const {path, name, icon: Icon, [childKey]: children} = item;
     if (children?.length) {
       return (
@@ -77,7 +76,7 @@ const renderTree = (data, dropFns, childKey = 'children') =>
     return <TreeNode key={path} title={treeDrop(item, dropFns)} icon={<Icon />} item={item} />;
   });
 
-const Index = (props) => {
+const Index = props => {
   const [visible, setVisible] = useState(false);
   const [modalType, setModalType] = useState('');
   const [item, setItem] = useState({});
@@ -85,22 +84,22 @@ const Index = (props) => {
 
   const [result, update] = useFetchList(listRouterFn);
 
-  const searchTree = (value) => setFilterTree(tree, value, 'name', 'path');
+  const searchTree = value => setFilterTree(tree, value, 'name', 'path');
 
-  const addFn = (item) => {
+  const addFn = item => {
     setVisible(true);
     setModalType('add');
     setItem({...item, parentId: item.path});
   };
-  const editFn = (item) => {
+  const editFn = item => {
     setVisible(true);
     setModalType('edit');
     const {icon, children, key, ...rest} = item;
     setItem(rest);
   };
-  const deleteFn = (item) => {
+  const deleteFn = item => {
     const paths = [];
-    traverItem((v) => {
+    traverItem(v => {
       paths.push(v.path);
     })([item]);
     Modal.confirm({
@@ -122,7 +121,7 @@ const Index = (props) => {
       },
     });
   };
-  const onModalOk = async (value) => {
+  const onModalOk = async value => {
     const handleFn = modalType === 'edit' ? editRouterFn : addRouterFn;
     const {code, message: msg} = await handleFn(value);
     if (code === 200) {
@@ -138,14 +137,14 @@ const Index = (props) => {
     deleteFn,
   };
   const {isPending, data} = result;
-  const arr = [rootNode, ...(data || [])].map((item) => {
+  const arr = [rootNode, ...(data || [])].map(item => {
     item.key = item.path;
     const Icon = Icons[item.iconKey] || EyeInvisibleOutlined;
     item.icon = <Icon />;
     return item;
   });
 
-  const tree = traverItem((item) => {
+  const tree = traverItem(item => {
     if (!isValidArr(item.children)) {
       item.isLeaf = true;
     }
@@ -157,7 +156,7 @@ const Index = (props) => {
       <div className="page-left">
         <Search placeholder="请输入名称" allowClear enterButton onSearch={searchTree} style={{maxWidth: '240px', marginBottom: 12}} />
         <Spin spinning={isPending}>
-          <Tree showIcon defaultExpandAll switcherIcon={<DownOutlined />} titleRender={(item) => treeDrop(item, dropFns)} treeData={treeData} virtual={false} />
+          <Tree showIcon defaultExpandAll switcherIcon={<DownOutlined />} titleRender={item => treeDrop(item, dropFns)} treeData={treeData} virtual={false} />
         </Spin>
       </div>
       {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} isRoot={!data?.length} />}

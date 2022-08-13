@@ -3,8 +3,8 @@ import {EditableProTable} from '@ant-design/pro-table';
 import {Tooltip, Popconfirm} from 'antd';
 import {uuidv4} from '@huxy/utils';
 
-const fmData = (data) =>
-  data.map((item) => {
+const fmData = data =>
+  data.map(item => {
     const {render, ...rest} = item;
     const {type: renderType, props: renderProps, children: renderChildren} = render || {};
     return {...rest, renderType, renderProps, renderChildren, uuid: uuidv4()};
@@ -16,8 +16,8 @@ const fmData = (data) =>
   handleDelete:'handleDelete',
 }; */
 
-const formatTable = (data) =>
-  data.map((item) => {
+const formatTable = data =>
+  data.map(item => {
     const {renderType, renderProps, renderChildren, ...rest} = item;
     if (renderType || renderProps || renderChildren) {
       rest.render = {
@@ -43,13 +43,13 @@ export default ({data, getValues, columnI18n}) => {
   useEffect(() => {
     setDataSource(fmData(data) || []);
   }, [data]);
-  const onChange = (value) => {
+  const onChange = value => {
     const ds = formatTable(value);
     setDataSource(ds);
     getValues?.(ds);
   };
-  const deleteRow = (record) => {
-    const value = dataSource.filter((item) => item.uuid !== record.uuid);
+  const deleteRow = record => {
+    const value = dataSource.filter(item => item.uuid !== record.uuid);
     const ds = formatTable(value);
     setDataSource(ds);
     getValues?.(ds);

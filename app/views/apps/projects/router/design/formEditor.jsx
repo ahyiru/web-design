@@ -44,7 +44,7 @@ const treeDrop = (item, dropFns, actionsText) => (
   </Dropdown>
 );
 
-const formData = (data) => (Array.isArray(data) ? data : data ? [data] : [{}]);
+const formData = data => (Array.isArray(data) ? data : data ? [data] : [{}]);
 
 const Index = ({data, getValues, actionsText, editorI18n}) => {
   const [visible, setVisible] = useState(false);
@@ -65,15 +65,15 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
     }
   })(updateId(schema,'key')); */
 
-  const addFn = (item) => {
+  const addFn = item => {
     setVisible(true);
     setModalType('add');
   };
-  const editFn = (item) => {
+  const editFn = item => {
     setVisible(true);
     setModalType('edit');
   };
-  const deleteFn = (item) => {
+  const deleteFn = item => {
     Modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
@@ -91,13 +91,13 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
       },
     });
   };
-  const onModalOk = (values) => {
+  const onModalOk = values => {
     const tree = addNodes(schemaTree, selectedKey, [values], 'key');
     setSchema([...tree]);
     getValues?.(tree);
   };
 
-  const editProps = (values) => {
+  const editProps = values => {
     const tree = editNodes(schemaTree, selectedKey, {props: values}, 'key');
     setSchema([...tree]);
     getValues?.({schema: tree[0]});
@@ -134,7 +134,7 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
                 showIcon
                 defaultExpandAll
                 switcherIcon={<DownOutlined />}
-                titleRender={(item) => treeDrop(item, dropFns, actionsText)}
+                titleRender={item => treeDrop(item, dropFns, actionsText)}
                 treeData={schemaTree}
                 onSelect={onSelect}
                 virtual={false}

@@ -1,6 +1,6 @@
 import {wrapPromise, sleep} from '@huxy/utils';
 
-const sus1 = async (params) => {
+const sus1 = async params => {
   await sleep(2500);
   return {
     code: 200,
@@ -11,7 +11,7 @@ const sus1 = async (params) => {
     },
   };
 };
-export const sus2 = async (params) => {
+export const sus2 = async params => {
   await sleep(4000);
   return {
     code: 200,
@@ -32,6 +32,6 @@ export const sus2 = async (params) => {
   };
 };
 
-export const susTest1 = (params) => wrapPromise(sus1(params));
+export const susTest1 = params => wrapPromise(sus1(params));
 
-export const susTest2 = (params) => wrapPromise(sus2(params));
+export const susTest2 = params => wrapPromise(sus2(params));

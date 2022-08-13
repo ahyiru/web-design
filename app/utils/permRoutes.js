@@ -1,15 +1,15 @@
-const permRouter = (routers, permList, permKey = 'path', prefix = '') => {
+const permRoutes = (routers, permList, permKey = 'path', prefix = '') => {
   prefix = prefix === '/' ? '' : prefix;
-  return routers.map((router) => {
+  return routers.map(router => {
     const path = prefix + router[permKey];
     const isRouterDenied = router.denied != null && path !== '/';
     if (!isRouterDenied && router.children?.length) {
-      router.children = permRouter(router.children, permList, permKey, path);
+      router.children = permRoutes(router.children, permList, permKey, path);
     }
     // 权限控制
-    // router.denied=router.denied!=null?router.denied:!permList?.includes(path);
+    // router.denied = router.denied != null ? router.denied : !permList?.includes(path);
     return router;
   });
 };
 
-export default permRouter;
+export default permRoutes;

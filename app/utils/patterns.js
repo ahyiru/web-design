@@ -1,3 +1,8 @@
+export const required = {
+  pattern: /.+/,
+  message: '请输入!',
+};
+
 // 用户名
 export const namePattern = {
   pattern: /^[\u4E00-\u9FA5A-Za-z0-9_]{2,20}$/,

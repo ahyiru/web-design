@@ -9,24 +9,26 @@ import {nameRule, pathRule} from '@app/utils/rules';
 
 import Panel from '@app/components/panel';
 
+import {userInfoStore} from '@app/store/stores';
+
+import Intls from '@app/components/intl';
+
 const {addApiFn, editApiFn} = apiList;
 
 const formStyle = {
   width: '50%',
 };
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.projectApis ?? {};
-  const {addFormText = {}} = i18nCfg;
-  const profile = props.store.getState('profile');
+const Index = props => {
+  const profile = userInfoStore.getState();
+  const addFormText = Intls({keys: 'main.projectApis.addFormText'}) ?? {};
   const [form] = Form.useForm();
   const {getState} = props.history;
   const {item, backState} = getState() || {};
   const back = () => {
     backState ? props.router.push(backState) : props.history.back();
   };
-  const onFinish = async (values) => {
+  const onFinish = async values => {
     const handler = item ? editApiFn : addApiFn;
     values = item ? {...item, ...values} : values;
     // console.log(handler,values);
@@ -61,7 +63,7 @@ const Index = (props) => {
               </Form.Item>
               <Form.Item label={addFormText.method} name="method">
                 <Select placeholder={addFormText.method} allowClear style={{width: '60%'}}>
-                  {methodList.map((v) => (
+                  {methodList.map(v => (
                     <Select.Option key={v.value} value={v.value}>
                       {v.label}
                     </Select.Option>
@@ -70,7 +72,7 @@ const Index = (props) => {
               </Form.Item>
               <Form.Item label={addFormText.type} name="type">
                 <Select disabled placeholder={addFormText.type} allowClear style={{width: '60%'}}>
-                  {paramsList.map((v) => (
+                  {paramsList.map(v => (
                     <Select.Option key={v.value} value={v.value}>
                       {v.label}
                     </Select.Option>
@@ -79,7 +81,7 @@ const Index = (props) => {
               </Form.Item>
               <Form.Item label={addFormText.auth} name="auth">
                 <Select disabled placeholder={addFormText.auth} allowClear style={{width: '60%'}}>
-                  {roleList.map((v) => (
+                  {roleList.map(v => (
                     <Select.Option key={v.value} value={v.value}>
                       {v.label}
                     </Select.Option>

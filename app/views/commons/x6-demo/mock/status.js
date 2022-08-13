@@ -48,11 +48,11 @@ let state = {
     Lang: 'zh_CN',
   },
 };
-export const runGraph = async (nodes) => {
+export const runGraph = async nodes => {
   const newState = getStatus();
   newState.data.instStatus = {};
   newState.data.execInfo = {};
-  nodes.forEach((node) => {
+  nodes.forEach(node => {
     newState.data.instStatus[node.id] = 'default';
     newState.data.execInfo[node.id] = {
       jobStatus: 'default',
@@ -82,7 +82,7 @@ export const queryGraphStatus = async () => {
     if (state.idx === idList.length) {
       state.idx = 0;
       state.running = false;
-      idList.forEach((id) => {
+      idList.forEach(id => {
         instStatus[id] = 'success';
         execInfo[id]['jobStatus'] = 'success';
         newState['data']['status'] = 'success';

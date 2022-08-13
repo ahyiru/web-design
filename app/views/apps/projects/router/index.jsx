@@ -1,5 +1,5 @@
 import {useState, useCallback, useEffect} from 'react';
-import {Tree, Modal, Dropdown, Menu, message, Input, Spin, Button} from 'antd';
+import {Tree, Modal, Dropdown, Menu, message, Input, Spin, Button, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {traverItem, sort} from '@huxy/utils';
@@ -11,6 +11,8 @@ import formatTree from '@app/utils/formatTree';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
 import customRender from '@app/utils/render';
+import {userInfoStore} from '@app/store/stores';
+import {useIntls} from '@app/components/intl';
 import HandleModal from './modal';
 
 const {listRouterFn, addRouterFn, editRouterFn, deleteRouterFn, listSchemaFn} = apiList;
@@ -49,12 +51,20 @@ const treeDrop = (item, dropFns, actionsText) => (
   </Dropdown>
 );
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.projectRouter ?? {};
-  const {pageText = {}, actionsText = {}} = i18nCfg;
+const defSelectedItem = {
+  key: '/low-code/dom',
+  name: '原生dom',
+  path: '/low-code/dom',
+  projectId: '6098f12b099e1202a287acad',
+  _id: '60f842f05ce53002d3bd35d7',
+};
 
-  const profile = props.store.getState('profile');
+const Index = props => {
+  const getIntls = useIntls();
+  const pageText = getIntls('main.projectRouter.pageText', {});
+  const actionsText = getIntls('main.projectRouter.actionsText', {});
+  const profile = userInfoStore.getState();
+
   const pageParams = props.params;
   const backState = props.history.getState()?.backState;
   const selItem = props.history.getState()?.item;
@@ -70,26 +80,26 @@ const Index = (props) => {
   const [modalType, setModalType] = useState('');
   const [item, setItem] = useState({});
   const [filterTree, setFilterTree] = useSearch(null);
-  const [selectedItem, setSelectedItem] = useState(pageParams || {});
+  const [selectedItem, setSelectedItem] = useState(pageParams?._id ? pageParams : defSelectedItem);
   const [pageSchema, setPageSchema] = useState([]);
   const [result, update] = useFetchList(listRouterFn, {projectId: stateItem._id});
 
-  const searchTree = (value) => setFilterTree(tree, value, 'name', 'path');
+  const searchTree = value => setFilterTree(tree, value, 'name', 'path');
 
-  const addFn = (item) => {
+  const addFn = item => {
     setVisible(true);
     setModalType('add');
     setItem({...item, parentId: item.path});
   };
-  const editFn = (item) => {
+  const editFn = item => {
     setVisible(true);
     setModalType('edit');
     const {icon, children, key, ...rest} = item;
     setItem(rest);
   };
-  const deleteFn = (item) => {
+  const deleteFn = item => {
     const paths = [];
-    traverItem((v) => {
+    traverItem(v => {
       paths.push(v.path);
     })([item]);
     Modal.confirm({
@@ -111,7 +121,7 @@ const Index = (props) => {
       },
     });
   };
-  const onModalOk = async (value) => {
+  const onModalOk = async value => {
     const handleFn = modalType === 'edit' ? editRouterFn : addRouterFn;
     const {code, message: msg} = await handleFn({...value, projectId: stateItem._id});
     if (code === 200) {
@@ -137,7 +147,9 @@ const Index = (props) => {
 
   const onSelect = (selectedKeys, e) => {
     const item = e.selectedNodes[0];
-    setSelectedItem(item);
+    if (item.parentId === '/low-code') {
+      setSelectedItem(item);
+    }
     // getPageSchema(item._id,item.projectId);
   };
 
@@ -172,16 +184,17 @@ const Index = (props) => {
             <Back back={back} />
           </Col>
         )}
-        <Col width="240px">
+        <Col width="260px">
           <Panel>
             <Spin spinning={isPending}>
+              <Alert message="提供路由增删改查操作。暂时只有‘低代码’路由下的页面提供设计操作！" type="warning" showIcon closable style={{marginBottom: 10}} />
               <Search placeholder={pageText.search_placeholder} allowClear enterButton onSearch={searchTree} style={{maxWidth: '240px', marginBottom: 12}} />
               {!isPending && (
                 <Tree
                   showIcon
                   defaultExpandedKeys={[selectedItem?.key || -1]}
                   switcherIcon={<DownOutlined />}
-                  titleRender={(item) => treeDrop(item, dropFns, actionsText)}
+                  titleRender={item => treeDrop(item, dropFns, actionsText)}
                   treeData={treeData}
                   onSelect={onSelect}
                   selectedKeys={[selectedItem?.key || '']}
@@ -191,11 +204,11 @@ const Index = (props) => {
             </Spin>
           </Panel>
         </Col>
-        <Col auto offsetWidth="240px">
+        <Col auto offsetWidth="260px">
           <Panel>
             <div style={{display: 'flex', marginBottom: 10}}>
               <h4 style={{flex: 'auto', margin: 0, lineHeight: '24px'}}>{pageText.preview_text}</h4>
-              <Button type="primary" disabled={!selectedItem?._id} size="small" icon={<EditOutlined />} onClick={(e) => toDesignPage()}>
+              <Button type="primary" disabled={!selectedItem?._id} size="small" icon={<EditOutlined />} onClick={e => toDesignPage()}>
                 {pageText.design_text}
               </Button>
             </div>
@@ -203,7 +216,7 @@ const Index = (props) => {
           </Panel>
         </Col>
       </Row>
-      {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} isRoot={!data?.length} store={props.store} />}
+      {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} isRoot={!data?.length} />}
     </div>
   );
 };

@@ -7,7 +7,7 @@ const {Search} = Input;
 export const SearchInput = () => {
   const [value, setValue] = useState('');
   const {search, setKeyword} = useModel('guide-algo-component');
-  const onDebouncedSearch = useDebounce((v) => {
+  const onDebouncedSearch = useDebounce(v => {
     if (!v) {
       return;
     }
@@ -20,7 +20,7 @@ export const SearchInput = () => {
         placeholder="请输入组件名称或描述"
         value={value}
         allowClear={true}
-        onChange={(e) => {
+        onChange={e => {
           const v = e.target.value;
           if (!v) {
             setKeyword('');

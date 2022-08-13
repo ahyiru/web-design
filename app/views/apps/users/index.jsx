@@ -7,6 +7,8 @@ import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
 import {roleList} from '@app/utils/config';
 import Panel from '@app/components/panel';
+import {userInfoStore} from '@app/store/stores';
+import {useIntls} from '@app/components/intl';
 
 const {allUserFn, deleteUserFn} = apiList;
 
@@ -19,17 +21,17 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
   {
     title: i18ns.email,
     dataIndex: 'email',
-    render: (text) => text.replace(/\S+(@\S+)/, '*****$1'),
+    render: text => text.replace(/\S+(@\S+)/, '*****$1'),
   },
   {
     title: i18ns.active,
     dataIndex: 'active',
-    render: (text) => (text ? <Tag color="green">{i18ns.active_true}</Tag> : <Tag color="red">{i18ns.active_false}</Tag>),
+    render: text => (text ? <Tag color="green">{i18ns.active_true}</Tag> : <Tag color="red">{i18ns.active_false}</Tag>),
   },
   {
     title: i18ns.github,
     dataIndex: 'github',
-    render: (text) => (text ? <Tag color="green">{i18ns.github_true}</Tag> : <Tag color="red">{i18ns.github_false}</Tag>),
+    render: text => (text ? <Tag color="green">{i18ns.github_true}</Tag> : <Tag color="red">{i18ns.github_false}</Tag>),
   },
   {
     title: i18ns.projectName,
@@ -39,7 +41,7 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
     title: i18ns.role,
     dataIndex: 'role',
     render: (text, record) => {
-      return roleList.find((v) => v.value === text)?.label ?? '-';
+      return roleList.find(v => v.value === text)?.label ?? '-';
     },
   },
   {
@@ -73,17 +75,18 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
             {i18ns.delete_action}
           </Button>
           {/* <Popconfirm title="确认删除?" onConfirm={()=>handleDelete(record)}>
-          <a style={{color:'var(--red2)'}}>删除</a>
-        </Popconfirm> */}
+            <a style={{color:'var(--red2)'}}>删除</a>
+          </Popconfirm> */}
         </>
       );
     },
   },
 ];
 
-const Index = (props) => {
-  const i18ns = props.store.getState('i18ns');
-  const i18nCfg = i18ns?.main?.users ?? {};
+const Index = props => {
+  const getIntls = useIntls();
+  const i18nCfg = getIntls('main.users', {});
+  const profile = userInfoStore.getState();
   const {tableHeaderText = {}, actionsText = {}, searchFormText = {}} = i18nCfg;
 
   const [selectedRows, setSelectedRows] = useState([]);
@@ -91,13 +94,13 @@ const Index = (props) => {
   const pageParams = props.params;
   const [result, update, pageChange, searchList] = useHandleList(allUserFn, {current: pageParams?.current, size: pageParams?.size});
 
-  const handleCheck = (item) => {
+  const handleCheck = item => {
     props.router.push({
       path: `./auth/${item._id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
-  const handleEdit = (item) => {
+  const handleEdit = item => {
     // setModalItem(item);
     props.router.push({
       path: `./edit/${item._id}`,
@@ -109,13 +112,13 @@ const Index = (props) => {
     // update();
     props.router.push(`./add`);
   };
-  const handleDelete = (item) => {
+  const handleDelete = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map((v) => v._id);
+    const ids = items.map(v => v._id);
     Modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
-      content: `name: ${items.map((v) => v.name)}`,
+      content: `name: ${items.map(v => v.name)}`,
       okText: actionsText.delete_confirm_ok,
       okType: 'danger',
       cancelText: actionsText.delete_confirm_cancel,
@@ -132,18 +135,16 @@ const Index = (props) => {
       },
     });
   };
-  const handleModalOk = (values) => {
+  const handleModalOk = values => {
     console.log(values);
   };
 
-  const profile = props.store.getState('profile');
-
   const rowSelection = {
-    selectedRowKeys: selectedRows.map((v) => v._id),
+    selectedRowKeys: selectedRows.map(v => v._id),
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
-    getCheckboxProps: (record) => ({
+    getCheckboxProps: record => ({
       disabled: !profile.role && record._id !== profile._id,
     }),
     columnWidth: '30px',
@@ -203,17 +204,17 @@ const Index = (props) => {
   );
 };
 
-const SearchForm = (props) => {
+const SearchForm = props => {
   const {submit, loading, searchFormText} = props;
   const [form] = Form.useForm();
   return (
-    <Form layout="inline" form={form} initialValues={{}} onFinish={(value) => submit(validObj(value))}>
+    <Form layout="inline" form={form} initialValues={{}} onFinish={value => submit(validObj(value))}>
       <Form.Item name="name" label={searchFormText.name}>
         <Input placeholder={searchFormText.name_placeholder} allowClear style={{width: '120px'}} />
       </Form.Item>
       <Form.Item name="role" label={searchFormText.role}>
         <Select placeholder={searchFormText.role_placeholder} allowClear style={{width: '100px'}}>
-          {roleList.map((v) => (
+          {roleList.map(v => (
             <Select.Option key={v.value} value={v.value}>
               {v.label}
             </Select.Option>

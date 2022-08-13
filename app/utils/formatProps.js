@@ -12,7 +12,7 @@ export const formatProps = (props, params) => {
   }
   if (isObject(props)) {
     let newProps = {};
-    Object.keys(props).map((key) => {
+    Object.keys(props).map(key => {
       const value = formatProps(props[key], params);
       if (key === '@rest') {
         newProps = {...newProps, ...value};

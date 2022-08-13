@@ -12,7 +12,7 @@ marked.setOptions({
   gfm: true,
   breaks: true,
 });
-const Markdown2html = (props) => {
+const Markdown2html = props => {
   const {description, tag} = props;
   const descriptionElementRef = useRef(null);
   useSafeSetHTML(descriptionElementRef, marked(unescapeHTML(description).replace(/\\n/gi, ' \n ')));
@@ -30,7 +30,7 @@ const Markdown2html = (props) => {
     </div>
   );
 };
-const renderSearchInfo = (params) => {
+const renderSearchInfo = params => {
   const {id, name, catName, description = '暂无数据', tag} = params;
   return (
     <>
@@ -56,7 +56,7 @@ const renderSearchInfo = (params) => {
     </>
   );
 };
-const renderStatus = (params) => {
+const renderStatus = params => {
   const {changeType, isDeprecated, changeMessage} = params;
   const renderItems = [];
   if (changeType) {

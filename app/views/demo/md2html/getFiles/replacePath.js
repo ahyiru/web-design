@@ -14,10 +14,10 @@ const getPaths = async (defaultPaths, folder) => {
 
 const replacePath = async (context, {folder}) => {
   const src = [...context.matchAll(imgReg)].filter(Boolean);
-  const defaultPaths = src.map((item) => item[1]);
+  const defaultPaths = src.map(item => item[1]);
   if (defaultPaths?.length) {
     const asyncPaths = await getPaths(defaultPaths, folder);
-    defaultPaths.map((defaultPath) => {
+    defaultPaths.map(defaultPath => {
       context = context.replace(defaultPath, asyncPaths[defaultPath]);
     });
   }
