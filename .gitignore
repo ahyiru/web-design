@@ -55,5 +55,5 @@ build
 # draft
 # draft
 
-deadcode.json
+**/deadcode.json
 
