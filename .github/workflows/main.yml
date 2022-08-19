@@ -1,8 +1,8 @@
-name: CI
+name: Sync to gitee
 on:
   push:
     branches:
-      - develop
+      - master
     paths-ignore:
       - LICENSE
       - README.md
@@ -18,5 +18,5 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_SERVER_KEY }}
         with:
-          source-repo: git@github.com:ahyiru/ihuxy.git
-          destination-repo: git@gitee.com:yiru/ihuxy.git
+          source-repo: git@github.com:ahyiru/web-design.git
+          destination-repo: git@gitee.com:yiru/web-design.git
