@@ -2,7 +2,7 @@
   "name": "web-design",
   "version": "1.3.0",
   "main": "scripts/index.js",
-  "description": "Free admin dashboard template. Built with React18, Webpack5, useRouter, useStore, eslint, prettier, husky, commitlint, etc.",
+  "description": "Low-code development platform. Built with React18, Webpack5, useRouter, useStore, eslint, prettier, husky, commitlint, etc.",
   "keywords": [
     "React18",
     "useRouter",

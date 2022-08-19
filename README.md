@@ -1,4 +1,4 @@
-## React template
+## 低代码（low-code）简单实践
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ahyiru/ihuxy/blob/develop/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@huxy/router.svg)](https://www.npmjs.com/package/@huxy/router)
@@ -6,831 +6,404 @@
 
 基于 [huxy-admi](https://github.com/ahyiru/huxy-admin) 模板创建。
 
-### 运行
+### 理解
 
-#### 依赖安装：`pnpm i`
+低代码就是尽量**少写代码**，定义好业务组件，通过可视化操作实现开发工作。它主要受众是开发者。
 
-#### 项目运行
+无代码（no-code）即不需要写代码就能完成开发，更加偏向业务层的定制。
 
-可自行配置运行项目，如运行 `template` 项目：
+### 解决了什么？
 
-```js
-npm start ---dirname=template
+> 提效降本、质量保障、降低开发门槛。
 
-```
+低代码可以提升开发效率，保障系统稳定性，也降低了开发门槛，可以直接可视化开发。
 
-运行 `blog` 目录下的 `router` 项目：
+### 可能存在的问题
 
-```js
-npm start ---dirname=blog/router
+- 不灵活。适用于通用业务领域，对定制化需求不友好。
+- 不可控。业务拓展性、可维护性较低。
+- 不好用。开发不想用，业务不会用。
 
-```
+低代码或许可以降低开发门槛，但复杂度并不会降低。可视化开发的自由度越高，组件粒度就越细，配置复杂度就越高。
 
-默认运行 `app` 目录。`npm start`。
+## 简单实践
 
-#### 其它
+前端低代码开发不仅是界面开发，应该还包含工程化、项目管理、api 接口、权限控制等一些列的开发提效。
 
-其它一些命令：主要有 打包、文件分析、运行打包的资源、jest 测试、eslint、stylelint、lint-fix、prettier、release 等。
+### 设计
 
-```json
-"start": "nodemon scripts/index.js --watch scripts/index.js",
-"build": "webpack --config scripts/webpack.production.js --progress",
-"analyze": "ANALYZE=1 webpack --config scripts/webpack.production.js --progress",
-"server": "nodemon scripts/server.js --watch scripts/server.js",
-"test": "jest --colors --coverage",
-"eslint": "eslint 'app/**/*.{js,jsx}'",
-"stylelint": "stylelint 'app/**/*.{css,less}'",
-"lint": "npm run eslint && npm run stylelint",
-"lint-fix": "eslint --fix 'app/**/*.{js,jsx}' && stylelint --fix 'app/**/*.{css,less}'",
-"prettier": "prettier 'app/**/*' --write --ignore-unknown && npm run lint-fix",
-"release": "standard-version",
+一个页面其实就是一棵树，所以不管是拖拽还是配置，最终完成的就是一棵数据树。所以我们可以通过`json schema`来进行页面设计。
 
-```
+### 实现
 
-- `npm run build`：打包
-- `npm run analyze`：打包文件分析
-- `npm test`：单元测试
-- `npm run lint`：代码规范检查，包含 `eslint` 和 `stylelint`
-- `npm run lint-fix`：代码规范修正
-- `npm run prettier`：代码美化
-- `npm run release`：自动打 `tag` 并生成 `CHANGELOG`
+#### 基础搭建
 
-提供了 `git` 代码提交钩子 `husky` ，`git` 提交信息规范 `commitlint` ，支持 `pnpm` 安装依赖。
+[工程化](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&mid=2455985991&idx=1&sn=f1ee35b789a052518a9d2ade54134497&chksm=8cf5d081bb825997f7570355d36a7f6e0b24f56d8613e1a2174c9800c8709b41bf4e8c31ae58&=300862977&=zh_CN#rd)、[layout 设计](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&mid=2455985961&idx=1&sn=bc656fc27eea4fc204903d87e70215ff&chksm=8cf5d0efbb8259f9780c0ca630bc668843c6fed262395e8a8fc76c4559de40e5d212b73e6806&=300862977&=zh_CN#rd)、[权限和 i18n](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&mid=2455986033&idx=1&sn=1f5bc749f32df0e0cc84b08125a4bc32&chksm=8cf5d0b7bb8259a18b1843e3c2693e72cfb40ff35c40707e32bf653e6e11ca1d6ae812c6cbcc&=300862977&=zh_CN#rd)、[API 管理](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&mid=2455986140&idx=1&sn=50b43b26a16abd10adf466a735a6da41&chksm=8cf5d01abb82590c557cd3a80f6c5adb41194a7a501ae238bd39b28dcfe1319b9ad0fbc9ce4c&=300862977&=zh_CN#rd) 这些都是一些管理平台的基础设施，前面也讲过，大家可以去看看。
 
-### 全局配置
+### 页面设计
 
-#### 全局配置
+#### schema 设计
 
-主要有 运行端口、资源路径、打包路径、basepath、代理、mock 等。
-
-`configs/app.js`
-
-```js
-const app = {
-  HOST: process.env.IP || 'http://localhost',
-  PORT: process.env.PORT || 9500, // 开发环境运行端口
-  PRO_PORT: process.env.PRO_PORT || 9501, // 打包运行端口
-  BUILD_DIR: './build', // 打包路径
-  PUBLIC_DIR: '../public', // 静态资源路径
-  DEV_ROOT_DIR: '/', // dev basepath
-  PRD_ROOT_DIR: '/', // prod basepath
-  PROXY: {
-    url: 'http://47.105.94.51:9202', // 服务代理
-    prefix: '/api', // 代理前缀
-  },
-  MOCK: 'http://localhost:9502', // mock 地址
-  SERVER_PORT: 9503, // nodejs 本地服务端口
-  projectName: '...', // 项目名称
+```javascript
+const schema = {
+  type: 'a',
+  props: {},
+  children: [],
 };
 ```
 
-### 项目配置
+- type：标签名或组件名。组件可以是 UI 组件或业务组件，先注册再使用。
+- props：属性配置。组件的属性可根据组件库或自定义组件使用文档去配置。如果属性里面含有组件，可依照 schema 渲染原则执行。
+- children：子节点。可以是文本节点，组件，或子元素列表。
 
-主要是路由、导航栏、主题、i18ns 等配置。
+#### custom render
 
-`app/configs`
-
-#### 环境配置
-
-路由类型、basepath 通过全局配置获取。
-
-```js
-export const browserRouter = !process.env.isDev;
-
-export const basepath = browserRouter ? PRD_ROOT_DIR : DEV_ROOT_DIR;
-```
-
-#### 路由
-
-`app/configs/router`：路由钩子 `beforeRender` 可控制路由跳转。
-
-```js
-const beforeRender = (input, next) => {
-  const {path, prevPath} = input;
-  const validPath = path.split('?')[0];
-  if (validPath === initPath) {
-    return next({path: '/'});
-  }
-  if (!token && !whiteRoutes.includes(validPath)) {
-    return next({path: '/user/signin'});
-  }
-  next();
-};
-
-export default {
-  browserRouter,
-  beforeRender,
-  basepath,
+```javascript
+const render = (schema, params) => {
+  schema = Array.isArray(schema) ? schema : [schema];
+  const dom = schema.map((item, i) => {
+    let {type, props, children} = item;
+    type = (type || 'div').trim();
+    const first = type.charAt(0);
+    type = first.toUpperCase() === first ? components[type] || 'div' : type;
+    props = {
+      key: i,
+      ...formatProps(props, params),
+    };
+    children = Array.isArray(children) ? render(children, params) : [formatChildren(children || props.children, params) ?? null];
+    return createElement(type, props, ...children);
+  });
+  return dom;
 };
 ```
 
-#### 导航栏
+- components：我们注册的组件。
+- formatProps、formatChildren：将 props 或 children 转换为我们需要的运行时的值。主要用于我们自定义的组件。props 或 children 可以是函数，可以传递我们需要的参数 params，最终返回我们需要的数据。
+- render：通过 react 的 `createElement(type,props,...children)` 渲染。
 
-`app/configs/nav`：导航栏可分为左侧导航栏和右侧导航栏。
+**_属性解析_**
 
-```js
-export const leftNav = () => {
-  const left = getIntls('nav.left', {});
-  return [
-    {
-      key: 'collapse',
-      name: left?.collapse ?? 'collapse',
-      type: 'collapse',
-      Custom: () => <CustomCollapse />,
-    },
-  ];
-};
-export const rightNav = () => {
-  const right = getIntls('nav.right', {});
-  return [
-    {
-      key: 'username',
-      name: user?.name ?? right?.user,
-      img: user?.avatar ?? defUser,
-      children: [
-        {
-          key: 'profile',
-          name: right?.profile ?? '个人中心',
-          icon: 'UserOutlined',
-          path: '/profile',
-        },
-        {
-          key: 'settings',
-          name: right?.settings ?? '设置',
-          icon: 'SettingOutlined',
-          path: '/profile',
-        },
-        {
-          divider: true,
-          key: 'logout',
-          name: right?.logout ?? '退出',
-          icon: 'PoweroffOutlined',
-          handle: item => {
-            logout();
-          },
-        },
-      ],
-    },
-  ];
+```javascript
+const render = (schema, params) => {
+  schema = Array.isArray(schema) ? schema : [schema];
+  const dom = schema.map((item, i) => {
+    let {type, props, children} = item;
+    type = (type || 'div').trim();
+    const first = type.charAt(0);
+    type = first.toUpperCase() === first ? components[type] || 'div' : type;
+    props = {
+      key: i,
+      ...formatProps(props, params),
+    };
+    children = Array.isArray(children) ? render(children, params) : [formatChildren(children || props.children, params) ?? null];
+    return createElement(type, props, ...children);
+  });
+  return dom;
 };
 ```
 
-#### 主题
+可使用自定义函数，组件内部数据作为参数，来获取属性值。或直接使用全局 configs。
 
-`app/configs/theme`：主题列表包含主题名和主题配置表等。
+例如：
 
-```js
-const themeList = getIntls => [
-  {
-    name: getIntls('theme.dark', 'dark'),
-    key: 'dark',
-    list: dark,
-    type: 'theme',
-  },
-  {
-    name: getIntls('theme.dark1', 'dark1'),
-    key: 'dark1',
-    list: dark1,
-    type: 'theme',
-  },
-  {
-    name: getIntls('theme.dark', 'light'),
-    key: 'light',
-    list: light,
-    type: 'theme',
-  },
-  {
-    name: getIntls('theme.light1', 'light1'),
-    key: 'light1',
-    list: light1,
-    type: 'theme',
-  },
-  {
-    name: getIntls('theme.portal', 'portal'),
-    key: 'portal',
-    list: portal,
-    type: 'theme',
-  },
-];
-```
-
-#### 语言
-
-`app/configs/i18ns`：
-
-```js
-const langList = [
-  {
-    key: 'zh',
-    name: '汉语',
-    icon: zh_icon,
-  },
-  {
-    key: 'en',
-    name: '英语',
-    icon: en_icon,
-  },
-  {
-    key: 'jp',
-    name: '日语',
-    icon: jp_icon,
-  },
-];
-```
-
-### Api 请求
-
-`app/apis`
-
-#### 请求参数处理
-
-可自行配置路径 `prefix` 、`headers`、`token` 、`credentials` 等。
-
-```js
-const getToken = () => ({Authorization: `test ${storage.get('token') || ''}`});
-
-const fetch = ({method, url, ...opt}) => fetchApi(method)(`${TARGET}${url}`, {...opt, headers: getToken(), credentials: 'omit'});
-```
-
-#### 返回结果处理
-
-根据约定返回 `code` 码配置不同操作。可设置通用提示信息、数据格式化等。
-
-```js
-const success_code = [200, 10000];
-
-const handler = response => {
-  return response
-    .json()
-    .then(result => {
-      result.code = result.code ?? response.status;
-      result.msg = result.message ?? result.msg ?? response.statusText;
-      const {msg, code} = result;
-      if (code === 401) {
-        message.error(msg);
-        logout(true);
-        throw {code, message: msg};
-      }
-      if (!success_code.includes(code)) {
-        throw {code, message: msg};
-      }
-      return result;
-    })
-    .catch(error => {
-      message.error(error.message);
-      throw error.message;
-    });
-};
-```
-
-#### 接口配置
-
-```js
-const apiList = [
-  {
-    name: 'login',
-    url: '/auth/signup',
-    method: 'post',
-  },
-  {
-    fnName: 'getProfile',
-    url: '/users/profile',
-  },
-];
-```
-
-- fnName：自定义前端调用的函数名
-- name：默认前端调用的函数名 `${name}Fn`
-- url：接口地址
-- method：请求方式，默认 `get`
-- type：数据类型，json\formData\form\query，默认 json。
-
-可根据后台提供 API 文档来配置。`schema` 数据，方便同构。
-
-### 路由
-
-`app/routes`
-
-支持动态路由、权限路由、路由白名单等。
-
-#### 基本配置
-
-```js
+```javascript
 {
-  path: '/demo',
-  name: 'demo',
-  icon: 'MergeCellsOutlined',
-  denied: !isDev,
-  component: () => import('@app/views/demo'),
-},
+  prop:'test',
+  isPending:`{true}`,
+  style:`{{width:'800px'}}`,
+  handle:`{self=>self.rules}`,
+  onClick:`{()=>e=>alert('hello')}`,
+}
+
 ```
 
-可通过 `denied` 属性来控制是否渲染路由。可将 `staticRoutes` 设置为白名单路由。
+通过 `{code}` 将 code 字符串转换为运行时代码。
 
-可根据后台返回路由配置来做控制，也可根据后台返回权限码来控制。白名单一般就是登录注册页面，也可自行配置。
+**_判断并提取字符串代码_**
 
-```js
-const allRoutes = [
-  {
-    path: '/',
-    component: () => import('@common/layout'),
-    children: dynamicRoutes,
-  },
-  ...staticRoutes,
-];
+```javascript
+const matchedStr = (str, c = ['{', '}']) => str?.trim?.().match(new RegExp(`^${c[0]}([\\s\\S]*)${c[1]}$`))?.[1];
 ```
 
-#### 组件加载方式
+**_执行字符串代码_**
 
-路由组件可按需加载，可根据目录地址加载。
+```javascript
+const str2code = (str, hasReturn = false) => {
+  str = hasReturn ? str : `return ${str};`;
+  const exec = Function(str);
+  return exec();
+};
+```
 
-```js
-export const playgroundRoutes = {
-  path: '/playground',
-  name: ' Playground',
-  icon: 'ConsoleSqlOutlined',
-  children: [
+> str2code 会直接执行并返回结果，如果返回的是函数会执行函数并返回结果。如果我们需要返回函数，就要包裹一层函数。例如：`onClick`，`{()=>e=>alert('hello')}`。
+
+**_路由设置_**
+
+路由配置可直接在页面配置，存入后台，使用时获取路由配置即可。
+
+```javascript
+{
+  path:'/low-code',
+  name:'低代码',
+  icon:'CoffeeOutlined',
+  denied:false,
+  children:[
     {
-      path: '/demo',
-      name: 'demo',
-      icon: 'MergeCellsOutlined',
-      denied: browserRouter,
-      component: () => import('@app/views/demo'),
+      path:'/dom',
+      name:'原生dom',
+      icon:'CodeOutlined',
+      componentPath:'/lowCode',
+      loadData:{
+        pageSchema,
+      },
     },
     {
-      path: '/icons',
-      name: 'icons',
-      icon: 'PictureOutlined',
-      componentPath: '/demo/icons',
+      path:'/ui',
+      name:'UI组件',
+      icon:'CodeOutlined',
+      componentPath:'/lowCode',
+      loadData:{
+        pageSchema,
+      },
     },
     {
-      path: '/panel',
-      name: 'panel',
-      component: PanelDemo,
+      path:'/users',
+      name:'业务组件',
+      icon:'CodeOutlined',
+      componentPath:'/lowCode',
+      loadData:{
+        pageSchema,
+      },
+    },
+    {
+      path:'/users/add',
+      name:'新增用户',
+      componentPath:'/lowCode',
+      loadData:{
+        pageSchema,
+      },
+    },
+    {
+      path:'/users/edit/:id',
+      name:'编辑用户',
+      componentPath:'/lowCode',
+      loadData:{
+        pageSchema,
+      },
     },
   ],
+}
+
+```
+
+如果整个系统都是通过 `schema` 数据配置生成的，那么我们只需一个渲染器，通过路由 id 获取到 `shcema` 数据，然后渲染成当前路由页面。所以只需一个渲染文件即可。
+
+**_根据 `projectId`、`routerId` 获取路由页面数据。_**
+
+```javascript
+const pageSchema = async ({id}) => {
+  const {result} = await apiList.listSchemaFn({routerId: id, projectId: defProject._id});
+  return {result};
 };
 ```
 
-详情见[简单实现 react router](https://zhuanlan.zhihu.com/p/106989011)
+通过设置路由 `loadData` 来提前请求数据，页面直接获取即可。详细使用见 [useRouter](https://mp.weixin.qq.com/s?__biz=MzAwOTI3MTk3Nw==&mid=2455986102&idx=1&sn=4328f6e2d4d3077d7aac4962dbbaa736&chksm=8cf5d070bb8259661c6782d0235e12afce48fe6ce6d63139066a2d264feba61ee3769b32a66b&=300862977&=zh_CN#rd)
 
-#### useRouter 使用：
-
-```js
-const output = useRouter(input);
-```
-
-通过传入一些配置（主要是路由类型、路由列表、路由拦截函数等），返回给我们当前路径下的渲染组件以及 menu 菜单的处理数据和面包屑数据。
-
-提供 `Link` 、 `useRoute` 。`Link` 为路由跳转组件，`useRoute` 可获取到当前路由下的信息。
-
-详情见[useRouter 使用](https://zhuanlan.zhihu.com/p/373920768)
-
-### 主题配置
-
-`app/theme`
-
-```js
-const sizes = {
-  '--maxWidth': '100vw',
-  '--menuWidth': '240px',
-  '--collapseWidth': '68px',
-  '--collapseMenuWidth': '180px',
-  '--headerHeight': '68px',
-  '--footerHeight': '60px',
-  '--breadHeight': '50px',
-  '--menuItemHeight': '48px',
-};
-const colors = {
-  '--bannerBgColor': '#37424c',
-  '--navBgColor': '#3c4752',
-  '--menuBgColor': '#37424c',
-  '--appBgColor': '#303841',
-  '--pageBgColor': '#303841',
-  '--panelBgColor': '#36404a',
-  '--appColor': '#8c98a5',
-  '--linkColor': '#9097a7',
-  '--pageLinkColor': '#8c98a5',
-  '--linkHoverColor': '#c8cddc',
-  '--linkActiveColor': '#ffffff',
-  '--borderColor': '#424e5a',
+```javascript
+const pageSchema = async ({id}) => {
+  const {result} = await apiList.listSchemaFn({routerId: id, projectId: defProject._id});
+  return {result};
 };
 ```
 
-通过 `css` 变量自行设置大小和颜色，在系统中直接使用即可。
+**_页面渲染_**
 
-### layout 配置
-
-`layout` 可自己设计，整体框架无非就是头部导航栏和侧边菜单栏。
-
-我提供了一个管理平台 `layout` 模板，菜单通过路由返回 `menu` 数据渲染，头部导航栏可根据 `nav` 配置数据渲染，面包屑也在路由返回数据 `current` 里面。
-
-#### 通用配置
-
-`commons/layout`
-
-```js
-const layoutConfigs = {
-  MainTop: () => {},
-  MenuBottom: () => {},
-  Link: () => {},
-  handleNavClick: () => {},
-  logo: '',
-  leftList: [],
-  rightList: [],
-  headerStyle: {},
-  menuStyle: {},
-  ...
+```javascript
+const Index = props => {
+  const {pageSchema} = props;
+  if (pageSchema == null || pageSchema.pending) {
+    return <Spinner global />;
+  }
+  return customRender(pageSchema.result || [], {}, props);
 };
 ```
 
-#### 全局 UI `i18n` 配置
+### 可视化开发示例
 
-```jsx
-const Index = props => (
-  <UiI18n>
-    <Layout {...props} />
-  </UiI18n>
-);
+#### 创建项目
+
+![1](./doc/img/1.png)
+
+首先我们创建一个项目，如图所示。本示例使用 `控制台` 项目演示。
+
+![2](./doc/img/2.png)
+
+#### 创建用户并分配项目
+
+![3](./doc/img/3.png)
+
+#### 创建 API
+
+![4](./doc/img/4.png)
+
+![5](./doc/img/5.png)
+
+#### 新建项目路由
+
+![6](./doc/img/6.png)
+
+#### 为用户设置路由权限
+
+![7](./doc/img/7.png)
+
+### 页面设计
+
+#### 原生 html 标签
+
+![10](./doc/img/10.png)
+
+![23](./doc/img/23.png)
+
+根据 dom 元素属性自行配置。
+
+#### UI 组件
+
+![12](./doc/img/12.png)
+
+![14](./doc/img/14.png)
+
+当我们设计好页面时，可以随时回到项目路由查看改页面，也可点击预览查看，符合预期效果后保存即可。
+
+![22](./doc/img/22.png)
+
+![25](./doc/img/25.png)
+
+原生标签和基础组件只能设计出一些静态展示效果，我们可以自定义一些业务组件，给页面加入交互性。
+
+#### 业务组件
+
+以 `table` 和 `form` 为例，简单设计一个用户管理页面。
+
+![15](./doc/img/15.png)
+
+为 `table` 设置了自定义属性 `actions `、`columns `、`searchSchema `、`modalSchema `
+
+```javascript
+{
+  actions,
+  columns,
+  searchSchema,
+  modalSchema,
+}
+
 ```
 
-### i18ns 配置
+- actions：定义事件
+- columns：表头设计
+- searchSchema：搜索表单
+- modalSchema：弹窗表单
 
-`app/i18ns`
+![16](./doc/img/16.png)
 
-#### 加载
+事件定义可自行定义 `action name` ，共页面使用，`apiName` 从我们 API 系统里面选。
 
-`i18ns` 目录存放语言包，以语言 `key` 命名，通过 `key` 值按需加载语言包。
+**_预览_**
 
-```js
-const getI18n = async () => {
-  const language = getLang();
-  let i18ns = await import(`@app/i18ns/${language}`);
-  i18ns = i18ns.default ?? i18ns;
-  return {i18ns, language};
+![17](./doc/img/17.png)
+
+可实时进行页面预览，也提供了撤销重做操作。
+
+#### 编辑功能
+
+**_props 编辑_**
+
+```javascript
+const editProps = values => {
+  const tree = editNodes(schemaTree, selectedKey, {props: values}, 'key');
+  setSchema(tree);
+  record(clone(tree));
+  setDisableUndo(false);
 };
 ```
 
-语言包配置，可以使用页面或模块命名文件，然后分别做配置，如：
+每次编辑都会触发 `schema` 更新，并会记录每次操作的数据，使用 `record` 函数记录，便于我们完成撤销重做功能。
 
-- zh
-  - main
-  - nav
-  - router
-  - theme
-  - login
+**_cacheData 函数_**
 
-#### 具体配置
+```javascript
+const {record, undo, redo, clean} = cacheData();
+```
 
-```js
-const layout = {
-  saveConfig: '保存配置',
-  copyConfig: '拷贝配置',
-  menuType: '菜单类型：',
-  vertical: '纵向',
-  horizontal: '横向',
-  compose: '横纵组合',
-  fontSize: '字体大小：',
-  layoutDesign: '布局',
-  sizeDesign: '大小',
-  colorDesign: '颜色',
-  save_cfg_msg: '主题保存成功！',
-  copy_cfg_msg: '主题拷贝成功！',
-  data_valid_msg: '请输入合法数据！',
-  data_px_msg: '请输入500-5000内数据！',
-  data_percent_msg: '请输入50-100内数据！',
-  menu_width_msg: '请输入0-300内数据！',
+**_撤销重做_**
+
+```javascript
+const undoDesign = () => {
+  const {index, data} = undo();
+  setSchema(data);
+  if (index === 0) {
+    setDisableUndo(true);
+  }
+  setDisableRedo(false);
+};
+
+const redoDesign = () => {
+  const {index, length, data} = redo();
+  setSchema(data);
+  if (index === length - 1) {
+    setDisableRedo(true);
+  }
+  setDisableUndo(false);
 };
 ```
 
-#### 使用
+**_组件移动_**
 
-提供 3 种使用方式：
+提供了组件移动功能，可根据需要自行拖动。
 
-**_组件_**
+![27](./doc/img/27.png)
 
-```jsx
-<Intls keys="login.email">邮箱</Intls>
-```
-
-通过 `key` 来获取语言数据，如果获取失败则展示 `children` 文本。
-
-**_hook_**
-
-```jsx
-const getIntls = useIntls();
-message.success(getIntls('main.layout.save_cfg_msg', '成功！'));
-```
-
-`hook` 返回一个函数 `getIntls` ,第一个参数为文本 `key` 值，第二个参数是返回为空时的默认值。
-
-**_函数_**
-
-`getIntls` 函数和 `useIntls` 返回的函数一致，不同的是此函数可在任何地方使用，如纯 `js` 代码里。
-
-### 状态管理
-
-`app/store`
-
-基于 `flux` 理念，使用发布订阅模式来实现。主要提供 3 个函数：
-
-- getState：获取数据
-- setState：设置数据
-- subscribe：监听数据
-
-#### 通用方式
-
-```js
-const {useStore} = props;
-
-const [list, update, subscribe] = useStore('userList', {});
-```
-
-- key：userList
-- 默认值：{}
-- list：value 值
-- update：更新函数
-- subscribe：监听函数
-
-```js
-const Page1 = props => {
-  const [list, update] = useStore('userList', []);
-  const deleteUse = async id => {
-    await fetchDel({id});
-    update();
-  };
-};
-
-const Page2 = props => {
-  const [, , subscribe] = useStore('userList', []);
-  useEffect(() => {
-    subscribe(result => {
-      console.log(result);
-    });
-  }, []);
+```javascript
+const onDrop = info => {
+  const fromId = info.dragNode.key;
+  const toId = info.node.key;
+  const dropPosition = info.dropPosition;
+  const tree = moveNodes(schemaTree, fromId, toId, dropPosition, 'key');
+  setSchema(tree);
 };
 ```
 
-#### 组合
+#### 效果
 
-有 2 中使用方式，函数和 `hook`。当创建时使用的是同一个 `store` 时，二者数据可通用。如：
+可点击按钮或链接查看效果。
 
-```js
-// a.jsx 可检测到数据更新
-const [state] = useStore('store-test');
-// b.jsx 设置数据
-store.setState({'store-test', 'test data'});
-```
+![28](./doc/img/28.png)
 
-#### 创建 `store`
+页面 `schema` ：
 
-```js
-import createStore from '@huxy/utils/createStore';
-import createContainer from '@huxy/utils/createContainer';
-import createUseContainer from '@huxy/use/createContainer';
+![29](./doc/img/29.png)
 
-export const container = createStore();
+**_用户管理页面_**
 
-export const store = createContainer(container);
-export const useStore = createUseContainer(container);
-```
+![18](./doc/img/18.png)
 
-#### 数据名（key）
+页面 `schema`：
 
-```js
-export const langName = 'lang-store';
-export const themeName = 'theme-store';
-export const menuTypeName = 'menuType-store';
-export const i18nsName = 'i18ns-store';
-export const userInfoName = 'userInfo-store';
-export const permissionName = 'permission-store';
-export const routersName = 'routers-store';
-```
+![30](./doc/img/30.png)
 
-#### 创建函数（hooks）
+编辑页面
 
-```js
-export const langStore = store(langName);
-export const themeStore = store(themeName);
-export const menuTypeStore = store(menuTypeName);
-export const i18nsStore = store(i18nsName);
-export const userInfoStore = store(userInfoName);
-export const permissionStore = store(permissionName);
+![19](./doc/img/19.png)
 
-export const useLangStore = initState => useStore(langName, initState);
-export const useThemeStore = initState => useStore(themeName, initState);
-export const useMenuTypeStore = initState => useStore(menuTypeName, initState);
-export const useI18nsStore = initState => useStore(i18nsName, initState);
-export const useUserInfoStore = initState => useStore(userInfoName, initState);
-export const usePermissionStore = initState => useStore(permissionName, initState);
-```
+页面 `schema`：
 
-#### 使用
+![31](./doc/img/31.png)
 
-```jsx
-// useI18nsStore
-const Intls = ({keys, children}) => {
-  const [i18ns] = useI18nsStore();
-  return (keys && i18ns?.getValue(keys)) ?? children ?? '';
-};
-// i18nsStore
-export const getIntls = (keys, def) => (keys && i18nsStore.getState()?.getValue(keys)) ?? def ?? '';
-```
+### 总结
 
-### utils、components、hooks
+低代码更多的是用来当作提升开发效率的一个工具，在我们当前业务范围内，写少量代码封装好业务组件，即可进行可视化开发。
 
-组件可分为基础组件、业务组件，基础组件粒度低、通用性高，业务组件包含了一些业务场景，在某一领域模型内通用，通常是基础组件组合而来。
+平台的通用性和灵活性，需要我们在实际业务中去权衡。
 
-#### utils
+我们需要认清，没有一劳永逸的方法，只有在不断探索中提升。
 
-例如：格式化树
-
-```js
-// formatTree
-const fixIcon = router =>
-  router.map(item => {
-    item.key = item.key || item.path;
-    item.icon = fixIcons(item.iconKey || 'EyeInvisibleOutlined');
-    return item;
-  });
-
-const formatTree = arr =>
-  traverItem(item => {
-    if (!isValidArr(item.children)) {
-      item.isLeaf = true;
-    }
-  })(arr2TreeByPath(fixIcon(arr)));
-
-export default formatTree;
-```
-
-详情见 [utils](https://github.com/ahyiru/utils)
-
-#### components
-
-例如：超出宽度文本自动省略并展示 `tooltip`
-
-```jsx
-const style = {
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  display: 'inline-block',
-  width: '100%',
-};
-
-const Ellipsis = ({children, ttProps}) => {
-  const span = useRef();
-  const [ellipsis, setEllipsis] = useState(false);
-  const state = useEleResize(span, 250);
-  useEffect(() => {
-    if (span.current) {
-      const {width: tWidth} = getTextSize(children);
-      const {width} = getPosition(span.current);
-      const isEllipsis = tWidth > width;
-      if (isEllipsis !== ellipsis) {
-        setEllipsis(isEllipsis);
-      }
-    }
-  }, [children, state.width]);
-  return (
-    <span ref={span} style={style}>
-      {ellipsis ? (
-        <Tooltip placement="topLeft" title={children} {...ttProps}>
-          {children}
-        </Tooltip>
-      ) : (
-        <span>{children}</span>
-      )}
-    </span>
-  );
-};
-```
-
-**_Input_**
-
-```jsx
-const Input = ({className, ...rest}) => {
-  const cls = ['h-input', ...(className?.split(' ') ?? [])]
-    .filter(Boolean)
-    .map(c => styles[c])
-    .join(' ');
-  return <input className={cls} {...rest} />;
-};
-
-export default Input;
-```
-
-**_Radio_**
-
-```jsx
-const Radio = ({options, name, value: checked, onChange, ...rest}) => (
-  <div className="radio-wrap" {...rest} style={{display: 'flex'}}>
-    {options.map(({value, label}) => (
-      <div key={value} className="radio-item" onClick={e => onChange?.(value, e)} style={{display: 'flex', alignItems: 'center', marginRight: '12px', cursor: 'pointer'}}>
-        <input type="radio" name={name} value={value} checked={value === checked} readOnly />
-        <span style={{marginLeft: '6px'}}>{value}</span>
-      </div>
-    ))}
-  </div>
-);
-
-export default Radio;
-```
-
-**_Tooltip_**
-
-```jsx
-const Tooltip = ({children, title, placement}) => (
-  <span className={`tooltip-${placement}`} tooltips={title}>
-    {children}
-  </span>
-);
-
-export default Tooltip;
-```
-
-**_Drawer_**
-
-```jsx
-const Drawer = ({visible, onClose, footer, header, className, children, width = '300px'}) => {
-  const cls = ['drawer-wrap', visible ? 'open' : '', ...(className?.split(' ') ?? [])]
-    .filter(Boolean)
-    .map(c => styles[c])
-    .join(' ');
-  return (
-    <Mask open={visible} close={onClose} delay={250} hasMask={true} className="huxy-drawer">
-      <div className={cls} style={{width}}>
-        <div className={styles['drawer-container']}>
-          <div className={styles['drawer-header']}>
-            <a className={styles['ico-close']} onClick={onClose} />
-            {header}
-          </div>
-          <div className={styles['drawer-content']}>{children}</div>
-          {footer ? <div className={styles['drawer-footer']}>{footer}</div> : null}
-        </div>
-      </div>
-    </Mask>
-  );
-};
-
-export default Drawer;
-```
-
-详情见 [components](https://github.com/ahyiru/components)
-
-#### hooks
-
-例如：请求列表数据 `hook` ，包含返回结果处理、分页、搜索、更新等。
-
-useFetchList：
-
-```jsx
-const useFetchList = (fetchList, initParams = null, handleResult, commonParams = null) => {
-  const [result, updateResult] = useAsync({});
-  const update = useCallback(params => updateResult({res: fetchList({...commonParams, ...params})}, handleResult), []);
-  useEffect(() => {
-    update({...initParams});
-  }, []);
-  const {res} = result;
-  const isPending = !res || res.pending;
-
-  return [{isPending, data: res?.result}, update];
-};
-```
-
-useHandleList：
-
-```jsx
-const useHandleList = (fetchList, initParams = null, handleResult, commonParams = null) => {
-  const {current, size, ...rest} = initParams || {};
-  const search = useRef(rest || {});
-  const page = useRef({current: current || 1, size: size || 10});
-  const [result, update] = useFetchList(fetchList, {...page.current, ...search.current}, handleResult, commonParams);
-
-  const pageChange = (current, size) => {
-    page.current = {current, size};
-    update({
-      ...page.current,
-      ...search.current,
-    });
-  };
-  const searchList = values => {
-    search.current = values;
-    page.current = {...page.current, current: 1};
-    update({...page.current, ...search.current});
-  };
-  const handleUpdate = params => {
-    const {current, size, ...rest} = params;
-    page.current = {current: current ?? page.current.current, size: size ?? page.current.size};
-    search.current = {...search.current, ...rest};
-    update({...page.current, ...search.current});
-  };
-
-  return [result, handleUpdate, pageChange, searchList];
-};
-```
-
-详情见 [use](https://github.com/ahyiru/use)
-
-### [low-code](./doc/low-code.md)
+项目地址：[https://github.com/ahyiru/web-design](https://github.com/ahyiru/web-design)
