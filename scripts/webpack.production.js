@@ -73,6 +73,7 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
       isDev: false,
+      buildTime: +new Date(),
     },
     EMAIL: JSON.stringify('ah.yiru@gmail.com'),
     VERSION: JSON.stringify('1.2.x'),

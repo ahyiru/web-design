@@ -1,6 +1,6 @@
 import {message} from 'antd';
 import html2canvas from 'html2canvas';
-import {dlfile} from '@huxy/utils';
+import {dlfile, formatTime} from '@huxy/utils';
 
 import {langStore, userInfoStore} from '@app/store/stores';
 import {getIntls} from '@app/components/intl';
@@ -22,7 +22,22 @@ import wx from '@app/assets/images/wx.jpg';
 import metamask from '@app/assets/images/metamask.svg';
 import langList from './langList';
 
+const {version} = require('../../package.json');
+
 const changeLang = ({key}) => langStore.setState(key);
+
+const buildTime = process.env.buildTime ? [
+  {
+    divider: true,
+    key: 'version',
+    type: 'version',
+    name: 'version',
+    icon: 'EyeOutlined',
+    handle: item => {
+      message.info(`version：${version}，构建时间：${formatTime(process.env.buildTime)}`);
+    },
+  },
+] : [];
 
 export const leftNav = () => {
   const left = getIntls('nav.left', {});
@@ -116,6 +131,7 @@ export const rightNav = () => {
             logout();
           },
         },
+        ...buildTime,
       ],
     },
     {
