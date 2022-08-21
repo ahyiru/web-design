@@ -4,7 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/@huxy/router.svg)](https://www.npmjs.com/package/@huxy/router)
 [![](https://img.shields.io/badge/blog-ihuxy-blue.svg)](http://ihuxy.com/)
 
-基于 [huxy-admi](https://github.com/ahyiru/huxy-admin) 模板创建。
+基于 [huxy-admin](https://github.com/ahyiru/huxy-admin) 模板创建。
 
 ### 理解
 
