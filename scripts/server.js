@@ -1,12 +1,12 @@
 const express = require('express');
-const path = require('path');
 const colors = require('colors');
 const cors = require('cors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const https = require('https');
-const fs = require('fs');
+const path = require('path');
+// const https = require('https');
+// const fs = require('fs');
 
 const app = express();
 

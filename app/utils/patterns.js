@@ -1,6 +1,7 @@
 export const required = {
-  pattern: /.+/,
-  message: '请输入!',
+  // pattern: /.+/,
+  // message: '请输入!',
+  required: true,
 };
 
 // 用户名

@@ -46,8 +46,8 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
     dataIndex: 'method',
   },
   {
-    title: i18ns.type,
-    dataIndex: 'type',
+    title: i18ns.dataType,
+    dataIndex: 'dataType',
   },
   {
     title: i18ns.auth,

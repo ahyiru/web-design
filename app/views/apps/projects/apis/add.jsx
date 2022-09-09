@@ -70,8 +70,8 @@ const Index = props => {
                   ))}
                 </Select>
               </Form.Item>
-              <Form.Item label={addFormText.type} name="type">
-                <Select disabled placeholder={addFormText.type} allowClear style={{width: '60%'}}>
+              <Form.Item label={addFormText.dataType} name="dataType">
+                <Select disabled placeholder={addFormText.dataType} allowClear style={{width: '60%'}}>
                   {paramsList.map(v => (
                     <Select.Option key={v.value} value={v.value}>
                       {v.label}

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Button} from 'antd';
-import {Portal, Mask, Modal} from '@huxy/components';
+import {Portal, Mask, Modal, Drawer, Drop} from '@huxy/components';
 import {message} from '@huxy/utils';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
@@ -8,6 +8,7 @@ import Panel from '@app/components/panel';
 const Index = props => {
   const [maskOpen, setMaskOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   return (
     <Row>
       <Col>
@@ -29,9 +30,30 @@ const Index = props => {
       <Col>
         <Panel>
           <Button onClick={e => setModalOpen(true)}>openModal</Button>
-          <Modal open={modalOpen} cancel={() => setModalOpen(false)} delay={250}>
+          <Modal open={modalOpen} close={() => setModalOpen(false)} delay={250}>
             <div>modal test</div>
           </Modal>
+        </Panel>
+      </Col>
+      <Col>
+        <Panel>
+          <Button onClick={e => setDrawerOpen(true)}>openDrawer</Button>
+          <Drawer open={drawerOpen} close={() => setDrawerOpen(false)}>
+            <div>drawer test</div>
+          </Drawer>
+        </Panel>
+      </Col>
+      <Col>
+        <Panel>
+          <Drop dropList={
+            <div>
+              <h4>list 1</h4>
+              <h4>list 2</h4>
+              <h4>list 3</h4>
+            </div>
+          }>
+            <Button>openDrop</Button>
+          </Drop>
         </Panel>
       </Col>
       <Col>

@@ -140,15 +140,16 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const app = express();
-const {HOST, SERVER_PORT} = require('../configs');
+const {MOCK} = require('../configs');
+const [HOST, PORT] = MOCK.split(':');
 app.set('host', HOST);
-app.set('port', SERVER_PORT);
+app.set('port', PORT);
 app.use(cors());
 app.use(logger('combined'));
 app.use(bodyParser.json({limit: '20mb'}));
 app.use(bodyParser.urlencoded({limit: '20mb', extended: true}));
 app.use(compression());
-app.listen(SERVER_PORT, err => {
+app.listen(PORT, err => {
   if (err) {
     console.log(err);
     return false;

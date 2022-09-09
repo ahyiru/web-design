@@ -5,7 +5,7 @@ import FormEditor from '../formEditor';
 import Panel from '@app/components/panel';
 
 const TableEditor = props => {
-  const {data = {}, getValues, designConfigText} = props;
+  const {data = {}, getValues, designConfigText, actionsText = {}} = props;
   const {editorI18n = {}, actionI18n = {}, columnI18n = {}} = designConfigText || {};
   const getActions = values => {
     // console.log(1,values);
@@ -35,7 +35,7 @@ const TableEditor = props => {
       </Panel>
       <Divider dashed style={{borderColor: 'rgba(255,255,255,.1)'}} />
       <h4 style={{margin: '10px 0'}}>{editorI18n.searchForm}</h4>
-      <FormEditor getValues={getSearchForm} data={data.searchSchema} editorI18n={editorI18n} />
+      <FormEditor getValues={getSearchForm} data={data.searchSchema} editorI18n={editorI18n} actionsText={actionsText} />
       <Divider dashed style={{borderColor: 'rgba(255,255,255,.1)'}} />
       <h4 style={{margin: '10px 0'}}>{editorI18n.columns}</h4>
       <Panel style={{height: 'auto'}}>
@@ -43,7 +43,7 @@ const TableEditor = props => {
       </Panel>
       <Divider dashed style={{borderColor: 'rgba(255,255,255,.1)'}} />
       <h4 style={{margin: '10px 0'}}>{editorI18n.modalForm}</h4>
-      <FormEditor getValues={getModalForm} data={data.modalSchema} editorI18n={editorI18n} />
+      <FormEditor getValues={getModalForm} data={data.modalSchema} editorI18n={editorI18n} actionsText={actionsText} />
     </>
   );
 };

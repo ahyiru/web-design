@@ -140,7 +140,7 @@ const Index = props => {
       </>
     ),
     color: getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
-      <Row key={key} gutter={[10, 16]}>
+      <Row key={key} gutter={[10, 10]}>
         <Col span={5}>
           <span style={labelStyle}>{themeLang[key]}：</span>
         </Col>
@@ -168,7 +168,7 @@ const Index = props => {
       </Row>
     )),
     size: Object.keys(theme.list.colors).map(key => (
-      <Row key={key} gutter={[10, 16]}>
+      <Row key={key} gutter={[10, 10]}>
         <Col span={5}>
           <span style={labelStyle}>{themeLang[key]}：</span>
         </Col>
@@ -186,7 +186,7 @@ const Index = props => {
       </a>
       <Drawer
         onClose={() => setVisible(false)}
-        visible={visible}
+        open={visible}
         className="configs-drawer"
         width="300px"
         extra={

@@ -10,9 +10,13 @@ const lowcode = {
     url: 'http://47.105.94.51:9202',
     prefix: '/api',
   },
-  MOCK: 'http://localhost:7202',
+  MOCK: '127.0.0.1:7202',
   SERVER_PORT: 7203,
   projectName: '...',
+  defProject: {
+    name: '控制台',
+    _id: '6098f12b099e1202a287acad',
+  },
 };
 
 module.exports = lowcode;

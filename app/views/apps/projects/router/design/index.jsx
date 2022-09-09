@@ -231,7 +231,7 @@ const Index = props => {
     [item],
   );
   const CustomForm = useMemo(() => <FormEditor getValues={editProps} data={[item?.props?.schema]} actionsText={actionsText} editorI18n={editorI18n} />, [item]);
-  const CustomTable = useMemo(() => <TableEditor getValues={editProps} data={item?.props} designConfigText={designConfigText} />, [item]);
+  const CustomTable = useMemo(() => <TableEditor getValues={editProps} data={item?.props} designConfigText={designConfigText} actionsText={actionsText} />, [item]);
 
   const CfgComp = {
     CustomForm,

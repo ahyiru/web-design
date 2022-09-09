@@ -14,7 +14,7 @@ const themeList = getIntls => [
     type: 'theme',
   },
   {
-    name: getIntls('theme.dark', 'light'),
+    name: getIntls('theme.light', 'light'),
     key: 'light',
     list: light,
     type: 'theme',

@@ -55,7 +55,7 @@ const defSelectedItem = {
   key: '/low-code/dom',
   name: '原生dom',
   path: '/low-code/dom',
-  projectId: '6098f12b099e1202a287acad',
+  projectId: defProject._id,
   _id: '60f842f05ce53002d3bd35d7',
 };
 
@@ -80,7 +80,7 @@ const Index = props => {
   const [modalType, setModalType] = useState('');
   const [item, setItem] = useState({});
   const [filterTree, setFilterTree] = useSearch(null);
-  const [selectedItem, setSelectedItem] = useState(pageParams?._id ? pageParams : defSelectedItem);
+  const [selectedItem, setSelectedItem] = useState(pageParams?.projectId ? {...defSelectedItem, ...pageParams} : defSelectedItem);
   const [pageSchema, setPageSchema] = useState([]);
   const [result, update] = useFetchList(listRouterFn, {projectId: stateItem._id});
 

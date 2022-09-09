@@ -2,6 +2,7 @@ import {Button} from 'antd';
 import {Spinner} from '@huxy/components';
 import customRender from '@app/utils/render';
 import {useIntls} from '@app/components/intl';
+import defProject from '@app/configs/projects';
 const Index = props => {
   const getIntls = useIntls();
   const {pageSchema, id, path, name} = props;
@@ -13,7 +14,7 @@ const Index = props => {
     <div>
       <div style={{overflow: 'hidden', marginBottom: 10}}>
         <h4 style={{margin: 0, float: 'left'}}>{getIntls('main.projectRouter.pageText.preview_text')}</h4>
-        <Button onClick={e => props.router.push({path: '/apps/projects/router/6098f12b099e1202a287acad', params: {name, _id: id, key, path: key}})} type="link" size="small" style={{float: 'right'}}>
+        <Button onClick={e => props.router.push({path: `/apps/projects/router/${defProject._id}`, params: {name, _id: id, key, path: key}})} type="link" size="small" style={{float: 'right'}}>
           {getIntls('main.projectRouter.pageText.design_text')}
         </Button>
       </div>
