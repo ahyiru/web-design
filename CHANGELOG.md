@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/ahyiru/web-design/compare/v1.3.0...v1.4.0) (2022-09-09)
+
+
+### Features
+
+* add github actions ([adf8809](https://github.com/ahyiru/web-design/commit/adf880948f01016e580ebca059824df5194cc99a))
+
+
+### Bug Fixes
+
+* fix github actions ([bafca26](https://github.com/ahyiru/web-design/commit/bafca2633814d11846a8d1d643b3f395d809c686))
+* fix readme ([294414a](https://github.com/ahyiru/web-design/commit/294414ae01a16ef08b6fda959f9e68f1aa670807))
+
 ## [1.3.0](https://github.com/ahyiru/web-design/compare/v1.2.0...v1.3.0) (2022-08-13)
 
 
