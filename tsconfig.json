@@ -17,5 +17,5 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "typeRoots": ["./node_modules/@types"]
   },
-  "exclude": ["node_modules", "configs", "scripts", "server", "**/draft/", "doc", "public", "common"]
+  "exclude": ["node_modules", "configs", "scripts", "server", "**/draft/", "doc", "public", "commons"]
 }

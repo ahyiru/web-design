@@ -225,7 +225,7 @@ module.exports = {
     alias: {
       '@app': app,
       '@configs': path.resolve(__dirname, '../configs'),
-      '@common': path.resolve(__dirname, '../commons'),
+      '@commons': path.resolve(__dirname, '../commons'),
     },
     extensions: ['.jsx', '.js', '.less', '.css', '.scss', '.json', '.ts', '.tsx', '.vue', '.mjs'],
     fallback: {

@@ -2,12 +2,12 @@ import {useEffect, useState, useRef} from 'react';
 import {Spinner} from '@huxy/components';
 
 const pics = [
-  require('@common/images/webgl/front.jpg'),
-  require('@common/images/webgl/back.jpg'),
-  require('@common/images/webgl/up.jpg'),
-  require('@common/images/webgl/down.jpg'),
-  require('@common/images/webgl/left1.jpg'),
-  require('@common/images/webgl/right.jpg'),
+  require('@commons/images/webgl/front.jpg'),
+  require('@commons/images/webgl/back.jpg'),
+  require('@commons/images/webgl/up.jpg'),
+  require('@commons/images/webgl/down.jpg'),
+  require('@commons/images/webgl/left1.jpg'),
+  require('@commons/images/webgl/right.jpg'),
 ];
 
 /* const styles={

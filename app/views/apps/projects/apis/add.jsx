@@ -24,6 +24,7 @@ const Index = props => {
   const addFormText = Intls({keys: 'main.projectApis.addFormText'}) ?? {};
   const [form] = Form.useForm();
   const {getState} = props.history;
+  const {projectId} = props.params;
   const {item, backState} = getState() || {};
   const back = () => {
     backState ? props.router.push(backState) : props.history.back();
@@ -33,7 +34,7 @@ const Index = props => {
     values = item ? {...item, ...values} : values;
     // console.log(handler,values);
     try {
-      const {code, message: msg} = await handler({...values, projectId: profile.projectId});
+      const {code, message: msg} = await handler({...values, projectId});
       if (code === 200) {
         message.success(msg);
         // props.router.push(`/users`);

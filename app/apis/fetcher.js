@@ -26,7 +26,6 @@ const handler = response => {
       result.msg = result.message ?? result.msg ?? response.statusText;
       const {msg, code} = result;
       if (code === 401) {
-        message.error(msg);
         logout(true);
         throw {code, message: msg};
       }
