@@ -1,9 +1,10 @@
 import {useState} from 'react';
 import {Form, Input, Button, message, Result} from 'antd';
 import {LeftOutlined, MailOutlined} from '@ant-design/icons';
-import apiList from '@app/utils/getApis';
-import {emailRule} from '@app/utils/rules';
 import Intls, {useIntls} from '@app/components/intl';
+import {apiList, formRules} from '../configs';
+
+const {emailRule} = formRules;
 
 const Index = props => {
   const getIntls = useIntls();

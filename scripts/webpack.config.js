@@ -6,10 +6,14 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 // const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
+const fixPath = require('./utils');
+
 const {appName, projectName, PUBLIC_DIR, BUILD_DIR, DEV_ROOT_DIR} = require('../configs');
 
-const publics = path.resolve(__dirname, PUBLIC_DIR);
+const rootDir = fixPath(`${DEV_ROOT_DIR}/`);
+
 const app = path.resolve(__dirname, `../${appName}`);
+const publics = path.resolve(app, PUBLIC_DIR || '../public');
 
 const frame = appName === 'vue' ? {uiframe: ['vue']} : {uiframe: ['react', 'react-dom']};
 
@@ -193,7 +197,7 @@ module.exports = {
   entry: entry,
   output: {
     path: path.resolve(app, BUILD_DIR),
-    publicPath: DEV_ROOT_DIR,
+    publicPath: rootDir,
     filename: 'js/[name].js',
     // chunkFilename:'js/[name]_[chunkhash:8].chunk.js',
     // assetModuleFilename: 'assets/[contenthash][ext]',
@@ -224,12 +228,13 @@ module.exports = {
     modules: [app, 'node_modules'],
     alias: {
       '@app': app,
-      '@configs': path.resolve(__dirname, '../configs'),
-      '@commons': path.resolve(__dirname, '../commons'),
+      '@configs': path.resolve(app, '../configs'),
+      '@commons': path.resolve(app, '../commons'),
     },
     extensions: ['.jsx', '.js', '.less', '.css', '.scss', '.json', '.ts', '.tsx', '.vue', '.mjs'],
     fallback: {
       path: false, //require.resolve('path-browserify'),
+      fs: false,
       process: false,
     },
     symlinks: false,

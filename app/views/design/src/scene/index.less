@@ -1,0 +1,84 @@
+.scene-item {
+  position: relative;
+  display: block;
+  height: 0;
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 4px;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1);
+  background: rgba(0,0,0,0.7);
+  overflow: hidden;
+  .describe, .image, .actions {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 4px;
+    transition: all 0.25s;
+  }
+  .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .describe {
+    opacity: 1;
+    padding: 10px 15px;
+    background: rgba(54, 64, 74, 0.4);
+    transform: translateY(0px);
+    h2 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      color: #fff !important;
+    }
+    p {
+      color: #fff !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+  .actions {
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    font-size: 2rem;
+    transform: translateY(50%);
+    span {
+      display: block;
+      padding: 0 8px;
+    }
+  }
+  .status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--red2);
+    &.audited{
+      background: var(--green2);
+    }
+  }
+  &:hover {
+    .image {
+      transform: scale(1.1);
+    }
+    .describe {
+      opacity: 0;
+      transform: translateY(-50%);
+    }
+    .actions {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

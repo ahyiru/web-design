@@ -1,7 +1,7 @@
 import {Tag, Space, Button} from 'antd';
 // import {ExclamationCircleOutlined} from '@ant-design/icons';
 import {formatTime} from '@huxy/utils';
-import {roleList} from '@app/utils/config';
+import {roleList} from '@app/utils/configs';
 
 export const tabs = [
   {

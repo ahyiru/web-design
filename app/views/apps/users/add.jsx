@@ -3,7 +3,7 @@ import {Form, Input, Button, message, InputNumber, Select} from 'antd';
 import {Row, Col} from '@huxy/components';
 import Back from '@app/components/goBack';
 import apiList from '@app/utils/getApis';
-import {layout, tailLayout} from '@app/utils/config';
+import {layout, tailLayout} from '@app/utils/configs';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';
 import Panel from '@app/components/panel';
 import {useIntls} from '@app/components/intl';

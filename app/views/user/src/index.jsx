@@ -1,6 +1,6 @@
 import Intls from '@app/components/intl';
-import logo from '@app/assets/images/logo.png';
 import styles from './index.less';
+import {logo} from '../configs';
 
 const Index = props => (
   <div className={styles.page}>
@@ -10,7 +10,7 @@ const Index = props => (
           <img src={logo} alt="logo" />
         </div>
         <h2>
-          <Intls keys="title">Dashboard</Intls>
+          <Intls keys="title">Ihuxy</Intls>
         </h2>
       </div>
       <div className={styles.content}>{props.children}</div>

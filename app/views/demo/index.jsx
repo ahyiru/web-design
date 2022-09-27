@@ -1,5 +1,5 @@
 import {useState, useCallback, useEffect, useMemo, memo} from 'react';
-// import {usePrevious} from '@huxy/use';
+import {Drop} from '@huxy/components';
 // import Settings from '@app/components/settings';
 // import Intls from '@app/components/intl';
 import './index.less';
@@ -63,6 +63,8 @@ const key21 = 21;
 
 const Child22 = memo(Child2_2, () => true);
 
+const Li = props => <a>{props.index}</a>;
+
 const Index = props => {
   const [state, setState] = useState(0);
   useEffect(() => {
@@ -85,6 +87,19 @@ const Index = props => {
           <Child22 state={state} eventBus={props.eventBus} />
         </Parent2>
       </Layout>
+      {[1, 2, 3, 4].map(item => (
+        <Li key={item} index={item} />
+      ))}
+      <div>
+        <Drop dropList={<div>hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello</div>}>
+          <span>121</span>
+        </Drop>
+      </div>
+      <div>
+        <Drop dropList={<div style={{height: 300}}>world</div>}>
+          <h1>hhh</h1>
+        </Drop>
+      </div>
     </div>
   );
 };

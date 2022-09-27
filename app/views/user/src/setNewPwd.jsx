@@ -1,8 +1,10 @@
 import {Form, Input, Button, message} from 'antd';
 import {LockOutlined, LeftOutlined} from '@ant-design/icons';
-import apiList from '@app/utils/getApis';
-import {passwordRule, confirmRule} from '@app/utils/rules';
 import {useIntls} from '@app/components/intl';
+import {goPage} from '@app/utils/utils';
+import {apiList, formRules} from '../configs';
+
+const {passwordRule, confirmRule} = formRules;
 
 const Index = props => {
   const getIntls = useIntls();
@@ -13,7 +15,7 @@ const Index = props => {
       message.success(msg);
       // storage.set('token',token);
       // props.router.push('/');
-      location.href = '/';
+      goPage();
     }
   };
 

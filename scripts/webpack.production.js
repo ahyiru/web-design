@@ -16,12 +16,14 @@ const {GenerateSW} = require('workbox-webpack-plugin');
 
 const webpackConfig = require('./webpack.config');
 
-const {appName, PRD_ROOT_DIR, BUILD_DIR, PUBLIC_DIR} = require('../configs');
+const fixPath = require('./utils');
 
-const rootDir = ['/', './'].includes(PRD_ROOT_DIR) ? PRD_ROOT_DIR : `${PRD_ROOT_DIR}/`;
+const {appName, PRD_ROOT_DIR, BUILD_DIR, PUBLIC_DIR, PROXY, defProject} = require('../configs');
 
-const publics = path.resolve(__dirname, PUBLIC_DIR);
+const rootDir = fixPath(`${PRD_ROOT_DIR}/`);
+
 const app = path.resolve(__dirname, `../${appName}`);
+const publics = path.resolve(app, PUBLIC_DIR || '../public');
 const build = path.resolve(app, BUILD_DIR);
 
 rimraf(build, err => console.log(err));
@@ -72,11 +74,16 @@ const plugins = [
   }),
   new webpack.DefinePlugin({
     'process.env': {
-      isDev: false,
-      buildTime: +new Date(),
+      configs: JSON.stringify({
+        browserRouter: true,
+        basepath: PRD_ROOT_DIR ?? '',
+        PROXY,
+        defProject,
+        buildTime: +new Date(),
+      }),
     },
     EMAIL: JSON.stringify('ah.yiru@gmail.com'),
-    VERSION: JSON.stringify('1.2.x'),
+    VERSION: JSON.stringify('1.5.x'),
   }),
   new GenerateSW({
     // importWorkboxFrom: 'local',
@@ -88,10 +95,12 @@ const plugins = [
     /* {
       from:path.resolve(publics,'src'),
       to:path.resolve(app,`${BUILD_DIR}/src`),
-    },{
+    },
+    {
       from:path.resolve(publics,'manifest.json'),
       to:path.resolve(app,`${BUILD_DIR}/manifest.json`),
-    }, */ {
+    }, */
+    {
       from: path.resolve(publics, 'robots.txt'),
       to: path.resolve(app, `${BUILD_DIR}/robots.txt`),
     },

@@ -320,6 +320,12 @@ export const pageRoutes = {
                 target: '_blank',
               },
             },
+            {
+              path: '/page1-2-2-4',
+              name: '四级菜单4-hideMenu',
+              component: Page,
+              hideMenu: true,
+            },
           ],
         },
       ],
@@ -334,7 +340,7 @@ export const pageRoutes = {
 };
 export const playgroundRoutes = {
   path: '/playground',
-  name: ' Playground',
+  name: 'Playground',
   icon: 'ConsoleSqlOutlined',
   children: [
     {

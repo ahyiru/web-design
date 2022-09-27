@@ -2,7 +2,7 @@ import {Modal, Form, Input, Switch} from 'antd';
 
 import {fixRoute} from '@huxy/utils';
 
-import {layout} from '@app/utils/config';
+import {layout} from '@app/utils/configs';
 
 import {pathRule} from '@app/utils/rules';
 

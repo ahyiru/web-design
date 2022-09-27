@@ -1,5 +1,11 @@
-const {DEV_ROOT_DIR, PRD_ROOT_DIR} = require('@configs');
+const {configs} = process.env;
 
-export const browserRouter = !process.env.isDev;
+export const browserRouter = configs.browserRouter;
 
-export const basepath = browserRouter ? PRD_ROOT_DIR : DEV_ROOT_DIR;
+export const basepath = configs.basepath;
+
+export const PROXY = configs.PROXY;
+
+export const defProject = configs.defProject;
+
+export const buildTime = configs.buildTime;

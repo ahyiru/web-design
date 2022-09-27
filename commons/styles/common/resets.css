@@ -85,6 +85,15 @@ img {
 a {
   text-decoration: none;
   cursor: pointer;
+  color: var(--linkColor);
+}
+
+a:active, a.active {
+  color: var(--linkActiveColor);
+}
+
+a:hover {
+  color: var(--linkHoverColor);
 }
 
 input,

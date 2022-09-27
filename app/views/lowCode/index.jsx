@@ -2,7 +2,7 @@ import {Button} from 'antd';
 import {Spinner} from '@huxy/components';
 import customRender from '@app/utils/render';
 import {useIntls} from '@app/components/intl';
-import defProject from '@app/configs/projects';
+import {defProject} from '@app/configs';
 const Index = props => {
   const getIntls = useIntls();
   const {pageSchema, id, path, name} = props;

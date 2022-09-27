@@ -16,29 +16,19 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const webpackConfig = require('./webpack.development');
 
-const {appName, HOST, PORT, PROXY, MOCK} = require('../configs');
+const appProxy = require('./appProxy');
 
-const getIPs = require('./getIPs');
-
-const {createProxyMiddleware} = require('http-proxy-middleware');
-
-const app = express();
-
-const compiler = webpack(webpackConfig);
-
-const proxyCfg = require('./appProxy');
+const {appName, HOST, PORT, MOCK} = require('../configs');
 
 const mocks = require('./mock');
 
-if (Array.isArray(PROXY)) {
-  PROXY.map(proxyItem => {
-    const {prefix, opts} = proxyCfg(PROXY);
-    app.use(prefix, createProxyMiddleware(opts));
-  });
-} else {
-  const {prefix, opts} = proxyCfg(PROXY);
-  app.use(prefix, createProxyMiddleware(opts));
-}
+const getIPs = require('./getIPs');
+
+const app = express();
+
+appProxy(app);
+
+const compiler = webpack(webpackConfig);
 
 const devMiddleware = webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
@@ -55,7 +45,7 @@ const devMiddleware = webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 app.use(devMiddleware);
 
-app.set('host', HOST);
+app.set('host', HOST || 'http://localhost');
 app.set('port', PORT);
 
 app.use(cors());

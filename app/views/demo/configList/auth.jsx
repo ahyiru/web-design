@@ -8,8 +8,6 @@ import {Row, Col} from '@huxy/components';
 import {arr2TreeByPath, isValidArr, traverItem} from '@huxy/utils';
 import {useSearch, useDebounce} from '@huxy/use';
 
-import defProject from '@app/configs/projects';
-
 import useFetchList from '@app/hooks/useFetchList';
 
 import Back from '@app/components/goBack';
@@ -20,7 +18,9 @@ import Icons from '@app/utils/icons';
 
 import {useIntls} from '@app/components/intl';
 
-import {getRouter, getAuthedRouter, setAuthedRouter} from '../mock';
+import {defProject} from '@app/configs';
+
+import {getRouter, getAuthedRouter, setAuthedRouter} from './mock';
 
 const {Search} = Input;
 

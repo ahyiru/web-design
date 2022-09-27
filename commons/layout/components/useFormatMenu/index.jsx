@@ -1,13 +1,15 @@
 import {useRoute} from '@huxy/router';
 import {useMenuTypeStore} from '@app/store/stores';
 
-const formatMenu = (menu, curPath, type = 'vertical', cb = null) => {
+import {getSelected} from '@huxy/utils';
+
+const formatMenu = (menu, curPath, type, cb = null) => {
   const menuConfig = {
     vertical: [],
     horizontal: [],
   };
   if (type === 'horizontal') {
-    menuConfig[type] = menu /* .length>1?menu:menu[0]?.children */;
+    menuConfig[type] = menu;
     return menuConfig;
   }
   if (type === 'vertical') {
@@ -27,12 +29,18 @@ const formatMenu = (menu, curPath, type = 'vertical', cb = null) => {
 
 const useFormatMenu = props => {
   const {current, menu: menus} = useRoute();
+  const [type] = useMenuTypeStore(props.menuType ?? 'vertical');
 
-  const menu = menus[0]?.children ?? [];
+  let menu = menus.find(({path}) => path === current[0]?.path)?.children ?? [];
+  let firstLevel = 1;
 
-  const [menuType] = useMenuTypeStore('vertical');
+  if (props.onlyCurrentMenu) {
+    const selectedItems = getSelected(menu, props.onlyCurrentMenu, 'path');
+    menu = selectedItems.slice(-1);
+    firstLevel = current.length - selectedItems.length;
+  }
 
-  const {vertical, horizontal} = formatMenu(menu, current[1]?.path, menuType);
+  const {vertical, horizontal} = formatMenu(menu, current[firstLevel]?.path, type);
 
   return {vertical, horizontal, menu};
 };

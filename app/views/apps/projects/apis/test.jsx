@@ -4,7 +4,7 @@ import {Row, Col} from '@huxy/components';
 
 import Back from '@app/components/goBack';
 
-import {layout, tailLayout, methodList} from '@app/utils/config';
+import {layout, tailLayout, methodList} from '@app/utils/configs';
 
 import Panel from '@app/components/panel';
 
@@ -14,7 +14,7 @@ import {storage} from '@huxy/utils';
 
 import {useIntls} from '@app/components/intl';
 
-const {PROXY} = require('@configs');
+import {PROXY} from '@app/configs';
 
 const token = storage.get('token');
 

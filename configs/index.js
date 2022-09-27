@@ -2,6 +2,7 @@ const appName = require('./appName');
 const app = require('./app');
 const vue = require('./vue');
 const lowcode = require('./lowcode');
+
 const cfg = {
   app,
   vue,

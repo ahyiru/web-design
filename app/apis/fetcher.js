@@ -1,11 +1,11 @@
 import {message} from 'antd';
 import {fetcher, storage, wrapPromise} from '@huxy/utils';
 
-const {PROXY} = require('@configs');
-
-const TARGET = PROXY?.prefix ?? '/api';
+import {PROXY} from '@app/configs';
 
 import {logout} from '@app/utils/utils';
+
+const TARGET = PROXY?.prefix ?? '/api';
 
 const success_code = [200, 10000];
 

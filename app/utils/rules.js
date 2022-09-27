@@ -1,5 +1,6 @@
-import {required, namePattern, emailPattern, passwordPattern, pathPattern} from './patterns';
+import {required, namePattern, emailPattern, passwordPattern, pathPattern, urlPattern} from './patterns';
 
+export const urlRule = [urlPattern];
 export const nameRule = [required, namePattern];
 export const emailRule = [required, emailPattern];
 export const passwordRule = [required, passwordPattern];

@@ -4,7 +4,7 @@ import {Row, Col} from '@huxy/components';
 
 import Back from '@app/components/goBack';
 import apiList from '@app/utils/getApis';
-import {layout, tailLayout, roleList, methodList, paramsList} from '@app/utils/config';
+import {layout, tailLayout, roleList, methodList, paramsList} from '@app/utils/configs';
 import {nameRule, pathRule} from '@app/utils/rules';
 
 import Panel from '@app/components/panel';
@@ -72,7 +72,7 @@ const Index = props => {
                 </Select>
               </Form.Item>
               <Form.Item label={addFormText.dataType} name="dataType">
-                <Select disabled placeholder={addFormText.dataType} allowClear style={{width: '60%'}}>
+                <Select placeholder={addFormText.dataType} allowClear style={{width: '60%'}}>
                   {paramsList.map(v => (
                     <Select.Option key={v.value} value={v.value}>
                       {v.label}

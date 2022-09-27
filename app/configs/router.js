@@ -1,8 +1,8 @@
-import {storage} from '@huxy/utils';
-
 import {demoBackReg, confirmDesignPage} from '@app/utils/confirmDesignPage';
 
 import whiteList from '@app/routes/whiteList';
+
+import {isAuthed} from '@app/utils/utils';
 
 import {browserRouter, basepath} from '.';
 
@@ -11,8 +11,6 @@ const initPath = `${browserRouter ? '' : '#'}/`;
 const whiteRoutes = browserRouter ? whiteList : whiteList.map(path => `#${path}`);
 
 const routerListen = {};
-
-const token = storage.get('token');
 
 const routerListenFn = (path, prevPath) => {
   if (!routerListen[path]) {
@@ -37,7 +35,7 @@ const beforeRender = (input, next) => {
   if (validPath === initPath) {
     return next({path: '/'});
   }
-  if (!token && !whiteRoutes.includes(validPath)) {
+  if (!isAuthed() && !whiteRoutes.includes(validPath)) {
     return next({path: '/user/signin'});
   }
   if (path !== prevPath && demoBackReg.test(prevPath)) {

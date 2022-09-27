@@ -22,11 +22,13 @@ import wx from '@app/assets/images/wx.jpg';
 import metamask from '@app/assets/images/metamask.svg';
 import langList from './langList';
 
+import {buildTime} from '.';
+
 const {version} = require('../../package.json');
 
 const changeLang = ({key}) => langStore.setState(key);
 
-const buildTime = process.env.buildTime ? [
+const buildInfo = buildTime ? [
   {
     divider: true,
     key: 'version',
@@ -34,7 +36,7 @@ const buildTime = process.env.buildTime ? [
     name: 'version',
     icon: 'EyeOutlined',
     handle: item => {
-      message.info(`version：${version}，构建时间：${formatTime(process.env.buildTime)}`);
+      message.info(`version：${version}，构建时间：${formatTime(buildTime)}`);
     },
   },
 ] : [];
@@ -131,7 +133,7 @@ export const rightNav = () => {
             logout();
           },
         },
-        ...buildTime,
+        ...buildInfo,
       ],
     },
     {

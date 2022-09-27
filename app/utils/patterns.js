@@ -20,6 +20,11 @@ export const passwordPattern = {
   message: '密码长度为8-20个字符，并且至少包含数字、大小写字母中的两种，不含特殊字符!',
 };
 
+// 链接地址
+export const urlPattern = {
+  pattern: /^https?:\/\/[^\s/?.#]+\.[^\s]+/,
+  message: '请输入正确链接！',
+};
 // 路由地址
 export const pathPattern = {
   pattern: /^(\/[\w#?&=:-]+)+$/,

@@ -181,6 +181,7 @@ const Index = props => {
           </Row>
         </Col>
       </Row>
+      {/* <TimeBar lastTime={new Date('2021-09-30 18:00:00')} lastText="放假" /> */}
     </div>
   );
 };

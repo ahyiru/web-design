@@ -1,9 +1,11 @@
 import {useState} from 'react';
 import {Form, Input, Button, message, Result} from 'antd';
 import {UserOutlined, LockOutlined, MailOutlined, LeftOutlined} from '@ant-design/icons';
-import apiList from '@app/utils/getApis';
-import {nameRule, emailRule, passwordRule, confirmRule} from '@app/utils/rules';
 import {useIntls} from '@app/components/intl';
+import {goPage} from '@app/utils/utils';
+import {apiList, formRules} from '../configs';
+
+const {nameRule, emailRule, passwordRule, confirmRule} = formRules;
 
 const Index = props => {
   const getIntls = useIntls();
@@ -53,7 +55,7 @@ const Index = props => {
         title={getIntls('login.signup_msg')}
         subTitle={getIntls('login.signup_sub_msg')}
         extra={
-          <Button type="primary" key="back" onClick={() => (location.href = '/')}>
+          <Button type="primary" key="back" onClick={() => goPage()}>
             {getIntls('login.backLogin')}
           </Button>
         }

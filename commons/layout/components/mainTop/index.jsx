@@ -1,5 +1,5 @@
 import {Link} from '@huxy/router';
-import TopRight from '@app/components/topRight';
+import TopRight from './topRight';
 import './index.less';
 
 const Index = ({current, Right = TopRight}) => {

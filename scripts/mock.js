@@ -141,7 +141,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const app = express();
 const {MOCK} = require('../configs');
-const [HOST, PORT] = MOCK.split(':');
+const [HOST, PORT] = MOCK?.split(':') ?? ['http://localhost', '9522'];
 app.set('host', HOST);
 app.set('port', PORT);
 app.use(cors());

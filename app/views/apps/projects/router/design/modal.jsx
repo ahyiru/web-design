@@ -1,6 +1,6 @@
 import {Modal, Form, Select} from 'antd';
 
-import {layout} from '@app/utils/config';
+import {layout} from '@app/utils/configs';
 
 import components from '@app/utils/components';
 

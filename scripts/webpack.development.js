@@ -7,7 +7,8 @@ const OpenBrowserWebpackPlugin = require('@huxy/open-browser-webpack-plugin');
 
 // const {GenerateSW} = require('workbox-webpack-plugin');
 const webpackConfig = require('./webpack.config');
-const {HOST, PORT, appName} = require('../configs');
+
+const {HOST, PORT, appName, DEV_ROOT_DIR, PROXY, defProject} = require('../configs');
 
 const app = path.resolve(__dirname, `../${appName}`);
 
@@ -145,12 +146,18 @@ const devConfig = merge(webpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        isDev: true,
+        configs: JSON.stringify({
+          browserRouter: false,
+          basepath: DEV_ROOT_DIR ?? '',
+          PROXY,
+          defProject,
+          buildTime: +new Date(),
+        }),
       },
       EMAIL: JSON.stringify('ah.yiru@gmail.com'),
-      VERSION: JSON.stringify('1.2.x'),
+      VERSION: JSON.stringify('1.5.x'),
     }),
-    new OpenBrowserWebpackPlugin({target: `${HOST}:${PORT}`}),
+    new OpenBrowserWebpackPlugin({target: `${HOST || 'http://localhost'}:${PORT}`}),
     new DeadCodePlugin({
       patterns: [`${app}/**/*.(js|jsx|css|less|json|png|jpg|jpeg)`, '../commons/**/*.(js|jsx|css|less|json|png|jpg|jpeg)'],
       exclude: ['**/node_modules/**', '**/build/**', '**/draft/**'],

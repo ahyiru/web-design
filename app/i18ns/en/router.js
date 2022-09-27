@@ -1,5 +1,5 @@
 const router = {
-  // '/':'home',
+  '/':'home',
   '/user': 'user',
   '/user/signin': 'signin',
   '/user/signup': 'signup',

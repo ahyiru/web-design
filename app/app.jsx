@@ -9,13 +9,13 @@ import useGetI18ns from '@app/hooks/useGetI18ns';
 import useGetProfile from '@app/hooks/useGetProfile';
 import {isAuthed} from '@app/utils/utils';
 import getRouterCfgs from '@app/utils/getRouterCfgs';
-import setGlobalVar from '@app/utils/setGlobalVar';
+import setStyleVar from '@app/utils/setStyleVar';
 import {langStore, themeStore} from '@app/store/stores';
 
 const ConfigProvider = ({routerCfgs}) => {
   const {output, loading, updateRouter} = useRouter(routerCfgs);
   useEffect(() => {
-    const cancelTheme = themeStore.subscribe(setGlobalVar);
+    const cancelTheme = themeStore.subscribe(setStyleVar);
     themeStore.setState(getTheme());
     const cancelLang = langStore.subscribe(async lang => {
       storage.set('language', lang);

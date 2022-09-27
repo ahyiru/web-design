@@ -5,7 +5,7 @@ import {Row, Col} from '@huxy/components';
 import {formatTime, validObj} from '@huxy/utils';
 import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
-import {roleList} from '@app/utils/config';
+import {roleList} from '@app/utils/configs';
 import Panel from '@app/components/panel';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';

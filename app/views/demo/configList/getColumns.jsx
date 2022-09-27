@@ -13,5 +13,7 @@ export const RenderItem = ({index, style, item, isItemLoaded}) => {
   } else {
     content = item.name;
   }
-  return <div style={{...style, borderBottom: '1px solid #333'}}>{content}</div>;
+  return <div style={{...style, borderBottom: '1px solid #333'}}>
+    <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>{content}</div>
+  </div>;
 };

@@ -1,33 +1,7 @@
+import userRoutes from '@app/views/user/routes';
+
 const routes = [
-  {
-    path: '/user',
-    title: '登录注册',
-    icon: 'TeamOutlined',
-    hideMenu: true,
-    component: () => import('@app/views/user'),
-    children: [
-      {
-        path: '/signin',
-        name: '登录',
-        component: () => import('@app/views/user/login'),
-      },
-      {
-        path: '/signup',
-        name: '注册',
-        component: () => import('@app/views/user/signup'),
-      },
-      {
-        path: '/verifyEmail',
-        name: '验证邮箱',
-        component: () => import('@app/views/user/verifyEmail'),
-      },
-      {
-        path: '/setNewPwd',
-        name: '重置密码',
-        component: () => import('@app/views/user/setNewPwd'),
-      },
-    ],
-  },
+  ...userRoutes,
   {
     path: '/404',
     name: '404',
@@ -51,15 +25,12 @@ const routes = [
     name: 'x6',
     hideMenu: true,
     component: () => import('@app/views/commons/x6-demo/pages'),
-    linkProps: {
-      target: '_blank',
-    },
   },
   /* {
-    path: '/h5',
-    name: 'h5',
+    path: '/scenes/:name',
+    name: '场景展示',
     hideMenu: true,
-    component: () => import('@app/h5/configList'),
+    component: props => <h1>{props.inputPath}</h1>,
   }, */
 ];
 

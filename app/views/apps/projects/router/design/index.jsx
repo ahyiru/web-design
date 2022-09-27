@@ -3,12 +3,14 @@ import {Tree, Modal, Dropdown, Menu, message, Spin, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {updateId, addNodes, editNodes, deleteNodes, moveNodes, cacheData, selectedHandle, session} from '@huxy/utils';
-import apiList from '@app/utils/getApis';
-import defProject from '@app/configs/projects';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
+
+import apiList from '@app/utils/getApis';
+import {defProject} from '@app/configs';
+
 import HandleModal from './modal';
 import CommonEditor from './commonEditor';
 import FormEditor from './formEditor';
@@ -265,18 +267,20 @@ const Index = props => {
           </Panel>
         </Col>
         <Col auto offsetWidth="260px">
-          {selectedKey ? (
-            Comp
-          ) : (
-            <div style={{padding: 12}}>
-              <Alert
-                type="warning"
-                showIcon
-                message="请选中左侧DOM树节点！"
-                description="请选中左侧DOM树节点，来对当前节点属性进行增删改操作，如添加属性‘style’、‘onClick’等。根节点不可设置属性！DOM树节点右键可添加或删除节点，节点可自由拖动！"
-              />
-            </div>
-          )}
+          <Panel>
+            {selectedKey ? (
+              Comp
+            ) : (
+              <div>
+                <Alert
+                  type="warning"
+                  showIcon
+                  message="请选中左侧DOM树节点！"
+                  description="请选中左侧DOM树节点，来对当前节点属性进行增删改操作，如添加属性‘style’、‘onClick’等。根节点不可设置属性！DOM树节点右键可添加或删除节点，节点可自由拖动！"
+                />
+              </div>
+            )}
+          </Panel>
         </Col>
       </Row>
       {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} addFormText={addFormText} />}

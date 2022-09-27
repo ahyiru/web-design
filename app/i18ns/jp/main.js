@@ -16,6 +16,19 @@ const layout = {
   data_percent_msg: '请输入50-100内数据！',
   menu_width_msg: '请输入0-300内数据！',
 };
+
+const tables = {
+  add: '添加',
+  batchDelete: '批量删除',
+  search: '查询',
+  reset: '重置',
+  edit: '编辑',
+  delete: '删除',
+  cancel: '取消',
+  submit: '确定',
+  delMsg: '确定删除吗？',
+};
+
 const projects = {
   tableHeaderText: {
     name: '项目名',
@@ -345,6 +358,7 @@ const main = {
   bread: '当前位置',
   copyright: 'copyright &copy; 2020-2022',
   layout,
+  tables,
   projects,
   projectApis,
   projectRouter,

@@ -8,10 +8,6 @@ import {Row, Col} from '@huxy/components';
 import {arr2TreeByPath, isValidArr, traverItem} from '@huxy/utils';
 import {useSearch, useDebounce} from '@huxy/use';
 
-import defProject from '@app/configs/projects';
-
-import apiList from '@app/utils/getApis';
-
 import useFetchList from '@app/hooks/useFetchList';
 
 import Back from '@app/components/goBack';
@@ -21,6 +17,9 @@ import Panel from '@app/components/panel';
 import Icons from '@app/utils/icons';
 
 import {useIntls} from '@app/components/intl';
+
+import apiList from '@app/utils/getApis';
+import {defProject} from '@app/configs';
 
 const {listRouterFn, listAuthFn, setAuthFn} = apiList;
 

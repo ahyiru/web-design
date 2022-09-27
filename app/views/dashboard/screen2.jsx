@@ -7,7 +7,7 @@ import {Row, Col} from '@app/components/row';
 import ScreenHeader from '@app/components/screenHeader';
 import {option1, option2, option3, option4, option5, option6, option7, option8, option9, option10, option11, option12, columns1, columns2, dataSource1, dataSource2} from '@app/models/screen1';
 import defaultOpts from '@app/models/screen1/defaultOpts';
-import {tableCfg} from '@app/utils/config';
+import {tableCfg} from '@app/utils/configs';
 
 const Panel = props => <DefPanel {...props} style={{background: 'rgba(255,255,255,.074)' /*'rgba(42,48,66,.7)'*/}} />;
 

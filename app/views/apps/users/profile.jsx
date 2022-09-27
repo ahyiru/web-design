@@ -2,7 +2,7 @@ import {Form, Input, Button, message, Tabs, Typography} from 'antd';
 import {UserOutlined, LockOutlined, MailOutlined} from '@ant-design/icons';
 import apiList from '@app/utils/getApis';
 
-import {layout} from '@app/utils/config';
+import {layout} from '@app/utils/configs';
 import {nameRule, emailRule, passwordRule} from '@app/utils/rules';
 
 import Panel from '@app/components/panel';

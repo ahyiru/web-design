@@ -4,15 +4,14 @@ import {UserOutlined, LockOutlined, GithubOutlined} from '@ant-design/icons';
 import {Spinner} from '@huxy/components';
 import {storage} from '@huxy/utils';
 
-import apiList from '@app/utils/getApis';
-
-import {isAuthed} from '@app/utils/utils';
-
-import {nameRule} from '@app/utils/rules';
+import {isAuthed, goPage} from '@app/utils/utils';
 
 import {useIntls} from '@app/components/intl';
 
+import {apiList, formRules, github_client_id, github_oauth_url} from '../configs';
+
 const {activeEmailFn, githubFn, loginFn} = apiList;
+const {nameRule} = formRules;
 
 const thirdLoginStyle = {
   textAlign: 'center',
@@ -42,7 +41,8 @@ const Index = props => {
       const {code: msgCode, token} = await githubFn({code});
       if (msgCode === 200) {
         storage.set('token', token);
-        location.href = '/';
+        // props.router.push('/');
+        goPage();
       }
     } catch (err) {}
     setIsPending(false);
@@ -55,7 +55,7 @@ const Index = props => {
         message.success(msg);
         storage.set('token', token);
         // props.router.push('/');
-        location.href = '/';
+        goPage();
       }
     } catch (err) {}
     setIsPending(false);
@@ -69,15 +69,14 @@ const Index = props => {
         message.success(msg);
         storage.set('token', token);
         // props.router.push('/');
-        location.href = '/';
+        goPage();
       }
     } catch (err) {}
     setIsPending(false);
   };
 
   const auth = () => {
-    const client_id = '61721ef923095e006d18';
-    location.href = `https://github.com/login/oauth/authorize?client_id=${client_id}`;
+    location.href = `${github_oauth_url}?client_id=${github_client_id}`;
   };
 
   return (

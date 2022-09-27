@@ -16,6 +16,19 @@ const layout = {
   data_percent_msg: 'please enter data within 50-100！',
   menu_width_msg: 'please enter data within 0-300！',
 };
+
+const tables = {
+  add: 'add',
+  batchDelete: 'batchDelete',
+  search: 'search',
+  reset: 'reset',
+  edit: 'edit',
+  delete: 'delete',
+  cancel: 'cancel',
+  submit: 'submit',
+  delMsg: 'confirm to delete？',
+};
+
 const projects = {
   tableHeaderText: {
     name: 'project name',
@@ -345,6 +358,7 @@ const main = {
   bread: 'current',
   copyright: 'copyright &copy; 2020-2022',
   layout,
+  tables,
   projects,
   projectApis,
   projectRouter,

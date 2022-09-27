@@ -16,7 +16,7 @@ const Index = props => {
   const [active, setActive] = useState(1);
   const [searchParmas, setSearchParmas] = useState('');
   const [selectedRows, setSelectedRows] = useState([]);
-  const [result, update, pageChange, searchList] = useHandleList(apiList.allUserFn, {current: 1, size: 10, active});
+  const [result, update, pageChange, searchList] = useHandleList(apiList.allUser, {current: 1, size: 10, active});
 
   const {current, size} = result.data || {};
 
@@ -56,7 +56,7 @@ const Index = props => {
       okType: 'danger',
       cancelText: '取消',
       onOk: async () => {
-        const {code, message: msg} = await apiList.deleteUserFn({ids});
+        const {code, message: msg} = await apiList.deleteUser({ids});
         if (code === 200) {
           message.success(msg);
           setSelectedRows([]);
@@ -72,7 +72,7 @@ const Index = props => {
     props.router.push(`./add`);
   };
   const handleExport = async () => {
-    const {code, message: msg} = await apiList.exportFn();
+    const {code, message: msg} = await apiList.export();
     if (code === 200) {
       message.success(msg);
     }

@@ -8,25 +8,19 @@ const path = require('path');
 // const https = require('https');
 // const fs = require('fs');
 
+const appProxy = require('./appProxy');
+
+const fixPath = require('./utils');
+
+const {appName, HOST, PRO_PORT, BUILD_DIR, PRD_ROOT_DIR} = require('../configs');
+
 const app = express();
 
-const {appName, HOST, PRO_PORT, PROXY, BUILD_DIR, PRD_ROOT_DIR} = require('../configs');
+appProxy(app);
 
-const {createProxyMiddleware} = require('http-proxy-middleware');
+const rootDir = fixPath(`${PRD_ROOT_DIR}/`);
 
-const proxyCfg = require('./appProxy');
-
-if (Array.isArray(PROXY)) {
-  PROXY.map(proxyItem => {
-    const {prefix, opts} = proxyCfg(PROXY);
-    app.use(prefix, createProxyMiddleware(opts));
-  });
-} else {
-  const {prefix, opts} = proxyCfg(PROXY);
-  app.use(prefix, createProxyMiddleware(opts));
-}
-
-app.set('host', HOST);
+app.set('host', HOST || 'http://localhost');
 app.set('port', PRO_PORT);
 
 app.use(cors());
@@ -40,8 +34,7 @@ const build = path.resolve(appName, BUILD_DIR);
 // app.use(express.static(build));
 
 app.use(PRD_ROOT_DIR, express.static(build));
-
-app.get('*', function (request, response) {
+app.get(`${rootDir}*`, function (request, response) {
   response.sendFile(path.resolve(build, 'index.html'));
 });
 

@@ -4,8 +4,6 @@ import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCir
 import {Row, Col} from '@huxy/components';
 import {traverItem, sort} from '@huxy/utils';
 import {useSearch} from '@huxy/use';
-import apiList from '@app/utils/getApis';
-import defProject from '@app/configs/projects';
 import useFetchList from '@app/hooks/useFetchList';
 import formatTree from '@app/utils/formatTree';
 import Back from '@app/components/goBack';
@@ -13,6 +11,8 @@ import Panel from '@app/components/panel';
 import customRender from '@app/utils/render';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
+import apiList from '@app/utils/getApis';
+import {defProject} from '@app/configs';
 import HandleModal from './modal';
 
 const {listRouterFn, addRouterFn, editRouterFn, deleteRouterFn, listSchemaFn} = apiList;

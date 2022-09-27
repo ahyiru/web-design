@@ -7,8 +7,8 @@ const config = api => {
     [
       '@babel/preset-env',
       {
-        modules: 'commonjs',
-        // modules: false,
+        // modules: 'commonjs',
+        modules: false,
         // loose: true,
         bugfixes: true,
         useBuiltIns: 'usage',
@@ -103,7 +103,6 @@ const config = api => {
 
   const env = {
     development: {
-      presets: ['@babel/preset-env'],
       plugins: ['react-hot-loader/babel'],
     },
     production: {

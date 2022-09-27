@@ -7,8 +7,8 @@ import * as configs from './configs';
 
 const Index = props => {
   const i18ns = i18nsStore.getState();
-  const menus = useFormatMenu();
-  return <Layout title={i18ns?.title} {...props} {...menus} leftList={leftNav()} rightList={rightNav()} {...configs} />;
+  const menus = useFormatMenu(props);
+  return <Layout title={i18ns?.title} {...menus} leftList={leftNav()} rightList={rightNav()} {...configs} {...props} />;
 };
 
 export default Index;
