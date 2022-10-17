@@ -9,6 +9,7 @@ const Index = props => {
   const [maskOpen, setMaskOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [dropOpen, setDropOpen] = useState(false);
   return (
     <Row>
       <Col>
@@ -45,7 +46,7 @@ const Index = props => {
       </Col>
       <Col>
         <Panel>
-          <Drop dropList={
+          <Drop type="vertical" dropList={
             <div>
               <h4>list 1</h4>
               <h4>list 2</h4>

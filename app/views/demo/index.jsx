@@ -1,104 +1,18 @@
-import {useState, useCallback, useEffect, useMemo, memo} from 'react';
-import {Drop} from '@huxy/components';
-// import Settings from '@app/components/settings';
-// import Intls from '@app/components/intl';
+import {useState, useEffect} from 'react';
 import './index.less';
 
-const Layout = props => {
-  console.log('Layout', props.state);
-  return (
-    <div>
-      <h1>Layout</h1>
-      {props.children}
-    </div>
-  );
-};
-const Parent1 = props => {
-  console.log('Parent1', props.state);
-  return (
-    <div>
-      <h2>Parent1</h2>
-      {props.children}
-    </div>
-  );
-};
-const Parent2 = props => {
-  console.log('Parent2', props.state);
-  return (
-    <div>
-      <h2>Parent2</h2>
-      {props.children}
-    </div>
-  );
-};
-const Child1_1 = props => {
-  console.log('Child1_1', props.state);
-  return (
-    <div>
-      <h4>Child1_1</h4>
-    </div>
-  );
-};
-const Child2_1 = props => {
-  console.log('Child2_1', props.state);
-  return (
-    <div>
-      <h4>Child2_1</h4>
-    </div>
-  );
-};
-const Child2_2 = props => {
-  console.log('Child2_2', props.state);
-  props.eventBus.on('test-memo', data => {
-    console.log('Child2_2 new data', data);
-  });
-  return (
-    <div>
-      <h4>Child2_2</h4>
-    </div>
-  );
-};
-
-const key21 = 21;
-
-const Child22 = memo(Child2_2, () => true);
-
-const Li = props => <a>{props.index}</a>;
-
 const Index = props => {
-  const [state, setState] = useState(0);
+  const [value, setValue] = useState(1);
   useEffect(() => {
-    setTimeout(() => {
-      setState(1);
-      props.eventBus.emit('test-memo', 1);
-    }, 2000);
-  }, []);
-  // const Layout1 = useMemo(()=><Layout state={state} />,[]);
-  // const Child22 = useMemo(()=><Child2_2 state={state} eventBus={props.eventBus} />,[]);
-  // const Child22 = memo(Child2_2, ()=>true);
+    document.documentElement.style.setProperty('--test-taiji-rotate', `${value * 360 + 90}deg`);
+  }, [value]);
   return (
-    <div className="demo-container">
-      <Layout state={state}>
-        <Parent1 key="1" state={state}>
-          <Child1_1 state={state} />
-        </Parent1>
-        <Parent2 state={state}>
-          <Child2_1 key={key21} state={state} />
-          <Child22 state={state} eventBus={props.eventBus} />
-        </Parent2>
-      </Layout>
-      {[1, 2, 3, 4].map(item => (
-        <Li key={item} index={item} />
-      ))}
-      <div>
-        <Drop dropList={<div>hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello</div>}>
-          <span>121</span>
-        </Drop>
+    <div className="taiji-container">
+      <div className="yao-gua">
+        <div className="taiji" />
       </div>
-      <div>
-        <Drop dropList={<div style={{height: 300}}>world</div>}>
-          <h1>hhh</h1>
-        </Drop>
+      <div style={{padding: '20px 0', textAlign: 'center'}}>
+        <input type="number" min="1" max="360" value={value} onChange={e => setValue(e.target.value)} />
       </div>
     </div>
   );

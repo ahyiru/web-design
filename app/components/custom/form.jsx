@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
 import {Form, Modal, message} from 'antd';
 import {traverItem, clone} from '@huxy/utils';
-import apiList from '@app/utils/getApis';
+
 import customRender from '@app/utils/render';
+import apiList from '@app/utils/getApis';
 import * as rules from '@app/utils/rules';
 
 /* const formCfg={

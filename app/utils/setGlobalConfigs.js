@@ -1,8 +1,8 @@
 import {formatTime} from '@huxy/utils';
 
-import * as globalCfgs from './configs';
+import * as configs from './configs';
 
-const setGlobalConfigs = () => {
+const setGlobalConfigs = (globalCfgs = configs) => {
   window.utils = {formatTime};
   window.configs = globalCfgs;
 };

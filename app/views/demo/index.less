@@ -1,6 +1,58 @@
-.demo-container {
-  width: 100%;
+@keyframes taiji-animate-rotate {
+  0% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(var(--test-taiji-rotate));
+  }
+}
+
+.taiji {
+  --black: #000;
+  --white: #fff;
+  --width: 300px;
+  --border: 2px;
+  box-sizing: content-box;
+  position: relative;
+  width: var(--width);
+  height: calc(var(--width) / 2);
+  background: var(--white);
+  border-color: var(--black);
+  border-style: solid;
+  border-width: var(--border) var(--border) calc(var(--width) / 2 + var(--border)) var(--border);
+  border-radius: 100%;
+  transform: rotate(90deg);
+  animation: taiji-animate-rotate linear 1s infinite;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    box-sizing: content-box;
+    width: calc(var(--width) / 8);
+    height: calc(var(--width) / 8);
+    border-radius: 100%;
+    top: 50%;
+  }
+  &::before {
+    left: 0;
+    background: var(--black);
+    border: calc(var(--width) * 3 / 16) solid var(--white);
+  }
+  &::after {
+    left: 50%;
+    background: var(--white);
+    border: calc(var(--width) * 3 / 16) solid var(--black);
+  }
+}
+
+.taiji-container {
   height: 100%;
+}
+
+.yao-gua {
+  // width: 500px;
+  height: 500px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -8,11 +8,11 @@ import {layout, tailLayout, methodList} from '@app/utils/configs';
 
 import Panel from '@app/components/panel';
 
-import {testFetcher} from '@app/apis/fetcher';
-
 import {storage} from '@huxy/utils';
 
 import {useIntls} from '@app/components/intl';
+
+import {testFetcher} from '@app/apis/fetcher';
 
 import {PROXY} from '@app/configs';
 

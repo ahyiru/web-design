@@ -2,12 +2,12 @@ const routes = [
   {
     path: '/design',
     name: '设计',
-    icon: 'FundProjectionScreenOutlined',
+    icon: 'ico-layout',
     children: [
       {
         path: '/scene',
-        name: '场景设计',
-        icon: 'CodeSandboxOutlined',
+        name: '场景',
+        icon: 'ico-flag',
         component: () => import('./src/scene'),
       },
       {
@@ -24,7 +24,8 @@ const routes = [
       {
         path: '/tags',
         name: '标签管理',
-        icon: 'TagsOutlined',
+        hideMenu: true,
+        icon: 'ico-flag',
         component: () => import('./src/tags'),
       },
       {

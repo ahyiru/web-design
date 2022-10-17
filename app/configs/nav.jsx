@@ -58,11 +58,18 @@ export const leftNav = () => {
       Ricon: true,
       children: [
         {
-          key: 'zbxtable',
-          name: 'zbxtable',
+          key: 'scenedesign',
+          name: 'scenes',
           icon: 'ApiOutlined',
           type: 'link',
-          link: 'https://zbx.cactifans.com/',
+          link: 'http://ihuxy.com:7000',
+        },
+        {
+          key: 'filesystem',
+          name: 'filesystem',
+          icon: 'ApiOutlined',
+          type: 'link',
+          link: 'http://ihuxy.com:8020',
         },
         {
           key: 'PhoenixUI',

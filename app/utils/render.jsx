@@ -2,7 +2,9 @@ import {createElement} from 'react';
 import components from './components';
 import {formatProps, formatChildren} from './formatProps';
 import setGlobalConfigs from './setGlobalConfigs';
+
 setGlobalConfigs();
+
 const render = (schema, params, commonprops = null) => {
   schema = Array.isArray(schema) ? schema : [schema];
   const dom = schema.map((item, i) => {

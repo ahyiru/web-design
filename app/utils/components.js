@@ -1,11 +1,11 @@
 import {Button, Form, Input, InputNumber, Select, Checkbox, Radio, Switch, DatePicker, TimePicker, Upload, Tabs, Tag, Tooltip, Badge, Result, Empty, Space, Progress, Spin} from 'antd';
 
-import CustomTable from '@app/components/custom/table';
-import CustomForm from '@app/components/custom/form';
-
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 import Back from '@app/components/goBack';
+
+import CustomTable from '@app/components/custom/table';
+import CustomForm from '@app/components/custom/form';
 
 const {Item} = Form;
 const {TextArea, Search} = Input;

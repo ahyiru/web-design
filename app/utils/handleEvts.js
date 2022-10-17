@@ -5,7 +5,7 @@ const eventTargets = () =>
     ? {
       startEvt: 'touchstart',
       moveEvt: 'touchmove',
-      endEvent: 'touchend',
+      endEvt: 'touchend',
     }
     : {
       startEvt: 'mousedown',
@@ -13,37 +13,37 @@ const eventTargets = () =>
       endEvt: 'mouseup',
     };
 
-const initStart = (startEvt, ref, startEvent) => {
-  ref.addEventListener(startEvt, startEvent, false);
+const initStart = (startEvt, startFn, ref) => {
+  ref.addEventListener(startEvt, startFn, false);
 };
-const destroyStart = (startEvt, ref, startEvent) => {
-  ref.removeEventListener(startEvt, startEvent, false);
+const destroyStart = (startEvt, startFn, ref) => {
+  ref.removeEventListener(startEvt, startFn, false);
 };
-const handleStart = (moveEvt, endEvt, ref, moveEvent, endEvent) => {
-  ref.addEventListener(moveEvt, moveEvent, false);
-  document.addEventListener(endEvt, endEvent, false);
+const handleStart = (moveEvt, endEvt, moveFn, endFn, ref) => {
+  ref.addEventListener(moveEvt, moveFn, false);
+  document.addEventListener(endEvt, endFn, false);
 };
-const handleEnd = (moveEvt, endEvt, ref, moveEvent, endEvent) => {
-  ref.removeEventListener(moveEvt, moveEvent, false);
-  document.removeEventListener(endEvt, endEvent, false);
+const handleEnd = (moveEvt, endEvt, moveFn, endFn, ref) => {
+  ref.removeEventListener(moveEvt, moveFn, false);
+  document.removeEventListener(endEvt, endFn, false);
 };
 
-const init = (ref, startEvent, moveEvent, endEvent) => {
+const init = (startEvent, moveEvent, endEvent, ref = document) => {
   const {startEvt, moveEvt, endEvt} = eventTargets();
 
-  const start = event => {
+  const startFn = event => {
     startEvent(event, ref);
-    handleStart(moveEvt, endEvt, ref, move, end);
+    handleStart(moveEvt, endEvt, moveFn, endFn, ref);
   };
-  const move = event => moveEvent(event, ref);
-  const end = event => {
+  const moveFn = event => moveEvent(event, ref);
+  const endFn = event => {
     endEvent(event, ref);
-    handleEnd(moveEvt, endEvt, ref, move, end);
+    handleEnd(moveEvt, endEvt, moveFn, endFn, ref);
   };
 
-  initStart(startEvt, ref, start);
+  initStart(startEvt, startFn, ref);
 
-  return () => destroyStart(startEvt, ref, start);
+  return () => destroyStart(startEvt, startFn, ref);
 };
 
 export default init;

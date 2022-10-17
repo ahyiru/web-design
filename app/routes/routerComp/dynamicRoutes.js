@@ -4,6 +4,8 @@ import pageSchema from '@app/utils/getPageSchema';
 import LowCode from '@app/views/lowCode';
 import Page from '@app/views/page';
 
+import slateRoutes from '@app/views/commons/slate/routes';
+
 export const configRoutes = {
   path: '/layout',
   name: '框架配置',
@@ -191,12 +193,7 @@ export const commonRoutes = {
       icon: 'FundOutlined',
       component: () => import('@app/views/commons/x6-demo/pages'),
     },
-    {
-      path: '/slate',
-      name: '富文本编辑器-slate',
-      icon: 'EditOutlined',
-      component: () => import('@app/views/commons/slate'),
-    },
+    ...slateRoutes,
     {
       path: '/virtualList',
       name: '虚拟列表',
@@ -221,6 +218,12 @@ export const dashboardRoutes = {
       name: 'screen2',
       icon: 'DashboardOutlined',
       component: () => import('@app/views/dashboard/screen2'),
+    },
+    {
+      path: '/screen3',
+      name: 'screen3',
+      icon: 'DashboardOutlined',
+      component: () => import('@app/views/dashboard/screen3'),
     },
   ],
 };
@@ -347,7 +350,8 @@ export const playgroundRoutes = {
       path: '/demo',
       name: 'demo',
       icon: 'MergeCellsOutlined',
-      denied: browserRouter,
+      // denied: browserRouter,
+      injectSomeValues: 'injectSomeValues',
       component: () => import('@app/views/demo'),
     },
     {

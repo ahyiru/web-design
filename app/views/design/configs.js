@@ -9,6 +9,23 @@ export const apiList = apis;
 export const formConfigs = configs;
 export const formRules = rules;
 
+export const baseUrl = 'http://ihuxy.com:7000';
+
+export const loadTypes = [
+  {
+    label: 'modules',
+    value: 'modules',
+  },
+  {
+    label: 'packages',
+    value: 'packages',
+  },
+  {
+    label: 'static',
+    value: 'static',
+  },
+];
+
 export const defCategories = [
   {
     label: '娱乐',

@@ -45,11 +45,11 @@ const tabs = i18nCfg => [
     value: i18nCfg.layoutDesign,
   },
   {
-    key: 'color',
+    key: 'size',
     value: i18nCfg.sizeDesign,
   },
   {
-    key: 'size',
+    key: 'color',
     value: i18nCfg.colorDesign,
   },
 ];
@@ -139,7 +139,7 @@ const Index = props => {
         </Row>
       </>
     ),
-    color: getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
+    size: getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
       <Row key={key} gutter={[10, 10]}>
         <Col span={5}>
           <span style={labelStyle}>{themeLang[key]}：</span>
@@ -167,7 +167,7 @@ const Index = props => {
         </Col>
       </Row>
     )),
-    size: Object.keys(theme.list.colors).map(key => (
+    color: Object.keys(theme.list.colors).map(key => (
       <Row key={key} gutter={[10, 10]}>
         <Col span={5}>
           <span style={labelStyle}>{themeLang[key]}：</span>

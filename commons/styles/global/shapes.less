@@ -99,14 +99,18 @@
   z-index: -1;
 }
 .corner-half:before {
-  bottom: -1px;
   left: -1px;
-  box-shadow: 2px -2px 0 0 var(--appColor) inset, 4px -4px 0 0 var(--panelBgColor) inset; // -6px 6px 0 0 var(--appColor) inset;
+  bottom: -1px;
+  // box-shadow: 2px -2px 0 0 var(--appColor) inset, 4px -4px 0 0 var(--panelBgColor) inset; // -6px 6px 0 0 var(--appColor) inset;
+  border-left: 2px solid var(--appColor);
+  border-bottom: 2px solid var(--appColor);
 }
 .corner-half:after {
   top: -1px;
   right: -1px;
-  box-shadow: -2px 2px 0 0 var(--appColor) inset, -4px 4px 0 0 var(--panelBgColor) inset; // -6px 6px 0 0 var(--appColor) inset;
+  // box-shadow: -2px 2px 0 0 var(--appColor) inset, -4px 4px 0 0 var(--panelBgColor) inset; // -6px 6px 0 0 var(--appColor) inset;
+  border-top: 2px solid var(--appColor);
+  border-right: 2px solid var(--appColor);
 }
 
 .page-bg-dot {

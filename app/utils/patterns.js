@@ -1,9 +1,17 @@
+export const customRequired = {
+  pattern: /.+/,
+  message: '请输入!',
+};
+
 export const required = {
-  // pattern: /.+/,
-  // message: '请输入!',
   required: true,
 };
 
+// 标题
+export const titlePattern = {
+  pattern: /^[\u4E00-\u9FA5A-Za-z0-9_-]{2,20}$/,
+  message: '长度为2-20不含特殊字符!',
+};
 // 用户名
 export const namePattern = {
   pattern: /^[\u4E00-\u9FA5A-Za-z0-9_]{2,20}$/,

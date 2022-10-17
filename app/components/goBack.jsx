@@ -1,20 +1,55 @@
 import Panel from '@app/components/panel';
-import Intls from '@app/components/intl';
 import Icon from '@app/components/icon';
 import Button from '@app/components/base/button';
 
-const Index = ({back, actions = []}) => (
+import Intls from '@app/components/intl';
+
+const containerStyle = {
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+const backStyle = {
+  width: '100px',
+};
+const titleStyle = {
+  width: '100%',
+  paddingRight: '50px',
+  fontSize: '1.6rem',
+  fontWeight: 500,
+  textAlign: 'center',
+};
+const actionStyle = {
+  maxWidth: '500px',
+};
+
+const Index = ({back, title, actions = [], backText = '返回'}) => (
   <Panel>
-    <Button onClick={e => (typeof back === 'function' ? back() : history.back())} className="sm link">
-      <Icon icon="ico-left" />
-      <Intls keys="main.components.back">返回</Intls>
-    </Button>
-    {actions.map(({text, icon, className, ...rest}) => (
-      <Button key={text} className={`sm ${className ?? ''}`} {...rest}>
-        <Icon icon={icon} />
-        <Intls>{text}</Intls>
-      </Button>
-    ))}
+    <div style={containerStyle}>
+      <div style={backStyle}>
+        <Button onClick={e => (typeof back === 'function' ? back() : history.back())} className="sm link">
+          <Icon icon="ico-left" />
+          <span><Intls keys="main.components.back">{backText}</Intls></span>
+        </Button>
+      </div>
+      {
+        title && <div style={titleStyle}>{title}</div>
+      }
+      {
+        actions.length ? <div style={actionStyle}>
+          {
+            actions.map(({text, icon, className, style, ...rest}, i) => (
+              <Button key={text} className={`sm ${className ?? ''}`} style={{marginLeft: i ? 12 : 0, ...style}} {...rest}>
+                <Icon icon={icon} />
+                <span>{text}</span>
+              </Button>
+            ))
+          }
+        </div> : null
+      }
+    </div>
   </Panel>
 );
 

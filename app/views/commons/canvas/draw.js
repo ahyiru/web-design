@@ -127,7 +127,7 @@ const init = (ref, defCfg, imgRef, imgUrl) => {
   } else {
     clearRect(imgRef);
   }
-  const destroy = initStart(ref, startEvent, moveEvent, endEvent);
+  const destroy = initStart(startEvent, moveEvent, endEvent, ref);
   return {
     destroy,
     color: value => setCfg({color: value, type: 'draw'}),

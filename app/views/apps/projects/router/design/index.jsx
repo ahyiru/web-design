@@ -189,21 +189,18 @@ const Index = props => {
       icon: 'EyeOutlined',
       type: 'primary',
       onClick: preview,
-      style: {float: 'right'},
     },
     {
       text: topActionText.saveConfigs,
       icon: 'SaveOutlined',
       type: 'primary',
       onClick: saveConfigs,
-      style: {float: 'right', marginRight: 12},
     },
     {
       text: topActionText.redoDesign,
       icon: 'RedoOutlined',
       // type:'primary',
       onClick: redoDesign,
-      style: {float: 'right', marginRight: 12},
       disabled: disableRedo,
     },
     {
@@ -211,7 +208,6 @@ const Index = props => {
       icon: 'UndoOutlined',
       // type:'primary',
       onClick: undoDesign,
-      style: {float: 'right', marginRight: 12},
       disabled: disableUndo,
     },
   ];

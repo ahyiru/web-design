@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Form, Button, message, Input, Select } from 'antd';
+import {useState, useEffect} from 'react';
+import {Form, Button, message, Input, Select, Radio} from 'antd';
 import {Row, Col} from '@huxy/components';
 import Back from '@app/components/goBack';
 import {useIntls} from '@app/components/intl';
@@ -7,7 +7,7 @@ import Panel from '@app/components/panel';
 
 import Upload from './upload';
 
-import {apiList, defProject, formConfigs, formRules, defCategories, defTags} from '../../configs';
+import {apiList, defProject, formConfigs, formRules, defCategories, defTags, loadTypes} from '../../configs';
 
 const {addSceneFn, editSceneFn} = apiList;
 const {layout, tailLayout} = formConfigs;
@@ -64,17 +64,22 @@ const Index = props => {
     </Col>
     <Col span={6}>
       <Panel>
-        <Form name="scene" initialValues={item ? {...item, screenshot: undefined, tag: item.tag.split(',')} : {}} onFinish={onFinish} {...layout}>
+        <Form name="scene" initialValues={item ? {...item, screenshot: undefined, tag: item.tag.split(',')} : {loadType: 'modules'}} onFinish={onFinish} {...layout}>
           <Form.Item name="name" label="标题" rules={titleRule}>
             <Input  placeholder="请输入标题" />
+          </Form.Item>
+          <Form.Item name="loadType" label="类型" rules={[{ required: true }]}>
+            <Radio.Group options={loadTypes} optionType="button" />
           </Form.Item>
           <Form.Item name="category" label="类别" rules={[{ required: true }]}>
             <Select placeholder="请选择类别" options={categories} />
           </Form.Item>
-          <Form.Item name="tag" label="标签" rules={[{ required: true }]}>
+          <Form.Item label="标签" required>
             <Row>
               <Col auto>
-                <Select mode="tags" placeholder="请选择标签" options={tags} onChange={onChange} disabled={tagCount > 4} />
+                <Form.Item name="tag" rules={[{ required: true }]}>
+                  <Select mode="tags" placeholder="请选择标签" options={tags} onChange={onChange} disabled={tagCount > 4} />
+                </Form.Item>
               </Col>
               <Col width="98px">
                 <Button type="primary" onClick={e => props.router.push('/design/tags/add')}>添加标签</Button>

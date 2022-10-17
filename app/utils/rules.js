@@ -1,10 +1,12 @@
-import {required, namePattern, emailPattern, passwordPattern, pathPattern, urlPattern} from './patterns';
+import {required, customRequired, titlePattern, namePattern, emailPattern, passwordPattern, pathPattern, urlPattern} from './patterns';
 
+export const titleRule = [required, titlePattern];
 export const urlRule = [urlPattern];
 export const nameRule = [required, namePattern];
 export const emailRule = [required, emailPattern];
 export const passwordRule = [required, passwordPattern];
 export const roleRule = [{type: 'number', min: 0, max: 5, message: '取值范围0-5!'}];
+
 export const confirmRule = [
   required,
   ({getFieldValue}) => ({
@@ -18,6 +20,10 @@ export const confirmRule = [
 ];
 
 export const pathRule = [required, pathPattern];
+
+export const customNameRule = [customRequired, namePattern];
+export const customEmailRule = [customRequired, emailPattern];
+export const customPasswordRule = [customRequired, passwordPattern];
 
 export const checkVolid = (rules, value) => {
   for (let i = 0, l = rules.length; i < l; i++) {

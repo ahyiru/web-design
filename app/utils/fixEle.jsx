@@ -6,7 +6,7 @@ const fixEle = list => Value => {
     const Comp = list?.[Value];
     return Comp ? <Comp /> : <i className={Value} />;
   }
-  return Value || null;
+  return Value ?? null;
 };
 
 export default fixEle;

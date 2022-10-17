@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Pagination, Space, Input, Button, Modal, Form, message, Select} from 'antd';
-import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined, EditOutlined} from '@ant-design/icons';
+import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined, EditOutlined, EyeOutlined} from '@ant-design/icons';
 import {Link} from '@huxy/router';
 import {Row, Col} from '@huxy/components';
 import {validObj} from '@huxy/utils';
@@ -9,7 +9,7 @@ import Panel from '@app/components/panel';
 import {useIntls} from '@app/components/intl';
 import FixedSizeImage from '@app/components/fixedSizeImage';
 
-import {apiList, defCategories, defaultImg} from '../../configs';
+import {apiList, defCategories, defaultImg, baseUrl} from '../../configs';
 
 import './index.less';
 
@@ -114,13 +114,10 @@ const Index = props => {
         <Col>
           <Panel>
             {/* <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={isPending} size="small" bordered rowKey="_id" scroll={{x: true}} /> */}
-            <Row gutter={10}>
+            <Row gutter={[16, 16]}>
               {
                 (list || []).map(item => <Col key={item._id} span={3} xs={12} sm={6}>
-                  <Link className="scene-item" target="_blank" rel="noopener noreferrer" to={{
-                    path: item.demo || `/scenes/${item.name}`,
-                    query: {uid: item.uid},
-                  }}>
+                  <div className="scene-item">
                     <span className={`status${item.audited ? ' audited' : ''}`} />
                     <div className="image">
                       <FixedSizeImage src={item.screenshot || defaultImg} alt={item.name} />
@@ -130,10 +127,16 @@ const Index = props => {
                       <p>{item.description}</p>
                     </div>
                     <div className="actions">
-                      <EditOutlined onClick={e => handleEdit(item, e)} />
-                      <DeleteOutlined onClick={e => handleDelete(item, e)} />
+                      <Link target="_blank" rel="noopener noreferrer" to={{
+                        path: item.demo || `${baseUrl}/scenes${item.loadType === 'modules' ? `/${item.loadType}` : ''}/${item.name}`,
+                        // query: {uid: item.uid},
+                      }}>
+                        <EyeOutlined />
+                      </Link>
+                      <a onClick={e => handleEdit(item, e)}><EditOutlined /></a>
+                      <a onClick={e => handleDelete(item, e)}><DeleteOutlined /></a>
                     </div>
-                  </Link>
+                  </div>
                 </Col>)
               }
             </Row>

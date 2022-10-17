@@ -4,16 +4,17 @@ import {Table, Space, Button, Modal, message} from 'antd';
 import {Row, Col} from '@huxy/components';
 import {validObj} from '@huxy/utils';
 
-import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
 
 import Panel from '@app/components/panel';
 
 import Icon from '@app/components/icon';
 
+import {userInfoStore} from '@app/store/stores';
+
 import customRender from '@app/utils/render';
 
-import {userInfoStore} from '@app/store/stores';
+import apiList from '@app/utils/getApis';
 
 const actionsRender = {
   handleCheck: {

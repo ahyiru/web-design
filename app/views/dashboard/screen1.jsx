@@ -40,12 +40,12 @@ const Index = props => {
         <Col>
           <Row gutter={[12, 12]}>
             <Col span={3}>
-              <Panel className="corner">
+              <DefPanel title="使用统计量" className="corner">
                 <ReactECharts option={option6} style={{height: '160px'}} />
-              </Panel>
+              </DefPanel>
             </Col>
             <Col span={3}>
-              <Panel className="corner-half">
+              <Panel title="访问统计量" className="corner-half">
                 <ReactECharts option={option5} style={{height: '160px'}} />
               </Panel>
             </Col>

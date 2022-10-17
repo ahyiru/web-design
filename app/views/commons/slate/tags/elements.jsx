@@ -1,4 +1,4 @@
-export const DefaultElement = ({attributes, children}) => <p {...attributes}>{children}</p>;
+export const DefaultElement = ({attributes, children, ...rest}) => <div {...attributes} {...rest}>{children}</div>;
 
 export const H1 = ({attributes, children}) => <h1 {...attributes}>{children}</h1>;
 export const H2 = ({attributes, children}) => <h2 {...attributes}>{children}</h2>;
@@ -10,8 +10,8 @@ export const Italic = ({attributes, children}) => <i {...attributes}>{children}<
 export const Underline = ({attributes, children}) => <u {...attributes}>{children}</u>;
 export const Strikethrough = ({attributes, children}) => <s {...attributes}>{children}</s>;
 export const Quote = ({attributes, children}) => <blockquote {...attributes}>{children}</blockquote>;
-// export const Code=({attributes,children})=><pre {...attributes}><code>{children}</code></pre>;
 export const Code = ({attributes, children}) => <code {...attributes}>{children}</code>;
+
 export const Link = ({attributes, children, element}) => (
   <a {...attributes} href={element.url}>
     {children}

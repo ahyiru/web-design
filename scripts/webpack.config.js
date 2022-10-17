@@ -114,7 +114,7 @@ const rules = [
     exclude: [/node_modules/ /* ,/draft/ */, path.resolve(__dirname, 'node')],
   },
   {
-    test: /\.(jpe?g|png|gif|psd|bmp|ico|webp|svg)$/i,
+    test: /\.(jpe?g|png|gif|psd|bmp|ico|webp|svg|hdr)$/i,
     loader: 'url-loader',
     options: {
       limit: 20480,
@@ -173,6 +173,15 @@ const rules = [
     options: {
       limit: 20480,
       name: 'video/[hash].[ext]',
+    },
+    exclude: [/node_modules/],
+  },
+  {
+    test: /\.(max|glb|gltf|fbx)$/,
+    loader: 'url-loader',
+    options: {
+      limit: 20480,
+      name: 'models/[hash].[ext]',
     },
     exclude: [/node_modules/],
   },
