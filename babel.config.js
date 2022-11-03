@@ -103,7 +103,7 @@ const config = api => {
 
   const env = {
     development: {
-      plugins: ['react-hot-loader/babel'],
+      // plugins: ['react-hot-loader/babel'],
     },
     production: {
       plugins: [],

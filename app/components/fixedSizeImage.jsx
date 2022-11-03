@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { loadImage, fixSize } from '@huxy/utils';
+import {loadImage, fixSize} from '@huxy/utils';
 
 const FixedSizeImage = props => {
   const [width, setWidth] = useState(0);

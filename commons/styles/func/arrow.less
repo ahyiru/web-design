@@ -1,0 +1,183 @@
+.arrow(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  position: relative;
+  background: @arrowBgColor;
+  border: 1px solid @arrowBorderColor;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+  }
+
+  &::before {
+    border-width: @arrowSize;
+  }
+
+  &::after {
+    border-width: @arrowSize - @arrowWidth;
+  }
+}
+
+.arrow-lt(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  .arrow(@arrowBgColor, @arrowBorderColor, @arrowSize, @position, @arrowWidth);
+
+  &::before,
+  &::after {
+    top: auto;
+    bottom: 100%;
+  }
+
+  &::before {
+    left: @position;
+    border-bottom-color: @arrowBorderColor;
+  }
+
+  &::after {
+    left: calc(@position + @arrowWidth);
+    border-bottom-color: @arrowBgColor;
+  }
+}
+
+.arrow-rt(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  .arrow(@arrowBgColor, @arrowBorderColor, @arrowSize, @position, @arrowWidth);
+
+  &::before,
+  &::after {
+    left: auto;
+    top: auto;
+    bottom: 100%;
+  }
+
+  &::before {
+    right: @position;
+    border-bottom-color: @arrowBorderColor;
+  }
+
+  &::after {
+    right: calc(@position + @arrowWidth);
+    border-bottom-color: @arrowBgColor;
+  }
+}
+
+.arrow-lb(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  .arrow(@arrowBgColor, @arrowBorderColor, @arrowSize, @position, @arrowWidth);
+
+  &::before,
+  &::after {
+    bottom: auto;
+    top: 100%;
+    border-top-color: @arrowBorderColor;
+  }
+
+  &::before {
+    left: @position;
+  }
+
+  &::after {
+    left: calc(@position + @arrowWidth);
+    border-top-color: @arrowBgColor;
+  }
+}
+
+.arrow-rb(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  .arrow(@arrowBgColor, @arrowBorderColor, @arrowSize, @position, @arrowWidth);
+
+  &::before,
+  &::after {
+    bottom: auto;
+    top: 100%;
+  }
+
+  &::before {
+    right: @position;
+    border-top-color: @arrowBorderColor;
+  }
+
+  &::after {
+    right: calc(@position + @arrowWidth);
+    border-top-color: @arrowBgColor;
+  }
+}
+
+.arrow-tl(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  .arrow(@arrowBgColor, @arrowBorderColor, @arrowSize, @position, @arrowWidth);
+
+  &::before,
+  &::after {
+    left: auto;
+    right: 100%;
+  }
+
+  &::before {
+    top: @position;
+    border-right-color: @arrowBorderColor;
+  }
+
+  &::after {
+    top: calc(@position + @arrowWidth);
+    border-right-color: @arrowBgColor;
+  }
+}
+
+.arrow-tr(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  .arrow(@arrowBgColor, @arrowBorderColor, @arrowSize, @position, @arrowWidth);
+
+  &::before,
+  &::after {
+    right: auto;
+    left: 100%;
+  }
+
+  &::before {
+    top: @position;
+    border-left-color: @arrowBorderColor;
+  }
+
+  &::after {
+    top: calc(@position + @arrowWidth);
+    border-left-color: @arrowBgColor;
+  }
+}
+
+.arrow-bl(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  .arrow(@arrowBgColor, @arrowBorderColor, @arrowSize, @position, @arrowWidth);
+
+  &::before,
+  &::after {
+    left: auto;
+    right: 100%;
+  }
+
+  &::before {
+    bottom: @position;
+    border-right-color: @arrowBorderColor;
+  }
+
+  &::after {
+    bottom: calc(@position + @arrowWidth);
+    border-right-color: @arrowBgColor;
+  }
+}
+
+.arrow-br(@arrowBgColor: #fff, @arrowBorderColor: #f0f0f0, @arrowSize: 6px, @position: 10px, @arrowWidth: 1px) {
+  .arrow(@arrowBgColor, @arrowBorderColor, @arrowSize, @position, @arrowWidth);
+
+  &::before,
+  &::after {
+    right: auto;
+    left: 100%;
+  }
+
+  &::before {
+    bottom: @position;
+    border-left-color: @arrowBorderColor;
+  }
+
+  &::after {
+    bottom: calc(@position + @arrowWidth);
+    border-left-color: @arrowBgColor;
+  }
+}

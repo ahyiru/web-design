@@ -4,7 +4,5 @@ node_modules
 coverage
 dist
 build
-/__tests__/
-doc
-public
-**/draft/
+__tests__
+draft

@@ -15,7 +15,7 @@ import {apiList, defProject} from '../../configs';
 
 const {listTagsFn, deleteTagsFn} = apiList;
 
-const getColumns = ({ handleEdit, handleDelete}) => [
+const getColumns = ({handleEdit, handleDelete}) => [
   {
     title: '标签值',
     dataIndex: 'value',
@@ -68,7 +68,7 @@ const Index = props => {
   // const profile = userInfoStore.getState() || {};
   const backState = props.history.getState()?.backState;
   const selItem = props.history.getState()?.item;
-  const stateItem = selItem || (/* profile.projectId ? {_id: profile.projectId, name: profile.projectName, isDef: true} : */ {...defProject, isDef: true});
+  const stateItem = selItem || /* profile.projectId ? {_id: profile.projectId, name: profile.projectName, isDef: true} : */ {...defProject, isDef: true};
 
   const [selectedRows, setSelectedRows] = useState([]);
 

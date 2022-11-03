@@ -88,7 +88,8 @@ a {
   color: var(--linkColor);
 }
 
-a:active, a.active {
+a:active,
+a.active {
   color: var(--linkActiveColor);
 }
 

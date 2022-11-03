@@ -10,6 +10,7 @@ import FullPage from '@app/components/fullScreen';
 import CustomCollapse from '@app/components/customCollapse';
 import Notify from '@app/components/notify';
 import Search from '@app/components/search';
+import Icon from '@app/components/icon';
 
 import getLang from '@app/utils/getLang';
 import {logout} from '@app/utils/utils';
@@ -28,18 +29,20 @@ const {version} = require('../../package.json');
 
 const changeLang = ({key}) => langStore.setState(key);
 
-const buildInfo = buildTime ? [
-  {
-    divider: true,
-    key: 'version',
-    type: 'version',
-    name: 'version',
-    icon: 'EyeOutlined',
-    handle: item => {
-      message.info(`version：${version}，构建时间：${formatTime(buildTime)}`);
+const buildInfo = buildTime
+  ? [
+    {
+      divider: true,
+      key: 'version',
+      type: 'version',
+      name: 'version',
+      icon: <Icon icon="EyeOutlined" />,
+      handle: item => {
+        message.info(`version：${version}，构建时间：${formatTime(buildTime)}`);
+      },
     },
-  },
-] : [];
+  ]
+  : [];
 
 export const leftNav = () => {
   const left = getIntls('nav.left', {});
@@ -60,28 +63,28 @@ export const leftNav = () => {
         {
           key: 'scenedesign',
           name: 'scenes',
-          icon: 'ApiOutlined',
+          icon: <Icon icon="ApiOutlined" />,
           type: 'link',
           link: 'http://ihuxy.com:7000',
         },
         {
           key: 'filesystem',
           name: 'filesystem',
-          icon: 'ApiOutlined',
+          icon: <Icon icon="ApiOutlined" />,
           type: 'link',
           link: 'http://ihuxy.com:8020',
         },
         {
           key: 'PhoenixUI',
           name: 'PhoenixUI',
-          icon: 'ApiOutlined',
+          icon: <Icon icon="ApiOutlined" />,
           type: 'link',
           link: 'http://ihuxy.com:8088/',
         },
         {
           key: 'API文档',
           name: left?.apis ?? 'API文档',
-          icon: 'ApiOutlined',
+          icon: <Icon icon="ApiOutlined" />,
           type: 'link',
           link: 'http://ihuxy.com:8010',
         },
@@ -89,7 +92,7 @@ export const leftNav = () => {
     },
     {
       key: 'wechat',
-      icon: 'WechatOutlined',
+      icon: <Icon icon="WechatOutlined" />,
       arrowDir: 'lt',
       ChildRender: item => (
         <div className="follow-me">
@@ -100,7 +103,7 @@ export const leftNav = () => {
     },
     {
       key: 'configs',
-      icon: 'ToolOutlined',
+      icon: <Icon icon="ToolOutlined" />,
       type: 'configs',
       Custom: () => <Settings />,
     },
@@ -120,14 +123,14 @@ export const rightNav = () => {
           key: 'profile',
           name: right?.profile ?? '个人中心',
           type: 'profile',
-          icon: 'UserOutlined',
+          icon: <Icon icon="UserOutlined" />,
           path: '/profile',
         },
         {
           key: 'settings',
           name: right?.settings ?? '设置',
           type: 'setting',
-          icon: 'SettingOutlined',
+          icon: <Icon icon="SettingOutlined" />,
           path: '/profile',
         },
         {
@@ -135,7 +138,7 @@ export const rightNav = () => {
           key: 'logout',
           name: right?.logout ?? '退出',
           type: 'logout',
-          icon: 'PoweroffOutlined',
+          icon: <Icon icon="PoweroffOutlined" />,
           handle: item => {
             logout();
           },
@@ -192,7 +195,7 @@ export const rightNav = () => {
     {
       key: 'github',
       title: right?.github ?? 'Github',
-      icon: GithubIcon,
+      icon: <GithubIcon />,
       type: 'link',
       link: 'https://github.com/ahyiru/web-design',
     },
@@ -212,7 +215,7 @@ export const rightNav = () => {
     {
       title: right?.screenshot ?? '截屏',
       key: 'screencapture',
-      icon: 'CameraOutlined',
+      icon: <Icon icon="CameraOutlined" />,
       handle: item => {
         // const ele=document. getElementsByClassName('page-content')[0];
         html2canvas(document.getElementById('app'), {

@@ -115,8 +115,8 @@ const Index = props => {
           <Panel>
             {/* <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={isPending} size="small" bordered rowKey="_id" scroll={{x: true}} /> */}
             <Row gutter={[16, 16]}>
-              {
-                (list || []).map(item => <Col key={item._id} span={3} xs={12} sm={6}>
+              {(list || []).map(item => (
+                <Col key={item._id} span={3} xs={12} sm={6}>
                   <div className="scene-item">
                     <span className={`status${item.audited ? ' audited' : ''}`} />
                     <div className="image">
@@ -127,18 +127,26 @@ const Index = props => {
                       <p>{item.description}</p>
                     </div>
                     <div className="actions">
-                      <Link target="_blank" rel="noopener noreferrer" to={{
-                        path: item.demo || `${baseUrl}/scenes${item.loadType === 'modules' ? `/${item.loadType}` : ''}/${item.name}`,
-                        // query: {uid: item.uid},
-                      }}>
+                      <Link
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        to={{
+                          path: item.demo || `${baseUrl}/scenes${item.loadType === 'modules' ? `/${item.loadType}` : ''}/${item.name}`,
+                          // query: {uid: item.uid},
+                        }}
+                      >
                         <EyeOutlined />
                       </Link>
-                      <a onClick={e => handleEdit(item, e)}><EditOutlined /></a>
-                      <a onClick={e => handleDelete(item, e)}><DeleteOutlined /></a>
+                      <a onClick={e => handleEdit(item, e)}>
+                        <EditOutlined />
+                      </a>
+                      <a onClick={e => handleDelete(item, e)}>
+                        <DeleteOutlined />
+                      </a>
                     </div>
                   </div>
-                </Col>)
-              }
+                </Col>
+              ))}
             </Row>
             <div style={{padding: '10px 0', display: 'flex', justifyContent: 'end'}}>
               <Pagination {...pagination} />

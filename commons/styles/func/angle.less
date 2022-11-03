@@ -1,0 +1,66 @@
+.angle(@angleSize: 6px, @width: 1px) {
+  --pos: calc(@angleSize - @width) / 2;
+  position: relative;
+  display: inline-block;
+  font-style: normal;
+  float: right;
+  cursor: pointer;
+  height: 100%;
+  width: 2 * @angleSize;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 1px;
+    background-color: currentColor;
+    height: @width;
+    width: @angleSize;
+    left: 0;
+    transform-origin: 100% 50% 0;
+    transition: all 0.3s;
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    left: calc(@width * 0.7);
+  }
+}
+
+.angle-bt(@angleSize: 6px, @width: 1px) {
+  .angle(@angleSize, @width);
+
+  &::before,
+  &::after {
+    top: calc(50% + var(--pos));
+  }
+
+  &::before {
+    transform: rotate(135deg);
+  }
+
+  &::after {
+    transform: rotate(45deg);
+  }
+}
+
+.angle-top(@angleSize: 6px, @width: 1px) {
+  .angle(@angleSize, @width);
+
+  &::before,
+  &::after {
+    top: calc(50% - var(--pos));
+  }
+
+  &::before {
+    transform: rotate(225deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}

@@ -1,6 +1,6 @@
-import zh_icon from '@app/assets/icons/zh.png';
-import en_icon from '@app/assets/icons/en.png';
-import jp_icon from '@app/assets/icons/jp.png';
+import zh_icon from '@app/assets/lang/zh.png';
+import en_icon from '@app/assets/lang/en.png';
+import jp_icon from '@app/assets/lang/jp.png';
 
 const langList = [
   {

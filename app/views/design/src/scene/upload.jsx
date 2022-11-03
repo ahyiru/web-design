@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { message, Upload } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import { loadImage, loadBase64, fixSize } from '@huxy/utils';
+import {useState} from 'react';
+import {message, Upload} from 'antd';
+import {PlusOutlined} from '@ant-design/icons';
+import {loadImage, loadBase64, fixSize} from '@huxy/utils';
 
 const maxSize = 3 * 1024 * 1024;
 const fileTypes = ['png', 'jpg', 'jpeg', 'webp', 'gif'].map(v => `image/${v}`);
@@ -30,23 +30,18 @@ const UploadFile = ({getFiles, ...rest}) => {
     return true;
   };
 
-  return <Upload
-    name="screenshot"
-    listType="picture-card"
-    maxCount={1}
-    className="screenshot-uploader"
-    showUploadList={false}
-    beforeUpload={beforeUpload}
-    {...rest}
-  >
-    {
-      imageInfo.url ? <img src={imageInfo.url} alt="screenshot" style={{width: imageInfo.width}} />
-        : <div>
+  return (
+    <Upload name="screenshot" listType="picture-card" maxCount={1} className="screenshot-uploader" showUploadList={false} beforeUpload={beforeUpload} {...rest}>
+      {imageInfo.url ? (
+        <img src={imageInfo.url} alt="screenshot" style={{width: imageInfo.width}} />
+      ) : (
+        <div>
           <PlusOutlined />
           <div style={{marginTop: 8}}>Upload</div>
         </div>
-    }
-  </Upload>;
+      )}
+    </Upload>
+  );
 };
 
 export default UploadFile;

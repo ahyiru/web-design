@@ -1,0 +1,144 @@
+.tooltip(@tooltipBgColor: #303133, @tooltipBorderColor: #303133, @tooltipColor: #fff, @position: 15px, @arrowSize: 8px) {
+  position: relative;
+
+  &:hover {
+    &::before,
+    &::after {
+      opacity: 1;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    &::before {
+      transform: translateY(0);
+    }
+    &::after {
+      transform: translateY(0) rotate(var(--rotate));
+    }
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10000;
+    background-color: @tooltipBgColor;
+    border: 1px solid @tooltipBorderColor;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  &::before {
+    content: attr(tooltip);
+    z-index: 100002;
+    padding: 4px 10px;
+    text-align: left;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: @tooltipColor;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+    // min-width: 100px;
+    // word-break: break-all;
+    // word-wrap: break-word;
+    white-space: nowrap; //normal;
+    transform: translateY(100%);
+  }
+
+  &::after {
+    content: "";
+    height: calc(@arrowSize + 2px);
+    width: calc(@arrowSize + 2px);
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    transform: translateY(100%) rotate(var(--rotate));
+  }
+}
+
+.tooltip-lb(@tooltipBgColor: #303133, @tooltipBorderColor: #303133, @tooltipColor: #fff, @position: 15px, @arrowSize: 8px) {
+  --rotate: 135deg;
+  &[tooltip] {
+    .tooltip(@tooltipBgColor, @tooltipBorderColor, @tooltipColor, @position, @arrowSize);
+
+    &::before {
+      left: 0;
+      bottom: calc(100% + @arrowSize);
+    }
+
+    &::after {
+      left: @position;
+      bottom: calc(100% + @arrowSize / 2);
+      transform: translateY(0) rotate(var(--rotate));
+    }
+  }
+}
+
+.tooltip-rb(@tooltipBgColor: #303133, @tooltipBorderColor: #303133, @tooltipColor: #fff, @position: 15px, @arrowSize: 8px) {
+  --rotate: 135deg;
+  &[tooltip] {
+    .tooltip(@tooltipBgColor, @tooltipBorderColor, @tooltipColor, @position, @arrowSize);
+
+    &::before {
+      right: 0;
+      bottom: calc(100% + @arrowSize);
+    }
+
+    &::after {
+      right: @position;
+      bottom: calc(100% + @arrowSize / 2);
+      transform: translateY(0) rotate(var(--rotate));
+    }
+  }
+}
+
+.tooltip-lt(@tooltipBgColor: #303133, @tooltipBorderColor: #303133, @tooltipColor: #fff, @position: 15px, @arrowSize: 8px) {
+  --rotate: -45deg;
+  &[tooltip] {
+    .tooltip(@tooltipBgColor, @tooltipBorderColor, @tooltipColor, @position, @arrowSize);
+
+    &::before {
+      left: 0;
+      top: calc(100% + @arrowSize);
+    }
+
+    &::after {
+      left: @position;
+      top: calc(100% + @arrowSize / 2);
+      transform: translateY(0) rotate(var(--rotate));
+    }
+  }
+}
+
+.tooltip-rt(@tooltipBgColor: #303133, @tooltipBorderColor: #303133, @tooltipColor: #fff, @position: 15px, @arrowSize: 8px) {
+  --rotate: -45deg;
+  &[tooltip] {
+    .tooltip(@tooltipBgColor, @tooltipBorderColor, @tooltipColor, @position, @arrowSize);
+
+    &::before {
+      right: 0;
+      top: calc(100% + @arrowSize);
+    }
+
+    &::after {
+      right: @position;
+      top: calc(100% + @arrowSize / 2);
+      transform: translateY(0) rotate(var(--rotate));
+    }
+  }
+}
+
+.tooltip-tr(@tooltipBgColor: #303133, @tooltipBorderColor: #303133, @tooltipColor: #fff, @position: 15px, @arrowSize: 8px) {
+  --rotate: -45deg;
+  &[tooltip] {
+    .tooltip(@tooltipBgColor, @tooltipBorderColor, @tooltipColor, @position, @arrowSize);
+
+    &::before {
+      top: 0;
+      left: calc(100% + @arrowSize);
+    }
+
+    &::after {
+      top: @position;
+      left: calc(100% + @arrowSize / 2);
+      transform: translateY(0) rotate(var(--rotate));
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@import "~@commons/styles/func/tooltip.less";
+
+.rich-text-demo {
+  ul {
+    all: revert;
+  }
+}
+
+.tools-bar {
+  position: relative;
+  padding: 10px 0;
+}
+
+.tools-bar-icon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  color: #777;
+  &:hover,
+  &.active {
+    border-color: rgba(0, 0, 0, 0.03);
+    color: var(--blue1);
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .tooltip-lb();
+  &.dividing {
+    margin-right: 9px;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      right: 5px;
+      width: 1px;
+      height: calc(100% - 8px);
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.icon-drop-area {
+  max-width: 200px;
+  max-height: 400px;
+  overflow: auto;
+  li {
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+}

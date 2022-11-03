@@ -46,7 +46,7 @@ const LiItem = ({li, itemClick}) => {
         <ul className="menu-arrow-rt">
           {li.list.map(item => (
             <li key={item.value}>
-              <a className="menu-tooltip" tooltips={item.name}>
+              <a className="menu-tooltip" tooltip={item.name}>
                 {item.name}
               </a>
             </li>

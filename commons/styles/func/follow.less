@@ -1,0 +1,84 @@
+.follow(@followSize: 3px, @followColor: currentColor, @followPadding: 0px) {
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: @followPadding;
+    bottom: 0;
+    top: auto;
+    height: @followSize;
+    width: calc(100% - @followPadding * 2);
+    background-color: @followColor;
+    transform: scale(0);
+    transition: transform 0.3s;
+  }
+
+  /*&:hover,*/
+  &.active {
+    &::after {
+      transform: scale(1);
+      transition: transform 0.3s;
+    }
+  }
+}
+
+.follow-hover(@followSize: 3px, @followColor: currentColor, @followPadding: 0px) {
+  .follow(@followSize, @followColor, @followPadding);
+
+  &:hover {
+    &::after {
+      transform: scale(1);
+      transition: transform 0.3s;
+    }
+  }
+}
+
+.follow-vertical(@followSize: 3px, @followColor: currentColor, @followPadding: 0px) {
+  .follow(@followSize, @followColor, @followPadding);
+
+  &::after {
+    left: 0;
+    bottom: 0;
+    top: 0;
+    height: 100%;
+    width: @followSize;
+  }
+}
+
+.follow-vertical-hover(@followSize: 3px, @followColor: currentColor, @followPadding: 0px) {
+  .follow(@followSize, @followColor, @followPadding);
+
+  &:hover {
+    &::after {
+      transform: scale(1);
+      transition: transform 0.3s;
+    }
+  }
+}
+
+.follow-vertical-right(@followSize: 3px, @followColor: currentColor, @followPadding: 0px) {
+  .follow(@followSize, @followColor, @followPadding);
+
+  &::after {
+    left: calc(100% - @followSize);
+    // left:auto;
+    // right:0;
+    bottom: 0;
+    top: 0;
+    height: 100%;
+    width: @followSize;
+  }
+}
+
+.follow-vertical-right-hover(@followSize: 3px, @followColor: currentColor, @followPadding: 0px) {
+  .follow(@followSize, @followColor, @followPadding);
+
+  &:hover {
+    &::after {
+      transform: scale(1);
+      transition: transform 0.3s;
+    }
+  }
+}

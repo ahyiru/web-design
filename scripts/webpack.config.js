@@ -177,7 +177,7 @@ const rules = [
     exclude: [/node_modules/],
   },
   {
-    test: /\.(max|glb|gltf|fbx)$/,
+    test: /\.(max|glb|gltf|fbx|stl|obj)$/,
     loader: 'url-loader',
     options: {
       limit: 20480,

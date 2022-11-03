@@ -31,24 +31,22 @@ const Index = ({back, title, actions = [], backText = '返回'}) => (
       <div style={backStyle}>
         <Button onClick={e => (typeof back === 'function' ? back() : history.back())} className="sm link">
           <Icon icon="ico-left" />
-          <span><Intls keys="main.components.back">{backText}</Intls></span>
+          <span>
+            <Intls keys="main.components.back">{backText}</Intls>
+          </span>
         </Button>
       </div>
-      {
-        title && <div style={titleStyle}>{title}</div>
-      }
-      {
-        actions.length ? <div style={actionStyle}>
-          {
-            actions.map(({text, icon, className, style, ...rest}, i) => (
-              <Button key={text} className={`sm ${className ?? ''}`} style={{marginLeft: i ? 12 : 0, ...style}} {...rest}>
-                <Icon icon={icon} />
-                <span>{text}</span>
-              </Button>
-            ))
-          }
-        </div> : null
-      }
+      {title && <div style={titleStyle}>{title}</div>}
+      {actions.length ? (
+        <div style={actionStyle}>
+          {actions.map(({text, icon, className, style, ...rest}, i) => (
+            <Button key={text} className={`sm ${className ?? ''}`} style={{marginLeft: i ? 12 : 0, ...style}} {...rest}>
+              <Icon icon={icon} />
+              <span>{text}</span>
+            </Button>
+          ))}
+        </div>
+      ) : null}
     </div>
   </Panel>
 );
