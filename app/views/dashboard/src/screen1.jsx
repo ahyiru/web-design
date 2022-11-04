@@ -1,14 +1,13 @@
 import {useState, useEffect} from 'react';
 import ECharts from 'echarts-for-react';
 import {Table as AntTable} from 'antd';
-import {Spinner, materials} from '@huxy/components';
+import {Spinner} from '@huxy/components';
+import {CornerBorder, HalfBorder, BgBox, TitleHeader, TitleBorder, AnimateBorder} from '@huxy/materials';
 import DefPanel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
 import {tableCfg} from '@app/utils/configs';
 import {option1, option2, option3, option4, option5, option6, option7, option8, option9, option10, option11, option12, columns1, columns2, dataSource1, dataSource2} from './data';
 import defaultOpts from './data/defaultOpts';
-
-const {CornerBorder, HalfBorder/* , BgBox, TitleHeader, TitleBorder, AnimateBorder */} = materials;
 
 const Panel = props => <DefPanel {...props} style={{borderColor: 'rgba(0,180,220,0.08)'}} />;
 
@@ -55,15 +54,18 @@ const Index = props => {
               </HalfBorder>
             </Col>
             <Col span={3}>
-              {/* <TitleBorder>TitleBorder</TitleBorder> */}
-              <Panel>
-                <ReactECharts option={option7} style={{height: '160px'}} />
-              </Panel>
+              <AnimateBorder>
+                <Panel>
+                  <ReactECharts option={option7} style={{height: '160px'}} />
+                </Panel>
+              </AnimateBorder>
             </Col>
             <Col span={3}>
-              <Panel>
-                <ReactECharts option={option12} style={{height: '160px'}} />
-              </Panel>
+              <TitleBorder title="访问统计量">
+                <Panel>
+                  <ReactECharts option={option12} style={{height: '160px'}} />
+                </Panel>
+              </TitleBorder>
             </Col>
           </Row>
         </Col>

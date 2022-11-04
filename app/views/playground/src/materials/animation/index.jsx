@@ -1,11 +1,9 @@
-import {materials} from '@huxy/components';
+import {IconAnimate, Css3dModel, Fliper, IconCarousel} from '@huxy/materials';
 
 import models from '@app/models/models';
 
 import animateObjs from '@app/models/animateObjs';
 import cssModels from '@app/models/cssModels';
-
-const {IconAnimate, Css3dModel, Fliper, IconCarousel} = materials;
 
 const box = {
   position: 'relative',

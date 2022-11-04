@@ -1,9 +1,7 @@
-import {materials} from '@huxy/components';
+import {Time, Search, Location, Loading, Spot} from '@huxy/materials';
 
 import Taiji from './taiji';
 import Bagua from './taiji/bagua';
-
-const {Time, Search, Location, Loading, Spot} = materials;
 
 const box = {
   position: 'relative',

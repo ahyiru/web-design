@@ -1,7 +1,6 @@
 import {rmUnit} from '@huxy/utils';
-import {Row, Col, Panel, materials} from '@huxy/components';
-
-const {Barchart, Card, Circle, Dashboard, List, Piechart, Progress, Ring, Container, Table, Wave} = materials;
+import {Row, Col, Panel} from '@huxy/components';
+import {Barchart, Card, Circle, Dashboard, List, Piechart, Progress, Ring, Container, Table, Wave} from '@huxy/materials';
 
 const centerStyle = {
   position: 'absolute',

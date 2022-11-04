@@ -1,6 +1,12 @@
-import {Row, Col, Panel, materials} from '@huxy/components';
+import {Row, Col, Panel} from '@huxy/components';
+import {TitleHeader, CornerBorder, HalfBorder, BgBox, TitleBorder, AnimateBorder} from '@huxy/materials';
 
-const {TitleHeader, CornerBorder, HalfBorder, BgBox, TitleBorder, AnimateBorder} = materials;
+import writeIcon from '@app/models/icons/write.png';
+
+const box = {
+  width: '100%',
+  height: '120px',
+};
 
 const Index = props => {
   return (
@@ -10,23 +16,53 @@ const Index = props => {
         <Col>
           <Row gutter={[12, 12]}>
             <Col span={4}>
-              <CornerBorder><Panel>CornerBorder <a href="/">111</a></Panel></CornerBorder>
+              <CornerBorder>
+                <BgBox type="strip">
+                  <Panel style={{opacity: '0.2'}}>
+                    <div style={box}>CornerBorder <a>strip background</a></div>
+                  </Panel>
+                </BgBox>
+              </CornerBorder>
             </Col>
             <Col span={4}>
-              <HalfBorder><Panel>HalfBorder</Panel></HalfBorder>
+              <HalfBorder>
+                <BgBox type="cubestrip">
+                  <Panel style={{opacity: '0.2'}}>
+                    <div style={box}>HalfBorder <a>cubestrip background</a></div>
+                  </Panel>
+                </BgBox>
+              </HalfBorder>
             </Col>
             <Col span={4}>
-              <TitleBorder><Panel>TitleBorder</Panel></TitleBorder>
+              <TitleBorder title="TitleBorder">
+                <BgBox type="cube">
+                  <Panel style={{opacity: '0.2'}}>
+                    <div style={{...box, height: '100px'}}>TitleBorder <a>cube background</a></div>
+                  </Panel>
+                </BgBox>
+              </TitleBorder>
             </Col>
           </Row>
         </Col>
         <Col>
           <Row gutter={[12, 12]}>
             <Col span={4}>
-              <AnimateBorder type="dash"><Panel>AnimateBorder1</Panel></AnimateBorder>
+              <AnimateBorder type="dash">
+                <BgBox type="grid">
+                  <Panel style={{opacity: '0.2'}}>
+                    <div style={box}>AnimateBorder1 <a>grid background</a></div>
+                  </Panel>
+                </BgBox>
+              </AnimateBorder>
             </Col>
             <Col span={4}>
-              <AnimateBorder type="solid"><Panel>AnimateBorder2</Panel></AnimateBorder>
+              <AnimateBorder type="solid">
+                <BgBox url={writeIcon}>
+                  <Panel style={{opacity: '0.2'}}>
+                    <div style={box}>AnimateBorder2 <a>image background</a></div>
+                  </Panel>
+                </BgBox>
+              </AnimateBorder>
             </Col>
           </Row>
         </Col>

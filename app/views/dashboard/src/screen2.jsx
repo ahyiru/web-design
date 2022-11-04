@@ -1,14 +1,13 @@
 import {useState, useEffect} from 'react';
 import ECharts from 'echarts-for-react';
 import {Table as AntTable} from 'antd';
-import {Spinner, materials} from '@huxy/components';
+import {Spinner} from '@huxy/components';
+import {BgBox, TitleHeader/* , CornerBorder, HalfBorder, TitleBorder, AnimateBorder */} from '@huxy/materials';
 import DefPanel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
 import {tableCfg} from '@app/utils/configs';
 import {option1, option2, option3, option4, option5, option6, option7, option8, option9, option10, option11, option12, columns1, columns2, dataSource1, dataSource2} from './data';
 import defaultOpts from './data/defaultOpts';
-
-const {BgBox, TitleHeader/* , CornerBorder, HalfBorder, TitleBorder, AnimateBorder */} = materials;
 
 const Panel = props => <DefPanel {...props} style={{background: 'rgba(255,255,255,.074)' /*'rgba(42,48,66,.7)'*/}} />;
 

@@ -6,7 +6,7 @@ const app = {
   PUBLIC_DIR: '../public',
   DEV_ROOT_DIR: '',
   PRD_ROOT_DIR: '/',
-  PROXY: 'http://47.105.94.51:9202',
+  PROXY: 'http://ihuxy.com:9202',
   MOCK: '127.0.0.1:7502',
   SERVER_PORT: 7502,
   appNane: '...',

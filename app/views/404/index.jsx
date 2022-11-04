@@ -1,10 +1,8 @@
-import {materials} from '@huxy/components';
+import {IconAnimate} from '@huxy/materials';
 
 import notFound from '@app/models/icons/not-found.png';
 import animateObjs from '@app/models/animateObjs';
 import cssModels from '@app/models/cssModels';
-
-const {IconAnimate} = materials;
 
 import './index.less';
 

@@ -1,10 +1,8 @@
 import {useState} from 'react';
 
-import {materials} from '@huxy/components';
+import {Taiji} from '@huxy/materials';
 
 import './index.less';
-
-const {Taiji} = materials;
 
 const containerStyle = {
   height: '100%',
