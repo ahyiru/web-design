@@ -70,12 +70,12 @@ const dlFile = fetcher(dlHandler);
 
 const getToken = () => ({Authorization: `yiru ${storage.get('token') || ''}`});
 
-const fetch = ({method, url, ...opt}) => fetchApi(method)(`${TARGET}${url}`, {...opt, headers: getToken(), credentials: 'omit'});
+const fetch = ({method, url, ...opt}) => fetchApi(method)(`${TARGET}${url}`, {headers: getToken(), credentials: 'omit', ...opt});
 
-export const suspense = ({method, url, ...opt}) => wrapPromise(fetchApi(method)(`${TARGET}${url}`, {...opt, headers: getToken()}));
+export const suspense = ({method, url, ...opt}) => wrapPromise(fetchApi(method)(`${TARGET}${url}`, {headers: getToken(), ...opt}));
 
-export const dlApi = ({method, url, ...opt}) => dlFile(method)(`${TARGET}${url}`, {...opt, headers: getToken()});
+export const dlApi = ({method, url, ...opt}) => dlFile(method)(`${TARGET}${url}`, {headers: getToken(), ...opt});
 
-export const testFetcher = ({method, url, ...opt}) => fetcher()(method)(`${TARGET}${url}`, {...opt, headers: getToken(), credentials: 'omit'});
+export const testFetcher = ({method, url, ...opt}) => fetcher()(method)(`${TARGET}${url}`, {headers: getToken(), credentials: 'omit', ...opt});
 
 export default fetch;

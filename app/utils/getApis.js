@@ -1,4 +1,5 @@
-import fetcher, {dlApi, suspense} from '@app/apis/fetcher';
+import fetcher from '@app/apis/report/fetchError';
+import {dlApi, suspense} from '@app/apis/fetcher';
 import getApis from '@app/apis/getApis';
 
 const apiList = {};

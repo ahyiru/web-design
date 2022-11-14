@@ -6,28 +6,12 @@ import {isAuthed} from '@app/utils/utils';
 
 import {browserRouter, basepath} from '.';
 
+import errorBoundary from '@app/apis/report/pageError';
+import routeReport from '@app/apis/report/routeChange';
+
 const initPath = `${browserRouter ? '' : '#'}/`;
 
 const whiteRoutes = browserRouter ? whiteList : whiteList.map(path => `#${path}`);
-
-const routerListen = {};
-
-const routerListenFn = (path, prevPath) => {
-  if (!routerListen[path]) {
-    routerListen[path] = {};
-  }
-  let delay = 0;
-  if (!prevPath) {
-    routerListen[path].start = new Date();
-  } else {
-    if (!routerListen[prevPath]) {
-      routerListen[prevPath] = {};
-    }
-    routerListen[path].start = routerListen[prevPath].end = new Date();
-    delay = routerListen[prevPath].end - routerListen[prevPath].start;
-  }
-  console.log(`${prevPath || '初始化'}页面停留时间：`, delay, routerListen);
-};
 
 const beforeRender = (input, next) => {
   const {path, prevPath} = input;
@@ -43,12 +27,15 @@ const beforeRender = (input, next) => {
     return confirmDesignPage(next);
   }
   next();
-  // routerListenFn(path,prevPath);
+  if (!path.includes('/user/')) {
+    routeReport();
+  }
 };
 
 export default {
   browserRouter,
   beforeRender,
   basepath,
+  errorBoundary,
   // afterRender,
 };

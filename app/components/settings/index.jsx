@@ -9,8 +9,9 @@ import {Row, Col} from '@app/components/row';
 import {sizeRules} from '@app/utils/sizeRules';
 import getThemeList from '@app/configs/theme';
 import {useMenuTypeStore, useThemeStore} from '@app/store/stores';
-
 import {useIntls} from '@app/components/intl';
+
+import report from '@app/apis/report/report';
 
 const {Option} = Select;
 
@@ -82,37 +83,79 @@ const Index = props => {
   const saveConfig = () => {
     changeLayout(theme.list, true);
     setVisible(false);
+    report({
+      actionType: 'click',
+      category: 'settings',
+      text: '保存配置',
+      value: 'saveConfig',
+    });
   };
   const copyConfig = () => {
     copyToClipboard(JSON.stringify(theme.list));
     setVisible(false);
     message.success(i18nCfg.copy_cfg_msg);
+    report({
+      actionType: 'click',
+      category: 'settings',
+      text: '拷贝配置',
+      value: 'copyConfig',
+    });
   };
 
   const changeFont = value => {
     setSize(value);
     changeFontSize(`${(value * 100) / 16}%`);
+    report({
+      actionType: 'change',
+      category: 'settings',
+      text: value,
+      value: 'fontSize',
+    });
   };
   const selectTheme = current => {
     storage.set('theme', current);
     setTheme(current);
+    report({
+      actionType: 'click',
+      category: 'settings',
+      text: current.name,
+      value: 'switchTheme',
+    });
   };
 
   const changeSizes = (key, value, unit) => {
     // e.persist();
     theme.list.sizes[key] = `${value || ''}${unit}`;
     changeLayout(theme.list);
+    report({
+      actionType: 'change',
+      category: 'settings',
+      text: `${value || ''}${unit}`,
+      value: key,
+    });
   };
   const changeUnit = (key, unit) => {
     const value = unit === 'px' ? 1200 : 100;
     theme.list.sizes[key] = `${value}${unit}`;
     changeLayout(theme.list);
+    report({
+      actionType: 'change',
+      category: 'settings',
+      text: `${value}${unit}`,
+      value: key,
+    });
   };
 
   const changeColors = (e, key) => {
     const {value} = e.target;
     theme.list.colors[key] = value;
     changeLayout(theme.list);
+    report({
+      actionType: 'change',
+      category: 'settings',
+      text: value,
+      value: key,
+    });
   };
 
   const comps = {
@@ -120,7 +163,15 @@ const Index = props => {
       <>
         <div className="vertical-item">
           <label>{i18nCfg.menuType}</label>
-          <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => setMenuType(e.target.value)}>
+          <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => {
+            setMenuType(e.target.value);
+            report({
+              actionType: 'click',
+              category: 'settings',
+              text: e.target.value,
+              value: 'switchMenuType',
+            });
+          }}>
             <Radio value="vertical">{i18nCfg.vertical}</Radio>
             <Radio value="horizontal">{i18nCfg.horizontal}</Radio>
             <Radio value="compose">{i18nCfg.compose}</Radio>
