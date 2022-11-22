@@ -1,0 +1,33 @@
+.cylinder {
+  --rotate: 4;
+  --width: 200px;
+  --height: 150px;
+  --bgColor: linear-gradient(to right, #0158a9, #0095cf);
+  --topColor: #2193d0;
+  --bottomColor: #2193d0;
+  position: relative;
+  margin: 0 auto;
+  height: var(--height);
+  width: var(--width);
+  border-radius: var(--width) / calc(var(--width) / var(--rotate));
+  background: var(--bgColor);
+}
+
+.cylinder:before, .cylinder:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--width);
+  height: calc(var(--width) / var(--rotate));
+  border-radius: 50%;
+  background: var(--topColor);
+}
+
+.cylinder:after {
+  top: auto;
+  bottom: 0;
+  background: var(--bottomColor);
+  opacity: 0.5;
+}
+

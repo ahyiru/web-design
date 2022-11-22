@@ -1,8 +1,8 @@
 import {Row as DefRow, Col as DefCol} from '@huxy/components';
 
-/* const rowCfg={
-  gutter:[10,10],
-}; */
+const rowCfg={
+  gutter: [12, 12],
+};
 const styles = {
   // '--gutter': 'calc(var(--frame-spacing) / 2)',
   // '--rowgap': 'calc(var(--frame-spacing) / 2)',
@@ -14,7 +14,7 @@ const colCfg = {
 };
 
 export const Row = ({children, style, ...rest}) => (
-  <DefRow style={{...styles, ...style}} {...rest}>
+  <DefRow {...rowCfg} style={{...styles, ...style}} {...rest}>
     {children}
   </DefRow>
 );

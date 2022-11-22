@@ -1,5 +1,3 @@
-const dash2camel = require('@huxy/utils/src/dash2camel');
-
 const config = api => {
   api.cache.using(() => process.env.NODE_ENV === 'development');
 
@@ -28,51 +26,6 @@ const config = api => {
   ];
 
   const plugins = [
-    [
-      'import',
-      {
-        libraryName: 'antd',
-        libraryDirectory: 'es',
-        style: 'css',
-      },
-      'antd',
-    ],
-    [
-      'import',
-      {
-        libraryName: '@antv/x6-react-components',
-        libraryDirectory: 'es',
-        style: true,
-        transformToDefaultImport: false,
-      },
-      'x6',
-    ],
-    [
-      'import',
-      {
-        libraryName: '@huxy/utils',
-        libraryDirectory: 'src',
-        camel2DashComponentName: false,
-      },
-      '@huxy/utils',
-    ],
-    [
-      'import',
-      {
-        libraryName: '@huxy/use',
-        libraryDirectory: 'src',
-        camel2DashComponentName: false,
-      },
-      '@huxy/use',
-    ],
-    [
-      'import',
-      {
-        libraryName: '@huxy/components',
-        customName: name => `@huxy/components/src/${dash2camel(name)}`,
-      },
-      '@huxy/components',
-    ],
     [
       '@babel/plugin-proposal-decorators',
       {

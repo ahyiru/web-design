@@ -17,9 +17,7 @@ const axis = {
   },
   axisLabel: {
     show: true,
-    textStyle: {
-      color,
-    },
+    color,
   },
   splitLine: {
     show: false,
@@ -54,29 +52,23 @@ const itemStyle = {
 };
 const mapItemStle = {
   itemStyle: {
-    normal: {
-      color,
-      areaColor: color,
-      borderColor: color,
-      borderWidth: 0.5,
-    },
-    emphasis: {
+    color,
+    areaColor: color,
+    borderColor: color,
+    borderWidth: 0.5,
+  },
+  label: {
+    color,
+  },
+  emphasis: {
+    itemStyle: {
       color,
       areaColor: color,
       borderColor: color,
       borderWidth: 1,
     },
-  },
-  label: {
-    normal: {
-      textStyle: {
-        color: color,
-      },
-    },
-    emphasis: {
-      textStyle: {
-        color: color,
-      },
+    label: {
+      color,
     },
   },
 };
@@ -158,10 +150,10 @@ const defaultOpts = {
   },
   toolbox: {
     iconStyle: {
-      normal: {
-        borderColor: color,
-      },
-      emphasis: {
+      borderColor: color,
+    },
+    emphasis: {
+      iconStyle: {
         borderColor: color,
       },
     },

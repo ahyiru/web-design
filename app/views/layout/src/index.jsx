@@ -155,23 +155,27 @@ const Index = props => {
                 <h3>{getIntls('main.layout.layoutDesign')}</h3>
                 <div className="vertical-item">
                   <label>{getIntls('main.layout.menuType')}</label>
-                  <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => {
-                    setMenuType(e.target.value);
-                    report({
-                      actionType: 'click',
-                      category: 'layout',
-                      text: e.target.value,
-                      value: 'switchMenuType',
-                    });
-                  }}>
-                    <Radio value="vertical">{getIntls('main.layout.vertical')}</Radio>
-                    <Radio value="horizontal">{getIntls('main.layout.horizontal')}</Radio>
-                    <Radio value="compose">{getIntls('main.layout.compose')}</Radio>
-                  </Radio.Group>
+                  <div>
+                    <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => {
+                      setMenuType(e.target.value);
+                      report({
+                        actionType: 'click',
+                        category: 'layout',
+                        text: e.target.value,
+                        value: 'switchMenuType',
+                      });
+                    }}>
+                      <Radio value="vertical">{getIntls('main.layout.vertical')}</Radio>
+                      <Radio value="horizontal">{getIntls('main.layout.horizontal')}</Radio>
+                      <Radio value="compose">{getIntls('main.layout.compose')}</Radio>
+                    </Radio.Group>
+                  </div>
                 </div>
                 <div className="vertical-item">
                   <label>{getIntls('main.layout.fontSize')}</label>
-                  <Slider min={6} max={16} value={size} onChange={e => changeFont(e)} />
+                  <div>
+                    <Slider min={6} max={16} value={size} onChange={e => changeFont(e)} />
+                  </div>
                 </div>
                 <Row className="select-item">
                   {getThemeList(getIntls).map(item => (

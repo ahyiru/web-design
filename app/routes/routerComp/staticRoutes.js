@@ -26,6 +26,12 @@ const routes = [
     hideMenu: true,
     component: () => import('@app/views/commons/src/x6-demo/pages'),
   },
+  {
+    path: '/bigscreen',
+    name: 'bigscreen',
+    hideMenu: true,
+    component: () => import('@app/views/dashboard/src/bigscreen'),
+  },
 ];
 
 export default routes;

@@ -26,7 +26,7 @@ const info = {
 };
 
 const report = params => {
-  if (!isAuthed()) {
+  if (!browserRouter || !isAuthed()) {
     return;
   }
   const routeInfo = routeStore.getState();

@@ -120,7 +120,7 @@ const Index = ({commonprops, ...props}) => {
     return item;
   })([tmpSchema]);
   return modalItem ? (
-    <Modal title={title} visible={!!modalItem} onCancel={onCancel} onOk={() => modalOk()}>
+    <Modal title={title} open={!!modalItem} onCancel={onCancel} onOk={() => modalOk()}>
       {customRender(newSchema[0], self)}
     </Modal>
   ) : (

@@ -1,7 +1,7 @@
 import {Form, Input} from 'antd';
 import {useObservableState} from '../../../common/hooks/useObservableState';
 import {useExperimentGraph} from '../../rx-models/experiment-graph';
-import 'antd/lib/style/index.css';
+
 export const NodeFormDemo = ({name, nodeId, experimentId}) => {
   const [form] = Form.useForm();
   const expGraph = useExperimentGraph(experimentId);

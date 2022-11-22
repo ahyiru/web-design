@@ -70,7 +70,7 @@ const Index = props => {
     key: '-1',
     selectable: false,
   };
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
   // const [selectedItem,setSelectedItem]=useState({});
@@ -87,11 +87,11 @@ const Index = props => {
   }, []);
 
   const addFn = item => {
-    setVisible(true);
+    setOpen(true);
     setModalType('add');
   };
   const editFn = item => {
-    setVisible(true);
+    setOpen(true);
     setModalType('edit');
   };
   const deleteFn = item => {
@@ -279,7 +279,7 @@ const Index = props => {
           </Panel>
         </Col>
       </Row>
-      {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} addFormText={addFormText} />}
+      {open && <HandleModal onModalOk={onModalOk} onModalCancel={() => setOpen(false)} modalOpen={open} type={modalType} item={item} addFormText={addFormText} />}
     </div>
   );
 };

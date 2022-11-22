@@ -6,6 +6,14 @@ const routes = {
   icon: 'ConsoleSqlOutlined',
   children: [
     {
+      path: '/demo',
+      name: 'demo',
+      icon: 'MergeCellsOutlined',
+      denied: browserRouter,
+      injectSomeValues: 'injectSomeValues',
+      component: () => import('./src'),
+    },
+    {
       path: '/materials',
       name: 'css 物料',
       children: [

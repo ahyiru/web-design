@@ -20,7 +20,7 @@ const useHandleList = (fetchList, initParams = null, handleResult, commonParams 
     update({...page.current, ...search.current});
   };
   const handleUpdate = params => {
-    const {current, size, ...rest} = params;
+    const {current, size, ...rest} = params || {};
     page.current = {current: current ?? page.current.current, size: size ?? page.current.size};
     search.current = {...search.current, ...rest};
     update({...page.current, ...search.current});

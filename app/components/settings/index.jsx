@@ -63,7 +63,7 @@ const Index = props => {
   const [menuType, setMenuType] = useMenuTypeStore('vertical');
 
   const [active, setActive] = useState('layout');
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const [size, setSize] = useState(10);
   const changeFontSize = useDebounce(value => document.documentElement.style.setProperty('--rootSize', value), delay);
@@ -82,7 +82,7 @@ const Index = props => {
 
   const saveConfig = () => {
     changeLayout(theme.list, true);
-    setVisible(false);
+    setOpen(false);
     report({
       actionType: 'click',
       category: 'settings',
@@ -92,7 +92,7 @@ const Index = props => {
   };
   const copyConfig = () => {
     copyToClipboard(JSON.stringify(theme.list));
-    setVisible(false);
+    setOpen(false);
     message.success(i18nCfg.copy_cfg_msg);
     report({
       actionType: 'click',
@@ -163,23 +163,27 @@ const Index = props => {
       <>
         <div className="vertical-item">
           <label>{i18nCfg.menuType}</label>
-          <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => {
-            setMenuType(e.target.value);
-            report({
-              actionType: 'click',
-              category: 'settings',
-              text: e.target.value,
-              value: 'switchMenuType',
-            });
-          }}>
-            <Radio value="vertical">{i18nCfg.vertical}</Radio>
-            <Radio value="horizontal">{i18nCfg.horizontal}</Radio>
-            <Radio value="compose">{i18nCfg.compose}</Radio>
-          </Radio.Group>
+          <div>
+            <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => {
+              setMenuType(e.target.value);
+              report({
+                actionType: 'click',
+                category: 'settings',
+                text: e.target.value,
+                value: 'switchMenuType',
+              });
+            }}>
+              <Radio value="vertical">{i18nCfg.vertical}</Radio>
+              <Radio value="horizontal">{i18nCfg.horizontal}</Radio>
+              <Radio value="compose">{i18nCfg.compose}</Radio>
+            </Radio.Group>
+          </div>
         </div>
         <div className="vertical-item">
           <label>{i18nCfg.fontSize}</label>
-          <Slider min={6} max={16} value={size} onChange={e => changeFont(e)} />
+          <div>
+            <Slider min={6} max={16} value={size} onChange={e => changeFont(e)} />
+          </div>
         </div>
         <Row className="select-item">
           {getThemeList(getIntls).map(item => (
@@ -232,12 +236,12 @@ const Index = props => {
 
   return (
     <>
-      <a className={visible ? 'active' : ''} onClick={e => setVisible(true)}>
+      <a className={open ? 'active' : ''} onClick={e => setOpen(true)}>
         <SettingOutlined />
       </a>
       <Drawer
-        onClose={() => setVisible(false)}
-        open={visible}
+        onClose={() => setOpen(false)}
+        open={open}
         className="configs-drawer"
         width="300px"
         extra={

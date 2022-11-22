@@ -39,53 +39,6 @@ const Document = props => {
     </div>
   );
 };
-/* const InnerNodeTitle = (props) => {
-  const { node = {}, searchKey = '', connectDragPreview, connectDragSource } = props;
-  const { name = '', isDir } = node;
-  const [visible, setVisible] = useState(false);
-  const onMouseIn = useCallback(() => {
-    setVisible(true);
-  }, []);
-  const onMouseOut = useCallback(() => {
-    setVisible(false);
-  }, []);
-  if (isDir) {
-    return <div className={styles.folder}>{name}</div>;
-  }
-  const keywordIdx = searchKey ? toLower(name).indexOf(toLower(searchKey)) : -1;
-  if (keywordIdx > -1) {
-    const beforeStr = name.substr(0, keywordIdx);
-    const afterStr = name.substr(keywordIdx + searchKey.length);
-    return connectDragPreview(connectDragSource(<span className={styles.node}>
-      <DatabaseFilled className={styles.nodeIcon}/>
-      <span className={styles.label}>
-        {beforeStr}
-        <span className={styles.keyword}>{searchKey}</span>
-        {afterStr}
-      </span>
-    </span>));
-  }
-  return (<div className={styles.nodeTitleWrapper} onMouseEnter={onMouseIn} onMouseLeave={onMouseOut}>
-    {connectDragPreview(connectDragSource(<div className={styles.node}>
-      <DatabaseFilled className={styles.nodeIcon}/>
-      <span className={styles.label}>{name}</span>
-    </div>))}
-    {visible && (<Popover visible={true} title={name} placement="right" content={<Document node={node}/>} key="description">
-      <a className={styles.doc}>
-        <ReadOutlined /> 文档
-      </a>
-    </Popover>)}
-  </div>);
-};
-export const NodeTitle = DragSource(DRAGGABLE_ALGO_COMPONENT, {
-  beginDrag: (props) => ({
-    component: props.node,
-  }),
-}, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  connectDragPreview: connect.dragPreview(),
-  isDragging: monitor.isDragging(),
-}))(InnerNodeTitle); */
 
 export const NodeTitle = ({node = {}, searchKey = ''}) => {
   const [collected, drag, dragPreview] = useDrag(() => ({
@@ -93,12 +46,12 @@ export const NodeTitle = ({node = {}, searchKey = ''}) => {
     item: node,
   }));
   const {name = '', isDir} = node;
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const onMouseIn = useCallback(() => {
-    setVisible(true);
+    setOpen(true);
   }, []);
   const onMouseOut = useCallback(() => {
-    setVisible(false);
+    setOpen(false);
   }, []);
   if (isDir) {
     return <div className={styles.folder}>{name}</div>;
@@ -130,8 +83,8 @@ export const NodeTitle = ({node = {}, searchKey = ''}) => {
           </div>,
         ),
       )}
-      {visible && (
-        <Popover visible={true} title={name} placement="right" content={<Document node={node} />} key="description">
+      {open && (
+        <Popover open={true} title={name} placement="right" content={<Document node={node} />} key="description">
           <a className={styles.doc}>
             <ReadOutlined /> 文档
           </a>

@@ -70,7 +70,7 @@ const ModalForm = props => {
 
 const HandleModal = props => {
   const [form] = Form.useForm();
-  const {onModalOk, modalVisible, onModalCancel, type, item, addFormText} = props;
+  const {onModalOk, modalOpen, onModalCancel, type, item, addFormText} = props;
   const title = {add: addFormText.add_title, edit: addFormText.edit_title};
   const isEdit = type === 'edit';
   const handleSubmit = () => {
@@ -87,7 +87,7 @@ const HandleModal = props => {
   return (
     <Modal
       title={title[type]}
-      visible={modalVisible}
+      open={modalOpen}
       onOk={() => handleSubmit()}
       // width={600}
       onCancel={() => onModalCancel()}

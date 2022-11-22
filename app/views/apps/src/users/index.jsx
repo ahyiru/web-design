@@ -247,7 +247,7 @@ const SearchForm = props => {
     });
   };
   return <div style={pageStyle}>
-    <Modal title="Form Modal" visible={!!modalItem} onCancel={onCancel} onOk={()=>modalOk()}>
+    <Modal title="Form Modal" open={!!modalItem} onCancel={onCancel} onOk={()=>modalOk()}>
       <Form {...layout} form={form} name="FormModal" initialValues={{...modalItem}}>
         <Item label="用户名" name="name" rules={[{required:true,message:'必填项!'}]}>
           <Input placeholder="请输入用户名" />

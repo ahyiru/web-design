@@ -76,7 +76,7 @@ const Index = props => {
     iconKey: 'LayoutOutlined',
     isRoot: true,
   };
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [item, setItem] = useState({});
   const [filterTree, setFilterTree] = useSearch(null);
@@ -87,12 +87,12 @@ const Index = props => {
   const searchTree = value => setFilterTree(tree, value, 'name', 'path');
 
   const addFn = item => {
-    setVisible(true);
+    setOpen(true);
     setModalType('add');
     setItem({...item, parentId: item.path});
   };
   const editFn = item => {
-    setVisible(true);
+    setOpen(true);
     setModalType('edit');
     const {icon, children, key, ...rest} = item;
     setItem(rest);
@@ -126,7 +126,7 @@ const Index = props => {
     const {code, message: msg} = await handleFn({...value, projectId: stateItem._id});
     if (code === 200) {
       message.success(msg);
-      setVisible(false);
+      setOpen(false);
       update();
     }
   };
@@ -216,7 +216,7 @@ const Index = props => {
           </Panel>
         </Col>
       </Row>
-      {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} isRoot={!data?.length} />}
+      {open && <HandleModal onModalOk={onModalOk} onModalCancel={() => setOpen(false)} modalOpen={open} type={modalType} item={item} isRoot={!data?.length} />}
     </div>
   );
 };

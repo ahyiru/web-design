@@ -47,7 +47,7 @@ const treeDrop = (item, dropFns, actionsText) => (
 const formData = data => (Array.isArray(data) ? data : data ? [data] : [{}]);
 
 const Index = ({data, getValues, actionsText, editorI18n}) => {
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
   // const [selectedItem,setSelectedItem]=useState({});
@@ -66,11 +66,11 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
   })(updateId(schema,'key')); */
 
   const addFn = item => {
-    setVisible(true);
+    setOpen(true);
     setModalType('add');
   };
   const editFn = item => {
-    setVisible(true);
+    setOpen(true);
     setModalType('edit');
   };
   const deleteFn = item => {
@@ -150,7 +150,7 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
           </Panel>
         </Col>
       </Row>
-      {visible && <HandleModal onModalOk={onModalOk} onModalCancel={() => setVisible(false)} modalVisible={visible} type={modalType} item={item} />}
+      {open && <HandleModal onModalOk={onModalOk} onModalCancel={() => setOpen(false)} modalOpen={open} type={modalType} item={item} />}
     </div>
   );
 };

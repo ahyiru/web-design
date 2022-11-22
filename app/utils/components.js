@@ -9,12 +9,10 @@ import CustomForm from '@app/components/custom/form';
 
 const {Item} = Form;
 const {TextArea, Search} = Input;
-const {Option} = Select;
 const {Group: CheckboxGroup} = Checkbox;
 const {Radio: RadioGroup, Button: RadioButton} = Radio;
 const {RangePicker} = DatePicker;
 const {RangePicker: TRangePicker} = TimePicker;
-const {TabPane} = Tabs;
 
 const components = {
   CustomTable,
@@ -31,7 +29,6 @@ const components = {
   Search,
   InputNumber,
   Select,
-  Option,
   Checkbox,
   CheckboxGroup,
   Radio,
@@ -44,7 +41,6 @@ const components = {
   TRangePicker,
   Upload,
   Tabs,
-  TabPane,
   Tag,
   Tooltip,
   Badge,

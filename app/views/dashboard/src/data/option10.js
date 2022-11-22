@@ -19,7 +19,7 @@ const option = {
       },
       pointer: {
         itemStyle: {
-          color: 'auto',
+          color: 'inherit',
         },
       },
       axisTick: {
@@ -39,14 +39,14 @@ const option = {
         },
       },
       axisLabel: {
-        color: 'auto',
+        color: 'inherit',
         distance: 25,
         fontSize: 16,
       },
       detail: {
         valueAnimation: true,
         formatter: '{value}%',
-        color: 'auto',
+        color: 'inherit',
         fontSize: 22,
       },
       data: [

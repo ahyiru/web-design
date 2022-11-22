@@ -11,8 +11,6 @@ import {userInfoStore} from '@app/store/stores';
 
 import {useIntls} from '@app/components/intl';
 
-const {TabPane} = Tabs;
-
 const formStyle = {
   padding: '10px 20px',
   maxWidth: '600px',
@@ -34,54 +32,60 @@ const Index = props => {
     }
   };
 
+  const items = [
+    {
+      key: '1',
+      label: profile.title,
+      children: <div style={formStyle}>
+        <Form name="profile" {...layout}>
+          <Form.Item name="name" label={profile.name}>
+            <Typography.Text>{values.name}</Typography.Text>
+          </Form.Item>
+          <Form.Item name="email" label={profile.email}>
+            <Typography.Text>{values.email}</Typography.Text>
+          </Form.Item>
+          <Form.Item name="active" label={profile.active}>
+            <Typography.Text>{values.active ? profile.active_true : profile.active_false}</Typography.Text>
+          </Form.Item>
+          <Form.Item name="projectName" label={profile.projectName}>
+            <Typography.Text>{values.projectName}</Typography.Text>
+          </Form.Item>
+          <Form.Item name="role" label={profile.role}>
+            <Typography.Text>{values.role}</Typography.Text>
+          </Form.Item>
+        </Form>
+      </div>,
+    },
+    {
+      key: '2',
+      label: upProfile.title,
+      children: <div style={formStyle}>
+        <Form name="upProfile" form={form} autoComplete="off" initialValues={values} onFinish={onFinish}>
+          <Form.Item name="name" rules={nameRule}>
+            <Input prefix={<UserOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder={upProfile.name} />
+          </Form.Item>
+          <Form.Item name="email" rules={emailRule}>
+            <Input disabled prefix={<MailOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder={upProfile.email} />
+          </Form.Item>
+          <Form.Item name="password" rules={passwordRule}>
+            <Input prefix={<LockOutlined style={{marginRight: '7px', color: '#999'}} />} type="password" placeholder={upProfile.password} autoComplete="new-password" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              {upProfile.submit}
+            </Button>
+            <Button style={{marginLeft: '12px'}} onClick={() => form.setFieldsValue({name: '', password: ''})}>
+              {upProfile.reset}
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>,
+    },
+  ];
+
   return (
     <Panel>
-      <Tabs type="card">
-        <TabPane tab={profile.title} key="1">
-          <div style={formStyle}>
-            <Form name="profile" {...layout}>
-              <Form.Item name="name" label={profile.name}>
-                <Typography.Text>{values.name}</Typography.Text>
-              </Form.Item>
-              <Form.Item name="email" label={profile.email}>
-                <Typography.Text>{values.email}</Typography.Text>
-              </Form.Item>
-              <Form.Item name="active" label={profile.active}>
-                <Typography.Text>{values.active ? profile.active_true : profile.active_false}</Typography.Text>
-              </Form.Item>
-              <Form.Item name="projectName" label={profile.projectName}>
-                <Typography.Text>{values.projectName}</Typography.Text>
-              </Form.Item>
-              <Form.Item name="role" label={profile.role}>
-                <Typography.Text>{values.role}</Typography.Text>
-              </Form.Item>
-            </Form>
-          </div>
-        </TabPane>
-        <TabPane tab={upProfile.title} key="2">
-          <div style={formStyle}>
-            <Form name="upProfile" form={form} autoComplete="off" initialValues={values} onFinish={onFinish}>
-              <Form.Item name="name" rules={nameRule}>
-                <Input prefix={<UserOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder={upProfile.name} />
-              </Form.Item>
-              <Form.Item name="email" rules={emailRule}>
-                <Input disabled prefix={<MailOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder={upProfile.email} />
-              </Form.Item>
-              <Form.Item name="password" rules={passwordRule}>
-                <Input prefix={<LockOutlined style={{marginRight: '7px', color: '#999'}} />} type="password" placeholder={upProfile.password} autoComplete="new-password" />
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  {upProfile.submit}
-                </Button>
-                <Button style={{marginLeft: '12px'}} onClick={() => form.setFieldsValue({name: '', password: ''})}>
-                  {upProfile.reset}
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        </TabPane>
-      </Tabs>
+      <Tabs type="card" items={items} />
     </Panel>
   );
 };

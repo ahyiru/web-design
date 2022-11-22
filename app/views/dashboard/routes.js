@@ -15,6 +15,12 @@ const routes = {
       icon: 'DashboardOutlined',
       component: () => import('./src/screen2'),
     },
+    {
+      path: '/monitor',
+      name: 'monitor',
+      icon: 'DashboardOutlined',
+      component: () => import('./src/monitor'),
+    },
   ],
 };
 

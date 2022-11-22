@@ -13,6 +13,8 @@ import {userInfoStore} from '@app/store/stores';
 
 import Intls from '@app/components/intl';
 
+import {defProject} from '@app/configs';
+
 const {addApiFn, editApiFn} = apiList;
 
 const formStyle = {
@@ -24,7 +26,7 @@ const Index = props => {
   const addFormText = Intls({keys: 'main.projectApis.addFormText'}) ?? {};
   const [form] = Form.useForm();
   const {getState} = props.history;
-  const {projectId} = props.params;
+  const projectId = props.params.projectId || defProject._id;
   const {item, backState} = getState() || {};
   const back = () => {
     backState ? props.router.push(backState) : props.history.back();

@@ -48,7 +48,7 @@ const HandleModal = props => {
   const addFormText = getIntls('main.projectRouter.addFormText', {});
 
   const [form] = Form.useForm();
-  const {onModalOk, modalVisible, onModalCancel, type, item, isRoot} = props;
+  const {onModalOk, modalOpen, onModalCancel, type, item, isRoot} = props;
   const title = {add: addFormText.add_title, edit: addFormText.edit_title};
   const isEdit = type === 'edit';
   const handleSubmit = () => {
@@ -64,7 +64,7 @@ const HandleModal = props => {
       });
   };
   return (
-    <Modal title={title[type]} visible={modalVisible} onOk={() => handleSubmit()} width={800} onCancel={() => onModalCancel()} okText={addFormText.ok_text} cancelText={addFormText.cancel_text}>
+    <Modal title={title[type]} open={modalOpen} onOk={() => handleSubmit()} width={800} onCancel={() => onModalCancel()} okText={addFormText.ok_text} cancelText={addFormText.cancel_text}>
       <div>
         <ModalForm form={form} item={item} isEdit={isEdit} isRoot={isRoot} addFormText={addFormText} />
       </div>

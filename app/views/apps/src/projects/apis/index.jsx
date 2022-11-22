@@ -266,37 +266,4 @@ const SearchForm = props => {
   );
 };
 
-/* const FormModal=props=>{
-  const {modalItem,handleOk,onCancel}=props;
-  const [form]=Form.useForm();
-  const modalOk=()=>{
-    form.validateFields().then(values=>{
-      // form.resetFields();
-      handleOk(values);
-      onCancel();
-    }).catch(info=>{
-      console.log('Validate Failed:', info);
-      onCancel();
-    });
-  };
-  return <div style={pageStyle}>
-    <Modal title="Form Modal" visible={!!modalItem} onCancel={onCancel} onOk={()=>modalOk()}>
-      <Form {...layout} form={form} name="FormModal" initialValues={{...modalItem}}>
-        <Item label="用户名" name="name" rules={[{required:true,message:'必填项!'}]}>
-          <Input placeholder="请输入用户名" />
-        </Item>
-        <Item label="邮箱" name="email" rules={[{required:true,message:'必填项!'}]}>
-          <Input placeholder="请输入邮箱" />
-        </Item>
-        <Item label="等级" name="role" rules={[{required:true,message:'必填项!'}]}>
-          <Input placeholder="请输入等级" />
-        </Item>
-        <Item label="状态" name="active">
-          <Checkbox checked disabled>激活</Checkbox>
-        </Item>
-      </Form>
-    </Modal>
-  </div>;
-}; */
-
 export default Index;

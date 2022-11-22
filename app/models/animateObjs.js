@@ -1,6 +1,3 @@
-import centerTable from './imgs/centerTable.png';
-import centerLight from './imgs/centerLight.png';
-
 import brain from './icons/brain.png';
 import trend from './icons/trend.png';
 import coder from './icons/coder.png';
@@ -9,19 +6,13 @@ import light from './icons/light.png';
 import debug from './icons/debug.png';
 import chat from './icons/chat.png';
 
+import CircleRing from './circleRing';
+
 const objs = [
   {
     value: 'centerTable',
     label: 'centerTable',
-    icon: centerTable,
-    details: '',
-    link: '',
-    type: 'center',
-  },
-  {
-    value: 'centerLight',
-    label: 'centerLight',
-    icon: centerLight,
+    icon: <CircleRing />,
     details: '',
     link: '',
     type: 'center',

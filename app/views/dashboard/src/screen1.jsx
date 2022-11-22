@@ -1,38 +1,13 @@
-import {useState, useEffect} from 'react';
-import ECharts from 'echarts-for-react';
-import {Table as AntTable} from 'antd';
-import {Spinner} from '@huxy/components';
 import {CornerBorder, HalfBorder, BgBox, TitleHeader, TitleBorder, AnimateBorder} from '@huxy/materials';
-import DefPanel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
-import {tableCfg} from '@app/utils/configs';
 import {option1, option2, option3, option4, option5, option6, option7, option8, option9, option10, option11, option12, columns1, columns2, dataSource1, dataSource2} from './data';
-import defaultOpts from './data/defaultOpts';
 
-const Panel = props => <DefPanel {...props} style={{borderColor: 'rgba(0,180,220,0.08)'}} />;
+import Panel from './components/panel';
+import ReactChart from './components/reactChart';
+import Table from './components/table';
 
-const Table = ({style, ...rest}) => (
-  <div style={{height: style?.height ?? 300, overflow: 'auto'}}>
-    <AntTable {...rest} {...tableCfg} />
-  </div>
-);
-
-const ReactECharts = props => <ECharts {...props} /* option={merge(props.option,defaultOpts)} */ theme="dark-screen" />;
 
 const Index = props => {
-  const [charts, setCharts] = useState(null);
-  useEffect(() => {
-    const getCharts = async () => {
-      const echarts = await import('echarts');
-      echarts.registerTheme('dark-screen', defaultOpts);
-      setCharts(echarts);
-    };
-    getCharts();
-  }, []);
-  if (!charts) {
-    return <Spinner global />;
-  }
-  const opt1 = option1(charts);
   return (
     <div>
       {/* <TitleHeader title="大屏监控测试平台" /> */}
@@ -41,29 +16,29 @@ const Index = props => {
           <Row gutter={[12, 12]}>
             <Col span={3}>
               <CornerBorder>
-                <DefPanel title="使用统计量">
-                  <ReactECharts option={option6} style={{height: '160px'}} />
-                </DefPanel>
+                <Panel title="使用统计量">
+                  <ReactChart option={option6} style={{height: '160px'}} />
+                </Panel>
               </CornerBorder>
             </Col>
             <Col span={3}>
               <HalfBorder>
                 <Panel title="访问统计量">
-                  <ReactECharts option={option5} style={{height: '160px'}} />
+                  <ReactChart option={option5} style={{height: '160px'}} />
                 </Panel>
               </HalfBorder>
             </Col>
             <Col span={3}>
               <AnimateBorder>
                 <Panel>
-                  <ReactECharts option={option7} style={{height: '160px'}} />
+                  <ReactChart option={option7} style={{height: '160px'}} />
                 </Panel>
               </AnimateBorder>
             </Col>
             <Col span={3}>
               <TitleBorder title="访问统计量">
                 <Panel>
-                  <ReactECharts option={option12} style={{height: '160px'}} />
+                  <ReactChart option={option12} style={{height: '160px'}} />
                 </Panel>
               </TitleBorder>
             </Col>
@@ -75,12 +50,12 @@ const Index = props => {
               <Row>
                 <Col>
                   <Panel>
-                    <ReactECharts option={option8} />
+                    <ReactChart option={option8} />
                   </Panel>
                 </Col>
                 <Col>
                   <Panel>
-                    <ReactECharts option={option10} style={{height: '240px'}} />
+                    <ReactChart option={option10} style={{height: '240px'}} />
                   </Panel>
                 </Col>
               </Row>
@@ -89,12 +64,12 @@ const Index = props => {
               <Row>
                 <Col span={8}>
                   <Panel>
-                    <ReactECharts option={option2} />
+                    <ReactChart option={option2} />
                   </Panel>
                 </Col>
                 <Col span={4}>
                   <Panel>
-                    <ReactECharts option={option11} />
+                    <ReactChart option={option11} />
                   </Panel>
                 </Col>
               </Row>
@@ -112,12 +87,12 @@ const Index = props => {
           <Row gutter={[12, 12]}>
             <Col span={6}>
               <Panel>
-                <ReactECharts option={option3} />
+                <ReactChart option={option3} />
               </Panel>
             </Col>
             <Col span={6}>
               <Panel>
-                <ReactECharts option={opt1} />
+                <ReactChart option={option1} />
               </Panel>
             </Col>
           </Row>
@@ -126,12 +101,12 @@ const Index = props => {
           <Row gutter={[12, 12]}>
             <Col span={4}>
               <Panel>
-                <ReactECharts option={option9} />
+                <ReactChart option={option9} />
               </Panel>
             </Col>
             <Col span={4}>
               <Panel>
-                <ReactECharts option={option4} />
+                <ReactChart option={option4} />
               </Panel>
             </Col>
             <Col span={4}>
