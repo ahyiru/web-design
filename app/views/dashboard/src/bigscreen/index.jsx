@@ -5,13 +5,13 @@ import {Row, Col} from '@app/components/row';
 import DefPanel from '../components/panel';
 import ReactChart from '../components/reactChart';
 
-import {getOsTypeOpt, getBrowserTypeOpt, getViewsOpt, getRouteVisitOpt, getVisitCityOpt} from '../utils';
+import {getOsTypeOpt, getBrowserTypeOpt, getViewsOpt, getRouteVisitOpt, getVisitCityOpt, getFirstloadOpt} from '../utils';
 
 import ModelCss from './modelCss';
 import TextData from './textData';
 import Timebar from './timebar';
 
-const Panel = ({style, ...rest}) => <DefPanel style={{background: 'rgba(0, 0, 0, 0.1)', ...style}} {...rest} />;
+const Panel = ({style, ...rest}) => <DefPanel style={{background: 'rgba(0, 0, 0, 0.08)', ...style}} {...rest} />;
 
 const borderColor = '#00b4dcdd';
 
@@ -22,7 +22,8 @@ const Bigscreen = props => {
   const browserTypeOpt = getBrowserTypeOpt(list);
   const viewsOpt = getViewsOpt(list);
   const routeVisitOpt = getRouteVisitOpt(list);
-  const visitCityOpt = getVisitCityOpt(list);
+  const visitCityOpt = getVisitCityOpt(list, {key: 'dark'});
+  const firstloadOpt = getFirstloadOpt(list);
   return <div style={{minHeight: '100vh', background: 'var(--appBgColor)', padding: '10px 15px'}}>
     <BgBox type="dot">
       <div style={{position: 'relative'}}>
@@ -78,6 +79,13 @@ const Bigscreen = props => {
               <ReactChart option={osTypeOpt.opt} style={{height: '240px'}} />
             </Panel>
           </AnimateBorder>
+        </Col>
+      </Row>
+      <Row>
+        <Col span={12}>
+          <Panel title={firstloadOpt.name}>
+            <ReactChart option={firstloadOpt.opt} style={{height: '200px'}} />
+          </Panel>
         </Col>
       </Row>
     </BgBox>

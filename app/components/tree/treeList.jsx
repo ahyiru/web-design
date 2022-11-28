@@ -136,7 +136,7 @@ const Index = props => {
     editFn,
     deleteFn,
   };
-  const {isPending, data} = result;
+  const {pending, data} = result;
   const arr = [rootNode, ...(data || [])].map(item => {
     item.key = item.path;
     const Icon = Icons[item.iconKey] || EyeInvisibleOutlined;
@@ -155,7 +155,7 @@ const Index = props => {
     <div className="page-style" style={{'--pageLeftWidth': '100%'}}>
       <div className="page-left">
         <Search placeholder="请输入名称" allowClear enterButton onSearch={searchTree} style={{maxWidth: '240px', marginBottom: 12}} />
-        <Spin spinning={isPending}>
+        <Spin spinning={pending}>
           <Tree showIcon defaultExpandAll switcherIcon={<DownOutlined />} titleRender={item => treeDrop(item, dropFns)} treeData={treeData} virtual={false} />
         </Spin>
       </div>

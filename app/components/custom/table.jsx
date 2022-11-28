@@ -157,7 +157,7 @@ const Index = ({commonprops, ...props}) => {
 
   const columnsCfg = formatColums(columns, {handleCheck, handleEdit, handleDelete});
 
-  const {isPending, data} = result;
+  const {pending, data} = result;
 
   const {total, current, size, list} = data || {};
 
@@ -180,7 +180,7 @@ const Index = ({commonprops, ...props}) => {
 
   const searchFormProps = {
     submit: values => handleSearch(validObj(values)),
-    loading: isPending,
+    loading: pending,
   };
   const modalFormProps = {
     title: '查看',
@@ -216,12 +216,12 @@ const Index = ({commonprops, ...props}) => {
             <div style={{float: 'left'}}>
               <Space size="small">
                 {addInfo.btnText && (
-                  <Button loading={isPending} onClick={() => handleAdd()} type="primary" icon={<Icon icon="PlusOutlined" />}>
+                  <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<Icon icon="PlusOutlined" />}>
                     {addInfo.btnText}
                   </Button>
                 )}
                 {deleteInfo?.isBatch && (
-                  <Button loading={isPending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<Icon icon="DeleteOutlined" />}>
+                  <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<Icon icon="DeleteOutlined" />}>
                     {deleteInfo.btnText}
                   </Button>
                 )}
@@ -232,7 +232,7 @@ const Index = ({commonprops, ...props}) => {
         </Col>
         <Col>
           <Panel>
-            <Table pagination={paginationCfg} rowSelection={selectionCfg} columns={columnsCfg} dataSource={list ?? []} loading={isPending} rowKey={rowKey} size="small" bordered scroll={{x: true}} />
+            <Table pagination={paginationCfg} rowSelection={selectionCfg} columns={columnsCfg} dataSource={list ?? []} loading={pending} rowKey={rowKey} size="small" bordered scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>

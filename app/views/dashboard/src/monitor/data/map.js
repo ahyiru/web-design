@@ -1,16 +1,31 @@
-const styleJson = [
+const colors = [
+  {
+    water: '#252c33',
+    land: '#2b323a',
+    highway: '#3c4752',
+    local: '#303841',
+  },
+  {
+    water: '#efefef',
+    land: '#fcfcfc',
+    highway: '#e0e0e0',
+    local: '#dedede',
+  },
+];
+
+const styleJson = colors => [
   {
     featureType: 'water',
     elementType: 'all',
     stylers: {
-      color: '#252c33', // '#282f36',
+      color: colors['water'],
     },
   },
   {
     featureType: 'land',
     elementType: 'all',
     stylers: {
-      color: '#2b323a',
+      color: colors['land'],
     },
   },
   {
@@ -24,7 +39,7 @@ const styleJson = [
     featureType: 'highway',
     elementType: 'all',
     stylers: {
-      color: '#3c4752',
+      color: colors['highway'],
     },
   },
   {
@@ -38,14 +53,14 @@ const styleJson = [
     featureType: 'arterial',
     elementType: 'geometry',
     stylers: {
-      color: '#3c4752',
+      color: colors['highway'],
     },
   },
   {
     featureType: 'arterial',
     elementType: 'geometry.fill',
     stylers: {
-      color: '#3c4752',
+      color: colors['highway'],
     },
   },
   {
@@ -73,14 +88,14 @@ const styleJson = [
     featureType: 'manmade',
     elementType: 'all',
     stylers: {
-      color: '#303841',
+      color: colors['local'],
     },
   },
   {
     featureType: 'local',
     elementType: 'all',
     stylers: {
-      color: '#303841',
+      color: colors['local'],
     },
   },
   {
@@ -94,14 +109,14 @@ const styleJson = [
     featureType: 'boundary',
     elementType: 'all',
     stylers: {
-      color: '#3c4752',
+      color: colors['highway'],
     },
   },
   {
     featureType: 'building',
     elementType: 'all',
     stylers: {
-      color: '#303841',
+      color: colors['local'],
     },
   },
   {
@@ -142,7 +157,7 @@ const styleJson = [
     },
   },
 ];
-const option = data => ({
+const option = (data, {key}) => ({
   tooltip: {
     trigger: 'item',
   },
@@ -152,7 +167,7 @@ const option = data => ({
     zoom: 5,
     roam: true,
     mapStyle: {
-      styleJson,
+      styleJson: styleJson(colors[key === 'dark' ? 0 : 1]),
     },
   },
   series: [

@@ -20,7 +20,7 @@ const thirdLoginStyle = {
 
 const Index = props => {
   const getIntls = useIntls();
-  const [isPending, setIsPending] = useState(false);
+  const [pending, setPending] = useState(false);
   useEffect(() => {
     const {code, token} = props.params ?? {};
     if (code) {
@@ -36,7 +36,7 @@ const Index = props => {
     }
   }, []);
   const githubAuth = async code => {
-    setIsPending(true);
+    setPending(true);
     try {
       const {code: msgCode, token} = await githubFn({code});
       if (msgCode === 200) {
@@ -45,10 +45,10 @@ const Index = props => {
         goPage();
       }
     } catch (err) {}
-    setIsPending(false);
+    setPending(false);
   };
   const activeEmail = async query => {
-    setIsPending(true);
+    setPending(true);
     try {
       const {code, token, message: msg} = await activeEmailFn({token: query});
       if (code === 200) {
@@ -58,11 +58,11 @@ const Index = props => {
         goPage();
       }
     } catch (err) {}
-    setIsPending(false);
+    setPending(false);
   };
 
   const onFinish = async values => {
-    setIsPending(true);
+    setPending(true);
     try {
       const {code, token, message: msg} = await loginFn(values);
       if (code === 200) {
@@ -72,7 +72,7 @@ const Index = props => {
         goPage();
       }
     } catch (err) {}
-    setIsPending(false);
+    setPending(false);
   };
 
   const auth = () => {
@@ -117,7 +117,7 @@ const Index = props => {
           </a>
         </div>
       </div>
-      {isPending && <Spinner global />}
+      {pending && <Spinner global />}
     </>
   );
 };

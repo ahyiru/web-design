@@ -11,9 +11,9 @@ window.addEventListener('beforeunload', e => {
   }
 }, false);
 
-const routeReport = () => {
+const routeReport = params => {
   const uuid = uuidv4();
-  report({actionType: 'routeChange', uuid, prevUuid});
+  report({actionType: 'routeChange', uuid, prevUuid, ...params});
   prevUuid = uuid;
 };
 

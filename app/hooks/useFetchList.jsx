@@ -8,9 +8,8 @@ const useFetchList = (fetchList, initParams = null, handleResult, commonParams =
     update({...initParams});
   }, []);
   const {res} = result;
-  const isPending = !res || res.pending;
 
-  return [{isPending, data: res?.result}, update];
+  return [{pending: !res || res.pending, data: res?.result}, update];
 };
 
 export default useFetchList;

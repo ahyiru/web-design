@@ -3,12 +3,13 @@ import {SyncOutlined} from '@ant-design/icons';
 import {Link} from '@huxy/router';
 import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
+import {useThemeStore} from '@app/store/stores';
 import RangeTimePicker from '@app/components/rangeTimePicker';
 import {Row, Col} from '@app/components/row';
 import Panel from '../components/panel';
 import ReactChart from '../components/reactChart';
 
-import {totalViews, getOverview, getOsTypeOpt, getBrowserTypeOpt, getViewsOpt, getRouteVisitOpt, getVisitCityOpt} from '../utils';
+import {totalViews, getOverview, getOsTypeOpt, getBrowserTypeOpt, getViewsOpt, getRouteVisitOpt, getVisitCityOpt, getFirstloadOpt} from '../utils';
 
 import {actions} from './configs';
 
@@ -19,17 +20,19 @@ const Monitor = props => {
     startTime: todaySatrt(),
     endTime: +new Date(),
   }); */
+  const [theme] = useThemeStore();
   const [result, update] = useHandleList(apiList.listReportFn, {/* ...timeRef.current, */ size: 5000});
   const handleTimeChange = time => {
     update(time);
   };
-  const list = result?.data?.list ?? [];
+  const list = result.data?.list ?? [];
   const overviewObj = getOverview(list);
   const osTypeOpt = getOsTypeOpt(list);
   const browserTypeOpt = getBrowserTypeOpt(list);
   const viewsOpt = getViewsOpt(list);
   const routeVisitOpt = getRouteVisitOpt(list);
-  const visitCityOpt = getVisitCityOpt(list);
+  const visitCityOpt = getVisitCityOpt(list, theme);
+  const firstloadOpt = getFirstloadOpt(list);
   return <div className="monitor-dashboard">
     <Row>
       <Col>
@@ -38,12 +41,14 @@ const Monitor = props => {
             <div className="toolbar-left">
               <h4>访问量：{totalViews(list)}</h4>
               <Tooltip title="刷新">
-                <Button type="link" icon={<SyncOutlined />} loading={result.isPending} onClick={e => update()} />
+                <Button type="link" icon={<SyncOutlined />} loading={result.pending} onClick={e => update()} />
               </Tooltip>
             </div>
-            <div>
-              <Link to="/bigscreen" target="_blank" style={{marginRight: 16}}>bigscreen</Link>
-              <RangeTimePicker getTime={handleTimeChange} defaultValue={[]} />
+            <div className="toolbar-right">
+              <Link to="/bigscreen" target="_blank" style={{marginRight: 8}}>
+                <Button type="link">bigscreen</Button>
+              </Link>
+              <div className="monitor-toolbar-timepicker"><RangeTimePicker getTime={handleTimeChange} defaultValue={[]} /></div>
             </div>
           </div>
         </Panel>
@@ -65,6 +70,13 @@ const Monitor = props => {
           </Panel>
         </Col>)
       }
+    </Row>
+    <Row>
+      <Col span={12}>
+        <Panel title={firstloadOpt.name}>
+          <ReactChart option={firstloadOpt.opt} style={{height: '200px'}} />
+        </Panel>
+      </Col>
     </Row>
     <Row>
       <Col span={8}>

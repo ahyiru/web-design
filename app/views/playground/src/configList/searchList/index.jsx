@@ -23,7 +23,7 @@ const Index = ({result, actionList, formList, columns, RenderItem, searchList, p
               <div style={{float: 'left'}}>
                 <Space size="small">
                   {actionList.map(({key, type, label, icon, action, disabled}) => (
-                    <Button key={key} loading={result.isPending} onClick={e => action?.()} type={type} icon={icon} disabled={disabled}>
+                    <Button key={key} loading={result.pending} onClick={e => action?.()} type={type} icon={icon} disabled={disabled}>
                       {label}
                     </Button>
                   ))}
@@ -32,7 +32,7 @@ const Index = ({result, actionList, formList, columns, RenderItem, searchList, p
             ) : null}
             {formList?.length ? (
               <div style={{float: 'right'}}>
-                <SearchForm formList={formList} submit={searchList} loading={result.isPending} />
+                <SearchForm formList={formList} submit={searchList} loading={result.pending} />
               </div>
             ) : null}
           </Panel>

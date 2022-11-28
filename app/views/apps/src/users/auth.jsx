@@ -97,7 +97,7 @@ const Index = props => {
     backState ? props.router.push(backState) : props.history.back();
   };
 
-  const {isPending, data} = routerList;
+  const {pending, data} = routerList;
   const treeData = filterTree || data || [];
   const nodes = [];
   traverItem(item => {
@@ -115,7 +115,7 @@ const Index = props => {
         </Col>
         <Col>
           <Panel>
-            <Spin spinning={isPending}>
+            <Spin spinning={pending}>
               <Search placeholder="搜索..." allowClear enterButton style={{maxWidth: '240px', marginBottom: '12px'}} /* onSearch={searchTree} */ onChange={e => searchChange(e, data)} />
               <Tree showIcon defaultExpandAll switcherIcon={<DownOutlined />} titleRender={item => item.name} treeData={treeData} virtual={false} checkable onCheck={onCheck} checkedKeys={leafKeys} />
               <div style={{padding: '12px 16px'}}>

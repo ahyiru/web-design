@@ -111,10 +111,10 @@ const defaultOpts = {
     borderColor: color,
   },
   grid: {
-    top: '50px',
+    top: '35px',
     left: '4%',
     right: '4%',
-    bottom: '50px',
+    bottom: '35px',
     containLabel: true,
   },
   title: {

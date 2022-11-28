@@ -10,13 +10,14 @@ import FullPage from '@app/components/fullScreen';
 import CustomCollapse from '@app/components/customCollapse';
 import Notify from '@app/components/notify';
 import Search from '@app/components/search';
+import ThemeModel from '@app/components/themeModel';
 import Icon from '@app/components/icon';
 
 import getLang from '@app/utils/getLang';
 import {logout} from '@app/utils/utils';
 import getWeb3 from '@app/web3/getWeb3';
 
-import GithubIcon from '@app/components/githubIcon';
+import GithubIcon from '@app/components/icons/github';
 
 import defUser from '@app/assets/images/user/2.png';
 import wx from '@app/assets/images/wx.jpg';
@@ -106,6 +107,11 @@ export const leftNav = () => {
       icon: <Icon icon="ToolOutlined" />,
       type: 'configs',
       Custom: () => <Settings />,
+    },
+    {
+      key: 'search',
+      title: left?.search ?? '搜索',
+      Custom: () => <Search />,
     },
   ];
 };
@@ -208,9 +214,15 @@ export const rightNav = () => {
       key: 'fullscreen',
       Custom: () => (
         <a>
-          <FullPage />
+          <span className="node-icon">
+            <FullPage />
+          </span>
         </a>
       ),
+    },
+    {
+      key: 'themeModel',
+      Custom: () => <ThemeModel />,
     },
     {
       title: right?.screenshot ?? '截屏',
@@ -232,11 +244,6 @@ export const rightNav = () => {
             message.error(error);
           });
       },
-    },
-    {
-      key: 'search',
-      title: right?.search ?? '搜索',
-      Custom: () => <Search />,
     },
   ];
 };

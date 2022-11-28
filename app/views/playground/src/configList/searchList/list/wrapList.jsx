@@ -4,11 +4,11 @@ import InfiniteLoader from 'react-window-infinite-loader';
 
 const Index = props => {
   const {result, pageChange, RenderItem, itemSize = 45, paramsKey, width = '100%', height = 600} = props;
-  const {isPending, data} = result;
+  const {pending, data} = result;
   const {list = [], total = 1, size = 10, current = 1} = data || {};
 
   const handlePageChange = (start, end) => {
-    if (isPending) {
+    if (pending) {
       return;
     }
     const current = ~~((end + 1) / size);
@@ -27,7 +27,7 @@ const Index = props => {
   const tempList = useRef({
     [current]: list,
   });
-  if (!isPending) {
+  if (!pending) {
     tempList.current[current] = list;
   }
   const totalList = [];

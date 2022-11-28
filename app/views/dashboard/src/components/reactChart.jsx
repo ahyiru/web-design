@@ -52,7 +52,7 @@ const ReactChart = ({style, option, ...rest}) => {
   if (typeof charts !== 'object') {
     return <Spinner />;
   }
-  return <ECharts {...rest} option={typeof option ==='function' ? option(charts) : option} theme="dark-screen" style={{...style}} />;
+  return <ECharts notMerge={true} option={typeof option ==='function' ? option(charts) : option} theme="dark-screen" style={{...style}} {...rest} />;
 };
 
 export default ReactChart;

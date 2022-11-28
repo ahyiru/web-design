@@ -1,4 +1,4 @@
-import {osType, getExplore} from '@huxy/utils';
+import {getOsInfo, getExplore} from '@huxy/utils';
 
 import {routeStore} from '@huxy/router';
 
@@ -10,12 +10,15 @@ import apiList from '@app/utils/getApis';
 
 const {name, version} = require('../../../package.json');
 
-const [browserType, browserVersion] = getExplore().split(': ');
+const {type: osType, version: osVersion, model: osModel} = getOsInfo();
+const {type: browserType, version: browserVersion} = getExplore();
 
 const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
 
 const info = {
-  osType: osType(),
+  osType,
+  osVersion,
+  osModel,
   browserType,
   browserVersion,
   language: window.navigator.language,
@@ -30,18 +33,15 @@ const report = params => {
     return;
   }
   const routeInfo = routeStore.getState();
+  const routes = routeInfo ? routeInfo.current.slice(-1)[0] ?? {} : {};
+  const {path, name, ...restParams} = params;
+  const currentPath = routes.path ?? path ?? '';
   const reportInfo = {
     ...info,
-    ...params,
-    route: '/',
-    routeName: 'Home',
+    ...restParams,
+    route: browserRouter ? currentPath : currentPath.slice(1),
+    routeName: routes.name ?? name,
   };
-  if (routeInfo) {
-    const {path, name} = routeInfo.current.slice(-1)[0] ?? {};
-    const route = browserRouter ? path : path.slice(1);
-    reportInfo.route = route;
-    reportInfo.routeName = name;
-  }
   apiList.addReportFn?.(reportInfo);
 };
 

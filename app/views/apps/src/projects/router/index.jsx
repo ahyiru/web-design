@@ -171,7 +171,7 @@ const Index = props => {
     editFn,
     deleteFn,
   };
-  const {isPending, data} = result;
+  const {pending, data} = result;
 
   const tree = formatTree([rootNode, ...sort(data, 'createtime', true)]);
   const treeData = filterTree || tree || [];
@@ -186,10 +186,10 @@ const Index = props => {
         )}
         <Col width="260px">
           <Panel>
-            <Spin spinning={isPending}>
+            <Spin spinning={pending}>
               <Alert message="提供路由增删改查操作。暂时只有‘低代码’路由下的页面提供设计操作！" type="warning" showIcon closable style={{marginBottom: 10}} />
               <Search placeholder={pageText.search_placeholder} allowClear enterButton onSearch={searchTree} style={{maxWidth: '240px', marginBottom: 12}} />
-              {!isPending && (
+              {!pending && (
                 <Tree
                   showIcon
                   defaultExpandedKeys={[selectedItem?.key || -1]}

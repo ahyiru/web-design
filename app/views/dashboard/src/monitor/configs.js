@@ -15,7 +15,7 @@ export const actions = [
     value: 'click',
     label: '点击次数',
     icon: control,
-    description: '页面点击次数总和',
+    description: 'Layout页面点击次数',
     color: 'var(--green1)',
   },
   {

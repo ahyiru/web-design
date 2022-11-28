@@ -1,16 +1,16 @@
-const option = (typeList, data) => ({
+const option = (data) => ({
   grid: {
-    top: '30px',
+    top: '20px',
     left: '2%',
     right: '2%',
-    bottom: '50px',
+    bottom: '35px',
     containLabel: true,
   },
   tooltip: {
     trigger: 'axis',
   },
   legend: {
-    data: typeList,
+    data: data.map(({name}) => name),
   },
   xAxis: {
     type: 'value',
@@ -25,12 +25,17 @@ const option = (typeList, data) => ({
     stack: 'total',
     label: {
       show: true,
+      formatter: ({value}) => value ? value : '',
       color: '#fff',
     },
     emphasis: {
       focus: 'series',
     },
     data: value.map(({count}) => count),
+    showBackground: true,
+    backgroundStyle: {
+      color: 'rgba(180, 180, 180, 0.01)',
+    },
   })),
 });
 

@@ -27,8 +27,19 @@ const beforeRender = (input, next) => {
     return confirmDesignPage(next);
   }
   next();
+};
+
+let listenRouteInit = false;
+
+const afterRender = output => {
+  const {path, name, stay} = output;
+  let firstLoadTime;
+  if (!listenRouteInit) {
+    firstLoadTime = stay;
+    listenRouteInit = true;
+  }
   if (!path.includes('/user/')) {
-    routeReport();
+    routeReport({path, name, firstLoadTime});
   }
 };
 
@@ -37,5 +48,5 @@ export default {
   beforeRender,
   basepath,
   errorBoundary,
-  // afterRender,
+  afterRender,
 };

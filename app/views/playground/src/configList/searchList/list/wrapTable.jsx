@@ -2,7 +2,7 @@ import {Table} from 'antd';
 
 const Index = props => {
   const {result, pageChange, columns, rowSelection, pagination, ...rest} = props;
-  const {isPending, data} = result;
+  const {pending, data} = result;
   const {total, current, size, list} = data || {};
 
   const handlePageChange = (current, size) => {
@@ -39,7 +39,7 @@ const Index = props => {
         ...(typeof pagination === 'object' ? pagination : null),
       };
 
-  return <Table pagination={paginationCfg} rowSelection={selectionCfg} columns={columns} dataSource={list ?? []} loading={isPending} size="small" bordered scroll={{x: true}} {...rest} />;
+  return <Table pagination={paginationCfg} rowSelection={selectionCfg} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered scroll={{x: true}} {...rest} />;
 };
 
 export default Index;

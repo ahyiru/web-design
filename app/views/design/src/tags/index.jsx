@@ -130,7 +130,7 @@ const Index = props => {
 
   const columns = getColumns(actions);
 
-  const {isPending, data} = result;
+  const {pending, data} = result;
 
   const {total, current, size, list} = data || {};
 
@@ -158,19 +158,19 @@ const Index = props => {
             <div style={{overflow: 'hidden', marginBottom: '10px'}}>
               <div style={{float: 'left'}}>
                 <Space size="small">
-                  <Button loading={isPending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
+                  <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
                     {i18nCfg.add}
                   </Button>
-                  <Button loading={isPending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
+                  <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
                     {i18nCfg.batchDelete}
                   </Button>
                 </Space>
               </div>
               <div style={{float: 'right'}}>
-                <SearchForm submit={searchList} loading={isPending} />
+                <SearchForm submit={searchList} loading={pending} />
               </div>
             </div>
-            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={isPending} size="small" bordered rowKey="_id" scroll={{x: true}} />
+            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>

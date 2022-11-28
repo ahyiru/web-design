@@ -184,7 +184,7 @@ const Index = props => {
 
   const columns = getColumns(actions, profile, {...tableHeaderText, ...actionsText});
 
-  const {isPending, data} = result;
+  const {pending, data} = result;
 
   const {total, current, size, list} = data || {};
 
@@ -224,20 +224,20 @@ const Index = props => {
             <div style={{overflow: 'hidden', marginBottom: '10px'}}>
               <div style={{float: 'left'}}>
                 <Space size="small">
-                  <Button loading={isPending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
+                  <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
                     {actionsText.add_action}
                   </Button>
-                  <Button loading={isPending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
+                  <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
                     {actionsText.batch_action}
                   </Button>
                 </Space>
               </div>
               <div style={{float: 'right'}}>
-                {/* <Search loading={isPending} placeholder="请输入用户名" allowClear onSearch={value=>searchList({keyword:value})} enterButton /> */}
-                <SearchForm submit={searchList} loading={isPending} searchFormText={searchFormText} />
+                {/* <Search loading={pending} placeholder="请输入用户名" allowClear onSearch={value=>searchList({keyword:value})} enterButton /> */}
+                <SearchForm submit={searchList} loading={pending} searchFormText={searchFormText} />
               </div>
             </div>
-            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={isPending} size="small" bordered rowKey="_id" scroll={{x: true}} />
+            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>

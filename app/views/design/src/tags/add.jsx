@@ -21,7 +21,7 @@ const Index = props => {
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.tables', {});
   // const profile = userInfoStore.getState();
-  const [isPending, setIsPending] = useState(false);
+  const [pending, setPending] = useState(false);
   const [form] = Form.useForm();
   const {getState} = props.history;
   const {item, backState} = getState() || {};
@@ -31,7 +31,7 @@ const Index = props => {
   const onFinish = async values => {
     const handler = item ? editTagsFn : addTagsFn;
     values = item ? {...item, ...values} : values;
-    setIsPending(true);
+    setPending(true);
     try {
       const {code, message: msg} = await handler({...values, projectId: /* profile?.projectId ?? */ defProject._id});
       if (code === 200) {
@@ -41,7 +41,7 @@ const Index = props => {
     } catch (err) {
       console.log(err);
     }
-    setIsPending(false);
+    setPending(false);
   };
   return (
     <div>
@@ -65,7 +65,7 @@ const Index = props => {
                 <Button style={{marginRight: '12px'}} onClick={() => back()}>
                   {i18nCfg.cancel}
                 </Button>
-                <Button type="primary" htmlType="submit" disabled={isPending}>
+                <Button type="primary" htmlType="submit" disabled={pending}>
                   {i18nCfg.submit}
                 </Button>
               </Form.Item>

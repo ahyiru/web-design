@@ -19,7 +19,7 @@ const Index = props => {
   const i18nCfg = getIntls('main.tables', {});
   const {getState} = props.history;
   const {item, backState} = getState() || {};
-  const [isPending, setIsPending] = useState(false);
+  const [pending, setPending] = useState(false);
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [tagCount, setTagCount] = useState(0);
@@ -40,7 +40,7 @@ const Index = props => {
     values = item ? {...item, ...values} : values;
     const {screenshot, ...rest} = values;
     const file = typeof screenshot === 'string' ? screenshot : screenshot && screenshot[0].originFileObj;
-    setIsPending(true);
+    setPending(true);
     try {
       const {code, message: msg} = await handler({...rest, file});
       if (code === 200) {
@@ -48,7 +48,7 @@ const Index = props => {
         back();
       }
     } catch (err) {}
-    setIsPending(false);
+    setPending(false);
   };
   const onChange = value => {
     setTagCount(value.length);
@@ -112,7 +112,7 @@ const Index = props => {
               <Button style={{marginRight: 12}} onClick={e => back()}>
                 {i18nCfg.cancel}
               </Button>
-              <Button type="primary" htmlType="submit" disabled={isPending}>
+              <Button type="primary" htmlType="submit" disabled={pending}>
                 {i18nCfg.submit}
               </Button>
             </Form.Item>

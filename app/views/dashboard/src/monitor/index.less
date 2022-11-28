@@ -15,6 +15,20 @@
       margin-right: 16px;
     }
   }
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .monitor-toolbar {
+    .toolbar-right {
+      .monitor-toolbar-timepicker {
+        display: none;
+      }
+    }
+  }
 }
 
 .overview-item {

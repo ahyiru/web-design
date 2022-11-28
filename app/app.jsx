@@ -3,6 +3,7 @@ import {useRouter} from '@huxy/router';
 import {Spinner} from '@huxy/components';
 import {storage} from '@huxy/utils';
 import routerCfgs from '@app/configs/router';
+import sysThemeMode from '@app/utils/sysThemeMode';
 import getTheme from '@app/utils/getTheme';
 import getI18n from '@app/utils/getI18n';
 import useGetI18ns from '@app/hooks/useGetI18ns';
@@ -17,6 +18,7 @@ const ConfigProvider = ({routerCfgs}) => {
   useEffect(() => {
     const cancelTheme = themeStore.subscribe(setStyleVar);
     themeStore.setState(getTheme());
+    sysThemeMode(themeStore.setState);
     const cancelLang = langStore.subscribe(async lang => {
       storage.set('language', lang);
       await getI18n();
