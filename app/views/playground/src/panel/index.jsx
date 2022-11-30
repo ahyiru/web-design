@@ -167,7 +167,7 @@ const Index = props => {
               <span>rgba</span>
             </Col>
             <Col span={5}>
-              <Input value={hex2rgba(colorValue)} />
+              <Input value={hex2rgba(colorValue)} onChange={colorPicker} />
             </Col>
           </Row>
         </Panel>

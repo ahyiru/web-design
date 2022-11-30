@@ -7,7 +7,7 @@ import rankingOpt from '../monitor/data/ranking';
 import mapOpt from '../monitor/data/map';
 import firstLoadOpt from '../monitor/data/firstLoad';
 
-export const fixTime = t => fixTimeUnit(t, [' 秒', ' 分', ' 小时', ' 天']);
+export const fixTime = t => fixTimeUnit(t, ['秒', '分', '小时', '天']);
 
 const weekLabel = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 
@@ -54,6 +54,13 @@ const filterByIp = list => {
   return Object.keys(ipObj).map(key => ipObj[key][0]);
 };
 
+const filterByIpAndType = (list, type = 'osType') => {
+  const ipObj = classifyArr(list, 'ip');
+  const types = [];
+  Object.keys(ipObj).map(key => types.push(...unique(ipObj[key], type)));
+  return types;
+};
+
 export const getOverview = list => {
   const stay = fixTime(~~sum(list.filter(item => item.route !== '/')));
   const actionsObj = classifyArr(list, 'actionType');
@@ -89,8 +96,8 @@ export const getBrowserTypeOpt = list => {
   };
 };
 
-export const getViewsOpt = list => {
-  const data = filterByIp(list);
+export const getViewsOpt = data => {
+  data = filterByIpAndType(data);
   const osTypeObj = classifyArr(data, 'osType');
   const optData = Object.keys(osTypeObj).map(key => ({
     name: key,
@@ -120,7 +127,7 @@ export const getRouteVisitOpt = list => {
         data: viewsData.sort((a, b) => b.stay - a.stay).slice(0, 10),
       },
     ]),
-    name: '页面访问量与停留时间前十',
+    name: '页面访问量与停留时间Top10',
   };
 };
 

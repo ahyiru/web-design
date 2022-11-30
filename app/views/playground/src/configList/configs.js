@@ -154,12 +154,11 @@ export const colsCfg = actions => [
     dataIndex: 'action',
     render: (text, record) => {
       const disabled = false; // !profile.role && record._id !== profile._id;
-      const color = disabled ? 'var(--light-color)' : 'var(--red2)';
       const acList = Object.keys(actions).map(key => ({...colActions.find(item => item.key === key), action: actions[key]}));
       return (
         <Space>
           {acList.map(({key, action, type, label}) => (
-            <Button key={key} type={type} size="small" disabled={disabled} style={{color: key === 'handleDelete' ? color : ''}} onClick={() => action(record)}>
+            <Button key={key} type={type} size="small" disabled={disabled} danger={key === 'handleDelete'} onClick={() => action(record)}>
               {label}
             </Button>
           ))}

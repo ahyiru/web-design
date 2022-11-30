@@ -91,7 +91,7 @@ const Monitor = props => {
       </Col>
     </Row>
     <Row>
-      <Col span={4}>
+      <Col span={5}>
         <Panel title={viewsOpt.name}>
           <ReactChart option={viewsOpt.opt} style={{height: '240px'}} />
         </Panel>
@@ -101,7 +101,7 @@ const Monitor = props => {
           <ReactChart option={browserTypeOpt.opt} style={{height: '240px'}} />
         </Panel>
       </Col>
-      <Col span={4}>
+      <Col span={3}>
         <Panel title={osTypeOpt.name}>
           <ReactChart option={osTypeOpt.opt} style={{height: '240px'}} />
         </Panel>

@@ -2,6 +2,9 @@ const option = {
   title: {
     text: '网站访问量统计',
   },
+  grid: {
+    bottom: '55px',
+  },
   tooltip: {
     trigger: 'axis',
   },

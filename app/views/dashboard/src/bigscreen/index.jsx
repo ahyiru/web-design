@@ -59,7 +59,7 @@ const Bigscreen = props => {
         </Col>
       </Row>
       <Row>
-        <Col span={4}>
+        <Col span={5}>
           <CornerBorder cornerColor={borderColor}>
             <Panel title={viewsOpt.name}>
               <ReactChart option={viewsOpt.opt} style={{height: '240px'}} />
@@ -73,7 +73,7 @@ const Bigscreen = props => {
             </Panel>
           </CornerBorder>
         </Col>
-        <Col span={4}>
+        <Col span={3}>
           <AnimateBorder borderColor={borderColor}>
             <Panel title={osTypeOpt.name}>
               <ReactChart option={osTypeOpt.opt} style={{height: '240px'}} />

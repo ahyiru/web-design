@@ -1,8 +1,8 @@
 const option = (data) => ({
   grid: {
-    top: '20px',
-    left: '2%',
-    right: '2%',
+    top: '10px',
+    left: '0',
+    right: '0',
     bottom: '35px',
     containLabel: true,
   },

@@ -47,13 +47,13 @@ const getColumns = ({handleEdit, handleDelete}) => [
     dataIndex: 'action',
     align: 'center',
     render: (text, record) => {
-      const disabled = false; //!profile.role&&record._id!==profile._id;
+      const disabled = false; //!profile.role&&record._id !== profile._id;
       return (
         <>
           <Button type="link" size="small" disabled={disabled} onClick={() => handleEdit(record)}>
             编辑
           </Button>
-          <Button type="link" size="small" disabled={disabled} onClick={() => handleDelete(record)} style={{color: disabled ? 'var(--light-color)' : 'var(--red2)'}}>
+          <Button type="link" size="small" disabled={disabled} onClick={() => handleDelete(record)} danger>
             删除
           </Button>
         </>

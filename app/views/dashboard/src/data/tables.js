@@ -58,7 +58,7 @@ export const columns = [
           <Button type="link" size="small" onClick={() => {}}>
             编辑
           </Button>
-          <Button type="link" size="small" onClick={() => {}} style={{color: 'var(--red2)'}}>
+          <Button type="link" size="small" onClick={() => {}} danger>
             删除
           </Button>
         </>

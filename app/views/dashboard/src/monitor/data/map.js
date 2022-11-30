@@ -176,7 +176,7 @@ const option = (data, {key}) => ({
       type: 'scatter',
       coordinateSystem: 'bmap',
       data,
-      // symbolSize: val => val[2] / 10,
+      symbolSize: val => 10 + val[2] / 5,
       encode: {
         value: 2,
       },
@@ -197,11 +197,11 @@ const option = (data, {key}) => ({
       },
     },
     {
-      name: '排名前五',
+      name: '访问量Top5',
       type: 'effectScatter',
       coordinateSystem: 'bmap',
       data: data.sort((a, b) => b.value[2] - a.value[2]).slice(0, 5),
-      // symbolSize: val => val[2] / 10,
+      symbolSize: val => 10 + val[2] / 5,
       encode: {
         value: 2,
       },

@@ -85,11 +85,11 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
           <Button type="link" size="small" disabled={disabled} onClick={() => handleEdit(record)}>
             {i18ns.edit_action}
           </Button>
-          <Button type="link" size="small" disabled={disabled} onClick={() => handleDelete(record)} style={{color: disabled ? 'var(--light-color)' : 'var(--red2)'}}>
+          <Button type="link" size="small" disabled={disabled} onClick={() => handleDelete(record)} danger>
             {i18ns.delete_action}
           </Button>
           {/* <Popconfirm title="确认删除?" onConfirm={()=>handleDelete(record)}>
-          <a style={{color:'var(--red2)'}}>删除</a>
+          <a style={{color: 'var(--red2)'}}>删除</a>
         </Popconfirm> */}
         </>
       );

@@ -19,36 +19,36 @@ import apiList from '@app/utils/getApis';
 const actionsRender = {
   handleCheck: {
     type: 'Button',
-    props: `{({text,record,index,actions})=>{
+    props: `{({text, record, index, actions}) => {
       return {
-        type:'link',
-        size:'small',
-        onClick:e=>actions['handleCheck'](record),
-        children:'查看',
+        type: 'link',
+        size: 'small',
+        onClick: e => actions['handleCheck'](record),
+        children: '查看',
       };
     }}`,
   },
   handleEdit: {
     type: 'Button',
-    props: `{({text,record,index,actions})=>{
+    props: `{({text, record, index, actions}) => {
       return {
-        type:'link',
-        size:'small',
-        onClick:e=>actions['handleEdit'](record),
-        children:'编辑',
+        type: 'link',
+        size: 'small',
+        onClick: e => actions['handleEdit'](record),
+        children: '编辑',
       };
     }}`,
   },
   handleDelete: {
     type: 'Button',
-    props: `{({text,record,index,actions})=>{
-      const disabled=false;
+    props: `{({text, record, index, actions}) => {
+      const disabled = false;
       return {
-        type:'link',
-        size:'small',
-        style:{color:disabled?'var(--light-color)':'var(--red2)'},
-        onClick:e=>actions['handleDelete'](record),
-        children:'删除',
+        type: 'link',
+        size: 'small',
+        danger: true,
+        onClick: e => actions['handleDelete'](record),
+        children: '删除',
       };
     }}`,
   },
