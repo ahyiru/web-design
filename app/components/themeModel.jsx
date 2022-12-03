@@ -9,7 +9,6 @@ const ThemeModel = ({panel}) => {
   const {key} = theme;
 
   const handleClick = e => {
-    e.stopPropagation();
     const currentKey = key === 'dark' ? 'light' : 'dark';
     const current = getTheme(currentKey);
     storage.set('theme', current);

@@ -15,12 +15,6 @@ const routes = [
     component: () => import('@app/views/apps/src/projects/router/design/preview'),
   },
   {
-    path: '/panorama',
-    name: 'panorama',
-    hideMenu: true,
-    component: () => import('@app/views/commons/src/canvas/panorama'),
-  },
-  {
     path: '/x6-demo/:id',
     name: 'x6',
     hideMenu: true,

@@ -4,8 +4,8 @@ const handleNavClick = (props, item) => {
   report({
     actionType: 'click',
     category: 'navbar',
-    text: item.name || item.title || item.type,
-    value: item.type,
+    text: item.name || item.title || item.key,
+    value: item.key || item.name,
   });
   const {handle, path, link} = item;
   if (typeof handle === 'function') {

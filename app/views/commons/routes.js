@@ -38,14 +38,8 @@ const routes = {
           component: () => import('./src/canvas/d3'),
         },
         {
-          path: '/webgl',
+          path: 'http://ihuxy.com:8081/',
           name: 'webgl',
-          component: () => import('./src/canvas/webgl'),
-        },
-        {
-          path: '/panorama',
-          name: 'panorama',
-          redirect: '/panorama',
           linkProps: {
             target: '_blank',
           },

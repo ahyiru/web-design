@@ -59,10 +59,10 @@ const objs = [
   },
   {
     value: 'debug',
-    label: 'DOC',
+    label: 'mern',
     icon: debug,
     details: '',
-    link: 'https://juejin.cn/user/4177799915506701',
+    link: 'https://github.com/ahyiru/mern',
     type: '',
   },
   {

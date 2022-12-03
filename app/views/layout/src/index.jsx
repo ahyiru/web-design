@@ -65,8 +65,8 @@ const Index = props => {
     report({
       actionType: 'change',
       category: 'layout',
-      text: `${value || ''}${unit}`,
-      value: key,
+      text: key,
+      value: `${value || ''}${unit}`,
     });
   };
   const changeColors = (e, key) => {
@@ -76,8 +76,8 @@ const Index = props => {
     report({
       actionType: 'change',
       category: 'layout',
-      text: value,
-      value: key,
+      text: key,
+      value,
     });
   };
   const changeFont = value => {
@@ -86,8 +86,8 @@ const Index = props => {
     report({
       actionType: 'change',
       category: 'layout',
-      text: value,
-      value: 'fontSize',
+      text: 'fontSize',
+      value,
     });
   };
   const saveConfig = () => {
@@ -116,8 +116,8 @@ const Index = props => {
     report({
       actionType: 'change',
       category: 'layout',
-      text: `${value}${unit}`,
-      value: key,
+      text: key,
+      value: `${value}${unit}`,
     });
   };
   const selectTheme = current => {
@@ -126,8 +126,8 @@ const Index = props => {
     report({
       actionType: 'click',
       category: 'layout',
-      text: current.name,
-      value: 'switchTheme',
+      text: 'switchTheme',
+      value: current.name,
     });
   };
   return (
@@ -161,8 +161,8 @@ const Index = props => {
                       report({
                         actionType: 'click',
                         category: 'layout',
-                        text: e.target.value,
-                        value: 'switchMenuType',
+                        text: 'switchMenuType',
+                        value: e.target.value,
                       });
                     }}>
                       <Radio value="vertical">{getIntls('main.layout.vertical')}</Radio>

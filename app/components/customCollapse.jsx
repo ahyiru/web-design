@@ -6,7 +6,7 @@ const CustomCollapse = props => {
   const {useStore} = useRoute();
   const {width} = useWinResize();
   const [collapsed, setCollapsed] = useStore('huxy-collapse');
-  return width < 1024 ? (
+  return width <= 1024 ? (
     <a
       {...props}
       onClick={e => {
