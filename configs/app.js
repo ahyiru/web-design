@@ -13,7 +13,7 @@ const app = {
   },
   MOCK: '127.0.0.1:8102',
   SERVER_PORT: 8103,
-  projectName: '招摇山',
+  projectName: '...',
   defProject: {
     name: '控制台',
     _id: '6098f12b099e1202a287acad',
