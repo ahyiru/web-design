@@ -26,6 +26,12 @@ const routes = [
     hideMenu: true,
     component: () => import('@app/views/dashboard/src/bigscreen'),
   },
+  {
+    path: '/carmodel',
+    name: 'carmodel',
+    hideMenu: true,
+    component: () => import('@app/views/dashboard/src/carmodel'),
+  },
 ];
 
 export default routes;

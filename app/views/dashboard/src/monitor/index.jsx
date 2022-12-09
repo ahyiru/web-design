@@ -45,9 +45,9 @@ const Monitor = props => {
               </Tooltip>
             </div>
             <div className="toolbar-right">
-              <Link to="/bigscreen" target="_blank" style={{marginRight: 8}}>
+              {/* <Link to="/bigscreen" target="_blank" style={{marginRight: 8}}>
                 <Button type="link">bigscreen</Button>
-              </Link>
+              </Link> */}
               <div className="monitor-toolbar-timepicker"><RangeTimePicker getTime={handleTimeChange} defaultValue={[]} /></div>
             </div>
           </div>

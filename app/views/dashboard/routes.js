@@ -21,6 +21,16 @@ const routes = {
       icon: 'DashboardOutlined',
       component: () => import('./src/monitor'),
     },
+    {
+      path: '/bigscreen',
+      name: 'bigscreen',
+      redirect: '/bigscreen',
+    },
+    {
+      path: '/carmodel',
+      name: 'carmodel',
+      redirect: '/carmodel',
+    },
   ],
 };
 

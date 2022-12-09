@@ -1,4 +1,4 @@
-const colors = ['#1890ff', '#52c41a', '#fa8c16', '#722ed1', '#f5222d', '#fadb14', '#faad14'];
+const colors = ['#40a9ff', '#73d13d', '#ffec3d', '#ff4d4f', '#ffa940', '#9254de', '#1890ff', '#52c41a', '#fadb14', '#f5222d', '#fa8c16', '#722ed1'];
 const bgColor = '#2a3042';
 const color = '#a6b0cf';
 
@@ -101,7 +101,7 @@ const itemStyles = {
 };
 
 const defaultOpts = {
-  // color:colors,
+  // color: colors,
   backgroundColor: 'transparent',
   textStyle: {
     color,
