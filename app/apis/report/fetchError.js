@@ -4,7 +4,9 @@ import report from './report';
 
 const fetch = props => fetcher(props).catch(err => {
   const {url} = props;
-  if (!url.includes('/report/') && !url.includes('/auth/')) {
+  const isPermission = err.code != 401 && err.code != 403;
+  const authedPath = !url.includes('/report/') && !url.includes('/auth/');
+  if (isPermission && authedPath) {
     report({actionType: 'fetchError', text: err.message, value: url});
   }
   throw err.message;
