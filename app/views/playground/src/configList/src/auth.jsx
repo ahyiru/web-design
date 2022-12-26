@@ -20,7 +20,9 @@ import {useIntls} from '@app/components/intl';
 
 import {defProject} from '@app/configs';
 
-import {getRouter, getAuthedRouter, setAuthedRouter} from './mock';
+import {apiList} from '../configs';
+
+const {getRouter, getAuthedRouter, setAuthedRouter} = apiList;
 
 const {Search} = Input;
 

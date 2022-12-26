@@ -1,5 +1,8 @@
 import {browserRouter} from '@app/configs';
 
+import configListRoutes from './src/configList/routes';
+import messagesRoutes from './src/messages/routes';
+
 const routes = {
   path: '/playground',
   name: 'Playground',
@@ -75,27 +78,8 @@ const routes = {
       name: 'tools',
       component: () => import('./src/tools'),
     },
-    {
-      path: '/configTable',
-      name: 'configTable',
-      component: () => import('./src/configList'),
-    },
-    {
-      path: '/configTable/add',
-      name: '添加用户',
-      hideMenu: true,
-      component: () => import('./src/configList/add'),
-    },
-    {
-      path: '/configTable/edit/:id',
-      name: '编辑用户',
-      component: () => import('./src/configList/add'),
-    },
-    {
-      path: '/configTable/auth/:id',
-      name: '路由权限设置',
-      component: () => import('./src/configList/auth'),
-    },
+    ...configListRoutes,
+    ...messagesRoutes,
   ],
 };
 

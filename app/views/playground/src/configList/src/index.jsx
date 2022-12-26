@@ -3,16 +3,14 @@ import {Modal, message} from 'antd';
 import {ExclamationCircleOutlined, TableOutlined, BarsOutlined} from '@ant-design/icons';
 import {TabHeader} from '@huxy/components';
 import useHandleList from '@app/hooks/useHandleList';
-import * as apiList from './mock';
-import getColumns, {RenderItem} from './getColumns';
 import List from './searchList';
 
-import {tabs, formList, actionList, colsCfg, tableHeader} from './configs';
+import {tabs, formList, actionList, colsCfg, tableHeader, getColumns, RenderItem, apiList} from '../configs';
 
 import './index.less';
 
 const Index = props => {
-  const [listType, setListType] = useState('table');
+  const [listType, setListType] = useState(props.type ?? 'table');
   const [active, setActive] = useState(1);
   const [searchParmas, setSearchParmas] = useState('');
   const [selectedRows, setSelectedRows] = useState([]);

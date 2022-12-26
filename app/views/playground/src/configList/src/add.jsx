@@ -7,7 +7,9 @@ import Panel from '@app/components/panel';
 
 import {useIntls} from '@app/components/intl';
 
-import {addUser, editUser, projectList} from './mock';
+import {apiList} from '../configs';
+
+const {addUser, editUser, projectList} = apiList;
 
 const Index = props => {
   const getIntls = useIntls();

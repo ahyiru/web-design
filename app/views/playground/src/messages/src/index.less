@@ -1,0 +1,19 @@
+.messages-list {
+  position: relative;
+  .handle-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 32px;
+    line-height: 32px;
+    > a {
+      font-size: 18px;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      &.active {
+        background: rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}

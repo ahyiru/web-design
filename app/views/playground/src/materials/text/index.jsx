@@ -1,4 +1,4 @@
-import {Text3d, TextFilter, TextLoading, TextMasked} from '@huxy/materials';
+import {Text3d, TextFilter, TextLoading, TextMasked, RateScore} from '@huxy/materials';
 import objs from '@app/models/objs';
 
 const box = {
@@ -20,6 +20,9 @@ const Index = props => {
       </div>
       <div style={box}>
         <TextLoading style={{fontSize: '3rem'}}>Loading</TextLoading>
+      </div>
+      <div style={box}>
+        <RateScore score="0.66666666">★★★★★</RateScore>
       </div>
       <div style={box}>
         <TextMasked>当我们在写代码时，其实我们都在写一个故事，而场景就是故事中的每一个片段。</TextMasked>

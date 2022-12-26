@@ -13,11 +13,11 @@ export const RenderItem = Item;
 export const tabs = [
   {
     key: 1,
-    value: '已激活',
+    value: '已读',
   },
   {
     key: 0,
-    value: '未激活',
+    value: '未读',
   },
 ];
 
@@ -47,22 +47,10 @@ export const formList = [
 
 export const actionList = (actions, disabled) => [
   {
-    key: 'add',
+    key: 'handleCheck',
     type: 'primary',
-    label: '新增',
-    action: actions['handleAdd'],
-  },
-  {
-    key: 'export',
-    type: 'default',
-    label: '导出',
-    action: actions['handleExport'],
-  },
-  {
-    key: 'handleDelete',
-    type: 'default',
-    label: '批量删除',
-    action: actions['handleDelete'],
+    label: '标记为已读',
+    action: actions['handleCheck'],
     disabled,
   },
 ];
@@ -71,17 +59,7 @@ export const colActions = [
   {
     key: 'handleCheck',
     type: 'link',
-    label: '设置',
-  },
-  {
-    key: 'handleEdit',
-    type: 'link',
-    label: '编辑',
-  },
-  {
-    key: 'handleDelete',
-    type: 'link',
-    label: '删除',
+    label: '标记已读',
   },
 ];
 
@@ -91,17 +69,17 @@ export const tableHeader = [
     title: '用户名',
   },
   {
-    dataIndex: 'email',
-    title: '邮箱',
+    dataIndex: 'message',
+    title: '信息',
   },
   {
     dataIndex: 'active',
     title: '状态',
   },
-  {
+  /* {
     dataIndex: 'github',
     title: '绑定GitHub',
-  },
+  }, */
   {
     dataIndex: 'role',
     title: '等级',
@@ -124,19 +102,11 @@ export const tableHeader = [
 export const colsCfg = actions => [
   {
     dataIndex: 'name',
-    render: (text, record) => <a onClick={() => actions.handleCheck(record)}>{text}</a>,
-  },
-  {
-    dataIndex: 'email',
-    render: text => text.replace(/\S+(@\S+)/, '*****$1'),
+    render: (text, record) => record.active ? text : <a onClick={() => actions.handleCheck(record)}>{text}</a>,
   },
   {
     dataIndex: 'active',
-    render: text => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
-  },
-  {
-    dataIndex: 'github',
-    render: text => (text ? <Tag color="green">已激活</Tag> : <Tag color="red">未激活</Tag>),
+    render: text => (text ? <Tag color="green">已读</Tag> : <Tag color="red">未读</Tag>),
   },
   {
     dataIndex: 'role',
@@ -158,7 +128,7 @@ export const colsCfg = actions => [
   {
     dataIndex: 'action',
     render: (text, record) => {
-      const disabled = false; // !profile.role && record._id !== profile._id;
+      const disabled = record.active; // !profile.role && record._id !== profile._id;
       const acList = Object.keys(actions).map(key => ({...colActions.find(item => item.key === key), action: actions[key]}));
       return (
         <Space>

@@ -13,7 +13,7 @@ const compList = {
 };
 
 const Index = ({result, actionList, formList, columns, RenderItem, searchList, pageChange, rowSelection, paramsKey, rowKey = '_id', listType}) => {
-  const List = compList[listType];
+  const List = compList[listType] ?? compList.table;
   return (
     <Row>
       {actionList?.length || formList?.length ? (

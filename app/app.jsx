@@ -33,7 +33,7 @@ const ConfigProvider = ({routerCfgs}) => {
   return (
     <>
       {output}
-      {loading && <Spinner global />}
+      {loading ? <Spinner global /> : null}
     </>
   );
 };
