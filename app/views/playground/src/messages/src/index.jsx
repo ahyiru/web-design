@@ -31,7 +31,7 @@ const Index = props => {
   };
   const handleSearchList = values => {
     setSearchParmas(values);
-    searchList(values);
+    searchList({...values, active});
   };
 
   const handleCheck = async item => {
