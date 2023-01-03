@@ -16,7 +16,7 @@ const Index = ({collapsed, setCollapsed}) => {
           text: 'collapsed',
           value: collapsed ? 'close' : 'open',
         });
-      }}>
+      }} title="collapse">
         <Anico type={collapsed ? 'right' : ''} />
       </a>
       {!collapsed && (

@@ -15,7 +15,7 @@ const ThemeModel = ({panel}) => {
     setTheme(current);
   };
   
-  return <a onClick={handleClick}>
+  return <a onClick={handleClick} title={key}>
     <span className="node-icon">{key === 'light' ? <SunIcon /> : <MoonIcon />}</span>
   </a>;
 };
