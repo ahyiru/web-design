@@ -39,7 +39,7 @@ const handleClick = ({addFn, editFn, deleteFn}, item, actionsText) => (
 );
 
 const treeDrop = (item, dropFns, actionsText) => (
-  <Dropdown overlay={() => handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
+  <Dropdown menu={() => handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
     <span className="node-style">{item.type}</span>
   </Dropdown>
 );

@@ -138,7 +138,7 @@
     "@huxy/open-browser-webpack-plugin": "^0.4.0",
     "@huxy/router": "^1.7.1",
     "@huxy/use": "^1.7.1",
-    "@huxy/utils": "^1.7.1",
+    "@huxy/utils": "^1.7.2",
     "@testing-library/react": "^13.4.0",
     "antd": "^5.1.2",
     "core-js": "^3.27.1",

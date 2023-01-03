@@ -68,6 +68,13 @@ export const leftNav = () => {
           link: 'http://ihuxy.com:7000',
         },
         {
+          key: 'webgl',
+          name: 'webgl',
+          icon: <Icon icon="ApiOutlined" />,
+          type: 'link',
+          link: 'http://ihuxy.com:8081',
+        },
+        {
           key: 'filesystem',
           name: 'filesystem',
           icon: <Icon icon="ApiOutlined" />,

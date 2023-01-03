@@ -93,10 +93,10 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
   );
   return (
     <div className="tools-area">
-      <Dropdown.Button trigger={['click']} overlay={colorMenu} icon={<BgColorsOutlined style={{color: type === 'draw' ? color.key : ''}} />}>
+      <Dropdown.Button trigger={['click']} menu={colorMenu} icon={<BgColorsOutlined style={{color: type === 'draw' ? color.key : ''}} />}>
         <span style={{color: type === 'draw' ? color.key : ''}}>{i18nCfg[color.name]}</span>
       </Dropdown.Button>
-      <Dropdown.Button trigger={['click']} overlay={sizeMenu} icon={<FontColorsOutlined />}>
+      <Dropdown.Button trigger={['click']} menu={sizeMenu} icon={<FontColorsOutlined />}>
         <span style={{color: type === 'draw' ? 'var(--red2)' : ''}}>{i18nCfg[size.name]}</span>
       </Dropdown.Button>
       <Button

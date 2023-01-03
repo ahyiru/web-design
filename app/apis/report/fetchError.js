@@ -9,7 +9,7 @@ const fetch = props => fetcher(props).catch(err => {
   if (isPermission && authedPath) {
     report({actionType: 'fetchError', text: err.message, value: url});
   }
-  throw err.message;
+  throw Error(err.message);
 });
 
 export default fetch;
