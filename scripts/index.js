@@ -85,7 +85,7 @@ app.listen(app.get('port'), err => {
   const ips = getIPs().map(ip => `${ip}:${app.get('port')}`).join('\n');
   // open(`http://${app.get('host')}:${app.get('port')}`);
   console.log('\n' + appName.magenta + ': 服务已启动! '.cyan + '✓'.green);
-  console.log(`\n监听端口: ${app.get('port')} ,正在构建,请稍后...`.cyan);
+  console.log(`\n监听端口: ${app.get('port')} ,正在构建,请稍后...构建完成后将自动打开浏览器`.cyan);
   console.log('-----------------------------------'.blue);
   // console.log(` 本地地址: http://${app.get('host')}:${app.get('port')}`.magenta);
   console.log(`运行地址: \n`.magenta);

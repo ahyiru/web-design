@@ -191,7 +191,7 @@ export const rightNav = language => {
               message.success(`已连接${addr}`);
             }
           } catch (error) {
-            message.error('未检测到MetaMask插件！');
+            message.error(error.code ? error.message : '未检测到MetaMask插件！');
           }
         };
         return (

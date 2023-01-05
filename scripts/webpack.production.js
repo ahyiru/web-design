@@ -2,11 +2,12 @@ const webpack = require('webpack');
 const path = require('path');
 const {merge} = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const postcssPresetEnv = require('postcss-preset-env');
-const TerserPlugin = require('terser-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
+const {ESBuildMinifyPlugin} = require('esbuild-loader');
+
 const CopyFileWebpackPlugin = require('@huxy/copy-file-webpack-plugin');
-const rimraf = require('rimraf');
 
 // const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -25,27 +26,6 @@ const rootDir = fixPath(`${PRD_ROOT_DIR}/`);
 const app = path.resolve(__dirname, `../${appName}`);
 const publics = path.resolve(app, PUBLIC_DIR || '../public');
 const build = path.resolve(app, BUILD_DIR);
-
-rimraf(build, err => console.log(err));
-
-const postcssOptions = {
-  stage: 0,
-  features: {
-    'nesting-rules': true,
-  },
-  // autoprefixer: { grid: true }
-  browsers: 'last 2 versions',
-  importFrom: [
-    // './commons/global.css',
-    // './configs/themeCfg.js',
-    () => {
-      const environmentVariables = {
-        '--viewport-1': '1200px',
-      };
-      return {environmentVariables};
-    },
-  ],
-};
 
 const frameChunks =
   appName === 'vue'
@@ -67,6 +47,10 @@ const frameChunks =
     };
 
 const plugins = [
+  new webpack.optimize.ModuleConcatenationPlugin(),
+  new webpack.optimize.MinChunkSizePlugin({
+    minChunkSize: 30000,
+  }),
   new MiniCssExtractPlugin({
     filename: 'css/[name]_[contenthash:8].css',
     chunkFilename: 'css/[id]_[name]_[contenthash:8].css',
@@ -92,14 +76,14 @@ const plugins = [
     skipWaiting: true,
   }),
   new CopyFileWebpackPlugin([
-    /* {
-      from:path.resolve(publics,'src'),
-      to:path.resolve(app,`${BUILD_DIR}/src`),
-    },
-    {
-      from:path.resolve(publics,'manifest.json'),
-      to:path.resolve(app,`${BUILD_DIR}/manifest.json`),
-    }, */
+    // {
+    //   from:path.resolve(publics,'src'),
+    //   to:path.resolve(app,`${BUILD_DIR}/src`),
+    // },
+    // {
+    //   from:path.resolve(publics,'manifest.json'),
+    //   to:path.resolve(app,`${BUILD_DIR}/manifest.json`),
+    // },
     {
       from: path.resolve(publics, 'robots.txt'),
       to: path.resolve(app, `${BUILD_DIR}/robots.txt`),
@@ -125,6 +109,7 @@ const prodConfig = merge(webpackConfig, {
   mode: 'production',
   // devtool:'nosources-source-map',
   output: {
+    clean: true,
     path: build,
     publicPath: rootDir,
     filename: 'js/[name]_[contenthash:8].js',
@@ -135,12 +120,12 @@ const prodConfig = merge(webpackConfig, {
       chunks: 'all', //'async','initial'
       // minSize:0,
       minSize: {
-        javascript: 8000,
-        style: 8000,
+        javascript: 5000,
+        style: 5000,
       },
       maxSize: {
-        javascript: 800000,
-        style: 800000,
+        javascript: 500000,
+        style: 500000,
       },
       minChunks: 2,
       maxInitialRequests: 10,
@@ -167,24 +152,24 @@ const prodConfig = merge(webpackConfig, {
           idHint: 'echarts',
           chunks: 'all',
           priority: 20,
-          test: function (module) {
-            const context = module.context;
-            return context && (context.indexOf('echarts') >= 0 || context.indexOf('zrender') >= 0);
-          },
+          test: ({context}) => context && (context.indexOf('echarts') >= 0 || context.indexOf('zrender') >= 0),
+        },
+        three: {
+          idHint: 'three',
+          chunks: 'all',
+          priority: 25,
+          test: ({context}) => context && context.indexOf('three') >= 0,
         },
         antd: {
           idHint: 'antd',
           chunks: 'all',
-          priority: 25,
-          test: function (module) {
-            const context = module.context;
-            return context && (context.indexOf('@ant-design') >= 0 || context.indexOf('antd') >= 0);
-          },
+          priority: 30,
+          test: ({context}) => context && (context.indexOf('@ant-design') >= 0 || context.indexOf('antd') >= 0),
         },
       },
     },
     minimizer: [
-      new TerserPlugin({
+      /* new TerserPlugin({
         parallel: true,
         extractComments: false,
         terserOptions: {
@@ -212,6 +197,15 @@ const prodConfig = merge(webpackConfig, {
             },
           ],
         },
+      }), */
+      new ESBuildMinifyPlugin({
+        target: 'es2018',
+        css: true,
+        minify: true,
+        minifyWhitespace: true,
+        minifyIdentifiers: true,
+        minifySyntax: true,
+        legalComments: 'none',
       }),
     ],
     minimize: true,
@@ -249,11 +243,7 @@ const prodConfig = merge(webpackConfig, {
           },
           {
             loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: () => [postcssPresetEnv(postcssOptions)],
-              },
-            },
+            options: {},
           },
         ],
         // exclude: /components/,
@@ -279,17 +269,7 @@ const prodConfig = merge(webpackConfig, {
           },
           {
             loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: () => [postcssPresetEnv(postcssOptions)],
-                /* plugins:[
-                  'postcss-preset-env',
-                  {
-                    // Options
-                  },
-                ], */
-              },
-            },
+            options: {},
           },
           {
             loader: 'less-loader',
@@ -302,38 +282,6 @@ const prodConfig = merge(webpackConfig, {
         ],
         // exclude:[/node_modules/],
       },
-      /* {
-        test:/\.s[ac]ss$/i,
-        use: [
-          {
-            loader:MiniCssExtractPlugin.loader,
-            options:{
-              // publicPath: '../',
-            },
-          },
-          {
-            loader:'css-loader',
-            options:{
-              importLoaders:2,
-            },
-          },
-          {
-            loader:'sass-loader',
-            options:{
-              implementation: require('sass'),
-              sassOptions:{
-                indentWidth:2,
-              },
-              additionalData:(content, loaderContext) =>{
-                if(loaderContext.resourcePath.endsWith('app/styles/index.scss')) {
-                  return content;
-                }
-                return `@import '~@app/styles/index.scss';${content};`;
-              },
-            },
-          },
-        ],
-      }, */
     ],
   },
   plugins,

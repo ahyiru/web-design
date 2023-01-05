@@ -11,14 +11,6 @@ module.exports = {
       // autoprefixer: { grid: true }
       browsers: 'last 2 versions',
       // importFrom: './commons/global.css',
-      /* importFrom: [
-        // './commons/global.css',
-        // './configs/themeCfg.js',
-        () => {
-          const environmentVariables = {'--viewport-1': '1200px'};
-          return {environmentVariables};
-        },
-      ], */
     },
     cssnano: {},
     autoprefixer: {},
