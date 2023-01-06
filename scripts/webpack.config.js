@@ -15,11 +15,11 @@ const rootDir = fixPath(`${DEV_ROOT_DIR}/`);
 const app = path.resolve(__dirname, `../${appName}`);
 const publics = path.resolve(app, PUBLIC_DIR || '../public');
 
-const frame = appName === 'vue' ? {uiframe: ['vue']} : {uiframe: ['react', 'react-dom']};
+// const frame = appName === 'vue' ? {uiframe: ['vue']} : {uiframe: ['react', 'react-dom']};
 
 const entry = {
   app: [path.resolve(app, 'index.jsx')],
-  ...frame,
+  // ...frame,
 };
 const templ = path.resolve(publics, 'index.html');
 const icon = path.resolve(publics, 'favicon.ico');
@@ -33,7 +33,7 @@ const htmlPlugin = () =>
     minify: {
       html5: true,
       collapseWhitespace: true,
-      // conservativeCollapse:true,
+      // conservativeCollapse: true,
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true,
       removeComments: true,
