@@ -5,9 +5,9 @@ const GlobalSearch = props => {
     console.log(value);
   };
   return (
-    <a className="global-search">
+    <span className="link global-search">
       <Input placeholder="search..." suffix={<SearchOutlined />} onChange={onChange} />
-    </a>
+    </span>
   );
 };
 

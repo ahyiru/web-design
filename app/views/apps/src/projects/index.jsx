@@ -20,7 +20,7 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
     title: i18ns.name,
     dataIndex: 'name',
     width: 60,
-    render: (text, record) => <a onClick={() => handleRouter(record)}>{text}</a>,
+    render: (text, record) => <span className="link" onClick={() => handleRouter(record)}>{text}</span>,
   },
   /* {
     title: '项目类型',
@@ -88,9 +88,6 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
           <Button type="link" size="small" disabled={disabled} onClick={() => handleDelete(record)} danger>
             {i18ns.delete_action}
           </Button>
-          {/* <Popconfirm title="确认删除?" onConfirm={()=>handleDelete(record)}>
-          <a style={{color: 'var(--red2)'}}>删除</a>
-        </Popconfirm> */}
         </>
       );
     },

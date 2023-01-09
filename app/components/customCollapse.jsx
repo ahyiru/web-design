@@ -4,13 +4,13 @@ import {Anico} from '@huxy/components';
 
 import report from '@app/apis/report/report';
 
-const CustomCollapse = props => {
+const CustomCollapse = ({item, ...rest}) => {
   const {useStore} = useRoute();
   const {width} = useWinResize();
   const [collapsed, setCollapsed] = useStore('huxy-collapse');
   return width <= 1024 ? (
-    <a
-      {...props}
+    <span
+      {...rest}
       onClick={e => {
         e.stopPropagation();
         setCollapsed(!collapsed);
@@ -24,7 +24,7 @@ const CustomCollapse = props => {
       title="minscreen-collapse"
     >
       <Anico type={collapsed ? 'right' : ''} />
-    </a>
+    </span>
   ) : null;
 };
 

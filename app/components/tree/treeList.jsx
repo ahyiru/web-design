@@ -37,22 +37,22 @@ const rootNode = {
 const handleClick = ({addFn, editFn, deleteFn}, item) => (
   <Menu>
     <Menu.Item onClick={() => addFn(item)}>
-      <a>
+      <span className="link">
         <PlusOutlined />
         <span style={{padding: '0 4px'}}>新增</span>
-      </a>
+      </span>
     </Menu.Item>
     <Menu.Item onClick={() => editFn(item)}>
-      <a>
+      <span className="link">
         <EditOutlined />
         <span style={{padding: '0 4px'}}>编辑</span>
-      </a>
+      </span>
     </Menu.Item>
     <Menu.Item onClick={() => deleteFn(item)}>
-      <a>
+      <span className="link">
         <DeleteOutlined />
         <span style={{padding: '0 4px'}}>删除</span>
-      </a>
+      </span>
     </Menu.Item>
   </Menu>
 );

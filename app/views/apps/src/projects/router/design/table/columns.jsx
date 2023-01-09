@@ -169,17 +169,18 @@ export default ({data, getValues, columnI18n}) => {
       width: 120,
       // fixed: 'right',
       render: (text, record, _, action) => [
-        <a
+        <span
           key="editable"
+          className="link"
           onClick={() => {
             let _a;
             (_a = action === null || action === void 0 ? void 0 : action.startEditable) === null || _a === void 0 ? void 0 : _a.call(action, record.uuid);
           }}
         >
           {columnI18n.edit_action}
-        </a>,
+        </span>,
         <Popconfirm key="delete" title={columnI18n.delete_confirm} onConfirm={() => deleteRow(record)}>
-          <a /* onClick={() => deleteRow(record)} */ style={{color: 'var(--red2)'}}>{columnI18n.delete_action}</a>
+          <span className="link" /* onClick={() => deleteRow(record)} */ style={{color: 'var(--red2)'}}>{columnI18n.delete_action}</span>
         </Popconfirm>,
       ],
     },

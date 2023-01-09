@@ -31,7 +31,7 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
   {
     title: i18ns.name,
     dataIndex: 'name',
-    render: (text, record) => <a onClick={() => handleTest(record)}>{text}</a>,
+    render: (text, record) => <span className="link" onClick={() => handleTest(record)}>{text}</span>,
   },
   {
     title: i18ns.tags,

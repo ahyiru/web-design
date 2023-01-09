@@ -137,12 +137,12 @@ const Index = props => {
                       >
                         <EyeOutlined />
                       </Link>
-                      <a onClick={e => handleEdit(item, e)}>
+                      <span className="link" onClick={e => handleEdit(item, e)}>
                         <EditOutlined />
-                      </a>
-                      <a onClick={e => handleDelete(item, e)}>
+                      </span>
+                      <span className="link" onClick={e => handleDelete(item, e)}>
                         <DeleteOutlined />
-                      </a>
+                      </span>
                     </div>
                   </div>
                 </Col>

@@ -38,17 +38,17 @@ const LiItem = ({li, itemClick}) => {
   useClickAway(liRef, e => li.open && itemClick(e, li));
   return (
     <li ref={liRef} className={`${li.open ? 'open' : ''}`} onClick={e => itemClick(e, li)}>
-      <a className={`menu-follow${li.active ? ' active' : ''}`}>
+      <span className={`link menu-follow${li.active ? ' active' : ''}`}>
         <span>{li.name}</span>
         {li.list?.length ? <i className={`menu-angle-${li.open ? 'top' : 'bt'}`} /> : null}
-      </a>
+      </span>
       {li.list?.length ? (
         <ul className="menu-arrow-rt">
           {li.list.map(item => (
             <li key={item.value}>
-              <a className="menu-tooltip" tooltip={item.name}>
+              <span className="link menu-tooltip" tooltip={item.name}>
                 {item.name}
-              </a>
+              </span>
             </li>
           ))}
         </ul>

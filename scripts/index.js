@@ -2,9 +2,9 @@ const express = require('express');
 const webpack = require('webpack');
 const colors = require('colors');
 
-// const https=require('https');
-// const fs=require('fs');
-// const path=require('path');
+// const https = require('https');
+// const fs = require('fs');
+// const path = require('path');
 
 const cors = require('cors');
 const logger = require('morgan');
@@ -62,32 +62,28 @@ app.use('*', (req, res, next) => {
   res.end();
 });
 
-/* app.get('/subRouter',(req,res)=>{
-  const htmlBuffer=devMiddleware.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
+/* app.get('/subRouter', (req, res) => {
+  const htmlBuffer = devMiddleware.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
   res.send(htmlBuffer.toString());
 }); */
 
-/* https */
-/* const cert=path.resolve(__dirname,'../cert');
-const options={
-  key:fs.readFileSync(`${cert}/server.key`),
-  cert:fs.readFileSync(`${cert}/server.cert`),
+/* const ssl = path.resolve(__dirname, './ssl');
+const options = {
+  key: fs.readFileSync(`${ssl}/server.key`),
+  cert: fs.readFileSync(`${ssl}/server.pem`),
   // passphrase: 'YOUR PASSPHRASE HERE',
 };
-const httpsServer=https.createServer(options,app); */
-/* https */
+const httpsServer = https.createServer(options, app); */
 
 app.listen(app.get('port'), err => {
   if (err) {
     console.log(err);
     return false;
   }
-  const ips = getIPs().map(ip => `${ip}:${app.get('port')}`).join('\n');
-  // open(`http://${app.get('host')}:${app.get('port')}`);
+  const ips = getIPs(true).map(ip => `${ip}:${app.get('port')}`).join('\n');
   console.log('\n' + appName.magenta + ': 服务已启动! '.cyan + '✓'.green);
-  console.log(`\n监听端口: ${app.get('port')} ,正在构建,请稍后...构建完成后将自动打开浏览器`.cyan);
+  console.log(`\n监听端口: ${app.get('port')} , 正在构建, 请稍后...构建完成后将自动打开浏览器`.cyan);
   console.log('-----------------------------------'.blue);
-  // console.log(` 本地地址: http://${app.get('host')}:${app.get('port')}`.magenta);
   console.log(`运行地址: \n`.magenta);
   console.log(`${ips} \n`.magenta);
   console.log(`如需打包部署到生产环境，请运行 `.cyan + `npm run build`.green);
@@ -98,11 +94,4 @@ app.listen(app.get('port'), err => {
 if (appName === 'demo') {
   mocks();
 }
-/* app.get('test',(req,res)=>{
-  return res.send({id:'test'});
-});
 
-app.get('/users/test1',(req,res)=>{
-  console.log(req.originalUrl);
-  res.send({users:'huy'});
-}); */

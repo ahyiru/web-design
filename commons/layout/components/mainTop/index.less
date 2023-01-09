@@ -27,16 +27,16 @@
     li {
       display: block;
       position: relative;
-      a {
-        color: var(--appColor);
+      .link {
         padding: 2px 8px;
+        /*color: var(--appColor);
         &:active,
         &.active {
           color: var(--linkActiveColor);
         }
         &:hover {
           color: var(--linkHoverColor);
-        }
+        }*/
       }
       .btn-bar {
         color: #f0f0f0;
@@ -78,7 +78,7 @@
   .tools-bar {
     li {
       &:not(:last-of-type) {
-        a {
+        .link {
           &::before {
             content: "";
             position: absolute;

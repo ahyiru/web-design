@@ -1,7 +1,7 @@
 /* Works on Firefox */
 /* * {
-  scrollbar-width:thin;
-  scrollbar-color:rgba(0,0,0,.3) transparent;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.3) transparent;
 } */
 
 ::-webkit-scrollbar {

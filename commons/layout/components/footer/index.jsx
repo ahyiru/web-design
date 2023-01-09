@@ -2,7 +2,7 @@ import './index.less';
 const Index = props => (
   <div className="footer-wrap">
     <div className="copyright">
-      <a className="copy">©2022 ihuxy</a>
+      <a className="copy" href="https://ihuxy.com">©2022 ihuxy</a>
       <a className="right" href="https://beian.miit.gov.cn/">
         京ICP备15005899号-2
       </a>

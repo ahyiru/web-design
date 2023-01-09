@@ -85,9 +85,9 @@ export const NodeTitle = ({node = {}, searchKey = ''}) => {
       )}
       {open && (
         <Popover open={true} title={name} placement="right" content={<Document node={node} />} key="description">
-          <a className={styles.doc}>
+          <span className={`link ${styles.doc}`}>
             <ReadOutlined /> 文档
-          </a>
+          </span>
         </Popover>
       )}
     </div>

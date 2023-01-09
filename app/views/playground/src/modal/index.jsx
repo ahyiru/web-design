@@ -1,7 +1,7 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Button} from 'antd';
 import {Portal, Mask, Modal, Drawer, Drop} from '@huxy/components';
-import {message} from '@huxy/utils';
+import {message, backTop} from '@huxy/utils';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 
@@ -10,8 +10,12 @@ const Index = props => {
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
+  useEffect(() => {
+    const totop = backTop();
+    return totop;
+  }, []);
   return (
-    <Row>
+    <Row style={{height: '200vh'}}>
       <Col>
         <Panel>
           <div id="portal-test">portal demo</div>

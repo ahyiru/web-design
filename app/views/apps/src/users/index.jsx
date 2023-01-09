@@ -16,7 +16,7 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
   {
     title: i18ns.name,
     dataIndex: 'name',
-    render: (text, record) => <a onClick={() => handleCheck(record)}>{text}</a>,
+    render: (text, record) => <span className="link" onClick={() => handleCheck(record)}>{text}</span>,
   },
   {
     title: i18ns.email,
@@ -74,9 +74,6 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
           <Button type="link" size="small" disabled={disabled} onClick={() => handleDelete(record)} danger>
             {i18ns.delete_action}
           </Button>
-          {/* <Popconfirm title="确认删除?" onConfirm={() => handleDelete(record)}>
-            <a style={{color: 'var(--red2)'}}>删除</a>
-          </Popconfirm> */}
         </>
       );
     },

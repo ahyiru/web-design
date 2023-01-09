@@ -45,17 +45,18 @@ export default ({data, getValues, selectedKey, title, editorI18n}) => {
       valueType: 'option',
       width: 120,
       render: (text, record, _, action) => [
-        <a
+        <span
           key="editable"
+          className="link"
           onClick={() => {
             let _a;
             (_a = action === null || action === void 0 ? void 0 : action.startEditable) === null || _a === void 0 ? void 0 : _a.call(action, record.uuid);
           }}
         >
           {editorI18n.edit_action}
-        </a>,
+        </span>,
         <Popconfirm key="delete" title={editorI18n.delete_confirm} onConfirm={() => deleteRow(record)}>
-          <a /* onClick={() => deleteRow(record)} */ style={{color: 'var(--red2)'}}>{editorI18n.delete_action}</a>
+          <span className="link" /* onClick={() => deleteRow(record)} */ style={{color: 'var(--red2)'}}>{editorI18n.delete_action}</span>
         </Popconfirm>,
       ],
     },

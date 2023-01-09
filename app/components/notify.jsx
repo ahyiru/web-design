@@ -30,13 +30,13 @@ const Notify = props => {
     });
   };
   return (
-    <a className="notify-item" title="notify" onClick={handleClick}>
+    <span className="link notify-item" title="notify" onClick={handleClick}>
       <span className="node-icon">
         <Badge count={count} size="small">
           <BellOutlined />
         </Badge>
       </span>
-    </a>
+    </span>
   );
 };
 

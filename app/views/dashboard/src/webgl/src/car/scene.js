@@ -81,7 +81,7 @@ const startScene = (areaInfo, mountDom = document.body) => {
     const dracoLoader = new DRACOLoader();
     // dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
     // dracoLoader.setDecoderPath('three/addons/libs/draco/gltf/');
-    dracoLoader.setDecoderPath('http://ihuxy.com:8081/draco-gltf/');
+    dracoLoader.setDecoderPath('https://ihuxy.com:9000/uploads/draco-gltf/');
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
     loader.load(ferrariGlb, gltf => {

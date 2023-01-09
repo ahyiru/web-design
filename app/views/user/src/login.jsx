@@ -101,20 +101,20 @@ const Index = props => {
       </Form>
       <div>
         <div style={{overflow: 'hidden'}}>
-          <a style={{float: 'right'}} onClick={e => props.router.push('/user/signup')}>
+          <span className="link" style={{float: 'right'}} onClick={e => props.router.push('/user/signup')}>
             {getIntls('login.signup')}
-          </a>
-          <a style={{float: 'left'}} onClick={e => props.router.push('/user/verifyEmail')}>
+          </span>
+          <span className="link" style={{float: 'left'}} onClick={e => props.router.push('/user/verifyEmail')}>
             {getIntls('login.forgetPwd')}
-          </a>
+          </span>
         </div>
         <div className="split-line" style={{padding: '15px 0'}}>
           {getIntls('login.thirdParty')}
         </div>
         <div style={thirdLoginStyle}>
-          <a>
+          <span className="link">
             <GithubOutlined onClick={() => auth()} />
-          </a>
+          </span>
         </div>
       </div>
       {pending && <Spinner global />}

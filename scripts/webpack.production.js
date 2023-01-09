@@ -72,8 +72,9 @@ const plugins = [
   new GenerateSW({
     // importWorkboxFrom: 'local',
     cacheId: 'huxy-pwa',
-    clientsClaim: true,
     skipWaiting: true,
+    clientsClaim: true,
+    cleanupOutdatedCaches: true,
   }),
   new CopyFileWebpackPlugin([
     // {

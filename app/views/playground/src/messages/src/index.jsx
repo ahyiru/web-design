@@ -80,12 +80,12 @@ const Index = props => {
       <TabHeader tabs={tabs} switchTab={switchTab} activekey={active} />
       <List {...tableProps} />
       {/* <div className="handle-bar">
-        <a className={listType === 'table' ? 'active' : ''} onClick={e => switchListType('table')}>
+        <span className={`link${listType === 'table' ? ' active' : ''}`} onClick={e => switchListType('table')}>
           <TableOutlined />
-        </a>
-        <a className={listType === 'list' ? 'active' : ''} onClick={e => switchListType('list')}>
+        </span>
+        <span className={`link${listType === 'list' ? ' active' : ''}`} onClick={e => switchListType('list')}>
           <BarsOutlined />
-        </a>
+        </span>
       </div> */}
     </div>
   );

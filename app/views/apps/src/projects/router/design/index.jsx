@@ -24,17 +24,17 @@ const {record, undo, redo, clean} = cacheData();
 const handleClick = ({addFn, editFn, deleteFn}, item, actionsText) => (
   <Menu>
     <Menu.Item key="add" onClick={() => addFn(item)}>
-      <a>
+      <span className="link">
         <PlusOutlined />
         <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>
-      </a>
+      </span>
     </Menu.Item>
     {!item.isRoot && (
       <Menu.Item key="delete" onClick={() => deleteFn(item)}>
-        <a>
+        <span className="link">
           <DeleteOutlined />
           <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>
-        </a>
+        </span>
       </Menu.Item>
     )}
   </Menu>

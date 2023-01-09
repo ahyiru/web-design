@@ -162,11 +162,11 @@ export const rightNav = language => {
       key: 'language',
       name: right?.[language] ?? '语言',
       Custom: () => (
-        <a title={right?.[language] ?? '语言'}>
+        <span className="link" title={right?.[language] ?? '语言'}>
           <div className="icon">
-            <img src={langList.find(({key}) => key === language)?.icon} alt={language} />
+            <img width="1" height="1" src={langList.find(({key}) => key === language)?.icon} alt={language} />
           </div>
-        </a>
+        </span>
       ),
       children: langList.map(({key, name, icon}) => ({
         key,
@@ -195,11 +195,11 @@ export const rightNav = language => {
           }
         };
         return (
-          <a onClick={e => hanlder()} title={right?.metamask ?? 'MetaMask'}>
+          <span className="link" onClick={e => hanlder()} title={right?.metamask ?? 'MetaMask'}>
             <div className="icon">
               <img src={metamask} alt="metamask" />
             </div>
-          </a>
+          </span>
         );
       },
     },
@@ -218,11 +218,11 @@ export const rightNav = language => {
     {
       key: 'fullscreen',
       Custom: () => (
-        <a title="fullscreen">
+        <span className="link" title="fullscreen">
           <span className="node-icon">
             <FullPage />
           </span>
-        </a>
+        </span>
       ),
     },
     {

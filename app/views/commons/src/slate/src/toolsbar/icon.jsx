@@ -13,7 +13,7 @@ const Index = ({icon, name, format, active, className, dropList, defaultValue, o
 
   if (dropList?.length) {
     return (
-      <a {...rest} className={`tools-bar-icon${cls}`} tooltip={selectedKey}>
+      <span {...rest} className={`link tools-bar-icon${cls}`} tooltip={selectedKey}>
         {rest.disabled ? (
           selectedKey
         ) : (
@@ -39,14 +39,14 @@ const Index = ({icon, name, format, active, className, dropList, defaultValue, o
             {selectedKey}
           </Drop>
         )}
-      </a>
+      </span>
     );
   }
 
   return (
-    <a {...rest} className={`tools-bar-icon${cls}`} tooltip={name} onMouseDown={rest.disabled ? null : onClick}>
+    <span {...rest} className={`link tools-bar-icon${cls}`} tooltip={name} onMouseDown={rest.disabled ? null : onClick}>
       <Icon icon={icon} />
-    </a>
+    </span>
   );
 };
 

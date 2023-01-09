@@ -180,7 +180,7 @@ const Index = props => {
                 <Row className="select-item">
                   {getThemeList(getIntls).map(item => (
                     <Col key={item.key} span={6} onClick={e => selectTheme(item)}>
-                      <a className={`item${item.key === theme.key ? ' selected' : ''}`}>{item.name}</a>
+                      <span className={`link item${item.key === theme.key ? ' selected' : ''}`}>{item.name}</span>
                     </Col>
                   ))}
                 </Row>

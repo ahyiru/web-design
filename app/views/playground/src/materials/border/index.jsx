@@ -1,5 +1,5 @@
-import {Row, Col, Panel} from '@huxy/components';
 import {TitleHeader, CornerBorder, HalfBorder, BgBox, TitleBorder, AnimateBorder} from '@huxy/materials';
+import {Row, Col, Panel} from '@huxy/components';
 
 import writeIcon from '@app/models/icons/write.png';
 
@@ -19,7 +19,7 @@ const Index = props => {
               <CornerBorder>
                 <BgBox type="strip">
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={box}>CornerBorder <a>strip background</a></div>
+                    <div style={box}>CornerBorder <b>strip background</b></div>
                   </Panel>
                 </BgBox>
               </CornerBorder>
@@ -28,7 +28,7 @@ const Index = props => {
               <HalfBorder>
                 <BgBox type="cubestrip">
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={box}>HalfBorder <a>cubestrip background</a></div>
+                    <div style={box}>HalfBorder <b>cubestrip background</b></div>
                   </Panel>
                 </BgBox>
               </HalfBorder>
@@ -37,7 +37,7 @@ const Index = props => {
               <TitleBorder title="TitleBorder">
                 <BgBox type="cube">
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={{...box, height: '100px'}}>TitleBorder <a>cube background</a></div>
+                    <div style={{...box, height: '100px'}}>TitleBorder <b>cube background</b></div>
                   </Panel>
                 </BgBox>
               </TitleBorder>
@@ -50,7 +50,7 @@ const Index = props => {
               <AnimateBorder type="dash">
                 <BgBox type="grid">
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={box}>dash <a>grid background</a></div>
+                    <div style={box}>dash <b>grid background</b></div>
                   </Panel>
                 </BgBox>
               </AnimateBorder>
@@ -59,7 +59,7 @@ const Index = props => {
               <AnimateBorder type="solid">
                 <BgBox url={writeIcon}>
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={box}>solid <a>image background</a></div>
+                    <div style={box}>solid <b>image background</b></div>
                   </Panel>
                 </BgBox>
               </AnimateBorder>

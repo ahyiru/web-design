@@ -53,7 +53,7 @@ const Index = ({className, value, onChange, onBlur, ...rest}) => {
       setTimeout(() => onChange?.(e, val));
     }
   };
-  return <input className={cls} {...rest} value={val} onChange={handleChange} onBlur={handleBlur} />;
+  return <input className={cls} aria-label="huxy-label" {...rest} value={val} onChange={handleChange} onBlur={handleBlur} />;
 };
 
 export default Index;

@@ -38,15 +38,12 @@ app.get(`${rootDir}*`, function (request, response) {
   response.sendFile(path.resolve(build, 'index.html'));
 });
 
-/* https */
-/* const cert = path.resolve(__dirname, '../cert');
+/* const ssl = path.resolve(__dirname, './ssl');
 const options = {
-  key: fs.readFileSync(`${cert}/server.key`),
-  cert: fs.readFileSync(`${cert}/server.cert`),
-  // passphrase: 'YOUR PASSPHRASE HERE',
+  key: fs.readFileSync(`${ssl}/ihuxy.com.key`),
+  cert: fs.readFileSync(`${ssl}/ihuxy.com.pem`),
 };
 const httpsServer = https.createServer(options, app); */
-/* https */
 
 app.listen(app.get('port'), err => {
   if (err) {
