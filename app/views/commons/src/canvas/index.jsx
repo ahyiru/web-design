@@ -85,7 +85,7 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
     onClick: handleSizeMenuClick,
     items: sizeCfg.map(item => ({
       key: item.key,
-      icon: FontColorsOutlined,
+      icon: <FontColorsOutlined />,
       label: i18nCfg[item.name],
     })),
   };
