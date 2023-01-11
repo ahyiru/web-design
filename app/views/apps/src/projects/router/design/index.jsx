@@ -21,27 +21,31 @@ import TableEditor from './table';
 const {setSchemaFn} = apiList;
 const {record, undo, redo, clean} = cacheData();
 
-const handleClick = ({addFn, editFn, deleteFn}, item, actionsText) => (
-  <Menu>
-    <Menu.Item key="add" onClick={() => addFn(item)}>
-      <span className="link">
-        <PlusOutlined />
-        <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>
-      </span>
-    </Menu.Item>
-    {!item.isRoot && (
-      <Menu.Item key="delete" onClick={() => deleteFn(item)}>
-        <span className="link">
-          <DeleteOutlined />
-          <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>
-        </span>
-      </Menu.Item>
-    )}
-  </Menu>
-);
+const handleClick = (actions, item, actionsText) => ({
+  onClick: action => actions[`${action.key}Fn`](item),
+  items: [
+    {
+      key: 'add',
+      icon: <PlusOutlined />,
+      label: <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>,
+    },
+    ...(item.isRoot ? [] :[
+      /* {
+        key: 'edit',
+        icon: <EditOutlined />,
+        label: <span style={{padding: '0 4px'}}>{actionsText.edit_action}</span>,
+      }, */
+      {
+        key: 'delete',
+        icon: <DeleteOutlined />,
+        label: <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>,
+      },
+    ]),
+  ],
+});
 
 const treeDrop = (item, dropFns, actionsText) => (
-  <Dropdown menu={() => handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
+  <Dropdown menu={handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
     <span className="node-style">{item.type}</span>
   </Dropdown>
 );
@@ -228,8 +232,8 @@ const Index = props => {
     ),
     [item],
   );
-  const CustomForm = useMemo(() => <FormEditor getValues={editProps} data={[item?.props?.schema]} actionsText={actionsText} editorI18n={editorI18n} />, [item]);
-  const CustomTable = useMemo(() => <TableEditor getValues={editProps} data={item?.props} designConfigText={designConfigText} actionsText={actionsText} />, [item]);
+  const CustomForm = useMemo(() => <FormEditor getValues={editProps} data={[item?.props?.schema]} actionsText={actionsText} editorI18n={editorI18n} addFormText={addFormText} />, [item]);
+  const CustomTable = useMemo(() => <TableEditor getValues={editProps} data={item?.props} designConfigText={designConfigText} actionsText={actionsText} addFormText={addFormText} />, [item]);
 
   const CfgComp = {
     CustomForm,

@@ -73,30 +73,28 @@ const ToolsBar = ({actions, defCfg, beforeUpload, imgUrl, rmImg, i18nCfg}) => {
     setSize(sizeCfg.find(item => item.key === value.key));
   };
 
-  const colorMenu = (
-    <Menu onClick={handleColorMenuClick}>
-      {colorCfg.map(item => (
-        <Menu.Item key={item.key} icon={<BgColorsOutlined style={{color: type === 'draw' ? item.key : ''}} />}>
-          <Tag color={item.key}>{i18nCfg[item.name]}</Tag>
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-  const sizeMenu = (
-    <Menu onClick={handleSizeMenuClick}>
-      {sizeCfg.map(item => (
-        <Menu.Item key={item.key} icon={<FontColorsOutlined />}>
-          {i18nCfg[item.name]}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
+  const colorMenuCfg = {
+    onClick: handleColorMenuClick,
+    items: colorCfg.map(item => ({
+      key: item.key,
+      icon: <BgColorsOutlined style={{color: type === 'draw' ? item.key : ''}} />,
+      label: <Tag color={item.key}>{i18nCfg[item.name]}</Tag>,
+    })),
+  };
+  const sizeMenuCfg = {
+    onClick: handleSizeMenuClick,
+    items: sizeCfg.map(item => ({
+      key: item.key,
+      icon: FontColorsOutlined,
+      label: i18nCfg[item.name],
+    })),
+  };
   return (
     <div className="tools-area">
-      <Dropdown.Button trigger={['click']} menu={colorMenu} icon={<BgColorsOutlined style={{color: type === 'draw' ? color.key : ''}} />}>
+      <Dropdown.Button trigger={['click']} menu={colorMenuCfg} icon={<BgColorsOutlined style={{color: type === 'draw' ? color.key : ''}} />}>
         <span style={{color: type === 'draw' ? color.key : ''}}>{i18nCfg[color.name]}</span>
       </Dropdown.Button>
-      <Dropdown.Button trigger={['click']} menu={sizeMenu} icon={<FontColorsOutlined />}>
+      <Dropdown.Button trigger={['click']} menu={sizeMenuCfg} icon={<FontColorsOutlined />}>
         <span style={{color: type === 'draw' ? 'var(--red2)' : ''}}>{i18nCfg[size.name]}</span>
       </Dropdown.Button>
       <Button

@@ -18,35 +18,31 @@ import HandleModal from './modal';
 const {listRouterFn, addRouterFn, editRouterFn, deleteRouterFn, listSchemaFn} = apiList;
 const {Search} = Input;
 
-const handleClick = ({addFn, editFn, deleteFn}, item, actionsText) => (
-  <Menu>
-    <Menu.Item onClick={() => addFn(item)}>
-      <span className="link">
-        <PlusOutlined />
-        <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>
-      </span>
-    </Menu.Item>
-    {!item.isRoot && (
-      <>
-        <Menu.Item onClick={() => editFn(item)}>
-          <span className="link">
-            <EditOutlined />
-            <span style={{padding: '0 4px'}}>{actionsText.edit_action}</span>
-          </span>
-        </Menu.Item>
-        <Menu.Item onClick={() => deleteFn(item)}>
-          <span className="link">
-            <DeleteOutlined />
-            <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>
-          </span>
-        </Menu.Item>
-      </>
-    )}
-  </Menu>
-);
+const handleClick = (actions, item, actionsText) => ({
+  onClick: action => actions[`${action.key}Fn`](item),
+  items: [
+    {
+      key: 'add',
+      icon: <PlusOutlined />,
+      label: <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>,
+    },
+    ...(item.isRoot ? [] :[
+      {
+        key: 'edit',
+        icon: <EditOutlined />,
+        label: <span style={{padding: '0 4px'}}>{actionsText.edit_action}</span>,
+      },
+      {
+        key: 'delete',
+        icon: <DeleteOutlined />,
+        label: <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>,
+      },
+    ]),
+  ],
+});
 
 const treeDrop = (item, dropFns, actionsText) => (
-  <Dropdown menu={() => handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
+  <Dropdown menu={handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
     <span className="node-style">{item.name}</span>
   </Dropdown>
 );

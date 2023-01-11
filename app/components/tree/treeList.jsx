@@ -34,31 +34,29 @@ const rootNode = {
   iconKey: 'LayoutOutlined',
 };
 
-const handleClick = ({addFn, editFn, deleteFn}, item) => (
-  <Menu>
-    <Menu.Item onClick={() => addFn(item)}>
-      <span className="link">
-        <PlusOutlined />
-        <span style={{padding: '0 4px'}}>新增</span>
-      </span>
-    </Menu.Item>
-    <Menu.Item onClick={() => editFn(item)}>
-      <span className="link">
-        <EditOutlined />
-        <span style={{padding: '0 4px'}}>编辑</span>
-      </span>
-    </Menu.Item>
-    <Menu.Item onClick={() => deleteFn(item)}>
-      <span className="link">
-        <DeleteOutlined />
-        <span style={{padding: '0 4px'}}>删除</span>
-      </span>
-    </Menu.Item>
-  </Menu>
-);
+const handleClick = (actions, item) => ({
+  onClick: action => actions[`${action.key}Fn`](item),
+  items: [
+    {
+      key: 'add',
+      icon: <PlusOutlined />,
+      label: <span style={{padding: '0 4px'}}>新增</span>,
+    },
+    {
+      key: 'edit',
+      icon: <EditOutlined />,
+      label: <span style={{padding: '0 4px'}}>编辑</span>,
+    },
+    {
+      key: 'delete',
+      icon: <DeleteOutlined />,
+      label: <span style={{padding: '0 4px'}}>删除</span>,
+    },
+  ],
+});
 
 const treeDrop = (item, dropFns) => (
-  <Dropdown menu={() => handleClick(dropFns, item)} trigger={['contextMenu']}>
+  <Dropdown menu={handleClick(dropFns, item)} trigger={['contextMenu']}>
     <span style={nodeStyle}>{item.name}</span>
   </Dropdown>
 );

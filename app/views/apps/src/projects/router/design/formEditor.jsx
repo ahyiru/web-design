@@ -19,34 +19,38 @@ const getSelected = (data, id) => {
   return selected;
 };
 
-const handleClick = ({addFn, editFn, deleteFn}, item, actionsText) => (
-  <Menu>
-    <Menu.Item key="add" onClick={() => addFn(item)}>
-      <span className="link">
-        <PlusOutlined />
-        <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>
-      </span>
-    </Menu.Item>
-    {!item.isRoot && (
-      <Menu.Item key="delete" onClick={() => deleteFn(item)}>
-        <span className="link">
-          <DeleteOutlined />
-          <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>
-        </span>
-      </Menu.Item>
-    )}
-  </Menu>
-);
+const handleClick = (actions, item, actionsText) => ({
+  onClick: action => actions[`${action.key}Fn`](item),
+  items: [
+    {
+      key: 'add',
+      icon: <PlusOutlined />,
+      label: <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>,
+    },
+    ...(item.isRoot ? [] :[
+      /* {
+        key: 'edit',
+        icon: <EditOutlined />,
+        label: <span style={{padding: '0 4px'}}>{actionsText.edit_action}</span>,
+      }, */
+      {
+        key: 'delete',
+        icon: <DeleteOutlined />,
+        label: <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>,
+      },
+    ]),
+  ],
+});
 
 const treeDrop = (item, dropFns, actionsText) => (
-  <Dropdown menu={() => handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
+  <Dropdown menu={handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
     <span className="node-style">{item.type}</span>
   </Dropdown>
 );
 
 const formData = data => (Array.isArray(data) ? data : data ? [data] : [{}]);
 
-const Index = ({data, getValues, actionsText, editorI18n}) => {
+const Index = ({data, getValues, actionsText, addFormText, editorI18n}) => {
   const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
@@ -150,7 +154,7 @@ const Index = ({data, getValues, actionsText, editorI18n}) => {
           </Panel>
         </Col>
       </Row>
-      {open && <HandleModal onModalOk={onModalOk} onModalCancel={() => setOpen(false)} modalOpen={open} type={modalType} item={item} />}
+      {open && <HandleModal onModalOk={onModalOk} onModalCancel={() => setOpen(false)} modalOpen={open} type={modalType} item={item} addFormText={addFormText} />}
     </div>
   );
 };
