@@ -28,31 +28,31 @@ const option = (name, data) => ({
     pieces: [
       {
         gt: 0,
-        lte: 100,
+        lte: 160,
         color: '#06d6a0',
       },
       {
-        gt: 100,
-        lte: 160,
+        gt: 160,
+        lte: 320,
         color: '#3a86ff',
       },
       {
-        gt: 160,
-        lte: 240,
+        gt: 320,
+        lte: 480,
         color: '#ffb703',
       },
       {
-        gt: 240,
-        lte: 300,
+        gt: 480,
+        lte: 600,
         color: '#fb8500',
       },
       {
-        gt: 300,
-        lte: 360,
+        gt: 600,
+        lte: 720,
         color: '#e63946',
       },
       {
-        gt: 360,
+        gt: 720,
         color: '#9d0208',
       },
     ],
@@ -73,19 +73,19 @@ const option = (name, data) => ({
         },
         data: [
           {
-            yAxis: 100,
-          },
-          {
             yAxis: 160,
           },
           {
-            yAxis: 240,
+            yAxis: 320,
           },
           {
-            yAxis: 300,
+            yAxis: 480,
           },
           {
-            yAxis: 360,
+            yAxis: 600,
+          },
+          {
+            yAxis: 720,
           },
         ],
       },

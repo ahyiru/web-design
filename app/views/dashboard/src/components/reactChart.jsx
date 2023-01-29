@@ -2,24 +2,11 @@ import {useEffect} from 'react';
 import ECharts from 'echarts-for-react';
 import {Spinner} from '@huxy/components';
 import {useUpdate} from '@huxy/use';
+import {addScript} from '@huxy/utils';
 import {useStore} from '@app/store';
 import darkScreen from '../data/darkScreen';
 
 const ak = 'a7oSYS987EhqfPfMrZFbQ7PWUSxUVUmj';
-
-const addScript = url => new Promise((resolve, reject) => {
-  const loaded = [...document.getElementsByTagName('script')].find(item => item.src === url);
-  if (!loaded) {
-    const script = document.createElement('script');
-    script.onerror = event => reject(new Error(`Failed to load '${url}'`));
-    script.onload = resolve;
-    // script.async = true;
-    script.src = url;
-    (document.head || document.getElementsByTagName('head')[0]).appendChild(script);
-  } else {
-    resolve();
-  }
-});
 
 let charts = '';
 
@@ -41,7 +28,7 @@ const ReactChart = ({style, option, ...rest}) => {
         setState(true);
       } catch(err) {
         charts = {
-          error: 'load error',
+          error: 'load echarts failed, please refresh and try again!',
         };
         setState(true);
       }
@@ -52,7 +39,10 @@ const ReactChart = ({style, option, ...rest}) => {
   if (typeof charts !== 'object') {
     return <Spinner />;
   }
-  return <ECharts notMerge={true} option={typeof option ==='function' ? option(charts) : option} theme="dark-screen" style={{...style}} {...rest} />;
+  if (charts.error) {
+    return <div style={{color: 'var(--red2)'}}>{charts.error}</div>;
+  }
+  return <ECharts option={typeof option ==='function' ? option(charts) : option} theme="dark-screen" style={{...style}} {...rest} />;
 };
 
 export default ReactChart;

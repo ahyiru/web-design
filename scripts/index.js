@@ -32,8 +32,6 @@ const compiler = webpack(webpackConfig);
 
 const devMiddleware = webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
-  // index:'index.html',
-  // outputFileSystem:{},
   stats: {
     preset: 'minimal',
     moduleTrace: true,
