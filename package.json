@@ -112,7 +112,7 @@
     "terser-webpack-plugin": "^5.3.6",
     "ts-jest": "^29.0.5",
     "ts-loader": "^9.4.2",
-    "typescript": "^4.9.4",
+    "typescript": "^4.9.5",
     "url-loader": "^4.1.1",
     "webpack": "^5.75.0",
     "webpack-bundle-analyzer": "^4.7.0",
@@ -140,7 +140,7 @@
     "@huxy/use": "^1.7.5",
     "@huxy/utils": "^1.7.6",
     "@testing-library/react": "^13.4.0",
-    "antd": "^5.1.6",
+    "antd": "^5.1.7",
     "core-js": "^3.27.2",
     "echarts": "^5.4.1",
     "echarts-for-react": "^3.0.2",
@@ -157,8 +157,8 @@
     "rxjs": "^7.8.0",
     "slate": "^0.88.1",
     "slate-history": "^0.86.0",
-    "slate-react": "^0.88.2",
+    "slate-react": "^0.89.0",
     "three": "^0.149.0",
-    "web3": "^1.8.1"
+    "web3": "^1.8.2"
   }
 }

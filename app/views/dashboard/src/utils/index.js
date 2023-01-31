@@ -149,7 +149,7 @@ export const getVisitCityOpt = (list, theme) => {
 };
 
 export const getFirstloadOpt = list => {
-  const optData = list.filter(({firstLoadTime}) => firstLoadTime).map(({startTime, firstLoadTime}) => ({startTime: formatTime(new Date(startTime)), firstLoadTime}));
+  const optData = list.filter(({firstLoadTime}) => firstLoadTime && firstLoadTime < 1024).map(({startTime, firstLoadTime}) => ({startTime: formatTime(new Date(startTime)), firstLoadTime}));
   return {
     opt: firstLoadOpt('首屏加载时间', optData),
     name: '首屏加载时间',

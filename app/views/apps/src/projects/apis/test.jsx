@@ -56,7 +56,7 @@ const Index = props => {
               name="addApi"
               onFinish={onFinish}
               form={form}
-              initialValues={{method: 'get', ...item, service: PROXY, token}}
+              initialValues={{method: 'get', ...item, service: PROXY?.url ?? PROXY, token}}
               {...layout}
               // style={formStyle}
             >
