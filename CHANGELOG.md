@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/ahyiru/web-design/compare/v1.4.2...v1.5.0) (2023-02-02)
+
+
+### Features
+
+* add carmodel dashboard ([e87b564](https://github.com/ahyiru/web-design/commit/e87b56469c487122bbc9eb5b236a4d7929f87b94))
+* add message demo ([e550ddf](https://github.com/ahyiru/web-design/commit/e550ddfd49eb4384694b5bef340e1d47aee1b366))
+* add monitor bigscreen ([e7789c1](https://github.com/ahyiru/web-design/commit/e7789c155775dae75039ff7409bb304c9bfe75dc))
+* add report ([2c1ed3b](https://github.com/ahyiru/web-design/commit/2c1ed3ba125ceda3411f77d39eb37a4aa925ba88))
+* add theme mode ([2b4e212](https://github.com/ahyiru/web-design/commit/2b4e21279e6087c6781c1ab398793d0a0e19650a))
+
+
+### Bug Fixes
+
+* fix bugs ([85e7f06](https://github.com/ahyiru/web-design/commit/85e7f066e09a59e7f690e451fe4a034ec1d604c7))
+* fix charts ([b7b825c](https://github.com/ahyiru/web-design/commit/b7b825c67e39ca3c17e46651a4966d398ef779a8))
+* fix https ([95e04ad](https://github.com/ahyiru/web-design/commit/95e04ada4407694a10881f43498326e19fa999b5))
+* fix list search ([d633ccc](https://github.com/ahyiru/web-design/commit/d633ccc7683d0b58c6d14b37f882fcefaf1ceb7f))
+* fix report fetchError ([e9d34c9](https://github.com/ahyiru/web-design/commit/e9d34c9d7f684cd6a99f9dfa935f4fbea040bcd1))
+* fix router ([4b31a82](https://github.com/ahyiru/web-design/commit/4b31a82a5db10dba3e20fd7cc55fb6cb461ca795))
+* fix styles ([627a0bf](https://github.com/ahyiru/web-design/commit/627a0bfc74c97a480e9940142cd9c1a6077cfa60))
+* fix styles ([c6338af](https://github.com/ahyiru/web-design/commit/c6338af1d2bb269d884ed86fc6a8e3e46e5314c7))
+* fix theme configs ([db5e517](https://github.com/ahyiru/web-design/commit/db5e517c1086d745773b81b831c7d8d4c9bae572))
+* fix UI update bugs ([db389eb](https://github.com/ahyiru/web-design/commit/db389ebb4e596f45ab3139479b8884ef83cb5b87))
+* fix UI update bugs ([888b406](https://github.com/ahyiru/web-design/commit/888b4066889987509e620cc57e2c5e385085b2ac))
+* fix utils fetch ([9944c9f](https://github.com/ahyiru/web-design/commit/9944c9f68da2741063112422e94924e90691df98))
+* remove pics ([f07dfc7](https://github.com/ahyiru/web-design/commit/f07dfc7dd95356755f61fbd9a866004e1294a4fa))
+
 ### [1.4.2](https://github.com/ahyiru/web-design/compare/v1.4.1...v1.4.2) (2022-11-04)
 
 ### [1.4.1](https://github.com/ahyiru/web-design/compare/v1.4.0...v1.4.1) (2022-09-27)

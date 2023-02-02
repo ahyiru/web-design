@@ -1,6 +1,6 @@
 {
   "name": "web-design",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "Low-code development platform. Built with React18, Webpack5, useRouter, useStore, eslint, prettier, husky, commitlint, etc.",
   "keywords": [
     "React18",
