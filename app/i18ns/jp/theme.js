@@ -4,7 +4,6 @@ const theme = {
   dark: '深暗色',
   light: '浅亮色',
   portal: '门户',
-  lightPortal: '浅色门户',
   // fontSize
   fontSize: '字体大小',
   menuType: '菜单类型',
@@ -29,7 +28,6 @@ const theme = {
   // '--footerBgColor':'底部背景色',
   '--appColor': 'app颜色',
   '--linkColor': '框架链接颜色',
-  '--pageLinkColor': '页面链接颜色',
   '--linkHoverColor': '链接hover颜色',
   '--linkActiveColor': '链接active颜色',
   '--borderColor': '边框颜色',

@@ -11,6 +11,7 @@
 
 :root {
   --rootSize: 62.5%;
+  --constant: 1.075;
 }
 
 html {
@@ -34,7 +35,7 @@ html {
 @media screen and (max-width: 1920px) {
   html {
     /* font-size:67%; */
-    font-size: calc(var(--rootSize) * 1.075);
+    font-size: calc(var(--rootSize) * var(--constant));
   }
 }
 
@@ -48,21 +49,21 @@ html {
 @media screen and (max-width: 1366px) {
   html {
     /* font-size:58%; */
-    font-size: calc(var(--rootSize) / 1.075);
+    font-size: calc(var(--rootSize) / var(--constant));
   }
 }
 
 @media screen and (max-width: 1024px) {
   html {
     /* font-size:53.5%; */
-    font-size: calc(var(--rootSize) / 1.075 / 1.075);
+    font-size: calc(var(--rootSize) / var(--constant) / var(--constant));
   }
 }
 
 @media screen and (max-width: 768px) {
   html {
     /* font-size:50.3%; */
-    font-size: calc(var(--rootSize) / 1.075 / 1.075 / 1.075);
+    font-size: calc(var(--rootSize) / var(--constant) / var(--constant) / var(--constant));
   }
 }
 

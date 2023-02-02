@@ -110,7 +110,7 @@ const Index = props => {
                   {addFormText.test}
                 </Button>
                 <Button style={{marginLeft: '12px'}} onClick={() => form.resetFields()}>
-                  {addFormText.rest}
+                  {addFormText.reset}
                 </Button>
               </Form.Item>
             </Form>

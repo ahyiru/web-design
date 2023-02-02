@@ -33,7 +33,7 @@ const ReactChart = ({style, option, ...rest}) => {
         setState(true);
       }
     };
-    !charts && getCharts();
+    (!charts || charts.error) && getCharts();
     return () => cancelSub();
   }, []);
   if (typeof charts !== 'object') {

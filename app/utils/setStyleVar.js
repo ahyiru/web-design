@@ -16,7 +16,10 @@ const setStyleVar = (theme, ele = document.documentElement) => {
   const navBgRgb = getRgb(hex2rgba(navBgColor));
   const menuBgRgb = getRgb(hex2rgba(menuBgColor));
   const styleVars = {...theme?.list?.colors, ...theme?.list?.sizes, '--navBgRgb': navBgRgb, '--menuBgRgb': menuBgRgb};
-  setStyle(ele, styleVars);
+  styleVars['--appLinkColor'] = styleVars['--linkColor'];
+  styleVars['--appLinkActiveColor'] = styleVars['--linkActiveColor'];
+  styleVars['--appLinkHoverColor'] = styleVars['--linkHoverColor'];
+  setStyle(ele, styleVars, true);
 };
 
 export default setStyleVar;

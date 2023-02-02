@@ -5,8 +5,8 @@ specifiers:
   '@ant-design/pro-table': ^3.2.12
   '@antv/graphin': ^2.7.13
   '@antv/graphin-components': ^2.4.0
-  '@antv/x6': ^2.1.6
-  '@antv/x6-react-components': ^2.0.6
+  '@antv/x6': ^2.2.1
+  '@antv/x6-react-components': ^2.0.7
   '@antv/x6-react-shape': ^2.1.0
   '@babel/cli': ^7.20.7
   '@babel/core': ^7.20.12
@@ -27,14 +27,14 @@ specifiers:
   '@babel/runtime': ^7.20.13
   '@commitlint/cli': ^17.4.2
   '@commitlint/config-conventional': ^17.4.2
-  '@huxy/components': ^1.7.8
+  '@huxy/components': ^1.8.0
   '@huxy/copy-file-webpack-plugin': ^0.5.0
-  '@huxy/layout': ^1.7.11
-  '@huxy/materials': ^0.1.6
+  '@huxy/layout': ^1.8.0
+  '@huxy/materials': ^0.1.8
   '@huxy/open-browser-webpack-plugin': ^0.5.0
-  '@huxy/router': ^1.7.11
-  '@huxy/use': ^1.7.5
-  '@huxy/utils': ^1.7.6
+  '@huxy/router': ^1.8.0
+  '@huxy/use': ^1.8.0
+  '@huxy/utils': ^1.8.0
   '@testing-library/react': ^13.4.0
   '@types/node': ^18.11.18
   antd: ^5.1.7
@@ -88,9 +88,9 @@ specifiers:
   react-window-infinite-loader: ^1.0.8
   rimraf: ^4.1.2
   rxjs: ^7.8.0
-  slate: ^0.88.1
+  slate: ^0.90.0
   slate-history: ^0.86.0
-  slate-react: ^0.89.0
+  slate-react: ^0.90.0
   standard-version: ^9.5.0
   style-loader: ^3.3.1
   stylelint: ^14.16.1
@@ -118,17 +118,17 @@ dependencies:
   '@ant-design/pro-table': 3.2.12_aac2f7bij6zdfxpifyhyipckra
   '@antv/graphin': 2.7.13_biqbaboplfbrettd7655fr4n2y
   '@antv/graphin-components': 2.4.0_hwy6vkaqiymjmcsumy244ymffm
-  '@antv/x6': 2.1.6
-  '@antv/x6-react-components': 2.0.6_aac2f7bij6zdfxpifyhyipckra
-  '@antv/x6-react-shape': 2.1.0_s227yhmlm3es6xtnkxalf4vpsy
-  '@huxy/components': 1.7.8_biqbaboplfbrettd7655fr4n2y
+  '@antv/x6': 2.2.1
+  '@antv/x6-react-components': 2.0.7_aac2f7bij6zdfxpifyhyipckra
+  '@antv/x6-react-shape': 2.1.0_3qgtv7547uegxbdsa7zseirxym
+  '@huxy/components': 1.8.0_biqbaboplfbrettd7655fr4n2y
   '@huxy/copy-file-webpack-plugin': 0.5.0
-  '@huxy/layout': 1.7.11_react@18.2.0
-  '@huxy/materials': 0.1.6_react@18.2.0
+  '@huxy/layout': 1.8.0_react@18.2.0
+  '@huxy/materials': 0.1.8_react@18.2.0
   '@huxy/open-browser-webpack-plugin': 0.5.0
-  '@huxy/router': 1.7.11_react@18.2.0
-  '@huxy/use': 1.7.5_react@18.2.0
-  '@huxy/utils': 1.7.6
+  '@huxy/router': 1.8.0_react@18.2.0
+  '@huxy/use': 1.8.0_react@18.2.0
+  '@huxy/utils': 1.8.0
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   antd: 5.1.7_biqbaboplfbrettd7655fr4n2y
   core-js: 3.27.2
@@ -145,9 +145,9 @@ dependencies:
   react-window: 1.8.8_biqbaboplfbrettd7655fr4n2y
   react-window-infinite-loader: 1.0.8_biqbaboplfbrettd7655fr4n2y
   rxjs: 7.8.0
-  slate: 0.88.1
-  slate-history: 0.86.0_slate@0.88.1
-  slate-react: 0.89.0_qerhfwjtqsvhwpvu3ucjpiqydy
+  slate: 0.90.0
+  slate-history: 0.86.0_slate@0.90.0
+  slate-react: 0.90.0_vfkxdgngtm5gosdcaawdsu5ur4
   three: 0.149.0
   web3: 1.8.2
 
@@ -724,8 +724,8 @@ packages:
     resolution: {integrity: sha512-dlsLNRRTiCw8TsJ/03j3y5IbbbK4Npf6zBH6kAx8nnW+edNT/TAOChvPRzizwD+vA7wY9Rp2AiRnp/vCdIYC5w==}
     dev: false
 
-  /@antv/x6-react-components/2.0.6_aac2f7bij6zdfxpifyhyipckra:
-    resolution: {integrity: sha512-rmeVLiM1pK3WFvWfztdG5ZntihICjEi/3XNtEN9SaLHYtXbiU3bdfPV8WKq/+8L1qtptPK+ze3MHBM/MQOqSBw==}
+  /@antv/x6-react-components/2.0.7_aac2f7bij6zdfxpifyhyipckra:
+    resolution: {integrity: sha512-AcnsJgaIup88FWPFs37T/YuiDhwkwOwPlvCs3gMoMPLkoxACeuolip5l6BDcGpWlSSiibTPJ2u24tk6AIB1XxQ==}
     peerDependencies:
       antd: '>=4.4.2 || >=5.0.0'
       react: ^18.0.0
@@ -743,20 +743,20 @@ packages:
       ua-parser-js: 0.7.32
     dev: false
 
-  /@antv/x6-react-shape/2.1.0_s227yhmlm3es6xtnkxalf4vpsy:
+  /@antv/x6-react-shape/2.1.0_3qgtv7547uegxbdsa7zseirxym:
     resolution: {integrity: sha512-HY9tPbMU1Z7Tu2lwBenXJe53DzT2MFt9LXRBPyN+r5qu8kP3VMU1vzS+2+LsPFdPL3s71wolGjL1GExUoh77JQ==}
     peerDependencies:
       '@antv/x6': ^2.x
       react: '>=18.0.0'
       react-dom: '>= 18.0.0'
     dependencies:
-      '@antv/x6': 2.1.6
+      '@antv/x6': 2.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@antv/x6/2.1.6:
-    resolution: {integrity: sha512-Nsy3VXa6WAUPB9w8QbRSiIfBaTWH0qia0f7uMK3TVRnaT5HSpio6XxDsxil/xqCwqpv83SMqcruuDHuSa2pI/Q==}
+  /@antv/x6/2.2.1:
+    resolution: {integrity: sha512-1AJqOvi6MGP7Q41hI5/85vEZ7pUqfkJc1LQEBzw3LFtQfFKFtAURlw1SF5EdGgRKEF01CC8vmcagfQLWFDpTrg==}
     dependencies:
       '@antv/x6-common': 2.0.4
       '@antv/x6-geometry': 2.0.4
@@ -3066,8 +3066,8 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: true
 
-  /@huxy/components/1.7.8_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-kHWB0BmtM0ArENFaUKQlOs/9gs2e04L009XQLdmXsSC6QjtzOzZxm70IUY2xgHaLs/O2S+6lcMhAHYv0dvZI0A==}
+  /@huxy/components/1.8.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-OasxsyUzjWAp79PH5Nl5yFGYnYUOofwV6LtZBt0oNnGUYPWNRZAnfgcgQx52pYC7Y3nt/IWNc3TGpiJfsv1oWg==}
     peerDependencies:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
@@ -3080,16 +3080,16 @@ packages:
     resolution: {integrity: sha512-ABG1ksxyvioBNwmK9fqLHNVnfTQ6p6LlATrHOuJSLNUh8Nwtu4lgFBs34DvpEulOFO8c1ZeJlQ+pxw5Ql3x5mQ==}
     dev: false
 
-  /@huxy/layout/1.7.11_react@18.2.0:
-    resolution: {integrity: sha512-C9QDwrXGbJ0k1XkA5uBOQAOy+AK+MjJddaINfC0PHp37mk/tBXUy7Vl/PP7o6YjLnQD4wqc1gaNYtUiF06uikA==}
+  /@huxy/layout/1.8.0_react@18.2.0:
+    resolution: {integrity: sha512-8OHVWoa0o3wBEhQ3FLrJcbWq4ryBnx4/RgGWhV438D6ani9HhRelMMQL1/dT2WUdyvCaJs07Whl3U7tFzzMXYw==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
       react: 18.2.0
     dev: false
 
-  /@huxy/materials/0.1.6_react@18.2.0:
-    resolution: {integrity: sha512-cy3aWwDp2Mw9JEVT+vnw8SvxMGktpYkj6Kn5wUMTe30FUgO0Nx1jS1AzkO/kSiwQhSA3qC30PHkTnnDEC0QkZQ==}
+  /@huxy/materials/0.1.8_react@18.2.0:
+    resolution: {integrity: sha512-Q8UvQncDAlu1PKndLislKB2Nhs6ED0RQY2ZjwupoBOvFPJnAXSeVfNZYddm6x/0ceyR6NF0i6XwtGw2XZA/IKA==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
@@ -3100,24 +3100,24 @@ packages:
     resolution: {integrity: sha512-9D10U6kAS4nG/O++rHISWA5AYQ2NLlibSfe0+ci+sd7GzncIT4cMnLRSzm4loKEzCtreiIbjLaxAblEcUHyD0g==}
     dev: false
 
-  /@huxy/router/1.7.11_react@18.2.0:
-    resolution: {integrity: sha512-vyuI54Nj5u5vOUpFamPHOVFEjZHobaIICW+Etd3wlu+R+M/t2tHs+IVfeQNKeLfSbRjKl5h43EFpq2mduQ7Tng==}
+  /@huxy/router/1.8.0_react@18.2.0:
+    resolution: {integrity: sha512-hzDeOWNKcHkf2Wg+wM1FQ2sLd4GaTlBjTHR40+3DL4Motw2G8csc0rvmUTLn/GH2ZwxI0xsTkVBzl4xADpU5kw==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
       react: 18.2.0
     dev: false
 
-  /@huxy/use/1.7.5_react@18.2.0:
-    resolution: {integrity: sha512-PKeqXjIODo9Of+KZ0bT0LGRZhumqxtCtDwoXeLHdWPKaA7qJ/mAvw8tDuUaZaKhP7bQv4DJFMh4yjfXJvSwwlQ==}
+  /@huxy/use/1.8.0_react@18.2.0:
+    resolution: {integrity: sha512-DbT3/LjzaNohq78dH6tyQkwSQg20E/K5TGwHIiYMim4v2X64DotvHp7s2AC3audgfLG0z/T+hE0djCRvPCE8XA==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
       react: 18.2.0
     dev: false
 
-  /@huxy/utils/1.7.6:
-    resolution: {integrity: sha512-W9u3oCe2NAMFIgZXDKqG2U61BYVZtHenHxskUi9XfRW3jECKingPokXJKxuiWmlnLLHm77uwMyzTESLFwyvlXg==}
+  /@huxy/utils/1.8.0:
+    resolution: {integrity: sha512-AmStHBCCO/DxU9CRGEyyqV5ErCYWhYJdrpXgPGWt0+zo19geKrr8VZbIID3wu7rDbZmb7N6WqfvE1exph5yuQw==}
     dev: false
 
   /@icons/material/0.2.4_react@18.2.0:
@@ -12168,17 +12168,17 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /slate-history/0.86.0_slate@0.88.1:
+  /slate-history/0.86.0_slate@0.90.0:
     resolution: {integrity: sha512-OxObL9tbhgwvSlnKSCpGIh7wnuaqvOj5jRExGjEyCU2Ke8ctf22HjT+jw7GEi9ttLzNTUmTEU3YIzqKGeqN+og==}
     peerDependencies:
       slate: '>=0.65.3'
     dependencies:
       is-plain-object: 5.0.0
-      slate: 0.88.1
+      slate: 0.90.0
     dev: false
 
-  /slate-react/0.89.0_qerhfwjtqsvhwpvu3ucjpiqydy:
-    resolution: {integrity: sha512-ZTR0OwHbFWU9AK2iAUSxqpLK+GZFwTp4RttthDeWFzbF6y0aRAZRAwNNsi21jboZ26/7e8z68y2T9njhjKe/0w==}
+  /slate-react/0.90.0_vfkxdgngtm5gosdcaawdsu5ur4:
+    resolution: {integrity: sha512-z6pGd6jjU5VazLxlDi6zL3a6yaPBPJ+A2VyIlE/h/rvDywaLYGvk0xcrA9NrK71Dr47HK5ZN2zFEZNleh6wlPA==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -12194,12 +12194,12 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       scroll-into-view-if-needed: 2.2.31
-      slate: 0.88.1
+      slate: 0.90.0
       tiny-invariant: 1.0.6
     dev: false
 
-  /slate/0.88.1:
-    resolution: {integrity: sha512-DEj9RpkNwPfdh3zbE9eGpeOVGWdS8BYQt754S0Lk6IvJXOkYaxza7WEZLZl/vnp7vloMdTe24zccyxywA3XK8g==}
+  /slate/0.90.0:
+    resolution: {integrity: sha512-dv8idv0JjYyHiAJcVKf5yWKPDMTDi+PSZyfjsnquEI8VB5nmTVGjeJab06lc3o69O7aN05ROwO9/OY8mU1IUPA==}
     dependencies:
       immer: 9.0.17
       is-plain-object: 5.0.0

@@ -9,17 +9,17 @@ const sizes = {
   '--menuItemHeight': '45px',
 };
 const colors = {
+  '--appColor': '#495057',
+  '--appBgColor': '#eaeff2',
   '--bannerBgColor': '#21364a',
   '--navBgColor': '#21364a',
-  '--menuBgColor': '#2d4054',
-  '--appBgColor': '#eaeff2',
-  '--pageBgColor': '#eaeff2',
+  '--menuBgColor': '#ffffff',
   '--panelBgColor': '#ffffff',
-  '--appColor': '#444444',
-  '--linkColor': '#cccccc',
-  '--pageLinkColor': '#666666',
-  '--linkHoverColor': '#40a9ff',
-  '--linkActiveColor': '#40a9ff',
+  '--linkColor': '#495057',
+  '--linkHoverColor': 'var(--blue1)',
+  '--linkActiveColor': 'var(--blue2)',
+  '--headerLinkColor': '#ffffff',
+  '--bannerLinkColor': '#ffffff',
   '--borderColor': '#eff2f7',
 };
 

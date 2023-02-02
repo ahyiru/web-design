@@ -1,6 +1,4 @@
 :local {
-  @light: #ffffff;
-  @dark: #333333;
   .h-btn {
     display: inline-block;
     padding: 4px 10px;
@@ -70,43 +68,43 @@
     }
 
     &.default {
-      color: @dark;
-      background-color: var(--dark);
-      border-color: var(--light-dark);
+      color: var(--darkText);
+      background-color: var(--grey2);
+      border-color: var(--grey1);
 
       &:hover,
       &:focus,
       &:active {
-        color: @dark;
-        background-color: var(--light-dark);
-        border-color: var(--dark);
+        color: var(--darkText);
+        background-color: var(--grey1);
+        border-color: var(--grey2);
         transition: all 0.3s;
       }
     }
 
     &.outlineDefault {
-      color: var(--dark);
+      color: var(--grey2);
       background-color: transparent;
-      border-color: var(--light-dark);
+      border-color: var(--grey1);
 
       &:hover,
       &:focus,
       &:active {
-        color: var(--light-dark);
-        border-color: var(--dark);
+        color: var(--grey1);
+        border-color: var(--grey2);
         transition: all 0.3s;
       }
     }
 
     &.info {
-      color: @light;
+      color: var(--lightText);
       background-color: var(--blue2);
       border-color: var(--blue1);
 
       &:hover,
       &:focus,
       &:active {
-        color: @light;
+        color: var(--lightText);
         background-color: var(--blue1);
         border-color: var(--blue2);
         transition: all 0.3s;
@@ -128,14 +126,14 @@
     }
 
     &.success {
-      color: @light;
+      color: var(--lightText);
       background-color: var(--green2);
       border-color: var(--green1);
 
       &:hover,
       &:focus,
       &:active {
-        color: @light;
+        color: var(--lightText);
         background-color: var(--green1);
         border-color: var(--green2);
         transition: all 0.3s;
@@ -157,43 +155,43 @@
     }
 
     &.warn {
-      color: @light;
-      background-color: var(--gold2);
-      border-color: var(--gold1);
+      color: var(--lightText);
+      background-color: var(--orange2);
+      border-color: var(--orange1);
 
       &:hover,
       &:focus,
       &:active {
-        color: @light;
-        background-color: var(--gold1);
-        border-color: var(--gold2);
+        color: var(--lightText);
+        background-color: var(--orange1);
+        border-color: var(--orange2);
         transition: all 0.3s;
       }
     }
 
     &.outlineWarn {
-      color: var(--gold2);
+      color: var(--orange2);
       background-color: transparent;
-      border-color: var(--gold1);
+      border-color: var(--orange1);
 
       &:hover,
       &:focus,
       &:active {
-        color: var(--gold1);
-        border-color: var(--gold2);
+        color: var(--orange1);
+        border-color: var(--orange2);
         transition: all 0.3s;
       }
     }
 
     &.danger {
-      color: @light;
+      color: var(--lightText);
       background-color: var(--red2);
       border-color: var(--red1);
 
       &:hover,
       &:focus,
       &:active {
-        color: @light;
+        color: var(--lightText);
         background-color: var(--red1);
         border-color: var(--red2);
         transition: all 0.3s;

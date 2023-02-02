@@ -4,7 +4,6 @@ const theme = {
   dark: 'dark',
   light: 'light',
   portal: 'portal',
-  lightPortal: 'lightPortal',
   // fontSize
   fontSize: 'fontSize',
   // menuType
@@ -30,7 +29,6 @@ const theme = {
   // '--footerBgColor':'footerBgColor',
   '--appColor': 'appColor',
   '--linkColor': 'linkColor',
-  '--pageLinkColor': 'pageLinkColor',
   '--linkHoverColor': 'linkHoverColor',
   '--linkActiveColor': 'linkActiveColor',
   '--borderColor': 'borderColor',

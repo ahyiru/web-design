@@ -197,7 +197,7 @@ const Index = props => {
     size: getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
       <Row key={key} gutter={[10, 10]}>
         <Col span={5}>
-          <span style={labelStyle}>{themeLang[key]}：</span>
+          <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
         </Col>
         <Col span={6}>
           <InputNumber
@@ -225,7 +225,7 @@ const Index = props => {
     color: Object.keys(theme.list.colors).map(key => (
       <Row key={key} gutter={[10, 10]}>
         <Col span={5}>
-          <span style={labelStyle}>{themeLang[key]}：</span>
+          <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
         </Col>
         <Col span={6}>
           <Input type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />

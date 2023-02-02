@@ -9,15 +9,13 @@ const sizes = {
   '--menuItemHeight': '48px',
 };
 const colors = {
+  '--appColor': '#ced4da',
+  '--appBgColor': '#303841',
   '--bannerBgColor': '#37424c',
   '--navBgColor': '#3c4752',
   '--menuBgColor': '#37424c',
-  '--appBgColor': '#303841',
-  '--pageBgColor': '#303841',
   '--panelBgColor': '#36404a',
-  '--appColor': '#ced4da',
   '--linkColor': '#ced4da',
-  '--pageLinkColor': '#ced4da',
   '--linkHoverColor': '#ffffff',
   '--linkActiveColor': '#ffffff',
   '--borderColor': '#424e5a',

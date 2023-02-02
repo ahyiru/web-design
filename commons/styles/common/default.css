@@ -30,7 +30,7 @@
 }
 
 :fullscreen {
-  background: var(--pageBgColor);
+  background: var(--appBgColor);
 }
 
 /* 

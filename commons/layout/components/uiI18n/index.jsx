@@ -18,7 +18,7 @@ const Index = props => {
     locale={uiLang[language] || zhCN}
     theme={{
       token: {
-        colorBgBase: colors['--appBgColor'],
+        colorBgBase: colors['--pageBgColor'] || colors['--appBgColor'],
         colorTextBase: colors['--appColor'],
         colorBorder: colors['--borderColor'],
         colorText: colors['--appColor'],
