@@ -1,4 +1,6 @@
-import {dark, dark1, gradient, light, light1, portal1, portal} from './themes';
+import {dark, dark1, light, light1, portal1, portal} from './themes';
+
+import * as themes from './themes/themes';
 
 const themeList = getIntls => [
   {
@@ -37,12 +39,12 @@ const themeList = getIntls => [
     list: portal1,
     type: 'theme',
   },
-  {
-    name: getIntls('theme.gradient', 'gradient'),
-    key: 'gradient',
-    list: gradient,
+  ...Object.keys(themes).map(key => ({
+    name: key,
+    key,
+    list: themes[key],
     type: 'theme',
-  },
+  })),
 ];
 
 export default themeList;
