@@ -39,7 +39,7 @@ const Bigscreen = props => {
           </HalfBorder>
         </Col>
         <Col span={4}>
-          <CornerBorder cornerColor={borderColor}>
+          <CornerBorder borderColor={borderColor}>
             <Panel title="热搜词">
               <TextData width="420px" bgColor="transparent" />
             </Panel>
@@ -60,14 +60,14 @@ const Bigscreen = props => {
       </Row>
       <Row>
         <Col span={5}>
-          <CornerBorder cornerColor={borderColor}>
+          <CornerBorder borderColor={borderColor}>
             <Panel title={viewsOpt.name}>
               <ReactChart option={viewsOpt.opt} style={{height: '240px'}} />
             </Panel>
           </CornerBorder>
         </Col>
         <Col span={4}>
-          <CornerBorder cornerColor={borderColor}>
+          <CornerBorder borderColor={borderColor}>
             <Panel title={browserTypeOpt.name}>
               <ReactChart option={browserTypeOpt.opt} style={{height: '240px'}} />
             </Panel>

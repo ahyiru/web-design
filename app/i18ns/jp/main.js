@@ -4,7 +4,7 @@ const layout = {
   menuType: '菜单类型：',
   vertical: '纵向',
   horizontal: '横向',
-  compose: '横纵组合',
+  compose: '组合',
   fontSize: '字体大小：',
   layoutDesign: '布局',
   sizeDesign: '大小',

@@ -138,10 +138,20 @@ table {
 }
 
 code {
-  background: rgba(0, 0, 0, 0.06);
-  border: 1px inset rgba(0, 0, 0, 0.08);
   border-radius: 2px;
-  color: #444;
+}
+
+.pre, .code {
+  border: 1px inset rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  line-height: 1.7142857;
+  overflow-x: auto;
+  font-family: Söhne Mono,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  background: #23241f;
+  color: #f8f8f2;
 }
 
 blockquote {

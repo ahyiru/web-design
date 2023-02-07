@@ -20,6 +20,8 @@ const appProxy = require('./appProxy');
 
 const {appName, HOST, PORT, MOCK} = require('../configs');
 
+const localApis = ['/local/chatgpt'];
+
 const mocks = require('./mock');
 
 const getIPs = require('./getIPs');
@@ -54,6 +56,11 @@ app.use(compression());
 
 // browserRouter
 app.use('*', (req, res, next) => {
+  // 本地请求
+  if (localApis.includes(req.originalUrl.split('?')[0])) {
+    next();
+    return;
+  }
   const htmlBuffer = compiler.outputFileSystem.readFileSync(`${webpackConfig.output.path}/index.html`);
   res.set('Content-Type', 'text/html');
   res.send(htmlBuffer);

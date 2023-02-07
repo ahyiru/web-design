@@ -12,7 +12,7 @@ const Index = ({item}) => {
       try {
         const context = await getContext({...item, type: '.md'});
         const newContext = await replacePath(context, item);
-        setContext(marked(newContext));
+        setContext(marked.parse(newContext));
       } catch (err) {
         setContext(err?.message);
       }

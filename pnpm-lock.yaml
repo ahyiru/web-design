@@ -5,7 +5,7 @@ specifiers:
   '@ant-design/pro-table': ^3.2.12
   '@antv/graphin': ^2.7.13
   '@antv/graphin-components': ^2.4.0
-  '@antv/x6': ^2.2.1
+  '@antv/x6': ^2.3.0
   '@antv/x6-react-components': ^2.0.7
   '@antv/x6-react-shape': ^2.1.0
   '@babel/cli': ^7.20.7
@@ -27,9 +27,9 @@ specifiers:
   '@babel/runtime': ^7.20.13
   '@commitlint/cli': ^17.4.2
   '@commitlint/config-conventional': ^17.4.2
-  '@huxy/components': ^1.8.1
+  '@huxy/components': ^1.8.2
   '@huxy/copy-file-webpack-plugin': ^0.5.0
-  '@huxy/layout': ^1.8.1
+  '@huxy/layout': ^1.8.2
   '@huxy/materials': ^0.1.9
   '@huxy/open-browser-webpack-plugin': ^0.5.0
   '@huxy/router': ^1.8.0
@@ -118,12 +118,12 @@ dependencies:
   '@ant-design/pro-table': 3.2.12_aac2f7bij6zdfxpifyhyipckra
   '@antv/graphin': 2.7.13_biqbaboplfbrettd7655fr4n2y
   '@antv/graphin-components': 2.4.0_hwy6vkaqiymjmcsumy244ymffm
-  '@antv/x6': 2.2.1
+  '@antv/x6': 2.3.0
   '@antv/x6-react-components': 2.0.7_aac2f7bij6zdfxpifyhyipckra
-  '@antv/x6-react-shape': 2.1.0_3qgtv7547uegxbdsa7zseirxym
-  '@huxy/components': 1.8.1_biqbaboplfbrettd7655fr4n2y
+  '@antv/x6-react-shape': 2.1.0_idhvxo3i7oml2mxamiejun6ovm
+  '@huxy/components': 1.8.2_biqbaboplfbrettd7655fr4n2y
   '@huxy/copy-file-webpack-plugin': 0.5.0
-  '@huxy/layout': 1.8.1_react@18.2.0
+  '@huxy/layout': 1.8.2_react@18.2.0
   '@huxy/materials': 0.1.9_react@18.2.0
   '@huxy/open-browser-webpack-plugin': 0.5.0
   '@huxy/router': 1.8.0_react@18.2.0
@@ -743,20 +743,20 @@ packages:
       ua-parser-js: 0.7.32
     dev: false
 
-  /@antv/x6-react-shape/2.1.0_3qgtv7547uegxbdsa7zseirxym:
+  /@antv/x6-react-shape/2.1.0_idhvxo3i7oml2mxamiejun6ovm:
     resolution: {integrity: sha512-HY9tPbMU1Z7Tu2lwBenXJe53DzT2MFt9LXRBPyN+r5qu8kP3VMU1vzS+2+LsPFdPL3s71wolGjL1GExUoh77JQ==}
     peerDependencies:
       '@antv/x6': ^2.x
       react: '>=18.0.0'
       react-dom: '>= 18.0.0'
     dependencies:
-      '@antv/x6': 2.2.1
+      '@antv/x6': 2.3.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@antv/x6/2.2.1:
-    resolution: {integrity: sha512-1AJqOvi6MGP7Q41hI5/85vEZ7pUqfkJc1LQEBzw3LFtQfFKFtAURlw1SF5EdGgRKEF01CC8vmcagfQLWFDpTrg==}
+  /@antv/x6/2.3.0:
+    resolution: {integrity: sha512-fnhr26F7ztPmNjjm670QvA/yD09bQNn4MYAQaLDhqBzbRwA3eGZjYuljFvXjstOq18VG2lzFpIiAEeqJkYVIwA==}
     dependencies:
       '@antv/x6-common': 2.0.4
       '@antv/x6-geometry': 2.0.4
@@ -3066,8 +3066,8 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: true
 
-  /@huxy/components/1.8.1_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-KaVOfeiNJWK7rwSiRmoQnOLvFj+SA3AgyLirRJRHkOAAkHCDheI2899BCAg5M2OOgarciMW40AMwhjWnYimpvQ==}
+  /@huxy/components/1.8.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-6kBas3aXbcNonZ/rnMVbbjqegr113UzWMjIbdwA3qpX9hFP6042JZeJo96C3NIHe1ietVG4CbO5VPJrzPCvgtA==}
     peerDependencies:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
@@ -3080,8 +3080,8 @@ packages:
     resolution: {integrity: sha512-ABG1ksxyvioBNwmK9fqLHNVnfTQ6p6LlATrHOuJSLNUh8Nwtu4lgFBs34DvpEulOFO8c1ZeJlQ+pxw5Ql3x5mQ==}
     dev: false
 
-  /@huxy/layout/1.8.1_react@18.2.0:
-    resolution: {integrity: sha512-/w40ozQKQubhQYVdTAqIIJaIkueV30ke+lgsRwjaRC/J55YqRNIGXqd6YSx+GDisOZzd94ZRK79b7N2zXzZQJw==}
+  /@huxy/layout/1.8.2_react@18.2.0:
+    resolution: {integrity: sha512-PYgfSO67HKhQ4fgVe5708wvt10xN2QwuEEos+i4jToYCrAMLXUQklACOJAewwJ0385oe8L0h6l8+avOtE9mhZQ==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:

@@ -6,7 +6,7 @@ const renderMenu = (menu, curName) =>
     if (children?.length) {
       return (
         <li key={path || name} className={open ? 'open' : ''}>
-          <Link to={{query: {name}}} className={active ? 'active' : ''} preventDefault>
+          <Link to={{query: {name}}} className={`link${active ? ' active' : ''}`} preventDefault>
             <span>{name}</span>
           </Link>
           <ul>{renderMenu(children, curName)}</ul>
@@ -15,7 +15,7 @@ const renderMenu = (menu, curName) =>
     }
     return (
       <li key={path || name}>
-        <Link to={{query: {name}}} className={active ? 'active' : ''}>
+        <Link to={{query: {name}}} className={`link${active ? ' active' : ''}`}>
           <span>{name}</span>
         </Link>
       </li>

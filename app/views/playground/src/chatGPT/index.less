@@ -1,0 +1,20 @@
+@import "~@app/assets/var.less";
+
+.chatgpt-page-container {
+  .chatgpt-input-area, .chatgpt-output-area {
+    background-color: var(--panelBgColor);
+    padding: 15px 20px;
+    border-radius: 2px;
+    height: @mainHeight;
+    overflow-y: auto;
+  }
+  .chatgpt-output-area {
+    .output-context {
+      background-color: rgba(0, 0, 0, 0.03);
+      padding: 10px 12px;
+      border-radius: 2px;
+      border: 1px inset rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+

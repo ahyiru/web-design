@@ -27,7 +27,7 @@ const Index = props => {
         <ul className="doc-nav">
           {list.map(({name, children}) => (
             <li key={name}>
-              <Link to={{query: {folder: name, name: children[0]?.name}}} className={name === folder ? 'active' : ''}>
+              <Link to={{query: {folder: name, name: children[0]?.name}}} className={`link${name === folder ? ' active' : ''}`}>
                 <span>{name}</span>
               </Link>
             </li>

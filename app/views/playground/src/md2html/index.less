@@ -11,7 +11,7 @@
 }
 .doc-header {
   height: @headerHeight;
-  background-color: #eeeeee;
+  background-color: var(--panelBgColor);
   overflow: hidden;
   position: sticky;
   top: var(--headerHeight);
@@ -62,7 +62,7 @@
     top: calc(@headerHeight + var(--headerHeight));
     height: calc(100vh - @headerHeight - var(--headerHeight) - var(--footerHeight));
     overflow: hidden;
-    background-color: #fcfcfc;
+    background-color: var(--panelBgColor);
     .doc-menu-root {
       li {
         > .link {
@@ -78,7 +78,8 @@
           white-space: nowrap;
           transition: all 0.3s;
           &.active {
-            background-color: #e6f7ff;
+            // background-color: #e6f7ff;
+            background-color: hsla(0, 0%, 0%, 0.04);
           }
           &:hover {
             background-color: hsla(0, 0%, 0%, 0.03);
