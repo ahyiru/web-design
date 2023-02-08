@@ -19,7 +19,7 @@ const Index = ({children, ttProps}) => {
     if (span.current) {
       const {width: tWidth} = getTextSize(children);
       const {width} = getPosition(span.current);
-      const isEllipsis = tWidth > width;
+      const isEllipsis = ~~tWidth > ~~width;
       if (isEllipsis !== ellipsis) {
         setEllipsis(isEllipsis);
       }
@@ -28,7 +28,7 @@ const Index = ({children, ttProps}) => {
   return (
     <span ref={span} style={style}>
       {ellipsis ? (
-        <Tooltip placement="topLeft" title={children} {...ttProps}>
+        <Tooltip placement="topLeft" title={children} color="var(--panelBgColor)" {...ttProps}>
           {children}
         </Tooltip>
       ) : (
