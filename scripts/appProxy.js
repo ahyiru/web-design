@@ -1,19 +1,22 @@
 const {createProxyMiddleware} = require('http-proxy-middleware');
-const {PROXY} = require('../configs');
 
 const proxyCfg = proxy => ({
   prefix: proxy?.prefix || '/api',
   opts: {
     target: proxy?.url || proxy,
     changeOrigin: true,
-    // pathRewrite: {'^/api/':'/'},
+    // pathRewrite: {'^/api/': '/'},
+    onProxyReq: (proxyReq, req, res) => {
+      proxyReq.setHeader('clientip', req.ip);
+    },
+    // xfwd: true,
   },
 });
 
-const appProxy = app => {
+const appProxy = (app, PROXY) => {
   if (Array.isArray(PROXY)) {
     PROXY.map(proxyItem => {
-      const {prefix, opts} = proxyCfg(PROXY);
+      const {prefix, opts} = proxyCfg(proxyItem);
       app.use(prefix, createProxyMiddleware(opts));
     });
   } else if (PROXY) {

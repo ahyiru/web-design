@@ -7,7 +7,7 @@ const lowcode = {
   DEV_ROOT_DIR: '/',
   PRD_ROOT_DIR: '/',
   PROXY: {
-    url: 'http://ihuxy.com:9202',
+    url: 'http://api.ihuxy.com',
     prefix: '/api',
   },
   MOCK: '127.0.0.1:7202',

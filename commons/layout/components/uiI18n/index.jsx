@@ -26,6 +26,7 @@ const Index = props => {
         controlOutline: 'transparent',
         colorBgContainerDisabled: '',
         colorTextPlaceholder: '',
+        colorBgSpotlight: colors['--panelBgColor'],
       },
     }}
   >

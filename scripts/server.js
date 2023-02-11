@@ -12,11 +12,11 @@ const appProxy = require('./appProxy');
 
 const fixPath = require('./utils');
 
-const {appName, HOST, PRO_PORT, BUILD_DIR, PRD_ROOT_DIR} = require('../configs');
+const {appName, HOST, PRO_PORT, BUILD_DIR, PRD_ROOT_DIR, PROXY} = require('../configs');
 
 const app = express();
 
-appProxy(app);
+appProxy(app, PROXY);
 
 const rootDir = fixPath(`${PRD_ROOT_DIR}/`);
 

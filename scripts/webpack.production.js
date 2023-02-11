@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const TerserPlugin = require('terser-webpack-plugin');
 // const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-const {ESBuildMinifyPlugin} = require('esbuild-loader');
+const {EsbuildPlugin} = require('esbuild-loader');
 
 const CopyFileWebpackPlugin = require('@huxy/copy-file-webpack-plugin');
 
@@ -199,7 +199,7 @@ const prodConfig = merge(webpackConfig, {
           ],
         },
       }), */
-      new ESBuildMinifyPlugin({
+      new EsbuildPlugin({
         target: 'es2018',
         css: true,
         minify: true,

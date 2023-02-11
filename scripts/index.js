@@ -18,7 +18,7 @@ const webpackConfig = require('./webpack.development');
 
 const appProxy = require('./appProxy');
 
-const {appName, HOST, PORT, MOCK} = require('../configs');
+const {appName, HOST, PORT, PROXY, MOCK} = require('../configs');
 
 const localApis = ['/local/chatgpt'];
 
@@ -28,7 +28,7 @@ const getIPs = require('./getIPs');
 
 const app = express();
 
-appProxy(app);
+appProxy(app, PROXY);
 
 const compiler = webpack(webpackConfig);
 
