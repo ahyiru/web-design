@@ -10,7 +10,7 @@ import designRoutes from '@app/views/design/routes';
 const allRoutes = [
   {
     path: '/',
-    component: () => import('@commons/layout'),
+    component: () => import('@app/commons/layout'),
     children: [...dynamicRoutes, ...designRoutes],
   },
   ...staticRoutes,
