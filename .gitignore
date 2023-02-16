@@ -50,12 +50,3 @@ cert
 # build
 dist
 build
-# production
-
-# draft
-# draft
-
-**/deadcode.json
-
-temp
-

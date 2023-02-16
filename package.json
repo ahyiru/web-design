@@ -47,7 +47,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^0.1.7",
+    "@huxy/pack": "^0.2.4",
     "husky": "^8.0.3"
   },
   "dependencies": {
@@ -58,12 +58,12 @@
     "@antv/x6": "^2.3.0",
     "@antv/x6-react-components": "^2.0.7",
     "@antv/x6-react-shape": "^2.1.0",
-    "@huxy/components": "^1.9.0",
-    "@huxy/layout": "^1.9.0",
-    "@huxy/materials": "^0.2.0",
-    "@huxy/router": "^1.9.0",
-    "@huxy/use": "^1.9.0",
-    "@huxy/utils": "^1.9.0",
+    "@huxy/components": "^1.9.1",
+    "@huxy/layout": "^1.9.1",
+    "@huxy/materials": "^0.2.1",
+    "@huxy/router": "^1.9.1",
+    "@huxy/use": "^1.9.1",
+    "@huxy/utils": "^1.9.1",
     "antd": "^5.2.1",
     "echarts": "^5.4.1",
     "echarts-for-react": "^3.0.2",

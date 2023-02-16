@@ -11,8 +11,8 @@ const app = {
     url: 'http://ihuxy.com:9202',
     prefix: '/api',
   },
-  defProject: {
-    // 项目全局配置
+  envConfigs: {
+    // 全局环境变量
     name: '控制台',
     _id: '6098f12b099e1202a287acad',
   },

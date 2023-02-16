@@ -1,8 +1,8 @@
-const sum=(a,b)=>a+b;
+const sum = (a, b) => a + b;
 
-describe('add',()=>{
-  it('adds 1 + 2 to equal 3',()=>{
-    expect(sum(1,2)).toBe(3);
+describe('add', () => {
+  it ('adds 1 + 2 to equal 3', () => {
+    expect(sum(1, 2)).toBe(3);
   });
 });
 

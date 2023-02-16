@@ -1,11 +1,5 @@
-const {configs} = process.env;
+const {browserRouter, basepath, PROXY, buildTime, ...rest} = process.env.configs ?? {};
 
-export const browserRouter = configs.browserRouter;
+export {browserRouter, basepath, PROXY, buildTime};
 
-export const basepath = configs.basepath;
-
-export const PROXY = configs.PROXY;
-
-export const defProject = configs.defProject;
-
-export const buildTime = configs.buildTime;
+export const defProject = rest;
