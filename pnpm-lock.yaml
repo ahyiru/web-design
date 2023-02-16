@@ -11,7 +11,7 @@ specifiers:
   '@huxy/components': ^1.9.1
   '@huxy/layout': ^1.9.1
   '@huxy/materials': ^0.2.1
-  '@huxy/pack': ^0.2.4
+  '@huxy/pack': ^0.2.5
   '@huxy/router': ^1.9.1
   '@huxy/use': ^1.9.1
   '@huxy/utils': ^1.9.1
@@ -71,7 +71,7 @@ dependencies:
   web3: 1.8.2
 
 devDependencies:
-  '@huxy/pack': 0.2.4
+  '@huxy/pack': 0.2.5
   husky: 8.0.3
 
 packages:
@@ -2804,8 +2804,8 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dev: true
 
-  /@huxy/pack/0.2.4:
-    resolution: {integrity: sha512-mKikvqtpeiqi1nF110qV8tIp8010LpTVR5IwLEHJ7xSb/5G8lKD/2Qc3iCrjGSnH/tPsE2uRWnk2xSZelwQRDw==}
+  /@huxy/pack/0.2.5:
+    resolution: {integrity: sha512-EhFNFb0t/7MM45yy8OWknIIVjXZJ3Q/kipImJOshuwcTjCAXQ1K2IN/+Q6VsZBbFx1dMvlbLknFUmF7SYWYjeA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
     dependencies:
@@ -3470,7 +3470,7 @@ packages:
   /@types/bn.js/5.1.1:
     resolution: {integrity: sha512-qNrYbZqMx0uJAfKnKclPh+dTwK33KfLHYqtyODwd5HnXOjnkhc4qgn3BrK6RWyGZm5+sIFE7Q7Vz6QQtJB7w7g==}
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 18.13.0
     dev: false
 
   /@types/cacheable-request/6.0.3:
@@ -3478,7 +3478,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 12.20.55
+      '@types/node': 18.13.0
       '@types/responselike': 1.0.0
     dev: false
 
@@ -3563,7 +3563,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 18.13.0
     dev: false
 
   /@types/lodash.clonedeep/4.5.7:
@@ -3614,7 +3614,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 18.13.0
     dev: false
 
   /@types/secp256k1/4.0.3:
@@ -3982,7 +3982,7 @@ packages:
       rc-checkbox: 2.3.2_biqbaboplfbrettd7655fr4n2y
       rc-collapse: 3.5.2_biqbaboplfbrettd7655fr4n2y
       rc-dialog: 9.0.2_biqbaboplfbrettd7655fr4n2y
-      rc-drawer: 6.1.2_biqbaboplfbrettd7655fr4n2y
+      rc-drawer: 6.1.3_biqbaboplfbrettd7655fr4n2y
       rc-dropdown: 4.0.1_biqbaboplfbrettd7655fr4n2y
       rc-field-form: 1.27.4_biqbaboplfbrettd7655fr4n2y
       rc-image: 5.13.0_biqbaboplfbrettd7655fr4n2y
@@ -4138,7 +4138,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.5
-      caniuse-lite: 1.0.30001452
+      caniuse-lite: 1.0.30001453
       fraction.js: 4.2.0
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -4406,8 +4406,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001452
-      electron-to-chromium: 1.4.298
+      caniuse-lite: 1.0.30001453
+      electron-to-chromium: 1.4.299
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
@@ -4533,8 +4533,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite/1.0.30001452:
-    resolution: {integrity: sha512-Lkp0vFjMkBB3GTpLR8zk4NwW5EdRdnitwYJHDOOKIU85x4ckYCPQ+9WlVvSVClHxVReefkUMtWZH2l9KGlD51w==}
+  /caniuse-lite/1.0.30001453:
+    resolution: {integrity: sha512-R9o/uySW38VViaTrOtwfbFEiBFUh7ST3uIG4OEymIG3/uKdHDO4xk/FaqfUw0d+irSUyFPy3dZszf9VvSTPnsA==}
     dev: true
 
   /caseless/0.12.0:
@@ -5611,8 +5611,8 @@ packages:
       jake: 10.8.5
     dev: true
 
-  /electron-to-chromium/1.4.298:
-    resolution: {integrity: sha512-dJZurgxDeaqn90VmS23Xz+QPQQl84BxnlAfwCDFNjfEhqO2yLMDkeaDoJ1yPXAbmiqTi+hd5TpB5zi1N4hwBuQ==}
+  /electron-to-chromium/1.4.299:
+    resolution: {integrity: sha512-lQ7ijJghH6pCGbfWXr6EY+KYCMaRSjgsY925r1p/TlpSfVM1VjHTcn1gAc15VM4uwti283X6QtjPTXdpoSGiZQ==}
     dev: true
 
   /elliptic/6.5.4:
@@ -9522,8 +9522,8 @@ packages:
       postcss: 8.4.21
     dev: true
 
-  /postcss-nesting/11.2.0_postcss@8.4.21:
-    resolution: {integrity: sha512-VmYgRBc9CLAREKLrn4HHbV33VwUWeaNasWNzYxJX1CLLi51YDy6EtncmPtuzrsftwhPmGpWyMxMQPqgAx8u6iQ==}
+  /postcss-nesting/11.2.1_postcss@8.4.21:
+    resolution: {integrity: sha512-E6Jq74Jo/PbRAtZioON54NPhUNJYxVWhwxbweYl1vAoBYuGlDIts5yhtKiZFLvkvwT73e/9nFrW3oMqAtgG+GQ==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
@@ -9621,7 +9621,7 @@ packages:
       postcss-lab-function: 5.1.0_postcss@8.4.21
       postcss-logical: 6.1.0_postcss@8.4.21
       postcss-media-minmax: 5.0.0_postcss@8.4.21
-      postcss-nesting: 11.2.0_postcss@8.4.21
+      postcss-nesting: 11.2.1_postcss@8.4.21
       postcss-opacity-percentage: 1.1.3_postcss@8.4.21
       postcss-overflow-shorthand: 4.0.1_postcss@8.4.21
       postcss-page-break: 3.0.4_postcss@8.4.21
@@ -9944,8 +9944,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /rc-drawer/6.1.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-mYsTVT8Amy0LRrpVEv7gI1hOjtfMSO/qHAaCDzFx9QBLnms3cAQLJkaxRWM+Eq99oyLhU/JkgoqTg13bc4ogOQ==}
+  /rc-drawer/6.1.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-AvHisO90A+xMLMKBw2zs89HxjWxusM2BUABlgK60RhweIHF8W/wk0hSOrxBlUXoA9r1F+10na3g6GZ97y1qDZA==}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'

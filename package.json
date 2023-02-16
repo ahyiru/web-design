@@ -47,7 +47,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^0.2.4",
+    "@huxy/pack": "^0.2.5",
     "husky": "^8.0.3"
   },
   "dependencies": {
