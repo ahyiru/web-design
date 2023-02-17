@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Drawer, Space, Input, InputNumber, Slider, Button, message, Select, Radio} from 'antd';
+import {Drawer, Space, Input, InputNumber, Slider, Button, message, Select, Radio, Checkbox} from 'antd';
 import {SettingOutlined} from '@ant-design/icons';
 import {TabHeader} from '@huxy/components';
 import {useDebounce} from '@huxy/use';
@@ -60,7 +60,10 @@ const Index = props => {
   const themeLang = getIntls('theme', {});
   const i18nCfg = getIntls('main.layout', {});
   const [theme, setTheme] = useThemeStore();
-  const [menuType, setMenuType] = useMenuTypeStore('vertical');
+  const [menuType, setMenuType] = useMenuTypeStore({
+    menu: 'vertical',
+    header: '',
+  });
 
   const [active, setActive] = useState('layout');
   const [open, setOpen] = useState(false);
@@ -162,17 +165,35 @@ const Index = props => {
     layout: (
       <>
         <div className="vertical-item">
+          <label>是否隐藏头部</label>
+          <div>
+            <Checkbox checked={menuType.header === 'noHeader'} onChange={e => setMenuType({
+              header: e.target.checked ? 'noHeader' : '',
+              menu: menuType.menu,
+            })}>
+              隐藏
+            </Checkbox>
+          </div>
+        </div>
+        <div className="vertical-item">
           <label>{i18nCfg.menuType}</label>
           <div>
-            <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => {
-              setMenuType(e.target.value);
-              report({
-                actionType: 'click',
-                category: 'settings',
-                text: 'switchMenuType',
-                value: e.target.value,
-              });
-            }}>
+            <Radio.Group
+              style={{marginTop: '5px'}}
+              value={menuType.menu}
+              onChange={e => {
+                setMenuType({
+                  header: menuType.header,
+                  menu: e.target.value,
+                });
+                report({
+                  actionType: 'click',
+                  category: 'settings',
+                  text: 'switchMenuType',
+                  value: e.target.value,
+                });
+              }}
+            >
               <Radio value="vertical">{i18nCfg.vertical}</Radio>
               <Radio value="horizontal">{i18nCfg.horizontal}</Radio>
               <Radio value="compose">{i18nCfg.compose}</Radio>

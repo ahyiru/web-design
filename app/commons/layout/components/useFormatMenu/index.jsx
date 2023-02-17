@@ -12,24 +12,24 @@ const formatMenu = (menu, curPath, type, cb = null) => {
     menuConfig[type] = menu;
     return menuConfig;
   }
-  if (type === 'vertical') {
-    menuConfig[type] = menu.length > 1 ? menu : menu[0]?.children;
+  if (type === 'compose') {
+    const horizontal = menu.map(item => {
+      const {children, ...rest} = item;
+      if (item.path === curPath) {
+        menuConfig.vertical = children;
+      }
+      return rest;
+    });
+    menuConfig.horizontal = menu.length > 0 ? horizontal : [];
     return menuConfig;
   }
-  const horizontal = menu.map(item => {
-    const {children, ...rest} = item;
-    if (item.path === curPath) {
-      menuConfig.vertical = children;
-    }
-    return rest;
-  });
-  menuConfig.horizontal = menu.length > 0 ? horizontal : [];
+  menuConfig.vertical = menu.length > 1 ? menu : menu[0]?.children;
   return menuConfig;
 };
 
 const useFormatMenu = props => {
   const {current, menu: menus} = useRoute();
-  const [type] = useMenuTypeStore(props.menuType ?? 'vertical');
+  const [types] = useMenuTypeStore(props.menuType ?? {menu: 'vertical', header: ''});
 
   let menu = menus.find(({path}) => path === current[0]?.path)?.children ?? [];
   let firstLevel = 1;
@@ -40,9 +40,9 @@ const useFormatMenu = props => {
     firstLevel = current.length - selectedItems.length;
   }
 
-  const {vertical, horizontal} = formatMenu(menu, current[firstLevel]?.path, type);
+  const {vertical, horizontal} = formatMenu(menu, current[firstLevel]?.path, types.menu);
 
-  return {vertical, horizontal, menu};
+  return [{vertical, horizontal, menu}, types.header === 'noHeader'];
 };
 
 export default useFormatMenu;

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Input, InputNumber, Slider, Button, message, Select, Radio} from 'antd';
+import {Input, InputNumber, Slider, Button, message, Select, Radio, Checkbox} from 'antd';
 import {storage, copyToClipboard} from '@huxy/utils';
 import {useDebounce} from '@huxy/use';
 import {Row, Col} from '@app/components/row';
@@ -42,7 +42,10 @@ const getSizeList = list =>
 const Index = props => {
   const getIntls = useIntls();
   const [theme, setTheme] = useThemeStore();
-  const [menuType, setMenuType] = useMenuTypeStore('vertical');
+  const [menuType, setMenuType] = useMenuTypeStore({
+    menu: 'vertical',
+    header: '',
+  });
   const themeLang = getIntls('theme', {});
   const [size, setSize] = useState(10);
   const changeFontSize = useDebounce(value => document.documentElement.style.setProperty('--rootSize', value), delay);
@@ -154,17 +157,35 @@ const Index = props => {
               <Panel>
                 <h3>{getIntls('main.layout.layoutDesign')}</h3>
                 <div className="vertical-item">
+                  <label>是否隐藏头部</label>
+                  <div>
+                    <Checkbox checked={menuType.header === 'noHeader'} onChange={e => setMenuType({
+                      header: e.target.checked ? 'noHeader' : '',
+                      menu: menuType.menu,
+                    })}>
+                      隐藏
+                    </Checkbox>
+                  </div>
+                </div>
+                <div className="vertical-item">
                   <label>{getIntls('main.layout.menuType')}</label>
                   <div>
-                    <Radio.Group style={{marginTop: '5px'}} value={menuType} onChange={e => {
-                      setMenuType(e.target.value);
-                      report({
-                        actionType: 'click',
-                        category: 'layout',
-                        text: 'switchMenuType',
-                        value: e.target.value,
-                      });
-                    }}>
+                    <Radio.Group
+                      style={{marginTop: '5px'}}
+                      value={menuType.menu}
+                      onChange={e => {
+                        setMenuType({
+                          header: menuType.header,
+                          menu: e.target.value,
+                        });
+                        report({
+                          actionType: 'click',
+                          category: 'layout',
+                          text: 'switchMenuType',
+                          value: e.target.value,
+                        });
+                      }}
+                    >
                       <Radio value="vertical">{getIntls('main.layout.vertical')}</Radio>
                       <Radio value="horizontal">{getIntls('main.layout.horizontal')}</Radio>
                       <Radio value="compose">{getIntls('main.layout.compose')}</Radio>

@@ -9,6 +9,7 @@ import './index.less';
 const Index = props => {
   return (
     <div className="not-found-page">
+      <h4 style={{color: 'var(--red2)', textAlign: 'center', position: 'absolute', width: '100%', top: 0}}>{props.inputPath} is not found</h4>
       <div className="not-found-icon">
         <img  src={notFound} />
       </div>

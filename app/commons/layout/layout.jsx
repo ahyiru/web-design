@@ -9,8 +9,16 @@ import * as configs from './configs';
 const Index = props => {
   const i18ns = i18nsStore.getState();
   const language = getLang();
-  const menus = useFormatMenu(props);
-  return <Layout title={i18ns?.title} {...menus} leftList={leftNav(language)} rightList={rightNav(language)} {...configs} {...props} language={language} />;
+  const [menus, noHeader] = useFormatMenu(props);
+  return <Layout
+    title={i18ns?.title}
+    {...menus}
+    leftList={noHeader ? null : leftNav(language)}
+    rightList={noHeader ? null : rightNav(language)}
+    {...configs}
+    {...props}
+    language={language}
+  />;
 };
 
 export default Index;

@@ -6,4 +6,6 @@ import handleNavClick from './utils/handleNavClick';
 import iconList from '@app/utils/icons';
 import logo from '@app/assets/images/logo.png';
 
-export {MainTop, MenuBottom, Footer, handleNavClick, iconList, logo, Link};
+const menuAnimate = false;
+
+export {MainTop, MenuBottom, Footer, handleNavClick, iconList, logo, Link, menuAnimate};

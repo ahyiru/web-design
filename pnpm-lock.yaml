@@ -11,7 +11,7 @@ specifiers:
   '@huxy/components': ^1.9.1
   '@huxy/layout': ^1.9.1
   '@huxy/materials': ^0.2.1
-  '@huxy/pack': ^0.2.5
+  '@huxy/pack': ^0.2.8
   '@huxy/router': ^1.9.1
   '@huxy/use': ^1.9.1
   '@huxy/utils': ^1.9.1
@@ -71,7 +71,7 @@ dependencies:
   web3: 1.8.2
 
 devDependencies:
-  '@huxy/pack': 0.2.5
+  '@huxy/pack': 0.2.8
   husky: 8.0.3
 
 packages:
@@ -2804,8 +2804,8 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dev: true
 
-  /@huxy/pack/0.2.5:
-    resolution: {integrity: sha512-EhFNFb0t/7MM45yy8OWknIIVjXZJ3Q/kipImJOshuwcTjCAXQ1K2IN/+Q6VsZBbFx1dMvlbLknFUmF7SYWYjeA==}
+  /@huxy/pack/0.2.8:
+    resolution: {integrity: sha512-sk6bh1o+qR575xv0azkDliDhs8f9rBVYn/UtpMfEtKdHJ8tVa8ahWwSMDnYWI54AzWtMGjEGWjurxDqWxpuXaQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
     dependencies:
