@@ -34,12 +34,12 @@
     "analyze": "pack run analyze",
     "server": "pack run server",
     "test": "pack run test",
+    "release": "pack run release",
     "eslint": "eslint 'app/**/*.{js,jsx}'",
     "stylelint": "stylelint 'app/**/*.{css,less}'",
     "lint": "npm run eslint && npm run stylelint",
     "lint-fix": "eslint --fix 'app/**/*.{js,jsx}' && stylelint --fix 'app/**/*.{css,less}'",
-    "prettier": "prettier 'app/**/*' --write --ignore-unknown && npm run lint-fix",
-    "release": "pack run release"
+    "prettier": "prettier 'app/**/*' --write --ignore-unknown && npm run lint-fix"
   },
   "repository": {
     "type": "git",
@@ -47,24 +47,24 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^0.2.8",
+    "@huxy/pack": "^0.3.5",
     "husky": "^8.0.3"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
-    "@ant-design/pro-table": "^3.2.14",
+    "@ant-design/pro-table": "^3.3.1",
     "@antv/graphin": "^2.7.13",
     "@antv/graphin-components": "^2.4.0",
-    "@antv/x6": "^2.3.0",
+    "@antv/x6": "^2.5.1",
     "@antv/x6-react-components": "^2.0.7",
     "@antv/x6-react-shape": "^2.1.0",
-    "@huxy/components": "^1.9.1",
-    "@huxy/layout": "^1.9.1",
+    "@huxy/components": "^1.9.5",
+    "@huxy/layout": "^1.9.4",
     "@huxy/materials": "^0.2.1",
     "@huxy/router": "^1.9.1",
     "@huxy/use": "^1.9.1",
-    "@huxy/utils": "^1.9.1",
-    "antd": "^5.2.1",
+    "@huxy/utils": "^1.9.2",
+    "antd": "^5.2.2",
     "echarts": "^5.4.1",
     "echarts-for-react": "^3.0.2",
     "highlight.js": "^11.7.0",
@@ -78,10 +78,10 @@
     "react-window": "^1.8.8",
     "react-window-infinite-loader": "^1.0.8",
     "rxjs": "^7.8.0",
-    "slate": "^0.90.0",
+    "slate": "^0.91.3",
     "slate-history": "^0.86.0",
-    "slate-react": "^0.91.0",
-    "three": "^0.149.0",
+    "slate-react": "^0.91.3",
+    "three": "^0.150.0",
     "web3": "^1.8.2"
   }
 }

@@ -1,4 +1,4 @@
-import {message} from 'antd';
+import {message as msgAlert} from 'antd';
 import {fetcher, storage, wrapPromise} from '@huxy/utils';
 
 import {PROXY} from '@app/configs';
@@ -23,26 +23,26 @@ const handler = response => {
     .json()
     .then(result => {
       result.code = result.code ?? response.status;
-      result.msg = result.message ?? result.msg ?? response.statusText;
-      const {msg, code} = result;
+      result.message = result.message ?? result.msg ?? response.statusText;
+      const {message, code} = result;
       if (code === 401) {
         logout(true);
-        throw {code, message: msg};
+        throw {code, message};
       }
       if (!success_code.includes(code)) {
-        throw {code, message: msg};
+        throw {code, message};
       }
       return result;
     })
     .catch(error => {
-      message.error(error.message);
+      msgAlert.error(error.message);
       throw error;
     });
 };
 
 const dlHandler = response => {
   if (response.status !== 200) {
-    message.error(response.statusText);
+    msgAlert.error(response.statusText);
     throw {message: response.statusText};
   }
   const disposition = response.headers.get('Content-Disposition');
@@ -59,7 +59,7 @@ const dlHandler = response => {
       return {result, fileInfo};
     })
     .catch(error => {
-      message.error(error.message);
+      msgAlert.error(error.message);
       throw error;
     });
 };
@@ -70,12 +70,12 @@ const dlFile = fetcher(dlHandler);
 
 const getToken = () => ({Authorization: `yiru ${storage.get('token') || ''}`});
 
-const fetch = ({method, url, ...opt}) => fetchApi(method)(`${TARGET}${url}`, {headers: getToken(), credentials: 'omit', ...opt});
+const fetch = ({method, url, prefix, ...opt}) => fetchApi(method)(`${prefix ?? TARGET}${url}`, {headers: getToken(), credentials: 'omit', ...opt});
 
-export const suspense = ({method, url, ...opt}) => wrapPromise(fetchApi(method)(`${TARGET}${url}`, {headers: getToken(), ...opt}));
+export const suspense = ({method, url, prefix, ...opt}) => wrapPromise(fetchApi(method)(`${prefix ?? TARGET}${url}`, {headers: getToken(), ...opt}));
 
-export const dlApi = ({method, url, ...opt}) => dlFile(method)(`${TARGET}${url}`, {headers: getToken(), ...opt});
+export const dlApi = ({method, url, prefix, ...opt}) => dlFile(method)(`${prefix ?? TARGET}${url}`, {headers: getToken(), ...opt});
 
-export const testFetcher = ({method, url, ...opt}) => fetcher()(method)(`${TARGET}${url}`, {headers: getToken(), credentials: 'omit', ...opt});
+export const testFetcher = ({method, url, prefix, ...opt}) => fetcher()(method)(`${prefix ?? TARGET}${url}`, {headers: getToken(), credentials: 'omit', ...opt});
 
 export default fetch;

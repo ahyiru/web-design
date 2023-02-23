@@ -23,8 +23,13 @@ const routes = (nameList, routerList) =>
       .join('')
       .replace('//', '/');
     item.name = nameList?.[fullPath] ?? item.name;
-    item.icon = item.icon ? <Icon icon={item.icon} /> : item.icon;
     item.id = item.id ?? routerList?.find(route => route.path === fullPath)?._id;
+    if (item.icon && item.icon !== true) {
+      item.icon = <Icon icon={item.icon} />;
+    }
+    if (typeof item.denied === 'function') {
+      item.denied = item.denied();
+    }
     /* if (typeof item.componentPath === 'string') {
       item.component = () => import(`@app/views${item.componentPath}`);
     } */
