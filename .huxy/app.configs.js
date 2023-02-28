@@ -2,7 +2,7 @@ const app = {
   // HOST: 'http://localhost',
   PORT: 8000,
   PROD_PORT: 8080,
-  PUBLIC_DIR: 'app/public',
+  PUBLIC_DIR: 'public',
   BUILD_DIR: 'build',
   DEV_ROOT_DIR: '/',
   PROD_ROOT_DIR: '/',
