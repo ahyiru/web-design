@@ -15,7 +15,7 @@
 }
 
 html {
-  font-family: -apple-system, "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  font-family: -apple-system, 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
   font-size: var(--rootSize);
   width: 100%;
   height: 100%;
@@ -27,43 +27,43 @@ html {
 
 @media screen and (min-width: 1920px) {
   html {
-    /* font-size:75%; */
-    font-size: calc(var(--rootSize) * 1.2);
+    /* font-size: 67.2%; */
+    font-size: calc(var(--rootSize) * var(--constant));
   }
 }
 
 @media screen and (max-width: 1920px) {
   html {
-    /* font-size:67%; */
-    font-size: calc(var(--rootSize) * var(--constant));
+    /* font-size: 62.5%; */
+    font-size: var(--rootSize);
   }
 }
 
 @media screen and (max-width: 1440px) {
   html {
-    /* font-size:62.5%; */
-    font-size: var(--rootSize);
+    /* font-size: 58%; */
+    font-size: calc(var(--rootSize) / var(--constant));
   }
 }
 
 @media screen and (max-width: 1366px) {
   html {
-    /* font-size:58%; */
-    font-size: calc(var(--rootSize) / var(--constant));
+    /* font-size: 54%; */
+    font-size: calc(var(--rootSize) / 1.156);
   }
 }
 
 @media screen and (max-width: 1024px) {
   html {
-    /* font-size:53.5%; */
-    font-size: calc(var(--rootSize) / var(--constant) / var(--constant));
+    /* font-size: 50.3%; */
+    font-size: calc(var(--rootSize) / 1.242);
   }
 }
 
 @media screen and (max-width: 768px) {
   html {
-    /* font-size:50.3%; */
-    font-size: calc(var(--rootSize) / var(--constant) / var(--constant) / var(--constant));
+    /* font-size: 46.8%; */
+    font-size: calc(var(--rootSize) / 1.335);
   }
 }
 
@@ -120,8 +120,8 @@ a[disabled] {
 }
 
 button,
-input[type="button"],
-input[type="submit"] {
+input[type='button'],
+input[type='submit'] {
   -webkit-appearance: button;
   cursor: pointer;
 }
@@ -141,7 +141,8 @@ code {
   border-radius: 2px;
 }
 
-.pre, .code {
+.pre,
+.code {
   border: 1px inset rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   padding: 1rem;
@@ -149,7 +150,7 @@ code {
   font-weight: 400;
   line-height: 1.7142857;
   overflow-x: auto;
-  font-family: Söhne Mono,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-family: Söhne Mono, Monaco, Andale Mono, Ubuntu Mono, monospace;
   background: #23241f;
   color: #f8f8f2;
 }
