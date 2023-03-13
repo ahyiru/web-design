@@ -25,7 +25,7 @@ import langList from './langList';
 
 import {buildTime} from '.';
 
-const {version} = require('../../package.json');
+import pkg from '../../package.json';
 
 const changeLang = ({key}) => langStore.setState(key);
 
@@ -38,7 +38,7 @@ const buildInfo = buildTime
       name: 'version',
       icon: <Icon icon="EyeOutlined" />,
       handle: item => {
-        message.info(`version：${version}，构建时间：${formatTime(buildTime)}`);
+        message.info(`version：${pkg.version}，构建时间：${formatTime(buildTime)}`);
       },
     },
   ]

@@ -27,43 +27,43 @@ html {
 
 @media screen and (min-width: 1920px) {
   html {
+    /* font-size: 75%; */
+    font-size: calc(var(--rootSize) * 1.2);
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  html {
     /* font-size: 67.2%; */
     font-size: calc(var(--rootSize) * var(--constant));
   }
 }
 
-@media screen and (max-width: 1920px) {
+@media screen and (max-width: 1440px) {
   html {
     /* font-size: 62.5%; */
     font-size: var(--rootSize);
   }
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1366px) {
   html {
     /* font-size: 58%; */
     font-size: calc(var(--rootSize) / var(--constant));
   }
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1024px) {
   html {
     /* font-size: 54%; */
     font-size: calc(var(--rootSize) / 1.156);
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
   html {
     /* font-size: 50.3%; */
     font-size: calc(var(--rootSize) / 1.242);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  html {
-    /* font-size: 46.8%; */
-    font-size: calc(var(--rootSize) / 1.335);
   }
 }
 

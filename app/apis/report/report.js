@@ -1,6 +1,6 @@
 import {getOsInfo, getExplore} from '@huxy/utils';
 
-import {routeStore} from '@huxy/router';
+import {getRoute} from '@huxy/router';
 
 import {browserRouter} from '@app/configs';
 
@@ -8,7 +8,7 @@ import {isAuthed} from '@app/utils/utils';
 
 import apiList from '@app/utils/getApis';
 
-const {name, version} = require('../../../package.json');
+import pkg  from '../../../package.json';
 
 const {type: osType, version: osVersion, model: osModel} = getOsInfo();
 const {type: browserType, version: browserVersion} = getExplore();
@@ -24,15 +24,15 @@ const info = {
   language: window.navigator.language,
   netType: connection?.type,
   evn: browserRouter ? 'prod' : 'dev',
-  appName: name,
-  appVersion: version,
+  appName: pkg.name,
+  appVersion: pkg.version,
 };
 
 const report = params => {
   if (!browserRouter || !isAuthed()) {
     return;
   }
-  const routeInfo = routeStore.getState();
+  const routeInfo = getRoute();
   const routes = routeInfo ? routeInfo.current.slice(-1)[0] ?? {} : {};
   const {path, name, ...restParams} = params;
   const currentPath = routes.path ?? path ?? '';
