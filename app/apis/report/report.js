@@ -29,7 +29,7 @@ const info = {
 };
 
 const report = params => {
-  if (!browserRouter || !isAuthed()) {
+  if (!isAuthed()) {
     return;
   }
   const routeInfo = getRoute();

@@ -10,6 +10,9 @@ const initSW = () => {
           // console.log('SW registration failed: ',registrationError);
         });
     });
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      window.location.reload();
+    });
   }
 };
 
