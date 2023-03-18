@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import {loadImage, fixSize} from '@huxy/utils';
 
+import ImageSkeleton from './imageSkeleton';
+
 const FixedSizeImage = props => {
   const [width, setWidth] = useState(0);
   useEffect(() => {
@@ -14,7 +16,7 @@ const FixedSizeImage = props => {
     };
     fixedSize(props.src);
   }, []);
-  return <img {...props} width={width} />;
+  return width ? <img {...props} width={width} /> : <ImageSkeleton />;
 };
 
 export default FixedSizeImage;

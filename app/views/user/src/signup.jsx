@@ -10,14 +10,19 @@ const {nameRule, emailRule, passwordRule, confirmRule} = formRules;
 const Index = props => {
   const getIntls = useIntls();
   const [hasSignup, setHasSignup] = useState(false);
+  const [pending, setPending] = useState(false);
   const onFinish = async values => {
-    const {code, message: msg} = await apiList.signupFn(values);
-    if (code === 200) {
-      message.success(msg);
-      setHasSignup(true);
-      // props.router.push('/');
-      // location.href='/';
-    }
+    setPending(true);
+    try {
+      const {code, message: msg} = await apiList.signupFn(values);
+      if (code === 200) {
+        message.success(msg);
+        setHasSignup(true);
+        // props.router.push('/');
+        // location.href='/';
+      }
+    } catch (err) {}
+    setPending(false);
   };
   return !hasSignup ? (
     <>
@@ -35,7 +40,7 @@ const Index = props => {
           <Input prefix={<LockOutlined style={{marginRight: '7px', color: '#999'}} />} type="password" placeholder={getIntls('login.confirmPwd')} autoComplete="new-password" />
         </Form.Item>
         <Form.Item>
-          <Button block type="primary" htmlType="submit">
+          <Button block type="primary" htmlType="submit" disabled={pending}>
             {getIntls('login.signup')}
           </Button>
         </Form.Item>

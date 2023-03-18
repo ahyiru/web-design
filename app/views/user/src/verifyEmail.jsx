@@ -9,14 +9,19 @@ const {emailRule} = formRules;
 const Index = props => {
   const getIntls = useIntls();
   const [hasVerify, setHasVerify] = useState(false);
+  const [pending, setPending] = useState(false);
   const onFinish = async values => {
-    const {code, message: msg} = await apiList.verifyEmailFn(values);
-    if (code === 200) {
-      message.success(msg);
-      setHasVerify(true);
-      // props.router.push('/');
-      // location.href='/';
-    }
+    setPending(true);
+    try {
+      const {code, message: msg} = await apiList.verifyEmailFn(values);
+      if (code === 200) {
+        message.success(msg);
+        setHasVerify(true);
+        // props.router.push('/');
+        // location.href='/';
+      }
+    } catch (err) {}
+    setPending(false);
   };
 
   return !hasVerify ? (
@@ -33,7 +38,7 @@ const Index = props => {
       </Form>
       <div>
         <div style={{textAlign: 'center'}}>
-          <Button onClick={e => props.router.push('/user/signin')} type="link" size="small" icon={<LeftOutlined />}>
+          <Button onClick={e => props.router.push('/user/signin')} type="link" size="small" icon={<LeftOutlined />} disabled={pending}>
             <Intls keys="login.backLogin" />
           </Button>
         </div>

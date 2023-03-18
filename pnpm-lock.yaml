@@ -8,9 +8,9 @@ specifiers:
   '@antv/x6': ^2.5.5
   '@antv/x6-react-components': ^2.0.7
   '@antv/x6-react-shape': ^2.1.1
-  '@huxy/components': ^2.0.3
+  '@huxy/components': ^2.0.4
   '@huxy/layout': ^2.0.1
-  '@huxy/materials': ^1.0.1
+  '@huxy/materials': ^1.0.2
   '@huxy/pack': ^1.0.8
   '@huxy/router': ^2.0.1
   '@huxy/use': ^2.0.1
@@ -32,7 +32,7 @@ specifiers:
   rxjs: ^7.8.0
   slate: ^0.91.4
   slate-history: ^0.86.0
-  slate-react: ^0.91.11
+  slate-react: ^0.92.0
   three: ^0.150.1
   web3: ^1.8.2
 
@@ -44,9 +44,9 @@ dependencies:
   '@antv/x6': 2.5.5
   '@antv/x6-react-components': 2.0.7_eb53grn7ewfdadbdent56mxr3e
   '@antv/x6-react-shape': 2.1.1_xgfqvueruxflxzn2skgp353zve
-  '@huxy/components': 2.0.3_biqbaboplfbrettd7655fr4n2y
+  '@huxy/components': 2.0.4_biqbaboplfbrettd7655fr4n2y
   '@huxy/layout': 2.0.1_react@18.2.0
-  '@huxy/materials': 1.0.1_react@18.2.0
+  '@huxy/materials': 1.0.2_react@18.2.0
   '@huxy/router': 2.0.1_react@18.2.0
   '@huxy/use': 2.0.1_react@18.2.0
   '@huxy/utils': 2.0.3
@@ -66,7 +66,7 @@ dependencies:
   rxjs: 7.8.0
   slate: 0.91.4
   slate-history: 0.86.0_slate@0.91.4
-  slate-react: 0.91.11_6tgy34rvmll7duwkm4ydcekf3u
+  slate-react: 0.92.0_6tgy34rvmll7duwkm4ydcekf3u
   three: 0.150.1
   web3: 1.8.2
 
@@ -2799,8 +2799,8 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: true
 
-  /@huxy/components/2.0.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-bSVT8rKCQ9OTeX63V90/Zn7C8iGtbltud1dwaIBjOYHYCpTNlobO9eVu1ZwJoz6SN1Xx5odyCzRhOMfszuFiag==}
+  /@huxy/components/2.0.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-FKUKiVY9da55e/f88Oa218QRrkr4kurEvAiSXNgOU4ZV2Mtc58T0YEiaL4+xUREhmMUFw3QWHtBrEpAOOEnj9A==}
     peerDependencies:
       react: '>=17.0.0'
       react-dom: '>=17.0.0'
@@ -2824,8 +2824,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@huxy/materials/1.0.1_react@18.2.0:
-    resolution: {integrity: sha512-+5B+fgijcEpY3MNTUDo6fRSPej30W8I7WHejwflrkRp3rDb8jkl35xC+rHnISfqNzgR9LjnmCr70G6cHmuX/JQ==}
+  /@huxy/materials/1.0.2_react@18.2.0:
+    resolution: {integrity: sha512-VSPqvjAkMUm8I1fUIxCfbZeGGteL3/tdfDKfn1iPHl0qdmcT0U3cCSwX8jKMc7q5SMfxyK4W2XU0zpha/wcjvg==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
@@ -11202,8 +11202,8 @@ packages:
       slate: 0.91.4
     dev: false
 
-  /slate-react/0.91.11_6tgy34rvmll7duwkm4ydcekf3u:
-    resolution: {integrity: sha512-2nS29rc2kuTTJrEUOXGyTkFATmTEw/R9KuUXadUYiz+UVwuFOUMnBKuwJWyuIBOsFipS+06SkIayEf5CKdARRQ==}
+  /slate-react/0.92.0_6tgy34rvmll7duwkm4ydcekf3u:
+    resolution: {integrity: sha512-xEDKu5RKw5f0N95l1UeNQnrB0Pxh4JPjpIZR/BVsMo0ININnLAknR99gLo46bl/Ffql4mr7LeaxQRoXxbFtJOQ==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'

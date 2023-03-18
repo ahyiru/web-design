@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {Form, Input, Button, message} from 'antd';
 import {LockOutlined, LeftOutlined} from '@ant-design/icons';
 import {useIntls} from '@app/components/intl';
@@ -8,15 +9,20 @@ const {passwordRule, confirmRule} = formRules;
 
 const Index = props => {
   const getIntls = useIntls();
+  const [pending, setPending] = useState(false);
   const onFinish = async values => {
-    const query = props.params?.token;
-    const {code, token, message: msg} = await apiList.setNewPwdFn({password: values.password, token: query});
-    if (code === 200) {
-      message.success(msg);
-      // storage.set('token',token);
-      // props.router.push('/');
-      goPage();
-    }
+    setPending(true);
+    try {
+      const query = props.params?.token;
+      const {code, token, message: msg} = await apiList.setNewPwdFn({password: values.password, token: query});
+      if (code === 200) {
+        message.success(msg);
+        // storage.set('token',token);
+        // props.router.push('/');
+        goPage();
+      }
+    } catch (err) {}
+    setPending(false);
   };
 
   return (
@@ -29,7 +35,7 @@ const Index = props => {
           <Input prefix={<LockOutlined style={{marginRight: '7px', color: '#999'}} />} type="password" placeholder={getIntls('login.confirmPwd')} autoComplete="new-password" />
         </Form.Item>
         <Form.Item>
-          <Button block type="primary" htmlType="submit">
+          <Button block type="primary" htmlType="submit" disabled={pending}>
             {getIntls('login.resetPwd')}
           </Button>
         </Form.Item>
