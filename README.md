@@ -4,9 +4,10 @@
 [![npm version](https://img.shields.io/npm/v/@huxy/router.svg)](https://www.npmjs.com/package/@huxy/router)
 [![](https://img.shields.io/badge/blog-ihuxy-blue.svg)](http://ihuxy.com/)
 
-基于 [huxy-admin](https://github.com/ahyiru/huxy-admin) 模板创建。
 
-使用界面可视化操作来配置生成页面描述 `json schema`，然后通过自定义规则将 `json schema` 渲染成我们需要的页面。
+Web Design 是一个简单的低代码开发平台示例。使用界面可视化操作来配置生成页面描述 `json schema`，然后通过自定义规则将 `json schema` 渲染成我们需要的页面。
+
+Web Design 基于 [huxy-admin](https://github.com/ahyiru/huxy-admin) 模板创建。除了提供页面可视化搭建，还包含了工程化配置、主题设计、Layout 设计、API 配置、权限和 i18n 配置等。
 
 ### 理解
 

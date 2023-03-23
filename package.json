@@ -49,7 +49,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^1.1.1",
+    "@huxy/pack": "^1.1.2",
     "husky": "^8.0.3"
   },
   "dependencies": {
@@ -65,9 +65,9 @@
     "@huxy/materials": "^1.0.2",
     "@huxy/router": "^2.0.1",
     "@huxy/use": "^2.0.1",
-    "@huxy/utils": "^2.0.3",
+    "@huxy/utils": "^2.0.4",
     "antd": "^5.3.2",
-    "echarts": "^5.4.1",
+    "echarts": "^5.4.2",
     "echarts-for-react": "^3.0.2",
     "highlight.js": "^11.7.0",
     "html2canvas": "^1.4.1",
