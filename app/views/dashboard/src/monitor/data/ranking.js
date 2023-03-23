@@ -8,7 +8,7 @@ const option = data => ({
       return `${seriesName}：<br/>${name} : ${value}`;
     },
   },
-  grid: [{ bottom: '58%' }, { top: '58%' }],
+  grid: [{bottom: '58%'}, {top: '58%'}],
   title: [
     {
       left: 'auto',
@@ -30,7 +30,7 @@ const option = data => ({
     {
       // show: false,
       type: 'category',
-      gridIndex: 0 ,
+      gridIndex: 0,
       data: data[0].data.map(({name}) => name),
       axisLabel: {
         // interval: 0,
@@ -41,7 +41,7 @@ const option = data => ({
     {
       // show: false,
       type: 'category',
-      gridIndex: 1 ,
+      gridIndex: 1,
       data: data[1].data.map(({name}) => name),
       axisLabel: {
         // interval: 0,

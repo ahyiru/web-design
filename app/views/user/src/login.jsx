@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react';
 import {Form, Input, Button, message} from 'antd';
-import {UserOutlined, LockOutlined, GithubOutlined, WechatOutlined} from '@ant-design/icons';
+import {UserOutlined, LockOutlined, GithubOutlined} from '@ant-design/icons';
 import {Spinner} from '@huxy/components';
-import {storage, params2str, isWechat} from '@huxy/utils';
+import {storage} from '@huxy/utils';
 
 import {isAuthed, goPage} from '@app/utils/utils';
 
 import {useIntls} from '@app/components/intl';
 
-import {apiList, formRules, githubConfigs, wechatConfigs} from '../configs';
+import {apiList, formRules, githubConfigs} from '../configs';
 
 const {activeEmailFn, githubFn, wechatFn, loginFn} = apiList;
 const {emailRule} = formRules;
@@ -21,8 +21,8 @@ const thirdLoginStyle = {
 const Index = props => {
   const getIntls = useIntls();
   const [pending, setPending] = useState(false);
+  const {state, code, token} = props.params ?? {};
   useEffect(() => {
-    const {state, code, token} = props.params ?? {};
     if (code) {
       handleAuth(code, state);
       return;
@@ -37,13 +37,17 @@ const Index = props => {
   }, []);
   const handleAuth = async (code, state) => {
     setPending(true);
-    const authFn = state === 'wechat' ? wechatFn : githubFn;
+    const authFn = !state ? githubFn : wechatFn;
     try {
-      const {code: msgCode, token} = await authFn({code});
-      if (msgCode === 200) {
+      const {token} = await authFn({code, state});
+      if (token) {
         storage.set('token', token);
         // props.router.push('/');
         goPage();
+      } else {
+        setPending(false);
+        /* eslint-disable */
+        setTimeout(() => WeixinJSBridge.call('closeWindow'), 1000);
       }
     } catch (err) {}
     setPending(false);
@@ -81,11 +85,6 @@ const Index = props => {
     location.href = `${github_oauth_url}?client_id=${github_client_id}`;
   };
 
-  const wechatCode = () => {
-    const {wechat_oauth_url, ...rest} = wechatConfigs;
-    location.href = `${wechat_oauth_url}${params2str(rest)}#wechat_redirect`;
-  };
-
   return (
     <>
       <Form name="login" initialValues={{}} onFinish={onFinish} autoComplete="off">
@@ -93,7 +92,7 @@ const Index = props => {
           <Input prefix={<UserOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder={getIntls('login.email')} />
         </Form.Item>
         <Form.Item name="password" /* rules={passwordRule} */>
-          <Input prefix={<LockOutlined style={{marginRight: '7px', color: '#999'}} />} type="password" placeholder={getIntls('login.password')} autoComplete="new-password" />
+          <Input.Password prefix={<LockOutlined style={{marginRight: '7px', color: '#999'}} />} type="password" placeholder={getIntls('login.password')} autoComplete="new-password" />
         </Form.Item>
         <Form.Item>
           <Button block type="primary" htmlType="submit">
@@ -121,9 +120,6 @@ const Index = props => {
         <div style={thirdLoginStyle}>
           <span className="link">
             <GithubOutlined onClick={() => githubCode()} />
-          </span>
-          <span className="link" style={{marginLeft: '2rem', color: '#8ae14d'}}>
-            <WechatOutlined onClick={() => wechatCode()} />
           </span>
         </div>
       </div>

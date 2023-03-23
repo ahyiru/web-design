@@ -26,7 +26,7 @@ const ReactChart = ({style, option, ...rest}) => {
         echarts.registerTheme('dark-screen', darkScreen);
         charts = echarts;
         setState(true);
-      } catch(err) {
+      } catch (err) {
         charts = {
           error: 'load echarts failed, please refresh and try again!',
         };
@@ -42,7 +42,7 @@ const ReactChart = ({style, option, ...rest}) => {
   if (charts.error) {
     return <div style={{color: 'var(--red2)'}}>{charts.error}</div>;
   }
-  return <ECharts option={typeof option ==='function' ? option(charts) : option} theme="dark-screen" style={{...style}} {...rest} />;
+  return <ECharts option={typeof option === 'function' ? option(charts) : option} theme="dark-screen" style={{...style}} {...rest} />;
 };
 
 export default ReactChart;

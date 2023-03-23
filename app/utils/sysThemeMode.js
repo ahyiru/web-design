@@ -7,9 +7,13 @@ const sysThemeMode = setTheme => {
     return;
   }
   const query = window.matchMedia('(prefers-color-scheme: dark)');
-  query.addEventListener('change', e => {
-    setTheme(getTheme());
-  }, false);
+  query.addEventListener(
+    'change',
+    e => {
+      setTheme(getTheme());
+    },
+    false,
+  );
 };
 
 export default sysThemeMode;

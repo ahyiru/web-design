@@ -51,7 +51,7 @@ const Index = props => {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
-    getCheckboxProps: (record) => ({
+    getCheckboxProps: record => ({
       disabled: record.active == 1,
     }),
   };

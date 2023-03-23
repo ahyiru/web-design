@@ -23,8 +23,8 @@ const option = () => echarts => ({
       itemStyle: {
         borderRadius: 6,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: '#14c8d4' },
-          { offset: 1, color: '#43eec6' },
+          {offset: 0, color: '#14c8d4'},
+          {offset: 1, color: '#43eec6'},
         ]),
       },
       showBackground: true,

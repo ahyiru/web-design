@@ -9,19 +9,10 @@ export const githubConfigs = {
 };
 
 export const wechatConfigs = {
-  appid: 'wx7f4df123f88372a5',
+  appid: 'xxx',
   wechat_oauth_url: 'https://open.weixin.qq.com/connect/oauth2/authorize',
   redirect_uri: 'https://ihuxy.com/user/signin',
   response_type: 'code',
-  scope: 'snsapi_userinfo',
+  scope: 'snsapi_base',//'snsapi_userinfo',
   state: 'wechat',
-};
-
-export const wechatqrConfigs = {
-  appid: 'wx7f4df123f88372a5',
-  wechat_oauth_url: 'https://open.weixin.qq.com/connect/qrconnect',
-  redirect_uri: 'https://ihuxy.com/user/signin',
-  response_type: 'code',
-  scope: 'snsapi_login',
-  state: 'wechatqr',
 };

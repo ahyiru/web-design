@@ -219,7 +219,7 @@ const users = {
     active: 'status',
     active_true: 'actived',
     active_false: 'not active',
-    github: 'bind GitHub',
+    github: 'GitHub',
     github_true: 'bind',
     github_false: 'not bind',
     projectName: 'project',

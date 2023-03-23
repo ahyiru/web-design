@@ -9,10 +9,16 @@ const centerStyle = {
   transform: 'translate(-50%, -50%)',
 };
 
-const CircleRing = ({height = '240px', padding = '30px'}) => <div style={{position: 'relative', height, padding}}>
-  <div style={centerStyle}><Circle size={`${(rmUnit(height) - rmUnit(padding))}px`} /></div>
-  <div style={centerStyle}><Ring size={`${(rmUnit(height) - rmUnit(padding))}px`} color="rgba(2, 254, 255, 0.8)" itemWidth="16px" /></div>
-</div>;
+const CircleRing = ({height = '240px', padding = '30px'}) => (
+  <div style={{position: 'relative', height, padding}}>
+    <div style={centerStyle}>
+      <Circle size={`${rmUnit(height) - rmUnit(padding)}px`} />
+    </div>
+    <div style={centerStyle}>
+      <Ring size={`${rmUnit(height) - rmUnit(padding)}px`} color="rgba(2, 254, 255, 0.8)" itemWidth="16px" />
+    </div>
+  </div>
+);
 
 const Index = props => {
   return (
@@ -52,10 +58,18 @@ const Index = props => {
         <Row gutter={8}>
           <Col span={12}>
             <Panel>
-              <div style={{marginTop: '10px'}}><Progress /></div>
-              <div style={{marginTop: '10px'}}><Progress /></div>
-              <div style={{marginTop: '10px'}}><Progress /></div>
-              <div style={{marginTop: '10px'}}><Progress /></div>
+              <div style={{marginTop: '10px'}}>
+                <Progress />
+              </div>
+              <div style={{marginTop: '10px'}}>
+                <Progress />
+              </div>
+              <div style={{marginTop: '10px'}}>
+                <Progress />
+              </div>
+              <div style={{marginTop: '10px'}}>
+                <Progress />
+              </div>
             </Panel>
           </Col>
           <Col span={12}>
@@ -78,7 +92,9 @@ const Index = props => {
         <Row gutter={8}>
           <Col span={6}>
             <Panel>
-              <div style={{padding: '30px 0'}}><Dashboard size="200px" /></div>
+              <div style={{padding: '30px 0'}}>
+                <Dashboard size="200px" />
+              </div>
             </Panel>
           </Col>
           <Col span={6}>

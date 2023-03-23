@@ -7,12 +7,12 @@ import {suspenseApis} from '@app/utils/getApis';
 import {useIntls} from '@app/components/intl';
 import {susTest1, susTest2} from './suspenseFns';
 
-const {profileSuspense, allUserSuspense} = suspenseApis;
+const {profileSuspense, allUserSuspenseMock} = suspenseApis;
 
 const userinfo = susTest1();
 const users = susTest2();
 const userinfo1 = profileSuspense();
-const users1 = allUserSuspense();
+const users1 = allUserSuspenseMock();
 
 const columns = i18nCfg => [
   {dataIndex: 'name', title: i18nCfg.columns_title},

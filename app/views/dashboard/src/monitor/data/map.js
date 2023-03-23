@@ -163,7 +163,7 @@ const option = (data, {key}) => ({
   },
   bmap: {
     // center: [104.114129, 37.550339],
-    center: [108.552500, 34.322700],
+    center: [108.5525, 34.3227],
     zoom: 5,
     roam: true,
     mapStyle: {

@@ -46,8 +46,9 @@ const Index = props => {
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v._id);
+    const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     Modal.confirm({
-      title: '确定删除吗？',
+      title: `确定删除吗？${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v => v.name)}`,
       okText: '删除',

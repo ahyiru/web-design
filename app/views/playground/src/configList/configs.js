@@ -124,7 +124,11 @@ export const tableHeader = [
 export const colsCfg = actions => [
   {
     dataIndex: 'name',
-    render: (text, record) => <span className="link" onClick={() => actions.handleCheck(record)}>{text}</span>,
+    render: (text, record) => (
+      <span className="link" onClick={() => actions.handleCheck(record)}>
+        {text}
+      </span>
+    ),
   },
   {
     dataIndex: 'email',

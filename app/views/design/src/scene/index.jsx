@@ -3,8 +3,8 @@ import {Pagination, Space, Input, Button, Modal, Form, message, Select} from 'an
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined, EditOutlined, EyeOutlined} from '@ant-design/icons';
 import {Link} from '@huxy/router';
 import {Row, Col} from '@huxy/components';
-import {validObj} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
+import SearchForm from '@app/components/searchForm';
 import Panel from '@app/components/panel';
 import {useIntls} from '@app/components/intl';
 import FixedSizeImage from '@app/components/fixedSizeImage';
@@ -36,8 +36,9 @@ const Index = props => {
     e.stopPropagation();
     const items = item ? [item] : selectedRows;
     // const ids = items.map(v => v._id);
+    const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     Modal.confirm({
-      title: i18nCfg.delMsg,
+      title: `${i18nCfg.delMsg}${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v => v.name)}`,
       okText: i18nCfg.submit,
@@ -96,19 +97,33 @@ const Index = props => {
       <Row>
         <Col>
           <Panel>
-            <div style={{float: 'left'}}>
-              <Space size="small">
-                <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
-                  {i18nCfg.add}
-                </Button>
-                {/* <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
-                  {i18nCfg.batchDelete}
-                </Button> */}
-              </Space>
-            </div>
-            <div style={{float: 'right'}}>
-              <SearchForm submit={searchList} loading={pending} />
-            </div>
+            <SearchForm
+              submit={searchList}
+              loading={pending}
+              handler={
+                <Space size="small">
+                  <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
+                    {i18nCfg.add}
+                  </Button>
+                  {/* <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
+                    {i18nCfg.batchDelete}
+                  </Button> */}
+                </Space>
+              }
+            >
+              <Form.Item name="name" label="标题">
+                <Input placeholder="请输入" allowClear />
+              </Form.Item>
+              <Form.Item name="category" label="类别">
+                <Select placeholder="请选择" allowClear>
+                  {defCategories.map(v => (
+                    <Select.Option key={v.value} value={v.value}>
+                      {v.label}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </SearchForm>
           </Panel>
         </Col>
         <Col>
@@ -155,37 +170,6 @@ const Index = props => {
         </Col>
       </Row>
     </div>
-  );
-};
-
-const SearchForm = props => {
-  const getIntls = useIntls();
-  const i18nCfg = getIntls('main.tables', {});
-  const {submit, loading} = props;
-  const [form] = Form.useForm();
-  return (
-    <Form layout="inline" form={form} initialValues={{}} onFinish={value => submit(validObj(value))}>
-      <Form.Item name="name" label="标题">
-        <Input placeholder="请输入" allowClear style={{width: '120px'}} />
-      </Form.Item>
-      <Form.Item name="category" label="类别">
-        <Select placeholder="请选择" allowClear style={{width: '100px'}}>
-          {defCategories.map(v => (
-            <Select.Option key={v.value} value={v.value}>
-              {v.label}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
-      <Form.Item>
-        <Button loading={loading} type="primary" htmlType="submit">
-          {i18nCfg.search}
-        </Button>
-        <Button style={{marginLeft: '12px'}} onClick={() => form.resetFields()}>
-          {i18nCfg.reset}
-        </Button>
-      </Form.Item>
-    </Form>
   );
 };
 

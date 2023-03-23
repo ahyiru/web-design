@@ -2,8 +2,9 @@ import {useState} from 'react';
 import {Table, Space, Input, Button, Modal, Form, Tooltip, message} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {formatTime, validObj} from '@huxy/utils';
+import {formatTime} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
+import SearchForm from '@app/components/searchForm';
 
 import Panel from '@app/components/panel';
 
@@ -31,41 +32,54 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
   {
     title: i18ns.name,
     dataIndex: 'name',
-    render: (text, record) => <span className="link" onClick={() => handleTest(record)}>{text}</span>,
+    ellipsis: true,
+    render: (text, record) => (
+      <span className="link" onClick={() => handleTest(record)}>
+        {text}
+      </span>
+    ),
   },
   {
     title: i18ns.tags,
     dataIndex: 'tags',
+    ellipsis: true,
   },
   {
     title: i18ns.url,
     dataIndex: 'url',
+    ellipsis: true,
   },
   {
     title: i18ns.method,
     dataIndex: 'method',
+    ellipsis: true,
   },
   {
     title: i18ns.dataType,
     dataIndex: 'dataType',
+    ellipsis: true,
   },
   {
     title: i18ns.auth,
     dataIndex: 'auth',
+    ellipsis: true,
   },
   {
     title: i18ns.input,
     dataIndex: 'input',
+    ellipsis: true,
     render: (text, record) => <Tooltip title={text}>{text}</Tooltip>,
   },
   {
     title: i18ns.output,
     dataIndex: 'output',
+    ellipsis: true,
     render: (text, record) => <Tooltip title={text}>{text}</Tooltip>,
   },
   {
     title: i18ns.updatetime,
     dataIndex: 'updatetime',
+    ellipsis: true,
     render: (text, record) => {
       const time = text || record.createtime || record.signuptime || +new Date();
       const txt = formatTime(new Date(time));
@@ -75,11 +89,13 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
   {
     title: i18ns.updater,
     dataIndex: 'updater',
+    ellipsis: true,
     render: (text, record) => text || record.creator,
   },
   {
     title: i18ns.action,
     dataIndex: 'action',
+    ellipsis: true,
     align: 'center',
     render: (text, record) => {
       const disabled = false; //!profile.role&&record._id!==profile._id;
@@ -113,7 +129,7 @@ const Index = props => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   const pageParams = props.params;
-  const [result, update, pageChange, searchList] = useHandleList(listApiFn, {projectId: stateItem._id}, {current: pageParams?.current, size: pageParams?.size});
+  const [result, update, pageChange, searchList] = useHandleList(listApiFn, {current: pageParams?.current, size: pageParams?.size}, null, {projectId: stateItem._id});
 
   const handleTest = item => {
     // console.log(item);
@@ -137,8 +153,9 @@ const Index = props => {
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v._id);
+    const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     Modal.confirm({
-      title: actionsText.delete_confirm,
+      title: `${actionsText.delete_confirm}${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v => v.name)}`,
       okText: actionsText.delete_confirm_ok,
@@ -221,8 +238,10 @@ const Index = props => {
       </Col> */}
         <Col>
           <Panel>
-            <div style={{overflow: 'hidden', marginBottom: '10px'}}>
-              <div style={{float: 'left'}}>
+            <SearchForm
+              submit={searchList}
+              loading={pending}
+              handler={
                 <Space size="small">
                   <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
                     {actionsText.add_action}
@@ -231,38 +250,22 @@ const Index = props => {
                     {actionsText.batch_action}
                   </Button>
                 </Space>
-              </div>
-              <div style={{float: 'right'}}>
-                {/* <Search loading={pending} placeholder="请输入用户名" allowClear onSearch={value=>searchList({keyword:value})} enterButton /> */}
-                <SearchForm submit={searchList} loading={pending} searchFormText={searchFormText} />
-              </div>
-            </div>
+              }
+            >
+              <Form.Item name="url" label={searchFormText.url}>
+                <Input placeholder={searchFormText.url_placeholder} allowClear />
+              </Form.Item>
+            </SearchForm>
+          </Panel>
+        </Col>
+        <Col>
+          <Panel>
             <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>
       {/* <FormModal modalItem={modalItem} handleOk={handleModalOk} onCancel={()=>setModalItem(null)} /> */}
     </div>
-  );
-};
-
-const SearchForm = props => {
-  const {submit, loading, searchFormText} = props;
-  const [form] = Form.useForm();
-  return (
-    <Form layout="inline" form={form} initialValues={{}} onFinish={value => submit(validObj(value))}>
-      <Form.Item name="url" label={searchFormText.url}>
-        <Input placeholder={searchFormText.url_placeholder} allowClear style={{width: '120px'}} />
-      </Form.Item>
-      <Form.Item>
-        <Button loading={loading} type="primary" htmlType="submit">
-          {searchFormText.submit}
-        </Button>
-        <Button style={{marginLeft: '12px'}} onClick={() => form.resetFields()}>
-          {searchFormText.reset}
-        </Button>
-      </Form.Item>
-    </Form>
   );
 };
 

@@ -16,6 +16,10 @@ import {testFetcher} from '@app/apis/fetcher';
 
 import {PROXY} from '@app/configs';
 
+import report from '@app/apis/report/report';
+
+const serverUrl = Array.isArray(PROXY) ? PROXY[0]?.url : PROXY?.url ?? PROXY;
+
 const token = storage.get('token');
 
 const strToJson = str => new Function(`return ${str}`)();
@@ -34,6 +38,13 @@ const Index = props => {
       const result = await testFetcher({url, method, [paramsKey]: input});
       form.setFieldsValue({
         output: JSON.stringify(result),
+      });
+
+      report({
+        actionType: 'APITest',
+        category: 'APITest',
+        text: url,
+        value: input,
       });
     } catch (err) {
       form.setFieldsValue({
@@ -56,7 +67,7 @@ const Index = props => {
               name="addApi"
               onFinish={onFinish}
               form={form}
-              initialValues={{method: 'get', ...item, service: PROXY?.url ?? PROXY, token}}
+              initialValues={{method: 'get', ...item, service: serverUrl, token}}
               {...layout}
               // style={formStyle}
             >

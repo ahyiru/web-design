@@ -11,7 +11,9 @@ const box = {
 const Index = props => {
   return (
     <BgBox type="dot" style={{minHeight: 600}}>
-      <div style={{overflow: 'hidden', margin: '10px 0'}}><TitleHeader title="XXX 云平台" /></div>
+      <div style={{overflow: 'hidden', margin: '10px 0'}}>
+        <TitleHeader title="XXX 云平台" />
+      </div>
       <Row>
         <Col>
           <Row gutter={[12, 12]}>
@@ -19,7 +21,9 @@ const Index = props => {
               <CornerBorder>
                 <BgBox type="strip">
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={box}>CornerBorder <b>strip background</b></div>
+                    <div style={box}>
+                      CornerBorder <b>strip background</b>
+                    </div>
                   </Panel>
                 </BgBox>
               </CornerBorder>
@@ -28,7 +32,9 @@ const Index = props => {
               <HalfBorder>
                 <BgBox type="cubestrip">
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={box}>HalfBorder <b>cubestrip background</b></div>
+                    <div style={box}>
+                      HalfBorder <b>cubestrip background</b>
+                    </div>
                   </Panel>
                 </BgBox>
               </HalfBorder>
@@ -37,7 +43,9 @@ const Index = props => {
               <TitleBorder title="TitleBorder">
                 <BgBox type="cube">
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={{...box, height: '100px'}}>TitleBorder <b>cube background</b></div>
+                    <div style={{...box, height: '100px'}}>
+                      TitleBorder <b>cube background</b>
+                    </div>
                   </Panel>
                 </BgBox>
               </TitleBorder>
@@ -50,7 +58,9 @@ const Index = props => {
               <AnimateBorder type="dash">
                 <BgBox type="grid">
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={box}>dash <b>grid background</b></div>
+                    <div style={box}>
+                      dash <b>grid background</b>
+                    </div>
                   </Panel>
                 </BgBox>
               </AnimateBorder>
@@ -59,7 +69,9 @@ const Index = props => {
               <AnimateBorder type="solid">
                 <BgBox url={writeIcon}>
                   <Panel style={{opacity: '0.2'}}>
-                    <div style={box}>solid <b>image background</b></div>
+                    <div style={box}>
+                      solid <b>image background</b>
+                    </div>
                   </Panel>
                 </BgBox>
               </AnimateBorder>

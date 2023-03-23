@@ -14,7 +14,7 @@ const {layout, tailLayout} = formConfigs;
 const {nameRule} = formRules;
 
 const formStyle = {
-  width: '50%',
+  width: '60%',
 };
 
 const Index = props => {
@@ -53,10 +53,10 @@ const Index = props => {
           <Panel>
             <Form name="addApi" onFinish={onFinish} form={form} initialValues={{...item}} {...layout} style={formStyle}>
               <Form.Item label="标签值" name="value" rules={nameRule}>
-                <Input placeholder="请输入" style={{width: '80%'}} />
+                <Input placeholder="请输入"/>
               </Form.Item>
               <Form.Item label="标签名" name="label" rules={nameRule}>
-                <Input placeholder="请输入" style={{width: '80%'}} />
+                <Input placeholder="请输入" />
               </Form.Item>
               <Form.Item label="描述" name="description">
                 <Input.TextArea placeholder="请输入" />

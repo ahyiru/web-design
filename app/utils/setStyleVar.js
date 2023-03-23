@@ -4,7 +4,11 @@ const getRgb = rgb => {
   if (rgb.includes('rgb')) {
     const matched = rgb.match(/rgba?\((.+)\)/);
     if (matched) {
-      return matched[1].split(',').map(v => v.trim()).slice(0, 3).join();
+      return matched[1]
+        .split(',')
+        .map(v => v.trim())
+        .slice(0, 3)
+        .join();
     }
   }
   return rgb;
@@ -19,6 +23,7 @@ const setStyleVar = (theme, ele = document.documentElement) => {
   styleVars['--appLinkColor'] = styleVars['--linkColor'];
   styleVars['--appLinkActiveColor'] = styleVars['--linkActiveColor'];
   styleVars['--appLinkHoverColor'] = styleVars['--linkHoverColor'];
+  styleVars['--containerHeight'] = `${ele.clientHeight}px`;
   setStyle(ele, styleVars, true);
 };
 

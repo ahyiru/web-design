@@ -21,7 +21,7 @@ const startScene = (areaInfo, mountDom = document.body) => {
 
   const wheels = [];
 
-  const setConfigs = () => {
+  const setConfigs = async () => {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     renderer.outputEncoding = THREE.sRGBEncoding;
@@ -49,72 +49,67 @@ const startScene = (areaInfo, mountDom = document.body) => {
     grid.material.transparent = true;
     scene.add(grid);
 
-    setMaterials();
+    return await setMaterials();
   };
 
-  const setMaterials = () => {
-    const bodyMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xf5222d,
-      metalness: 1.0,
-      roughness: 0.5,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.03,
-      sheen: 0.5,
-    });
-    const detailsMaterial = new THREE.MeshStandardMaterial({
-      color: 0x1890ff,
-      metalness: 1.0,
-      roughness: 0.5,
-    });
-    const glassMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xfadb14,
-      metalness: 0.25,
-      roughness: 0,
-      transmission: 1.0,
-    });
+  const setMaterials = () =>
+    new Promise(resolve => {
+      const bodyMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0xf5222d,
+        metalness: 1.0,
+        roughness: 0.5,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.03,
+        sheen: 0.5,
+      });
+      const detailsMaterial = new THREE.MeshStandardMaterial({
+        color: 0x1890ff,
+        metalness: 1.0,
+        roughness: 0.5,
+      });
+      const glassMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0xfadb14,
+        metalness: 0.25,
+        roughness: 0,
+        transmission: 1.0,
+      });
 
-    areaInfo[0].setColor = value => bodyMaterial.color.set(value);
-    areaInfo[1].setColor = value => detailsMaterial.color.set(value);
-    areaInfo[2].setColor = value => glassMaterial.color.set(value);
+      areaInfo[0].setColor = value => bodyMaterial.color.set(value);
+      areaInfo[1].setColor = value => detailsMaterial.color.set(value);
+      areaInfo[2].setColor = value => glassMaterial.color.set(value);
 
-    const shadow = new THREE.TextureLoader().load(ferrariPng);
-    const dracoLoader = new DRACOLoader();
-    // dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-    // dracoLoader.setDecoderPath('three/addons/libs/draco/gltf/');
-    // dracoLoader.setDecoderPath('http://uploads.ihuxy.com/draco-gltf/');
-    dracoLoader.setDecoderPath('https://ihuxy.com/uploads/draco-gltf/');
-    const loader = new GLTFLoader();
-    loader.setDRACOLoader(dracoLoader);
-    loader.load(ferrariGlb, gltf => {
-      const carModel = gltf.scene.children[0];
-      carModel.getObjectByName('body').material = bodyMaterial;
-      carModel.getObjectByName('rim_fl').material = detailsMaterial;
-      carModel.getObjectByName('rim_fr').material = detailsMaterial;
-      carModel.getObjectByName('rim_rr').material = detailsMaterial;
-      carModel.getObjectByName('rim_rl').material = detailsMaterial;
-      carModel.getObjectByName('trim').material = detailsMaterial;
-      carModel.getObjectByName('glass').material = glassMaterial;
-      wheels.push(
-        carModel.getObjectByName('wheel_fl'),
-        carModel.getObjectByName('wheel_fr'),
-        carModel.getObjectByName('wheel_rl'),
-        carModel.getObjectByName('wheel_rr'),
-      );
-      const mesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(0.655 * 4, 1.3 * 4),
-        new THREE.MeshBasicMaterial({
-          map: shadow,
-          blending: THREE.MultiplyBlending,
-          toneMapped: false,
-          transparent: true,
-        }),
-      );
-      mesh.rotation.x = - Math.PI / 2;
-      mesh.renderOrder = 2;
-      carModel.add(mesh);
-      scene.add(carModel);
+      const shadow = new THREE.TextureLoader().load(ferrariPng);
+      const dracoLoader = new DRACOLoader();
+      dracoLoader.setDecoderPath('https://ihuxy.com/uploads/draco-gltf/');
+      const loader = new GLTFLoader();
+      loader.setDRACOLoader(dracoLoader);
+      loader.load(ferrariGlb, gltf => {
+        const carModel = gltf.scene.children[0];
+        carModel.getObjectByName('body').material = bodyMaterial;
+        carModel.getObjectByName('rim_fl').material = detailsMaterial;
+        carModel.getObjectByName('rim_fr').material = detailsMaterial;
+        carModel.getObjectByName('rim_rr').material = detailsMaterial;
+        carModel.getObjectByName('rim_rl').material = detailsMaterial;
+        carModel.getObjectByName('trim').material = detailsMaterial;
+        carModel.getObjectByName('glass').material = glassMaterial;
+        wheels.push(carModel.getObjectByName('wheel_fl'), carModel.getObjectByName('wheel_fr'), carModel.getObjectByName('wheel_rl'), carModel.getObjectByName('wheel_rr'));
+        const mesh = new THREE.Mesh(
+          new THREE.PlaneGeometry(0.655 * 4, 1.3 * 4),
+          new THREE.MeshBasicMaterial({
+            map: shadow,
+            blending: THREE.MultiplyBlending,
+            toneMapped: false,
+            transparent: true,
+          }),
+        );
+        mesh.rotation.x = -Math.PI / 2;
+        mesh.renderOrder = 2;
+        carModel.add(mesh);
+        scene.add(carModel);
+        // Done
+        resolve('Done');
+      });
     });
-  };
 
   const onResize = () => {
     const {width, height} = getViewportSize(mountDom);
@@ -127,22 +122,24 @@ const startScene = (areaInfo, mountDom = document.body) => {
     requestAnimationFrame(animate);
     controls.update();
 
-    const time = - performance.now() / 1000;
-    for (let i = 0; i < wheels.length; i ++) {
+    const time = -performance.now() / 1000;
+    for (let i = 0; i < wheels.length; i++) {
       wheels[i].rotation.x = time * Math.PI * 2;
     }
-    grid.position.z = - time % 1;
+    grid.position.z = -time % 1;
 
     renderer.render(scene, camera);
   };
 
-  const start = () => {
-    setConfigs();
+  const start = async () => {
+    const result = await setConfigs();
     animate();
     window.addEventListener('resize', onResize, false);
-    return () => window.removeEventListener('resize', onResize, false);
+    return result;
   };
-  return start();
+  const cancel = () => window.removeEventListener('resize', onResize, false);
+
+  return {start, cancel};
 };
 
 export default startScene;

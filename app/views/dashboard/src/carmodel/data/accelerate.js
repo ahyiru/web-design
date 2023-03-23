@@ -1,11 +1,11 @@
 const option = data => ({
   color: ['#40a9ff', '#73d13d', '#ffec3d'],
-  /* tooltip: {
+  tooltip: {
     trigger: 'axis',
     axisPointer: {
       type: 'cross',
     },
-  }, */
+  },
   xAxis: [
     {
       type: 'category',
@@ -34,14 +34,12 @@ const option = data => ({
       name: '（m）',
       min: 0,
       max: 100,
-      interval: 20,
     },
     {
       type: 'value',
       name: '（g）',
       min: -1.5,
       max: 1,
-      interval: 0.5,
     },
   ],
   series: [

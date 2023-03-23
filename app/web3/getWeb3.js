@@ -11,7 +11,7 @@ export const getWeb3 = async () => {
   } else if (window.web3) {
     return window.web3;
   } else {
-    const provider = new Web3.providers.HttpProvider('http://ihuxy.com');
+    const provider = new Web3.providers.HttpProvider('https://ihuxy.com');
     return new Web3(provider);
   }
 };

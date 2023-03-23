@@ -8,6 +8,7 @@ const routes = [
       {
         path: '/signin',
         name: '登录',
+        title: '登录',
         component: () => import('./src/login'),
       },
       /* {

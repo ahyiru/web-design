@@ -2,10 +2,11 @@ import {useState} from 'react';
 import {Table, Tag, Space, Input, Button, Modal, Form, Tooltip, message} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {formatTime, validObj} from '@huxy/utils';
+import {formatTime} from '@huxy/utils';
 import {projectRoleList} from '@app/utils/configs';
 import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
+import SearchForm from '@app/components/searchForm';
 
 import Panel from '@app/components/panel';
 import Ellipsis from '@app/components/ellipsis';
@@ -19,8 +20,13 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
   {
     title: i18ns.name,
     dataIndex: 'name',
-    width: 60,
-    render: (text, record) => <span className="link" onClick={() => handleRouter(record)}>{text}</span>,
+    width: 50,
+    ellipsis: true,
+    render: (text, record) => (
+      <span className="link" onClick={() => handleRouter(record)}>
+        {text}
+      </span>
+    ),
   },
   /* {
     title: '项目类型',
@@ -29,15 +35,17 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
   {
     title: i18ns.description,
     dataIndex: 'description',
-    width: 80,
+    width: 60,
     ellipsis: true,
     // render: text => <Tooltip title={text}>{text}</Tooltip>,
-    render: text => <Ellipsis>{text}</Ellipsis>,
+    // render: text => <Ellipsis>{text}</Ellipsis>,
   },
   {
     title: i18ns.role,
     dataIndex: 'role',
-    width: 40,
+    align: 'center',
+    width: 50,
+    ellipsis: true,
     render: text => {
       const {label, color} = projectRoleList.find(v => v.value == text) || {};
       return label ? <Tag color={color}>{label}</Tag> : '-';
@@ -46,32 +54,35 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
   {
     title: i18ns.target,
     dataIndex: 'target',
-    width: 50,
+    width: 40,
+    ellipsis: true,
     render: (text, record) => text || '/',
   },
   {
     title: i18ns.updatetime,
     dataIndex: 'updatetime',
-    width: 60,
+    width: 50,
     ellipsis: true,
     render: (text, record) => {
       const time = text || record.createtime || +new Date();
       const txt = formatTime(new Date(time));
-      // return <Tooltip title={txt}>{txt}</Tooltip>;
-      return <Ellipsis>{txt}</Ellipsis>;
+      return <Tooltip title={txt}>{txt}</Tooltip>;
+      // return <Ellipsis>{txt}</Ellipsis>;
     },
   },
   {
     title: i18ns.updater,
     dataIndex: 'updater',
     width: 40,
+    ellipsis: true,
     render: (text, record) => text || record.creator,
   },
   {
     title: i18ns.action,
     dataIndex: 'action',
     align: 'center',
-    width: 160,
+    width: 200,
+    ellipsis: true,
     render: (text, record) => {
       const disabled = false; //!profile.role&&record._id!==profile.projectId;
       return (
@@ -132,8 +143,9 @@ const Index = props => {
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v._id);
+    const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     Modal.confirm({
-      title: actionsText.delete_confirm,
+      title: `${actionsText.delete_confirm}${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v => v.name)}`,
       okText: actionsText.delete_confirm_ok,
@@ -196,20 +208,31 @@ const Index = props => {
       <Row>
         <Col>
           <Panel>
-            <div style={{float: 'left'}}>
-              <Space size="small">
-                <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
-                  {actionsText.add_action}
-                </Button>
-                <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
-                  {actionsText.batch_action}
-                </Button>
-              </Space>
-            </div>
-            <div style={{float: 'right'}}>
-              {/* <Search loading={pending} placeholder="请输入用户名" allowClear onSearch={value=>searchList({keyword:value})} enterButton /> */}
-              <SearchForm submit={searchList} loading={pending} searchFormText={searchFormText} />
-            </div>
+            <SearchForm
+              submit={searchList}
+              loading={pending}
+              handler={
+                <Space size="small">
+                  <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
+                    {actionsText.add_action}
+                  </Button>
+                  <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
+                    {actionsText.batch_action}
+                  </Button>
+                </Space>
+              }
+            >
+              <Form.Item name="name" label={searchFormText.name}>
+                <Input placeholder={searchFormText.name} allowClear />
+              </Form.Item>
+              {/* <Form.Item name="role" label="等级">
+              <Select placeholder="请选择" allowClear style={{width:'100px'}}>
+                {
+                  projectRoleList.map(v=><Select.Option key={v.value} value={v.value}>{v.label}</Select.Option>)
+                }
+              </Select>
+            </Form.Item> */}
+            </SearchForm>
           </Panel>
         </Col>
         <Col>
@@ -219,31 +242,6 @@ const Index = props => {
         </Col>
       </Row>
     </div>
-  );
-};
-
-const SearchForm = props => {
-  const {submit, loading, searchFormText} = props;
-  const [form] = Form.useForm();
-  return (
-    <Form layout="inline" form={form} initialValues={{}} onFinish={value => submit(validObj(value))}>
-      <Form.Item name="name" /* label={searchFormText.name} */>
-        <Input placeholder={searchFormText.name} allowClear style={{width: '120px'}} />
-      </Form.Item>
-      {/* <Form.Item name="role" label="等级">
-      <Select placeholder="请选择" allowClear style={{width:'100px'}}>
-        {
-          projectRoleList.map(v=><Select.Option key={v.value} value={v.value}>{v.label}</Select.Option>)
-        }
-      </Select>
-    </Form.Item> */}
-      <Form.Item>
-        <Button loading={loading} type="primary" htmlType="submit">
-          {searchFormText.submit}
-        </Button>
-        {/* <Button style={{marginLeft:'12px'}} onClick={()=>form.resetFields()}>重置</Button> */}
-      </Form.Item>
-    </Form>
   );
 };
 

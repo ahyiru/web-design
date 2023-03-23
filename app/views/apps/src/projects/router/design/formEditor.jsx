@@ -27,18 +27,20 @@ const handleClick = (actions, item, actionsText) => ({
       icon: <PlusOutlined />,
       label: <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>,
     },
-    ...(item.isRoot ? [] :[
-      /* {
+    ...(item.isRoot
+      ? []
+      : [
+        /* {
         key: 'edit',
         icon: <EditOutlined />,
         label: <span style={{padding: '0 4px'}}>{actionsText.edit_action}</span>,
       }, */
-      {
-        key: 'delete',
-        icon: <DeleteOutlined />,
-        label: <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>,
-      },
-    ]),
+        {
+          key: 'delete',
+          icon: <DeleteOutlined />,
+          label: <span style={{padding: '0 4px'}}>{actionsText.delete_action}</span>,
+        },
+      ]),
   ],
 });
 

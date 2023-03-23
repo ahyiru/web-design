@@ -31,6 +31,11 @@ const routes = {
       name: 'carmodel',
       redirect: '/carmodel',
     },
+    /* {
+      path: '/smartcity',
+      name: 'smartcity',
+      redirect: '/smartcity',
+    }, */
   ],
 };
 

@@ -119,8 +119,9 @@ const Index = ({commonprops, ...props}) => {
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v[rowKey]);
+    const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     Modal.confirm({
-      title: '确定执行此操作吗？',
+      title: `确定执行此操作吗？${countStr}`,
       icon: <Icon icon="ExclamationCircleOutlined" />,
       content: `name: ${items.map(v => v.name)}`,
       okText: '确定',

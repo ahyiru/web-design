@@ -1,8 +1,11 @@
-const listFiles = async () =>
-  await require
-    .context('@app/doc', true, /^\.\/(.+)\.md$/)
-    .keys()
-    .map(name => ({name: name.replace(/^\.\/(.+)\.md$/, '$1')}));
+// const contextRequire = require.context('@app/doc', true, /^\.\/(.+)\.md$/);
+
+const contextRequire = import.meta.webpackContext('../../../../../doc', {
+  recursive: true,
+  regExp: /^\.\/(.+)\.md$/,
+});
+
+const listFiles = async () => await contextRequire.keys().map(name => ({name: name.replace(/^\.\/(.+)\.md$/, '$1')}));
 
 const getFileMenu = list => {
   const newArr = [];

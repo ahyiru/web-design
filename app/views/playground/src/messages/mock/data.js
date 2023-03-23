@@ -20,6 +20,14 @@ const userSchema = {
 };
 
 export const fakeUsers = (schema, num = 10) =>
-  [...Array(num)].map((item, index) => ({...schema, _id: uuidv4(), name: `${schema.name}-${index + 1}`, email: `${schema.name}${index + 1}@gmail.com`, role: randNum(5), active: randTrue(), message: `${schema.message} ${index + 1}`}));
+  [...Array(num)].map((item, index) => ({
+    ...schema,
+    _id: uuidv4(),
+    name: `${schema.name}-${index + 1}`,
+    email: `${schema.name}${index + 1}@gmail.com`,
+    role: randNum(5),
+    active: randTrue(),
+    message: `${schema.message} ${index + 1}`,
+  }));
 
 export const messages = fakeUsers(userSchema, 30);

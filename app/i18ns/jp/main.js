@@ -219,7 +219,7 @@ const users = {
     active: '状态',
     active_true: '已激活',
     active_false: '未激活',
-    github: '是否绑定GitHub',
+    github: 'GitHub',
     github_true: '已绑定',
     github_false: '未绑定',
     projectName: '所在项目',

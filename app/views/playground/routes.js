@@ -9,12 +9,6 @@ const routes = {
   icon: 'ConsoleSqlOutlined',
   children: [
     {
-      path: '/chatGPT',
-      name: 'chatGPT',
-      icon: 'PictureOutlined',
-      component: () => import('./src/chatGPT'),
-    },
-    {
       path: '/demo',
       name: 'demo',
       icon: 'MergeCellsOutlined',

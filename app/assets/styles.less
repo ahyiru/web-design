@@ -61,7 +61,7 @@
       position: relative;
       transition: all 0.2s;
       &::after {
-        content: "\2713";
+        content: '\2713';
         position: absolute;
         top: 6px;
         right: 6px;
@@ -137,4 +137,17 @@ td {
 
 .anchorBL {
   display: none;
+}
+
+.sm-form-style {
+  .ant-form-item-row {
+    flex-wrap: nowrap;
+    .ant-form-item-label {
+      flex: 0 0 auto;
+    }
+    .ant-form-item-control {
+      flex: auto;
+      margin-left: 10px;
+    }
+  }
 }

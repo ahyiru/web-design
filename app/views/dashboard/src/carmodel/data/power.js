@@ -1,4 +1,3 @@
-
 const option = (name, data) => ({
   color: ['#40a9ff', '#73d13d', '#ffec3d'],
   // tooltip: {},
@@ -14,7 +13,7 @@ const option = (name, data) => ({
       type: 'gauge',
       startAngle: 90,
       endAngle: -270,
-      radius: '85%',
+      radius: '82%',
       pointer: {
         show: false,
       },
@@ -89,8 +88,8 @@ const option = (name, data) => ({
         width: 20,
         height: 4,
         fontSize: 10,
-        color: 'auto',
-        borderColor: 'auto',
+        color: 'inherit',
+        borderColor: 'inherit',
         borderRadius: 10,
         borderWidth: 1,
         formatter: '{value}%',

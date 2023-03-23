@@ -24,6 +24,7 @@ export const actions = [
     icon: api,
     description: '请求错误总数',
     color: 'var(--orange1)',
+    path: '/report',
   },
   {
     value: 'pageError',
@@ -31,6 +32,7 @@ export const actions = [
     icon: code,
     description: '页面错误总数',
     color: 'var(--red1)',
+    path: '/report',
   },
 ];
 

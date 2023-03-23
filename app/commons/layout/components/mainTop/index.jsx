@@ -6,12 +6,16 @@ const Index = ({current, Right = TopRight}) => {
   current = current.filter(v => v.name);
   const name = (
     <li>
-      <span className="link" style={{fontSize: '1.6rem'}}>{current.slice(-1)[0]?.name}</span>
+      <span className="link" style={{fontSize: '1.6rem'}}>
+        {current.slice(-1)[0]?.name}
+      </span>
     </li>
   );
   const bread = current.map(({path, name}) => (
     <li key={path}>
-      <Link className="link" to={path}>{name}</Link>
+      <Link className="link" to={path}>
+        {name}
+      </Link>
     </li>
   ));
   const isRightBread = current.length > 1;

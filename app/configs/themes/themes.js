@@ -66,9 +66,4 @@ const theme2 = {sizes, colors: color2};
 const theme3 = {sizes, colors: color3};
 const theme4 = {sizes, colors: color4};
 
-export {
-  theme1,
-  theme2,
-  theme3,
-  theme4,
-};
+export {theme1, theme2, theme3, theme4};

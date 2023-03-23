@@ -1,8 +1,8 @@
-const option = (data) => ({
+const option = data => ({
   grid: {
     top: '10px',
-    left: '0',
-    right: '0',
+    left: '10px',
+    right: '10px',
     bottom: '35px',
     containLabel: true,
   },
@@ -25,7 +25,7 @@ const option = (data) => ({
     stack: 'total',
     label: {
       show: true,
-      formatter: ({value}) => value ? value : '',
+      formatter: ({value}) => (value ? value : ''),
       color: '#fff',
     },
     emphasis: {

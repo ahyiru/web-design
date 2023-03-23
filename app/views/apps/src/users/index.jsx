@@ -2,44 +2,62 @@ import {useState} from 'react';
 import {Table, Tag, Space, Input, Button, Modal, Form, message, Select} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {formatTime, validObj} from '@huxy/utils';
+import {formatTime} from '@huxy/utils';
 import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
+import SearchForm from '@app/components/searchForm';
 import {roleList} from '@app/utils/configs';
 import Panel from '@app/components/panel';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
 
-const {allUserFn, deleteUserFn} = apiList;
+const {allUserFn, deleteUserFn, exitUserFn} = apiList;
 
-const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => [
+const getColumns = ({handleCheck, handleEdit, handleDelete, handleExit}, profile, i18ns) => [
   {
     title: i18ns.name,
     dataIndex: 'name',
-    render: (text, record) => <span className="link" onClick={() => handleCheck(record)}>{text}</span>,
+    ellipsis: true,
+    render: (text, record) => (
+      <span className="link" onClick={() => handleCheck(record)}>
+        {text}
+      </span>
+    ),
   },
   {
     title: i18ns.email,
     dataIndex: 'email',
-    render: text => text.replace(/\S+(@\S+)/, '*****$1'),
+    ellipsis: true,
+    width: '120px',
+    // render: text => text.replace(/\S+(@\S+)/, '*****$1'),
   },
   {
     title: i18ns.active,
     dataIndex: 'active',
+    align: 'center',
     render: text => (text ? <Tag color="green">{i18ns.active_true}</Tag> : <Tag color="red">{i18ns.active_false}</Tag>),
   },
   {
     title: i18ns.github,
     dataIndex: 'github',
+    align: 'center',
+    render: text => (text ? <Tag color="green">{i18ns.github_true}</Tag> : <Tag color="red">{i18ns.github_false}</Tag>),
+  },
+  {
+    title: '微信',
+    dataIndex: 'wechat',
+    align: 'center',
     render: text => (text ? <Tag color="green">{i18ns.github_true}</Tag> : <Tag color="red">{i18ns.github_false}</Tag>),
   },
   {
     title: i18ns.projectName,
     dataIndex: 'projectName',
+    ellipsis: true,
   },
   {
     title: i18ns.role,
     dataIndex: 'role',
+    ellipsis: true,
     render: (text, record) => {
       return roleList.find(v => v.value === text)?.label ?? '-';
     },
@@ -47,6 +65,7 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
   {
     title: i18ns.updatetime,
     dataIndex: 'updatetime',
+    ellipsis: true,
     render: (text, record) => {
       const time = text || record.createtime || record.signuptime || +new Date();
       return formatTime(new Date(time));
@@ -55,11 +74,13 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
   {
     title: i18ns.updater,
     dataIndex: 'updater',
+    ellipsis: true,
     render: (text, record) => text || record.creator,
   },
   {
     title: i18ns.action,
     dataIndex: 'action',
+    ellipsis: true,
     align: 'center',
     render: (text, record) => {
       const disabled = !profile.role && record._id !== profile._id;
@@ -74,6 +95,9 @@ const getColumns = ({handleCheck, handleEdit, handleDelete}, profile, i18ns) => 
           <Button type="link" size="small" disabled={disabled} onClick={() => handleDelete(record)} danger>
             {i18ns.delete_action}
           </Button>
+          <Button type="link" size="small" disabled={disabled} onClick={() => handleExit(record)} danger>
+            退出
+          </Button>
         </>
       );
     },
@@ -85,6 +109,8 @@ const Index = props => {
   const i18nCfg = getIntls('main.users', {});
   const profile = userInfoStore.getState();
   const {tableHeaderText = {}, actionsText = {}, searchFormText = {}} = i18nCfg;
+
+  // const getList = profile.role == 5 ? allUserFn : allUserMock;
 
   const [selectedRows, setSelectedRows] = useState([]);
   // const [modalItem,setModalItem]=useState(null);
@@ -112,8 +138,9 @@ const Index = props => {
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v._id);
+    const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     Modal.confirm({
-      title: actionsText.delete_confirm,
+      title: `${actionsText.delete_confirm}${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v => v.name)}`,
       okText: actionsText.delete_confirm_ok,
@@ -131,6 +158,12 @@ const Index = props => {
         console.log('Cancel');
       },
     });
+  };
+  const handleExit = async user => {
+    const {code, message: msg} = await exitUserFn({user});
+    if (code === 200) {
+      message.success(msg);
+    }
   };
   const handleModalOk = values => {
     console.log(values);
@@ -151,13 +184,14 @@ const Index = props => {
     handleCheck,
     handleEdit,
     handleDelete,
+    handleExit,
   };
 
   const columns = getColumns(actions, profile, {...tableHeaderText, ...actionsText});
 
   const {pending, data} = result;
 
-  const {total, current, size, list} = data || {};
+  const {total, current, size, list = []} = data || {};
 
   const pagination = {
     onShowSizeChange: (current, size) => pageChange(current, size),
@@ -175,58 +209,42 @@ const Index = props => {
       <Row>
         <Col>
           <Panel>
-            <div style={{float: 'left'}}>
-              <Space size="small">
-                <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
-                  {actionsText.add_action}
-                </Button>
-                <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
-                  {actionsText.batch_action}
-                </Button>
-              </Space>
-            </div>
-            <div style={{float: 'right'}}>
-              {/* <Search loading={pending} placeholder="请输入用户名" allowClear onSearch={value=>searchList({keyword:value})} enterButton /> */}
-              <SearchForm submit={searchList} loading={pending} searchFormText={searchFormText} />
-            </div>
+            <SearchForm
+              submit={searchList}
+              loading={pending}
+              handler={
+                <Space size="small">
+                  <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
+                    {actionsText.add_action}
+                  </Button>
+                  <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
+                    {actionsText.batch_action}
+                  </Button>
+                </Space>
+              }
+            >
+              <Form.Item name="name" label={searchFormText.name}>
+                <Input placeholder={searchFormText.name_placeholder} allowClear />
+              </Form.Item>
+              <Form.Item name="role" label={searchFormText.role}>
+                <Select placeholder={searchFormText.role_placeholder} allowClear>
+                  {roleList.map(v => (
+                    <Select.Option key={v.value} value={v.value}>
+                      {v.label}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </SearchForm>
           </Panel>
         </Col>
         <Col>
           <Panel>
-            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
+            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>
     </div>
-  );
-};
-
-const SearchForm = props => {
-  const {submit, loading, searchFormText} = props;
-  const [form] = Form.useForm();
-  return (
-    <Form layout="inline" form={form} initialValues={{}} onFinish={value => submit(validObj(value))}>
-      <Form.Item name="name" label={searchFormText.name}>
-        <Input placeholder={searchFormText.name_placeholder} allowClear style={{width: '120px'}} />
-      </Form.Item>
-      <Form.Item name="role" label={searchFormText.role}>
-        <Select placeholder={searchFormText.role_placeholder} allowClear style={{width: '100px'}}>
-          {roleList.map(v => (
-            <Select.Option key={v.value} value={v.value}>
-              {v.label}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
-      <Form.Item>
-        <Button loading={loading} type="primary" htmlType="submit">
-          {searchFormText.submit}
-        </Button>
-        <Button style={{marginLeft: '12px'}} onClick={() => form.resetFields()}>
-          {searchFormText.reset}
-        </Button>
-      </Form.Item>
-    </Form>
   );
 };
 

@@ -6,6 +6,8 @@
 
 基于 [huxy-admin](https://github.com/ahyiru/huxy-admin) 模板创建。
 
+使用界面可视化操作来配置生成页面描述 `json schema`，然后通过自定义规则将 `json schema` 渲染成我们需要的页面。
+
 ### 理解
 
 低代码就是尽量**少写代码**，定义好业务组件，通过可视化操作实现开发工作。它主要受众是开发者。

@@ -37,6 +37,11 @@ const routes = {
           name: 'd3',
           component: () => import('./src/canvas/d3'),
         },
+        /* {
+          path: '/webgl',
+          name: 'webgl',
+          component: () => import('./src/canvas/webgl'),
+        }, */
         {
           path: 'http://ihuxy.com:8081/',
           name: 'webgl',

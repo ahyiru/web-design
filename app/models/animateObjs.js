@@ -46,7 +46,7 @@ const objs = [
     label: 'ihuxy',
     icon: dataAnalysis,
     details: '',
-    link: 'http://ihuxy.com/',
+    link: 'https://ihuxy.com/',
     type: '',
   },
   {

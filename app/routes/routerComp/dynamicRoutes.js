@@ -14,4 +14,4 @@ const profileRoutes = {
   component: () => import('@app/views/apps/src/users/profile'),
 };
 
-export default [layoutRoutes, appRoutes, commonRoutes, dashboardRoutes, lowcodeRoutes, pageRoutes, playgroundRoutes, profileRoutes];
+export default [layoutRoutes, appRoutes, commonRoutes, dashboardRoutes, lowcodeRoutes, playgroundRoutes, pageRoutes, profileRoutes];

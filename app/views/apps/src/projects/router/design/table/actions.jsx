@@ -94,7 +94,9 @@ export default ({data, getValues, actionI18n}) => {
           {actionI18n.edit_action}
         </span>,
         <Popconfirm key="delete" title={actionI18n.delete_confirm} onConfirm={() => deleteRow(record)}>
-          <span className="link" /* onClick={() => deleteRow(record)} */ style={{color: 'var(--red2)'}}>{actionI18n.delete_action}</span>
+          <span className="link" /* onClick={() => deleteRow(record)} */ style={{color: 'var(--red2)'}}>
+            {actionI18n.delete_action}
+          </span>
         </Popconfirm>,
       ],
     },

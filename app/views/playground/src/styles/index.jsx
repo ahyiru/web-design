@@ -34,13 +34,11 @@ const Index = props => {
             <Anico type={type} />
           </div>
           <div>
-            {
-              typeList.map(({key, name}) => (
-                <Button style={{marginRight: 10}} key={key} type={key === type ? 'primary' : ''} onClick={e => setType(key)}>
-                  {name}
-                </Button>
-              ))
-            }
+            {typeList.map(({key, name}) => (
+              <Button style={{marginRight: 10}} key={key} type={key === type ? 'primary' : ''} onClick={e => setType(key)}>
+                {name}
+              </Button>
+            ))}
           </div>
         </Panel>
       </Col>

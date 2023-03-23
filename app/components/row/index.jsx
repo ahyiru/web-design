@@ -1,6 +1,6 @@
 import {Row as DefRow, Col as DefCol} from '@huxy/components';
 
-const rowCfg={
+const rowCfg = {
   gutter: [12, 12],
 };
 const styles = {

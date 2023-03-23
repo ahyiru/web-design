@@ -1,7 +1,7 @@
 .car-model-dashboard {
   --headerHeight: 32px;
   position: relative;
-  height: 100vh;
+  height: var(--containerHeight);
   // background: radial-gradient(circle at center, #fff 0, #f0f0f0 5%, #eee 10%, var(--appBgColor) 15%, var(--appBgColor) 100%);
   background-color: var(--appBgColor);
   padding: 10px 15px;
@@ -13,7 +13,7 @@
     text-align: center;
   }
   .car-model-container {
-    --mainHeight: calc(100vh - var(--headerHeight) - 20px);
+    --mainHeight: calc(var(--containerHeight) - var(--headerHeight) - 20px);
     --itemHeight: calc(var(--mainHeight) / 3);
     height: var(--mainHeight);
     .car-model-top {
@@ -26,10 +26,29 @@
       --itemHeaderHeight: 32px;
       height: var(--itemHeight);
       .car-model-item-content {
+        position: relative;
         height: calc(var(--itemHeight) - var(--itemHeaderHeight));
+        .item-content-affix {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          color: #f0f0f0;
+          font-weight: 500;
+          p {
+            margin: 0;
+            span {
+              font-size: 20px;
+              font-weight: 700;
+              color: #ffffff;
+            }
+          }
+        }
       }
     }
     .car-model-center {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -50,7 +69,7 @@
     margin: 0;
   }
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 25%;

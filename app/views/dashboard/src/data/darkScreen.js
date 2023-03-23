@@ -40,11 +40,6 @@ const shadows = {
   shadowColor: 'rgba(0,180,220,.5)',
 };
 
-const barItemStyle = {
-  barBorderWidth: 0,
-  barBorderColor: color,
-  ...shadows,
-};
 const itemStyle = {
   borderWidth: 0,
   borderColor: color,
@@ -74,7 +69,7 @@ const mapItemStle = {
 };
 
 const itemStyles = {
-  bar: {itemStyle: barItemStyle},
+  bar: {itemStyle},
   pie: {itemStyle},
   scatter: {itemStyle},
   boxplot: {itemStyle},
@@ -92,11 +87,31 @@ const itemStyles = {
     },
     symbolSize: 0,
     symbol: 'circle',
-    smooth: true,
     color,
     label: {
       color,
     },
+  },
+  radar: {
+    itemStyle: {
+      borderWidth: 4,
+    },
+    lineStyle: {
+      width: 3,
+    },
+    symbolSize: 0,
+    symbol: 'circle',
+  },
+  line: {
+    itemStyle: {
+      borderWidth: 4,
+    },
+    lineStyle: {
+      width: 3,
+    },
+    symbolSize: 0,
+    symbol: 'circle',
+    smooth: true,
   },
 };
 
@@ -109,6 +124,9 @@ const defaultOpts = {
   itemStyle: {
     borderWidth: 0,
     borderColor: color,
+  },
+  label: {
+    color,
   },
   grid: {
     top: '35px',
@@ -125,28 +143,6 @@ const defaultOpts = {
     subtextStyle: {
       color,
     },
-  },
-  line: {
-    itemStyle: {
-      borderWidth: 4,
-    },
-    lineStyle: {
-      width: 3,
-    },
-    symbolSize: 0,
-    symbol: 'circle',
-    smooth: true,
-  },
-  radar: {
-    itemStyle: {
-      borderWidth: 4,
-    },
-    lineStyle: {
-      width: 3,
-    },
-    symbolSize: 0,
-    symbol: 'circle',
-    smooth: true,
   },
   toolbox: {
     iconStyle: {
@@ -184,9 +180,6 @@ const defaultOpts = {
     textStyle: {
       color,
     },
-  },
-  label: {
-    color,
   },
   ...itemStyles,
   categoryAxis: axis,

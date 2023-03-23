@@ -5,7 +5,11 @@ export const columns = [
     title: '用户名',
     dataIndex: 'name',
     ellipsis: true,
-    render: (text, record) => <a onClick={() => {}}>{text}</a>,
+    render: (text, record) => (
+      <span className="link" onClick={() => {}}>
+        {text}
+      </span>
+    ),
   },
   {
     title: '邮箱',

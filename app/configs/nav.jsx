@@ -51,7 +51,7 @@ export const leftNav = () => {
       key: 'collapse',
       name: left?.collapse ?? 'collapse',
       type: 'collapse',
-      Custom: () => <CustomCollapse />,
+      Custom: props => <CustomCollapse {...props} />,
     },
     {
       key: 'projectList',
@@ -113,12 +113,12 @@ export const leftNav = () => {
       key: 'configs',
       icon: <Icon icon="ToolOutlined" />,
       type: 'configs',
-      Custom: () => <Settings />,
+      Custom: props => <Settings {...props} />,
     },
     {
       key: 'search',
       title: left?.search ?? '搜索',
-      Custom: () => <Search />,
+      Custom: props => <Search {...props} />,
     },
   ];
 };
@@ -161,7 +161,7 @@ export const rightNav = language => {
     {
       key: 'language',
       name: right?.[language] ?? '语言',
-      Custom: () => (
+      Custom: props => (
         <span className="link" title={right?.[language] ?? '语言'}>
           <div className="icon">
             <img width="1" height="1" src={langList.find(({key}) => key === language)?.icon} alt={language} />
@@ -182,7 +182,7 @@ export const rightNav = language => {
     },
     {
       key: 'MetaMask',
-      Custom: () => {
+      Custom: props => {
         const hanlder = async () => {
           try {
             const result = await getWeb3();
@@ -213,11 +213,11 @@ export const rightNav = language => {
     {
       key: 'notify',
       title: right?.notify ?? '消息',
-      Custom: () => <Notify />,
+      Custom: props => <Notify {...props} />,
     },
     {
       key: 'fullscreen',
-      Custom: () => (
+      Custom: props => (
         <span className="link" title="fullscreen">
           <span className="node-icon">
             <FullPage />
@@ -227,7 +227,7 @@ export const rightNav = language => {
     },
     {
       key: 'themeModel',
-      Custom: () => <ThemeModel />,
+      Custom: props => <ThemeModel {...props} />,
     },
     {
       title: right?.screenshot ?? '截屏',

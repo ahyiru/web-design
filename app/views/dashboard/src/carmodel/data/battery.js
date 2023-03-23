@@ -22,7 +22,7 @@ const option = (name, data) => ({
       pointer: {
         width: 4,
         itemStyle: {
-          color: 'auto',
+          color: 'inherit',
         },
       },
       axisTick: {
@@ -38,17 +38,17 @@ const option = (name, data) => ({
       },
       axisLabel: {
         distance: 6,
-        color: 'auto',
+        color: 'inherit',
         fontSize: 9,
       },
       title: {
         fontSize: 16,
-        color: 'auto',
+        color: 'inherit',
       },
       detail: {
         valueAnimation: true,
         formatter: '{value}km',
-        color: 'auto',
+        color: 'inherit',
         fontSize: 14,
       },
       data: [
@@ -56,10 +56,10 @@ const option = (name, data) => ({
           value: 593,
           name: '高速',
           title: {
-            offsetCenter: ['0%', '145%'],
+            offsetCenter: ['0%', '150%'],
           },
           detail: {
-            offsetCenter: ['0%', '95%'],
+            offsetCenter: ['0%', '100%'],
           },
         },
       ],
@@ -79,7 +79,7 @@ const option = (name, data) => ({
       pointer: {
         width: 4,
         itemStyle: {
-          color: 'auto',
+          color: 'inherit',
         },
       },
       axisTick: {
@@ -95,17 +95,17 @@ const option = (name, data) => ({
       },
       axisLabel: {
         distance: 6,
-        color: 'auto',
+        color: 'inherit',
         fontSize: 9,
       },
       title: {
         fontSize: 16,
-        color: 'auto',
+        color: 'inherit',
       },
       detail: {
         valueAnimation: true,
         formatter: '{value}km',
-        color: 'auto',
+        color: 'inherit',
         fontSize: 14,
       },
       data: [
@@ -113,10 +113,10 @@ const option = (name, data) => ({
           value: 522,
           name: '低速',
           title: {
-            offsetCenter: ['0%', '145%'],
+            offsetCenter: ['0%', '150%'],
           },
           detail: {
-            offsetCenter: ['0%', '95%'],
+            offsetCenter: ['0%', '100%'],
           },
         },
       ],
@@ -136,7 +136,7 @@ const option = (name, data) => ({
       pointer: {
         width: 4,
         itemStyle: {
-          color: 'auto',
+          color: 'inherit',
         },
       },
       axisTick: {
@@ -146,23 +146,23 @@ const option = (name, data) => ({
         distance: 0,
         length: 4,
         lineStyle: {
-          color: 'auto',
+          color: 'inherit',
           width: 1,
         },
       },
       axisLabel: {
         distance: 6,
-        color: 'auto',
+        color: 'inherit',
         fontSize: 9,
       },
       title: {
         fontSize: 16,
-        color: 'auto',
+        color: 'inherit',
       },
       detail: {
         valueAnimation: true,
         formatter: '{value}km',
-        color: 'auto',
+        color: 'inherit',
         fontSize: 14,
       },
       data: [
@@ -170,10 +170,10 @@ const option = (name, data) => ({
           value: 660,
           name: '标准',
           title: {
-            offsetCenter: ['0%', '145%'],
+            offsetCenter: ['0%', '150%'],
           },
           detail: {
-            offsetCenter: ['0%', '95%'],
+            offsetCenter: ['0%', '100%'],
           },
         },
       ],

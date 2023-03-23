@@ -3,8 +3,9 @@ import {Table, Space, Input, Button, Modal, Form, Tooltip, message} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {useIntls} from '@app/components/intl';
-import {formatTime, validObj} from '@huxy/utils';
+import {formatTime} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
+import SearchForm from '@app/components/searchForm';
 
 import Panel from '@app/components/panel';
 import Back from '@app/components/goBack';
@@ -73,7 +74,7 @@ const Index = props => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   const pageParams = props.params;
-  const [result, update, pageChange, searchList] = useHandleList(listTagsFn, null, {current: pageParams?.current, size: pageParams?.size}, {projectId: stateItem._id});
+  const [result, update, pageChange, searchList] = useHandleList(listTagsFn, {current: pageParams?.current, size: pageParams?.size}, null, {projectId: stateItem._id});
 
   const handleEdit = item => {
     props.router.push({
@@ -87,8 +88,9 @@ const Index = props => {
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v._id);
+    const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     Modal.confirm({
-      title: i18nCfg.delMsg,
+      title: `${i18nCfg.delMsg}${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `label: ${items.map(v => v.label)}`,
       okText: i18nCfg.submit,
@@ -155,8 +157,10 @@ const Index = props => {
         )}
         <Col>
           <Panel>
-            <div style={{overflow: 'hidden', marginBottom: '10px'}}>
-              <div style={{float: 'left'}}>
+            <SearchForm
+              submit={searchList}
+              loading={pending}
+              handler={
                 <Space size="small">
                   <Button loading={pending} onClick={() => handleAdd()} type="primary" icon={<PlusOutlined />}>
                     {i18nCfg.add}
@@ -165,38 +169,21 @@ const Index = props => {
                     {i18nCfg.batchDelete}
                   </Button>
                 </Space>
-              </div>
-              <div style={{float: 'right'}}>
-                <SearchForm submit={searchList} loading={pending} />
-              </div>
-            </div>
+              }
+            >
+              <Form.Item name="label" label="标签名">
+                <Input placeholder="请输入" allowClear />
+              </Form.Item>
+            </SearchForm>
+          </Panel>
+        </Col>
+        <Col>
+          <Panel>
             <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>
     </div>
-  );
-};
-
-const SearchForm = props => {
-  const getIntls = useIntls();
-  const i18nCfg = getIntls('main.tables', {});
-  const {submit, loading} = props;
-  const [form] = Form.useForm();
-  return (
-    <Form layout="inline" form={form} initialValues={{}} onFinish={value => submit(validObj(value))}>
-      <Form.Item name="label" label="标签名">
-        <Input placeholder="请输入" allowClear style={{width: '120px'}} />
-      </Form.Item>
-      <Form.Item>
-        <Button loading={loading} type="primary" htmlType="submit">
-          {i18nCfg.search}
-        </Button>
-        <Button style={{marginLeft: '12px'}} onClick={() => form.resetFields()}>
-          {i18nCfg.reset}
-        </Button>
-      </Form.Item>
-    </Form>
   );
 };
 

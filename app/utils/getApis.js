@@ -1,10 +1,15 @@
 import fetcher from '@app/apis/report/fetchError';
 import {dlApi, suspense} from '@app/apis/fetcher';
 import getApis from '@app/apis/getApis';
+import {allUserMock, allUserSuspenseMock} from '@app/apis/userMock';
 
-const apiList = {};
+const apiList = {
+  allUserMock,
+};
 
-const suspenseApis = {};
+const suspenseApis = {
+  allUserSuspenseMock,
+};
 
 const getSuspense = apis => {
   const susList = apis.filter(api => ['profile', 'allUser'].includes(api.name));

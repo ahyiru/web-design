@@ -7,10 +7,12 @@ const option = (name, data) => echarts => ({
     type: 'value',
     name: '（分贝）',
   },
+  legend: {},
   series: [
     {
       data: [58.3, 65.7, 75.1],
       type: 'bar',
+      name: '推荐值',
       label: {
         show: true,
         position: 'top',
@@ -22,14 +24,15 @@ const option = (name, data) => echarts => ({
       itemStyle: {
         borderRadius: 5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: '#1890ff' },
-          { offset: 1, color: '#73d13d' },
+          {offset: 0, color: '#1890ff'},
+          {offset: 1, color: '#73d13d'},
         ]),
       },
     },
     {
       data: [53.3, 60.2, 66.8],
       type: 'bar',
+      name: '实测值',
       label: {
         show: true,
         position: 'top',
@@ -42,8 +45,8 @@ const option = (name, data) => echarts => ({
       itemStyle: {
         borderRadius: 5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: '#ffa940' },
-          { offset: 1, color: '#ffec3d' },
+          {offset: 0, color: '#ffa940'},
+          {offset: 1, color: '#ffec3d'},
         ]),
       },
     },

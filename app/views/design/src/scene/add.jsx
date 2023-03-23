@@ -37,7 +37,7 @@ const Index = props => {
   }, []);
   const onFinish = async values => {
     const handler = item ? editSceneFn : addSceneFn;
-    values = item ? {...item, ...values} : values;
+    values = item ? {...item, ...values, screenshot: values.screenshot ?? item.screenshot} : values;
     const {screenshot, ...rest} = values;
     const file = typeof screenshot === 'string' ? screenshot : screenshot && screenshot[0].originFileObj;
     setPending(true);
@@ -63,7 +63,7 @@ const Index = props => {
       <Col>
         <Back back={back} />
       </Col>
-      <Col span={6}>
+      <Col span={12}>
         <Panel>
           <Form name="scene" initialValues={item ? {...item, screenshot: undefined, tag: item.tag.split(',')} : {loadType: 'modules'}} onFinish={onFinish} {...layout}>
             <Form.Item name="name" label="标题" rules={titleRule}>

@@ -13,10 +13,12 @@ export const ComponentConfigPanel = props => {
     {
       key: 'setting',
       label: '参数设置',
-      children: <div className={css.form}>
-        {nodeId && <NodeFormDemo name="节点参数" nodeId={nodeId} experimentId={experimentId} />}
-        {!nodeId && <ExperimentForm name="实验设置" experimentId={experimentId} />}
-      </div>,
+      children: (
+        <div className={css.form}>
+          {nodeId && <NodeFormDemo name="节点参数" nodeId={nodeId} experimentId={experimentId} />}
+          {!nodeId && <ExperimentForm name="实验设置" experimentId={experimentId} />}
+        </div>
+      ),
     },
     {
       key: 'params',
