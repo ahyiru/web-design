@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/ahyiru/web-design/compare/v1.5.0...v1.6.0) (2023-03-23)
+
+
+### 🚀 Chore | 构建/工程依赖/工具
+
+* 更新@huxy/pack构建工具 ([05be5a9](https://github.com/ahyiru/web-design/commit/05be5a91e319341f0fab549a16afbbf9aaf39962))
+* 使用@huxy/pack来构建项目 ([1b1c074](https://github.com/ahyiru/web-design/commit/1b1c0742377e6c323505231443097e8afff35a90))
+* fix server ([af9f37f](https://github.com/ahyiru/web-design/commit/af9f37f008dcb501aeb4c0a53b063a76b64223a2))
+
+
+### ✨ Features | 新功能
+
+* add module type ([d899d7e](https://github.com/ahyiru/web-design/commit/d899d7eb21d71be4417a5338f775ff7be9356472))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* add themes ([4ce52a5](https://github.com/ahyiru/web-design/commit/4ce52a56686ad31f927a0b9c4cb0c9d0883e6b8d))
+* fix bugs ([518520c](https://github.com/ahyiru/web-design/commit/518520c75511d5ab6486d7e64af523a095bd0d49))
+* fix components ([58dd9d5](https://github.com/ahyiru/web-design/commit/58dd9d5741d72a660739b063e4757dbffbfe51bd))
+* fix ellipsis ([be00dd3](https://github.com/ahyiru/web-design/commit/be00dd3a44c98c5bfa271bb5e5542dd2834e549a))
+* fix image load ([05be234](https://github.com/ahyiru/web-design/commit/05be2345dc3bd18aa86aabd083af2fe175dd2d85))
+* fix login ([0385d10](https://github.com/ahyiru/web-design/commit/0385d10071f5b70da00e3d62c08b7a8f01152c29))
+* fix pwd ([e059101](https://github.com/ahyiru/web-design/commit/e05910146250b0f930232c6ea87927508af1a805))
+* fix styles ([c42f5d2](https://github.com/ahyiru/web-design/commit/c42f5d20c764871dbeb992bc3e3f47560e492cc6))
+* fix styles ([7b58ffd](https://github.com/ahyiru/web-design/commit/7b58ffde18a50b64c0935d82a53f99a071c3a2a4))
+* update ([5d7cdae](https://github.com/ahyiru/web-design/commit/5d7cdaea0ce229a9cc12126907bf82b64c722ada))
+
+
+### 💄 Styles | 风格
+
+* fix style ([4065b36](https://github.com/ahyiru/web-design/commit/4065b3633a9051aaf6fa380d53d307c7a7f55407))
+
 ## [1.5.0](https://github.com/ahyiru/web-design/compare/v1.4.2...v1.5.0) (2023-02-02)
 
 
