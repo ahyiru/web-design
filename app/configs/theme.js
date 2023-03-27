@@ -1,20 +1,8 @@
-import {dark, dark1, light, light1, portal1, portal} from './themes';
+import {light, light1, dark, dark1, portal1, portal} from './themes';
 
 import * as themes from './themes/themes';
 
 const themeList = getIntls => [
-  {
-    name: getIntls('theme.dark', 'dark'),
-    key: 'dark',
-    list: dark,
-    type: 'theme',
-  },
-  {
-    name: getIntls('theme.dark1', 'dark1'),
-    key: 'dark1',
-    list: dark1,
-    type: 'theme',
-  },
   {
     name: getIntls('theme.light', 'light'),
     key: 'light',
@@ -25,6 +13,18 @@ const themeList = getIntls => [
     name: getIntls('theme.light1', 'light1'),
     key: 'light1',
     list: light1,
+    type: 'theme',
+  },
+  {
+    name: getIntls('theme.dark', 'dark'),
+    key: 'dark',
+    list: dark,
+    type: 'theme',
+  },
+  {
+    name: getIntls('theme.dark1', 'dark1'),
+    key: 'dark1',
+    list: dark1,
     type: 'theme',
   },
   {

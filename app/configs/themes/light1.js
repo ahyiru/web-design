@@ -1,26 +1,24 @@
 const sizes = {
   '--maxWidth': '100vw',
-  '--menuWidth': '230px',
-  '--collapseWidth': '70px',
-  '--collapseMenuWidth': '189px',
-  '--headerHeight': '70px',
-  '--footerHeight': '60px',
+  '--menuWidth': '220px',
+  '--collapseWidth': '68px',
+  '--collapseMenuWidth': '180px',
+  '--headerHeight': '60px',
+  '--footerHeight': '50px',
   '--breadHeight': '50px',
-  '--menuItemHeight': '45px',
+  '--menuItemHeight': '48px',
 };
 const colors = {
   '--appColor': '#495057',
-  '--appBgColor': '#f8f8fb',
-  '--bannerBgColor': '#2a3042',
-  '--navBgColor': '#ffffff',
-  '--menuBgColor': '#2a3042',
+  '--appBgColor': '#f3f4f7',
+  '--bannerBgColor': '#ffffff',
+  '--navBgColor': '#fcfcfc',
+  '--menuBgColor': '#ffffff',
   '--panelBgColor': '#ffffff',
-  '--linkColor': '#455a64',
+  '--linkColor': '#495057',
   '--linkHoverColor': 'var(--blue1)',
   '--linkActiveColor': 'var(--blue2)',
-  '--asideLinkColor': '#f0f0f0',
-  '--bannerLinkColor': '#f0f0f0',
-  '--borderColor': '#eff2f7',
+  '--borderColor': '#ebeef5',
 };
 
 export default {

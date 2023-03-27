@@ -100,7 +100,7 @@ const Index = props => {
           </Button>
         </Form.Item>
         <Form.Item>
-          <Button block onClick={() => onFinish({name: 'test1@zys.com', password: 'test1234'})}>
+          <Button block onClick={() => onFinish({email: 'test1@zys.com', password: 'test1234'})}>
             {getIntls('login.visitor')}
           </Button>
         </Form.Item>
