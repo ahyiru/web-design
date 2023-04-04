@@ -61,7 +61,7 @@
     "@antv/x6-react-components": "^2.0.7",
     "@antv/x6-react-shape": "^2.1.1",
     "@huxy/components": "^2.0.4",
-    "@huxy/layout": "^2.0.1",
+    "@huxy/layout": "^2.0.2",
     "@huxy/materials": "^1.0.2",
     "@huxy/router": "^2.0.1",
     "@huxy/use": "^2.0.1",

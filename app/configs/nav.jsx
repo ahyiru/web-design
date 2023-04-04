@@ -51,6 +51,7 @@ export const leftNav = () => {
       key: 'collapse',
       name: left?.collapse ?? 'collapse',
       type: 'collapse',
+      smShow: true,
       Custom: props => <CustomCollapse {...props} />,
     },
     {
@@ -113,6 +114,7 @@ export const leftNav = () => {
       key: 'configs',
       icon: <Icon icon="ToolOutlined" />,
       type: 'configs',
+      smShow: true,
       Custom: props => <Settings {...props} />,
     },
     {
@@ -129,6 +131,7 @@ export const rightNav = language => {
     {
       key: 'username',
       name: user?.name || right?.user,
+      smShow: true,
       img: user?.avatar || defUser,
       children: [
         {
@@ -227,6 +230,7 @@ export const rightNav = language => {
     },
     {
       key: 'themeModel',
+      smShow: true,
       Custom: props => <ThemeModel {...props} />,
     },
     {

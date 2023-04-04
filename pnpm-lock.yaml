@@ -26,8 +26,8 @@ dependencies:
     specifier: ^2.0.4
     version: 2.0.4(react-dom@18.2.0)(react@18.2.0)
   '@huxy/layout':
-    specifier: ^2.0.1
-    version: 2.0.1(react@18.2.0)
+    specifier: ^2.0.2
+    version: 2.0.2(react@18.2.0)
   '@huxy/materials':
     specifier: ^1.0.2
     version: 1.0.2(react@18.2.0)
@@ -2933,8 +2933,8 @@ packages:
       fs-extra: 11.1.1
     dev: true
 
-  /@huxy/layout@2.0.1(react@18.2.0):
-    resolution: {integrity: sha512-fJEzTFEnP2LQjnFzqjeCQVvxfi7avB/201WjV/e+PmqHdrvcQoUWHqPqPtH1y9mZAMzH1QSNa+VrzTvuEYKVEA==}
+  /@huxy/layout@2.0.2(react@18.2.0):
+    resolution: {integrity: sha512-msb3iPLdzlJnzqsMrupgZUxZAHQGOMNu0qkNRyTp4kndwt8NRAether7EBTZABcQbXcTtXlSZZCYBy4ENG+0wg==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
