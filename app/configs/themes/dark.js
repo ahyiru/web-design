@@ -3,10 +3,10 @@ const sizes = {
   '--menuWidth': '220px',
   '--collapseWidth': '68px',
   '--collapseMenuWidth': '180px',
-  '--headerHeight': '60px',
-  '--footerHeight': '50px',
-  '--breadHeight': '50px',
-  '--menuItemHeight': '48px',
+  '--headerHeight': '64px',
+  '--footerHeight': '52px',
+  '--breadHeight': '42px',
+  '--menuItemHeight': '45px',
 };
 const colors = {
   '--appColor': '#ced4da',

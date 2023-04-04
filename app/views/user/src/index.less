@@ -13,6 +13,17 @@
     background-repeat: no-repeat;*/
     background-color: #3f4e62;
     color: #fff;
+    :global {
+      .link {
+        color: #f0f0f0;
+        &:hover {
+          color: var(--blue1);
+        }
+        &:active, &.active {
+          color: var(--blue2);
+        }
+      }
+    }
     .login-panel {
       width: 320px;
       border-radius: 2px;
