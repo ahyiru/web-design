@@ -26,20 +26,20 @@ dependencies:
     specifier: ^2.0.4
     version: 2.0.4(react-dom@18.2.0)(react@18.2.0)
   '@huxy/layout':
-    specifier: ^2.0.2
-    version: 2.0.2(react@18.2.0)
+    specifier: ^2.0.3
+    version: 2.0.3(react@18.2.0)
   '@huxy/materials':
     specifier: ^1.0.2
     version: 1.0.2(react@18.2.0)
   '@huxy/router':
-    specifier: ^2.0.1
-    version: 2.0.1(react@18.2.0)
+    specifier: ^2.0.2
+    version: 2.0.2(react@18.2.0)
   '@huxy/use':
     specifier: ^2.0.1
     version: 2.0.1(react@18.2.0)
   '@huxy/utils':
-    specifier: ^2.0.4
-    version: 2.0.4
+    specifier: ^2.0.5
+    version: 2.0.5
   antd:
     specifier: ^5.4.0
     version: 5.4.0(react-dom@18.2.0)(react@18.2.0)
@@ -2933,8 +2933,8 @@ packages:
       fs-extra: 11.1.1
     dev: true
 
-  /@huxy/layout@2.0.2(react@18.2.0):
-    resolution: {integrity: sha512-msb3iPLdzlJnzqsMrupgZUxZAHQGOMNu0qkNRyTp4kndwt8NRAether7EBTZABcQbXcTtXlSZZCYBy4ENG+0wg==}
+  /@huxy/layout@2.0.3(react@18.2.0):
+    resolution: {integrity: sha512-waavEeMk5JZm+O/AlaVtFHX6B748jQ2ZbjE9YJiXEf5oM4IGLPVMwj6TuIFR8OIRfOlPp/30xRbMlqMkE7x9VQ==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
@@ -3032,8 +3032,8 @@ packages:
       - webpack-dev-server
     dev: true
 
-  /@huxy/router@2.0.1(react@18.2.0):
-    resolution: {integrity: sha512-3pe6KZOwqTdovPX1xv/1SmQkyUHjwtxRHSHPBWqmRrxcRkw3rjIQwWlf/GHkCWSVjkpZhZi7PMfD3YZUsNaMWA==}
+  /@huxy/router@2.0.2(react@18.2.0):
+    resolution: {integrity: sha512-VUk+UyBqk6DoCmTlMLqcmm157BRJYTmmWORXTyDF3pSYW7E/9K9qvXiOIvkrh40asM7B6yNrCeIzoI6R53WiNg==}
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
@@ -3048,8 +3048,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@huxy/utils@2.0.4:
-    resolution: {integrity: sha512-tBQh25UELJ7a54r5zHuY61mGtcKPLaU+Fcnj6q136aAE83M+oO6tDen95gwl03J7l27vIEgrLNqHxWM9PtBBeA==}
+  /@huxy/utils@2.0.5:
+    resolution: {integrity: sha512-53iXKvBtmHI5dZTb+VpRNXooSbUUHQ04xAFjX1BTeDC/TWn0+1Ps1ge2t3kpD7/dKY5AdNbMKJq/H7vLPo2grA==}
     dev: false
 
   /@icons/material@0.2.4(react@18.2.0):
