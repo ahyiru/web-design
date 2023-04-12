@@ -32,7 +32,6 @@ const changeLang = ({key}) => langStore.setState(key);
 const buildInfo = buildTime
   ? [
     {
-      divider: true,
       key: 'version',
       type: 'version',
       name: 'version',

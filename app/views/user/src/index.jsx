@@ -16,10 +16,10 @@ const Index = props => (
       <div className={styles.content}>{props.children}</div>
     </div>
     <div className={styles.copyright}>
-      <a className={styles.copy} href="https://ihuxy.com">
+      <a className={`${styles.copy} link`} href="https://ihuxy.com">
         ©2022 ihuxy
       </a>
-      <a className={styles.right} href="https://beian.miit.gov.cn/">
+      <a className={`${styles.right} link`} href="https://beian.miit.gov.cn/">
         京ICP备15005899号-2
       </a>
     </div>

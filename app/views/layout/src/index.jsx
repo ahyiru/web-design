@@ -2,7 +2,8 @@ import {useState} from 'react';
 import {Input, InputNumber, Slider, Button, message, Select, Radio, Checkbox} from 'antd';
 import {storage, copyToClipboard} from '@huxy/utils';
 import {useDebounce} from '@huxy/use';
-import {Row, Col} from '@app/components/row';
+import {Row, Col} from '@huxy/components';
+// import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';
 // import TimeBar from '@app/components/test1';
@@ -153,7 +154,7 @@ const Index = props => {
         </Col>
         <Col>
           <Row>
-            <Col span={4}>
+            <Col span={4} sm={12} xs={12}>
               <Panel>
                 <h3>{getIntls('main.layout.layoutDesign')}</h3>
                 <div className="vertical-item">
@@ -207,7 +208,7 @@ const Index = props => {
                 </Row>
               </Panel>
             </Col>
-            <Col span={4}>
+            <Col span={4} sm={12} xs={12}>
               <Panel>
                 <h3>{getIntls('main.layout.sizeDesign')}</h3>
                 {getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
@@ -240,7 +241,7 @@ const Index = props => {
                 ))}
               </Panel>
             </Col>
-            <Col span={4}>
+            <Col span={4} sm={12} xs={12}>
               <Panel className="color-picker-panel">
                 <h3>{getIntls('main.layout.colorDesign')}</h3>
                 {Object.keys(theme.list.colors).map(key => (

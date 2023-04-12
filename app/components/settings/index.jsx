@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {Drawer, Space, Input, InputNumber, Slider, Button, message, Select, Radio, Checkbox} from 'antd';
 import {SettingOutlined} from '@ant-design/icons';
-import {TabHeader} from '@huxy/components';
+import {TabHeader, Row, Col} from '@huxy/components';
 import {useDebounce} from '@huxy/use';
 import {storage, copyToClipboard} from '@huxy/utils';
-import {Row, Col} from '@app/components/row';
+// import {Row, Col} from '@app/components/row';
 // import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';
 import getThemeList from '@app/configs/theme';
