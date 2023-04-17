@@ -5,7 +5,7 @@ import {PROXY} from '@app/configs';
 
 import {logout} from '@app/utils/utils';
 
-const TARGET = PROXY?.prefix ?? '/api';
+const TARGET = Array.isArray(PROXY) ? PROXY[0]?.prefix : PROXY?.prefix ?? '/api';
 
 const success_code = [200, 10000];
 

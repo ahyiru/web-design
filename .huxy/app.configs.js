@@ -8,9 +8,14 @@ const app = {
   PROD_ROOT_DIR: '/',
   projectName: '...',
   PROXY: [
+    /* {
+      url: 'http://api.ihuxy.com',
+      prefix: '/huxyapi',
+      pathRewrite: {'^/huxyapi': ''},
+    }, */
     {
-      url: 'http://ihuxy.com:9202',
-      prefix: '/api',
+      url: 'https://ihuxy.com',
+      prefix: '/huxyapi',
     },
     {
       url: 'http://ihuxy.com:3333',
