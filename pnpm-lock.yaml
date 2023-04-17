@@ -103,8 +103,8 @@ dependencies:
 
 devDependencies:
   '@huxy/pack':
-    specifier: ^1.1.6
-    version: 1.1.6(@types/node@18.15.11)(ts-node@10.9.1)(typescript@5.0.4)
+    specifier: ^1.1.8
+    version: 1.1.8(@types/node@18.15.11)(ts-node@10.9.1)(typescript@5.0.4)
   husky:
     specifier: ^8.0.3
     version: 8.0.3
@@ -2240,8 +2240,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /@csstools/postcss-gradients-interpolation-method@3.0.3(postcss@8.4.22):
-    resolution: {integrity: sha512-0i6HQ8V3jcGEEhhGPAQdMemPjXTOct9qDYLIzjsgKHhrHVwhjwBVcUV70658vJJmrJJvVXgZx2qc4S6okKZJpg==}
+  /@csstools/postcss-gradients-interpolation-method@3.0.4(postcss@8.4.22):
+    resolution: {integrity: sha512-GgKoY7OlvL65UPigEdlrvMAUCR5kOQCjtue2/36TPrBNoRS6KM2KOqmjIVsxEwYYwK+L28pdnM8r10m03hhZxA==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
@@ -2936,8 +2936,8 @@ packages:
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dev: true
 
-  /@huxy/pack@1.1.6(@types/node@18.15.11)(ts-node@10.9.1)(typescript@5.0.4):
-    resolution: {integrity: sha512-+IlsJSHDzTStqluQcfBwNmzeneK6xMs9NdKhpiUfYm9CwpOdA9qqG0JBAEvh2RMvjQI3HIXecMCVD5RFv/WsRQ==}
+  /@huxy/pack@1.1.8(@types/node@18.15.11)(ts-node@10.9.1)(typescript@5.0.4):
+    resolution: {integrity: sha512-4HwkmpM2i1i09fQ1SG0zTpApCaWvd6JddsQxredGMOqP64YnKADiagi9yZh92kq80FD/Wd622u/vFlYRalD0PQ==}
     engines: {node: '>=19.0.0'}
     hasBin: true
     dependencies:
@@ -2979,7 +2979,7 @@ packages:
       postcss: 8.4.22
       postcss-less: 6.0.0(postcss@8.4.22)
       postcss-loader: 7.2.4(@types/node@18.15.11)(postcss@8.4.22)(ts-node@10.9.1)(typescript@5.0.4)(webpack@5.79.0)
-      postcss-preset-env: 8.3.1(postcss@8.4.22)
+      postcss-preset-env: 8.3.2(postcss@8.4.22)
       prettier: 2.8.7
       standard-version: 9.5.0
       style-loader: 3.3.2(webpack@5.79.0)
@@ -9701,8 +9701,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /postcss-preset-env@8.3.1(postcss@8.4.22):
-    resolution: {integrity: sha512-k3Y8BXbVLBAufrla3CNmQJhMS1iRuT9LFlysYvzs1rU5E78+ShX2u0EUL6KpMi0pDJO3wZcuVYSR8cgukfoRtg==}
+  /postcss-preset-env@8.3.2(postcss@8.4.22):
+    resolution: {integrity: sha512-VSAOsfxTXzO/gX5QljC8x8hN3ABbD9iqqLgqHqohBdNI5FhJptwpl96kpu+kYvvzK7BWwaHYou0IeYrp+NqmcQ==}
     engines: {node: ^14 || ^16 || >=18}
     peerDependencies:
       postcss: ^8.4
@@ -9711,7 +9711,7 @@ packages:
       '@csstools/postcss-color-function': 2.2.1(postcss@8.4.22)
       '@csstools/postcss-color-mix-function': 1.0.1(postcss@8.4.22)
       '@csstools/postcss-font-format-keywords': 2.0.2(postcss@8.4.22)
-      '@csstools/postcss-gradients-interpolation-method': 3.0.3(postcss@8.4.22)
+      '@csstools/postcss-gradients-interpolation-method': 3.0.4(postcss@8.4.22)
       '@csstools/postcss-hwb-function': 2.2.1(postcss@8.4.22)
       '@csstools/postcss-ic-unit': 2.0.2(postcss@8.4.22)
       '@csstools/postcss-is-pseudo-class': 3.2.0(postcss@8.4.22)
