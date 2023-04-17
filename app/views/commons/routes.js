@@ -25,7 +25,7 @@ const routes = {
     {
       path: '/canvas',
       name: '图形绘制',
-      icon: 'AreaChartOutlined',
+      icon: 'PictureOutlined',
       children: [
         {
           path: '/canvas',
@@ -72,7 +72,7 @@ const routes = {
     {
       path: '/x6-demo',
       name: 'x6',
-      icon: 'FundOutlined',
+      icon: 'BoxPlotOutlined',
       component: () => import('./src/x6-demo/pages'),
     },
     ...slateRoutes,

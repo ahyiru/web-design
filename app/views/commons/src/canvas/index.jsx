@@ -1,7 +1,8 @@
 import {useState, useEffect, useRef} from 'react';
-import {Dropdown, Menu, Button, Tag, Upload, message} from 'antd';
+import {Dropdown, Button, Tag, Upload} from 'antd';
 import {FontColorsOutlined, BgColorsOutlined} from '@ant-design/icons';
 import {useIntls} from '@app/components/intl';
+import {message} from '@app/utils/staticFunction';
 import draw from './draw';
 import img from './1.jpg';
 

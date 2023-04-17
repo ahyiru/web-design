@@ -1,4 +1,4 @@
-import {Form, Input, Button, message, Select} from 'antd';
+import {Form, Input, Button, Select} from 'antd';
 
 import {Row, Col} from '@huxy/components';
 
@@ -11,6 +11,8 @@ import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
 
 import {useIntls} from '@app/components/intl';
+
+import {message} from '@app/utils/staticFunction';
 
 const {addProjectFn, editProjectFn} = apiList;
 

@@ -170,4 +170,4 @@ module.exports = {
 
 ![7](./images/7.png)
 
-[测试地址](http://ihuxy.com/apis)
+[测试地址](https://ihuxy.com/apps/apis)

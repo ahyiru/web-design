@@ -1,33 +1,22 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {Badge} from 'antd';
 import {BellOutlined} from '@ant-design/icons';
 import {useRoute} from '@huxy/router';
-import {useStore} from '@huxy/use';
-
-import {apiList} from '@app/views/playground/src/messages/configs';
+import apiList from '@app/utils/getApis';
+import {useNotifyStore} from '@app/store/stores';
 
 const Notify = props => {
   const {router} = useRoute();
-  const [, , subscribe] = useStore('huxy-notify', []);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useNotifyStore();
   useEffect(() => {
     const getMes = async () => {
-      const {result} = await apiList.listMessage({current: 1, size: 1000});
-      const mes = (result?.list ?? []).filter(item => item.active == 0);
-      setCount(mes.length);
+      const {result} = await apiList.listMessageFn({current: 1, size: 100, status: 0});
+      setCount(result.total);
     };
-    const cancelSub = subscribe(result => {
-      const mes = (result ?? []).filter(item => item.active == 0);
-      setCount(mes.length);
-    });
     getMes();
-    return cancelSub;
   }, []);
   const handleClick = e => {
-    router.push({
-      path: '/playground/messages',
-      state: {tab: 0},
-    });
+    router.push('/messages');
   };
   return (
     <span className="link notify-item" title="notify" onClick={handleClick}>

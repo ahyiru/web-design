@@ -1,0 +1,80 @@
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  // display:inline-block;
+}
+.file-system{
+  .fs-info{
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    &>div, &>a, &>span {
+      padding: 10px;
+      flex: 1;
+      .ellipsis();
+    }
+    &.fs-header{
+      font-weight: 600;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+  .fs-topbar{
+    overflow: hidden;
+    padding: 10px;
+    background: var(--panelBgColor);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .current-route {
+      li {
+        float: left;
+        display: block;
+        position: relative;
+        &:not(:last-of-type) {
+          margin-right: 0;
+          &::after {
+            content: '/';
+            font-weight: bolder;
+            color: currentColor;
+            font-size: 12px;
+            vertical-align: bottom;
+          }
+        }
+        .link {
+          padding: 2px 8px;
+        }
+      }
+    }
+    .fs-back {
+      float: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      .ico-left{
+        margin-right: 4px;
+        margin-top: -2px;
+      }
+    }
+    .right-bar {
+      button {
+        margin-right: 1.2rem;
+      }
+    }
+  }
+}
+
+.drop-list{
+  ul{
+    li{
+      cursor: pointer;
+      &:not(:last-child){
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      }
+      .link {
+        display: block;
+        padding: 6px 12px;
+      }
+    }
+  }
+}

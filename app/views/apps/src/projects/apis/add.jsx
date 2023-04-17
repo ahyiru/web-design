@@ -1,4 +1,4 @@
-import {Form, Input, Button, message, Select} from 'antd';
+import {Form, Input, Button, Select} from 'antd';
 
 import {Row, Col} from '@huxy/components';
 
@@ -12,6 +12,8 @@ import Panel from '@app/components/panel';
 import {userInfoStore} from '@app/store/stores';
 
 import Intls from '@app/components/intl';
+
+import {message} from '@app/utils/staticFunction';
 
 import {defProject} from '@app/configs';
 

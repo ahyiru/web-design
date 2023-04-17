@@ -1,11 +1,11 @@
 const layout = {
   saveConfig: 'save configs',
   copyConfig: 'copy config',
-  menuType: 'menuType：',
+  menuType: 'menuType',
   vertical: 'vertical',
   horizontal: 'horizontal',
   compose: 'compose',
-  fontSize: 'font size：',
+  fontSize: 'font size',
   layoutDesign: 'layout',
   sizeDesign: 'size',
   colorDesign: 'color',

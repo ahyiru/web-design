@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Table, Tag, Space, Input, Button, Modal, Form, Tooltip, message} from 'antd';
+import {Table, Tag, Space, Input, Button, Modal, Form, Tooltip} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {formatTime} from '@huxy/utils';
@@ -13,6 +13,7 @@ import Ellipsis from '@app/components/ellipsis';
 
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
+import {message} from '@app/utils/staticFunction';
 
 const {listProjectFn, deleteProjectFn} = apiList;
 

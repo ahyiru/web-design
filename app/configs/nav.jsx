@@ -1,6 +1,7 @@
-import {message} from 'antd';
 import html2canvas from 'html2canvas';
 import {dlfile, formatTime} from '@huxy/utils';
+
+import {notAdmin} from '@app/utils/isAdmin';
 
 import {langStore, userInfoStore} from '@app/store/stores';
 import {getIntls} from '@app/components/intl';
@@ -13,6 +14,7 @@ import Search from '@app/components/search';
 import ThemeModel from '@app/components/themeModel';
 import Icon from '@app/components/icon';
 
+import {message} from '@app/utils/staticFunction';
 import {logout} from '@app/utils/utils';
 import getWeb3 from '@app/web3/getWeb3';
 
@@ -22,6 +24,7 @@ import defUser from '@app/assets/images/user/2.png';
 import wx from '@app/assets/images/wx.jpg';
 import metamask from '@app/assets/images/metamask.svg';
 import langList from './langList';
+import ProjectList from './project';
 
 import {buildTime} from '.';
 
@@ -32,6 +35,7 @@ const changeLang = ({key}) => langStore.setState(key);
 const buildInfo = buildTime
   ? [
     {
+      // divider: true,
       key: 'version',
       type: 'version',
       name: 'version',
@@ -45,6 +49,7 @@ const buildInfo = buildTime
 
 export const leftNav = () => {
   const left = getIntls('nav.left', {});
+  const isAdmin = !notAdmin();
   return [
     {
       key: 'collapse',
@@ -59,43 +64,8 @@ export const leftNav = () => {
       type: 'projectList',
       arrowDir: 'lt',
       Ricon: true,
-      children: [
-        {
-          key: 'scenedesign',
-          name: 'scenes',
-          icon: <Icon icon="ApiOutlined" />,
-          type: 'link',
-          link: 'http://ihuxy.com:7000',
-        },
-        {
-          key: 'webgl',
-          name: 'webgl',
-          icon: <Icon icon="ApiOutlined" />,
-          type: 'link',
-          link: 'http://ihuxy.com:8081',
-        },
-        {
-          key: 'filesystem',
-          name: 'filesystem',
-          icon: <Icon icon="ApiOutlined" />,
-          type: 'link',
-          link: 'http://ihuxy.com:8020',
-        },
-        {
-          key: 'PhoenixUI',
-          name: 'PhoenixUI',
-          icon: <Icon icon="ApiOutlined" />,
-          type: 'link',
-          link: 'http://ihuxy.com:8088/',
-        },
-        {
-          key: 'API文档',
-          name: left?.apis ?? 'API文档',
-          icon: <Icon icon="ApiOutlined" />,
-          type: 'link',
-          link: 'http://ihuxy.com:8010',
-        },
-      ],
+      smShow: true,
+      ChildRender: props => <ProjectList {...props} isAdmin={isAdmin} />,
     },
     {
       key: 'wechat',
@@ -139,6 +109,13 @@ export const rightNav = language => {
           type: 'profile',
           icon: <Icon icon="UserOutlined" />,
           path: '/profile',
+        },
+        {
+          key: 'order',
+          name: '我的订单',
+          type: 'order',
+          icon: <Icon icon="ShoppingCartOutlined" />,
+          path: '/order',
         },
         {
           key: 'settings',

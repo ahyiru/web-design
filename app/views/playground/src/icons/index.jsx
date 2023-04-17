@@ -1,6 +1,6 @@
-import {message} from 'antd';
 import {Row, Col} from '@huxy/components';
 import {copyToClipboard} from '@huxy/utils';
+import {message} from '@app/utils/staticFunction';
 
 import './index.less';
 const icons = [

@@ -1,11 +1,11 @@
 const layout = {
   saveConfig: '保存配置',
   copyConfig: '拷贝配置',
-  menuType: '菜单类型：',
+  menuType: '菜单类型',
   vertical: '纵向',
   horizontal: '横向',
   compose: '组合',
-  fontSize: '字体大小：',
+  fontSize: '字体大小',
   layoutDesign: '布局',
   sizeDesign: '大小',
   colorDesign: '颜色',

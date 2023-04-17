@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Table, Space, Input, Button, Modal, Form, Tooltip, message} from 'antd';
+import {Table, Space, Input, Button, Modal, Form, Tooltip} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {formatTime} from '@huxy/utils';
@@ -14,6 +14,7 @@ import {userInfoStore} from '@app/store/stores';
 
 import {useIntls} from '@app/components/intl';
 
+import {message} from '@app/utils/staticFunction';
 import apiList from '@app/utils/getApis';
 import {defProject} from '@app/configs';
 

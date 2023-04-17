@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useRef} from 'react';
-import {message} from 'antd';
 import '@antv/x6-react-shape';
 import {useDrop} from 'react-dnd';
+import {message} from '@app/utils/staticFunction';
 import {DRAGGABLE_ALGO_COMPONENT, DRAGGABLE_MODEL} from '../../constants/graph';
 import {useExperimentGraph} from '../rx-models/experiment-graph';
 import {FloatingContextMenu} from './elements/floating-context-menu';

@@ -2,6 +2,7 @@ import {TitleHeader, CornerBorder, HalfBorder, BgBox, AnimateBorder} from '@huxy
 import apiList from '@app/utils/getApis';
 import useHandleList from '@app/hooks/useHandleList';
 import {Row, Col} from '@app/components/row';
+import darkTheme from '@app/configs/themes/dark';
 import DefPanel from '../components/panel';
 import ReactChart from '../components/reactChart';
 
@@ -25,7 +26,7 @@ const Bigscreen = props => {
   const visitCityOpt = getVisitCityOpt(list, {key: 'dark'});
   const firstloadOpt = getFirstloadOpt(list);
   return (
-    <div style={{minHeight: 'var(--containerHeight)', background: 'var(--appBgColor)', padding: '10px 15px'}}>
+    <div style={{...darkTheme.colors, minHeight: 'var(--containerHeight)', background: 'var(--appBgColor)', padding: '10px 15px'}}>
       <BgBox type="dot">
         <div style={{position: 'relative'}}>
           <TitleHeader title="前端监控大屏" />

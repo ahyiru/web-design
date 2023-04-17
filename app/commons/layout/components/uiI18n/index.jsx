@@ -1,4 +1,4 @@
-import {ConfigProvider} from 'antd';
+import {ConfigProvider, App} from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
 import jaJP from 'antd/locale/ja_JP';
@@ -31,7 +31,7 @@ const Index = props => {
         },
       }}
     >
-      {props.children}
+      <App>{props.children}</App>
     </ConfigProvider>
   );
 };

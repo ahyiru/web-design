@@ -11,11 +11,6 @@ const routes = [
         title: '登录',
         component: () => import('./src/login'),
       },
-      /* {
-        path: '/signin_test',
-        name: '登录',
-        component: () => import('./src/login_test'),
-      }, */
       {
         path: '/signup',
         name: '注册',

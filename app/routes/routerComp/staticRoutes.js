@@ -15,6 +15,12 @@ const routes = [
     component: () => import('@app/views/apps/src/projects/router/design/preview'),
   },
   {
+    path: '/md2html',
+    name: '文档',
+    hideMenu: true,
+    component: () => import('@app/views/playground/src/md2html'),
+  },
+  {
     path: '/x6-demo/:id',
     name: 'x6',
     hideMenu: true,
@@ -31,6 +37,13 @@ const routes = [
     name: 'carmodel',
     hideMenu: true,
     component: () => import('@app/views/dashboard/src/carmodel'),
+  },
+  {
+    path: '/wechat_scan',
+    name: '扫码登录',
+    title: '扫码登录',
+    hideMenu: true,
+    component: () => <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.4rem', height: 'var(--containerHeight)', color: '#43a047', fontWeight: 500}}>登录成功</div>,
   },
 ];
 

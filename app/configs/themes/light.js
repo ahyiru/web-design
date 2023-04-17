@@ -1,12 +1,12 @@
 const sizes = {
   '--maxWidth': '100vw',
-  '--menuWidth': '220px',
-  '--collapseWidth': '68px',
-  '--collapseMenuWidth': '180px',
-  '--headerHeight': '64px',
-  '--footerHeight': '52px',
-  '--breadHeight': '42px',
-  '--menuItemHeight': '45px',
+  '--menuWidth': '22rem',
+  '--collapseWidth': '6.8rem',
+  '--collapseMenuWidth': '18rem',
+  '--headerHeight': '6.4rem',
+  '--footerHeight': '5.2rem',
+  '--breadHeight': '4.2rem',
+  '--menuItemHeight': '4.5rem',
 };
 const colors = {
   '--appColor': '#495057',

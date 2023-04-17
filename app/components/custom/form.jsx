@@ -1,10 +1,12 @@
-import {useEffect, useState} from 'react';
-import {Form, Modal, message} from 'antd';
+import {useState} from 'react';
+import {Form, Modal} from 'antd';
 import {traverItem, clone} from '@huxy/utils';
 
 import customRender from '@app/utils/render';
 import apiList from '@app/utils/getApis';
 import * as rules from '@app/utils/rules';
+
+import {message} from '@app/utils/staticFunction';
 
 /* const formCfg={
   name:'',

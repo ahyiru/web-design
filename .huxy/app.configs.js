@@ -7,10 +7,16 @@ const app = {
   DEV_ROOT_DIR: '/',
   PROD_ROOT_DIR: '/',
   projectName: '...',
-  PROXY: {
-    url: 'http://ihuxy.com:9202',
-    prefix: '/api',
-  },
+  PROXY: [
+    {
+      url: 'http://ihuxy.com:9202',
+      prefix: '/api',
+    },
+    {
+      url: 'http://ihuxy.com:3333',
+      prefix: '/filesystem',
+    },
+  ],
   envConfigs: {
     // 全局环境变量
     name: '控制台',

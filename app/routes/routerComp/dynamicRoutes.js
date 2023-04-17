@@ -5,6 +5,8 @@ import dashboardRoutes from '@app/views/dashboard/routes';
 import lowcodeRoutes from '@app/views/lowcode/routes';
 import pageRoutes from '@app/views/page/routes';
 import playgroundRoutes from '@app/views/playground/routes';
+import messageRoutes from '@app/views/message/routes';
+import filesRoutes from '@app/views/files/routes';
 
 const profileRoutes = {
   path: '/profile',
@@ -14,4 +16,4 @@ const profileRoutes = {
   component: () => import('@app/views/apps/src/users/profile'),
 };
 
-export default [layoutRoutes, appRoutes, commonRoutes, dashboardRoutes, lowcodeRoutes, playgroundRoutes, pageRoutes, profileRoutes];
+export default [layoutRoutes, appRoutes, lowcodeRoutes, ...dashboardRoutes, filesRoutes, playgroundRoutes, pageRoutes, ...messageRoutes, profileRoutes];

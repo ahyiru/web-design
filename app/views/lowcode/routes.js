@@ -5,12 +5,12 @@ import LowCode from './src';
 const routes = {
   path: '/low-code',
   name: '低代码',
-  icon: 'CoffeeOutlined',
+  icon: 'CodeOutlined',
   children: [
     {
       path: '/dom',
       name: '原生dom',
-      icon: 'CodeOutlined',
+      icon: 'CoffeeOutlined',
       component: LowCode,
       loadData: {
         pageSchema,
@@ -19,7 +19,7 @@ const routes = {
     {
       path: '/ui',
       name: 'UI组件',
-      icon: 'CodeOutlined',
+      icon: 'DesktopOutlined',
       component: LowCode,
       loadData: {
         pageSchema,
@@ -28,7 +28,7 @@ const routes = {
     {
       path: '/users',
       name: '业务组件',
-      icon: 'CodeOutlined',
+      icon: 'ClusterOutlined',
       component: LowCode,
       loadData: {
         pageSchema,

@@ -2,7 +2,7 @@ const routes = [
   {
     path: '/design',
     name: '设计',
-    icon: 'ico-layout',
+    icon: 'DesktopOutlined',
     children: [
       {
         path: '/scene',

@@ -50,7 +50,7 @@ const formatType = 'YYYY-MM-DD HH:mm:ss';
 
 export const defaultTime = () => [dayjs().subtract(1, 'month'), dayjs()];
 
-const RangeTimePicker = ({getTime, defaultValue, value, showBtn}) => {
+const RangeTimePicker = ({getTime, defaultValue, value, showBtn, style, ...rest}) => {
   const dateConfigs = getDateConfigs();
   const dateBtn = getDateBtn(dateConfigs);
   const [dateValue, setDateValue] = useState(value);
@@ -86,7 +86,8 @@ const RangeTimePicker = ({getTime, defaultValue, value, showBtn}) => {
       showTime
       format={formatType}
       onChange={selectRangeTime}
-      style={{marginLeft: '12px'}}
+      style={{marginLeft: '12px', ...style}}
+      {...rest}
     />
   </>;
 };

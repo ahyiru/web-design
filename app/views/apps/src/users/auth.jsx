@@ -1,6 +1,6 @@
 import {useState, useCallback, useEffect} from 'react';
 
-import {Tree, Button, message, Input, Spin} from 'antd';
+import {Tree, Button, Input, Spin} from 'antd';
 
 import {DownOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 
@@ -13,7 +13,7 @@ import useFetchList from '@app/hooks/useFetchList';
 import Back from '@app/components/goBack';
 
 import Panel from '@app/components/panel';
-
+import {message} from '@app/utils/staticFunction';
 import Icons from '@app/utils/icons';
 
 import {useIntls} from '@app/components/intl';

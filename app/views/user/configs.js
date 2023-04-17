@@ -9,7 +9,7 @@ export const githubConfigs = {
 };
 
 export const wechatConfigs = {
-  appid: 'xxx',
+  appid: 'wx7f4df123f88372a5',
   wechat_oauth_url: 'https://open.weixin.qq.com/connect/oauth2/authorize',
   redirect_uri: 'https://ihuxy.com/user/signin',
   response_type: 'code',

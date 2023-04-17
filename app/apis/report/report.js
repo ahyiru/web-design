@@ -9,7 +9,7 @@ import apiList from '@app/utils/getApis';
 import info from './browserInfo';
 
 const report = params => {
-  if (!browserRouter || !isAuthed()) {
+  if (!isAuthed()) {
     return;
   }
   const routeInfo = getRoute();

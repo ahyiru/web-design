@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import {message} from 'antd';
 // import {TableOutlined, BarsOutlined} from '@ant-design/icons';
 import {TabHeader} from '@huxy/components';
 import {useStore} from '@huxy/use';
+import {message} from '@app/utils/staticFunction';
 import useHandleList from '@app/hooks/useHandleList';
 import List from './searchList';
 
@@ -62,16 +62,17 @@ const Index = props => {
   const topActions = {
     handleCheck,
   };
+  const tableCols = active ? tableHeader.slice(0, -1) : tableHeader;
   const tableProps = {
     RenderItem,
-    columns: getColumns(tableHeader, colsCfg(colActions)),
+    columns: getColumns(tableCols, colsCfg(colActions)),
     result,
     pageChange,
     searchList: handleSearchList,
-    rowSelection,
+    rowSelection: active ? null : rowSelection,
     formList,
     // listType,
-    actionList: actionList(topActions, !selectedRows.length),
+    actionList: active ? null : actionList(topActions, !selectedRows.length),
     paramsKey: JSON.stringify({...searchParmas, active}),
   };
 

@@ -1,0 +1,104 @@
+.car-model-dashboard {
+  --headerHeight: 32px;
+  position: relative;
+  height: var(--containerHeight);
+  // background: radial-gradient(circle at center, #fff 0, #f0f0f0 5%, #eee 10%, var(--appBgColor) 15%, var(--appBgColor) 100%);
+  background-color: var(--appBgColor);
+  padding: 10px 15px;
+  .car-model-header {
+    margin: 0;
+    height: var(--headerHeight);
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+  }
+  .car-model-container {
+    --mainHeight: calc(var(--containerHeight) - var(--headerHeight) - 20px);
+    --itemHeight: calc(var(--mainHeight) / 3);
+    height: var(--mainHeight);
+    .car-model-top {
+      height: calc(var(--itemHeight) * 2);
+    }
+    .car-model-bottom {
+      height: var(--itemHeight);
+    }
+    .car-model-item {
+      --itemHeaderHeight: 32px;
+      height: var(--itemHeight);
+      .car-model-item-content {
+        position: relative;
+        height: calc(var(--itemHeight) - var(--itemHeaderHeight));
+        .item-content-affix {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          color: #f0f0f0;
+          font-weight: 500;
+          p {
+            margin: 0;
+            span {
+              font-size: 20px;
+              font-weight: 700;
+              color: #ffffff;
+            }
+          }
+        }
+      }
+    }
+    .car-model-center {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(var(--itemHeight) * 2);
+    }
+  }
+}
+
+.model-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  height: var(--itemHeaderHeight);
+  padding-left: 12px;
+  border-bottom: 1px solid rgba(180, 180, 180, 0.08);
+  h3 {
+    margin: 0;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 25%;
+    width: 5px;
+    height: 50%;
+    background: linear-gradient(to right, var(--blue1), transparent);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .car-model-dashboard {
+    .car-model-header {
+      display: none;
+    }
+    .car-model-container {
+      .car-model-center {
+        height: calc(var(--itemHeight) * 3);
+      }
+      .car-model-item {
+        display: none;
+      }
+      .car-model-bottom {
+        display: none;
+      }
+    }
+  }
+  .model-item-header {
+    .model-rate-score {
+      display: none;
+    }
+  }
+}

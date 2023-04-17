@@ -1,12 +1,11 @@
 import {browserRouter} from '@app/configs';
 
 import configListRoutes from './src/configList/routes';
-import messagesRoutes from './src/messages/routes';
 
 const routes = {
   path: '/playground',
   name: 'Playground',
-  icon: 'ConsoleSqlOutlined',
+  icon: 'ToolOutlined',
   children: [
     {
       path: '/demo',
@@ -54,11 +53,6 @@ const routes = {
       component: () => import('./src/icons'),
     },
     {
-      path: '/md2html',
-      name: 'md2html',
-      component: () => import('./src/md2html'),
-    },
-    {
       path: '/panel',
       name: 'panel',
       component: () => import('./src/panel'),
@@ -79,7 +73,6 @@ const routes = {
       component: () => import('./src/tools'),
     },
     ...configListRoutes,
-    ...messagesRoutes,
   ],
 };
 

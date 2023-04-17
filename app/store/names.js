@@ -5,3 +5,4 @@ export const i18nsName = 'i18ns-store';
 export const userInfoName = 'userInfo-store';
 export const permissionName = 'permission-store';
 export const routersName = 'routers-store';
+export const notifyName = 'notify-store';

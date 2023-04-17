@@ -1,12 +1,13 @@
 import {useState} from 'react';
-import {Drawer, Space, Input, InputNumber, Slider, Button, message, Select, Radio, Checkbox} from 'antd';
+import {Drawer, Space, Input, InputNumber, Slider, Button, Select, Radio, Checkbox} from 'antd';
 import {SettingOutlined} from '@ant-design/icons';
-import {TabHeader, Row, Col} from '@huxy/components';
+import {TabHeader} from '@huxy/components';
 import {useDebounce} from '@huxy/use';
 import {storage, copyToClipboard} from '@huxy/utils';
-// import {Row, Col} from '@app/components/row';
+import {Row, Col} from '@app/components/row';
 // import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';
+import {message} from '@app/utils/staticFunction';
 import getThemeList from '@app/configs/theme';
 import {useMenuTypeStore, useThemeStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
@@ -26,17 +27,19 @@ const labelStyle = {
 const getSizeList = list =>
   Object.keys(list).map(key => {
     const size = list[key];
-    const value = size.replace(/[^0-9]/gi, '') - 0;
-    const unit = size.replace(value, '');
-    const units = Object.keys(sizeRules[key]);
-    const range = sizeRules[key][unit];
+    const unit = size.replace(/\d+(\.\d)?/gi, '');
+    const value = size.replace(unit, '') - 0;
+    const rules = sizeRules(unit)[key];
+    const units = Object.keys(rules);
+    const [min, max] = rules[unit];
     return {
       key,
       value,
       unit,
       units,
-      min: range[0],
-      max: range[1],
+      min,
+      max,
+      step: unit === 'rem' ? '0.1' : 1,
     };
   });
 
@@ -138,7 +141,7 @@ const Index = props => {
     });
   };
   const changeUnit = (key, unit) => {
-    const value = unit === 'px' ? 1200 : 100;
+    const value = unit === 'px' ? 1280 : unit === 'rem' ? 128 : 100;
     theme.list.sizes[key] = `${value}${unit}`;
     changeLayout(theme.list);
     report({
@@ -208,19 +211,19 @@ const Index = props => {
         </div>
         <Row className="select-item">
           {getThemeList(getIntls).map(item => (
-            <Col key={item.key} span={6} onClick={e => selectTheme(item)}>
+            <Col key={item.key} span={6} sm={6} xs={6} onClick={e => selectTheme(item)}>
               <span className={`link item${item.key === theme.key ? ' selected' : ''}`}>{item.name}</span>
             </Col>
           ))}
         </Row>
       </>
     ),
-    size: getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
+    size: getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max, step}) => (
       <Row key={key} gutter={[10, 10]}>
-        <Col span={5}>
+        <Col span={6} sm={6} xs={6}>
           <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
         </Col>
-        <Col span={6}>
+        <Col span={6} sm={6} xs={6}>
           <InputNumber
             min={min}
             max={max}
@@ -239,16 +242,17 @@ const Index = props => {
                 units[0]
               )
             }
+            step={step}
           />
         </Col>
       </Row>
     )),
     color: Object.keys(theme.list.colors).map(key => (
       <Row key={key} gutter={[10, 10]}>
-        <Col span={5}>
+        <Col span={6} sm={6} xs={6}>
           <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
         </Col>
-        <Col span={6}>
+        <Col span={6} sm={6} xs={6}>
           <Input type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
         </Col>
       </Row>

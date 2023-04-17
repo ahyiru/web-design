@@ -1,9 +1,10 @@
-import {Form, Input, Button, message, InputNumber, Select} from 'antd';
+import {Form, Input, Button, InputNumber, Select} from 'antd';
 import {Row, Col} from '@huxy/components';
 import Back from '@app/components/goBack';
 import {layout, tailLayout} from '@app/utils/configs';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';
 import Panel from '@app/components/panel';
+import {message} from '@app/utils/staticFunction';
 
 import {useIntls} from '@app/components/intl';
 

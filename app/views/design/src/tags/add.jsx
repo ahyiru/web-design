@@ -1,9 +1,10 @@
 import {useState} from 'react';
-import {Form, Input, Button, message} from 'antd';
+import {Form, Input, Button} from 'antd';
 import {Row, Col} from '@huxy/components';
 import {useIntls} from '@app/components/intl';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
+import {message} from '@app/utils/staticFunction';
 
 // import {userInfoStore} from '@app/store/stores';
 

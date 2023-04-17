@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Form, Input, Button, message, InputNumber, Select} from 'antd';
+import {Form, Input, Button, InputNumber, Select} from 'antd';
 import {Row, Col} from '@huxy/components';
 import Back from '@app/components/goBack';
 import apiList from '@app/utils/getApis';
@@ -7,6 +7,7 @@ import {layout, tailLayout} from '@app/utils/configs';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';
 import Panel from '@app/components/panel';
 import {useIntls} from '@app/components/intl';
+import {message} from '@app/utils/staticFunction';
 
 const {addUserFn, editUserFn, listProjectFn} = apiList;
 
@@ -52,7 +53,7 @@ const Index = props => {
         </Col>
         <Col>
           <Panel>
-            <Form name="addUser" onFinish={onFinish} form={form} initialValues={item ?? {}} {...layout} style={{width: '50%'}} autoComplete="off">
+            <Form name="addUser" onFinish={onFinish} form={form} initialValues={item ?? {}} {...layout} style={{width: '100%', maxWidth: '600px'}} autoComplete="off">
               <Form.Item label={addFormText.name} name="name" rules={nameRule}>
                 <Input placeholder={addFormText.name} />
               </Form.Item>
@@ -63,8 +64,13 @@ const Index = props => {
                 <Input type="password" placeholder={addFormText.password} autoComplete="new-password" />
               </Form.Item>
               <Form.Item label={addFormText.role} name="role" rules={roleRule}>
-                <InputNumber placeholder={addFormText.role} />
+                <InputNumber placeholder={addFormText.role} style={{width: '160px'}} />
               </Form.Item>
+              {
+                item?.deadline ? <Form.Item label="截止日期" name="deadline">
+                  <InputNumber placeholder="deadline" style={{width: '160px'}} />
+                </Form.Item> : null
+              }
               <Form.Item label={addFormText.avatar} name="avatar">
                 <Input placeholder={addFormText.avatar} />
               </Form.Item>

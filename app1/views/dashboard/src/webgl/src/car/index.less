@@ -1,0 +1,55 @@
+.webgl-car-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  ::-webkit-color-swatch-wrapper,
+  ::-moz-color-swatch-wrapper {
+    padding: 0;
+  }
+  ::-webkit-color-swatch,
+  ::-moz-color-swatch {
+    border: 0;
+    border-radius: 4px;
+  }
+  .change-color {
+    width: 320px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    .color-picker {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      input {
+        padding: 0;
+        width: 42px;
+        height: 24px;
+        border-radius: 4px;
+        appearance: none;
+        background: none;
+        border: 0;
+      }
+    }
+  }
+  .webgl-car-model {
+    width: 100%;
+    height: 100%;
+  }
+  .model-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    .model-loading-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, calc(-50% - 60px));
+      font-size: 2.4rem;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+import Intls from '@app/components/intl';
+import styles from './index.less';
+import {logo} from '../configs';
+
+const Index = props => (
+  <div className={styles.page}>
+    <div className={styles['login-panel']}>
+      <div className={styles.title}>
+        <div className={styles.logo}>
+          <img src={logo} alt="logo" />
+        </div>
+        <h2>
+          <Intls keys="title">Ihuxy</Intls>
+        </h2>
+      </div>
+      <div className={styles.content}>{props.children}</div>
+    </div>
+    <div className={styles.copyright}>
+      <a className={`${styles.copy} link`} href="https://ihuxy.com">
+        ©2022 ihuxy
+      </a>
+      <a className={`${styles.right} link`} href="https://beian.miit.gov.cn/">
+        京ICP备15005899号-2
+      </a>
+    </div>
+  </div>
+);
+
+export default Index;

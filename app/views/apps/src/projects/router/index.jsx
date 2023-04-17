@@ -1,5 +1,5 @@
 import {useState, useCallback, useEffect} from 'react';
-import {Tree, Modal, Dropdown, Menu, message, Input, Spin, Button, Alert} from 'antd';
+import {Tree, Modal, Dropdown, Input, Spin, Button, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {traverItem, sort} from '@huxy/utils';
@@ -8,6 +8,7 @@ import useFetchList from '@app/hooks/useFetchList';
 import formatTree from '@app/utils/formatTree';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
+import {message} from '@app/utils/staticFunction';
 import customRender from '@app/utils/render';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';

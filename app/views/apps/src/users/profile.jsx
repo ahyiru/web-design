@@ -1,9 +1,10 @@
 import {useState} from 'react';
-import {Form, Input, Button, message, Tabs, Typography} from 'antd';
-import {UserOutlined, LockOutlined, MailOutlined} from '@ant-design/icons';
+import {Form, Input, Button, Tabs, Typography, Space} from 'antd';
+import {UserOutlined, LockOutlined, MailOutlined, MehOutlined, RiseOutlined} from '@ant-design/icons';
 import apiList from '@app/utils/getApis';
+import {message} from '@app/utils/staticFunction';
 
-import {nameRule, emailRule, passwordRule} from '@app/utils/rules';
+import {nameRule, emailRule, passwordRule, urlRule} from '@app/utils/rules';
 
 import Panel from '@app/components/panel';
 
@@ -11,8 +12,11 @@ import {userInfoStore} from '@app/store/stores';
 
 import {useIntls} from '@app/components/intl';
 
+import {roleList} from '@app/utils/configs';
+
 const formStyle = {
   padding: '10px 20px',
+  width: '100%',
   maxWidth: '600px',
 };
 
@@ -36,29 +40,48 @@ const Index = props => {
     }
   };
 
+  const roleLabel = roleList.find(item => item.value === values.role)?.label ?? '普通用户';
+
+  const leftDate = values.deadline ? Math.floor((values.deadline - new Date()) / 86400000) : 0;
+
   const items = [
     {
       key: '1',
       label: profile.title,
       children: (
-        <div style={formStyle}>
-          <Form name="profile" className="sm-form-style">
-            <Form.Item name="name" label={profile.name}>
-              <Typography.Text>{values.name}</Typography.Text>
-            </Form.Item>
-            <Form.Item name="email" label={profile.email}>
-              <Typography.Text>{values.email}</Typography.Text>
-            </Form.Item>
-            <Form.Item name="active" label={profile.active}>
-              <Typography.Text>{values.active ? profile.active_true : profile.active_false}</Typography.Text>
-            </Form.Item>
-            <Form.Item name="projectName" label={profile.projectName}>
-              <Typography.Text>{values.projectName}</Typography.Text>
-            </Form.Item>
-            <Form.Item name="role" label={profile.role}>
-              <Typography.Text>{values.role}</Typography.Text>
-            </Form.Item>
-          </Form>
+        <div style={{display: 'flex'}}>
+          <div style={formStyle}>
+            <Form name="profile" className="sm-form-style">
+              <Form.Item name="name" label={profile.name}>
+                <Typography.Text>{values.name}</Typography.Text>
+              </Form.Item>
+              <Form.Item name="email" label={profile.email}>
+                <Typography.Text>{values.email}</Typography.Text>
+              </Form.Item>
+              <Form.Item name="active" label={profile.active}>
+                <Typography.Text>{values.active ? profile.active_true : profile.active_false}</Typography.Text>
+              </Form.Item>
+              <Form.Item name="projectName" label={profile.projectName}>
+                <Typography.Text>{values.projectName}</Typography.Text>
+              </Form.Item>
+              <Form.Item name="role" label={profile.role}>
+                <Typography.Text>{roleLabel}</Typography.Text>
+              </Form.Item>
+              {
+                leftDate ? <Form.Item name="leftDate" label="会员剩余时间">
+                  <Typography.Text>{leftDate} 天</Typography.Text>
+                </Form.Item> : null
+              }
+            </Form>
+          </div>
+          <Space align="center" style={{width: '140px'}}>
+            {
+              values.role === 0 ? <Button block type="primary" icon={<RiseOutlined />} size="large" onClick={e => props.router.push('/member')}>开通会员</Button> : null
+            }
+            {
+              values.role > 0 ? <Button block type="primary" icon={<RiseOutlined />} size="large" onClick={e => props.router.push('/member')}>会员续费</Button> : null
+            }
+          </Space>
         </div>
       ),
     },
@@ -70,6 +93,9 @@ const Index = props => {
           <Form name="upProfile" className="sm-form-style" form={form} autoComplete="off" initialValues={values} onFinish={onFinish}>
             <Form.Item name="name" rules={nameRule}>
               <Input prefix={<UserOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder={upProfile.name} />
+            </Form.Item>
+            <Form.Item name="avatar" rules={urlRule}>
+              <Input prefix={<MehOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder="头像" />
             </Form.Item>
             <Form.Item name="email" rules={emailRule}>
               <Input disabled prefix={<MailOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder={upProfile.email} />

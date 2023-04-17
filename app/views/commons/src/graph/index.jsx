@@ -1,9 +1,8 @@
 import {useState, useContext} from 'react';
 import Graphin, {GraphinContext, Utils} from '@antv/graphin';
 import {ContextMenu, CreateEdge, Toolbar} from '@antv/graphin-components';
-import {message} from 'antd';
 import {TagFilled, DeleteFilled, ExpandAltOutlined, PlusCircleOutlined} from '@ant-design/icons';
-
+import {message} from '@app/utils/staticFunction';
 import testImage from '@app/assets/images/logo.png';
 
 const {Menu} = ContextMenu;

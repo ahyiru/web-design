@@ -1,11 +1,13 @@
 import {useState} from 'react';
 
-import {Tree, Modal, Dropdown, Menu, message, Input, Spin} from 'antd';
+import {Tree, Modal, Dropdown, Input, Spin} from 'antd';
 
 import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 
 import {useSearch} from '@huxy/use';
 import {traverItem, arr2TreeByPath, isValidArr} from '@huxy/utils';
+
+import {message} from '@app/utils/staticFunction';
 
 import apiList from '@app/utils/getApis';
 

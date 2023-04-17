@@ -1,0 +1,24 @@
+.footer-wrap {
+  height: 100%;
+  overflow: hidden;
+  padding: 0 var(--frame-spacing);
+  a {
+    padding: 0 6px;
+  }
+  .copyright {
+    float: left;
+  }
+  .link-list {
+    margin: 0;
+    float: right;
+    overflow: hidden;
+    li {
+      float: left;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .link-list {
+      display: none;
+    }
+  }
+}

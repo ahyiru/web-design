@@ -1,5 +1,6 @@
 import {RateScore} from '@huxy/materials';
 import {Row as DefRow, Col} from '@app/components/row';
+import darkTheme from '@app/configs/themes/dark';
 import ReactChart from '../components/reactChart';
 
 import CarModel from '../webgl/src/car';
@@ -36,7 +37,7 @@ const ItemHeader = ({index}) => {
 
 const CarDashboard = props => {
   return (
-    <div className="car-model-dashboard">
+    <div style={{...darkTheme.colors}} className="car-model-dashboard">
       <h2 className="car-model-header">车辆状态监测系统</h2>
       <div className="car-model-container">
         <div className="car-model-top">

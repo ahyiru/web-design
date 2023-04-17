@@ -13,6 +13,36 @@
   }
 }
 
+.project-list {
+  display: flex;
+  .path-list {
+    flex: 1;
+    padding: 15px;
+    width: 180px;
+    border-right: 1px solid var(--borderColor);
+  }
+  .link-list {
+    flex: 1;
+    padding: 15px;
+  }
+  .pl-item {
+    --itemHeight: 40px;
+    .link {
+      display: flex;
+      align-items: center;
+      height: var(--itemHeight) !important;
+      line-height: var(--itemHeight) !important;
+      padding: 0 !important;
+      border-radius: 4px;
+    }
+    .pl-icon {
+      display: block;
+      width: var(--itemHeight);
+      text-align: center;
+    }
+  }
+}
+
 .configs-drawer {
   .ant-drawer-header {
     background: var(--panelBgColor);

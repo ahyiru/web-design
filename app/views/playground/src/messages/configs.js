@@ -25,7 +25,7 @@ export const formList = [
   {
     type: 'input',
     name: 'name',
-    label: '用户名',
+    label: '标题',
     props: {
       placeholder: '请输入',
       allowClear: true,
@@ -66,7 +66,7 @@ export const colActions = [
 export const tableHeader = [
   {
     dataIndex: 'name',
-    title: '用户名',
+    title: '标题',
   },
   {
     dataIndex: 'message',
@@ -75,14 +75,7 @@ export const tableHeader = [
   {
     dataIndex: 'active',
     title: '状态',
-  },
-  /* {
-    dataIndex: 'github',
-    title: '绑定GitHub',
-  }, */
-  {
-    dataIndex: 'role',
-    title: '等级',
+    align: 'center',
   },
   {
     dataIndex: 'updatetime',

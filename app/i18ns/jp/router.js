@@ -33,7 +33,7 @@ const router = {
   '/low-code/users/add': '新增用户',
   '/low-code/users/edit/:id': '编辑用户',
   '/i18n': '语言管理',
-  '/dashboard': '仪表盘',
+  '/dashboard': '大屏',
   '/dashboard/screen1': '模板1',
   '/dashboard/screen2': '模板2',
   '/commons/suspense': 'suspense',

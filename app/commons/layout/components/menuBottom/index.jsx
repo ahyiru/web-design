@@ -27,7 +27,7 @@ const Index = ({collapsed, setCollapsed, isSmall}) => {
       }
       {(!isSmall && collapsed) ? null : (
         <Link
-          to="https://ihuxy.com/md2html"
+          to="/md2html"
           target="_blank"
           className="link-bar"
           onClick={() => {

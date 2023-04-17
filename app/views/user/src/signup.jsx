@@ -1,6 +1,7 @@
 import {useState} from 'react';
-import {Form, Input, Button, message, Result} from 'antd';
+import {Form, Input, Button, Result} from 'antd';
 import {UserOutlined, LockOutlined, MailOutlined, LeftOutlined} from '@ant-design/icons';
+import {message} from '@huxy/utils';
 import {useIntls} from '@app/components/intl';
 import {goPage} from '@app/utils/utils';
 import {apiList, formRules} from '../configs';

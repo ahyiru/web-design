@@ -1,5 +1,5 @@
-import {message as msgAlert} from 'antd';
-import {fetcher, storage, wrapPromise} from '@huxy/utils';
+import {fetcher, storage, wrapPromise, message as msgAlert} from '@huxy/utils';
+// import {message as msgAlert} from '@app/utils/staticFunction';
 
 import {PROXY} from '@app/configs';
 

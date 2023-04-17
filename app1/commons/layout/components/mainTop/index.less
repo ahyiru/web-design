@@ -1,0 +1,86 @@
+.clear {
+  &::after {
+    clear: both;
+    content: '';
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+}
+.main-top {
+  overflow: hidden;
+  z-index: 3;
+  // position:sticky;
+  // top:calc(var(--headerHeight) + var(--frame-spacing));
+  height: var(--breadHeight);
+  line-height: var(--breadHeight);
+  width: 100%;
+  // background:var(--panelBgColor);
+  // box-shadow:0 0 4px 2px rgba(0,0,0,.1);
+  padding: var(--frame-spacing);
+  padding-bottom: 0;
+  > ul {
+    height: calc(var(--breadHeight) - var(--frame-spacing));
+    line-height: calc(var(--breadHeight) - var(--frame-spacing));
+    .clear();
+    li {
+      display: block;
+      position: relative;
+      .link {
+        padding: 2px 8px;
+      }
+      .btn-bar {
+        color: #f0f0f0;
+        padding: 2px 14px;
+        border: 1px solid var(--blue1);
+        border-radius: 2px;
+        background-color: var(--blue2);
+      }
+    }
+  }
+  .left-bar {
+    float: left;
+    li {
+      float: left;
+    }
+  }
+  .right-bar {
+    float: right;
+    li {
+      float: left;
+    }
+  }
+  .bread {
+    li {
+      &:not(:last-of-type) {
+        margin-right: 0;
+        &::after {
+          content: '/';
+          // content:"\203A";
+          // margin-left:5px;
+          font-weight: bolder;
+          color: currentColor;
+          font-size: 12px;
+          vertical-align: bottom;
+        }
+      }
+    }
+  }
+  .tools-bar {
+    li {
+      &:not(:last-of-type) {
+        .link {
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            height: 20px;
+            width: 1px;
+            background-color: rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+    }
+  }
+}

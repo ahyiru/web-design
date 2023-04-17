@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import {Input, InputNumber, Slider, Button, message, Select, Radio, Checkbox} from 'antd';
+import {Input, InputNumber, Slider, Button, Select, Radio, Checkbox} from 'antd';
 import {storage, copyToClipboard} from '@huxy/utils';
 import {useDebounce} from '@huxy/use';
-import {Row, Col} from '@huxy/components';
-// import {Row, Col} from '@app/components/row';
+import {message} from '@app/utils/staticFunction';
+import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';
 // import TimeBar from '@app/components/test1';
@@ -26,17 +26,19 @@ const labelStyle = {
 const getSizeList = list =>
   Object.keys(list).map(key => {
     const size = list[key];
-    const value = size.replace(/[^0-9]/gi, '') - 0;
-    const unit = size.replace(value, '');
-    const units = Object.keys(sizeRules[key]);
-    const range = sizeRules[key][unit];
+    const unit = size.replace(/\d+(\.\d)?/gi, '');
+    const value = size.replace(unit, '') - 0;
+    const rules = sizeRules(unit)[key];
+    const units = Object.keys(rules);
+    const [min, max] = rules[unit];
     return {
       key,
       value,
       unit,
       units,
-      min: range[0],
-      max: range[1],
+      min,
+      max,
+      step: unit === 'rem' ? '0.1' : 1,
     };
   });
 
@@ -114,7 +116,7 @@ const Index = props => {
     });
   };
   const changeUnit = (key, unit) => {
-    const value = unit === 'px' ? 1200 : 100;
+    const value = unit === 'px' ? 1280 : unit === 'rem' ? 128 : 100;
     theme.list.sizes[key] = `${value}${unit}`;
     changeLayout(theme.list);
     report({
@@ -154,7 +156,7 @@ const Index = props => {
         </Col>
         <Col>
           <Row>
-            <Col span={4} sm={12} xs={12}>
+            <Col span={4}>
               <Panel>
                 <h3>{getIntls('main.layout.layoutDesign')}</h3>
                 <div className="vertical-item">
@@ -193,63 +195,78 @@ const Index = props => {
                     </Radio.Group>
                   </div>
                 </div>
+                {/* <div className="vertical-item">
+                  <label>{getIntls('main.layout.fontSize')}</label>
+                  <div>
+                    <Slider min={6} max={16} value={size} onChange={e => changeFont(e)} />
+                  </div>
+                </div> */}
+                <div className="vertical-item">
+                  <label>主题</label>
+                  <Row className="select-item">
+                    {getThemeList(getIntls).map(item => (
+                      <Col key={item.key} span={6} sm={6} xs={6} onClick={e => selectTheme(item)}>
+                        <span className={`link item${item.key === theme.key ? ' selected' : ''}`}>{item.name}</span>
+                      </Col>
+                    ))}
+                  </Row>
+                </div>
+              </Panel>
+            </Col>
+            <Col span={4}>
+              <Panel>
+                <h3>{getIntls('main.layout.sizeDesign')}</h3>
                 <div className="vertical-item">
                   <label>{getIntls('main.layout.fontSize')}</label>
                   <div>
                     <Slider min={6} max={16} value={size} onChange={e => changeFont(e)} />
                   </div>
                 </div>
-                <Row className="select-item">
-                  {getThemeList(getIntls).map(item => (
-                    <Col key={item.key} span={6} onClick={e => selectTheme(item)}>
-                      <span className={`link item${item.key === theme.key ? ' selected' : ''}`}>{item.name}</span>
-                    </Col>
-                  ))}
-                </Row>
+                <div className="vertical-item">
+                  <label>宽高配置</label>
+                  <div>
+                    {getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max, step}) => (
+                      <Row key={key} gutter={[10, 10]}>
+                        <Col span={6} sm={6} xs={6}>
+                          <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
+                        </Col>
+                        <Col span={6} sm={6} xs={6}>
+                          <InputNumber
+                            min={min}
+                            max={max}
+                            value={value}
+                            onChange={value => changeSizes(key, value, unit)}
+                            addonAfter={
+                              units.length > 1 ? (
+                                <Select value={unit} onChange={val => changeUnit(key, val)}>
+                                  {units.map(u => (
+                                    <Option key={u} value={u}>
+                                      {u}
+                                    </Option>
+                                  ))}
+                                </Select>
+                              ) : (
+                                units[0]
+                              )
+                            }
+                            step={step}
+                          />
+                        </Col>
+                      </Row>
+                    ))}
+                  </div>
+                </div>
               </Panel>
             </Col>
-            <Col span={4} sm={12} xs={12}>
-              <Panel>
-                <h3>{getIntls('main.layout.sizeDesign')}</h3>
-                {getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max}) => (
-                  <Row key={key} gutter={[10, 10]}>
-                    <Col span={5}>
-                      <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
-                    </Col>
-                    <Col span={6}>
-                      <InputNumber
-                        min={min}
-                        max={max}
-                        value={value}
-                        onChange={value => changeSizes(key, value, unit)}
-                        addonAfter={
-                          units.length > 1 ? (
-                            <Select value={unit} onChange={val => changeUnit(key, val)}>
-                              {units.map(u => (
-                                <Option key={u} value={u}>
-                                  {u}
-                                </Option>
-                              ))}
-                            </Select>
-                          ) : (
-                            units[0]
-                          )
-                        }
-                      />
-                    </Col>
-                  </Row>
-                ))}
-              </Panel>
-            </Col>
-            <Col span={4} sm={12} xs={12}>
+            <Col span={4}>
               <Panel className="color-picker-panel">
                 <h3>{getIntls('main.layout.colorDesign')}</h3>
                 {Object.keys(theme.list.colors).map(key => (
                   <Row key={key} gutter={[10, 10]}>
-                    <Col span={5}>
+                    <Col span={6} sm={6} xs={6}>
                       <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
                     </Col>
-                    <Col span={6}>
+                    <Col span={6} sm={6} xs={6}>
                       <Input type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
                     </Col>
                   </Row>

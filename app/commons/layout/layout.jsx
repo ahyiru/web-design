@@ -1,6 +1,7 @@
 import Layout from '@huxy/layout';
 import {i18nsStore} from '@app/store/stores';
 import getLang from '@app/utils/getLang';
+import staticFunction from '@app/utils/staticFunction';
 import {leftNav, rightNav} from '@app/configs/nav';
 import useFormatMenu from './components/useFormatMenu';
 
@@ -10,6 +11,7 @@ const Index = props => {
   const i18ns = i18nsStore.getState();
   const language = getLang();
   const [menus, noHeader] = useFormatMenu(props);
+  staticFunction();
   return <Layout
     title={i18ns?.title}
     {...menus}

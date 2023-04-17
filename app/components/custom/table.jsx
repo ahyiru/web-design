@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Table, Space, Button, Modal, message} from 'antd';
+import {Table, Space, Button, Modal} from 'antd';
 
 import {Row, Col} from '@huxy/components';
 import {validObj} from '@huxy/utils';
@@ -13,6 +13,7 @@ import Icon from '@app/components/icon';
 import {userInfoStore} from '@app/store/stores';
 
 import customRender from '@app/utils/render';
+import {message} from '@app/utils/staticFunction';
 
 import apiList from '@app/utils/getApis';
 

@@ -9,7 +9,7 @@ export const required = {
 
 // 标题
 export const titlePattern = {
-  pattern: /^[\u4E00-\u9FA5A-Za-z0-9_-]{2,20}$/,
+  pattern: /^[\u4E00-\u9FA5A-Za-z0-9_.-]{2,32}$/,
   message: '长度为2-20不含特殊字符!',
 };
 // 用户名
@@ -35,7 +35,7 @@ export const urlPattern = {
 };
 // 路由地址
 export const pathPattern = {
-  pattern: /^(\/[\w#?&=:-]+)+$/,
+  pattern: /^(\/[\w#?&=:.-]*)+$/,
   message: '请输入正确路径！',
 };
 // 版本号格式必须为X.Y.Z
@@ -45,12 +45,12 @@ export const versionPattern = {
 };
 // linux文件夹路径
 export const linuxPathPattern = {
-  pattern: /^\/(\w+\/?)+$/, // /^\/(?:[^/]+\/)*$/
+  pattern: /^\/(\w+\/?)*$/, // /^\/(?:[^/]+\/)*$/
   message: '请输入正确路径！',
 };
 // linux文件路径
 export const linuxFilePattern = {
-  pattern: /^\/(\w+\/)+\w+\.\w+$/, // /^\/(?:[^/]+\/)*[^/]+$/
+  pattern: /^\/(\w+\/)*\w+\.\w+$/, // /^\/(?:[^/]+\/)*[^/]+$/
   message: '请输入正确路径！',
 };
 // window下文件夹路径
