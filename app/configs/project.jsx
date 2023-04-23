@@ -54,44 +54,41 @@ const linkList = [
   },
 ];
 
+const LinkTo = ({name, icon, path, link, close}) => {
+  const commonProps = {
+    className: 'link',
+    onClick: e => {
+      e?.stopPropagation();
+      close();
+      report({
+        actionType: 'click',
+        category: 'navbar',
+        text: 'project',
+        value: name,
+      });
+    },
+  };
+  const ProjLink = ({children}) => path ? <Link to={path} {...commonProps}>{children}</Link> : <a href={link} target="_blank" {...commonProps}>{children}</a>;
+  
+  return <div className="pl-item">
+    <ProjLink>
+      <span className="pl-icon">{icon}</span>
+      <span className="pl-name">{name}</span>
+    </ProjLink>
+  </div>;
+};
+
 const ProjectList = ({close, isAdmin}) => {
   const validPathList = pathList.filter(({adminItem}) => !adminItem || (adminItem && isAdmin));
   return <div className="project-list">
     <div className="link-list">
       {
-        linkList.map(({key, name, icon, link}) => <div key={key} className="pl-item">
-          <a href={link} target="_blank" className="link" onClick={e => {
-            e.stopPropagation();
-            close();
-            report({
-              actionType: 'click',
-              category: 'navbar',
-              text: 'project',
-              value: name,
-            });
-          }}>
-            <span className="pl-icon">{icon}</span>
-            <span className="pl-name">{name}</span>
-          </a>
-        </div>)
+        linkList.map(({key, ...rest}) => <LinkTo key={key} {...rest} close={close} />)
       }
     </div>
     <div className="path-list">
       {
-        validPathList.map(({key, name, icon, path}) => <div key={key} className="pl-item">
-          <Link to={path} className="link" onClick={e => {
-            close();
-            report({
-              actionType: 'click',
-              category: 'navbar',
-              text: 'project',
-              value: name,
-            });
-          }}>
-            <span className="pl-icon">{icon}</span>
-            <span className="pl-name">{name}</span>
-          </Link>
-        </div>)
+        validPathList.map(({key, ...rest}) => <LinkTo key={key} {...rest} close={close} />)
       }
     </div>
   </div>;

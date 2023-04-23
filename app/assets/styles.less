@@ -15,15 +15,13 @@
 
 .project-list {
   display: flex;
-  .path-list {
+  .link-list, .path-list {
     flex: 1;
     padding: 15px;
+  }
+  .path-list {
     width: 180px;
     border-right: 1px solid var(--borderColor);
-  }
-  .link-list {
-    flex: 1;
-    padding: 15px;
   }
   .pl-item {
     --itemHeight: 40px;
@@ -74,6 +72,9 @@
     }
     > div {
       padding: 12px;
+    }
+    input {
+      max-width: 220px;
     }
   }
   .select-item {
