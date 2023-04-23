@@ -1,0 +1,14 @@
+name: Lint CI
+on:
+  push:
+    branches:
+      - master
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install
+      run: npm i
+    - name: Lint
+      run: npm run lint && npm run test
