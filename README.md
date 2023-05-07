@@ -2,7 +2,7 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ahyiru/ihuxy/blob/develop/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@huxy/router.svg)](https://www.npmjs.com/package/@huxy/router)
-[![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/ahyiru/web-design/lint-ci.yml?branch=master)](https://github.com/ahyiru/web-design)
+[![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/ahyiru/web-design/lint-ci.yml?branch=master)](https://github.com/ahyiru/web-design/actions/workflows/lint-ci.yml)
 [![](https://img.shields.io/badge/blog-ihuxy-blue.svg)](http://ihuxy.com/)
 
 
