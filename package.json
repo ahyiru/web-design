@@ -49,11 +49,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^1.2.3",
+    "@huxy/pack": "^1.2.4",
     "husky": "^8.0.3"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.1.0",
+    "@ant-design/icons": "^5.1.2",
     "@ant-design/pro-table": "^3.6.11",
     "@antv/graphin": "^2.7.16",
     "@antv/graphin-components": "^2.4.0",
@@ -66,7 +66,7 @@
     "@huxy/router": "^2.0.3",
     "@huxy/use": "^2.0.2",
     "@huxy/utils": "^2.0.6",
-    "antd": "^5.5.0",
+    "antd": "^5.5.1",
     "echarts": "^5.4.2",
     "echarts-for-react": "^3.0.2",
     "highlight.js": "^11.8.0",
