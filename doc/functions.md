@@ -1,5 +1,3 @@
-[toc]
-
 ## 系统功能
 
 ### [系统工具](./tools.md)
@@ -229,6 +227,8 @@ const {output, loading, updateRouter} = useRouter(routerCfgs);
 
 ### API管理
 
+编辑接口：
+
 ![api](./src/api.png)
 
 #### 获取API
@@ -275,9 +275,11 @@ export const listTags = (req, res) => {
 };
 ```
 
+测试接口：
+
 ![apiTest](./src/apiTest.png)
 
-### 用户管理
+### 项目管理
 
 ![project](./src/project.png)
 
@@ -341,7 +343,11 @@ const handleNavClick = (props, item) => {
 
 ### 页面管理
 
+页面设计：
+
 ![pageDesign](./src/pageDesign.png)
+
+页面预览：
 
 ![pageView](./src/pageView.png)
 
