@@ -289,7 +289,7 @@ export const listTags = (req, res) => {
 
 ![profile](./src/profile.png)
 
-### 监控管理
+### 页面监控
 
 ![monitor](./src/monitor.png)
 
@@ -324,6 +324,10 @@ const handleNavClick = (props, item) => {
   ...
 };
 ```
+
+### 页面日志
+
+![log](./src/log.png)
 
 ### 会员管理
 
