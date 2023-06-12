@@ -28,8 +28,8 @@ export const sizeRules = unit => {
       [unit]: [4 * b, 10 * b],
     },
     '--breadHeight': {
-      // px: [40, 80],
-      [unit]: [4 * b, 8 * b],
+      // px: [30, 80],
+      [unit]: [3 * b, 8 * b],
     },
     '--menuItemHeight': {
       // px: [30, 80],

@@ -55,6 +55,11 @@ const getColumns = ({handleAudit, handleDelete}, isAdmin, status) => [
       dataIndex: 'reader',
       ellipsis: true,
     },
+    {
+      title: '接收用户',
+      dataIndex: 'receiver',
+      ellipsis: true,
+    },
   ] : []),
   {
     title: '更新时间',
@@ -77,6 +82,7 @@ const getColumns = ({handleAudit, handleDelete}, isAdmin, status) => [
     dataIndex: 'action',
     ellipsis: true,
     align: 'center',
+    fixed: 'right',
     render: (text, record) => {
       // const disabled = false; //!profile.role&&record._id !== profile._id;
       return (

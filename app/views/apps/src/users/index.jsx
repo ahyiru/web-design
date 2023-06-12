@@ -63,28 +63,48 @@ const getColumns = ({handleCheck, handleEdit, handleDelete, handleExit}, profile
       return roleList.find(v => v.value === text)?.label ?? '-';
     },
   },
-  {
-    title: i18ns.updatetime,
-    dataIndex: 'updatetime',
-    ellipsis: true,
-    render: (text, record) => {
-      const time = text || record.createtime || record.signuptime || +new Date();
-      return formatTime(new Date(time));
+  ...(profile.role === 5 ? [
+    {
+      title: i18ns.updater,
+      dataIndex: 'updater',
+      ellipsis: true,
+      render: (text, record) => text || record.creator,
     },
-  },
-  {
-    title: i18ns.updater,
-    dataIndex: 'updater',
-    ellipsis: true,
-    render: (text, record) => text || record.creator,
-  },
+    {
+      title: i18ns.updatetime,
+      dataIndex: 'updatetime',
+      ellipsis: true,
+      render: (text, record) => {
+        const time = text || record.createtime || record.signuptime || +new Date();
+        return formatTime(new Date(time));
+      },
+    },
+    {
+      title: 'chatgpt次数',
+      dataIndex: 'payCount',
+      ellipsis: true,
+    },
+    {
+      title: '最后登录时间',
+      dataIndex: 'lastlogintime',
+      ellipsis: true,
+      render: text => text ? formatTime(new Date(text)) : '-',
+    },
+    {
+      title: '最后登录地址',
+      dataIndex: 'ip',
+      ellipsis: true,
+    },
+  ] : []),
   {
     title: i18ns.action,
     dataIndex: 'action',
     ellipsis: true,
     align: 'center',
+    fixed: 'right',
     render: (text, record) => {
-      const disabled = !profile.role && record._id !== profile._id;
+      // const disabled = !profile.role && record._id !== profile._id;
+      const disabled = profile.role !== 5;
       return (
         <>
           <Button type="link" size="small" disabled={disabled} onClick={() => handleCheck(record)}>
@@ -179,6 +199,7 @@ const Index = props => {
       disabled: !profile.role && record._id !== profile._id,
     }),
     columnWidth: '30px',
+    fixed: true,
   };
 
   const actions = {

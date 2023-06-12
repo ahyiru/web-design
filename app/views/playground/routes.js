@@ -1,6 +1,7 @@
 import {browserRouter} from '@app/configs';
 
 import configListRoutes from './src/configList/routes';
+// import messagesRoutes from './src/messages/routes';
 
 const routes = {
   path: '/playground',
@@ -52,6 +53,11 @@ const routes = {
       icon: 'PictureOutlined',
       component: () => import('./src/icons'),
     },
+    /* {
+      path: '/md2html',
+      name: 'md2html',
+      component: () => import('./src/md2html'),
+    }, */
     {
       path: '/panel',
       name: 'panel',
@@ -73,6 +79,7 @@ const routes = {
       component: () => import('./src/tools'),
     },
     ...configListRoutes,
+    // ...messagesRoutes,
   ],
 };
 

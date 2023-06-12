@@ -4,7 +4,7 @@ import {fixRoute} from '@huxy/utils';
 
 import {layout} from '@app/utils/configs';
 
-import {pathRule} from '@app/utils/rules';
+import {required, pathPattern, titlePattern} from '@app/utils/patterns';
 
 import {useIntls} from '@app/components/intl';
 
@@ -18,21 +18,21 @@ const ModalForm = props => {
       <Form.Item name="parentId" label={addFormText.parentId} hidden={isRoot}>
         <Input disabled />
       </Form.Item>
-      <Form.Item name="path" label={addFormText.path} rules={isRoot || editRoot ? [] : pathRule} hidden={isRoot}>
+      <Form.Item name="path" label={addFormText.path} rules={isRoot || editRoot ? [] : [required, pathPattern]} hidden={isRoot}>
         <Input placeholder={addFormText.path} disabled={editRoot} />
       </Form.Item>
-      <Form.Item name="name" label={addFormText.name} /* rules={nameRule} */>
+      <Form.Item name="name" label={addFormText.name} rules={[required, titlePattern]}>
         <Input placeholder={addFormText.name} />
       </Form.Item>
-      <Form.Item name="componentPath" label={addFormText.componentPath} rules={pathRule}>
-        <Input placeholder={addFormText.componentPath} />
+      <Form.Item name="component" label={addFormText.component} rules={[pathPattern]}>
+        <Input placeholder={addFormText.component} />
       </Form.Item>
-      <Form.Item name="iconKey" label={addFormText.iconKey}>
-        <Input placeholder={addFormText.iconKey} />
+      <Form.Item name="icon" label={addFormText.icon}>
+        <Input placeholder={addFormText.icon} />
       </Form.Item>
-      {/* <Form.Item name="redirect" label="重定向">
-      <Input disabled placeholder="请输入" />
-    </Form.Item> */}
+      <Form.Item name="redirect" label="重定向" rules={[pathPattern]}>
+        <Input placeholder="请输入" />
+      </Form.Item>
       <Form.Item name="hideMenu" label={addFormText.hideMenu} valuePropName="checked" hidden={isRoot}>
         <Switch />
       </Form.Item>

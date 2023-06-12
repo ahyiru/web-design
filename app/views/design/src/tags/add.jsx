@@ -34,7 +34,7 @@ const Index = props => {
     values = item ? {...item, ...values} : values;
     setPending(true);
     try {
-      const {code, message: msg} = await handler({...values, projectId: /* profile?.projectId ?? */ defProject._id});
+      const {code, message: msg} = await handler({...values, projectId: /* profile?.projectId || */ defProject._id});
       if (code === 200) {
         message.success(msg);
         back();

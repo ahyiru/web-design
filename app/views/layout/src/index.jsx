@@ -224,7 +224,7 @@ const Index = props => {
                 </div>
                 <div className="vertical-item">
                   <label>宽高配置</label>
-                  <div>
+                  <div style={{paddingLeft: 0}}>
                     {getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max, step}) => (
                       <Row key={key} gutter={[10, 10]}>
                         <Col span={6} sm={6} xs={6}>
@@ -261,16 +261,20 @@ const Index = props => {
             <Col span={4}>
               <Panel className="color-picker-panel">
                 <h3>{getIntls('main.layout.colorDesign')}</h3>
-                {Object.keys(theme.list.colors).map(key => (
-                  <Row key={key} gutter={[10, 10]}>
-                    <Col span={6} sm={6} xs={6}>
-                      <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
-                    </Col>
-                    <Col span={6} sm={6} xs={6}>
-                      <Input type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
-                    </Col>
-                  </Row>
-                ))}
+                <div style={{paddingRight: '15px'}}>
+                  {
+                    Object.keys(theme.list.colors).map(key => (
+                      <Row key={key} gutter={[10, 10]}>
+                        <Col span={6} sm={6} xs={6}>
+                          <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
+                        </Col>
+                        <Col span={6} sm={6} xs={6}>
+                          <Input type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
+                        </Col>
+                      </Row>
+                    ))
+                  }
+                </div>
               </Panel>
             </Col>
           </Row>

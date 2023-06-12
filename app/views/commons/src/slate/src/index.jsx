@@ -31,11 +31,11 @@ const renderElement = ({element, ...rest}) => {
 
 const Index = props => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  const [value, setValue] = useState(initialValue);
+  // const [value, setValue] = useState(initialValue);
 
   return (
     <Panel title="slate editor - 未完待续！" className="rich-text-demo">
-      <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+      <Slate editor={editor} initialValue={initialValue} /* onChange={value => setValue(value)} */>
         <Toolsbar />
         <Editable
           renderElement={renderElement}

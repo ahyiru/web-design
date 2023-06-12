@@ -33,6 +33,7 @@ const scanLoginStyle = {
   background: '#fcfcfc',
   color: '#43a047',
   fontWeight: 500,
+  zIndex: 3,
 };
 
 let fetchQrStatusCount = 0;

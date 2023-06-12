@@ -13,7 +13,6 @@ const nav = {
     language: '语言',
     zh: '汉语',
     en: '英语',
-    jp: '日语',
     themeList: '主题',
     github: 'github',
     screenshot: '截屏',

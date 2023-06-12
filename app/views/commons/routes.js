@@ -2,7 +2,7 @@ import slateRoutes from './src/slate/routes';
 
 const routes = {
   path: '/commons',
-  name: ' Common',
+  name: 'Common',
   icon: 'ShopOutlined',
   children: [
     {

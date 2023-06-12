@@ -1,13 +1,9 @@
-import html2canvas from 'html2canvas';
-import {dlfile, formatTime} from '@huxy/utils';
-
-import {notAdmin} from '@app/utils/isAdmin';
+import {formatTime} from '@huxy/utils';
 
 import {langStore, userInfoStore} from '@app/store/stores';
 import {getIntls} from '@app/components/intl';
 
 import Settings from '@app/components/settings';
-import FullPage from '@app/components/fullScreen';
 import CustomCollapse from '@app/components/customCollapse';
 import Notify from '@app/components/notify';
 import Search from '@app/components/search';
@@ -16,15 +12,12 @@ import Icon from '@app/components/icon';
 
 import {message} from '@app/utils/staticFunction';
 import {logout} from '@app/utils/utils';
-import getWeb3 from '@app/web3/getWeb3';
-
-import GithubIcon from '@app/components/icons/github';
 
 import defUser from '@app/assets/images/user/2.png';
 import wx from '@app/assets/images/wx.jpg';
-import metamask from '@app/assets/images/metamask.svg';
 import langList from './langList';
 import ProjectList from './project';
+import AppTools from './appTools';
 
 import {buildTime} from '.';
 
@@ -49,7 +42,6 @@ const buildInfo = buildTime
 
 export const leftNav = () => {
   const left = getIntls('nav.left', {});
-  const isAdmin = !notAdmin();
   return [
     {
       key: 'collapse',
@@ -65,7 +57,7 @@ export const leftNav = () => {
       arrowDir: 'lt',
       Ricon: true,
       smShow: true,
-      ChildRender: props => <ProjectList {...props} isAdmin={isAdmin} />,
+      ChildRender: props => <ProjectList {...props} />,
     },
     {
       key: 'wechat',
@@ -75,7 +67,8 @@ export const leftNav = () => {
       ChildRender: item => (
         <div className="follow-me">
           <img src={wx} alt="wechat" />
-          <p>{left?.followMe ?? 'followMe'}：yiru_js</p>
+          <p>前端道萌</p>
+          {/* <p>{left?.followMe ?? 'followMe'}：yiru_js</p> */}
         </div>
       ),
     },
@@ -85,11 +78,6 @@ export const leftNav = () => {
       type: 'configs',
       smShow: true,
       Custom: props => <Settings {...props} />,
-    },
-    {
-      key: 'search',
-      title: left?.search ?? '搜索',
-      Custom: props => <Search {...props} />,
     },
   ];
 };
@@ -115,7 +103,7 @@ export const rightNav = language => {
           name: '我的订单',
           type: 'order',
           icon: <Icon icon="ShoppingCartOutlined" />,
-          path: '/order',
+          path: '/payer/count/order',
         },
         {
           key: 'settings',
@@ -138,6 +126,16 @@ export const rightNav = language => {
       ],
     },
     {
+      key: 'notify',
+      title: right?.notify ?? '消息',
+      Custom: props => <Notify {...props} />,
+    },
+    {
+      key: 'themeModel',
+      smShow: true,
+      Custom: props => <ThemeModel {...props} />,
+    },
+    {
       key: 'language',
       name: right?.[language] ?? '语言',
       Custom: props => (
@@ -151,84 +149,21 @@ export const rightNav = language => {
         key,
         name: right?.[key] ?? name,
         type: 'language',
-        icon: (
-          <div key={key} className="img">
-            <img src={icon} alt={key} />
-          </div>
-        ),
+        icon: <img src={icon} alt={key} />,
         handle: changeLang,
       })),
     },
     {
-      key: 'MetaMask',
-      Custom: props => {
-        const hanlder = async () => {
-          try {
-            const result = await getWeb3();
-            const addr = result.accounts?.[0];
-            if (addr) {
-              message.success(`已连接${addr}`);
-            }
-          } catch (error) {
-            message.error(error.code ? error.message : '未检测到MetaMask插件！');
-          }
-        };
-        return (
-          <span className="link" onClick={e => hanlder()} title={right?.metamask ?? 'MetaMask'}>
-            <div className="icon">
-              <img src={metamask} alt="metamask" />
-            </div>
-          </span>
-        );
-      },
+      key: 'apps',
+      title: 'apps',
+      icon: <Icon icon="AppstoreAddOutlined" />,
+      arrowDir: 'rt',
+      ChildRender: props => <AppTools />,
     },
     {
-      key: 'github',
-      title: right?.github ?? 'Github',
-      icon: <GithubIcon />,
-      type: 'link',
-      link: 'https://github.com/ahyiru/web-design',
-    },
-    {
-      key: 'notify',
-      title: right?.notify ?? '消息',
-      Custom: props => <Notify {...props} />,
-    },
-    {
-      key: 'fullscreen',
-      Custom: props => (
-        <span className="link" title="fullscreen">
-          <span className="node-icon">
-            <FullPage />
-          </span>
-        </span>
-      ),
-    },
-    {
-      key: 'themeModel',
-      smShow: true,
-      Custom: props => <ThemeModel {...props} />,
-    },
-    {
-      title: right?.screenshot ?? '截屏',
-      key: 'screencapture',
-      icon: <Icon icon="CameraOutlined" />,
-      handle: item => {
-        // const ele=document. getElementsByClassName('page-content')[0];
-        html2canvas(document.getElementById('app'), {
-          useCORS: true,
-          foreignObjectRendering: true,
-          allowTaint: true,
-          logging: false,
-        })
-          .then(canvas => {
-            dlfile(canvas.toDataURL());
-            message.success(right?.screencapture_msg ?? '下载成功！');
-          })
-          .catch(error => {
-            message.error(error);
-          });
-      },
+      key: 'search',
+      title: right?.search ?? '搜索',
+      Custom: props => <Search {...props} />,
     },
   ];
 };

@@ -1,3 +1,30 @@
+export const orderList = [
+  {
+    type: 'vip1',
+    label: '基础版',
+    price: 29,
+    period: 3,
+    count: 800,
+    description: '提供 OpenAI API 接口代理。\n\n800 次 chatgpt 对话机会，有效期 3 个月。',
+  },
+  {
+    type: 'vip2',
+    label: '白银版',
+    price: 39,
+    period: 6,
+    count: 1500,
+    description: '提供 OpenAI API 接口代理。\n\n1500 次 chatgpt 对话机会，有效期 6 个月。',
+  },
+  {
+    type: 'vip3',
+    label: '黄金版',
+    price: 69,
+    period: 12,
+    count: 3000,
+    description: '提供 OpenAI API 接口代理。\n\n3000 次 chatgpt 对话机会，有效期 12 个月。',
+  },
+];
+
 export const roleList = [
   {
     value: 0,
@@ -5,7 +32,7 @@ export const roleList = [
     price: 0,
     period: 0,
     name: 'general',
-    description: '每天 6 次 chatgpt 对话机会。',
+    description: '每天 2 次 chatgpt 对话机会。',
   },
   {
     value: 1,
@@ -17,27 +44,27 @@ export const roleList = [
   },
   {
     value: 2,
-    label: '黄金会员',
-    price: 39,
+    label: '白银会员',
+    price: 29,
     period: 1,
     name: 'vip2',
-    description: '提供 OpenAI API 接口代理。\n\n每天 80 次 chatgpt 对话机会。',
+    description: '提供 OpenAI API 接口代理。\n\n每天 100 次 chatgpt 对话机会。',
   },
   {
     value: 3,
-    label: '铂金会员',
-    price: 69,
+    label: '黄金会员',
+    price: 39,
     period: 1,
     name: 'vip3',
-    description: '提供 OpenAI API 接口代理。\n\n每天 120 次 chatgpt 对话机会。',
+    description: '提供 OpenAI API 接口代理。\n\n每天 200 次 chatgpt 对话机会。',
   },
   {
     value: 4,
     label: '钻石会员',
-    price: 129,
+    price: 49,
     period: 1,
     name: 'vip4',
-    description: '提供 OpenAI API 接口代理。\n\n每天 200 次 chatgpt 对话机会。',
+    description: '提供 OpenAI API 接口代理。\n\n每天 320 次 chatgpt 对话机会。',
   },
   {
     value: 5,

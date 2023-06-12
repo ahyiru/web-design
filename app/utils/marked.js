@@ -1,14 +1,10 @@
 import {marked} from 'marked';
+import {markedHighlight} from 'marked-highlight';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
 // import 'highlight.js/styles/atom-one-dark.css';
-marked.setOptions({
+marked.use({
   renderer: new marked.Renderer(),
-  highlight: function (code, lang) {
-    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-    return hljs.highlight(code, {language}).value;
-  },
-  langPrefix: 'hljs language-',
   pedantic: false,
   gfm: true,
   breaks: false,
@@ -16,5 +12,13 @@ marked.setOptions({
   smartypants: false,
   xhtml: false,
 });
+
+marked.use(markedHighlight({
+  langPrefix: 'hljs language-',
+  highlight: (code, lang) => {
+    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+    return hljs.highlight(code, {language}).value;
+  },
+}));
 
 export default marked;

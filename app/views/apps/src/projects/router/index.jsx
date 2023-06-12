@@ -1,22 +1,21 @@
 import {useState, useCallback, useEffect} from 'react';
-import {Tree, Modal, Dropdown, Input, Spin, Button, Alert} from 'antd';
+import {Tree, Modal, Dropdown, Input, Button, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {traverItem, sort} from '@huxy/utils';
+import {traverItem} from '@huxy/utils';
 import {useSearch} from '@huxy/use';
-import useFetchList from '@app/hooks/useFetchList';
 import formatTree from '@app/utils/formatTree';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
 import {message} from '@app/utils/staticFunction';
 import customRender from '@app/utils/render';
-import {userInfoStore} from '@app/store/stores';
+import {userInfoStore, routersStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
 import apiList from '@app/utils/getApis';
 import {defProject} from '@app/configs';
 import HandleModal from './modal';
 
-const {listRouterFn, addRouterFn, editRouterFn, deleteRouterFn, listSchemaFn} = apiList;
+const {addRouterFn, editRouterFn, deleteRouterFn, listSchemaFn} = apiList;
 const {Search} = Input;
 
 const handleClick = (actions, item, actionsText) => ({
@@ -46,7 +45,10 @@ const handleClick = (actions, item, actionsText) => ({
 
 const treeDrop = (item, dropFns, actionsText) => (
   <Dropdown menu={handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
-    <span className="node-style">{item.name}</span>
+    <span className="custom-tree-node">
+      <span className="node-icon">{item.icon}</span>
+      <span className="node-style">{item.name}</span>
+    </span>
   </Dropdown>
 );
 
@@ -55,7 +57,7 @@ const defSelectedItem = {
   name: '原生dom',
   path: '/low-code/dom',
   projectId: defProject._id,
-  _id: '60f842f05ce53002d3bd35d7',
+  _id: '64827d9a0c54fc89e3a14b81',
 };
 
 const Index = props => {
@@ -63,6 +65,8 @@ const Index = props => {
   const pageText = getIntls('main.projectRouter.pageText', {});
   const actionsText = getIntls('main.projectRouter.actionsText', {});
   const profile = userInfoStore.getState();
+
+  const routerList = routersStore.getState();
 
   const pageParams = props.params;
   const backState = props.history.getState()?.backState;
@@ -72,7 +76,7 @@ const Index = props => {
     key: -1,
     path: '',
     name: stateItem.name,
-    iconKey: 'LayoutOutlined',
+    icon: 'LayoutOutlined',
     isRoot: true,
   };
   const [open, setOpen] = useState(false);
@@ -81,7 +85,10 @@ const Index = props => {
   const [filterTree, setFilterTree] = useSearch(null);
   const [selectedItem, setSelectedItem] = useState(pageParams?.projectId ? {...defSelectedItem, ...pageParams} : defSelectedItem);
   const [pageSchema, setPageSchema] = useState([]);
-  const [result, update] = useFetchList(listRouterFn, {projectId: stateItem._id});
+
+  const refresh = () => {
+    window.location.reload();
+  };
 
   const searchTree = value => setFilterTree(tree, value, 'name', 'path');
 
@@ -93,8 +100,8 @@ const Index = props => {
   const editFn = item => {
     setOpen(true);
     setModalType('edit');
-    const {icon, children, key, ...rest} = item;
-    setItem(rest);
+    const {icon, iconKey, children, key, ...rest} = item;
+    setItem({...rest, icon: iconKey});
   };
   const deleteFn = item => {
     const paths = [];
@@ -112,7 +119,7 @@ const Index = props => {
         const {code, message: msg} = await deleteRouterFn({_id: item._id});
         if (code === 200) {
           message.success(msg);
-          update();
+          refresh();
         }
       },
       onCancel() {
@@ -120,13 +127,13 @@ const Index = props => {
       },
     });
   };
-  const onModalOk = async value => {
+  const onModalOk = async values => {
     const handleFn = modalType === 'edit' ? editRouterFn : addRouterFn;
-    const {code, message: msg} = await handleFn({...value, projectId: stateItem._id});
+    const {code, message: msg} = await handleFn({...values, projectId: stateItem._id});
     if (code === 200) {
       message.success(msg);
       setOpen(false);
-      update();
+      refresh();
     }
   };
 
@@ -145,16 +152,16 @@ const Index = props => {
   }, [selectedItem]);
 
   const onSelect = (selectedKeys, e) => {
-    const item = e.selectedNodes[0];
-    if (item.parentId === '/low-code') {
+    const item = e.node; //selectedNodes[0];
+    if (item.component === '/lowcode/src/index.jsx') {
       setSelectedItem(item);
     }
     // getPageSchema(item._id,item.projectId);
   };
 
   const toDesignPage = () => {
-    const {_id, path, name, iconKey, projectId, key} = selectedItem;
-    const itemState = {_id, path, name, iconKey, projectId, key, pageSchema};
+    const {_id, path, name, icon, iconKey, projectId, key} = selectedItem;
+    const itemState = {_id, path, name, icon: iconKey, projectId, key, pageSchema};
     props.router.push({
       path: `./${_id}`,
       state: {item: itemState, backState: {path: props.path, params: itemState, state: {item: selItem, backState}}},
@@ -170,9 +177,9 @@ const Index = props => {
     editFn,
     deleteFn,
   };
-  const {pending, data} = result;
 
-  const tree = formatTree([rootNode, ...sort(data, 'createtime', true)]);
+  // const tree = formatTree([rootNode, ...sort(routerList, 'createtime', true)]);
+  const tree = formatTree([rootNode, ...routerList]);
   const treeData = filterTree || tree || [];
 
   return (
@@ -183,24 +190,22 @@ const Index = props => {
             <Back back={back} />
           </Col>
         )}
+        <Col>
+          <Alert message="右键路由菜单树可进行增删改操作。只有通过页面设计生成的路由页面才能进行重新设计操作！如‘低代码’路由" type="warning" showIcon closable style={{marginBottom: 10}} />
+        </Col>
         <Col width="260px">
           <Panel>
-            <Spin spinning={pending}>
-              <Alert message="提供路由增删改查操作。暂时只有‘低代码’路由下的页面提供设计操作！" type="warning" showIcon closable style={{marginBottom: 10}} />
-              <Search placeholder={pageText.search_placeholder} allowClear enterButton onSearch={searchTree} style={{maxWidth: '240px', marginBottom: 12}} />
-              {!pending && (
-                <Tree
-                  showIcon
-                  defaultExpandedKeys={[selectedItem?.key || -1]}
-                  switcherIcon={<DownOutlined />}
-                  titleRender={item => treeDrop(item, dropFns, actionsText)}
-                  treeData={treeData}
-                  onSelect={onSelect}
-                  selectedKeys={[selectedItem?.key || '']}
-                  virtual={false}
-                />
-              )}
-            </Spin>
+            <Search placeholder={pageText.search_placeholder} allowClear enterButton onSearch={searchTree} style={{maxWidth: '240px', marginBottom: 12}} />
+            <Tree
+              // showIcon
+              defaultExpandedKeys={[selectedItem?.key || -1]}
+              switcherIcon={<DownOutlined />}
+              titleRender={item => treeDrop(item, dropFns, actionsText)}
+              treeData={treeData}
+              onSelect={onSelect}
+              selectedKeys={[selectedItem?.key || '']}
+              virtual={false}
+            />
           </Panel>
         </Col>
         <Col auto offsetWidth="260px">
@@ -215,7 +220,7 @@ const Index = props => {
           </Panel>
         </Col>
       </Row>
-      {open && <HandleModal onModalOk={onModalOk} onModalCancel={() => setOpen(false)} modalOpen={open} type={modalType} item={item} isRoot={!data?.length} />}
+      {open && <HandleModal onModalOk={onModalOk} onModalCancel={() => setOpen(false)} modalOpen={open} type={modalType} item={item} isRoot={!routerList?.length} />}
     </div>
   );
 };

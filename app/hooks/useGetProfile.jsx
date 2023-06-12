@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import apiList from '@app/utils/getApis';
 import {logout} from '@app/utils/utils';
+import {defProject} from '@app/configs';
 import {userInfoStore, permissionStore, routersStore} from '@app/store/stores';
 
 const useGetProfile = () => {
@@ -37,7 +38,7 @@ const useGetProfile = () => {
     };
     const getRouters = async profile => {
       try {
-        const {code, result} = (await listRouterFn({projectId: profile?.projectId})) || {};
+        const {code, result} = (await listRouterFn({projectId: profile?.projectId || defProject._id})) || {};
         setLoading(false);
         if (code === 200) {
           routersStore.setState(result);

@@ -50,3 +50,5 @@ cert
 # build
 dist
 build
+
+deadcode.json

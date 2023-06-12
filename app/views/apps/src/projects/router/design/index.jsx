@@ -29,7 +29,7 @@ const handleClick = (actions, item, actionsText) => ({
       icon: <PlusOutlined />,
       label: <span style={{padding: '0 4px'}}>{actionsText.add_action}</span>,
     },
-    ...(item.isRoot
+    ...(item.key === '0'
       ? []
       : [
         /* {
@@ -48,7 +48,9 @@ const handleClick = (actions, item, actionsText) => ({
 
 const treeDrop = (item, dropFns, actionsText) => (
   <Dropdown menu={handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
-    <span className="node-style">{item.type}</span>
+    <span className="custom-tree-node">
+      <span className="node-style">{item.type}</span>
+    </span>
   </Dropdown>
 );
 
@@ -72,13 +74,12 @@ const Index = props => {
   const stateItem = selItem || (profile.projectId ? {_id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
   const rootNode = {
     type: stateItem?.name,
-    isRoot: true,
-    key: '-1',
-    selectable: false,
+    key: '0',
+    // selectable: false,
   };
   const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState('');
-  const [selectedKey, setSelectedKey] = useState('');
+  const [selectedKey, setSelectedKey] = useState('0');
   // const [selectedItem,setSelectedItem]=useState({});
   const pageSchema = stateItem?.pageSchema ? (Array.isArray(stateItem.pageSchema) ? stateItem.pageSchema : [stateItem.pageSchema]) : [];
 
@@ -234,7 +235,7 @@ const Index = props => {
     ),
     [item],
   );
-  const CustomForm = useMemo(() => <FormEditor getValues={editProps} data={[item?.props?.schema]} actionsText={actionsText} editorI18n={editorI18n} addFormText={addFormText} />, [item]);
+  const CustomForm = useMemo(() => <FormEditor getValues={editProps} data={item?.props?.schema} actionsText={actionsText} editorI18n={editorI18n} addFormText={addFormText} />, [item]);
   const CustomTable = useMemo(() => <TableEditor getValues={editProps} data={item?.props} designConfigText={designConfigText} actionsText={actionsText} addFormText={addFormText} />, [item]);
 
   const CfgComp = {
@@ -255,7 +256,7 @@ const Index = props => {
           <Panel>
             <Spin spinning={false}>
               <Tree
-                showIcon
+                // showLine
                 defaultExpandAll
                 switcherIcon={<DownOutlined />}
                 titleRender={item => treeDrop(item, dropFns, actionsText)}
@@ -270,7 +271,7 @@ const Index = props => {
         </Col>
         <Col auto offsetWidth="260px">
           <Panel>
-            {selectedKey ? (
+            {selectedKey !== '0' ? (
               Comp
             ) : (
               <div>

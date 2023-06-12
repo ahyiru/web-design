@@ -1,6 +1,4 @@
-import pageSchema from '@app/utils/getPageSchema';
-
-import LowCode from './src';
+import configs from './configs';
 
 const routes = {
   path: '/low-code',
@@ -11,45 +9,30 @@ const routes = {
       path: '/dom',
       name: '原生dom',
       icon: 'CoffeeOutlined',
-      component: LowCode,
-      loadData: {
-        pageSchema,
-      },
+      ...configs,
     },
     {
       path: '/ui',
       name: 'UI组件',
       icon: 'DesktopOutlined',
-      component: LowCode,
-      loadData: {
-        pageSchema,
-      },
+      ...configs,
     },
     {
       path: '/users',
       name: '业务组件',
       icon: 'ClusterOutlined',
-      component: LowCode,
-      loadData: {
-        pageSchema,
-      },
+      ...configs,
     },
     {
       path: '/users/add',
       name: '新增用户',
-      component: LowCode,
       hideMenu: true,
-      loadData: {
-        pageSchema,
-      },
+      ...configs,
     },
     {
       path: '/users/edit/:id',
       name: '编辑用户',
-      component: LowCode,
-      loadData: {
-        pageSchema,
-      },
+      ...configs,
     },
   ],
 };

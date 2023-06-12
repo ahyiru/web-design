@@ -29,9 +29,10 @@ const Index = props => {
     getProjects();
   }, []);
   const onFinish = async values => {
+    values.projectId = values.projectId ?? '';
     const handler = item ? editUserFn : addUserFn;
     values = item ? {...item, ...values} : values;
-    const projectName = projectList.find(v => v._id === values.projectId)?.name;
+    const projectName = projectList.find(v => v._id === values.projectId)?.name ?? '';
     try {
       const {code, message: msg} = await handler({...values, projectName});
       if (code === 200) {
@@ -60,7 +61,7 @@ const Index = props => {
               <Form.Item label={addFormText.email} name="email" rules={emailRule}>
                 <Input placeholder={addFormText.email} />
               </Form.Item>
-              <Form.Item label={addFormText.password} name="password" rules={passwordRule}>
+              <Form.Item label={addFormText.password} name="password" /* rules={passwordRule} */>
                 <Input type="password" placeholder={addFormText.password} autoComplete="new-password" />
               </Form.Item>
               <Form.Item label={addFormText.role} name="role" rules={roleRule}>

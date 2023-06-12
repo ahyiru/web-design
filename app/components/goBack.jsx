@@ -26,7 +26,7 @@ const actionStyle = {
 };
 
 const Index = ({back, title, actions = [], backText = '返回'}) => (
-  <Panel>
+  <Panel style={{height: '4.4rem'}}>
     <div style={containerStyle}>
       <div style={backStyle}>
         <Button onClick={e => (typeof back === 'function' ? back() : history.back())} className="sm link">

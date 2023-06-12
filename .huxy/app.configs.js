@@ -1,3 +1,5 @@
+import DeadCodePlugin from 'webpack-deadcode-plugin';
+
 const app = {
   // HOST: 'http://localhost',
   PORT: 8000,
@@ -29,4 +31,18 @@ const app = {
   },
 };
 
-export default {app};
+export default {
+  app,
+  webpack: (rootDir, appPath) => ({
+    dev: {
+      plugins: [
+        new DeadCodePlugin({
+          patterns: [`${appPath}/**/*.(js|jsx|css|less|json|png|jpg|jpeg)`],
+          exclude: ['**/node_modules/**', '**/build/**', '**/draft/**'],
+          log: 'none',
+          exportJSON: rootDir,
+        }),
+      ],
+    },
+  }),
+};

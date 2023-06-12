@@ -30,7 +30,7 @@ const {Search} = Input;
 
 const rootNode = {
   path: '',
-  iconKey: 'LayoutOutlined',
+  icon: 'LayoutOutlined',
 };
 
 const Index = props => {
@@ -45,7 +45,7 @@ const Index = props => {
   const [routerList] = useFetchList(getRouter, {projectId: defProject._id}, ({result}) => {
     const arr = [{...rootNode, name: getIntls('main.layout.users.authFormText.root_name')}, ...(result || [])].map(item => {
       item.key = item.path;
-      const Icon = Icons[item.iconKey] || EyeInvisibleOutlined;
+      const Icon = Icons[item.icon] || EyeInvisibleOutlined;
       item.icon = <Icon />;
       return item;
     });

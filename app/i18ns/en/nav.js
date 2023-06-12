@@ -13,7 +13,6 @@ const nav = {
     language: 'language',
     zh: 'zh',
     en: 'en',
-    jp: 'jp',
     themeList: 'themeList',
     github: 'github',
     screenshot: 'screenshot',

@@ -1,13 +1,11 @@
 import {ConfigProvider, App} from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import enUS from 'antd/locale/en_US';
-import jaJP from 'antd/locale/ja_JP';
 import {useLangStore, useThemeStore} from '@app/store/stores';
 
 const uiLang = {
   zh: zhCN,
   en: enUS,
-  jp: jaJP,
 };
 
 const Index = props => {

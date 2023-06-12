@@ -40,10 +40,20 @@ const handler = response => {
     });
 };
 
-const handleStream = response => {
+const handleStream = async response => {
   if (response.status !== 200) {
-    msgAlert.error(response.statusText);
-    throw {message: response.statusText};
+    let msg;
+    const reader = await response.body.getReader();
+    const {value} = await reader.read();
+    const decoder = new TextDecoder('utf8');
+    const dataString = decoder.decode(value);
+    try {
+      msg = JSON.parse(dataString).message;
+    } catch (err) {
+      msg = response.statusText;
+    }
+    msgAlert.error(msg);
+    throw {message: msg, code: response.status};
   }
   return response.body;
 };

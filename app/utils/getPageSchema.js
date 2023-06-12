@@ -1,8 +1,8 @@
 import apiList from '@app/utils/getApis';
 import {defProject} from '@app/configs';
 
-const pageSchema = async ({id}) => {
-  const {result} = await apiList.listSchemaFn({routerId: id, projectId: defProject._id});
+const pageSchema = async ({_id}) => {
+  const {result} = await apiList.listSchemaFn({routerId: _id, projectId: defProject._id});
   return {result};
 };
 

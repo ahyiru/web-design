@@ -1,15 +1,36 @@
 // @import "./font/iconfont.css";
+
+.custom-tree-node {
+  .node-style {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    user-select: none;
+    vertical-align: middle;
+  }
+  .node-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
 .follow-me {
   width: 100%;
   text-align: center;
+  padding: 2px 0;
   img {
     width: 116px;
   }
   p {
     margin: 0;
-    margin-top: 6px;
     height: 22px;
-    line-height: 22px;
+    line-height: 1;
+    font-weight: 600;
   }
 }
 
@@ -37,6 +58,28 @@
       display: block;
       width: var(--itemHeight);
       text-align: center;
+    }
+  }
+}
+.app-tools {
+  .app-list, .tool-list {
+    display: flex;
+    padding: 12px 8px;
+    .link {
+      display: flex;
+      flex-direction: column;
+      height: auto !important;
+      line-height: normal !important;
+      width: 100px;
+      .at-icon {
+        text-align: center;
+        font-size: 20px;
+        width: 24px;
+      }
+      .at-name {
+        text-align: center;
+        margin-top: 8px;
+      }
     }
   }
 }

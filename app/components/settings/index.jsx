@@ -279,7 +279,7 @@ const Index = props => {
         }
       >
         <TabHeader flex tabs={tabs(i18nCfg)} switchTab={key => setActive(key)} />
-        <div className="layout-setting" style={{padding: '15px 0'}}>
+        <div className="layout-setting" style={{padding: '15px'}}>
           {comps[active]}
         </div>
       </Drawer>

@@ -98,6 +98,7 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
     dataIndex: 'action',
     ellipsis: true,
     align: 'center',
+    fixed: 'right',
     render: (text, record) => {
       const disabled = false; //!profile.role&&record._id!==profile._id;
       return (
@@ -192,6 +193,7 @@ const Index = props => {
       // disabled:!profile.role&&record._id!==profile._id,
     }),
     columnWidth: '30px',
+    fixed: true,
   };
 
   const actions = {

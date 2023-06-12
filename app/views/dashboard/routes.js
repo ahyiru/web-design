@@ -22,12 +22,6 @@ const routes = [
         icon: 'PieChartOutlined',
         component: () => import('./src/screen2'),
       },
-      /* {
-        path: '/monitor',
-        name: 'monitor',
-        icon: 'LineChartOutlined',
-        component: () => import('./src/monitor'),
-      }, */
       {
         path: '/bigscreen',
         name: 'bigscreen',
@@ -40,6 +34,11 @@ const routes = [
         icon: 'LineChartOutlined',
         redirect: '/carmodel',
       },
+      /* {
+        path: '/smartcity',
+        name: 'smartcity',
+        redirect: '/smartcity',
+      }, */
     ],
   },
 ];

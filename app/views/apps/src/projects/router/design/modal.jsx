@@ -51,7 +51,7 @@ const nameList = [...compNames, ...ele];
 const ModalForm = props => {
   const {form, item, isEdit, addFormText} = props;
   return (
-    <Form form={form} {...layout} initialValues={{}}>
+    <Form form={form} {...layout} initialValues={{type: 'div'}}>
       <Form.Item name="type" label={addFormText.type}>
         <Select placeholder={addFormText.type} showSearch>
           {nameList.map(name => (

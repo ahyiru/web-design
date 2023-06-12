@@ -46,11 +46,18 @@ const handleClick = (actions, item, actionsText) => ({
 
 const treeDrop = (item, dropFns, actionsText) => (
   <Dropdown menu={handleClick(dropFns, item, actionsText)} trigger={['contextMenu']}>
-    <span className="node-style">{item.type}</span>
+    <span className="custom-tree-node">
+      <span className="node-style">{item.type}</span>
+    </span>
   </Dropdown>
 );
 
-const formData = data => (Array.isArray(data) ? data : data ? [data] : [{}]);
+const defaultForm = {
+  key: '0',
+  type: 'Form',
+};
+
+const formData = data => (Array.isArray(data) ? data : data ? [data] : [defaultForm]);
 
 const Index = ({data, getValues, actionsText, addFormText, editorI18n}) => {
   const [open, setOpen] = useState(false);
@@ -137,7 +144,7 @@ const Index = ({data, getValues, actionsText, addFormText, editorI18n}) => {
           <Panel>
             <Spin spinning={false}>
               <Tree
-                showIcon
+                // showIcon
                 defaultExpandAll
                 switcherIcon={<DownOutlined />}
                 titleRender={item => treeDrop(item, dropFns, actionsText)}
