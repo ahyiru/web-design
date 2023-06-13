@@ -12,24 +12,8 @@ Web Design 使用可视化操作生成页面描述 `json schema`，然后通过�
 
 Web Design 基于 [huxy-admin](https://github.com/ahyiru/huxy-admin) 模板创建。除了提供页面可视化搭建，还包含了工程化配置、主题设计、Layout 设计、API 配置、权限和 i18n 配置等。
 
-### [系统功能](./doc/functions.md)
+### [系统功能](https://github.com/ahyiru/huxy-admin/blob/develop/doc/functions.md)
 
-1. 主题配置 ✅
-2. i18n配置 ✅
-3. 路由配置 ✅
-4. 权限管理 ✅
-5. API管理 ✅
-6. 项目管理 ✅
-7. 角色管理 ✅
-8. 页面监控 ✅
-9. 页面日志 ✅
-10. 会员管理 ✅
-11. 订单管理 ✅
-12. 消息管理 ✅
-13. 邮件管理 ✅
-14. 页面管理 ✅
-15. 文件管理 ✅
-16. 文档管理 ✅
 
 ### 理解
 
