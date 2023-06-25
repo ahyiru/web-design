@@ -51,4 +51,5 @@ cert
 dist
 build
 
+# dead code
 deadcode.json

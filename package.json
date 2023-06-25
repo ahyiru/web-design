@@ -49,14 +49,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^1.2.7",
+    "@huxy/pack": "^1.2.9",
     "husky": "^8.0.3",
     "webpack-deadcode-plugin": "^0.1.17"
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
-    "@ant-design/pro-table": "^3.7.7",
-    "@antv/graphin": "^2.7.16",
+    "@ant-design/pro-table": "^3.8.2",
+    "@antv/graphin": "^2.7.17",
     "@antv/graphin-components": "^2.4.0",
     "@antv/x6": "^2.11.1",
     "@antv/x6-react-components": "^2.0.8",
@@ -64,10 +64,10 @@
     "@huxy/components": "^2.0.9",
     "@huxy/layout": "^2.0.8",
     "@huxy/materials": "^1.0.3",
-    "@huxy/router": "^2.0.4",
+    "@huxy/router": "^2.0.5",
     "@huxy/use": "^2.0.3",
-    "@huxy/utils": "^2.0.7",
-    "antd": "^5.6.1",
+    "@huxy/utils": "^2.0.8",
+    "antd": "^5.6.2",
     "echarts": "^5.4.2",
     "echarts-for-react": "^3.0.2",
     "highlight.js": "^11.8.0",
@@ -85,7 +85,7 @@
     "rxjs": "^7.8.1",
     "slate": "^0.94.1",
     "slate-history": "^0.93.0",
-    "slate-react": "^0.95.0",
+    "slate-react": "^0.97.1",
     "three": "^0.153.0",
     "web3": "^4.0.1"
   }

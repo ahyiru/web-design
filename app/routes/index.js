@@ -43,15 +43,17 @@ const routes = (routerList, nameList, permList, profile) => {
     if (icon && icon !== true) {
       item.icon = <Icon icon={icon} />;
     }
-    const isLowcode = typeof item.component === 'string' && item.component;
-    if (isLowcode) {
-      item.component = lowcode.component;
+    const isDesign = item.component && typeof item.component === 'string';
+    if (isDesign) {
+      const designPath = item.component.slice(1);
+      item.component = () => import(`@app/views/${designPath}`);
+      // item.component = lowcode.component;
       item.loadData = lowcode.loadData;
     }
     if (typeof item.denied === 'function') {
       item.denied = item.denied();
     }
-    if (!isAdmin && !isLowcode) {
+    if (!isAdmin && !isDesign) {
       item.denied = item.denied || !permission.includes(item.fullpath);
     }
   })(fullList);
