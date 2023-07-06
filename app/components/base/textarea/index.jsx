@@ -53,7 +53,7 @@ const TextArea = ({className, value, onChange, onBlur, ...rest}) => {
       setTimeout(() => onChange?.(e, val));
     }
   };
-  return <textarea className={cls} aria-label="huxy-label" row="3" {...rest} value={val} onChange={handleChange} onBlur={handleBlur} />;
+  return <textarea className={cls} aria-label="huxy-label" row="3" {...rest} value={val ?? ''} onChange={handleChange} onBlur={handleBlur} />;
 };
 
 export default TextArea;

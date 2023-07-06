@@ -39,6 +39,11 @@ export const pathPattern = {
   pattern: /^(\/[\w#?&=:.-]+)+$/,
   message: '请输入正确路径！',
 };
+// 链接或路由地址
+export const urlOrPathPattern = {
+  pattern: /^https?:\/\/[^\s/?.#]+\.[^\s]+|^(\/[\w#?&=:.-]+)+$/,
+  message: '请输入正确路径！',
+};
 // 版本号格式必须为X.Y.Z
 export const versionPattern = {
   pattern: /^\d+(?:\.\d+){2}$/,

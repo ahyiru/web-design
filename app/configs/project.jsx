@@ -1,65 +1,55 @@
 import {Link} from '@huxy/router';
+import {storage} from '@huxy/utils';
 import report from '@app/apis/report/report';
 import Icon from '@app/components/icon';
-import {notAdmin, isMember} from '@app/utils/isAdmin';
+import {notAdmin} from '@app/utils/isAdmin';
 
-const pathList = (isAdmin, isMem) => [
+import getMemberLink from './getMemberLink';
+
+const pathList = (isAdmin, i18ns) => [
   {
     key: 'docs',
-    name: '文档系统',
+    name: i18ns.docs ?? '文档系统',
     icon: <Icon icon="FileMarkdownOutlined" />,
+    // type: 'link',
+    // link: `https://ihuxy.com/md2html`,
     path: '/md2html',
   },
   {
     key: 'filesystem',
-    name: '文件系统',
+    name: i18ns.files ?? '文件系统',
     icon: <Icon icon="FileDoneOutlined" />,
+    // type: 'link',
+    // link: `https://ihuxy.com/files?authed_token=${storage.get('token')}`,
     path: '/files',
   },
   {
-    key: 'chatbot',
-    name: 'AI 助手',
-    icon: <Icon icon="RobotOutlined" />,
-    path: isMem ? '/paychat' : '/chatbot',
-  },
-  {
     key: 'chat',
-    name: '聊天室',
+    name: i18ns.chat ?? '聊天室',
     icon: <Icon icon="WechatOutlined" />,
-    path: '/wschat',
+    type: 'link',
+    link: `https://ihuxy.com/wschat?authed_token=${storage.get('token')}`,
   },
-  ...(isAdmin ? [
-    {
-      key: 'online',
-      name: '在线用户',
-      icon: <Icon icon="TeamOutlined" />,
-      path: '/online',
-    },
-    {
-      key: 'send-messages',
-      name: '发信息',
-      icon: <Icon icon="SendOutlined" />,
-      path: '/send-messages',
-    },
-  ] : []),
+  getMemberLink(i18ns),
 ];
 const linkList = [
   {
-    key: 'docs',
-    name: '文档系统',
-    icon: <Icon icon="FileMarkdownOutlined" />,
-    path: '/md2html',
+    key: 'huxy',
+    name: 'Huxy Admin',
+    icon: <Icon icon="ApiOutlined" />,
+    type: 'link',
+    link: 'https://yiru.gitee.io/huxy-admin',
   },
   {
     key: 'scenedesign',
-    name: 'scenes',
+    name: 'Scenes',
     icon: <Icon icon="ApiOutlined" />,
     type: 'link',
     link: 'http://ihuxy.com:7000',
   },
   {
     key: 'webgl',
-    name: 'webgl',
+    name: 'WebGL',
     icon: <Icon icon="ApiOutlined" />,
     type: 'link',
     link: 'http://ihuxy.com:8081',
@@ -97,10 +87,9 @@ const LinkTo = ({name, icon, path, link, close}) => {
   </div>;
 };
 
-const ProjectList = ({close}) => {
+const ProjectList = ({close, i18ns}) => {
   const isAdmin = !notAdmin();
-  const isMem = isMember();
-  const validPathList = pathList(isAdmin, isMem);
+  const validPathList = pathList(isAdmin, i18ns);
   return <div className="project-list">
     <div className="path-list">
       {

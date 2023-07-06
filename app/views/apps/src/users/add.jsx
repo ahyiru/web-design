@@ -1,13 +1,13 @@
 import {useEffect, useState} from 'react';
 import {Form, Input, Button, InputNumber, Select} from 'antd';
 import {Row, Col} from '@huxy/components';
+import {message} from '@huxy/utils';
 import Back from '@app/components/goBack';
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import {layout, tailLayout} from '@app/utils/configs';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';
 import Panel from '@app/components/panel';
 import {useIntls} from '@app/components/intl';
-import {message} from '@app/utils/staticFunction';
 
 const {addUserFn, editUserFn, listProjectFn} = apiList;
 

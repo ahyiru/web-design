@@ -180,21 +180,23 @@
     }
   }
 }
-.global-search {
-  width: 172px;
-  .ant-input-affix-wrapper {
+.suffix-input {
+  width: 160px;
+  padding: 0 10px;
+  position: relative;
+  input {
+    color: var(--appColor);
     background: var(--appBgColor);
-    border-color: var(--borderColor);
-    .ant-input {
-      color: var(--appColor);
-      background: transparent;
-      &::placeholder {
-        color: var(--appColor);
-      }
-    }
-    .ant-input-suffix {
-      color: var(--appColor);
-    }
+    padding-right: 24px;
+  }
+  .suffix {
+    position: absolute;
+    top: calc(50% - 6px);
+    right: 18px;
+    width: 12px;
+    height: 12px;
+    font-size: 12px;
+    cursor: pointer;
   }
 }
 .notify-item {

@@ -1,17 +1,20 @@
 import {traverItem, arr2TreeByPath, mergeArr} from '@huxy/utils';
 
-import {notAdmin, isMember} from '@app/utils/isAdmin';
+import {notAdmin} from '@app/utils/isAdmin';
 
 import Icon from '@app/components/icon';
 
-import designRoutes from '@app/views/design/routes';
-
 import lowcode from '@app/views/lowcode/configs';
+
+import designRoutes from '@app/views/design/routes';
 
 import staticRoutes from './routerComp/staticRoutes';
 import dynamicRoutes from './routerComp/dynamicRoutes';
-import whiteList from './whiteList';
 import defaultPermList from './defaultPermList';
+
+const whiteList = ['/playground'];
+
+const getWhiteRoute = fullpath => whiteList.find(route => fullpath.indexOf(`${route}/`) !== 0 && route !== fullpath);
 
 const allRoutes = [
   {
@@ -25,18 +28,18 @@ const allRoutes = [
 const routes = (routerList, nameList, permList, profile) => {
   const isAdmin = !notAdmin();
   const serverRoutes = traverItem(({denied, ...rest}) => {
-    rest.fullpath = rest.path;
     if (rest.parentId.length > 1) {
       rest.path = rest.path.replace(rest.parentId, '');
     }
     return rest;
-  })(arr2TreeByPath(routerList));
+  })(arr2TreeByPath(routerList || []));
 
   const fullList = mergeArr(allRoutes, serverRoutes, 'path');
 
-  const permission = [...new Set([...(permList || []), ...whiteList, ...defaultPermList])];
+  const permission = [...new Set([...(permList || []), ...defaultPermList])];
 
   return traverItem((item, parent) => {
+    item.fullpath = [...parent, item].map(item => item.path).join('').replace('//', '/');
     item.id = item._id;
     item.name = nameList?.[item.fullpath] ?? item.name;
     let icon = item.icon;
@@ -53,7 +56,7 @@ const routes = (routerList, nameList, permList, profile) => {
     if (typeof item.denied === 'function') {
       item.denied = item.denied();
     }
-    if (!isAdmin && !isDesign) {
+    if (!isAdmin && !isDesign && getWhiteRoute(item.fullpath)) {
       item.denied = item.denied || !permission.includes(item.fullpath);
     }
   })(fullList);

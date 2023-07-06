@@ -9,6 +9,7 @@ const defaultPermList = [
   '/md2html',
   '/bigscreen',
   '/carmodel',
+  '/wschat',
   '/user',
   '/user/signin',
   '/user/signup',
@@ -40,9 +41,12 @@ const defaultPermList = [
   '/low-code/users/add',
   '/dashboard',
   '/dashboard/screen1',
-  '/dashboard/screen2',
   '/dashboard/bigscreen',
   '/dashboard/carmodel',
+  '/prompt',
+  '/prompt/prompt',
+  '/prompt/prompt/add',
+  '/prompt/prompt/edit/:id',
   '/payer',
   '/payer/count',
   '/payer/count/member',
@@ -52,6 +56,10 @@ const defaultPermList = [
   '/payer/month/member',
   '/payer/month/order',
   '/payer/month/pay',
+  '/demand',
+  '/demand/demand',
+  '/demand/demand/add',
+  '/demand/demand/edit/:id',
 ];
 
 export default defaultPermList;

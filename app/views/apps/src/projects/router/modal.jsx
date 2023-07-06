@@ -4,7 +4,7 @@ import {fixRoute} from '@huxy/utils';
 
 import {layout} from '@app/utils/configs';
 
-import {required, pathPattern, titlePattern} from '@app/utils/patterns';
+import {required, pathPattern, urlOrPathPattern, titlePattern} from '@app/utils/patterns';
 
 import {useIntls} from '@app/components/intl';
 
@@ -18,7 +18,7 @@ const ModalForm = props => {
       <Form.Item name="parentId" label={addFormText.parentId} hidden={isRoot}>
         <Input disabled />
       </Form.Item>
-      <Form.Item name="path" label={addFormText.path} rules={isRoot || editRoot ? [] : [required, pathPattern]} hidden={isRoot}>
+      <Form.Item name="path" label={addFormText.path} rules={isRoot || editRoot ? [] : [required, urlOrPathPattern]} hidden={isRoot}>
         <Input placeholder={addFormText.path} disabled={editRoot} />
       </Form.Item>
       <Form.Item name="name" label={addFormText.name} rules={[required, titlePattern]}>
@@ -30,7 +30,7 @@ const ModalForm = props => {
       <Form.Item name="icon" label={addFormText.icon}>
         <Input placeholder={addFormText.icon} />
       </Form.Item>
-      <Form.Item name="redirect" label="重定向" rules={[pathPattern]}>
+      <Form.Item name="redirect" label="重定向" rules={[urlOrPathPattern]}>
         <Input placeholder="请输入" />
       </Form.Item>
       <Form.Item name="hideMenu" label={addFormText.hideMenu} valuePropName="checked" hidden={isRoot}>

@@ -6,7 +6,7 @@ const sizes = {
   '--headerHeight': '5.8rem',
   '--footerHeight': '4.3rem',
   '--breadHeight': '3.6rem',
-  '--menuItemHeight': '3.9rem',
+  '--menuItemHeight': '4rem',
 };
 const colors = {
   '--appColor': '#ced4da',

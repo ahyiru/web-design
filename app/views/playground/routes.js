@@ -1,6 +1,6 @@
-import {browserRouter} from '@app/configs';
-
+import slateRoutes from './src/slate/routes';
 import configListRoutes from './src/configList/routes';
+import pageRoutes from './src/page/routes';
 // import messagesRoutes from './src/messages/routes';
 
 const routes = {
@@ -8,13 +8,44 @@ const routes = {
   name: 'Playground',
   icon: 'ToolOutlined',
   children: [
+    ...slateRoutes,
+    ...configListRoutes,
+    // ...messagesRoutes,
     {
-      path: '/demo',
-      name: 'demo',
-      icon: 'MergeCellsOutlined',
-      denied: browserRouter,
-      injectSomeValues: 'injectSomeValues',
-      component: () => import('./src'),
+      path: '/suspense',
+      name: 'suspense',
+      icon: 'CoffeeOutlined',
+      children: [
+        {
+          path: '/suspense',
+          name: 'suspense',
+          component: () => import('./src/suspense'),
+        },
+        {
+          path: '/errorboundary',
+          name: 'errorboundary',
+          component: () => import('./src/suspense/errorboundary'),
+        },
+      ],
+    },
+    {
+      path: '/canvas',
+      name: '图形绘制',
+      icon: 'PictureOutlined',
+      children: [
+        {
+          path: '/canvas',
+          name: 'canvas',
+          component: () => import('./src/canvas'),
+        },
+        {
+          path: 'http://ihuxy.com:8081/',
+          name: 'webgl',
+          linkProps: {
+            target: '_blank',
+          },
+        },
+      ],
     },
     {
       path: '/materials',
@@ -47,39 +78,39 @@ const routes = {
         },
       ],
     },
+    ...pageRoutes,
     {
-      path: '/icons',
-      name: 'icons',
-      icon: 'PictureOutlined',
-      component: () => import('./src/icons'),
+      path: '/functions',
+      name: 'functions',
+      icon: 'CoffeeOutlined',
+      children: [
+        {
+          path: '/icons',
+          name: 'icons',
+          component: () => import('./src/functions/icons'),
+        },
+        {
+          path: '/panel',
+          name: 'panel',
+          component: () => import('./src/functions/panel'),
+        },
+        {
+          path: '/styles',
+          name: 'styles',
+          component: () => import('./src/functions/styles'),
+        },
+        {
+          path: '/modal',
+          name: 'modal',
+          component: () => import('./src/functions/modal'),
+        },
+        {
+          path: '/tools',
+          name: 'tools',
+          component: () => import('./src/functions/tools'),
+        },
+      ],
     },
-    /* {
-      path: '/md2html',
-      name: 'md2html',
-      component: () => import('./src/md2html'),
-    }, */
-    {
-      path: '/panel',
-      name: 'panel',
-      component: () => import('./src/panel'),
-    },
-    {
-      path: '/styles',
-      name: 'styles',
-      component: () => import('./src/styles'),
-    },
-    {
-      path: '/modal',
-      name: 'modal',
-      component: () => import('./src/modal'),
-    },
-    {
-      path: '/demo-tools',
-      name: 'tools',
-      component: () => import('./src/tools'),
-    },
-    ...configListRoutes,
-    // ...messagesRoutes,
   ],
 };
 

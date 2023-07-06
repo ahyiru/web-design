@@ -1,7 +1,7 @@
 import {traverItem} from '@huxy/utils';
 import staticRoutes from './routerComp/staticRoutes';
 
-const whiteList = [];
+const whiteList = ['/layout'];
 
 traverItem((item, parent) => {
   const path = `${parent.map(v => v.path).join('')}${item.path}`;

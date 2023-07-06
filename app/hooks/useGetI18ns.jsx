@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import getI18n from '@app/utils/getI18n';
-import {getApiFn} from '@app/utils/getApis';
+import {getApiFn} from '@app/apis/apiList';
 
 const useGetI18ns = () => {
   const [loading, setLoading] = useState(true);

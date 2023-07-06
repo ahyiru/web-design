@@ -17,13 +17,12 @@
     "webgl",
     "hooks",
     "webpack",
-    "eslint",
-    "prettier",
-    "husky",
-    "commitlint",
+    "full-stack",
+    "MERN",
+    "customizable",
+    "responsive",
     "admin",
-    "template",
-    "dashboard"
+    "template"
   ],
   "sideEffects": [
     "*.css",
@@ -41,7 +40,9 @@
     "stylelint": "stylelint 'app/**/*.{css,less}'",
     "lint": "npm run eslint && npm run stylelint",
     "lint-fix": "eslint --fix 'app/**/*.{js,jsx}' && stylelint --fix 'app/**/*.{css,less}'",
-    "prettier": "prettier 'app/**/*' --write --ignore-unknown && npm run lint-fix"
+    "prettier": "prettier 'app/**/*' --write --ignore-unknown && npm run lint-fix",
+    "server-fix": "eslint --fix 'server/**/*.{js,jsx,mjs}'",
+    "server-pre": "prettier 'server/**/*' --write --ignore-unknown && npm run server-fix"
   },
   "repository": {
     "type": "git",
@@ -56,11 +57,6 @@
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
     "@ant-design/pro-table": "^3.9.0",
-    "@antv/graphin": "^2.7.21",
-    "@antv/graphin-components": "^2.4.1",
-    "@antv/x6": "^2.11.2",
-    "@antv/x6-react-components": "^2.0.8",
-    "@antv/x6-react-shape": "^2.2.2",
     "@huxy/components": "^2.0.10",
     "@huxy/layout": "^2.0.8",
     "@huxy/materials": "^1.0.3",
@@ -76,16 +72,14 @@
     "marked-highlight": "^2.0.1",
     "qrcode": "^1.5.3",
     "react": "^18.2.0",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-virtualized-auto-sizer": "^1.0.20",
     "react-window": "^1.8.9",
     "react-window-infinite-loader": "^1.0.9",
-    "rxjs": "^7.8.1",
     "slate": "^0.94.1",
     "slate-history": "^0.93.0",
     "slate-react": "^0.97.1",
+    "socket.io-client": "^4.7.1",
     "three": "^0.154.0",
     "web3": "^4.0.2"
   }

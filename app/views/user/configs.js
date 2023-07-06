@@ -1,5 +1,5 @@
 export {default as logo} from '@app/assets/images/logo.png';
-export {default as apiList} from '@app/utils/getApis';
+export {default as apiList} from '@app/apis/apiList';
 import * as rules from '@app/utils/rules';
 export const formRules = rules;
 

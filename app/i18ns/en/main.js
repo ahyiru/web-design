@@ -1,32 +1,36 @@
 const layout = {
-  saveConfig: 'save configs',
-  copyConfig: 'copy config',
-  menuType: 'menuType',
-  vertical: 'vertical',
-  horizontal: 'horizontal',
-  compose: 'compose',
-  fontSize: 'font size',
-  layoutDesign: 'layout',
-  sizeDesign: 'size',
-  colorDesign: 'color',
-  save_cfg_msg: 'success save theme！',
-  copy_cfg_msg: 'success copy theme！',
-  data_valid_msg: 'please enter legal data！',
-  data_px_msg: 'please enter data within 500-5000！',
-  data_percent_msg: 'please enter data within 50-100！',
-  menu_width_msg: 'please enter data within 0-300！',
+  saveConfig: 'Save Configs',
+  copyConfig: 'Copy Configs',
+  hideHeader: 'HideHeader',
+  hidden: 'Hidden',
+  menuType: 'MenuType',
+  vertical: 'Vertical',
+  horizontal: 'Horizontal',
+  compose: 'Compose',
+  themes: 'Themes',
+  frameSize: 'FrameSize',
+  fontSize: 'FontSize',
+  layoutDesign: 'Layout',
+  sizeDesign: 'Size',
+  colorDesign: 'Color',
+  save_cfg_msg: 'Success save theme！',
+  copy_cfg_msg: 'Success copy theme！',
+  data_valid_msg: 'Please enter legal data！',
+  data_px_msg: 'Please enter data within 500-5000！',
+  data_percent_msg: 'Please enter data within 50-100！',
+  menu_width_msg: 'Please enter data within 0-300！',
 };
 
 const tables = {
-  add: 'add',
-  batchDelete: 'batchDelete',
-  search: 'search',
-  reset: 'reset',
-  edit: 'edit',
-  delete: 'delete',
-  cancel: 'cancel',
-  submit: 'submit',
-  delMsg: 'confirm to delete？',
+  add: 'Add',
+  batchDelete: 'BatchDelete',
+  search: 'Search',
+  reset: 'Reset',
+  edit: 'Edit',
+  delete: 'Delete',
+  cancel: 'Cancel',
+  submit: 'Submit',
+  delMsg: 'Confirm to delete？',
 };
 
 const projects = {
@@ -351,7 +355,7 @@ const editor = {
 };
 
 const components = {
-  back: 'back',
+  back: 'Back',
 };
 
 const main = {

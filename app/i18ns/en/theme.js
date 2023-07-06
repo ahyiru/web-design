@@ -1,13 +1,13 @@
 const theme = {
   // theme name
-  defaults: 'defaults',
-  dark: 'dark',
-  light: 'light',
-  portal: 'portal',
+  defaults: 'Defaults',
+  dark: 'Dark',
+  light: 'Light',
+  portal: 'Portal',
   // fontSize
-  fontSize: 'fontSize',
+  fontSize: 'FontSize',
   // menuType
-  menuType: 'menuType',
+  menuType: 'MenuType',
   // size
   '--maxWidth': 'maxWidth',
   '--menuWidth': 'menuWidth',

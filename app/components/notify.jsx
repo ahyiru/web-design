@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {Badge} from 'antd';
 import {BellOutlined} from '@ant-design/icons';
 import {useRoute} from '@huxy/router';
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import {useNotifyStore} from '@app/store/stores';
 
 const Notify = props => {

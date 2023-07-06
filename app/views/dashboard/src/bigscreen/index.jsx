@@ -1,5 +1,5 @@
 import {TitleHeader, CornerBorder, HalfBorder, BgBox, AnimateBorder} from '@huxy/materials';
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import useHandleList from '@app/hooks/useHandleList';
 import {Row, Col} from '@app/components/row';
 import darkTheme from '@app/configs/themes/dark';

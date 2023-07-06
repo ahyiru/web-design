@@ -1,9 +1,8 @@
 import html2canvas from 'html2canvas';
-import {dlfile, fullScreen} from '@huxy/utils';
+import {dlfile, fullScreen, message} from '@huxy/utils';
 import Icon from '@app/components/icon';
 import report from '@app/apis/report/report';
 
-import {message} from '@app/utils/staticFunction';
 import getWeb3 from '@app/web3/getWeb3';
 
 import FullPage from '@app/components/fullScreen';
@@ -50,6 +49,7 @@ const toolList = [
     name: '截屏',
     icon: <Icon icon="CameraOutlined" />,
     handler: () => {
+      const mesKey = message.info('正在下载截屏...', 0);
       html2canvas(document.getElementById('app'), {
         useCORS: true,
         foreignObjectRendering: true,
@@ -59,9 +59,11 @@ const toolList = [
         .then(canvas => {
           dlfile(canvas.toDataURL());
           message.success('下载成功！');
+          message.destroy(mesKey);
         })
         .catch(error => {
           message.error(error);
+          message.destroy(mesKey);
         });
     },
   },

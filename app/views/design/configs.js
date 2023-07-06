@@ -1,11 +1,10 @@
 import {defProject as project} from '@app/configs';
-import apis from '@app/utils/getApis';
 import * as configs from '@app/utils/configs';
 import * as rules from '@app/utils/rules';
+export {default as apiList} from '@app/apis/apiList';
 export {default as defaultImg} from '@app/assets/images/default.png';
 
 export const defProject = project;
-export const apiList = apis;
 export const formConfigs = configs;
 export const formRules = rules;
 

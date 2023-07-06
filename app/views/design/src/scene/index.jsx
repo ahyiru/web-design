@@ -3,12 +3,12 @@ import {Pagination, Space, Input, Button, Modal, Form, Select} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined, EditOutlined, EyeOutlined} from '@ant-design/icons';
 import {Link} from '@huxy/router';
 import {Row, Col} from '@huxy/components';
+import {message} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 import Panel from '@app/components/panel';
 import {useIntls} from '@app/components/intl';
 import FixedSizeImage from '@app/components/fixedSizeImage';
-import {message} from '@app/utils/staticFunction';
 
 import {apiList, defCategories, defaultImg, baseUrl} from '../../configs';
 

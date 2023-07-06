@@ -1,7 +1,7 @@
 import {Link} from '@huxy/router';
 import {Anico} from '@huxy/components';
-
 import report from '@app/apis/report/report';
+import {getIntls} from '@app/components/intl';
 
 import './index.less';
 
@@ -27,7 +27,7 @@ const Index = ({collapsed, setCollapsed, isSmall}) => {
       }
       {(!isSmall && collapsed) ? null : (
         <Link
-          to="/md2html"
+          to="https://ihuxy.com/md2html"
           target="_blank"
           className="link-bar"
           onClick={() => {
@@ -39,7 +39,7 @@ const Index = ({collapsed, setCollapsed, isSmall}) => {
             });
           }}
         >
-          文档
+          {getIntls('nav.left', {}).doc}
         </Link>
       )}
     </div>

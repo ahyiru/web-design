@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 606">
+  <defs>
+    <style>
+    .cls-1,
+    .cls-2,
+    .cls-3 {
+      fill: none;
+    }
+
+    .cls-2 {
+      clip-path: url(#clip-path-1);
+    }
+
+    .cls-3 {
+      clip-path: url(#clip-path-2);
+    }
+
+    .cls-4 {
+      fill: #4dc8fa;
+    }
+
+    .cls-5 {
+      fill: #00b2f0;
+    }
+
+    .cls-6 {
+      fill: #acd038;
+    }
+
+    .cls-7 {
+      fill: #026fb4;
+    }
+
+    .cls-8 {
+      fill: #006eb3;
+    }
+
+    .cls-9 {
+      fill: #01656f;
+    }
+
+    .cls-10 {
+      fill: #009698;
+    }
+
+    .cls-11 {
+      clip-path: url(#clip-path-3);
+    }
+
+    .cls-12 {
+      fill: url(#radialGradient);
+    }
+
+    </style>
+    <clipPath id="clip-path-1">
+      <polygon class="cls-1" points="340.53 92.23 236.41 71.11 203.17 127.64 345.23 100.22 340.53 92.23" />
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path class="cls-2" d="M288.35,3.51a7,7,0,0,0-12.17,0L246.84,53.38l80.44,16.31Z" />
+    </clipPath>
+    <clipPath id="clip-path-3" transform="translate(0 158.55)">
+      <polygon class="cls-3" points="410.82 218.81 412.96 215.38 363.84 131.85 179.8 167.37 174.96 175.6 410.82 218.81 410.82 218.81" />
+    </clipPath>
+    <radialGradient id="radialGradient" cx="280.81" cy="176" r="176" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.6" />
+      <stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="g1" data-name="g1">
+    <g id="g2" data-name="g2">
+      <polygon class="cls-4" points="203.17 286.19 345.23 258.77 340.53 250.78 236.41 229.67 203.17 286.19" />
+      <polygon class="cls-4" points="363.84 290.41 179.8 325.93 174.96 334.15 415.48 378.21 363.84 290.41" />
+      <path class="cls-5" d="M445.91,271.39,150.45,217.26l-40.06,68.12a7.2,7.2,0,0,0,6.08,10.89H448.06a7.2,7.2,0,0,0,6.08-10.89Z" transform="translate(0 158.55)" />
+      <path class="cls-4" d="M327.28,69.69,288.35,3.51a7,7,0,0,0-12.17,0L246.84,53.38Z" transform="translate(0 158.55)" />
+      <path class="cls-6" d="M245.05,296.27H7.53c-6.06,0-9.63-7.52-6.18-13l51.74-82.68,97.09,17.12,68,12,33,53.62C254.64,288.81,251.07,296.27,245.05,296.27Z" transform="translate(0 158.55)" />
+      <path class="cls-6" d="M133.41,92.05A7.12,7.12,0,0,0,121,92L81,156l79.87-19.37Z" transform="translate(0 158.55)" />
+      <path class="cls-7" d="M410.82,218.81l97.3,15.48-48.27-78.35a5.56,5.56,0,0,0-9.67,0l-39.36,62.91Z" transform="translate(0 158.55)" />
+      <path class="cls-8" d="M535.23,296.27H373.53c-4.73,0-7.51-5.86-4.83-10.17l16.13-25.75,60.86,9.25,92.92,14.16,1.47,2.39C542.72,290.43,539.93,296.27,535.23,296.27Z" transform="translate(0 158.55)" />
+      <path class="cls-9" d="M460.43,296.27h-86.9c-4.73,0-7.51-5.86-4.83-10.17l16.13-25.75,60.86,9.25Z" transform="translate(0 158.55)" />
+      <path class="cls-10" d="M245.05,296.27H101.43l48.75-78.58,68,12,33,53.62C254.64,288.81,251.07,296.27,245.05,296.27Z" transform="translate(0 158.55)" />
+      <g class="cls-11">
+        <circle class="cls-12" cx="280.81" cy="176" r="176" />
+      </g>
+    </g>
+  </g>
+</svg>

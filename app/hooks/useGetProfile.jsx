@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import {logout} from '@app/utils/utils';
 import {defProject} from '@app/configs';
 import {userInfoStore, permissionStore, routersStore} from '@app/store/stores';

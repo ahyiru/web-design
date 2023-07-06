@@ -1,12 +1,12 @@
 import {useState} from 'react';
 import {Select, Button, Modal} from 'antd';
 import {Row, Col} from '@huxy/components';
-import {message} from '@app/utils/staticFunction';
+import {message} from '@huxy/utils';
 import {roleList, periodList} from '@app/utils/configs';
 
 import {userInfoStore} from '@app/store/stores';
 
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 
 import './member.less';
 

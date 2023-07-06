@@ -1,4 +1,4 @@
-import {formatTime} from '@huxy/utils';
+import {formatTime, message} from '@huxy/utils';
 
 import {langStore, userInfoStore} from '@app/store/stores';
 import {getIntls} from '@app/components/intl';
@@ -10,7 +10,6 @@ import Search from '@app/components/search';
 import ThemeModel from '@app/components/themeModel';
 import Icon from '@app/components/icon';
 
-import {message} from '@app/utils/staticFunction';
 import {logout} from '@app/utils/utils';
 
 import defUser from '@app/assets/images/user/2.png';
@@ -18,6 +17,7 @@ import wx from '@app/assets/images/wx.jpg';
 import langList from './langList';
 import ProjectList from './project';
 import AppTools from './appTools';
+import getMemberLink from './getMemberLink';
 
 import {buildTime} from '.';
 
@@ -57,7 +57,7 @@ export const leftNav = () => {
       arrowDir: 'lt',
       Ricon: true,
       smShow: true,
-      ChildRender: props => <ProjectList {...props} />,
+      ChildRender: props => <ProjectList {...props} i18ns={left ?? {}} />,
     },
     {
       key: 'wechat',
@@ -73,11 +73,10 @@ export const leftNav = () => {
       ),
     },
     {
-      key: 'configs',
-      icon: <Icon icon="ToolOutlined" />,
-      type: 'configs',
+      ...getMemberLink(),
       smShow: true,
-      Custom: props => <Settings {...props} />,
+      name: undefined,
+      title: left?.chatbot ?? 'AI助手',
     },
   ];
 };
@@ -85,6 +84,13 @@ export const rightNav = language => {
   const user = userInfoStore.getState();
   const right = getIntls('nav.right', {});
   return [
+    {
+      key: 'configs',
+      icon: <Icon icon="ToolOutlined" />,
+      type: 'configs',
+      smShow: true,
+      Custom: props => <Settings {...props} />,
+    },
     {
       key: 'username',
       name: user?.name || right?.user,
@@ -100,7 +106,7 @@ export const rightNav = language => {
         },
         {
           key: 'order',
-          name: '我的订单',
+          name: right?.orders ?? '我的订单',
           type: 'order',
           icon: <Icon icon="ShoppingCartOutlined" />,
           path: '/payer/count/order',

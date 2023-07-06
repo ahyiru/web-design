@@ -2,13 +2,12 @@ import {useState} from 'react';
 import {Table, Input, Button, Modal, Form, Tooltip, Tag} from 'antd';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {formatTime} from '@huxy/utils';
+import {formatTime, message} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
-import {message} from '@app/utils/staticFunction';
 import {roleList} from '@app/utils/configs';
 
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 
 import Panel from '@app/components/panel';
 

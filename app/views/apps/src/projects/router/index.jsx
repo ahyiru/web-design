@@ -2,16 +2,15 @@ import {useState, useCallback, useEffect} from 'react';
 import {Tree, Modal, Dropdown, Input, Button, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {traverItem} from '@huxy/utils';
+import {traverItem, message} from '@huxy/utils';
 import {useSearch} from '@huxy/use';
 import formatTree from '@app/utils/formatTree';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
-import {message} from '@app/utils/staticFunction';
 import customRender from '@app/utils/render';
 import {userInfoStore, routersStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import {defProject} from '@app/configs';
 import HandleModal from './modal';
 

@@ -30,7 +30,7 @@ const objs = [
     label: 'NPM',
     icon: trend,
     details: '',
-    link: 'https://www.npmjs.com/settings/huxy/packages',
+    link: 'https://www.npmjs.com/org/huxy',
     type: '',
   },
   {
@@ -54,7 +54,7 @@ const objs = [
     label: '专栏',
     icon: light,
     details: '',
-    link: 'https://www.zhihu.com/people/hu-yong-20',
+    link: 'https://www.zhihu.com/column/c_1129074288602603520',
     type: '',
   },
   {

@@ -22,7 +22,7 @@ const minmaxRule = (value, min, max) => {
   return false;
 };
 
-const Index = ({className, value, onChange, onBlur, ...rest}) => {
+const Index = ({className, value, onChange, onBlur, onPressEnter, ...rest}) => {
   const [val, setVal] = useState(value);
   const cls = ['h-input', ...(className?.split(' ') ?? [])]
     .filter(Boolean)
@@ -53,7 +53,12 @@ const Index = ({className, value, onChange, onBlur, ...rest}) => {
       setTimeout(() => onChange?.(e, val));
     }
   };
-  return <input className={cls} aria-label="huxy-label" {...rest} value={val} onChange={handleChange} onBlur={handleBlur} />;
+  const handleKeyDown = e => {
+    if (e.keyCode === 13) {
+      onPressEnter?.(e);
+    }
+  };
+  return <input className={cls} aria-label="huxy-label" onKeyDown={handleKeyDown} {...rest} value={val ?? ''} onChange={handleChange} onBlur={handleBlur} />;
 };
 
 export default Index;

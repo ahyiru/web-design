@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import {Form, Input, Button, Tabs, Typography, Space} from 'antd';
 import {UserOutlined, LockOutlined, MailOutlined, MehOutlined, RiseOutlined} from '@ant-design/icons';
-import apiList from '@app/utils/getApis';
-import {message} from '@app/utils/staticFunction';
+import {message} from '@huxy/utils';
+import apiList from '@app/apis/apiList';
 
 import {nameRule, emailRule, passwordRule, urlRule} from '@app/utils/rules';
 

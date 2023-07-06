@@ -1,8 +1,8 @@
 import {Link} from '@huxy/router';
-import TopRight from './topRight';
+// import TopRight from './topRight';
 import './index.less';
 
-const Index = ({current, Right = TopRight}) => {
+const Index = ({current, Right}) => {
   current = current.filter(v => v.name);
   const name = (
     <li>
@@ -20,7 +20,7 @@ const Index = ({current, Right = TopRight}) => {
   ));
   const isRightBread = current.length > 1;
   const leftBar = isRightBread ? name : bread;
-  const rightBar = isRightBread ? bread : Right ? <Right /> : null;
+  const rightBar = Right ? <Right /> : isRightBread ? bread : null;
   return (
     <div className="main-top">
       <ul className={`left-bar${isRightBread ? '' : ' bread'}`}>{leftBar}</ul>

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {Modal} from 'antd';
 import {ExclamationCircleOutlined, TableOutlined, BarsOutlined} from '@ant-design/icons';
 import {TabHeader} from '@huxy/components';
-import {message} from '@app/utils/staticFunction';
+import {message} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
 import List from './searchList';
 

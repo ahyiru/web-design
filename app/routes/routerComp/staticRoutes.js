@@ -1,3 +1,4 @@
+import {notAdmin} from '@app/utils/isAdmin';
 import userRoutes from '@app/views/user/routes';
 
 const routes = [
@@ -21,12 +22,6 @@ const routes = [
     component: () => import('@app/views/playground/src/md2html'),
   },
   {
-    path: '/x6-demo/:id',
-    name: 'x6',
-    hideMenu: true,
-    component: () => import('@app/views/commons/src/x6-demo/pages'),
-  },
-  {
     path: '/bigscreen',
     name: 'bigscreen',
     hideMenu: true,
@@ -37,6 +32,13 @@ const routes = [
     name: 'carmodel',
     hideMenu: true,
     component: () => import('@app/views/dashboard/src/carmodel'),
+  },
+  {
+    path: '/wschat',
+    name: '聊天室',
+    title: '聊天室',
+    hideMenu: true,
+    component: () => import('@app/views/wschat/src'),
   },
 ];
 

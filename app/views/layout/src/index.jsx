@@ -1,8 +1,7 @@
 import {useState} from 'react';
 import {Input, InputNumber, Slider, Button, Select, Radio, Checkbox} from 'antd';
-import {storage, copyToClipboard} from '@huxy/utils';
+import {storage, copyToClipboard, message} from '@huxy/utils';
 import {useDebounce} from '@huxy/use';
-import {message} from '@app/utils/staticFunction';
 import {Row, Col} from '@app/components/row';
 import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';
@@ -160,13 +159,13 @@ const Index = props => {
               <Panel>
                 <h3>{getIntls('main.layout.layoutDesign')}</h3>
                 <div className="vertical-item">
-                  <label>是否隐藏头部</label>
+                  <label>{getIntls('main.layout.hideHeader')}</label>
                   <div>
                     <Checkbox checked={menuType.header === 'noHeader'} onChange={e => setMenuType({
                       header: e.target.checked ? 'noHeader' : '',
                       menu: menuType.menu,
                     })}>
-                      隐藏
+                      {getIntls('main.layout.hidden')}
                     </Checkbox>
                   </div>
                 </div>
@@ -202,7 +201,7 @@ const Index = props => {
                   </div>
                 </div> */}
                 <div className="vertical-item">
-                  <label>主题</label>
+                  <label>{getIntls('main.layout.themes')}</label>
                   <Row className="select-item">
                     {getThemeList(getIntls).map(item => (
                       <Col key={item.key} span={6} sm={6} xs={6} onClick={e => selectTheme(item)}>
@@ -223,7 +222,7 @@ const Index = props => {
                   </div>
                 </div>
                 <div className="vertical-item">
-                  <label>宽高配置</label>
+                  <label>{getIntls('main.layout.frameSize')}</label>
                   <div style={{paddingLeft: 0}}>
                     {getSizeList(theme.list.sizes).map(({key, value, unit, units, min, max, step}) => (
                       <Row key={key} gutter={[10, 10]}>

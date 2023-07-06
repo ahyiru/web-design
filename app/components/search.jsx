@@ -1,6 +1,6 @@
 import {useRef} from 'react';
-import {Input} from 'antd';
 import {SearchOutlined} from '@ant-design/icons';
+import Input from '@app/components/base/input';
 
 const GlobalSearch = props => {
   const searchValue = useRef();
@@ -9,14 +9,15 @@ const GlobalSearch = props => {
     console.log(searchValue.current);
   };
   return (
-    <span className="link global-search">
+    <div className="suffix-input">
       <Input
         placeholder="search..."
-        suffix={<SearchOutlined onClick={onSearch} />}
+        // suffix={<SearchOutlined onClick={onSearch} />}
         onChange={e => searchValue.current = e.target.value}
         onPressEnter={onSearch}
       />
-    </span>
+      <SearchOutlined onClick={onSearch} className="suffix" />
+    </div>
   );
 };
 

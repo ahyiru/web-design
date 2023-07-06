@@ -5,20 +5,19 @@ import {Tree, Button, Input} from 'antd';
 import {DownOutlined} from '@ant-design/icons';
 
 import {Row, Col} from '@huxy/components';
-import {isValidArr, traverItem} from '@huxy/utils';
+import {isValidArr, traverItem, message} from '@huxy/utils';
 import {useSearch, useDebounce} from '@huxy/use';
 
 import Back from '@app/components/goBack';
 
 import Panel from '@app/components/panel';
-import {message} from '@app/utils/staticFunction';
 import formatTree from '@app/utils/formatTree';
 
 import {useIntls} from '@app/components/intl';
 
 import {routersStore} from '@app/store/stores';
 
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 
 const {listAuthFn, setAuthFn} = apiList;
 

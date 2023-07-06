@@ -1,5 +1,4 @@
 import {fetcher, storage, wrapPromise, message as msgAlert} from '@huxy/utils';
-// import {message as msgAlert} from '@app/utils/staticFunction';
 
 import {PROXY} from '@app/configs';
 

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {Table, Space, Button, Modal} from 'antd';
 
 import {Row, Col} from '@huxy/components';
-import {validObj} from '@huxy/utils';
+import {validObj, message} from '@huxy/utils';
 
 import useHandleList from '@app/hooks/useHandleList';
 
@@ -13,9 +13,8 @@ import Icon from '@app/components/icon';
 import {userInfoStore} from '@app/store/stores';
 
 import customRender from '@app/utils/render';
-import {message} from '@app/utils/staticFunction';
 
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 
 const actionsRender = {
   handleCheck: {

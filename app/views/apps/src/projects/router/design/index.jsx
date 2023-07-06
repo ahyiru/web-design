@@ -2,13 +2,12 @@ import {useState, useEffect, useMemo} from 'react';
 import {Tree, Modal, Dropdown, Spin, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {updateId, addNodes, editNodes, deleteNodes, moveNodes, cacheData, selectedHandle, session} from '@huxy/utils';
+import {updateId, addNodes, editNodes, deleteNodes, moveNodes, cacheData, selectedHandle, session, message} from '@huxy/utils';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
-import {message} from '@app/utils/staticFunction';
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import {defProject} from '@app/configs';
 
 import HandleModal from './modal';

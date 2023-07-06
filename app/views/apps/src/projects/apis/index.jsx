@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {Table, Space, Input, Button, Modal, Form, Tooltip} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {formatTime} from '@huxy/utils';
+import {formatTime, message} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 
@@ -14,8 +14,7 @@ import {userInfoStore} from '@app/store/stores';
 
 import {useIntls} from '@app/components/intl';
 
-import {message} from '@app/utils/staticFunction';
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import {defProject} from '@app/configs';
 
 const {listApiFn, deleteApiFn} = apiList;

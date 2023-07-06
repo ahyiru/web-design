@@ -16,12 +16,12 @@ const routes = [
         icon: 'BarChartOutlined',
         component: () => import('./src/screen1'),
       },
-      {
+      /* {
         path: '/screen2',
         name: 'screen2',
         icon: 'PieChartOutlined',
         component: () => import('./src/screen2'),
-      },
+      }, */
       {
         path: '/bigscreen',
         name: 'bigscreen',
@@ -31,7 +31,7 @@ const routes = [
       {
         path: '/carmodel',
         name: 'carmodel',
-        icon: 'LineChartOutlined',
+        icon: 'PieChartOutlined',
         redirect: '/carmodel',
       },
       /* {

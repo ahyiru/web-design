@@ -20,6 +20,11 @@ const app = {
       prefix: '/huxyapi',
     },
     {
+      url: 'http://ihuxy.com:9203',
+      prefix: '/socket.io',
+      ws: true,
+    },
+    {
       url: 'http://ihuxy.com:3333',
       prefix: '/filesystem',
     },

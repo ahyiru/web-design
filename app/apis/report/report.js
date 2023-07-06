@@ -4,12 +4,12 @@ import {browserRouter} from '@app/configs';
 
 import {isAuthed} from '@app/utils/utils';
 
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 
 import info from './browserInfo';
 
 const report = params => {
-  if (!isAuthed()) {
+  if (/* !browserRouter || */ !isAuthed()) {
     return;
   }
   const routeInfo = getRoute();

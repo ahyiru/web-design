@@ -2,15 +2,14 @@ import {useState} from 'react';
 import {Table, Tag, Space, Input, Button, Modal, Form, Select} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {formatTime} from '@huxy/utils';
-import apiList from '@app/utils/getApis';
+import {formatTime, message} from '@huxy/utils';
+import apiList from '@app/apis/apiList';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 import {roleList} from '@app/utils/configs';
 import Panel from '@app/components/panel';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
-import {message} from '@app/utils/staticFunction';
 
 const {allUserFn, deleteUserFn, exitUserFn} = apiList;
 

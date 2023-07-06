@@ -4,7 +4,7 @@ import theme from './theme';
 import main from './main';
 import login from './login';
 
-const title = 'low-code platform';
+const title = 'Web Design';
 
 export default {
   title,

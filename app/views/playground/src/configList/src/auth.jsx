@@ -5,10 +5,8 @@ import {Tree, Button, Input, Spin} from 'antd';
 import {DownOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
 
 import {Row, Col} from '@huxy/components';
-import {arr2TreeByPath, isValidArr, traverItem} from '@huxy/utils';
+import {arr2TreeByPath, isValidArr, traverItem, message} from '@huxy/utils';
 import {useSearch, useDebounce} from '@huxy/use';
-
-import {message} from '@app/utils/staticFunction';
 
 import useFetchList from '@app/hooks/useFetchList';
 

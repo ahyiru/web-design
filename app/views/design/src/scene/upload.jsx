@@ -1,8 +1,7 @@
 import {useState} from 'react';
 import {Upload} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
-import {loadImage, loadBase64, fixSize} from '@huxy/utils';
-import {message} from '@app/utils/staticFunction';
+import {loadImage, loadBase64, fixSize, message} from '@huxy/utils';
 
 const maxSize = 3 * 1024 * 1024;
 const fileTypes = ['png', 'jpg', 'jpeg', 'webp', 'gif'].map(v => `image/${v}`);

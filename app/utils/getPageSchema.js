@@ -1,4 +1,4 @@
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import {defProject} from '@app/configs';
 
 const pageSchema = async ({_id}) => {

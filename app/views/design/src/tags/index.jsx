@@ -3,13 +3,12 @@ import {Table, Space, Input, Button, Modal, Form, Tooltip} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {useIntls} from '@app/components/intl';
-import {formatTime} from '@huxy/utils';
+import {formatTime, message} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 
 import Panel from '@app/components/panel';
 import Back from '@app/components/goBack';
-import {message} from '@app/utils/staticFunction';
 
 // import {userInfoStore} from '@app/store/stores';
 

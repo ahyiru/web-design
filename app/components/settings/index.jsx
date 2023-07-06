@@ -3,11 +3,10 @@ import {Drawer, Space, Input, InputNumber, Slider, Button, Select, Radio, Checkb
 import {SettingOutlined} from '@ant-design/icons';
 import {TabHeader} from '@huxy/components';
 import {useDebounce} from '@huxy/use';
-import {storage, copyToClipboard} from '@huxy/utils';
+import {storage, copyToClipboard, message} from '@huxy/utils';
 import {Row, Col} from '@app/components/row';
 // import Panel from '@app/components/panel';
 import {sizeRules} from '@app/utils/sizeRules';
-import {message} from '@app/utils/staticFunction';
 import getThemeList from '@app/configs/theme';
 import {useMenuTypeStore, useThemeStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
@@ -168,13 +167,13 @@ const Index = props => {
     layout: (
       <>
         <div className="vertical-item">
-          <label>是否隐藏头部</label>
+          <label>{i18nCfg.hideHeader}</label>
           <div>
             <Checkbox checked={menuType.header === 'noHeader'} onChange={e => setMenuType({
               header: e.target.checked ? 'noHeader' : '',
               menu: menuType.menu,
             })}>
-              隐藏
+              {i18nCfg.hidden}
             </Checkbox>
           </div>
         </div>

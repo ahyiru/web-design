@@ -1,7 +1,7 @@
 import {Button, Tooltip} from 'antd';
 import {SyncOutlined} from '@ant-design/icons';
 import {Link} from '@huxy/router';
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 import useHandleList from '@app/hooks/useHandleList';
 import {useThemeStore} from '@app/store/stores';
 import RangeTimePicker, {defaultTime} from '@app/components/rangeTimePicker';

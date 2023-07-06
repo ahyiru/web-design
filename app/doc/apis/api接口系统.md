@@ -48,7 +48,7 @@ const getApiFn = async () => {
 使用：
 
 ```javascript
-import apiList from '@app/utils/getApis';
+import apiList from '@app/apis/apiList';
 
 try {
   const {code, token, message: msg} = await apiList.loginFn(values);
