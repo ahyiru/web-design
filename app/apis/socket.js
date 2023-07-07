@@ -41,4 +41,6 @@ const initWS = () => {
   });
 };
 
-export default once(initWS);
+const start = () => setTimeout(initWS, 2000);
+
+export default once(start);

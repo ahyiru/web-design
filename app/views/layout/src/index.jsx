@@ -231,13 +231,14 @@ const Index = props => {
                         </Col>
                         <Col span={6} sm={6} xs={6}>
                           <InputNumber
+                            aria-label="huxy-label"
                             min={min}
                             max={max}
                             value={value}
                             onChange={value => changeSizes(key, value, unit)}
                             addonAfter={
                               units.length > 1 ? (
-                                <Select value={unit} onChange={val => changeUnit(key, val)}>
+                                <Select aria-label="huxy-label" value={unit} onChange={val => changeUnit(key, val)}>
                                   {units.map(u => (
                                     <Option key={u} value={u}>
                                       {u}
@@ -268,7 +269,7 @@ const Index = props => {
                           <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
                         </Col>
                         <Col span={6} sm={6} xs={6}>
-                          <Input type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
+                          <Input aria-label="huxy-label" type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
                         </Col>
                       </Row>
                     ))

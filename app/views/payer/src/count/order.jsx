@@ -2,10 +2,10 @@ import {useState} from 'react';
 import {Table, Input, Button, Modal, Form, Tooltip, Tag, Space} from 'antd';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
-import {formatTime, message} from '@huxy/utils';
+import {formatTime, message, storage} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
-import {roleList} from '@app/utils/configs';
+// import {roleList} from '@app/utils/configs';
 
 import apiList from '@app/apis/apiList';
 
@@ -208,7 +208,7 @@ const Index = props => {
               handler={
                 <Space size="small">
                   {
-                    payCount ? <Button loading={pending} onClick={() => props.router.push('http://chat.ihuxy.com')} type="primary">
+                    payCount ? <Button loading={pending} onClick={() => props.router.push(`https://ihuxy.com/paychat?authed_token=${storage.get('token')}`)} type="primary">
                       去聊天
                     </Button> : <Button loading={pending} onClick={() => props.router.push('/payer/count/member')} type="primary">
                       开通会员

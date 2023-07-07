@@ -16,8 +16,8 @@ const colors = {
   '--menuBgColor': '#ffffff',
   '--panelBgColor': '#ffffff',
   '--linkColor': '#495057',
-  '--linkHoverColor': 'var(--blue1)',
-  '--linkActiveColor': 'var(--blue2)',
+  '--linkHoverColor': 'var(--blue2)',
+  '--linkActiveColor': 'var(--blue1)',
   '--borderColor': '#ebeef5',
 };
 
