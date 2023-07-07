@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/ahyiru/web-design/compare/v1.6.0...v1.7.0) (2023-07-07)
+
+
+### ✨ Features | 新功能
+
+* add pack ([cf6eeec](https://github.com/ahyiru/web-design/commit/cf6eeecfceb777754ab4917c9186b47c7e7d25c0))
+* nav bar small screen show config ([ec58ea8](https://github.com/ahyiru/web-design/commit/ec58ea8c3f6edaf0066ca8d9a1cee4ac010a395d))
+
+
+### 📦‍ Build System | 打包构建
+
+* update packages ([2e79fc2](https://github.com/ahyiru/web-design/commit/2e79fc212366749da63f8f16b6d354be3d5ab697))
+* update packages ([8488142](https://github.com/ahyiru/web-design/commit/84881425393d8ed9dae119ab89951583ec6efd30))
+* update packages ([2606940](https://github.com/ahyiru/web-design/commit/2606940795431aa74ba4d8490ecf4fa0e946caf8))
+* update packages ([32631d9](https://github.com/ahyiru/web-design/commit/32631d92ec6eec9c5e7991299664e6b25bd40561))
+* update packages ([21f993a](https://github.com/ahyiru/web-design/commit/21f993a18a06aceec490031f00d2f561890526c6))
+
+
+### ♻️ Code Refactoring | 代码重构
+
+* 代码重构 ([10af7a8](https://github.com/ahyiru/web-design/commit/10af7a891b7c932ec3f61dc1954c40b4fef911ce))
+* refactor code ([520abe0](https://github.com/ahyiru/web-design/commit/520abe09569c7c569fe74cbb1295313789d32bf6))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* fix auth routes ([032b87d](https://github.com/ahyiru/web-design/commit/032b87d248fa615c4b5b96f3e9d747b1a80381ce))
+* fix default theme ([4b00f8d](https://github.com/ahyiru/web-design/commit/4b00f8d126c5fe313adfd993786b3e17c39d0097))
+* fix doc ([a71f05b](https://github.com/ahyiru/web-design/commit/a71f05bec7c0e995857aa74b95002db2a703c323))
+* fix doc ([4395b8c](https://github.com/ahyiru/web-design/commit/4395b8c52a22e3d8eb47b72781e2be55ac284fa2))
+* fix doc ([0102764](https://github.com/ahyiru/web-design/commit/01027642098347b6f2c6156808c6e3734bc4a593))
+* fix doc ([e81692c](https://github.com/ahyiru/web-design/commit/e81692cdb546a0f419e93ea1de490c24456f928b))
+* fix docs ([4e9cd5b](https://github.com/ahyiru/web-design/commit/4e9cd5b0943f5c9c8a99271bb48275b49443df98))
+* fix playground ([7f0ad3e](https://github.com/ahyiru/web-design/commit/7f0ad3e04b566f5467678552fc5f3cb172a1ebfb))
+* fix small screen menu bottom ([a0ca135](https://github.com/ahyiru/web-design/commit/a0ca1357860c9e295c7ad083d021091542041922))
+* fix styles ([76dc472](https://github.com/ahyiru/web-design/commit/76dc472c4d01f5ecdfd44a0036c38eefb7199692))
+* fix styles ([6fd6f53](https://github.com/ahyiru/web-design/commit/6fd6f532e17c9cbe31af54076b55fcb62941ea18))
+* fix workflows ([eaa7d15](https://github.com/ahyiru/web-design/commit/eaa7d15e654efa5b50ac8101becd3e3bd1151a17))
+* rm bks ([aee5429](https://github.com/ahyiru/web-design/commit/aee54298e202e0addd1680a068fbc003fb176269))
+* update @huxy/pack ([4b64404](https://github.com/ahyiru/web-design/commit/4b644044de0f1e1f71aa55c8d99f239cab1d3939))
+* update packages ([3803688](https://github.com/ahyiru/web-design/commit/38036887ecc37c1306cf243bbcca6c9bd3fbcf9d))
+
 ## [1.6.0](https://github.com/ahyiru/web-design/compare/v1.5.0...v1.6.0) (2023-03-23)
 
 
