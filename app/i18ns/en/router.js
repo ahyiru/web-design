@@ -10,7 +10,6 @@ const router = {
   '/bigscreen': 'BigScreen',
   '/carmodel': 'CarModel',
   '/chatbot': 'ChatBot',
-  '/paychat': 'ChatBot',
   '/wschat': 'Chat',
   '/user': 'User',
   '/user/signin': 'Signin',

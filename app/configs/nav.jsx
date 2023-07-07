@@ -1,4 +1,4 @@
-import {formatTime, message} from '@huxy/utils';
+import {formatTime, message, storage} from '@huxy/utils';
 
 import {langStore, userInfoStore} from '@app/store/stores';
 import {getIntls} from '@app/components/intl';
@@ -17,7 +17,6 @@ import wx from '@app/assets/images/wx.jpg';
 import langList from './langList';
 import ProjectList from './project';
 import AppTools from './appTools';
-import getMemberLink from './getMemberLink';
 
 import {buildTime} from '.';
 
@@ -73,10 +72,12 @@ export const leftNav = () => {
       ),
     },
     {
-      ...getMemberLink(),
-      smShow: true,
-      name: undefined,
+      key: 'chatbot',
+      icon: <Icon icon="RobotOutlined" />,
+      type: 'link',
+      link: `https://ihuxy.com/chatbot?authed_token=${storage.get('token')}`,
       title: left?.chatbot ?? 'AI助手',
+      smShow: true,
     },
   ];
 };

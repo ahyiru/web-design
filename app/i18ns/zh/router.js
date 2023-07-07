@@ -10,7 +10,6 @@ const router = {
   '/bigscreen': '大屏',
   '/carmodel': '汽车模型',
   '/chatbot': 'AI助手',
-  '/paychat': 'AI助手',
   '/wschat': '聊天室',
   '/user': '登录注册',
   '/user/signin': '登录',

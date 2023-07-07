@@ -4,8 +4,6 @@ import report from '@app/apis/report/report';
 import Icon from '@app/components/icon';
 import {notAdmin} from '@app/utils/isAdmin';
 
-import getMemberLink from './getMemberLink';
-
 const pathList = (isAdmin, i18ns) => [
   {
     key: 'docs',
@@ -30,7 +28,13 @@ const pathList = (isAdmin, i18ns) => [
     type: 'link',
     link: `https://ihuxy.com/wschat?authed_token=${storage.get('token')}`,
   },
-  getMemberLink(i18ns),
+  {
+    key: 'chatbot',
+    name: i18ns.chatbot ?? 'AI助手',
+    icon: <Icon icon="RobotOutlined" />,
+    type: 'link',
+    link: `https://ihuxy.com/chatbot?authed_token=${storage.get('token')}`,
+  },
 ];
 const linkList = [
   {
