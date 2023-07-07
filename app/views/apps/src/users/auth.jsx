@@ -9,11 +9,10 @@ import {isValidArr, traverItem, message} from '@huxy/utils';
 import {useSearch, useDebounce} from '@huxy/use';
 
 import Back from '@app/components/goBack';
-
 import Panel from '@app/components/panel';
-import formatTree from '@app/utils/formatTree';
-
 import {useIntls} from '@app/components/intl';
+
+import formatTree from '@app/utils/formatTree';
 
 import {routersStore} from '@app/store/stores';
 

@@ -14,18 +14,20 @@ const {addUser, editUser, projectList} = apiList;
 
 const Index = props => {
   const getIntls = useIntls();
+  const addFormText = getIntls('main.users.addFormText', {});
+
   const [form] = Form.useForm();
   const {getState} = props.history;
   const {item, backState} = getState() || {};
   const onFinish = async values => {
     const handler = item ? editUser : addUser;
     values = item ? {...item, ...values} : values;
-    const projectName = projectList.find(v => v._id === values.projectId)?.name;
+    const projectName = projectList.find(v => v._id === values.projectId)?.name ?? '';
     try {
       const {code, message: msg} = await handler({...values, projectName});
       if (code === 200) {
         message.success(msg);
-        props.router.push(`/playground/configTable`);
+        props.router.push(`/playground/configList`);
       }
     } catch (err) {
       console.log(err);
@@ -42,24 +44,24 @@ const Index = props => {
         </Col>
         <Col>
           <Panel>
-            <Form name="addUser" onFinish={onFinish} form={form} initialValues={item ?? {}} {...layout} style={{width: '50%'}} autoComplete="off">
-              <Form.Item label={getIntls('main.layout.users.addFormText.name')} name="name" rules={nameRule}>
-                <Input placeholder={getIntls('main.layout.users.addFormText.name')} />
+            <Form name="addUser" onFinish={onFinish} form={form} initialValues={item ?? {}} {...layout} style={{width: '100%', maxWidth: '600px'}} autoComplete="off">
+              <Form.Item label={addFormText.name} name="name" rules={nameRule}>
+                <Input placeholder={addFormText.name} />
               </Form.Item>
-              <Form.Item label={getIntls('main.layout.users.addFormText.email')} name="email" rules={emailRule}>
-                <Input placeholder={getIntls('main.layout.users.addFormText.email')} />
+              <Form.Item label={addFormText.email} name="email" rules={emailRule}>
+                <Input placeholder={addFormText.email} />
               </Form.Item>
-              <Form.Item label={getIntls('main.layout.users.addFormText.password')} name="password" rules={passwordRule}>
-                <Input type="password" placeholder={getIntls('main.layout.users.addFormText.password')} autoComplete="new-password" />
+              <Form.Item label={addFormText.password} name="password" /* rules={passwordRule} */>
+                <Input type="password" placeholder={addFormText.password} autoComplete="new-password" />
               </Form.Item>
-              <Form.Item label={getIntls('main.layout.users.addFormText.role')} name="role" rules={roleRule}>
-                <InputNumber placeholder={getIntls('main.layout.users.addFormText.role')} />
+              <Form.Item label={addFormText.role} name="role" rules={roleRule}>
+                <InputNumber placeholder={addFormText.role} style={{width: '160px'}} />
               </Form.Item>
-              <Form.Item label={getIntls('main.layout.users.addFormText.avatar')} name="avatar">
-                <Input placeholder={getIntls('main.layout.users.addFormText.avatar')} />
+              <Form.Item label={addFormText.avatar} name="avatar">
+                <Input placeholder={addFormText.avatar} />
               </Form.Item>
-              <Form.Item label={getIntls('main.layout.users.addFormText.projectId')} name="projectId">
-                <Select placeholder={getIntls('main.layout.users.addFormText.projectId')} allowClear style={{width: '80%'}}>
+              <Form.Item label={addFormText.projectId} name="projectId">
+                <Select placeholder={addFormText.projectId} allowClear style={{width: '80%'}}>
                   {projectList.map(v => (
                     <Select.Option key={v._id} value={v._id}>
                       {v.name}
@@ -69,10 +71,10 @@ const Index = props => {
               </Form.Item>
               <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit">
-                  {getIntls('main.layout.users.addFormText.submit')}
+                  {addFormText.submit}
                 </Button>
                 <Button style={{marginLeft: '12px'}} onClick={() => form.resetFields()}>
-                  {getIntls('main.layout.users.addFormText.reset')}
+                  {addFormText.reset}
                 </Button>
               </Form.Item>
             </Form>

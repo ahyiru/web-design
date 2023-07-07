@@ -1,5 +1,4 @@
-import {getTouchPosition, getRelative, getViewportSize, setStyle, getPosition} from '@huxy/utils';
-import initStart from '@app/utils/handleEvts';
+import {getTouchPosition, getRelative, getViewportSize, setStyle, getPosition, touchEvent} from '@huxy/utils';
 
 const defCfg = {
   relativeX: 0,
@@ -44,6 +43,6 @@ const endEvent = (evt, ref) => {
   setStyle(ref, dragableStyles, true);
 };
 
-const init = ref => initStart(startEvent, moveEvent, endEvent, ref);
+const init = ref => touchEvent(startEvent, moveEvent, endEvent, ref);
 
 export default init;

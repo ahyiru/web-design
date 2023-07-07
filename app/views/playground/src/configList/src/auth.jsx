@@ -2,21 +2,19 @@ import {useState, useCallback, useEffect} from 'react';
 
 import {Tree, Button, Input, Spin} from 'antd';
 
-import {DownOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
+import {DownOutlined} from '@ant-design/icons';
 
 import {Row, Col} from '@huxy/components';
-import {arr2TreeByPath, isValidArr, traverItem, message} from '@huxy/utils';
+import {isValidArr, traverItem, message} from '@huxy/utils';
 import {useSearch, useDebounce} from '@huxy/use';
 
 import useFetchList from '@app/hooks/useFetchList';
 
 import Back from '@app/components/goBack';
-
 import Panel from '@app/components/panel';
-
-import Icons from '@app/utils/icons';
-
 import {useIntls} from '@app/components/intl';
+
+import formatTree from '@app/utils/formatTree';
 
 import {defProject} from '@app/configs';
 
@@ -33,6 +31,8 @@ const rootNode = {
 
 const Index = props => {
   const getIntls = useIntls();
+  const authFormText = getIntls('main.users.authFormText', {});
+
   const {getState} = props.history;
   const {backState} = getState();
 
@@ -40,15 +40,7 @@ const Index = props => {
 
   const [filterTree, setFilterTree] = useSearch(null);
 
-  const [routerList] = useFetchList(getRouter, {projectId: defProject._id}, ({result}) => {
-    const arr = [{...rootNode, name: getIntls('main.layout.users.authFormText.root_name')}, ...(result || [])].map(item => {
-      item.key = item.path;
-      const Icon = Icons[item.icon] || EyeInvisibleOutlined;
-      item.icon = <Icon />;
-      return item;
-    });
-    return {result: arr2TreeByPath(arr)};
-  });
+  const [routerList] = useFetchList(getRouter, {projectId: defProject._id});
 
   const update = useCallback(async () => {
     const {
@@ -67,8 +59,6 @@ const Index = props => {
     update();
   }, []);
 
-  // const searchTree = (value) => setFilterTree(tree, value, 'name', 'path');
-
   const searchChange = useDebounce((e, data) => {
     const {value} = e.target;
     setFilterTree(data, value, 'name', 'path');
@@ -84,8 +74,8 @@ const Index = props => {
       authKeys: checkedKeys.filter(Boolean),
     });
     if (code === 200) {
-      message.success(`${msg} ${getIntls('main.layout.users.authFormText.auth_msg')}`);
-      props.router.push(`/playground/configTable`);
+      message.success(`${msg} ${authFormText.auth_msg}`);
+      props.router.push(`/playground/configList`);
     }
   };
 
@@ -98,7 +88,8 @@ const Index = props => {
   };
 
   const {pending, data} = routerList;
-  const treeData = filterTree || data || [];
+  const tree = formatTree([{...rootNode, name: authFormText.root_name}, ...(data || [])]);
+  const treeData = filterTree || tree || [];
   const nodes = [];
   traverItem(item => {
     if (isValidArr(item.children)) {
@@ -120,10 +111,10 @@ const Index = props => {
               <Tree showIcon defaultExpandAll switcherIcon={<DownOutlined />} titleRender={item => item.name} treeData={treeData} virtual={false} checkable onCheck={onCheck} checkedKeys={leafKeys} />
               <div style={{padding: '12px 16px'}}>
                 <Button type="primary" htmlType="submit" onClick={e => handleAuth()}>
-                  {getIntls('main.layout.users.authFormText.submit')}
+                  {authFormText.submit}
                 </Button>
                 <Button style={{marginLeft: '12px'}} onClick={() => setCheckedKeys([])}>
-                  {getIntls('main.layout.users.authFormText.reset')}
+                  {authFormText.reset}
                 </Button>
               </div>
             </Spin>

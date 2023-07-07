@@ -10,8 +10,10 @@ const Notify = props => {
   const [count, setCount] = useNotifyStore();
   useEffect(() => {
     const getMes = async () => {
-      const {result} = await apiList.listMessageFn({current: 1, size: 100, status: 0});
-      setCount(result.total);
+      try {
+        const {result} = await apiList.listMessageFn({current: 1, size: 100, status: 0});
+        setCount(result.total);
+      } catch (err) {}
     };
     getMes();
   }, []);

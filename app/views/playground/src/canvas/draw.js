@@ -1,5 +1,4 @@
-import {getRelative, dlfile, cacheData} from '@huxy/utils';
-import initStart from '@app/utils/handleEvts';
+import {getRelative, dlfile, cacheData, touchEvent} from '@huxy/utils';
 import drawText from './drawText';
 
 const {record, undo, redo} = cacheData();
@@ -127,7 +126,7 @@ const init = (ref, defCfg, imgRef, imgUrl) => {
   } else {
     clearRect(imgRef);
   }
-  const destroy = initStart(startEvent, moveEvent, endEvent, ref);
+  const destroy = touchEvent(startEvent, moveEvent, endEvent, ref);
   return {
     destroy,
     color: value => setCfg({color: value, type: 'draw'}),

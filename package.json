@@ -62,7 +62,7 @@
     "@huxy/materials": "^1.0.3",
     "@huxy/router": "^2.0.5",
     "@huxy/use": "^2.0.3",
-    "@huxy/utils": "^2.0.10",
+    "@huxy/utils": "^2.0.11",
     "antd": "^5.6.4",
     "echarts": "^5.4.2",
     "echarts-for-react": "^3.0.2",
