@@ -1,9 +1,16 @@
+import {useEffect} from 'react';
+import {useWinResize} from '@huxy/use';
+
 import Intls from '@app/components/intl';
 import styles from './index.less';
 import {logo} from '../configs';
 
-const Index = props => (
-  <div className={styles.page}>
+const Index = props => {
+  const {height} = useWinResize();
+  useEffect(() => {
+    document.documentElement.style.setProperty('--containerHeight', `${height}px`);
+  }, [height]);
+  return <div className={styles.page}>
     <div className={styles['login-panel']}>
       <div className={styles.title}>
         <div className={styles.logo}>
@@ -23,7 +30,7 @@ const Index = props => (
         <Intls keys="nav.footer.right">京ICP备15005899号-2</Intls>
       </a>
     </div>
-  </div>
-);
+  </div>;
+};
 
 export default Index;

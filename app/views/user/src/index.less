@@ -1,13 +1,14 @@
 :local {
   .page {
+    --footerHeight: 52px;
     position: relative;
     width: 100%;
     min-height: var(--containerHeight);
-    padding-bottom: 60px;
+    padding-bottom: var(--footerHeight);
     display: flex;
-    /*align-items:center;*/
+    align-items: center;
     justify-content: center;
-    /*background:url('../../assets/images/bg.jpg');
+    /*background: url('../../assets/images/bg.jpg');
 	  background-size: 100% 100%;
     background-position: center center;
     background-repeat: no-repeat;*/
@@ -27,10 +28,9 @@
     .login-panel {
       width: 320px;
       border-radius: 2px;
-      padding-top: 10vh;
-      /*transform:translateY(-100px);*/
+      /*transform: translateY(-100px);*/
       .title {
-        /*background-color:#495a72;*/
+        /*background-color: #495a72;*/
         padding: 15px 0;
         > h2 {
           margin: 0;
@@ -61,7 +61,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 60px;
+      height: var(--footerHeight);;
       a {
         position: relative;
         &:not(:first-of-type) {
