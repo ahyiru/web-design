@@ -11,6 +11,7 @@ const router = {
   '/carmodel': '汽车模型',
   '/chatbot': 'AI助手',
   '/wschat': '聊天室',
+  '/send-messages': '消息留言',
   '/user': '登录注册',
   '/user/signin': '登录',
   '/user/signup': '注册',

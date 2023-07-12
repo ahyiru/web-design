@@ -29,11 +29,10 @@ const pathList = (isAdmin, i18ns) => [
     link: `https://ihuxy.com/wschat?authed_token=${storage.get('token')}`,
   },
   {
-    key: 'chatbot',
-    name: i18ns.chatbot ?? 'AI助手',
-    icon: <Icon icon="RobotOutlined" />,
-    type: 'link',
-    link: `https://ihuxy.com/chatbot?authed_token=${storage.get('token')}`,
+    key: 'send-messages',
+    name: '信息留言',
+    icon: <Icon icon="SendOutlined" />,
+    path: '/send-messages',
   },
 ];
 const linkList = [

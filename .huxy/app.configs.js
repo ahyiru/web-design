@@ -38,14 +38,14 @@ const app = {
 
 export default {
   app,
-  webpack: (rootDir, appPath) => ({
+  webpack: (rootPath, appPath) => ({
     dev: {
       plugins: [
         new DeadCodePlugin({
           patterns: [`${appPath}/**/*.(js|jsx|css|less|json|png|jpg|jpeg)`],
           exclude: ['**/node_modules/**', '**/build/**', '**/draft/**'],
           log: 'none',
-          exportJSON: rootDir,
+          exportJSON: rootPath,
         }),
       ],
     },

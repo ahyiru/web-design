@@ -11,6 +11,7 @@ const router = {
   '/carmodel': 'CarModel',
   '/chatbot': 'ChatBot',
   '/wschat': 'Chat',
+  '/send-messages': 'SendMessage',
   '/user': 'User',
   '/user/signin': 'Signin',
   '/user/signup': 'Signup',

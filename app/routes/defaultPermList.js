@@ -10,6 +10,7 @@ const defaultPermList = [
   '/bigscreen',
   '/carmodel',
   '/wschat',
+  '/send-messages',
   '/user',
   '/user/signin',
   '/user/signup',

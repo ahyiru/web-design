@@ -1,6 +1,6 @@
 ## 关于我们
 
-### 提供专业定制化软件设计与开发服务
+### 提供专业定制化软件设计与开发服务！
 
 **当个性与追求交织，需求就复杂多样。当技术与创意碰撞，奇迹便成为可能！**
 
@@ -12,11 +12,11 @@
 
 **让我们一同创造出一个更美好、更高效的数字世界。**
 
-*_[GitHub](https://github.com/ahyiru)_*
+*_- [GitHub](https://github.com/ahyiru)_*
 
-*_[NPM](https://www.npmjs.com/org/huxy)_*
+*_- [NPM](https://www.npmjs.com/org/huxy)_*
 
-*_[知乎](https://www.zhihu.com/column/c_1129074288602603520)_*
+*_- [知乎](https://www.zhihu.com/column/c_1129074288602603520)_*
 
 ## 联系我们
 

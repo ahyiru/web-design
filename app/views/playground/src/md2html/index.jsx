@@ -9,6 +9,7 @@ const configs = {
   getContext,
   listFiles,
   title: '文档系统',
+  routeLink: '/',
 };
 
 const Index = props => <Md2html router={props.router} params={props.params} {...configs} />;

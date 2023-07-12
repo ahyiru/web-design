@@ -3,6 +3,8 @@ import {Input, Button, Form, Radio, Transfer} from 'antd';
 import {SendOutlined} from '@ant-design/icons';
 import {message} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
+import {notAdmin} from '@app/utils/isAdmin';
+import info from '@app/apis/report/browserInfo';
 
 import {layout, tailLayout} from '@app/utils/configs';
 
@@ -10,7 +12,7 @@ import {layout, tailLayout} from '@app/utils/configs';
 
 import apiList from '@app/apis/apiList';
 
-const {allUserFn, addMessageFn} = apiList;
+const {allUserFn, addMessageFn, addCommentFn} = apiList;
 
 const typeList = [
   {
@@ -25,13 +27,14 @@ const typeList = [
 
 
 const SendMsg = props => {
+  const isNotAdmin = notAdmin();
   const [pending, setPending] = useState(false);
   const [form] = Form.useForm();
   const [users] = useHandleList(allUserFn, {current: 1, size: 100, active: 1});
   const [targetKeys, setTargetKeys] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState([]);
 
-  const [type, setType] = useState('message');
+  const [type, setType] = useState(isNotAdmin ? 'email' : 'message');
 
   const onFinish = async values => {
     setPending(true);
@@ -40,12 +43,14 @@ const SendMsg = props => {
     }
     
     try {
-      const {code, message: msg} = await addMessageFn(values);
+      const handler = isNotAdmin ? addCommentFn : addMessageFn;
+      const {code, message: msg} = await handler({...values, ...info});
       if (code === 200) {
         message.success(msg);
         setTargetKeys([]);
         setSelectedKeys([]);
         form.resetFields();
+        props.router.push('/messages');
       }
     } catch (err) {
       console.log(err);
@@ -67,10 +72,10 @@ const SendMsg = props => {
     <div style={{padding: '20px'}}>
       <Form name="sendMsg" onFinish={onFinish} form={form} initialValues={{type}} {...layout}>
         <Form.Item label="类别" name="type" rules={[{required: true}]}>
-          <Radio.Group options={typeList} optionType="button" onChange={e => setType(e.target.value)} />
+          <Radio.Group disabled={isNotAdmin} options={typeList} optionType="button" onChange={e => setType(e.target.value)} />
         </Form.Item>
         {
-          type === 'email' ? <Form.Item label="接收者" name="receiver" rules={[{required: true}]}>
+          (!isNotAdmin && type === 'email') ? <Form.Item label="接收者" name="receiver" rules={[{required: true}]}>
             <Transfer
               dataSource={list.map(item => ({...item, key: item.email}))}
               titles={['用户', '已选']}

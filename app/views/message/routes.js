@@ -12,7 +12,7 @@ const routes = [
     name: '发送信息',
     icon: 'SendOutlined',
     hideMenu: true,
-    denied: notAdmin,
+    // denied: notAdmin,
     component: () => import('./src/send'),
   },
   {
