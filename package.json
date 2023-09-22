@@ -49,26 +49,26 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^1.3.7",
+    "@huxy/pack": "^1.4.1",
     "husky": "^8.0.3",
     "webpack-deadcode-plugin": "^0.1.17"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.2.5",
-    "@ant-design/pro-table": "^3.10.6",
+    "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-table": "^3.12.7",
     "@huxy/components": "^2.1.2",
     "@huxy/layout": "^2.1.2",
     "@huxy/materials": "^1.1.0",
     "@huxy/router": "^2.1.0",
     "@huxy/use": "^2.1.1",
     "@huxy/utils": "^2.1.4",
-    "antd": "^5.8.3",
+    "antd": "^5.9.2",
     "echarts": "^5.4.3",
     "echarts-for-react": "^3.0.2",
     "highlight.js": "^11.8.0",
     "html2canvas": "^1.4.1",
-    "marked": "^7.0.3",
-    "marked-highlight": "^2.0.4",
+    "marked": "^9.0.3",
+    "marked-highlight": "^2.0.6",
     "qrcode": "^1.5.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -77,9 +77,9 @@
     "react-window-infinite-loader": "^1.0.9",
     "slate": "^0.94.1",
     "slate-history": "^0.93.0",
-    "slate-react": "^0.98.1",
+    "slate-react": "^0.98.4",
     "socket.io-client": "^4.7.2",
-    "three": "^0.155.0",
-    "web3": "^4.0.3"
+    "three": "^0.156.1",
+    "web3": "^4.1.2"
   }
 }

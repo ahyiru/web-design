@@ -16,6 +16,7 @@ const nav = {
     settings: 'Setting',
     orders: 'Orders',
     logout: 'Logout',
+    signin: 'Signin',
     language: 'Language',
     zh: '中文',
     en: 'English',

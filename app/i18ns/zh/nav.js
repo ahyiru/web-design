@@ -16,6 +16,7 @@ const nav = {
     settings: '设置',
     orders: '我的订单',
     logout: '退出',
+    signin: '登录',
     language: '语言',
     zh: '中文',
     en: 'English',
