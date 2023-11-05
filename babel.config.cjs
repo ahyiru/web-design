@@ -1,1 +1,5 @@
-module.exports = require('@huxy/pack/config/babel');
+const configs = require('@huxy/pack/config/babel');
+
+module.exports = configs({
+  // customCfgs
+});

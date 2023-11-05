@@ -1,1 +1,5 @@
-module.exports = require('@huxy/pack/config/prettier');
+const configs = require('@huxy/pack/config/prettier');
+
+module.exports = configs({
+  // customCfgs
+});

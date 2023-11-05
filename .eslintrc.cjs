@@ -1,1 +1,5 @@
-module.exports = require('@huxy/pack/config/eslint');
+const configs = require('@huxy/pack/config/eslint');
+
+module.exports = configs({
+  // customCfgs
+});
