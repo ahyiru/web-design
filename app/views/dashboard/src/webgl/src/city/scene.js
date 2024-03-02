@@ -21,7 +21,8 @@ const startScene = (mountDom = document.body) => {
   const setConfigs = () => {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    // renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
     mountDom.appendChild(renderer.domElement);
 
     camera.position.x = 0.1;
