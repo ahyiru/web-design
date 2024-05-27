@@ -1,6 +1,19 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [1.7.1](https://github.com/ahyiru/web-design/compare/v1.7.0...v1.7.1) (2024-05-27)
+
+
+### Bug Fixes
+
+* fix chatbot link ([eaaf3d5](https://github.com/ahyiru/web-design/commit/eaaf3d5df83a74ae5100d3f502ef11cf6565ccf6))
+* fix configs ([2cb4b1a](https://github.com/ahyiru/web-design/commit/2cb4b1a313086866d72e2ac0e7e584a480b32c2c))
+* fix legacy-peer-deps ([a9c3db7](https://github.com/ahyiru/web-design/commit/a9c3db7173211a8fab82a4f17f5b96ecc60d01f1))
+* fix pack ([12f87c3](https://github.com/ahyiru/web-design/commit/12f87c389fd6ad1cc0abb9aea6ee752a87f08d2f))
+* fix seo ([13d6ade](https://github.com/ahyiru/web-design/commit/13d6adead8ce2fd86b4357bcf6ad8f2b7261ae41))
+* fix styles ([d7c5a9f](https://github.com/ahyiru/web-design/commit/d7c5a9f20307b802c754ee702db96adbb03b2232))
+* login ([24d0816](https://github.com/ahyiru/web-design/commit/24d0816b5bb9fdf3df9b3d6a393c7dae19cd51d6))
 
 ## [1.7.0](https://github.com/ahyiru/web-design/compare/v1.6.0...v1.7.0) (2023-07-07)
 
