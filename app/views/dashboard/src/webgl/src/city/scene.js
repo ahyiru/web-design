@@ -61,19 +61,19 @@ const startScene = (mountDom = document.body) => {
 
   const onMouseWheel = e => {
     // e.preventDefault();
-    const mouseWheel = () => {
-      const detail = e.wheelDelta * wheelStep ?? e.wheelDeltaY * wheelStep ?? e.detail * -1;
+    const mouseWheel = evt => {
+      const detail = (evt.deltaY ?? evt.wheelDeltaY) * wheelStep;
       camera.fov -= detail;
       camera.fov = Math.max(10, Math.min(100, camera.fov));
     };
     if (e.deltaY < 0) {
       if (deltaCount < deltaMax) {
-        mouseWheel();
+        mouseWheel(e);
         deltaCount += 1;
       }
     } else {
       if (deltaCount > deltaMin) {
-        mouseWheel();
+        mouseWheel(e);
         deltaCount -= 1;
       }
     }

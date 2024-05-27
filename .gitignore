@@ -43,13 +43,20 @@ typings
 .DS_Store
 Thumbs.db
 
+# test
 __snapshots__
 
-cert
+# package-lock.json
+package-lock.json
+
+# pnpm-lock.yaml
+pnpm-lock.yaml
 
 # build
 dist
 build
 
-# dead code
+# redis
+*.rdb
+
 deadcode.json
