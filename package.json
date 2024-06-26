@@ -1,6 +1,6 @@
 {
   "name": "web-design",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "type": "module",
   "description": "Web Design 是一个简单的低代码开发平台，用于快速搭建项目、开发页面、配置接口等。",
   "keywords": [
@@ -33,15 +33,15 @@
     "build": "pack run build",
     "analyze": "pack run analyze",
     "server": "pack run server",
-    "test": "pack run test",
-    "release": "pack run release",
-    "eslint": "eslint 'app/**/*.{js,jsx}'",
-    "stylelint": "stylelint 'app/**/*.{css,less}'",
+    "test": "pack test",
+    "release": "pack release",
+    "eslint": "pack eslint 'app/**/*.{js,jsx}'",
+    "stylelint": "pack stylelint 'app/**/*.{css,less}'",
     "lint": "npm run eslint && npm run stylelint",
-    "lint-fix": "eslint --fix 'app/**/*.{js,jsx}' && stylelint --fix 'app/**/*.{css,less}'",
-    "prettier": "prettier 'app/**/*' --write --ignore-unknown && npm run lint-fix",
-    "server-fix": "eslint --fix 'server/**/*.{js,jsx,mjs}'",
-    "server-pre": "prettier 'server/**/*' --write --ignore-unknown && npm run server-fix"
+    "lint-fix": "pack eslint --fix 'app/**/*.{js,jsx}' && pack stylelint --fix 'app/**/*.{css,less}'",
+    "prettier": "pack prettier 'app/**/*' --write --ignore-unknown && npm run lint-fix",
+    "server-fix": "pack eslint --fix 'server/**/*.{js,jsx,mjs}'",
+    "server-pre": "pack prettier 'server/**/*' --write --ignore-unknown && npm run server-fix"
   },
   "repository": {
     "type": "git",
@@ -49,26 +49,26 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^1.6.2",
+    "@huxy/pack": "^1.6.5",
     "husky": "^9.0.11",
     "webpack-deadcode-plugin": "^0.1.17"
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
-    "@ant-design/pro-table": "^3.16.0",
-    "@huxy/components": "^2.1.10",
-    "@huxy/layout": "^2.1.6",
+    "@ant-design/pro-table": "^3.16.1",
+    "@huxy/components": "^2.1.11",
+    "@huxy/layout": "^2.1.7",
     "@huxy/materials": "^1.1.4",
-    "@huxy/router": "^2.1.7",
-    "@huxy/use": "^2.1.5",
-    "@huxy/utils": "^2.1.12",
-    "antd": "^5.17.3",
+    "@huxy/router": "^2.1.8",
+    "@huxy/use": "^2.1.6",
+    "@huxy/utils": "^2.1.13",
+    "antd": "^5.18.3",
     "echarts": "^5.5.0",
     "echarts-for-react": "^3.0.2",
     "highlight.js": "^11.9.0",
     "html2canvas": "^1.4.1",
-    "marked": "^12.0.2",
-    "marked-highlight": "^2.1.1",
+    "marked": "^13.0.1",
+    "marked-highlight": "^2.1.3",
     "qrcode": "^1.5.3",
     "react": "19.0.0-rc-935180c7e0-20240524",
     "react-dom": "19.0.0-rc-935180c7e0-20240524",
@@ -77,9 +77,9 @@
     "react-window-infinite-loader": "^1.0.9",
     "slate": "^0.103.0",
     "slate-history": "^0.100.0",
-    "slate-react": "^0.104.0",
+    "slate-react": "^0.106.0",
     "socket.io-client": "^4.7.5",
-    "three": "^0.164.1",
-    "web3": "^4.9.0"
+    "three": "^0.165.0",
+    "web3": "^4.10.0"
   }
 }
