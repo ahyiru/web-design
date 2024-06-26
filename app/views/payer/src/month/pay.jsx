@@ -16,11 +16,21 @@ const Index = props => {
   return (
     <div className="month-page">
       <div style={{padding: '10px 0'}}>
-        <Button type="primary" ghost icon={<RollbackOutlined />} onClick={e => props.router.push('/payer/month/order')}>我的订单</Button>
+        <Button type="primary" ghost icon={<RollbackOutlined />} onClick={e => props.router.push('/payer/month/order')}>
+          我的订单
+        </Button>
       </div>
       <div className="pay-title">
-        <p>当前订单信息：开通 <b>{label} <i>{period}个月</i></b>，费用 <b>{price}元</b>，订单号：<b>{order}</b></p>
-        <h4 className="pay-tips">支付时请备注<b>订单号（如：{order ?? 'huy-0'}）</b>。审核通过后立即生效。</h4>
+        <p>
+          当前订单信息：开通{' '}
+          <b>
+            {label} <i>{period}个月</i>
+          </b>
+          ，费用 <b>{price}元</b>，订单号：<b>{order}</b>
+        </p>
+        <h4 className="pay-tips">
+          支付时请备注<b>订单号（如：{order ?? 'huy-0'}）</b>。审核通过后立即生效。
+        </h4>
       </div>
       <div className="pay-wrap">
         <div className="pay-item" style={{marginRight: '32px'}}>

@@ -145,16 +145,16 @@ const Index = ({commonprops, ...props}) => {
     rowSelection === false || !deleteInfo?.isBatch
       ? false
       : {
-        selectedRowKeys: selectedRows.map(v => v[rowKey]),
-        onChange: (selectedRowKeys, selectedRows) => {
-          setSelectedRows(selectedRows);
-        },
-        getCheckboxProps: record => ({
-          disabled: !profile.role && record[rowKey] !== profile[rowKey],
-        }),
-        columnWidth: '30px',
-        ...(typeof rowSelection === 'object' ? rowSelection : null),
-      };
+          selectedRowKeys: selectedRows.map(v => v[rowKey]),
+          onChange: (selectedRowKeys, selectedRows) => {
+            setSelectedRows(selectedRows);
+          },
+          getCheckboxProps: record => ({
+            disabled: !profile.role && record[rowKey] !== profile[rowKey],
+          }),
+          columnWidth: '30px',
+          ...(typeof rowSelection === 'object' ? rowSelection : null),
+        };
 
   const columnsCfg = formatColums(columns, {handleCheck, handleEdit, handleDelete});
 
@@ -166,18 +166,18 @@ const Index = ({commonprops, ...props}) => {
     pagination === false
       ? false
       : {
-        onShowSizeChange: (current, size) => pageChange(current, size),
-        onChange: (current, size) => pageChange(current, size),
-        showSizeChanger: true,
-        showQuickJumper: true,
-        total: total || 1,
-        current: current || 1,
-        pageSize: size || 10,
-        pageSizeOptions: ['10', '20', '30', '40'],
-        // hideOnSinglePage:true,
-        size: 'small',
-        ...(typeof pagination === 'object' ? pagination : null),
-      };
+          onShowSizeChange: (current, size) => pageChange(current, size),
+          onChange: (current, size) => pageChange(current, size),
+          showSizeChanger: true,
+          showQuickJumper: true,
+          total: total || 1,
+          current: current || 1,
+          pageSize: size || 10,
+          pageSizeOptions: ['10', '20', '30', '40'],
+          // hideOnSinglePage:true,
+          size: 'small',
+          ...(typeof pagination === 'object' ? pagination : null),
+        };
 
   const searchFormProps = {
     submit: values => handleSearch(validObj(values)),
@@ -192,21 +192,21 @@ const Index = ({commonprops, ...props}) => {
 
   const searchFormSchema = searchSchema
     ? {
-      type: 'CustomForm',
-      props: {
-        ...searchFormProps,
-        schema: searchSchema,
-      },
-    }
+        type: 'CustomForm',
+        props: {
+          ...searchFormProps,
+          schema: searchSchema,
+        },
+      }
     : null;
   const modalFormSchema = modalSchema
     ? {
-      type: 'CustomForm',
-      props: {
-        ...modalFormProps,
-        schema: modalSchema,
-      },
-    }
+        type: 'CustomForm',
+        props: {
+          ...modalFormProps,
+          schema: modalSchema,
+        },
+      }
     : null;
 
   return (

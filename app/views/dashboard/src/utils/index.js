@@ -101,10 +101,14 @@ export const getViewsOpt = data => {
   const osTypeObj = classifyArr(data, 'osType');
   const optData = Object.keys(osTypeObj).map(key => ({
     name: key,
-    value: osTypeObj[key] ? getWeekData(osTypeObj[key]).map(item => {
-      item.data = filterByIp(item.data);
-      return item;
-    }).map(item => ({...item, count: item.data?.length ?? 0})) : [],
+    value: osTypeObj[key]
+      ? getWeekData(osTypeObj[key])
+          .map(item => {
+            item.data = filterByIp(item.data);
+            return item;
+          })
+          .map(item => ({...item, count: item.data?.length ?? 0}))
+      : [],
   }));
   return {
     opt: viewsOpt(optData),

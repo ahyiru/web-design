@@ -79,20 +79,35 @@ const getColumns = ({handleDelete, handleAudit, handlePay, handleCancel}, isAdmi
     align: 'center',
     render: (text, record) => {
       if (isAdmin) {
-        return <>
-          <Button type="link" size="small" disabled={!!record.status || record.deleted} onClick={() => handleAudit(record)}>
-            审核
-          </Button>
-          <Button type="link" size="small" onClick={() => handleDelete(record)} danger>
-            删除
-          </Button>
-        </>;
+        return (
+          <>
+            <Button type="link" size="small" disabled={!!record.status || record.deleted} onClick={() => handleAudit(record)}>
+              审核
+            </Button>
+            <Button type="link" size="small" onClick={() => handleDelete(record)} danger>
+              删除
+            </Button>
+          </>
+        );
       }
-      return record.status ? <Button type="link" size="small" disabled>已支付</Button>
-        : record.deleted ? <Button type="link" size="small" disabled>已失效</Button> : <>
-          <Button type="link" size="small" onClick={() => handleCancel(record)}>取消订单</Button>
-          <Button type="link" size="small" onClick={() => handlePay(record)}>去支付</Button>
-        </>;
+      return record.status ? (
+        <Button type="link" size="small" disabled>
+          已支付
+        </Button>
+      ) : record.deleted ? (
+        <Button type="link" size="small" disabled>
+          已失效
+        </Button>
+      ) : (
+        <>
+          <Button type="link" size="small" onClick={() => handleCancel(record)}>
+            取消订单
+          </Button>
+          <Button type="link" size="small" onClick={() => handlePay(record)}>
+            去支付
+          </Button>
+        </>
+      );
     },
   },
 ];
@@ -207,13 +222,15 @@ const Index = props => {
               loading={pending}
               handler={
                 <Space size="small">
-                  {
-                    payCount ? <Button loading={pending} onClick={() => props.router.push(`https://ihuxy.com/chatbot?authed_token=${storage.get('token')}`)} type="primary">
+                  {payCount ? (
+                    <Button loading={pending} onClick={() => props.router.push(`https://ihuxy.com/chatbot?authed_token=${storage.get('token')}`)} type="primary">
                       去聊天
-                    </Button> : <Button loading={pending} onClick={() => props.router.push('/payer/count/member')} type="primary">
+                    </Button>
+                  ) : (
+                    <Button loading={pending} onClick={() => props.router.push('/payer/count/member')} type="primary">
                       开通会员
                     </Button>
-                  }
+                  )}
                   <Button loading={pending} onClick={() => props.router.push(`https://ihuxy.com/chatbot?authed_token=${storage.get('token')}`)}>
                     去试用
                   </Button>

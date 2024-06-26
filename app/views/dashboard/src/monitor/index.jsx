@@ -66,20 +66,24 @@ const Monitor = props => {
                 <div className="item-text">
                   <p className="text-desc">{item.description}</p>
                   <p className="text-value">
-                    {
-                      item.path ? <a
-                        onClick={e => props.router.push({
-                          path: item.path, 
-                          params: {
-                            actionType: item.value,
-                            timeRange,
-                          },
-                        })}
+                    {item.path ? (
+                      <a
+                        onClick={e =>
+                          props.router.push({
+                            path: item.path,
+                            params: {
+                              actionType: item.value,
+                              timeRange,
+                            },
+                          })
+                        }
                         style={{color: item.color}}
                       >
                         {overviewObj[item.value]}
-                      </a> : <b style={{color: item.color}}>{overviewObj[item.value]}</b>
-                    }
+                      </a>
+                    ) : (
+                      <b style={{color: item.color}}>{overviewObj[item.value]}</b>
+                    )}
                   </p>
                 </div>
               </div>

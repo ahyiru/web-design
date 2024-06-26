@@ -11,12 +11,12 @@ const app = {
   projectName: '...',
   PROXY: [
     /* {
-      url: 'http://api.ihuxy.com',
+      url: 'https://api.ihuxy.com',
       prefix: '/huxyapi',
       pathRewrite: {'^/huxyapi': ''},
     }, */
     {
-      url: 'https://ihuxy.com',
+      url: 'http://ihuxy.com:9202',
       prefix: '/huxyapi',
     },
     {

@@ -12,18 +12,18 @@
 
 **让我们一同创造出一个更美好、更高效的数字世界。**
 
-*_- [GitHub](https://github.com/ahyiru)_*
+_*- [GitHub](https://github.com/ahyiru)*_
 
-*_- [NPM](https://www.npmjs.com/org/huxy)_*
+_*- [NPM](https://www.npmjs.com/org/huxy)*_
 
-*_- [知乎](https://www.zhihu.com/column/c_1129074288602603520)_*
+_*- [知乎](https://www.zhihu.com/column/c_1129074288602603520)*_
 
 ## 联系我们
 
-***Email：ah.yiru@gmail.com***
+**_Email：ah.yiru@gmail.com_**
 
-***微信：ahyiru***
+**_微信：ahyiru_**
 
-***公众号：yiru_js***
+**_公众号：yiru_js_**
 
 <img src="./gzh.jpg" width="200px" style="width: 200px;" alt="公众号" />

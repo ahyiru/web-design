@@ -19,7 +19,7 @@ const OperatingModal = props => {
       });
   };
   return (
-    <Modal title="审核" open={open} onCancel={onCancel} onOk={()=>handleSubmit()}>
+    <Modal title="审核" open={open} onCancel={onCancel} onOk={() => handleSubmit()}>
       <Form name="completeDemand" form={form} initialValues={{...item}} {...layout}>
         <Form.Item label="完成说明" name="instruction">
           <Input.TextArea autoSize={{minRows: 3}} placeholder="请输入" />

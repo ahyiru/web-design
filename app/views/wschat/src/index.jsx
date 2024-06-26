@@ -25,11 +25,12 @@ const delayScrool = (ref, update) => setTimeout(() => scroolBottom(ref, update),
 
 const {getData, setData} = chatStore();
 
-const formatUser = user => user.map(({userid, time}) => {
-  const [name, email, ip] = userid.split('_huxy_');
-  const label = name === 'test1' ? `${name}(${ip})`: name;
-  return {value: userid, label, email, time};
-});
+const formatUser = user =>
+  user.map(({userid, time}) => {
+    const [name, email, ip] = userid.split('_huxy_');
+    const label = name === 'test1' ? `${name}(${ip})` : name;
+    return {value: userid, label, email, time};
+  });
 
 const ws = wsChat();
 
@@ -82,12 +83,12 @@ const Index = props => {
     };
     const online = ({userid}) => {
       const [name, email, ip] = userid.split('_huxy_');
-      const username = name === 'test1' ? `${name}(${ip})`: name;
+      const username = name === 'test1' ? `${name}(${ip})` : name;
       message.info(`${username}: 已上线！`);
     };
     const offline = ({userid}) => {
       const [name, email, ip] = userid.split('_huxy_');
-      const username = name === 'test1' ? `${name}(${ip})`: name;
+      const username = name === 'test1' ? `${name}(${ip})` : name;
       message.info(`${username}: 已下线！`);
     };
     ws.connect();
@@ -108,8 +109,8 @@ const Index = props => {
 
   return (
     <div className={`ws-chat-web-container ${themeToken.key}`}>
-      {
-        isSmall ? <Drawer
+      {isSmall ? (
+        <Drawer
           position="left"
           open={open}
           close={e => setOpen(false)}
@@ -120,38 +121,40 @@ const Index = props => {
           style={{background: 'var(--botBg)'}}
         >
           <ul className="drawer-list">
-            {
-              users.map(({label, value}) => <li key={value}>
+            {users.map(({label, value}) => (
+              <li key={value}>
                 <a className="link">{label}</a>
-              </li>)
-            }
+              </li>
+            ))}
           </ul>
-        </Drawer> : <div className="drawer-list small-screen">
+        </Drawer>
+      ) : (
+        <div className="drawer-list small-screen">
           <div className="ws-menu-wrap">
             <div className="ws-menu-container">
               <div className="drawer-title">在线用户</div>
               <ul className="drawer-list">
-                {
-                  users.map(({label, value}) => <li key={value}><a className="link">{label}</a></li>)
-                }
+                {users.map(({label, value}) => (
+                  <li key={value}>
+                    <a className="link">{label}</a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
-      }
+      )}
       <div className="ws-chat-web-main">
         <div className="chatbot-web-header">
-          {
-            isSmall ? <div className="bar title-coll" onClick={e => setOpen(!open)}><Anico type={open ? 'close' : ''} /></div> : null
-          }
+          {isSmall ? (
+            <div className="bar title-coll" onClick={e => setOpen(!open)}>
+              <Anico type={open ? 'close' : ''} />
+            </div>
+          ) : null}
           <h4 className="title">聊天室</h4>
           <Drop
             type="vertical"
-            dropList={<DropList
-              profile={profile}
-              switchTheme={e => switchTheme(themeToken)}
-              themeToken={themeToken}
-            />}
+            dropList={<DropList profile={profile} switchTheme={e => switchTheme(themeToken)} themeToken={themeToken} />}
             targetProps={{className: 'bar right'}}
             style={{
               '--bgColor': themeToken.key === 'dark' ? 'rgba(52, 53, 65, 1)' : 'rgba(32, 33, 35, 1)',
@@ -159,47 +162,56 @@ const Index = props => {
               '--linkColor': 'var(--asideLinkColor)',
             }}
           >
-            <div className="bar title-dot right"><span className="dot" /></div>
+            <div className="bar title-dot right">
+              <span className="dot" />
+            </div>
           </Drop>
         </div>
         <div className="chatbot-web-content" ref={contentRef}>
           <div className="content-wrap">
-            {
-              msgList.map((item, i) => {
-                const {role, time, content, avatar, name, ip} = item;
-                const username = name === 'test1' ? `${name}(${ip})`: name;
-                if (role === 'user') {
-                  return <div key={`${role}_${i}_${time}`} className="user-area">
+            {msgList.map((item, i) => {
+              const {role, time, content, avatar, name, ip} = item;
+              const username = name === 'test1' ? `${name}(${ip})` : name;
+              if (role === 'user') {
+                return (
+                  <div key={`${role}_${i}_${time}`} className="user-area">
                     <div className="message-wrap">
-                      <span className="message-info">{formatTime(new Date(time))}<span> {profile.name}</span></span>
-                      <div className={`user-message`}>
-                        {content}
-                      </div>
+                      <span className="message-info">
+                        {formatTime(new Date(time))}
+                        <span> {profile.name}</span>
+                      </span>
+                      <div className={`user-message`}>{content}</div>
                     </div>
                     <div className="user-avatar">
                       <img height="90%" src={profile.avatar} alt={profile.name} />
                     </div>
-                  </div>;
-                } else {
-                  return <div key={`${role}_${i}_${time}`} className="bot-area">
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={`${role}_${i}_${time}`} className="bot-area">
                     <div className="user-avatar">
                       <img height="90%" src={avatar || defAvatar} alt="zys" />
                     </div>
                     <div className="message-wrap">
-                      <span className="message-info"><span>{username} </span>{formatTime(new Date(time))}</span>
-                      <div className={`user-message`}>
-                        {content}
-                      </div>
+                      <span className="message-info">
+                        <span>{username} </span>
+                        {formatTime(new Date(time))}
+                      </span>
+                      <div className={`user-message`}>{content}</div>
                     </div>
-                  </div>;
-                }
-              })
-            }
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
         <div className="chatbot-web-footer">
           <div className="input-area">
-            <Input.TextArea bordered={false} autoSize={{maxRows: 1}} value={value}
+            <Input.TextArea
+              bordered={false}
+              autoSize={{maxRows: 1}}
+              value={value}
               placeholder="发送消息！"
               onChange={e => setValue(e.target.value)}
               onPressEnter={e => {

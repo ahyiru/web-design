@@ -150,7 +150,12 @@ code {
   font-weight: 400;
   line-height: 1.7142857;
   overflow-x: auto;
-  font-family: Söhne Mono, Monaco, Andale Mono, Ubuntu Mono, monospace;
+  font-family:
+    Söhne Mono,
+    Monaco,
+    Andale Mono,
+    Ubuntu Mono,
+    monospace;
   background: #23241f;
   color: #f8f8f2;
 }

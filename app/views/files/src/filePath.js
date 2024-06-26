@@ -1,15 +1,19 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Input from '@app/components/base/input';
 
-const FilePath = ({filename, modalInputVaule, pattern}) => {
-  const [value, setValue] = useState(filename);
-  modalInputVaule.current = {...pattern, value};
+const FilePath = ({filename, pattern, getModalInputVaule}) => {
+  const [name, setName] = useState(filename);
+  useEffect(() => {
+    // modalInputVaule.current = {...pattern, value: name};
+    getModalInputVaule({...pattern, value: name});
+  }, []);
   const handleChange = e => {
     const {value} = e.target;
-    setValue(value);
-    modalInputVaule.current.value = value;
+    setName(value);
+    // modalInputVaule.current.value = value;
+    getModalInputVaule({...pattern, value});
   };
-  return <Input autoFocus value={value} onChange={handleChange} placeholder="请输入" />;
+  return <Input autoFocus value={name} onChange={handleChange} placeholder="请输入" />;
 };
 
 export default FilePath;

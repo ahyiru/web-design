@@ -66,16 +66,16 @@ const Index = props => {
               <Form.Item label="prompt" name="prompt" rules={[{required: true}]}>
                 <Input.TextArea autoSize={{minRows: 3}} placeholder="请输入" />
               </Form.Item>
-              {
-                isAdmin ? <>
+              {isAdmin ? (
+                <>
                   <Form.Item label="可见性" name="visibility">
                     <InputNumber placeholder="请输入" />
                   </Form.Item>
                   <Form.Item label="等级" name="userRole">
                     <InputNumber placeholder="请输入" />
                   </Form.Item>
-                </> : null
-              }
+                </>
+              ) : null}
               <Form.Item {...tailLayout}>
                 <Button style={{marginRight: '12px'}} onClick={() => back()}>
                   取消

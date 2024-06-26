@@ -52,7 +52,15 @@ const Index = props => {
         </Col>
         <Col>
           <Panel>
-            <Form name="addDemand" onFinish={onFinish} form={form} initialValues={{...item, visibility: item?.visibility ?? true, attachment: item?.attachment ? [{name: item.attachment.split('/').slice(-1)[0]}] : undefined}} {...layout} style={formStyle} disabled={isCkeck}>
+            <Form
+              name="addDemand"
+              onFinish={onFinish}
+              form={form}
+              initialValues={{...item, visibility: item?.visibility ?? true, attachment: item?.attachment ? [{name: item.attachment.split('/').slice(-1)[0]}] : undefined}}
+              {...layout}
+              style={formStyle}
+              disabled={isCkeck}
+            >
               <Form.Item label="标题" name="title" rules={[{required: true}]}>
                 <Input placeholder="请输入" />
               </Form.Item>
@@ -82,16 +90,16 @@ const Index = props => {
               <Form.Item label="原型地址" name="sample">
                 <Input placeholder="请输入" />
               </Form.Item>
-              {
-                (isAdmin || isCkeck) ? <>
+              {isAdmin || isCkeck ? (
+                <>
                   <Form.Item label="完成说明" name="instruction">
                     <Input.TextArea autoSize={{minRows: 2}} placeholder="请输入" />
                   </Form.Item>
                   <Form.Item label="演示地址" name="demo">
                     <Input placeholder="请输入" />
                   </Form.Item>
-                </> : null
-              }
+                </>
+              ) : null}
               <Form.Item {...tailLayout}>
                 <Button style={{marginRight: '12px'}} onClick={() => back()}>
                   取消

@@ -5,7 +5,9 @@
     &::before,
     &::after {
       opacity: 1;
-      transition: opacity 0.2s, transform 0.2s;
+      transition:
+        opacity 0.2s,
+        transform 0.2s;
     }
     &::before {
       transform: translateY(0);
@@ -23,7 +25,9 @@
     z-index: 10000;
     background-color: @tooltipBgColor;
     border: 1px solid @tooltipBorderColor;
-    transition: opacity 0.2s, transform 0.2s;
+    transition:
+      opacity 0.2s,
+      transform 0.2s;
   }
 
   &::before {

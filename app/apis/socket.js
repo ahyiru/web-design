@@ -6,15 +6,17 @@ const wsMsgUrl = `${window.location.origin}/ws-message`;
 
 const wsChatUrl = `${window.location.origin}/ws-chat`;
 
-export const wsMsg = () => io(wsMsgUrl, {
-  auth: {Authorization: `yiru ${storage.get('token')}`},
-  // autoConnect: false,
-});
+export const wsMsg = () =>
+  io(wsMsgUrl, {
+    auth: {Authorization: `yiru ${storage.get('token')}`},
+    // autoConnect: false,
+  });
 
-export const wsChat = () => io(wsChatUrl, {
-  auth: {Authorization: `yiru ${storage.get('token')}`},
-  autoConnect: false,
-});
+export const wsChat = () =>
+  io(wsChatUrl, {
+    auth: {Authorization: `yiru ${storage.get('token')}`},
+    autoConnect: false,
+  });
 
 const initWS = () => {
   const ws = wsMsg();

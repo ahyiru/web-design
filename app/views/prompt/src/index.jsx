@@ -55,15 +55,17 @@ const getColumns = ({handleEdit, handleDelete, handleAudit}, profile) => [
     ellipsis: true,
     render: (text, record) => text || record.creator,
   },
-  ...(profile.role === 5 ? [
-    {
-      title: '使用情况',
-      dataIndex: 'visibility',
-      ellipsis: true,
-      align: 'center',
-      render: text => <Tag color={text ? 'green' : 'red'}>{text ? '使用中' : '已删除'}</Tag>,
-    },
-  ] : []),
+  ...(profile.role === 5
+    ? [
+        {
+          title: '使用情况',
+          dataIndex: 'visibility',
+          ellipsis: true,
+          align: 'center',
+          render: text => <Tag color={text ? 'green' : 'red'}>{text ? '使用中' : '已删除'}</Tag>,
+        },
+      ]
+    : []),
   {
     title: 'prompt',
     dataIndex: 'prompt',

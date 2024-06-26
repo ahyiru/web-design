@@ -67,11 +67,11 @@ const Index = props => {
               <Form.Item label={addFormText.role} name="role" rules={roleRule}>
                 <InputNumber placeholder={addFormText.role} style={{width: '160px'}} />
               </Form.Item>
-              {
-                item?.deadline ? <Form.Item label="截止日期" name="deadline">
+              {item?.deadline ? (
+                <Form.Item label="截止日期" name="deadline">
                   <InputNumber placeholder="deadline" style={{width: '160px'}} />
-                </Form.Item> : null
-              }
+                </Form.Item>
+              ) : null}
               <Form.Item label={addFormText.avatar} name="avatar">
                 <Input placeholder={addFormText.avatar} />
               </Form.Item>

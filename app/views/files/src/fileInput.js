@@ -4,26 +4,35 @@ import TextArea from '@app/components/base/textarea';
 
 import apis from './getApis';
 
-const FileInput = ({path, modalInputVaule}) => {
+const FileInput = ({path, getModalInputVaule}) => {
   const [content, setContent] = useState('');
-  modalInputVaule.current = {value: content};
   useEffect(() => {
     const getData = async () => {
-      const {result} = await apis.openfileFn({path});
-      setContent(result.data);
-      modalInputVaule.current.value = result.data;
+      let value = '';
+      try {
+        const {result} = await apis.openfileFn({path});
+        value = result.data ?? '';
+        setContent(value);
+      } catch (err) {
+        console.error(err.message);
+      }
+      getModalInputVaule({value});
+      // modalInputVaule.current.value = value;
     };
     getData();
   }, []);
   const handleChange = e => {
     const {value} = e.target;
     setContent(value);
-    modalInputVaule.current.value = value;
+    getModalInputVaule({value});
+    // modalInputVaule.current.value = value;
   };
-  return <div>
-    <Input value={path} disabled />
-    <TextArea autoFocus value={content} onChange={handleChange} placeholder="请输入内容" row={8} style={{marginTop: '1.3rem', minHeight: '20rem'}} />
-  </div>;
+  return (
+    <div>
+      <Input value={path} disabled />
+      <TextArea autoFocus value={content} onChange={handleChange} placeholder="请输入内容" row={8} style={{marginTop: '1.3rem', minHeight: '20rem'}} />
+    </div>
+  );
 };
 
 export default FileInput;

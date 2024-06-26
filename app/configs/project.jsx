@@ -80,31 +80,44 @@ const LinkTo = ({name, icon, path, link, close}) => {
       });
     },
   };
-  const ProjLink = ({children}) => path ? <Link to={path} {...commonProps}>{children}</Link> : <a href={link} target="_blank" {...commonProps}>{children}</a>;
-  
-  return <div className="pl-item">
-    <ProjLink>
-      <span className="pl-icon">{icon}</span>
-      <span className="pl-name">{name}</span>
-    </ProjLink>
-  </div>;
+  const ProjLink = ({children}) =>
+    path ? (
+      <Link to={path} {...commonProps}>
+        {children}
+      </Link>
+    ) : (
+      <a href={link} target="_blank" {...commonProps}>
+        {children}
+      </a>
+    );
+
+  return (
+    <div className="pl-item">
+      <ProjLink>
+        <span className="pl-icon">{icon}</span>
+        <span className="pl-name">{name}</span>
+      </ProjLink>
+    </div>
+  );
 };
 
 const ProjectList = ({close, i18ns}) => {
   const isAdmin = !notAdmin();
   const validPathList = pathList(isAdmin, i18ns);
-  return <div className="project-list">
-    <div className="path-list">
-      {
-        validPathList.map(({key, ...rest}) => <LinkTo key={key} {...rest} close={close} />)
-      }
+  return (
+    <div className="project-list">
+      <div className="path-list">
+        {validPathList.map(({key, ...rest}) => (
+          <LinkTo key={key} {...rest} close={close} />
+        ))}
+      </div>
+      <div className="link-list">
+        {linkList.map(({key, ...rest}) => (
+          <LinkTo key={key} {...rest} close={close} />
+        ))}
+      </div>
     </div>
-    <div className="link-list">
-      {
-        linkList.map(({key, ...rest}) => <LinkTo key={key} {...rest} close={close} />)
-      }
-    </div>
-  </div>;
+  );
 };
 
 export default ProjectList;

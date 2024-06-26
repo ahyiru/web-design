@@ -12,13 +12,16 @@ const ItemDetail = ({path, filename}) => {
     };
     getDetails();
   }, []);
-  return <div style={{padding: '0 10px'}}>
-    {
-      header.map(({key, label, flex, format}) => <div key={key} style={{padding: '4px 0'}}>
-        <span style={{width: '33.33%', textAlign: 'left', display: 'inline-block'}}>{label}：</span><span>{format ? format(details[key]) : details[key]}</span>
-      </div>)
-    }
-  </div>;
+  return (
+    <div style={{padding: '0 10px'}}>
+      {header.map(({key, label, flex, format}) => (
+        <div key={key} style={{padding: '4px 0'}}>
+          <span style={{width: '33.33%', textAlign: 'left', display: 'inline-block'}}>{label}：</span>
+          <span>{format ? format(details[key]) : details[key]}</span>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default ItemDetail;

@@ -9,23 +9,19 @@ const TableEditor = props => {
   const {editorI18n = {}, actionI18n = {}, columnI18n = {}} = designConfigText || {};
   const getActions = values => {
     // console.log(1,values);
-    data.actions = values;
-    getValues?.(data);
+    getValues?.({...data, actions: values});
   };
   const getColumns = values => {
     // console.log(2,values);
-    data.columns = values;
-    getValues?.(data);
+    getValues?.({...data, columns: values});
   };
   const getSearchForm = values => {
     // console.log(3,values);
-    data.searchSchema = values;
-    getValues?.(data);
+    getValues?.({...data, searchSchema: values});
   };
   const getModalForm = values => {
     // console.log(4,values);
-    data.modalSchema = values;
-    getValues?.(data);
+    getValues?.({...data, modalSchema: values});
   };
   return (
     <>

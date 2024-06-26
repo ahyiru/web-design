@@ -35,14 +35,26 @@ const Pay = props => {
   return (
     <div className="count-page">
       <div style={{padding: '10px 0'}}>
-        <Button type="primary" ghost icon={<RollbackOutlined />} onClick={e => props.router.push('/payer/count/order')}>我的订单</Button>
+        <Button type="primary" ghost icon={<RollbackOutlined />} onClick={e => props.router.push('/payer/count/order')}>
+          我的订单
+        </Button>
       </div>
       <div className="pay-title">
-        <p>当前订单信息：开通 <b>{label}，对话次数 {count} 次，有效期 <i>{period} 个月</i></b>，费用 <b>{price}元</b>，订单号：<b>{orderNo}</b></p>
-        <div className="pay-tips">支付时请备注 <b>订单号（如：{orderNo ?? 'huy-0'}）</b>。审核通过后立即生效。</div>
-        {
-          delay ? <div style={{color: 'var(--blue2)'}}><b>{delay}</b> 后订单自动失效，请尽快完成支付！</div> : null
-        }
+        <p>
+          当前订单信息：开通{' '}
+          <b>
+            {label}，对话次数 {count} 次，有效期 <i>{period} 个月</i>
+          </b>
+          ，费用 <b>{price}元</b>，订单号：<b>{orderNo}</b>
+        </p>
+        <div className="pay-tips">
+          支付时请备注 <b>订单号（如：{orderNo ?? 'huy-0'}）</b>。审核通过后立即生效。
+        </div>
+        {delay ? (
+          <div style={{color: 'var(--blue2)'}}>
+            <b>{delay}</b> 后订单自动失效，请尽快完成支付！
+          </div>
+        ) : null}
       </div>
       <div className="pay-wrap">
         <div className="pay-item" style={{marginRight: '32px'}}>

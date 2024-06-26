@@ -12,15 +12,7 @@ const Index = props => {
   const i18ns = i18nsStore.getState();
   const language = getLang();
   const [menus, noHeader] = useFormatMenu(props);
-  return <Layout
-    title={i18ns?.title}
-    {...menus}
-    leftList={noHeader ? null : leftNav(language)}
-    rightList={noHeader ? null : rightNav(language)}
-    {...configs}
-    {...props}
-    language={language}
-  />;
+  return <Layout title={i18ns?.title} {...menus} leftList={noHeader ? null : leftNav(language)} rightList={noHeader ? null : rightNav(language)} {...configs} {...props} language={language} />;
 };
 
 export default Index;

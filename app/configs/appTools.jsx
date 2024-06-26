@@ -70,42 +70,54 @@ const toolList = [
 ];
 
 const AppTools = () => {
-  return <div className="app-tools">
-    <div className="app-list">
-      {
-        appList.map(({key, name, icon, handler}) => <span key={key} className="link" onClick={e => {
-          e.stopPropagation();
-          handler();
-          report({
-            actionType: 'click',
-            category: 'navbar',
-            text: 'app-tools',
-            value: name,
-          });
-        }} title={name}>
-          <span className="at-icon">{icon}</span>
-          <span className="at-name">{name}</span>
-        </span>)
-      }
+  return (
+    <div className="app-tools">
+      <div className="app-list">
+        {appList.map(({key, name, icon, handler}) => (
+          <span
+            key={key}
+            className="link"
+            onClick={e => {
+              e.stopPropagation();
+              handler();
+              report({
+                actionType: 'click',
+                category: 'navbar',
+                text: 'app-tools',
+                value: name,
+              });
+            }}
+            title={name}
+          >
+            <span className="at-icon">{icon}</span>
+            <span className="at-name">{name}</span>
+          </span>
+        ))}
+      </div>
+      <div className="tool-list">
+        {toolList.map(({key, name, icon, handler}) => (
+          <span
+            key={key}
+            className="link"
+            onClick={e => {
+              e.stopPropagation();
+              handler();
+              report({
+                actionType: 'click',
+                category: 'navbar',
+                text: 'app-tools',
+                value: name,
+              });
+            }}
+            title={name}
+          >
+            <span className="at-icon">{icon}</span>
+            <span className="at-name">{name}</span>
+          </span>
+        ))}
+      </div>
     </div>
-    <div className="tool-list">
-      {
-        toolList.map(({key, name, icon, handler}) => <span key={key} className="link" onClick={e => {
-          e.stopPropagation();
-          handler();
-          report({
-            actionType: 'click',
-            category: 'navbar',
-            text: 'app-tools',
-            value: name,
-          });
-        }} title={name}>
-          <span className="at-icon">{icon}</span>
-          <span className="at-name">{name}</span>
-        </span>)
-      }
-    </div>
-  </div>;
+  );
 };
 
 export default AppTools;

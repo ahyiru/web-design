@@ -36,6 +36,8 @@ const Index = props => {
     updateList(path);
   }, [path]);
 
+  const getModalInputVaule = values => (modalInputVaule.current = values);
+
   const handleClick = (filename, type) => {
     const fullpath = fixPath(`${path}/${filename}`);
     if (type === 'dir') {
@@ -47,7 +49,7 @@ const Index = props => {
         modalProps: {
           open: true,
           title: '更新内容',
-          children: <FileInput path={fullpath} modalInputVaule={modalInputVaule} />,
+          children: <FileInput path={fullpath} getModalInputVaule={getModalInputVaule} />,
           style: {
             width: '60%',
             maxWidth: '800px',
@@ -58,7 +60,11 @@ const Index = props => {
   };
 
   const goTo = (route, i) => {
-    const toPath = path.split('/').slice(0, i + 1).join('/') || '/';
+    const toPath =
+      path
+        .split('/')
+        .slice(0, i + 1)
+        .join('/') || '/';
     if (path !== toPath) {
       setPath(toPath);
     }
@@ -81,14 +87,17 @@ const Index = props => {
       modalProps: {
         open: true,
         title: label,
-        children: <div>
-          <h4>当前文件{type === 'dir' ? '夹' : ''}：{fixPath(`${path}/${filename}`)}</h4>
-          <ModalInfo filename={filename} type={type} path={fullpath} modalInputVaule={modalInputVaule} />
-        </div>,
+        children: (
+          <div>
+            <h4>
+              当前文件{type === 'dir' ? '夹' : ''}：{fixPath(`${path}/${filename}`)}
+            </h4>
+            <ModalInfo filename={filename} type={type} path={fullpath} getModalInputVaule={getModalInputVaule} />
+          </div>
+        ),
       },
     });
   };
-
 
   const addFiles = async (e, isDir) => {
     e.stopPropagation();
@@ -104,10 +113,12 @@ const Index = props => {
       modalProps: {
         open: true,
         title: label,
-        children: <div>
-          <h4>当前目录：{path}</h4>
-          <ModalInfo modalInputVaule={modalInputVaule} />
-        </div>,
+        children: (
+          <div>
+            <h4>当前目录：{path}</h4>
+            <ModalInfo getModalInputVaule={getModalInputVaule} />
+          </div>
+        ),
       },
     });
   };
@@ -160,37 +171,44 @@ const Index = props => {
     }
     updateList(path);
     setAction({});
-    
   };
-  return <div className="file-system">
-    <Row>
-      <Col span={12}>
-        <div ref={fileRef}>
-          <div className="fs-topbar">
-            <ul className="current-route">
-              {
-                path === '/' ? <li>
-                  <a className="link">root</a>
-                </li> : path.split('/').map((route, i) => <li key={route || 'root'}>
-                  <a className="link" onClick={e => goTo(route, i)}>{route || 'root'}</a>
-                </li>)
-              }
-            </ul>
-            <div className="right-bar">
-              <Button onClick={e => addFiles(e, true)}>添加文件夹</Button>
-              <Button onClick={addFiles}>添加文件</Button>
-              <MaxSize panel={fileRef} />
+  return (
+    <div className="file-system">
+      <Row>
+        <Col span={12}>
+          <div ref={fileRef}>
+            <div className="fs-topbar">
+              <ul className="current-route">
+                {path === '/' ? (
+                  <li>
+                    <a className="link">root</a>
+                  </li>
+                ) : (
+                  path.split('/').map((route, i) => (
+                    <li key={route || 'root'}>
+                      <a className="link" onClick={e => goTo(route, i)}>
+                        {route || 'root'}
+                      </a>
+                    </li>
+                  ))
+                )}
+              </ul>
+              <div className="right-bar">
+                <Button onClick={e => addFiles(e, true)}>添加文件夹</Button>
+                <Button onClick={addFiles}>添加文件</Button>
+                <MaxSize panel={fileRef} />
+              </div>
             </div>
+            <Panel>
+              <ListHeader />
+              <List fileList={fileList} handleModal={handleModal} handleClick={handleClick} />
+            </Panel>
           </div>
-          <Panel>
-            <ListHeader />
-            <List fileList={fileList} handleModal={handleModal} handleClick={handleClick} />
-          </Panel>
-        </div>
-      </Col>
-    </Row>
-    <Modal close={e => setAction({})} submit={submit} {...action.modalProps} />
-  </div>;
+        </Col>
+      </Row>
+      <Modal close={e => setAction({})} submit={submit} {...action.modalProps} />
+    </div>
+  );
 };
 
 export default Index;

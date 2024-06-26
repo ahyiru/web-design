@@ -61,7 +61,7 @@
 }
 
 .ws-chat-web-container {
-  --headerHeight: 5.0rem;
+  --headerHeight: 5rem;
   --footerHeight: 6.8rem;
   // --footerHeight: 50px;
   --borderRadius: 0.4rem;
@@ -130,7 +130,8 @@
     &.disabled {
       background-color: rgba(255, 255, 255, 0.06);
     }
-    input, textarea {
+    input,
+    textarea {
       background: transparent;
       color: var(--color);
       &::placeholder {
@@ -142,7 +143,7 @@
   &.light {
     --bgColor: #f8f8f8;
     --color: #444;
-    --bgColorRgb: 255,255,255;
+    --bgColorRgb: 255, 255, 255;
     --botBg: #ffffff;
     --userBg: #94ec69;
     --userColor: #333;
@@ -154,7 +155,8 @@
       &.disabled {
         background-color: rgba(0, 0, 0, 0.06);
       }
-      input, textarea {
+      input,
+      textarea {
         background: transparent;
         color: var(--color);
         &::placeholder {
@@ -166,7 +168,7 @@
   &.dark {
     --bgColor: #282c35;
     --color: rgba(236, 236, 241, 1);
-    --bgColorRgb: 52,53,65;
+    --bgColorRgb: 52, 53, 65;
     --botBg: rgba(52, 53, 65, 1);
     --userBg: #94ec69;
     --userColor: #333;
@@ -224,8 +226,9 @@
         border-radius: calc(var(--dotSize) / 2);
         background: currentColor;
         position: relative;
-        &::before, &::after {
-          content: "";
+        &::before,
+        &::after {
+          content: '';
           position: absolute;
           top: 0;
           width: var(--dotSize);
@@ -474,7 +477,8 @@
         box-shadow: none;
       }
     }
-    .add-picture, .clean-chat-store {
+    .add-picture,
+    .clean-chat-store {
       margin-left: 0;
       margin-right: 1rem;
     }

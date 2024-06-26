@@ -12,7 +12,7 @@ import {useIntls} from '@app/components/intl';
 
 import {apiList, formRules, githubConfigs, wechatConfigs} from '../configs';
 
-const {activeEmailFn, githubFn, wechatFn, loginFn/* , qrTicketFn */, qrStatusFn} = apiList;
+const {activeEmailFn, githubFn, wechatFn, loginFn /* , qrTicketFn */, qrStatusFn} = apiList;
 const {emailRule} = formRules;
 
 const thirdLoginStyle = {
@@ -201,17 +201,21 @@ const Index = props => {
             <GithubOutlined onClick={() => githubCode()} />
           </span>
           <span className="link" style={{marginLeft: '3rem', color: '#8ae14d'}}>
-            <WechatOutlined onClick={() => isWechat() ? wechatCode() : getQr()} />
+            <WechatOutlined onClick={() => (isWechat() ? wechatCode() : getQr())} />
           </span>
         </div>
         <Mask open={qrRef.current} close={e => setScan()}>
-          {
-            qrRef.current ? <div style={{width: '85%', maxWidth: '35rem', textAlign: 'center', background: '#333', padding: '15px 20px', color: '#fff', fontWeight: 500}}>
-              <h2 style={{margin: 0,}}>微信登录</h2>
-              <div style={{padding: '20px'}}><img width="100%" src={qrRef.current} alt="qr" /></div>
+          {qrRef.current ? (
+            <div style={{width: '85%', maxWidth: '35rem', textAlign: 'center', background: '#333', padding: '15px 20px', color: '#fff', fontWeight: 500}}>
+              <h2 style={{margin: 0}}>微信登录</h2>
+              <div style={{padding: '20px'}}>
+                <img width="100%" src={qrRef.current} alt="qr" />
+              </div>
               <p style={{margin: '0 20px', marginBottom: 0, height: '32px', lineHeight: '32px', background: '#232323', borderRadius: '16px'}}>请使用微信扫描二维码登录</p>
-            </div> : <div style={{color: '#43a047', fontWeight: 500, fontSize: '3rem'}}>登录中...</div>
-          }
+            </div>
+          ) : (
+            <div style={{color: '#43a047', fontWeight: 500, fontSize: '3rem'}}>登录中...</div>
+          )}
         </Mask>
       </div>
       {pending && <Spinner global />}

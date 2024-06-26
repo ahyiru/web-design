@@ -1,6 +1,5 @@
 ## use
 
-
 ### useAsync
 
 异步处理
@@ -24,7 +23,6 @@ const Base64Image = ({src, ...rest}) => {
   return <img decoding="async" loading="lazy" {...rest} src={url} />;
 };
 ```
-
 
 ### useCancelablePromise
 
@@ -86,9 +84,12 @@ const [stop, setStop] = useState(false);
 
 const delay = 3000;
 
-useInterval(() => {
-  setCount(count + 1);
-}, stop ? null : delay);
+useInterval(
+  () => {
+    setCount(count + 1);
+  },
+  stop ? null : delay,
+);
 ```
 
 第一个参数为回调函数，第二个参数是延迟时间。当 delay 值为 null 或 false 时，会停止回调函数的执行。

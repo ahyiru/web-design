@@ -21,13 +21,23 @@ const getColumns = ({handleEdit, handleDelete, handleOperating}, profile) => [
     title: '标题',
     dataIndex: 'title',
     ellipsis: true,
-    render: (text, record) => <a className="link" onClick={() => handleEdit(record, true)}>{text}</a>,
+    render: (text, record) => (
+      <a className="link" onClick={() => handleEdit(record, true)}>
+        {text}
+      </a>
+    ),
   },
   {
     title: '需求描述',
     dataIndex: 'content',
     ellipsis: true,
-    render: text => <Tooltip title={text}><span className="ellipsis" style={{width: '220px'}}>{text}</span></Tooltip>,
+    render: text => (
+      <Tooltip title={text}>
+        <span className="ellipsis" style={{width: '220px'}}>
+          {text}
+        </span>
+      </Tooltip>
+    ),
   },
   {
     title: '可见性',
@@ -40,7 +50,13 @@ const getColumns = ({handleEdit, handleDelete, handleOperating}, profile) => [
     title: '其它说明',
     dataIndex: 'description',
     ellipsis: true,
-    render: text => <Tooltip title={text}><span className="ellipsis" style={{width: '180px'}}>{text}</span></Tooltip>,
+    render: text => (
+      <Tooltip title={text}>
+        <span className="ellipsis" style={{width: '180px'}}>
+          {text}
+        </span>
+      </Tooltip>
+    ),
   },
   {
     title: '附件',
@@ -52,14 +68,25 @@ const getColumns = ({handleEdit, handleDelete, handleOperating}, profile) => [
       }
       const filename = text.split('/').slice(-1)[0];
       const [name, ext] = filename.split('.');
-      return <a className="link" onClick={() => dlfile(text, ext, name)}>附件.{ext}</a>;
+      return (
+        <a className="link" onClick={() => dlfile(text, ext, name)}>
+          附件.{ext}
+        </a>
+      );
     },
   },
   {
     title: '原型地址',
     dataIndex: 'sample',
     ellipsis: true,
-    render: text => text ? <a className="link" href={text} target="_blank">{text}</a> : '',
+    render: text =>
+      text ? (
+        <a className="link" href={text} target="_blank">
+          {text}
+        </a>
+      ) : (
+        ''
+      ),
   },
   {
     title: '状态',
@@ -75,13 +102,26 @@ const getColumns = ({handleEdit, handleDelete, handleOperating}, profile) => [
     title: '完成说明',
     dataIndex: 'instruction',
     ellipsis: true,
-    render: text => <Tooltip title={text}><span className="ellipsis" style={{width: '180px'}}>{text}</span></Tooltip>,
+    render: text => (
+      <Tooltip title={text}>
+        <span className="ellipsis" style={{width: '180px'}}>
+          {text}
+        </span>
+      </Tooltip>
+    ),
   },
   {
     title: '演示地址',
     dataIndex: 'demo',
     ellipsis: true,
-    render: text => text ? <a className="link" href={text} target="_blank">{text}</a> : '',
+    render: text =>
+      text ? (
+        <a className="link" href={text} target="_blank">
+          {text}
+        </a>
+      ) : (
+        ''
+      ),
   },
   {
     title: '创建人',
@@ -123,11 +163,11 @@ const getColumns = ({handleEdit, handleDelete, handleOperating}, profile) => [
       const disabled = profile.role !== 5 && record.uid !== profile._id;
       return (
         <>
-          {
-            profile.role === 5 ? <Button type="link" size="small" disabled={![0, 1].includes(record.status)} onClick={() => handleOperating(record)}>
+          {profile.role === 5 ? (
+            <Button type="link" size="small" disabled={![0, 1].includes(record.status)} onClick={() => handleOperating(record)}>
               操作
-            </Button> : null
-          }
+            </Button>
+          ) : null}
           <Button type="link" size="small" disabled={disabled} onClick={() => handleEdit(record)}>
             编辑
           </Button>

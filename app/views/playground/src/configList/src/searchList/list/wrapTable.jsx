@@ -11,33 +11,33 @@ const Index = props => {
 
   const selectionCfg = rowSelection
     ? {
-      columnWidth: '30px',
-      // selectedRowKeys: selectedRows.map((v) => v[rowKey]),
-      // onChange: (selectedRowKeys, selectedRows) => {
-      //   setSelectedRows?.(selectedRows);
-      // },
-      // getCheckboxProps: (record) => ({
-      //   disabled: !profile.role && record[rowKey] !== profile[rowKey],
-      // }),
-      ...(typeof rowSelection === 'object' ? rowSelection : null),
-    }
+        columnWidth: '30px',
+        // selectedRowKeys: selectedRows.map((v) => v[rowKey]),
+        // onChange: (selectedRowKeys, selectedRows) => {
+        //   setSelectedRows?.(selectedRows);
+        // },
+        // getCheckboxProps: (record) => ({
+        //   disabled: !profile.role && record[rowKey] !== profile[rowKey],
+        // }),
+        ...(typeof rowSelection === 'object' ? rowSelection : null),
+      }
     : null;
 
   const paginationCfg =
     pagination === false
       ? false
       : {
-        onShowSizeChange: handlePageChange,
-        onChange: handlePageChange,
-        showSizeChanger: true,
-        showQuickJumper: true,
-        total: total || 1,
-        current: current || 1,
-        pageSize: size || 10,
-        pageSizeOptions: ['10', '20', '30', '40'],
-        size: 'small',
-        ...(typeof pagination === 'object' ? pagination : null),
-      };
+          onShowSizeChange: handlePageChange,
+          onChange: handlePageChange,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          total: total || 1,
+          current: current || 1,
+          pageSize: size || 10,
+          pageSizeOptions: ['10', '20', '30', '40'],
+          size: 'small',
+          ...(typeof pagination === 'object' ? pagination : null),
+        };
 
   return <Table pagination={paginationCfg} rowSelection={selectionCfg} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered scroll={{x: true}} {...rest} />;
 };

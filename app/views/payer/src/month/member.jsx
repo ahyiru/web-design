@@ -12,13 +12,12 @@ import './member.less';
 
 const orderList = roleList.slice(1, 4);
 
-
 const getLeftPrice = ({role, deadline}) => {
   const orderPrice = roleList.find(item => item.value === role)?.price ?? 0;
 
   const leftDate = deadline ? Math.floor((deadline - new Date()) / 86400000) : 0;
 
-  const leftPrice = orderPrice / 30 * leftDate;
+  const leftPrice = (orderPrice / 30) * leftDate;
 
   return leftPrice.toFixed(2);
 };
@@ -34,7 +33,7 @@ const Index = props => {
   // const {role} = profile;
   // const leftPrice = getLeftPrice(profile);
   const {roleLabel, leftDate} = getMemberInfo(profile);
-  const orderRoleList = roleList.slice(0);// role
+  const orderRoleList = roleList.slice(0); // role
   const [list, setList] = useState(orderList);
   // const [orderRole, setOrderRole] = useState(role);
   // const orderPrice = roleList.find(item => item.value === orderRole)?.price ?? 0;
@@ -69,20 +68,24 @@ const Index = props => {
 
   return (
     <div>
-      <h4 className="member-info">当前会员等级：<i>{roleLabel}</i>，会员还剩 <i>{leftDate}</i> 天</h4>
+      <h4 className="member-info">
+        当前会员等级：<i>{roleLabel}</i>，会员还剩 <i>{leftDate}</i> 天
+      </h4>
       <Row gutter={20}>
-        {
-          list.map(({value, label, price, period, description}) => {
-            return <Col span={4} xs={12} key={label}>
+        {list.map(({value, label, price, period, description}) => {
+          return (
+            <Col span={4} xs={12} key={label}>
               <div className="month-card">
                 <h4 className="order-title">{label}</h4>
                 <div className="order-price">
                   <span className="price-num">{price}</span>
                   <span> /月</span>
                 </div>
-                {
-                  description.split('\n\n').map((des, i) => <p key={`des-${i}`} className="order-desc">{des}</p>)
-                }
+                {description.split('\n\n').map((des, i) => (
+                  <p key={`des-${i}`} className="order-desc">
+                    {des}
+                  </p>
+                ))}
                 <div className="order-role">
                   <span>等级：</span>
                   <Select
@@ -95,23 +98,20 @@ const Index = props => {
                 </div>
                 <div className="order-period">
                   <span>时间：</span>
-                  <Select
-                    value={period}
-                    onChange={val => handleChange(value, val)}
-                    options={periodList}
-                    style={{width: '120px'}}
-                  />
+                  <Select value={period} onChange={val => handleChange(value, val)} options={periodList} style={{width: '120px'}} />
                 </div>
                 <p className="order-cost">
                   <span>消费：</span>
                   {/* <span className="cost-num">¥ {(period * price - leftPrice).toFixed(2)}</span> */}
                   <span className="cost-num">¥ {period * price}</span>
                 </p>
-                <Button type="primary" style={{width: '120px', paddingBottom: '15px'}} onClick={e => handleOrder({label, orderRole: value, period})}>下单</Button>
+                <Button type="primary" style={{width: '120px', paddingBottom: '15px'}} onClick={e => handleOrder({label, orderRole: value, period})}>
+                  下单
+                </Button>
               </div>
-            </Col>;
-          })
-        }
+            </Col>
+          );
+        })}
       </Row>
     </div>
   );

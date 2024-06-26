@@ -13,7 +13,7 @@ const GlobalSearch = props => {
       <Input
         placeholder="search..."
         // suffix={<SearchOutlined onClick={onSearch} />}
-        onChange={e => searchValue.current = e.target.value}
+        onChange={e => (searchValue.current = e.target.value)}
         onPressEnter={onSearch}
       />
       <SearchOutlined onClick={onSearch} className="suffix" />

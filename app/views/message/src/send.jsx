@@ -16,15 +16,14 @@ const {allUserFn, addMessageFn, addCommentFn} = apiList;
 
 const typeList = [
   {
-    label:'消息',
+    label: '消息',
     value: 'message',
   },
   {
-    label:'邮件',
+    label: '邮件',
     value: 'email',
   },
 ];
-
 
 const SendMsg = props => {
   const isNotAdmin = notAdmin();
@@ -41,7 +40,7 @@ const SendMsg = props => {
     if (values.receiver) {
       values.receiver = values.receiver.join(',');
     }
-    
+
     try {
       const handler = isNotAdmin ? addCommentFn : addMessageFn;
       const {code, message: msg} = await handler({...values, ...info});
@@ -74,8 +73,8 @@ const SendMsg = props => {
         <Form.Item label="类别" name="type" rules={[{required: true}]}>
           <Radio.Group disabled={isNotAdmin} options={typeList} optionType="button" onChange={e => setType(e.target.value)} />
         </Form.Item>
-        {
-          (!isNotAdmin && type === 'email') ? <Form.Item label="接收者" name="receiver" rules={[{required: true}]}>
+        {!isNotAdmin && type === 'email' ? (
+          <Form.Item label="接收者" name="receiver" rules={[{required: true}]}>
             <Transfer
               dataSource={list.map(item => ({...item, key: item.email}))}
               titles={['用户', '已选']}
@@ -83,11 +82,11 @@ const SendMsg = props => {
               selectedKeys={selectedKeys}
               onChange={onChange}
               onSelectChange={onSelectChange}
-              render={(item) => item.name}
+              render={item => item.name}
               showSearch
             />
-          </Form.Item> : null
-        }
+          </Form.Item>
+        ) : null}
         <Form.Item label="主题" name="title" rules={[{required: true}]}>
           <Input placeholder="请输入" maxLength={30} showCount />
         </Form.Item>

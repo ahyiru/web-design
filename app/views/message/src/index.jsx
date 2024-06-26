@@ -48,18 +48,20 @@ const getColumns = ({handleAudit, handleDelete}, isAdmin, status) => [
     align: 'center',
     render: text => <Tag color={text ? 'blue' : 'yellow'}>{text ? '已读' : '未读'}</Tag>,
   },
-  ...(isAdmin ? [
-    {
-      title: '已读用户',
-      dataIndex: 'reader',
-      ellipsis: true,
-    },
-    {
-      title: '接收用户',
-      dataIndex: 'receiver',
-      ellipsis: true,
-    },
-  ] : []),
+  ...(isAdmin
+    ? [
+        {
+          title: '已读用户',
+          dataIndex: 'reader',
+          ellipsis: true,
+        },
+        {
+          title: '接收用户',
+          dataIndex: 'receiver',
+          ellipsis: true,
+        },
+      ]
+    : []),
   {
     title: '更新时间',
     dataIndex: 'updatetime',
@@ -86,16 +88,16 @@ const getColumns = ({handleAudit, handleDelete}, isAdmin, status) => [
       // const disabled = false; //!profile.role&&record._id !== profile._id;
       return (
         <>
-          {
-            status ? null : <Button type="link" size="small" disabled={record.status} onClick={() => handleAudit(record)}>
+          {status ? null : (
+            <Button type="link" size="small" disabled={record.status} onClick={() => handleAudit(record)}>
               标记为已读
             </Button>
-          }
-          {
-            isAdmin ? <Button type="link" size="small" onClick={() => handleDelete(record)} danger>
+          )}
+          {isAdmin ? (
+            <Button type="link" size="small" onClick={() => handleDelete(record)} danger>
               删除
-            </Button> : null
-          }
+            </Button>
+          ) : null}
         </>
       );
     },
@@ -154,17 +156,20 @@ const Index = props => {
     update({current: 1, status: value});
   };
 
-  const rowSelection = status && !isAdmin ? null : {
-    selectedRowKeys: selectedRows.map(v => v._id),
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRows(selectedRows);
-    },
-    getCheckboxProps: record => ({
-      // disabled:!profile.role&&record._id!==profile._id,
-    }),
-    columnWidth: '30px',
-    fixed: true,
-  };
+  const rowSelection =
+    status && !isAdmin
+      ? null
+      : {
+          selectedRowKeys: selectedRows.map(v => v._id),
+          onChange: (selectedRowKeys, selectedRows) => {
+            setSelectedRows(selectedRows);
+          },
+          getCheckboxProps: record => ({
+            // disabled:!profile.role&&record._id!==profile._id,
+          }),
+          columnWidth: '30px',
+          fixed: true,
+        };
 
   const actions = {
     handleDelete,
@@ -203,16 +208,16 @@ const Index = props => {
                   <Radio.Group optionType="button" buttonStyle="solid" options={readStatus} onChange={switchRead} value={status} />
                   {
                     <>
-                      {
-                        status ? null : <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleAudit()} type="primary" icon={<EyeOutlined />}>
+                      {status ? null : (
+                        <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleAudit()} type="primary" icon={<EyeOutlined />}>
                           批量标记
                         </Button>
-                      }
-                      {
-                        isAdmin ? <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
+                      )}
+                      {isAdmin ? (
+                        <Button loading={pending} disabled={!selectedRows.length} onClick={() => handleDelete()} icon={<DeleteOutlined />}>
                           批量删除
-                        </Button> : null
-                      }
+                        </Button>
+                      ) : null}
                     </>
                   }
                 </Space>

@@ -39,25 +39,29 @@ const Index = props => {
   return (
     <div>
       <Row gutter={20}>
-        {
-          orderList.map(({type, label, price, period, count, description}) => {
-            return <Col span={4} xs={12} key={type}>
+        {orderList.map(({type, label, price, period, count, description}) => {
+          return (
+            <Col span={4} xs={12} key={type}>
               <div className="count-card">
                 <h4 className="order-title">{label}</h4>
                 <p className="order-info">有效期 {period} 个月</p>
                 <p className="order-info">对话次数 {count} 次</p>
-                {
-                  description.split('\n\n').map((des, i) => <p key={`des-${i}`} className="order-desc">{des}</p>)
-                }
+                {description.split('\n\n').map((des, i) => (
+                  <p key={`des-${i}`} className="order-desc">
+                    {des}
+                  </p>
+                ))}
                 <p className="order-cost">
                   <span>消费：</span>
                   <span className="cost-num">¥ {price}</span>
                 </p>
-                <Button type="primary" style={{width: '120px', paddingBottom: '15px'}} onClick={e => handleOrder({type, label})}>开通</Button>
+                <Button type="primary" style={{width: '120px', paddingBottom: '15px'}} onClick={e => handleOrder({type, label})}>
+                  开通
+                </Button>
               </div>
-            </Col>;
-          })
-        }
+            </Col>
+          );
+        })}
       </Row>
     </div>
   );

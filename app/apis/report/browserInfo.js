@@ -1,7 +1,7 @@
 import {getOsInfo, getExplore} from '@huxy/utils';
 import {browserRouter} from '@app/configs';
 
-import pkg  from '../../../package.json';
+import pkg from '../../../package.json';
 
 const {type: osType, version: osVersion, model: osModel} = getOsInfo();
 const {type: browserType, version: browserVersion} = getExplore();

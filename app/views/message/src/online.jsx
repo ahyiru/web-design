@@ -7,10 +7,11 @@ import Panel from '@app/components/panel';
 
 import {wsMsg} from '@app/apis/socket';
 
-const formatUser = user => user.map(({userid, time}) => {
-  const [name, email, ip] = userid.split('_huxy_');
-  return {userid, name, email, ip, time};
-});
+const formatUser = user =>
+  user.map(({userid, time}) => {
+    const [name, email, ip] = userid.split('_huxy_');
+    return {userid, name, email, ip, time};
+  });
 
 const getColumns = () => [
   {

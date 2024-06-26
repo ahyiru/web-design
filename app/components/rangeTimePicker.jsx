@@ -69,27 +69,47 @@ const RangeTimePicker = ({getTime, defaultValue, value, showBtn, style, ...rest}
     setDateValue(dates);
   };
 
-  return <>
-    {
-      showBtn ? <Space>
-        {
-          dateBtn.map(({key, label, value}) => <Button key={key} type="primary" size="small" ghost={selected !== key} onClick={e => selectRangeTime(value, value.map(item => item.format(formatType)))}>{label}</Button>)
-        }
-      </Space> : null
-    }
-    <RangePicker
-      defaultValue={defaultValue}
-      value={dateValue}
-      presets={
-        dateConfigs.map(({label, value}) => ({label: <Button type="primary" block>{label}</Button>, value}))
-      }
-      showTime
-      format={formatType}
-      onChange={selectRangeTime}
-      style={{marginLeft: '12px', ...style}}
-      {...rest}
-    />
-  </>;
+  return (
+    <>
+      {showBtn ? (
+        <Space>
+          {dateBtn.map(({key, label, value}) => (
+            <Button
+              key={key}
+              type="primary"
+              size="small"
+              ghost={selected !== key}
+              onClick={e =>
+                selectRangeTime(
+                  value,
+                  value.map(item => item.format(formatType)),
+                )
+              }
+            >
+              {label}
+            </Button>
+          ))}
+        </Space>
+      ) : null}
+      <RangePicker
+        defaultValue={defaultValue}
+        value={dateValue}
+        presets={dateConfigs.map(({label, value}) => ({
+          label: (
+            <Button type="primary" block>
+              {label}
+            </Button>
+          ),
+          value,
+        }))}
+        showTime
+        format={formatType}
+        onChange={selectRangeTime}
+        style={{marginLeft: '12px', ...style}}
+        {...rest}
+      />
+    </>
+  );
 };
 
 export default RangeTimePicker;

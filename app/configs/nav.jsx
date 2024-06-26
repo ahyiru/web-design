@@ -26,17 +26,17 @@ const changeLang = ({key}) => langStore.setState(key);
 
 const buildInfo = buildTime
   ? [
-    {
-      divider: true,
-      key: 'version',
-      type: 'version',
-      name: 'version',
-      icon: <Icon icon="EyeOutlined" />,
-      handle: item => {
-        message.info(`version：${pkg.version}，构建时间：${formatTime(buildTime)}`);
+      {
+        divider: true,
+        key: 'version',
+        type: 'version',
+        name: 'version',
+        icon: <Icon icon="EyeOutlined" />,
+        handle: item => {
+          message.info(`version：${pkg.version}，构建时间：${formatTime(buildTime)}`);
+        },
       },
-    },
-  ]
+    ]
   : [];
 
 export const leftNav = () => {
@@ -97,51 +97,53 @@ export const rightNav = language => {
       name: user?.name || right?.user,
       smShow: true,
       img: user?.avatar || defUser,
-      children: user?.name ? [
-        {
-          key: 'profile',
-          name: right?.profile ?? '个人中心',
-          type: 'profile',
-          icon: <Icon icon="UserOutlined" />,
-          path: '/profile',
-        },
-        {
-          key: 'order',
-          name: right?.orders ?? '我的订单',
-          type: 'order',
-          icon: <Icon icon="ShoppingCartOutlined" />,
-          path: '/payer/count/order',
-        },
-        {
-          key: 'settings',
-          name: right?.settings ?? '设置',
-          type: 'setting',
-          icon: <Icon icon="SettingOutlined" />,
-          path: '/profile',
-        },
-        {
-          // divider: true,
-          key: 'logout',
-          name: right?.logout ?? '退出',
-          type: 'logout',
-          icon: <Icon icon="PoweroffOutlined" />,
-          handle: item => {
-            logout();
-          },
-        },
-        ...buildInfo,
-      ] : [
-        {
-          key: 'signin',
-          name: right?.signin ?? '登录',
-          type: 'signin',
-          icon: <Icon icon="LoginOutlined" />,
-          handle: item => {
-            logout(true);
-          },
-        },
-        ...buildInfo,
-      ],
+      children: user?.name
+        ? [
+            {
+              key: 'profile',
+              name: right?.profile ?? '个人中心',
+              type: 'profile',
+              icon: <Icon icon="UserOutlined" />,
+              path: '/profile',
+            },
+            {
+              key: 'order',
+              name: right?.orders ?? '我的订单',
+              type: 'order',
+              icon: <Icon icon="ShoppingCartOutlined" />,
+              path: '/payer/count/order',
+            },
+            {
+              key: 'settings',
+              name: right?.settings ?? '设置',
+              type: 'setting',
+              icon: <Icon icon="SettingOutlined" />,
+              path: '/profile',
+            },
+            {
+              // divider: true,
+              key: 'logout',
+              name: right?.logout ?? '退出',
+              type: 'logout',
+              icon: <Icon icon="PoweroffOutlined" />,
+              handle: item => {
+                logout();
+              },
+            },
+            ...buildInfo,
+          ]
+        : [
+            {
+              key: 'signin',
+              name: right?.signin ?? '登录',
+              type: 'signin',
+              icon: <Icon icon="LoginOutlined" />,
+              handle: item => {
+                logout(true);
+              },
+            },
+            ...buildInfo,
+          ],
     },
     {
       key: 'notify',

@@ -11,7 +11,7 @@ export const initialValue = [
     type: 'paragraph',
     children: [
       {
-        text: 'Since it\'s rich text, you can do things like turn a selection of text ',
+        text: "Since it's rich text, you can do things like turn a selection of text ",
       },
       {text: 'bold', bold: true},
       {

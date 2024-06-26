@@ -65,8 +65,9 @@ const Index = props => {
   }, delay);
   const changeSizes = (key, value, unit) => {
     // e.persist();
-    theme.list.sizes[key] = `${value || ''}${unit}`;
-    changeLayout(theme.list);
+    const newTheme = JSON.parse(JSON.stringify(theme));
+    newTheme.list.sizes[key] = `${value || ''}${unit}`;
+    changeLayout(newTheme.list);
     report({
       actionType: 'change',
       category: 'layout',
@@ -76,8 +77,9 @@ const Index = props => {
   };
   const changeColors = (e, key) => {
     const {value} = e.target;
-    theme.list.colors[key] = value;
-    changeLayout(theme.list);
+    const newTheme = JSON.parse(JSON.stringify(theme));
+    newTheme.list.colors[key] = value;
+    changeLayout(newTheme.list);
     report({
       actionType: 'change',
       category: 'layout',
@@ -116,8 +118,9 @@ const Index = props => {
   };
   const changeUnit = (key, unit) => {
     const value = unit === 'px' ? 1280 : unit === 'rem' ? 128 : 100;
-    theme.list.sizes[key] = `${value}${unit}`;
-    changeLayout(theme.list);
+    const newTheme = JSON.parse(JSON.stringify(theme));
+    newTheme.list.sizes[key] = `${value}${unit}`;
+    changeLayout(newTheme.list);
     report({
       actionType: 'change',
       category: 'layout',
@@ -161,10 +164,15 @@ const Index = props => {
                 <div className="vertical-item">
                   <label>{getIntls('main.layout.hideHeader')}</label>
                   <div>
-                    <Checkbox checked={menuType.header === 'noHeader'} onChange={e => setMenuType({
-                      header: e.target.checked ? 'noHeader' : '',
-                      menu: menuType.menu,
-                    })}>
+                    <Checkbox
+                      checked={menuType.header === 'noHeader'}
+                      onChange={e =>
+                        setMenuType({
+                          header: e.target.checked ? 'noHeader' : '',
+                          menu: menuType.menu,
+                        })
+                      }
+                    >
                       {getIntls('main.layout.hidden')}
                     </Checkbox>
                   </div>
@@ -262,18 +270,16 @@ const Index = props => {
               <Panel className="color-picker-panel">
                 <h3>{getIntls('main.layout.colorDesign')}</h3>
                 <div style={{paddingRight: '15px'}}>
-                  {
-                    Object.keys(theme.list.colors).map(key => (
-                      <Row key={key} gutter={[10, 10]}>
-                        <Col span={6} sm={6} xs={6}>
-                          <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
-                        </Col>
-                        <Col span={6} sm={6} xs={6}>
-                          <Input aria-label="huxy-label" type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
-                        </Col>
-                      </Row>
-                    ))
-                  }
+                  {Object.keys(theme.list.colors).map(key => (
+                    <Row key={key} gutter={[10, 10]}>
+                      <Col span={6} sm={6} xs={6}>
+                        <span style={labelStyle}>{themeLang[key] || key.slice(2)}：</span>
+                      </Col>
+                      <Col span={6} sm={6} xs={6}>
+                        <Input aria-label="huxy-label" type="color" value={theme.list.colors[key]} onChange={e => changeColors(e, key)} />
+                      </Col>
+                    </Row>
+                  ))}
                 </div>
               </Panel>
             </Col>

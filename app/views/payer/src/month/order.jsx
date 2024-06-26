@@ -55,7 +55,7 @@ const getColumns = ({handleDelete, handleAudit, handlePay, handleCancel}, isAdmi
     title: '截止日期',
     dataIndex: 'deadline',
     ellipsis: true,
-    render: text => text ? formatTime(new Date(text)) : '-',
+    render: text => (text ? formatTime(new Date(text)) : '-'),
   },
   {
     title: '更新时间',
@@ -80,20 +80,35 @@ const getColumns = ({handleDelete, handleAudit, handlePay, handleCancel}, isAdmi
     align: 'center',
     render: (text, record) => {
       if (isAdmin) {
-        return <>
-          <Button type="link" size="small" disabled={!!record.status || record.deleted} onClick={() => handleAudit(record)}>
-            审核
-          </Button>
-          <Button type="link" size="small" onClick={() => handleDelete(record)} danger>
-            删除
-          </Button>
-        </>;
+        return (
+          <>
+            <Button type="link" size="small" disabled={!!record.status || record.deleted} onClick={() => handleAudit(record)}>
+              审核
+            </Button>
+            <Button type="link" size="small" onClick={() => handleDelete(record)} danger>
+              删除
+            </Button>
+          </>
+        );
       }
-      return record.status ? <Button type="link" size="small" disabled>已支付</Button>
-        : record.deleted ? <Button type="link" size="small" disabled>已失效</Button> : <>
-          <Button type="link" size="small" onClick={() => handleCancel(record)}>取消订单</Button>
-          <Button type="link" size="small" onClick={() => handlePay(record)}>去支付</Button>
-        </>;
+      return record.status ? (
+        <Button type="link" size="small" disabled>
+          已支付
+        </Button>
+      ) : record.deleted ? (
+        <Button type="link" size="small" disabled>
+          已失效
+        </Button>
+      ) : (
+        <>
+          <Button type="link" size="small" onClick={() => handleCancel(record)}>
+            取消订单
+          </Button>
+          <Button type="link" size="small" onClick={() => handlePay(record)}>
+            去支付
+          </Button>
+        </>
+      );
     },
   },
 ];

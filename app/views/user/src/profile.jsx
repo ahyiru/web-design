@@ -67,25 +67,29 @@ const Index = props => {
               <Form.Item name="role" label={profile.role}>
                 <Typography.Text>{roleLabel}</Typography.Text>
               </Form.Item>
-              {
-                leftDate ? <Form.Item name="leftDate" label="包月会员剩余时间">
+              {leftDate ? (
+                <Form.Item name="leftDate" label="包月会员剩余时间">
                   <Typography.Text>{leftDate} 天</Typography.Text>
-                </Form.Item> : null
-              }
-              {
-                values.payCount ? <Form.Item name="payCount" label="包次会员剩余次数">
+                </Form.Item>
+              ) : null}
+              {values.payCount ? (
+                <Form.Item name="payCount" label="包次会员剩余次数">
                   <Typography.Text>{values.payCount} 次</Typography.Text>
-                </Form.Item> : null
-              }
+                </Form.Item>
+              ) : null}
             </Form>
           </div>
           <Space align="center" style={{width: '140px'}}>
-            {
-              values.role === 0 ? <Button block type="primary" icon={<RiseOutlined />} size="large" onClick={e => props.router.push('/payer/count/member')}>开通会员</Button> : null
-            }
-            {
-              values.role > 0 ? <Button block type="primary" icon={<RiseOutlined />} size="large" onClick={e => props.router.push('/payer/month/member')}>会员续费</Button> : null
-            }
+            {values.role === 0 ? (
+              <Button block type="primary" icon={<RiseOutlined />} size="large" onClick={e => props.router.push('/payer/count/member')}>
+                开通会员
+              </Button>
+            ) : null}
+            {values.role > 0 ? (
+              <Button block type="primary" icon={<RiseOutlined />} size="large" onClick={e => props.router.push('/payer/month/member')}>
+                会员续费
+              </Button>
+            ) : null}
           </Space>
         </div>
       ),

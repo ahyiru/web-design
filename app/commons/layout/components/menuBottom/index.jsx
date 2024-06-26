@@ -8,8 +8,8 @@ import './index.less';
 const Index = ({collapsed, setCollapsed, isSmall}) => {
   return (
     <div className="menu-collapsed">
-      {
-        isSmall ? null : <span
+      {isSmall ? null : (
+        <span
           className="link collapsed-bar"
           onClick={() => {
             setCollapsed(!collapsed);
@@ -24,8 +24,8 @@ const Index = ({collapsed, setCollapsed, isSmall}) => {
         >
           <Anico type={collapsed ? 'right' : ''} />
         </span>
-      }
-      {(!isSmall && collapsed) ? null : (
+      )}
+      {!isSmall && collapsed ? null : (
         <Link
           to="https://ihuxy.com/md2html"
           target="_blank"

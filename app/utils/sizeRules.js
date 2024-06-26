@@ -4,7 +4,7 @@ export const sizeRules = unit => {
   return {
     '--maxWidth': {
       // px: [800, 2000],
-      [unit]: [80 * b , 200 * b],
+      [unit]: [80 * b, 200 * b],
       vw: [60, 100],
     },
     '--menuWidth': {

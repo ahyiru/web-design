@@ -13,6 +13,6 @@ export const wechatConfigs = {
   wechat_oauth_url: 'https://open.weixin.qq.com/connect/oauth2/authorize',
   redirect_uri: 'https://ihuxy.com/user/signin',
   response_type: 'code',
-  scope: 'snsapi_base',//'snsapi_userinfo',
+  scope: 'snsapi_base', //'snsapi_userinfo',
   state: 'wechat',
 };

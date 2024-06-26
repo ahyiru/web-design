@@ -130,8 +130,9 @@ const Index = props => {
 
   const changeSizes = (key, value, unit) => {
     // e.persist();
-    theme.list.sizes[key] = `${value || ''}${unit}`;
-    changeLayout(theme.list);
+    const newTheme = JSON.parse(JSON.stringify(theme));
+    newTheme.list.sizes[key] = `${value || ''}${unit}`;
+    changeLayout(newTheme.list);
     report({
       actionType: 'change',
       category: 'settings',
@@ -141,8 +142,9 @@ const Index = props => {
   };
   const changeUnit = (key, unit) => {
     const value = unit === 'px' ? 1280 : unit === 'rem' ? 128 : 100;
-    theme.list.sizes[key] = `${value}${unit}`;
-    changeLayout(theme.list);
+    const newTheme = JSON.parse(JSON.stringify(theme));
+    newTheme.list.sizes[key] = `${value}${unit}`;
+    changeLayout(newTheme.list);
     report({
       actionType: 'change',
       category: 'settings',
@@ -153,8 +155,9 @@ const Index = props => {
 
   const changeColors = (e, key) => {
     const {value} = e.target;
-    theme.list.colors[key] = value;
-    changeLayout(theme.list);
+    const newTheme = JSON.parse(JSON.stringify(theme));
+    newTheme.list.colors[key] = value;
+    changeLayout(newTheme.list);
     report({
       actionType: 'change',
       category: 'settings',
@@ -169,10 +172,15 @@ const Index = props => {
         <div className="vertical-item">
           <label>{i18nCfg.hideHeader}</label>
           <div>
-            <Checkbox checked={menuType.header === 'noHeader'} onChange={e => setMenuType({
-              header: e.target.checked ? 'noHeader' : '',
-              menu: menuType.menu,
-            })}>
+            <Checkbox
+              checked={menuType.header === 'noHeader'}
+              onChange={e =>
+                setMenuType({
+                  header: e.target.checked ? 'noHeader' : '',
+                  menu: menuType.menu,
+                })
+              }
+            >
               {i18nCfg.hidden}
             </Checkbox>
           </div>
