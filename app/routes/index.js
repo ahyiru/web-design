@@ -52,7 +52,7 @@ const routes = (routerList, nameList, permList, profile) => {
     const isDesign = item.component && typeof item.component === 'string';
     if (isDesign) {
       const designPath = item.component.slice(1);
-      item.component = () => import(`@app/views/${designPath}`);
+      item.component = () => import(`@app/views/lowcode/${designPath}`);
       // item.component = lowcode.component;
       item.loadData = lowcode.loadData;
     }
