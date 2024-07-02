@@ -56,13 +56,13 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "@ant-design/pro-table": "^3.16.1",
-    "@huxy/components": "^2.1.11",
-    "@huxy/layout": "^2.1.7",
+    "@huxy/components": "^2.1.12",
+    "@huxy/layout": "^2.1.8",
     "@huxy/materials": "^1.1.4",
-    "@huxy/router": "^2.1.8",
-    "@huxy/use": "^2.1.6",
+    "@huxy/router": "^2.1.9",
+    "@huxy/use": "^2.1.7",
     "@huxy/utils": "^2.1.13",
-    "antd": "^5.18.3",
+    "antd": "^5.19.0",
     "echarts": "^5.5.1",
     "echarts-for-react": "^3.0.2",
     "highlight.js": "^11.9.0",
@@ -79,7 +79,7 @@
     "slate-history": "^0.100.0",
     "slate-react": "^0.106.0",
     "socket.io-client": "^4.7.5",
-    "three": "^0.165.0",
+    "three": "^0.166.0",
     "web3": "^4.10.0"
   }
 }
