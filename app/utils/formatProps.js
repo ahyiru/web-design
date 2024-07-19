@@ -13,7 +13,7 @@ export const formatProps = (props, params) => {
   if (isObject(props)) {
     let newProps = {};
     Object.keys(props).map(key => {
-      const value = formatProps(props[key], params);
+      const value = formatProps(props[key], params) || null;
       if (key === '@rest') {
         newProps = {...newProps, ...value};
       } else {
