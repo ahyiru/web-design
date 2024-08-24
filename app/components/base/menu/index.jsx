@@ -35,7 +35,7 @@ const Index = ({data = []}) => {
 
 const LiItem = ({li, itemClick}) => {
   const liRef = useRef();
-  useClickAway(liRef, e => li.open && itemClick(e, li));
+  useClickAway(() => liRef, e => li.open && itemClick(e, li));
   return (
     <li ref={liRef} className={`${li.open ? 'open' : ''}`} onClick={e => itemClick(e, li)}>
       <span className={`link menu-follow${li.active ? ' active' : ''}`}>
