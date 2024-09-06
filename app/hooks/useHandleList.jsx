@@ -1,10 +1,10 @@
-import {useRefFun} from '@huxy/use';
+import {useCustomRef} from '@huxy/use';
 import useFetchList from './useFetchList';
 
 const useHandleList = (fetchList, initParams = null, handleResult, commonParams = null) => {
   const {current, size, ...rest} = initParams || {};
-  const search = useRefFun(rest || {})();
-  const page = useRefFun({current: current || 1, size: size || 10})();
+  const search = useCustomRef(rest || {})();
+  const page = useCustomRef({current: current || 1, size: size || 10})();
   const [result, update] = useFetchList(fetchList, {...page.current, ...search.current}, handleResult, commonParams);
 
   const pageChange = (current, size) => {

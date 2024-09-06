@@ -1,4 +1,4 @@
-import {Button} from 'antd';
+import Button from '@app/components/base/button';
 
 import report from './report';
 

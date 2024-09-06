@@ -1,6 +1,5 @@
 import {useEffect, useState, useRef} from 'react';
 import {Form, Input, Button} from 'antd';
-import {UserOutlined, LockOutlined, GithubOutlined, WechatOutlined} from '@ant-design/icons';
 import QRCode from 'qrcode';
 import {Spinner, Mask} from '@huxy/components';
 import {useUpdate} from '@huxy/use';
@@ -9,6 +8,11 @@ import {storage, params2str, isWechat, sleep, uuidv4, message} from '@huxy/utils
 import {isAuthed, goPage} from '@app/utils/utils';
 
 import {useIntls} from '@app/components/intl';
+
+import WechatIcon from '@app/components/icons/wechat';
+import GithubIcon from '@app/components/icons/github';
+import UserIcon from '@app/components/icons/user';
+import LockIcon from '@app/components/icons/lock';
 
 import {apiList, formRules, githubConfigs, wechatConfigs} from '../configs';
 
@@ -168,10 +172,10 @@ const Index = props => {
     <>
       <Form name="login" initialValues={{}} onFinish={onFinish} autoComplete="off">
         <Form.Item name="email" rules={emailRule}>
-          <Input prefix={<UserOutlined style={{marginRight: '7px', color: '#999'}} />} placeholder={getIntls('login.email')} />
+          <Input prefix={<UserIcon style={{marginRight: '7px', color: '#999'}} />} placeholder={getIntls('login.email')} />
         </Form.Item>
         <Form.Item name="password" /* rules={passwordRule} */>
-          <Input.Password prefix={<LockOutlined style={{marginRight: '7px', color: '#999'}} />} type="password" placeholder={getIntls('login.password')} autoComplete="new-password" />
+          <Input.Password prefix={<LockIcon style={{marginRight: '7px', color: '#999'}} />} type="password" placeholder={getIntls('login.password')} autoComplete="new-password" />
         </Form.Item>
         <Form.Item>
           <Button block type="primary" htmlType="submit">
@@ -198,10 +202,10 @@ const Index = props => {
         </div>
         <div style={thirdLoginStyle}>
           <span className="link">
-            <GithubOutlined onClick={() => githubCode()} />
+            <GithubIcon onClick={() => githubCode()} />
           </span>
           <span className="link" style={{marginLeft: '3rem', color: '#8ae14d'}}>
-            <WechatOutlined onClick={() => (isWechat() ? wechatCode() : getQr())} />
+            <WechatIcon onClick={() => (isWechat() ? wechatCode() : getQr())} />
           </span>
         </div>
         <Mask open={qrRef.current} close={e => setScan()}>

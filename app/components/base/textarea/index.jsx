@@ -22,9 +22,9 @@ const minmaxRule = (value, min, max) => {
   return false;
 };
 
-const TextArea = ({className, value, onChange, onBlur, ...rest}) => {
+const TextArea = ({className, value, onChange, onBlur, border = true, ...rest}) => {
   const [val, setVal] = useState(value);
-  const cls = ['h-textarea', ...(className?.split(' ') ?? [])]
+  const cls = ['h-textarea', border ? null : 'no-border', ...(className?.split(' ') ?? [])]
     .filter(Boolean)
     .map(c => styles[c])
     .join(' ');

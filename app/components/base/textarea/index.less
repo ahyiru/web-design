@@ -14,7 +14,6 @@
     border: 1px solid var(--borderColor);
     border-radius: 4px;
     transition: all 0.3s;
-
     resize: none;
 
     &::-webkit-input-placeholder {
@@ -45,6 +44,12 @@
 
     &:invalid {
       border-color: var(--red2);
+    }
+    &.no-border {
+      border: 0;
+      &:focus {
+        box-shadow: none;
+      }
     }
   }
 }

@@ -360,7 +360,6 @@ const components = {
 
 const main = {
   bread: '当前位置',
-  copyright: 'copyright &copy; 2020-2022',
   layout,
   tables,
   projects,

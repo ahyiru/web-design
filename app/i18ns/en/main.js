@@ -360,7 +360,6 @@ const components = {
 
 const main = {
   bread: 'current',
-  copyright: 'copyright &copy; 2020-2022',
   layout,
   tables,
   projects,

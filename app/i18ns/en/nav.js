@@ -26,8 +26,8 @@ const nav = {
     screencapture_msg: 'Page screenshot download completed！',
   },
   footer: {
-    copy: '©2023 Ihuxy',
-    right: '京ICP备15005899号-2',
+    copy: `©${new Date().getFullYear()} Huxy`,
+    right: '京ICP备XXXXXXXX号-2',
     about: 'About',
     team: 'Team',
     contact: 'Contact',
