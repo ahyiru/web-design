@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.8.1](https://github.com/ahyiru/web-design/compare/v1.8.0...v1.8.1) (2024-09-06)
+
+
+### Bug Fixes
+
+* fix design path ([49e7780](https://github.com/ahyiru/web-design/commit/49e7780fddd005cb541fda33ef4551e66f7a4056))
+* fix fetchList ([5e5ae13](https://github.com/ahyiru/web-design/commit/5e5ae1313d75bb5e5d25448d4f757dcb7fd43432))
+* fix formatProps ([7928599](https://github.com/ahyiru/web-design/commit/7928599dab6f0a4d89a627db6e4c85f08460fc80))
+* fix infos ([9ab8174](https://github.com/ahyiru/web-design/commit/9ab81744a3abf1cb50c9383e814d77b16de80b9f))
+* fix render ref value ([16ab977](https://github.com/ahyiru/web-design/commit/16ab97707002f436ffc7158cbed3c95d3348b795))
+* remove StrictMode ([50a17fa](https://github.com/ahyiru/web-design/commit/50a17fad317ad6a4e12951ba2ceea981d90e628f))
+
 ## [1.8.0](https://github.com/ahyiru/web-design/compare/v1.7.2...v1.8.0) (2024-06-26)
 
 
