@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Table, Tag, Space, Input, Button, Modal, Form, Tooltip} from 'antd';
+import {Table, Tag, Space, Input, Button, App, Form, Tooltip} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {formatTime, message} from '@huxy/utils';
@@ -106,6 +106,7 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
 ];
 
 const Index = props => {
+  const {modal} = App.useApp();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.projects', {});
   const profile = userInfoStore.getState();
@@ -144,7 +145,7 @@ const Index = props => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v._id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
-    Modal.confirm({
+    modal.confirm({
       title: `${actionsText.delete_confirm}${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v => v.name)}`,

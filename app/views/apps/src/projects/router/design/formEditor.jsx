@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {Tree, Modal, Dropdown, Menu, Spin} from 'antd';
+import {Tree, App, Dropdown, Menu, Spin} from 'antd';
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 
 import {Row, Col} from '@huxy/components';
@@ -60,6 +60,7 @@ const defaultForm = {
 const formData = data => (Array.isArray(data) ? data : data ? [data] : [defaultForm]);
 
 const Index = ({data, getValues, actionsText, addFormText, editorI18n}) => {
+  const {modal} = App.useApp();
   const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState('');
   const [selectedKey, setSelectedKey] = useState('');
@@ -87,7 +88,7 @@ const Index = ({data, getValues, actionsText, addFormText, editorI18n}) => {
     setModalType('edit');
   };
   const deleteFn = item => {
-    Modal.confirm({
+    modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
       content: `component: ${item.type}`,

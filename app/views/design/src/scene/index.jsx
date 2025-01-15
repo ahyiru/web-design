@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Pagination, Space, Input, Button, Modal, Form, Select} from 'antd';
+import {Pagination, Space, Input, Button, App, Form, Select} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined, EditOutlined, EyeOutlined} from '@ant-design/icons';
 import {Link} from '@huxy/router';
 import {Row, Col} from '@huxy/components';
@@ -17,6 +17,7 @@ import './index.less';
 const {listSceneFn, deleteSceneFn} = apiList;
 
 const Index = props => {
+  const {modal} = App.useApp();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.tables', {});
   const [selectedRows, setSelectedRows] = useState([]);
@@ -38,7 +39,7 @@ const Index = props => {
     const items = item ? [item] : selectedRows;
     // const ids = items.map(v => v._id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
-    Modal.confirm({
+    modal.confirm({
       title: `${i18nCfg.delMsg}${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v => v.name)}`,

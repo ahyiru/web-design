@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Modal} from 'antd';
+import {App} from 'antd';
 import {ExclamationCircleOutlined, TableOutlined, BarsOutlined} from '@ant-design/icons';
 import {TabHeader} from '@huxy/components';
 import {message} from '@huxy/utils';
@@ -11,6 +11,7 @@ import {tabs, formList, actionList, colsCfg, tableHeader, getColumns, RenderItem
 import './index.less';
 
 const Index = props => {
+  const {modal} = App.useApp();
   const [listType, setListType] = useState(props.type ?? 'table');
   const [active, setActive] = useState(1);
   const [searchParmas, setSearchParmas] = useState('');
@@ -48,7 +49,7 @@ const Index = props => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v._id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
-    Modal.confirm({
+    modal.confirm({
       title: `确定删除吗？${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `name: ${items.map(v => v.name)}`,

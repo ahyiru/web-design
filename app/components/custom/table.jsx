@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Table, Space, Button, Modal} from 'antd';
+import {Table, Space, Button, App} from 'antd';
 
 import {Row, Col} from '@huxy/components';
 import {validObj, message} from '@huxy/utils';
@@ -84,6 +84,7 @@ const formatColums = (data, actions) => {
 };
 
 const Index = ({commonprops, ...props}) => {
+  const {modal} = App.useApp();
   const profile = userInfoStore.getState();
   const {pagination, rowSelection, columns, actions, searchSchema, modalSchema, rowKey = '_id'} = props;
 
@@ -120,7 +121,7 @@ const Index = ({commonprops, ...props}) => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v[rowKey]);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
-    Modal.confirm({
+    modal.confirm({
       title: `确定执行此操作吗？${countStr}`,
       icon: <Icon icon="ExclamationCircleOutlined" />,
       content: `name: ${items.map(v => v.name)}`,

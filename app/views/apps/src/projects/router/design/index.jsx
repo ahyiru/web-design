@@ -1,5 +1,5 @@
 import {useState, useEffect, useMemo} from 'react';
-import {Tree, Modal, Dropdown, Spin, Alert} from 'antd';
+import {Tree, App, Dropdown, Spin, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {updateId, addNodes, editNodes, deleteNodes, moveNodes, cacheData, selectedHandle, session, message} from '@huxy/utils';
@@ -62,6 +62,7 @@ const getSelected = (data, id) => {
 };
 
 const Index = props => {
+  const {modal} = App.useApp();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.projectDesign', {});
   const {pageText = {}, actionsText = {}, topActionText = {}, addFormText = {}, designConfigText} = i18nCfg;
@@ -101,7 +102,7 @@ const Index = props => {
     setModalType('edit');
   };
   const deleteFn = item => {
-    Modal.confirm({
+    modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
       content: `component: ${item.type}`,

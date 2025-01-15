@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Table, Space, Input, Button, Modal, Form, Tooltip, Tag} from 'antd';
+import {Table, Space, Input, Button, App, Form, Tooltip, Tag} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {formatTime, dlfile, message} from '@huxy/utils';
@@ -181,6 +181,7 @@ const getColumns = ({handleEdit, handleDelete, handleOperating}, profile) => [
 ];
 
 const Index = props => {
+  const {modal} = App.useApp();
   const profile = userInfoStore.getState() || {};
   const backState = props.history.getState()?.backState;
   const selItem = props.history.getState()?.item;
@@ -205,7 +206,7 @@ const Index = props => {
     const items = item ? [item] : selectedRows;
     const ids = items.map(v => v._id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
-    Modal.confirm({
+    modal.confirm({
       title: `确定删除吗？${countStr}`,
       icon: <ExclamationCircleOutlined />,
       content: `title: ${items.map(v => v.title)}`,

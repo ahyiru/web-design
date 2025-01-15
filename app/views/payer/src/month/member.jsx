@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Select, Button, Modal} from 'antd';
+import {Select, Button, App} from 'antd';
 import {Row, Col} from '@huxy/components';
 import {message} from '@huxy/utils';
 import {roleList, periodList} from '@app/utils/configs';
@@ -29,6 +29,7 @@ const getMemberInfo = ({role, deadline}) => {
 };
 
 const Index = props => {
+  const {modal} = App.useApp();
   const profile = userInfoStore.getState() || {};
   // const {role} = profile;
   // const leftPrice = getLeftPrice(profile);
@@ -46,7 +47,7 @@ const Index = props => {
 
   const handleOrder = async ({label, orderRole, period}) => {
     const tips = leftDate ? `${roleLabel} 还剩余 ${leftDate} 天，开通新会员后会将剩余金额累加至新会员。` : '';
-    Modal.confirm({
+    modal.confirm({
       title: `订单确认`,
       // icon: <ExclamationCircleOutlined />,
       content: `${tips}确定开通 ${label} 吗？`,

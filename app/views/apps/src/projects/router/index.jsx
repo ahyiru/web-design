@@ -1,5 +1,5 @@
 import {useState, useCallback, useEffect} from 'react';
-import {Tree, Modal, Dropdown, Input, Button, Alert} from 'antd';
+import {Tree, App, Dropdown, Input, Button, Alert} from 'antd';
 import {DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {traverItem, message} from '@huxy/utils';
@@ -60,6 +60,7 @@ const defSelectedItem = {
 };
 
 const Index = props => {
+  const {modal} = App.useApp();
   const getIntls = useIntls();
   const pageText = getIntls('main.projectRouter.pageText', {});
   const actionsText = getIntls('main.projectRouter.actionsText', {});
@@ -107,7 +108,7 @@ const Index = props => {
     traverItem(v => {
       paths.push(v.path);
     })([item]);
-    Modal.confirm({
+    modal.confirm({
       title: actionsText.delete_confirm,
       icon: <ExclamationCircleOutlined />,
       content: `path: ${paths.join()}`,

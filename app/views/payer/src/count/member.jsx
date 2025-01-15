@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Button, Modal} from 'antd';
+import {Button, App} from 'antd';
 import {Row, Col} from '@huxy/components';
 import {message} from '@huxy/utils';
 import {orderList} from '@app/utils/configs';
@@ -11,12 +11,13 @@ import apiList from '@app/apis/apiList';
 import './member.less';
 
 const Index = props => {
+  const {modal} = App.useApp();
   const profile = userInfoStore.getState() || {};
 
   const handleOrder = async ({type, label}) => {
     const {payCount} = profile ?? {};
     const tips = payCount ? `您还剩余 ${payCount} 次聊天机会，开通新会员后会将剩余次数累加至新会员。` : '';
-    Modal.confirm({
+    modal.confirm({
       title: `订单确认`,
       // icon: <ExclamationCircleOutlined />,
       content: `${tips}确定开通 ${label}会员 吗？`,
