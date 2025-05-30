@@ -1,7 +1,6 @@
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import {FixedSizeList as List} from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
-import {useCustomRef} from '@huxy/use';
 
 const Index = props => {
   const {result, pageChange, RenderItem, itemSize = 45, paramsKey, width = '100%', height = 600} = props;
@@ -16,7 +15,7 @@ const Index = props => {
     pageChange?.(current, size);
   };
 
-  const listRef = useCustomRef(null)();
+  const listRef = useRef(null);
   useEffect(() => {
     if (listRef.current) {
       listRef.current.resetloadMoreItemsCache?.();
@@ -25,9 +24,9 @@ const Index = props => {
     tempList.current = {};
   }, [paramsKey]);
 
-  const tempList = useCustomRef({
+  const tempList = useRef({
     [current]: list,
-  })();
+  });
   if (!pending) {
     tempList.current[current] = list;
   }
