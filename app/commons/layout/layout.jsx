@@ -2,13 +2,13 @@ import Layout from '@huxy/layout';
 import {i18nsStore} from '@app/store/stores';
 import getLang from '@app/utils/getLang';
 import {leftNav, rightNav} from '@app/configs/nav';
-import registerSocket from '@app/globals/registerSocket';
+// import registerSocket from '@app/globals/registerSocket';
 import useFormatMenu from './components/useFormatMenu';
 
 import * as configs from './configs';
 
 const Index = props => {
-  registerSocket();
+  // registerSocket();
   const i18ns = i18nsStore.getState();
   const language = getLang();
   const [menus, noHeader] = useFormatMenu(props);

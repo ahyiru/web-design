@@ -11,21 +11,21 @@ const app = {
   projectName: '...',
   PROXY: [
     /* {
-      url: 'https://api.ihuxy.com',
+      target: 'https://api.ihuxy.com',
       prefix: '/huxyapi',
       pathRewrite: {'^/huxyapi': ''},
     }, */
     {
-      url: 'http://ihuxy.com:9202',
+      target: 'http://ihuxy.com:9202',
       prefix: '/huxyapi',
     },
     {
-      url: 'http://ihuxy.com:9203',
+      target: 'http://ihuxy.com:9203',
       prefix: '/socket.io',
       ws: true,
     },
     {
-      url: 'http://ihuxy.com:3333',
+      target: 'http://ihuxy.com:3333',
       prefix: '/filesystem',
     },
   ],

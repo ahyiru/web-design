@@ -19,9 +19,9 @@ const beforeRender = (input, next) => {
   if (validPath === initPath) {
     return next({path: '/'});
   }
-  if (!isAuthed() && !whiteRoutes.includes(validPath)) {
+  /* if (!isAuthed() && !whiteRoutes.includes(validPath)) {
     return next({path: '/user/signin'});
-  }
+  } */
   if (path !== prevPath && demoBackReg.test(prevPath)) {
     // designReg
     return confirmDesignPage(next);

@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react';
-import {FixedSizeList as List} from 'react-window';
-import InfiniteLoader from 'react-window-infinite-loader';
+import {List} from 'react-window';
+import {InfiniteLoader} from 'react-window-infinite-loader';
 
 const Index = props => {
   const {result, pageChange, RenderItem, itemSize = 45, paramsKey, width = '100%', height = 600} = props;
