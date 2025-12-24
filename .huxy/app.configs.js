@@ -16,16 +16,16 @@ const app = {
       pathRewrite: {'^/huxyapi': ''},
     }, */
     {
-      target: 'http://ihuxy.com:9202',
+      target: 'api.ihuxy.com',
       prefix: '/huxyapi',
     },
     {
-      target: 'http://ihuxy.com:9203',
+      target: 'api.ihuxy.com',
       prefix: '/socket.io',
       ws: true,
     },
     {
-      target: 'http://ihuxy.com:3333',
+      target: 'api.ihuxy.com',
       prefix: '/filesystem',
     },
   ],
