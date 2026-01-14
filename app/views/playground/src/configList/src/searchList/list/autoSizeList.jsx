@@ -1,4 +1,4 @@
-import AutoSizer from 'react-virtualized-auto-sizer';
+import {AutoSizer} from 'react-virtualized-auto-sizer';
 import WrapList from './wrapList';
 
 const AutoSizeList = props => (
