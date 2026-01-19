@@ -29,7 +29,7 @@ const Index = props => {
       setCategories(result?.result?.list ?? defCategories);
     };
     const getTags = async () => {
-      const result = await apiList.listTagsFn?.({projectId: defProject._id});
+      const result = await apiList.listTagsFn?.({projectId: defProject.id});
       setTags(result?.result?.list ?? defTags);
     };
     getCategories();

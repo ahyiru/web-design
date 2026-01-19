@@ -8,11 +8,11 @@ store.setState({users, routers});
 
 export const projectList = [
   {
-    _id: uuidv4(),
+    id: uuidv4(),
     name: 'demo1',
   },
   {
-    _id: uuidv4(),
+    id: uuidv4(),
     name: 'demo2',
   },
 ];
@@ -36,7 +36,7 @@ export const logout = async data => {
 
 export const addUser = async data => {
   const res = await fakeFetch();
-  const item = {...data, _id: uuidv4()};
+  const item = {...data, id: uuidv4()};
   const users = store.getState('users');
   users.push(item);
   store.setState({users});
@@ -49,7 +49,7 @@ export const addUser = async data => {
 export const editUser = async data => {
   const res = await fakeFetch();
   const users = store.getState('users');
-  let user = users.find(item => item._id === data._id);
+  let user = users.find(item => item.id === data.id);
   if (user) {
     user = {...user, ...data};
     store.setState({users});
@@ -63,7 +63,7 @@ export const deleteUser = async ({ids}) => {
   const res = await fakeFetch();
   const users = store.getState('users');
   (ids || []).map(id => {
-    const userIndex = users.findIndex(item => item._id === id);
+    const userIndex = users.findIndex(item => item.id === id);
     if (userIndex > -1) {
       users.splice(userIndex, 1);
     }
@@ -113,7 +113,7 @@ export const getRouter = async () => {
 export const addRouter = async data => {
   const res = await fakeFetch();
   const routers = store.getState('routers');
-  const item = {...data, _id: uuidv4()};
+  const item = {...data, id: uuidv4()};
   routers.push(item);
   store.setState({routers});
   return {
@@ -125,7 +125,7 @@ export const addRouter = async data => {
 export const editRouter = async data => {
   const res = await fakeFetch();
   const routers = store.getState('routers');
-  let router = routers.find(item => item._id === data._id);
+  let router = routers.find(item => item.id === data.id);
   if (router) {
     router = {...router, ...data};
     store.setState({routers});
@@ -139,7 +139,7 @@ export const editRouter = async data => {
 export const deleteRouter = async data => {
   const res = await fakeFetch();
   const routers = store.getState('routers');
-  const routerIndex = routers.findIndex(item => item._id === data._id);
+  const routerIndex = routers.findIndex(item => item.id === data.id);
   if (routerIndex > -1) {
     routers.splice(routerIndex, 1);
     store.setState({routers});

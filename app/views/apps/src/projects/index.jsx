@@ -84,7 +84,7 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
     width: 200,
     ellipsis: true,
     render: (text, record) => {
-      const disabled = false; //!profile.role&&record._id!==profile.projectId;
+      const disabled = false; //!profile.role&&record.id!==profile.projectId;
       return (
         <>
           <Button type="link" size="small" disabled={disabled} onClick={() => handleRouter(record)}>
@@ -119,20 +119,20 @@ const Index = props => {
 
   const handleRouter = item => {
     props.router.push({
-      path: `./router/${item._id}`,
+      path: `./router/${item.id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
   const handleApis = item => {
     props.router.push({
-      path: `./api/${item._id}`,
+      path: `./api/${item.id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
   const handleEdit = item => {
     // setModalItem(item);
     props.router.push({
-      path: `./edit/${item._id}`,
+      path: `./edit/${item.id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
@@ -143,7 +143,7 @@ const Index = props => {
   };
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map(v => v._id);
+    const ids = items.map(v => v.id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     modal.confirm({
       title: `${actionsText.delete_confirm}${countStr}`,
@@ -170,12 +170,12 @@ const Index = props => {
   };
 
   const rowSelection = {
-    selectedRowKeys: selectedRows.map(v => v._id),
+    selectedRowKeys: selectedRows.map(v => v.id),
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
     getCheckboxProps: record => ({
-      disabled: !profile.role && record._id !== profile._id,
+      disabled: !profile.role && record.id !== profile.id,
     }),
     columnWidth: '30px',
   };
@@ -238,7 +238,7 @@ const Index = props => {
         </Col>
         <Col>
           <Panel>
-            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
+            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="id" scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>

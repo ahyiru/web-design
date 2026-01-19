@@ -71,7 +71,7 @@ const Index = props => {
   const profile = userInfoStore.getState();
   const backState = props.history.getState()?.backState;
   const selItem = props.history.getState()?.item;
-  const stateItem = selItem || (profile.projectId ? {_id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
+  const stateItem = selItem || (profile.projectId ? {id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
   const rootNode = {
     type: stateItem?.name,
     key: '0',

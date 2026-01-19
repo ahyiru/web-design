@@ -32,7 +32,7 @@ const Index = props => {
     values.projectId = values.projectId ?? '';
     const handler = item ? editUserFn : addUserFn;
     values = item ? {...item, ...values} : values;
-    const projectName = projectList.find(v => v._id === values.projectId)?.name ?? '';
+    const projectName = projectList.find(v => v.id === values.projectId)?.name ?? '';
     try {
       const {code, message: msg} = await handler({...values, projectName});
       if (code === 200) {
@@ -78,7 +78,7 @@ const Index = props => {
               <Form.Item label={addFormText.projectId} name="projectId">
                 <Select placeholder={addFormText.projectId} allowClear style={{width: '80%'}}>
                   {projectList.map(v => (
-                    <Select.Option key={v._id} value={v._id}>
+                    <Select.Option key={v.id} value={v.id}>
                       {v.name}
                     </Select.Option>
                   ))}

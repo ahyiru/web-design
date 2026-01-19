@@ -43,7 +43,7 @@ const routes = (routerList, nameList, permList, profile) => {
       .map(item => item.path)
       .join('')
       .replace('//', '/');
-    item.id = item._id;
+    item.id = item.id;
     item.name = nameList?.[item.fullpath] ?? item.name;
     let icon = item.icon;
     if (icon && icon !== true) {

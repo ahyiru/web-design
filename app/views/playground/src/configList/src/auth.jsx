@@ -40,7 +40,7 @@ const Index = props => {
 
   const [filterTree, setFilterTree] = useSearch(null);
 
-  const [routerList] = useFetchList(getRouter, {projectId: defProject._id});
+  const [routerList] = useFetchList(getRouter, {projectId: defProject.id});
 
   const update = useCallback(async () => {
     const {

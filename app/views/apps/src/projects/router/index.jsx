@@ -55,8 +55,8 @@ const defSelectedItem = {
   key: '/low-code/dom',
   name: '原生dom',
   path: '/low-code/dom',
-  projectId: defProject._id,
-  _id: '64827d9a0c54fc89e3a14b81',
+  projectId: defProject.id,
+  id: '64827d9a0c54fc89e3a14b81',
 };
 
 const Index = props => {
@@ -71,7 +71,7 @@ const Index = props => {
   const pageParams = props.params;
   const backState = props.history.getState()?.backState;
   const selItem = props.history.getState()?.item;
-  const stateItem = selItem || (profile.projectId ? {_id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
+  const stateItem = selItem || (profile.projectId ? {id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
   const rootNode = {
     key: -1,
     path: '',
@@ -116,7 +116,7 @@ const Index = props => {
       okType: 'danger',
       cancelText: actionsText.delete_confirm_cancel,
       onOk: async () => {
-        const {code, message: msg} = await deleteRouterFn({_id: item._id});
+        const {code, message: msg} = await deleteRouterFn({id: item.id});
         if (code === 200) {
           message.success(msg);
           refresh();
@@ -129,7 +129,7 @@ const Index = props => {
   };
   const onModalOk = async values => {
     const handleFn = modalType === 'edit' ? editRouterFn : addRouterFn;
-    const {code, message: msg} = await handleFn({...values, projectId: stateItem._id});
+    const {code, message: msg} = await handleFn({...values, projectId: stateItem.id});
     if (code === 200) {
       message.success(msg);
       setOpen(false);
@@ -145,9 +145,9 @@ const Index = props => {
   }, []);
 
   useEffect(() => {
-    const {_id, projectId} = selectedItem;
-    if (_id) {
-      getPageSchema(_id, projectId);
+    const {id, projectId} = selectedItem;
+    if (id) {
+      getPageSchema(id, projectId);
     }
   }, [selectedItem]);
 
@@ -156,14 +156,14 @@ const Index = props => {
     if (item.component === '/lowcode/src/index.jsx') {
       setSelectedItem(item);
     }
-    // getPageSchema(item._id,item.projectId);
+    // getPageSchema(item.id,item.projectId);
   };
 
   const toDesignPage = () => {
-    const {_id, path, name, icon, iconKey, projectId, key} = selectedItem;
-    const itemState = {_id, path, name, icon: iconKey, projectId, key, pageSchema};
+    const {id, path, name, icon, iconKey, projectId, key} = selectedItem;
+    const itemState = {id, path, name, icon: iconKey, projectId, key, pageSchema};
     props.router.push({
-      path: `./${_id}`,
+      path: `./${id}`,
       state: {item: itemState, backState: {path: props.path, params: itemState, state: {item: selItem, backState}}},
     });
   };
@@ -212,7 +212,7 @@ const Index = props => {
           <Panel>
             <div style={{display: 'flex', marginBottom: 10}}>
               <h4 style={{flex: 'auto', margin: 0, lineHeight: '24px'}}>{pageText.preview_text}</h4>
-              <Button type="primary" disabled={!selectedItem?._id} size="small" icon={<EditOutlined />} onClick={e => toDesignPage()}>
+              <Button type="primary" disabled={!selectedItem?.id} size="small" icon={<EditOutlined />} onClick={e => toDesignPage()}>
                 {pageText.design_text}
               </Button>
             </div>

@@ -27,7 +27,7 @@ const useGetProfile = () => {
     };
     const getAuths = async profile => {
       try {
-        const {code, result} = (await listAuthFn({uid: profile?._id})) || {};
+        const {code, result} = (await listAuthFn({uid: profile?.id})) || {};
         if (code === 200) {
           permissionStore.setState(result);
           getRouters(profile);
@@ -38,7 +38,7 @@ const useGetProfile = () => {
     };
     const getRouters = async profile => {
       try {
-        const {code, result} = (await listRouterFn({projectId: profile?.projectId || defProject._id})) || {};
+        const {code, result} = (await listRouterFn({projectId: profile?.projectId || defProject.id})) || {};
         setLoading(false);
         if (code === 200) {
           routersStore.setState(result);

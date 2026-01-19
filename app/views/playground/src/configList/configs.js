@@ -162,7 +162,7 @@ export const colsCfg = actions => [
   {
     dataIndex: 'action',
     render: (text, record) => {
-      const disabled = false; // !profile.role && record._id !== profile._id;
+      const disabled = false; // !profile.role && record.id !== profile.id;
       const acList = Object.keys(actions).map(key => ({...colActions.find(item => item.key === key), action: actions[key]}));
       return (
         <Space>

@@ -86,7 +86,7 @@ const formatColums = (data, actions) => {
 const Index = ({commonprops, ...props}) => {
   const {modal} = App.useApp();
   const profile = userInfoStore.getState();
-  const {pagination, rowSelection, columns, actions, searchSchema, modalSchema, rowKey = '_id'} = props;
+  const {pagination, rowSelection, columns, actions, searchSchema, modalSchema, rowKey = 'id'} = props;
 
   const listInfo = actions.find(item => item.name === 'listFn');
   const deleteInfo = actions.find(item => item.name === 'deleteFn');

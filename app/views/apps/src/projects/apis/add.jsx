@@ -26,7 +26,7 @@ const Index = props => {
   const addFormText = Intls({keys: 'main.projectApis.addFormText'}) ?? {};
   const [form] = Form.useForm();
   const {getState} = props.history;
-  const projectId = props.params.projectId || defProject._id;
+  const projectId = props.params.projectId || defProject.id;
   const {item, backState} = getState() || {};
   const back = () => {
     backState ? props.router.push(backState) : props.history.back();

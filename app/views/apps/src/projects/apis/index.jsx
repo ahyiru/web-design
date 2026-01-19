@@ -99,7 +99,7 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
     align: 'center',
     fixed: 'right',
     render: (text, record) => {
-      const disabled = false; //!profile.role&&record._id!==profile._id;
+      const disabled = false; //!profile.role&&record.id!==profile.id;
       return (
         <>
           <Button type="link" size="small" disabled={disabled} onClick={() => handleTest(record)}>
@@ -126,24 +126,24 @@ const Index = props => {
 
   const backState = props.history.getState()?.backState;
   const selItem = props.history.getState()?.item;
-  const stateItem = selItem || (profile.projectId ? {_id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
+  const stateItem = selItem || (profile.projectId ? {id: profile.projectId, name: profile.projectName, isDef: true} : defProject);
 
   const [selectedRows, setSelectedRows] = useState([]);
 
   const pageParams = props.params;
-  const [result, update, pageChange, searchList] = useHandleList(listApiFn, {current: pageParams?.current, size: pageParams?.size}, null, {projectId: stateItem._id});
+  const [result, update, pageChange, searchList] = useHandleList(listApiFn, {current: pageParams?.current, size: pageParams?.size}, null, {projectId: stateItem.id});
 
   const handleTest = item => {
     // console.log(item);
     props.router.push({
-      path: `./test/${item._id}`,
+      path: `./test/${item.id}`,
       state: {item, backState: {path: props.path, params: {current, size}, state: {item: selItem, backState}}},
     });
   };
   const handleEdit = item => {
     // setModalItem(item);
     props.router.push({
-      path: `./edit/${item._id}`,
+      path: `./edit/${item.id}`,
       state: {item, backState: {path: props.path, params: {current, size}, state: {item: selItem, backState}}},
     });
   };
@@ -154,7 +154,7 @@ const Index = props => {
   };
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map(v => v._id);
+    const ids = items.map(v => v.id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     modal.confirm({
       title: `${actionsText.delete_confirm}${countStr}`,
@@ -185,12 +185,12 @@ const Index = props => {
   };
 
   const rowSelection = {
-    selectedRowKeys: selectedRows.map(v => v._id),
+    selectedRowKeys: selectedRows.map(v => v.id),
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
     getCheckboxProps: record => ({
-      // disabled:!profile.role&&record._id!==profile._id,
+      // disabled:!profile.role&&record.id!==profile.id,
     }),
     columnWidth: '30px',
     fixed: true,
@@ -263,7 +263,7 @@ const Index = props => {
         </Col>
         <Col>
           <Panel>
-            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
+            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="id" scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>

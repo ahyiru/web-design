@@ -6,7 +6,7 @@ export const allUserMock = async () => {
     total: 5,
     list: [
       {
-        _id: '123456',
+        id: '123456',
         name: 'admin',
         email: 'admin@zys.com',
         github: 'githubid',
@@ -19,11 +19,11 @@ export const allUserMock = async () => {
         __v: 0,
         updater: 'zys',
         updatetime: 1626883786994,
-        projectId: '6098f12b099e1202a287acad',
+        projectId: '1',
         projectName: '控制台',
       },
       {
-        _id: '1234567',
+        id: '1234567',
         name: 'demo',
         email: 'demo@zys.com',
         github: 'githubid1',
@@ -39,7 +39,7 @@ export const allUserMock = async () => {
         projectName: 'demo',
       },
       {
-        _id: '12345678',
+        id: '12345678',
         name: 'test',
         email: 'test@zys.com',
         weixin: 'openid1',
@@ -55,7 +55,7 @@ export const allUserMock = async () => {
         projectName: 'test',
       },
       {
-        _id: '123456789',
+        id: '123456789',
         name: 'visitor',
         email: 'visitor@zys.com',
         role: 0,
@@ -70,7 +70,7 @@ export const allUserMock = async () => {
         projectName: 'visitor',
       },
       {
-        _id: '1234567890',
+        id: '1234567890',
         name: 'unverified',
         email: 'unverified@zys.com',
         role: 0,

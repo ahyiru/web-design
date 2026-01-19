@@ -1,5 +1,8 @@
 import DeadCodePlugin from 'webpack-deadcode-plugin';
 
+const apiUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:9200' : 'https://api.ihuxy.com';
+const llmUrl = 'https://llmapi.ihuxy.com';
+
 const app = {
   // HOST: 'http://localhost',
   PORT: 8000,
@@ -10,29 +13,29 @@ const app = {
   PROD_ROOT_DIR: '/',
   projectName: '...',
   PROXY: [
-    /* {
-      target: 'https://api.ihuxy.com',
-      prefix: '/huxyapi',
-      pathRewrite: {'^/huxyapi': ''},
-    }, */
     {
-      target: 'api.ihuxy.com',
-      prefix: '/huxyapi',
+      target: apiUrl,
+      prefix: '/huxy',
     },
     {
-      target: 'api.ihuxy.com',
+      target: apiUrl,
       prefix: '/socket.io',
       ws: true,
     },
     {
-      target: 'api.ihuxy.com',
+      target: apiUrl,
       prefix: '/filesystem',
+    },
+    {
+      target: llmUrl,
+      prefix: '/chat',
+      withPrefix: false,
     },
   ],
   envConfigs: {
     // 全局环境变量
     name: '控制台',
-    _id: '6098f12b099e1202a287acad',
+    id: '1',
   },
 };
 

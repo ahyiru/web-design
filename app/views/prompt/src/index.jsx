@@ -94,7 +94,7 @@ const getColumns = ({handleEdit, handleDelete, handleAudit}, profile) => [
     align: 'center',
     fixed: 'right',
     render: (text, record) => {
-      const disabled = false; //!profile.role&&record._id !== profile._id;
+      const disabled = false; //!profile.role&&record.id !== profile.id;
       return (
         <>
           <Button type="link" size="small" disabled={record.audited} onClick={() => handleAudit(record)}>
@@ -125,7 +125,7 @@ const Index = props => {
 
   const handleEdit = item => {
     props.router.push({
-      path: `./edit/${item._id}`,
+      path: `./edit/${item.id}`,
       state: {item, backState: {path: props.path, params: {current, size}, state: {item: selItem, backState}}},
     });
   };
@@ -134,7 +134,7 @@ const Index = props => {
   };
   const handleDelete = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map(v => v._id);
+    const ids = items.map(v => v.id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     modal.confirm({
       title: `确定删除吗？${countStr}`,
@@ -158,7 +158,7 @@ const Index = props => {
   };
   const handleAudit = item => {
     const items = item ? [item] : selectedRows;
-    const ids = items.map(v => v._id);
+    const ids = items.map(v => v.id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     modal.confirm({
       title: `确定通过审核吗？${countStr}`,
@@ -182,12 +182,12 @@ const Index = props => {
   };
 
   const rowSelection = {
-    selectedRowKeys: selectedRows.map(v => v._id),
+    selectedRowKeys: selectedRows.map(v => v.id),
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
     getCheckboxProps: record => ({
-      // disabled:!profile.role&&record._id!==profile._id,
+      // disabled:!profile.role&&record.id!==profile.id,
     }),
     columnWidth: '30px',
     fixed: true,
@@ -243,7 +243,7 @@ const Index = props => {
         </Col>
         <Col>
           <Panel>
-            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} />
+            <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="id" scroll={{x: true}} />
           </Panel>
         </Col>
       </Row>

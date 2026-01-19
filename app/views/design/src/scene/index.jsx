@@ -27,7 +27,7 @@ const Index = props => {
   const handleEdit = (item, e) => {
     e.stopPropagation();
     props.router.push({
-      path: `./edit/${item._id}`,
+      path: `./edit/${item.id}`,
       state: {item, backState: {path: props.path, params: {current, size}}},
     });
   };
@@ -37,7 +37,7 @@ const Index = props => {
   const handleDelete = (item, e) => {
     e.stopPropagation();
     const items = item ? [item] : selectedRows;
-    // const ids = items.map(v => v._id);
+    // const ids = items.map(v => v.id);
     const countStr = items.length > 1 ? `(共 ${items.length} 项)` : '';
     modal.confirm({
       title: `${i18nCfg.delMsg}${countStr}`,
@@ -61,12 +61,12 @@ const Index = props => {
   };
 
   /* const rowSelection = {
-    selectedRowKeys: selectedRows.map(v => v._id),
+    selectedRowKeys: selectedRows.map(v => v.id),
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
     },
     getCheckboxProps: record => ({
-      disabled: !profile.role && record._id !== profile._id,
+      disabled: !profile.role && record.id !== profile.id,
     }),
     columnWidth: '30px',
   };
@@ -130,10 +130,10 @@ const Index = props => {
         </Col>
         <Col>
           <Panel>
-            {/* <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="_id" scroll={{x: true}} /> */}
+            {/* <Table pagination={pagination} rowSelection={rowSelection} columns={columns} dataSource={list ?? []} loading={pending} size="small" bordered rowKey="id" scroll={{x: true}} /> */}
             <Row gutter={[16, 16]}>
               {(list || []).map(item => (
-                <Col key={item._id} span={3} xs={12} sm={6}>
+                <Col key={item.id} span={3} xs={12} sm={6}>
                   <div className="scene-item">
                     <span className={`status${item.audited ? ' audited' : ''}`} />
                     <div className="image">

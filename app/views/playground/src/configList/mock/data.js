@@ -364,8 +364,8 @@ const routerList = [
 ];
 
 export const fakeUsers = (schema, num = 10) =>
-  [...Array(num)].map((item, index) => ({...schema, _id: uuidv4(), name: `${schema.name}-${index + 1}`, email: `${schema.name}${index + 1}@gmail.com`, role: randNum(5), active: randTrue()}));
+  [...Array(num)].map((item, index) => ({...schema, id: uuidv4(), name: `${schema.name}-${index + 1}`, email: `${schema.name}${index + 1}@gmail.com`, role: randNum(5), active: randTrue()}));
 
 export const users = fakeUsers(userSchema, 500);
 
-export const routers = routerList.map(route => ({...routerSchema, ...route, _id: uuidv4()}));
+export const routers = routerList.map(route => ({...routerSchema, ...route, id: uuidv4()}));

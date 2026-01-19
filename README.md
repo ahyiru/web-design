@@ -211,7 +211,7 @@ const str2code = (str, hasReturn = false) => {
 
 ```javascript
 const pageSchema = async ({id}) => {
-  const {result} = await apiList.listSchemaFn({routerId: id, projectId: defProject._id});
+  const {result} = await apiList.listSchemaFn({routerId: id, projectId: defProject.id});
   return {result};
 };
 ```
@@ -220,7 +220,7 @@ const pageSchema = async ({id}) => {
 
 ```javascript
 const pageSchema = async ({id}) => {
-  const {result} = await apiList.listSchemaFn({routerId: id, projectId: defProject._id});
+  const {result} = await apiList.listSchemaFn({routerId: id, projectId: defProject.id});
   return {result};
 };
 ```
