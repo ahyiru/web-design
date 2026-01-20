@@ -1,10 +1,15 @@
 import {fetcher, storage, wrapPromise, message as msgAlert} from '@huxy/utils';
 
-import {PROXY} from '@app/configs';
+import {PROXY, isDev} from '@app/configs';
 
 import {logout} from '@app/utils/utils';
 
-const TARGET = Array.isArray(PROXY) ? PROXY[0]?.prefix : PROXY?.prefix ?? '/api';
+const proxyApi = Array.isArray(PROXY) ? PROXY[0] : PROXY;
+
+const fixPrefix = prefix => {
+  prefix = prefix ?? proxyApi.prefix;
+  return isDev ? prefix : `${proxyApi.target}${prefix}`;
+};
 
 const success_code = [200, 10000];
 
@@ -87,14 +92,14 @@ const dlFile = fetcher(dlHandler);
 
 const getToken = () => ({Authorization: `yiru ${storage.get('token') || ''}`});
 
-const fetch = ({method, url, prefix, headers, ...opt}) => fetchApi(method)(`${prefix ?? TARGET}${url}`, {headers: {...getToken(), ...headers}, credentials: 'omit', ...opt});
+const fetch = ({method, url, prefix, headers, ...opt}) => fetchApi(method)(`${fixPrefix(prefix)}${url}`, {headers: {...getToken(), ...headers}, credentials: 'omit', ...opt});
 
-export const suspense = ({method, url, prefix, headers, ...opt}) => wrapPromise(fetchApi(method)(`${prefix ?? TARGET}${url}`, {headers: {...getToken(), ...headers}, ...opt}));
+export const suspense = ({method, url, prefix, headers, ...opt}) => wrapPromise(fetchApi(method)(`${fixPrefix(prefix)}${url}`, {headers: {...getToken(), ...headers}, ...opt}));
 
-export const dlApi = ({method, url, prefix, ...opt}) => dlFile(method)(`${prefix ?? TARGET}${url}`, {headers: getToken(), ...opt});
+export const dlApi = ({method, url, prefix, ...opt}) => dlFile(method)(`${fixPrefix(prefix)}${url}`, {headers: getToken(), ...opt});
 
-export const fetchStream = ({method, url, prefix, headers, ...opt}) => fetcher(handleStream)(method)(`${prefix ?? TARGET}${url}`, {headers: {...getToken(), ...headers}, ...opt});
+export const fetchStream = ({method, url, prefix, headers, ...opt}) => fetcher(handleStream)(method)(`${fixPrefix(prefix)}${url}`, {headers: {...getToken(), ...headers}, ...opt});
 
-export const testFetcher = ({method, url, prefix, ...opt}) => fetcher()(method)(`${prefix ?? TARGET}${url}`, {headers: getToken(), credentials: 'omit', ...opt});
+export const testFetcher = ({method, url, prefix, ...opt}) => fetcher()(method)(`${fixPrefix(prefix)}${url}`, {headers: getToken(), credentials: 'omit', ...opt});
 
 export default fetch;
