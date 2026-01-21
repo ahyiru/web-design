@@ -1,5 +1,7 @@
-const {browserRouter, basepath, PROXY, buildTime, isDev, ...rest} = process.env.configs ?? {};
+const {browserRouter, basepath, PROXY, buildTime, ...rest} = process.env.configs ?? {};
 
-export {browserRouter, basepath, PROXY, buildTime, isDev};
+export {browserRouter, basepath, PROXY, buildTime};
+
+export const isDev = process.env.NODE_ENV === 'development';
 
 export const defProject = rest;
