@@ -1,4 +1,4 @@
-import * as styles from './index.less';
+import * as styles from './index.module.less';
 
 const Index = ({yao = [], width, height, bgColor, style, ...rest}) => (
   <div

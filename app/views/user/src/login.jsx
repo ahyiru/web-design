@@ -16,6 +16,8 @@ import LockIcon from '@app/components/icons/lock';
 
 import {apiList, formRules, githubConfigs, wechatConfigs} from '../configs';
 
+import {linka} from './index.module.less';
+
 const {activeEmailFn, githubFn, wechatFn, loginFn /* , qrTicketFn */, qrStatusFn} = apiList;
 const {emailRule} = formRules;
 
@@ -190,10 +192,10 @@ const Index = props => {
       </Form>
       <div>
         <div style={{overflow: 'hidden'}}>
-          <span className="link" style={{float: 'right'}} onClick={e => props.router.push('/user/signup')}>
+          <span className={`link ${linka}`} style={{float: 'right'}} onClick={e => props.router.push('/user/signup')}>
             {getIntls('login.signup')}
           </span>
-          <span className="link" style={{float: 'left'}} onClick={e => props.router.push('/user/verifyEmail')}>
+          <span className={`link ${linka}`} style={{float: 'left'}} onClick={e => props.router.push('/user/verifyEmail')}>
             {getIntls('login.forgetPwd')}
           </span>
         </div>
@@ -201,10 +203,10 @@ const Index = props => {
           {getIntls('login.thirdParty')}
         </div>
         <div style={thirdLoginStyle}>
-          <span className="link">
+          <span className={`link ${linka}`}>
             <GithubIcon onClick={() => githubCode()} />
           </span>
-          <span className="link" style={{marginLeft: '3rem', color: '#8ae14d'}}>
+          <span className={`link ${linka}`} style={{marginLeft: '3rem', color: '#8ae14d'}}>
             <WechatIcon onClick={() => (isWechat() ? wechatCode() : getQr())} />
           </span>
         </div>

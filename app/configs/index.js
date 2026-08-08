@@ -1,7 +1,5 @@
-const {browserRouter, basepath, PROXY, buildTime, ...rest} = process.env.configs ?? {};
+const {browserRouter, basepath, PROXY, buildTime, VERSION, isDev, ...rest} = __HUXY_CONFIG__ ?? {};
 
-export {browserRouter, basepath, PROXY, buildTime};
-
-export const isDev = process.env.NODE_ENV === 'development';
+export {browserRouter, basepath, PROXY, buildTime, VERSION, isDev};
 
 export const defProject = rest;

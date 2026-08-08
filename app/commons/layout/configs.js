@@ -4,7 +4,7 @@ import MenuBottom from './components/menuBottom';
 import Footer from './components/footer';
 import handleNavClick from './utils/handleNavClick';
 import iconList from '@app/utils/icons';
-import logo from '@app/assets/images/logo.png';
+import logo from '@app/assets/images/logo.svg';
 
 const menuAnimate = false;
 

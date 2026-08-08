@@ -10,7 +10,7 @@ import {userInfoStore} from '@app/store/stores';
 import apis from './getApis';
 
 import FileInput from './fileInput';
-import {ListHeader, List, context} from './configs';
+import {ListHeader, List, fileContext} from './configs';
 
 import './index.less';
 
@@ -103,9 +103,9 @@ const Index = props => {
     e.stopPropagation();
     let item;
     if (isDir) {
-      item = context.find(({action}) => action === 'adddir');
+      item = fileContext.find(({action}) => action === 'adddir');
     } else {
-      item = context.find(({action}) => action === 'addfile');
+      item = fileContext.find(({action}) => action === 'addfile');
     }
     const {action, label, ModalInfo} = item || {};
     setAction({

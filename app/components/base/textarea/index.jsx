@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import {message} from '@huxy/utils';
-import * as styles from './index.less';
+import * as styles from './index.module.less';
 
 const minmaxRule = (value, min, max) => {
   if (min != null) {

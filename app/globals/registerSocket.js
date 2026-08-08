@@ -9,7 +9,7 @@ const wsChatUrl = `${window.location.origin}/ws-chat`;
 export const wsMsg = () =>
   io(wsMsgUrl, {
     auth: {Authorization: `yiru ${storage.get('token')}`},
-    // autoConnect: false,
+    autoConnect: false,
   });
 
 export const wsChat = () =>

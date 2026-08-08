@@ -14,7 +14,7 @@ const DeleteAlert = ({filename, type}) => (
   </span>
 );
 
-export const context = [
+export const fileContext = [
   {
     action: 'details',
     label: '详情',
@@ -54,7 +54,7 @@ export const context = [
   },
 ];
 
-const actionInfos = isDir => context.filter(item => (isDir ? item.type !== 'file' : item.type !== 'dir'));
+const actionInfos = isDir => fileContext.filter(item => (isDir ? item.type !== 'file' : item.type !== 'dir'));
 
 const DropDown = ({filename, type, handleModal}) => (
   <div className="drop-list">

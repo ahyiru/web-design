@@ -1,10 +1,10 @@
-const {isDev, configs} = process?.env ?? {};
+const {isDev, basepath} = __HUXY_CONFIG__ ?? {};
 
 const registerPwa = () => {
   if (!isDev && 'serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register(`${configs?.basepath ?? ''}/service-worker.js`)
+        .register(`${basepath}/service-worker.js`)
         .then(registration => {
           // console.log('SW registered: ',registration);
         })

@@ -1,4 +1,4 @@
-import * as styles from './index.less';
+import * as styles from './index.module.less';
 
 const Index = ({className, type = '', size = '', ...rest}) => {
   const cls = ['h-btn', ...(className?.split(' ') ?? []), type, size]

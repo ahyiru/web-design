@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useWinResize} from '@huxy/use';
 
 import Intls from '@app/components/intl';
-import * as styles from './index.less';
+import * as styles from './index.module.less';
 import {logo} from '../configs';
 
 const Index = props => {

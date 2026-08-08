@@ -1,7 +1,7 @@
 import configs from './configs';
 import Yao from '../yao';
 
-import * as styles from './index.less';
+import * as styles from './index.module.less';
 
 const Index = ({yaoProps, rotate, height, width, style, ...rest}) => (
   <div
