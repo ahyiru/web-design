@@ -48,7 +48,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^2.2.7",
+    "@huxy/pack": "^2.2.8",
     "husky": "^9.1.7",
     "webpack-deadcode-plugin": "^0.1.17"
   },
@@ -60,7 +60,7 @@
     "@huxy/materials": "^1.1.10",
     "@huxy/router": "^2.1.21",
     "@huxy/use": "^2.1.18",
-    "@huxy/utils": "^2.1.20",
+    "@huxy/utils": "^2.1.21",
     "antd": "^6.5.4",
     "echarts": "^6.1.0",
     "echarts-for-react": "^3.0.6",

@@ -8,7 +8,6 @@ const serverApi = 'https://api.ihuxy.com';
 const apiUrl = process.env.NODE_ENV === 'development' ? localApi : localApi;
 
 const app = {
-  // HOST: 'http://localhost',
   PORT: 8000,
   PROD_PORT: 8080,
   PUBLIC_DIR: 'public',
