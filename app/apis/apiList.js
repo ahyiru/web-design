@@ -1,13 +1,13 @@
 import fetcher from '@app/apis/report/fetchError';
 import {dlApi, suspense} from '@app/apis/fetcher';
-import getApis from '@app/apis/getApis';
 import {allUserMock, allUserSuspenseMock} from '@app/apis/userMock';
+import apis from '@app/apis/getApis';
 
 const apiList = {
   allUserMock,
 };
 
-const suspenseApis = {
+const suspenseList = {
   allUserSuspenseMock,
 };
 
@@ -18,22 +18,14 @@ const getSuspense = apis => {
     const fetchFn = isDl ? dlApi : suspense;
     const funcName = fnName ?? `${name}Suspense`;
     const paramsKey = dataType || restApi.method === 'post' ? 'data' : 'params';
-    suspenseApis[funcName] = (data, ...rest) => fetchFn({...restApi, url: typeof url === 'function' ? url(data) : url, [paramsKey]: data, ...rest});
+    suspenseList[funcName] = (data, ...rest) => fetchFn({...restApi, url: typeof url === 'function' ? url(data) : url, [paramsKey]: data, ...rest});
   });
+  return suspenseList;
 };
 
-export {suspenseApis};
+export const suspenseApis = getSuspense(apis);
 
-const getList = async () => {
-  const {result} = await getApis();
-  return result?.list ?? [];
-};
-
-export const getApiFn = async () => {
-  let apis = [];
-  try {
-    apis = await getList();
-  } catch (err) {}
+const getApiFn = apis => {
   apis.map(api => {
     const {name, fnName, dataType, url, isDl, ...restApi} = api;
     const fetchFn = isDl ? dlApi : fetcher;
@@ -41,8 +33,7 @@ export const getApiFn = async () => {
     const paramsKey = dataType || (restApi.method === 'post' ? 'data' : 'params');
     apiList[funcName] = (data, ...rest) => fetchFn({...restApi, url: typeof url === 'function' ? url(data) : url, [paramsKey]: data, ...rest});
   });
-  getSuspense(apis);
   return apiList;
 };
 
-export default apiList;
+export default getApiFn(apis);

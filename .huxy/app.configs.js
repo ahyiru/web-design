@@ -3,7 +3,8 @@ import DeadCodePlugin from 'webpack-deadcode-plugin';
 // const apiUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:9200' : 'https://api.ihuxy.com';
 // const llmUrl = 'https://llmapi.ihuxy.com';
 
-const localApi = 'http://localhost:9200';
+// const localApi = 'http://localhost:9200';
+const localApi = 'http://192.168.0.111:9200';
 const serverApi = 'https://api.ihuxy.com';
 const apiUrl = process.env.NODE_ENV === 'development' ? localApi : localApi;
 
@@ -53,6 +54,14 @@ export default {
           log: 'none',
           exportJSON: rootPath,
         }),
+      ],
+    },
+    prod: {
+      copy: [
+        {
+          from: `${rootPath}/node_modules/three/examples/jsm/libs/draco/gltf`,
+          to: `${appPath}/build/draco/gltf`,
+        },
       ],
     },
   }),
