@@ -48,7 +48,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@huxy/pack": "^2.2.8",
+    "@huxy/pack": "^2.3.0",
     "husky": "^9.1.7",
     "webpack-deadcode-plugin": "^0.1.17"
   },
