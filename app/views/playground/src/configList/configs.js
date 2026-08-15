@@ -3,12 +3,12 @@ import {formatTime} from '@huxy/utils';
 import {roleList} from '@app/utils/configs';
 
 import * as apis from './mock';
-import columns, {RenderItem as Item} from './getColumns';
+import columns, {RenderRow} from './getColumns';
 
 export const apiList = apis;
 
 export const getColumns = columns;
-export const RenderItem = Item;
+export const RenderItem = RenderRow;
 
 export const tabs = [
   {

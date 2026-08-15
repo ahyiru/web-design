@@ -2,8 +2,15 @@ import {useEffect, useRef} from 'react';
 import {List} from 'react-window';
 import {InfiniteLoader} from 'react-window-infinite-loader';
 
+const DefRenderRow = ({index, style, totalList, isRowLoaded}) =>
+  <div style={{...style, borderBottom: '1px solid #333'}}>
+    <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>
+      {isRowLoaded(index) ? totalList[index]?.name : 'Loading...'}
+    </div>
+  </div>;
+
 const Index = props => {
-  const {result, pageChange, RenderItem, itemSize = 45, paramsKey, width = '100%', height = 600} = props;
+  const {result, pageChange, RenderItem, rowHeight = 45, paramsKey, width = '100%', height = 500, threshold = 5} = props;
   const {pending, data} = result;
   const {list = [], total = 1, size = 10, current = 1} = data || {};
 
@@ -18,8 +25,9 @@ const Index = props => {
   const listRef = useRef(null);
   useEffect(() => {
     if (listRef.current) {
-      listRef.current.resetloadMoreItemsCache?.();
-      listRef.current._listRef?.scrollTo(0);
+      listRef.current.scrollToRow({
+        index: 0,
+      });
     }
     tempList.current = {};
   }, [paramsKey]);
@@ -35,15 +43,23 @@ const Index = props => {
 
   const len = totalList.length;
   const hasNextPage = len < total;
-  const itemCount = hasNextPage ? len + size : len;
-  const isItemLoaded = index => !hasNextPage || index < len;
+  const rowCount = hasNextPage ? len + size : len;
+  const isRowLoaded = index => !hasNextPage || index < len;
 
   return (
-    <InfiniteLoader ref={listRef} isItemLoaded={isItemLoaded} itemCount={itemCount} loadMoreItems={handlePageChange}>
-      {({onItemsRendered, ref}) => (
-        <List height={height} width={width} className="virtual-list" ref={ref} itemSize={itemSize} itemCount={itemCount} onItemsRendered={onItemsRendered}>
-          {({index, style}) => (typeof RenderItem === 'function' ? RenderItem({index, style, item: totalList[index], isItemLoaded}) : `${index}-${totalList[index].name}`)}
-        </List>
+    <InfiniteLoader isRowLoaded={isRowLoaded} rowCount={rowCount} loadMoreRows={handlePageChange} threshold={threshold}>
+      {({onRowsRendered}) => (
+        <List
+          rowKey={key => `${paramsKey}_${key}`}
+          listRef={listRef}
+          style={{width, height}}
+          className="virtual-list"
+          rowHeight={rowHeight}
+          rowCount={rowCount}
+          onRowsRendered={onRowsRendered}
+          rowComponent={typeof RenderItem === 'function' ? RenderItem : DefRenderRow}
+          rowProps={{totalList, isRowLoaded}}
+        />
       )}
     </InfiniteLoader>
   );
