@@ -14,7 +14,8 @@ import {userInfoStore} from '@app/store/stores';
 
 import customRender from '@app/utils/render';
 
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 
 const actionsRender = {
   handleCheck: {

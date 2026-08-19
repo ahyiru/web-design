@@ -1,14 +1,15 @@
 import {defProject as project} from '@app/configs';
 import * as configs from '@app/utils/configs';
 import * as rules from '@app/utils/rules';
-export {default as apiList} from '@app/apis/apiList';
 export {default as defaultImg} from '@app/assets/images/default.png';
+import {apisStore} from '@app/store/stores';
+export const apiList = apisStore.getState()?.apis ?? {};
 
 export const defProject = project;
 export const formConfigs = configs;
 export const formRules = rules;
 
-export const baseUrl = 'http://ihuxy.com:7000';
+export const baseUrl = 'https://chat.ihuxy.com';
 
 export const loadTypes = [
   {

@@ -4,7 +4,8 @@ import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-desi
 import {Row, Col} from '@huxy/components';
 import {formatTime, message} from '@huxy/utils';
 import {projectRoleList} from '@app/utils/configs';
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 

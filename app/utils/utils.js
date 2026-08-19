@@ -1,5 +1,6 @@
 import {storage, fixPath} from '@huxy/utils';
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 import {basepath, browserRouter} from '@app/configs';
 
 export const goPage = (url = '') => (location.href = url ? fixPath(browserRouter ? `${basepath}${url}` : `${basepath}/#/${url}`) : basepath || '/');

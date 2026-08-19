@@ -3,7 +3,8 @@ import {Form, Modal} from 'antd';
 import {traverItem, clone, message} from '@huxy/utils';
 
 import customRender from '@app/utils/render';
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 import * as rules from '@app/utils/rules';
 
 /* const formCfg={

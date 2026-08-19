@@ -6,6 +6,7 @@ import routerCfgs from '@app/configs/router';
 import sysThemeMode from '@app/utils/sysThemeMode';
 import getTheme from '@app/utils/getTheme';
 import getI18n from '@app/utils/getI18n';
+import useGetApis from '@app/hooks/useGetApis';
 import useGetI18ns from '@app/hooks/useGetI18ns';
 import useGetProfile from '@app/hooks/useGetProfile';
 import {isAuthed} from '@app/utils/utils';
@@ -47,6 +48,7 @@ const AuthedApp = props => {
 };
 
 const App = () => {
+  useGetApis();
   const [loading] = useGetI18ns();
   if (loading) {
     return <Spinner global />;

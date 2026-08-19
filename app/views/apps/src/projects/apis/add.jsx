@@ -3,7 +3,8 @@ import {Form, Input, Button, Select} from 'antd';
 import {Row, Col} from '@huxy/components';
 import {message} from '@huxy/utils';
 import Back from '@app/components/goBack';
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 import {layout, tailLayout, roleList, methodList, paramsList} from '@app/utils/configs';
 import {nameRule, pathRule} from '@app/utils/rules';
 

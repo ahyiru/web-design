@@ -1,7 +1,8 @@
 import * as configs from '@app/utils/configs';
 import * as rules from '@app/utils/rules';
 
-export {default as apiList} from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+export const apiList = apisStore.getState()?.apis ?? {};
 
 export const formConfigs = configs;
 export const formRules = rules;

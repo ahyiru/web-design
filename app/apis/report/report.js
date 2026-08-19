@@ -4,7 +4,8 @@ import {browserRouter} from '@app/configs';
 
 import {isAuthed} from '@app/utils/utils';
 
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 
 import info from './browserInfo';
 

@@ -6,7 +6,8 @@ import {roleList, periodList} from '@app/utils/configs';
 
 import {userInfoStore} from '@app/store/stores';
 
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 
 import './member.less';
 

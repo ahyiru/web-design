@@ -2,7 +2,8 @@ import {useState, useEffect} from 'react';
 import {EditableProTable} from '@ant-design/pro-table';
 import {Popconfirm} from 'antd';
 import {arr2obj, uuidv4} from '@huxy/utils';
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 
 const fmData = data => data.map(item => ({...item, uuid: uuidv4()}));
 

@@ -48,7 +48,8 @@ const getApiFn = async () => {
 使用：
 
 ```javascript
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 
 try {
   const {code, token, message: msg} = await apiList.loginFn(values);

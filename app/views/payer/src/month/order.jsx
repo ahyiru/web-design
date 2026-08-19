@@ -7,7 +7,8 @@ import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 import {roleList} from '@app/utils/configs';
 
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 
 import Panel from '@app/components/panel';
 

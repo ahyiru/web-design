@@ -1,7 +1,7 @@
 import fetcher from '@app/apis/report/fetchError';
 import {dlApi, suspense} from '@app/apis/fetcher';
 import {allUserMock, allUserSuspenseMock} from '@app/apis/userMock';
-import apis from '@app/apis/getApis';
+import {getApis} from '@app/apis/getApis';
 
 const apiList = {
   allUserMock,
@@ -23,9 +23,13 @@ const getSuspense = apis => {
   return suspenseList;
 };
 
-export const suspenseApis = getSuspense(apis);
-
-const getApiFn = apis => {
+export const getApiFn = async () => {
+  let apis = [];
+  try {
+    apis = (await getApis()).result?.list ?? [];
+  } catch (err) {
+    console.error(err.message);
+  }
   apis.map(api => {
     const {name, fnName, dataType, url, isDl, ...restApi} = api;
     const fetchFn = isDl ? dlApi : fetcher;
@@ -33,7 +37,6 @@ const getApiFn = apis => {
     const paramsKey = dataType || (restApi.method === 'post' ? 'data' : 'params');
     apiList[funcName] = (data, ...rest) => fetchFn({...restApi, url: typeof url === 'function' ? url(data) : url, [paramsKey]: data, ...rest});
   });
-  return apiList;
+  getSuspense(apis);
+  return {apis: apiList, suspenseApis: suspenseList};
 };
-
-export default getApiFn(apis);

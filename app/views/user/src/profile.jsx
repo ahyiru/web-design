@@ -2,7 +2,8 @@ import {useState} from 'react';
 import {Form, Input, Button, Tabs, Typography, Space} from 'antd';
 import {UserOutlined, LockOutlined, MailOutlined, MehOutlined, RiseOutlined} from '@ant-design/icons';
 import {message} from '@huxy/utils';
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 
 import {nameRule, emailRule, passwordRule, urlRule} from '@app/utils/rules';
 

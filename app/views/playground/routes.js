@@ -39,7 +39,7 @@ const routes = {
           component: () => import('./src/canvas'),
         },
         {
-          path: 'http://demo.ihuxy.com/webgl',
+          path: 'https://ihuxy.com/webgl',
           name: 'webgl',
           linkProps: {
             target: '_blank',

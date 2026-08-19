@@ -10,7 +10,8 @@ import Panel from '@app/components/panel';
 
 import {userInfoStore, notifyStore} from '@app/store/stores';
 
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 
 const {listMessageFn, deleteMessageFn, readMessageFn} = apiList;
 

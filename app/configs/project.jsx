@@ -48,21 +48,21 @@ const linkList = [
     name: 'Scenes',
     icon: <Icon icon="ApiOutlined" />,
     type: 'link',
-    link: 'http://ihuxy.com:7000',
+    link: 'https://chat.ihuxy.com',
   },
   {
     key: 'webgl',
     name: 'WebGL',
     icon: <Icon icon="ApiOutlined" />,
     type: 'link',
-    link: 'http://ihuxy.com:8081',
+    link: 'https://ihuxy.com/webgl',
   },
   {
     key: 'PhoenixUI',
     name: 'PhoenixUI',
     icon: <Icon icon="ApiOutlined" />,
     type: 'link',
-    link: 'http://ihuxy.com:8088',
+    link: 'https://agent.ihuxy.com',
   },
 ];
 

@@ -2,7 +2,8 @@ import {Form, Input, Button, Select} from 'antd';
 
 import {Row, Col} from '@huxy/components';
 import {message} from '@huxy/utils';
-import apiList from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
+const apiList = apisStore.getState()?.apis ?? {};
 import {layout, tailLayout, projectRoleList} from '@app/utils/configs';
 import {nameRule} from '@app/utils/rules';
 

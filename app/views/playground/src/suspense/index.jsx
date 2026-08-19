@@ -4,10 +4,10 @@ import {Spinner} from '@huxy/components';
 import Panel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
 import {useIntls} from '@app/components/intl';
-import {suspenseApis} from '@app/apis/apiList';
+import {apisStore} from '@app/store/stores';
 import {susTest1, susTest2} from './suspenseFns';
 
-const {profileSuspense, allUserSuspenseMock} = suspenseApis;
+const {profileSuspense, allUserSuspenseMock} = apisStore.getState()?.suspenseApis ?? {};
 
 const userinfo = susTest1();
 const users = susTest2();
