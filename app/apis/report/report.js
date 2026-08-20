@@ -4,8 +4,7 @@ import {browserRouter} from '@app/configs';
 
 import {isAuthed} from '@app/utils/utils';
 
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 
 import info from './browserInfo';
 
@@ -23,7 +22,7 @@ const report = params => {
     route: browserRouter ? currentPath : currentPath.slice(1),
     routeName: routes.name ?? name,
   };
-  apiList.addReportFn?.(reportInfo);
+  getApi().addReportFn?.(reportInfo);
 };
 
 export default report;

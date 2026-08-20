@@ -3,16 +3,13 @@ import {Table, Tag, Space, Input, Button, App, Form, Select} from 'antd';
 import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import {Row, Col} from '@huxy/components';
 import {formatTime, message} from '@huxy/utils';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 import {roleList} from '@app/utils/configs';
 import Panel from '@app/components/panel';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
-
-const {allUserFn, deleteUserFn, exitUserFn} = apiList;
 
 const getColumns = ({handleCheck, handleEdit, handleDelete, handleExit}, profile, i18ns) => [
   {
@@ -128,6 +125,7 @@ const getColumns = ({handleCheck, handleEdit, handleDelete, handleExit}, profile
 ];
 
 const Index = props => {
+  const {allUserFn, deleteUserFn, exitUserFn} = getApi();
   const {modal} = App.useApp();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.users', {});

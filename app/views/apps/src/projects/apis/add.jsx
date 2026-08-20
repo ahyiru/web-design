@@ -3,8 +3,7 @@ import {Form, Input, Button, Select} from 'antd';
 import {Row, Col} from '@huxy/components';
 import {message} from '@huxy/utils';
 import Back from '@app/components/goBack';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {layout, tailLayout, roleList, methodList, paramsList} from '@app/utils/configs';
 import {nameRule, pathRule} from '@app/utils/rules';
 
@@ -16,13 +15,12 @@ import Intls from '@app/components/intl';
 
 import {defProject} from '@app/configs';
 
-const {addApiFn, editApiFn} = apiList;
-
 const formStyle = {
   width: '50%',
 };
 
 const Index = props => {
+const {addApiFn, editApiFn} = getApi();
   const profile = userInfoStore.getState();
   const addFormText = Intls({keys: 'main.projectApis.addFormText'}) ?? {};
   const [form] = Form.useForm();

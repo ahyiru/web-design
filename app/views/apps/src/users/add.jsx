@@ -3,16 +3,14 @@ import {Form, Input, Button, InputNumber, Select} from 'antd';
 import {Row, Col} from '@huxy/components';
 import {message} from '@huxy/utils';
 import Back from '@app/components/goBack';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {layout, tailLayout} from '@app/utils/configs';
 import {nameRule, emailRule, passwordRule, roleRule} from '@app/utils/rules';
 import Panel from '@app/components/panel';
 import {useIntls} from '@app/components/intl';
 
-const {addUserFn, editUserFn, listProjectFn} = apiList;
-
 const Index = props => {
+  const {addUserFn, editUserFn, listProjectFn} = getApi();
   const getIntls = useIntls();
   const addFormText = getIntls('main.users.addFormText', {});
 

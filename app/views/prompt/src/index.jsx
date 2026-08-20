@@ -10,9 +10,7 @@ import Panel from '@app/components/panel';
 
 import {userInfoStore} from '@app/store/stores';
 
-import {apiList} from '../configs';
-
-const {listPromptFn, deletePromptFn, auditPromptFn} = apiList;
+import {getApi} from '@app/apis/apiList';
 
 const getColumns = ({handleEdit, handleDelete, handleAudit}, profile) => [
   /* {
@@ -113,6 +111,7 @@ const getColumns = ({handleEdit, handleDelete, handleAudit}, profile) => [
 ];
 
 const Index = props => {
+  const {listPromptFn, deletePromptFn, auditPromptFn} = getApi();
   const {modal} = App.useApp();
   const profile = userInfoStore.getState() || {};
   const backState = props.history.getState()?.backState;

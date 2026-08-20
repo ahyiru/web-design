@@ -1,6 +1,4 @@
 export {default as logo} from '@app/assets/images/logo.svg';
-import {apisStore} from '@app/store/stores';
-export const apiList = apisStore.getState()?.apis ?? {};
 import * as rules from '@app/utils/rules';
 export const formRules = rules;
 

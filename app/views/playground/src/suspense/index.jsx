@@ -4,15 +4,11 @@ import {Spinner} from '@huxy/components';
 import Panel from '@app/components/panel';
 import {Row, Col} from '@app/components/row';
 import {useIntls} from '@app/components/intl';
-import {apisStore} from '@app/store/stores';
+import {getApi} from '@app/apis/apiList';
 import {susTest1, susTest2} from './suspenseFns';
-
-const {profileSuspense, allUserSuspenseMock} = apisStore.getState()?.suspenseApis ?? {};
 
 const userinfo = susTest1();
 const users = susTest2();
-const userinfo1 = profileSuspense();
-const users1 = allUserSuspenseMock();
 
 const columns = i18nCfg => [
   {dataIndex: 'name', title: i18nCfg.columns_title},
@@ -45,6 +41,9 @@ const Allusers = ({users, title, i18nCfg}) => {
 };
 
 const Index = props => {
+  const {profileSuspense, allUserSuspenseMock} = getApi('suspenseApis');
+  const userinfo1 = profileSuspense();
+  const users1 = allUserSuspenseMock();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.suspense', {});
   return (

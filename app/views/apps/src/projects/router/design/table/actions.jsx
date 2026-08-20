@@ -2,8 +2,7 @@ import {useState, useEffect} from 'react';
 import {EditableProTable} from '@ant-design/pro-table';
 import {Popconfirm} from 'antd';
 import {arr2obj, uuidv4} from '@huxy/utils';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 
 const fmData = data => data.map(item => ({...item, uuid: uuidv4()}));
 
@@ -52,7 +51,7 @@ export default ({data, getValues, actionI18n}) => {
       title: actionI18n.apiName,
       dataIndex: 'apiName',
       valueType: 'select',
-      valueEnum: arr2obj(Object.keys(apiList).map(api => ({name: api, value: api}))),
+      valueEnum: arr2obj(Object.keys(getApi()).map(api => ({name: api, value: api}))),
       formItemProps: (form, {rowIndex}) => {
         return {
           rules: [{required: true, message: actionI18n.required_msg}],

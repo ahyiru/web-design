@@ -2,8 +2,7 @@ import {useEffect} from 'react';
 import {Badge} from 'antd';
 import {BellOutlined} from '@ant-design/icons';
 import {useRoute} from '@huxy/router';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {useNotifyStore} from '@app/store/stores';
 
 const Notify = props => {
@@ -12,7 +11,7 @@ const Notify = props => {
   useEffect(() => {
     const getMes = async () => {
       try {
-        const {result} = await apiList.listMessageFn({current: 1, size: 100, status: 0});
+        const {result} = await getApi().listMessageFn({current: 1, size: 100, status: 0});
         setCount(result.total);
       } catch (err) {}
     };

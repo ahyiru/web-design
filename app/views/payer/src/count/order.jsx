@@ -7,14 +7,11 @@ import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 // import {roleList} from '@app/utils/configs';
 
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 
 import Panel from '@app/components/panel';
 
 import {userInfoStore} from '@app/store/stores';
-
-const {listPayerFn, deletePayerFn, auditPayerFn, cancelPayerFn} = apiList;
 
 const getColumns = ({handleDelete, handleAudit, handlePay, handleCancel}, isAdmin) => [
   {
@@ -114,6 +111,7 @@ const getColumns = ({handleDelete, handleAudit, handlePay, handleCancel}, isAdmi
 ];
 
 const Index = props => {
+  const {listPayerFn, deletePayerFn, auditPayerFn, cancelPayerFn} = getApi();
   const {modal} = App.useApp();
   const profile = userInfoStore.getState() || {};
   const {role, payCount} = profile;

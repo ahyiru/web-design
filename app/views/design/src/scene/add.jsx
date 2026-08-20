@@ -4,17 +4,17 @@ import {Row, Col} from '@huxy/components';
 import Back from '@app/components/goBack';
 import {useIntls} from '@app/components/intl';
 import Panel from '@app/components/panel';
-
+import {getApi} from '@app/apis/apiList';
 import Upload from './upload';
 
-import {apiList, defProject, formConfigs, formRules, defCategories, defTags, loadTypes} from '../../configs';
+import {defProject, formConfigs, formRules, defCategories, defTags, loadTypes} from '../../configs';
 
-const {addSceneFn, editSceneFn} = apiList;
 const {layout, tailLayout} = formConfigs;
 const {titleRule, urlRule} = formRules;
 
 const {TextArea} = Input;
 const Index = props => {
+  const {addSceneFn, editSceneFn} = getApi();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.tables', {});
   const {getState} = props.history;
@@ -25,11 +25,11 @@ const Index = props => {
   const [tagCount, setTagCount] = useState(0);
   useEffect(() => {
     const getCategories = async () => {
-      const result = await apiList.getCategories?.();
+      const result = await getApi().getCategories?.();
       setCategories(result?.result?.list ?? defCategories);
     };
     const getTags = async () => {
-      const result = await apiList.listTagsFn?.({projectId: defProject.id});
+      const result = await getApi().listTagsFn?.({projectId: defProject.id});
       setTags(result?.result?.list ?? defTags);
     };
     getCategories();

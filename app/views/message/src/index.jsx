@@ -10,10 +10,7 @@ import Panel from '@app/components/panel';
 
 import {userInfoStore, notifyStore} from '@app/store/stores';
 
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
-
-const {listMessageFn, deleteMessageFn, readMessageFn} = apiList;
+import {getApi} from '@app/apis/apiList';
 
 const readStatus = [
   {
@@ -106,6 +103,7 @@ const getColumns = ({handleAudit, handleDelete}, isAdmin, status) => [
 ];
 
 const Index = props => {
+  const {listMessageFn, deleteMessageFn, readMessageFn} = getApi();
   const {modal} = App.useApp();
   const profile = userInfoStore.getState() || {};
   const isAdmin = profile.role === 5;

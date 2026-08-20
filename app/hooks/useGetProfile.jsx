@@ -1,12 +1,11 @@
 import {useState, useEffect} from 'react';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {logout} from '@app/utils/utils';
 import {defProject} from '@app/configs';
 import {userInfoStore, permissionStore, routersStore} from '@app/store/stores';
 
 const useGetProfile = () => {
-  const {profileFn, listAuthFn, listRouterFn} = apiList;
+  const {profileFn, listAuthFn, listRouterFn} = getApi();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getProfile = async () => {

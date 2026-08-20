@@ -4,7 +4,8 @@ import {LockOutlined, LeftOutlined} from '@ant-design/icons';
 import {message} from '@huxy/utils';
 import {useIntls} from '@app/components/intl';
 import {goPage} from '@app/utils/utils';
-import {apiList, formRules} from '../configs';
+import {getApi} from '@app/apis/apiList';
+import {formRules} from '../configs';
 
 const {passwordRule, confirmRule} = formRules;
 
@@ -15,7 +16,7 @@ const Index = props => {
     setPending(true);
     try {
       const query = props.params?.token;
-      const {code, token, message: msg} = await apiList.setNewPwdFn({password: values.password, token: query});
+      const {code, token, message: msg} = await getApi().setNewPwdFn({password: values.password, token: query});
       if (code === 200) {
         message.success(msg);
         // storage.set('token',token);

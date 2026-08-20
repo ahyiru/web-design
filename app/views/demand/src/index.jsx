@@ -9,12 +9,10 @@ import SearchForm from '@app/components/searchForm';
 import Panel from '@app/components/panel';
 
 import {userInfoStore} from '@app/store/stores';
-
-import {apiList, status} from '../configs';
+import {getApi} from '@app/apis/apiList';
+import {status} from '../configs';
 
 import OperatingModal from './operatingModal';
-
-const {listDemandFn, deleteDemandFn, completeDemandFn} = apiList;
 
 const getColumns = ({handleEdit, handleDelete, handleOperating}, profile) => [
   {
@@ -181,6 +179,7 @@ const getColumns = ({handleEdit, handleDelete, handleOperating}, profile) => [
 ];
 
 const Index = props => {
+  const {listDemandFn, deleteDemandFn, completeDemandFn} = getApi();
   const {modal} = App.useApp();
   const profile = userInfoStore.getState() || {};
   const backState = props.history.getState()?.backState;

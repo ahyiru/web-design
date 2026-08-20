@@ -14,8 +14,7 @@ import {userInfoStore} from '@app/store/stores';
 
 import customRender from '@app/utils/render';
 
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 
 const actionsRender = {
   handleCheck: {
@@ -97,7 +96,7 @@ const Index = ({commonprops, ...props}) => {
 
   const [modalItem, setModalItem] = useState(null);
 
-  const [result, update, pageChange, handleSearch] = useHandleList(apiList[listInfo?.apiName]);
+  const [result, update, pageChange, handleSearch] = useHandleList(getApi()[listInfo?.apiName]);
 
   const handleCheck = item => {
     setModalItem(item);
@@ -130,7 +129,7 @@ const Index = ({commonprops, ...props}) => {
       okType: 'danger',
       cancelText: '取消',
       onOk: async () => {
-        const {code, message: msg} = await apiList[deleteInfo?.apiName]({ids});
+        const {code, message: msg} = await getApi()[deleteInfo?.apiName]({ids});
         if (code === 200) {
           message.success(msg);
           setSelectedRows([]);

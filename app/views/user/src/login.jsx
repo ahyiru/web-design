@@ -8,17 +8,16 @@ import {storage, params2str, isWechat, sleep, uuidv4, message} from '@huxy/utils
 import {isAuthed, goPage} from '@app/utils/utils';
 
 import {useIntls} from '@app/components/intl';
-
+import {getApi} from '@app/apis/apiList';
 import WechatIcon from '@app/components/icons/wechat';
 import GithubIcon from '@app/components/icons/github';
 import UserIcon from '@app/components/icons/user';
 import LockIcon from '@app/components/icons/lock';
 
-import {apiList, formRules, githubConfigs, wechatConfigs} from '../configs';
+import {formRules, githubConfigs, wechatConfigs} from '../configs';
 
 import {linka} from './index.module.less';
 
-const {activeEmailFn, githubFn, wechatFn, loginFn /* , qrTicketFn */, qrStatusFn} = apiList;
 const {emailRule} = formRules;
 
 const thirdLoginStyle = {
@@ -45,6 +44,7 @@ const scanLoginStyle = {
 let fetchQrStatusCount = 0;
 
 const Index = props => {
+  const {activeEmailFn, githubFn, wechatFn, loginFn /* , qrTicketFn */, qrStatusFn} = getApi();
   const getIntls = useIntls();
   const [pending, setPending] = useState(false);
   const qrRef = useRef();

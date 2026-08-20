@@ -7,8 +7,7 @@ import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {defProject} from '@app/configs';
 
 import HandleModal from './modal';
@@ -18,7 +17,6 @@ import TableEditor from './table';
 // import indexSchema from '@app/20210720.bk/schema/indexSchema';
 // import addSchema from '@app/20210720.bk/schema/addSchema';
 
-const {setSchemaFn} = apiList;
 const {record, undo, redo, clean} = cacheData();
 
 const handleClick = (actions, item, actionsText) => ({
@@ -139,7 +137,7 @@ const Index = props => {
     const {routerId, projectId} = props.params || {};
     // console.log('pageSchema:',schemaTree);
     const schemas = schemaTree[0].children; //[indexSchema];[addSchema];
-    const {code, message: msg} = await setSchemaFn({pageSchema: schemas, routerId, projectId});
+    const {code, message: msg} = await getApi().setSchemaFn({pageSchema: schemas, routerId, projectId});
     if (code === 200) {
       message.success(msg);
       back();

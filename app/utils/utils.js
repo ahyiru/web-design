@@ -1,13 +1,12 @@
 import {storage, fixPath} from '@huxy/utils';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {basepath, browserRouter} from '@app/configs';
 
 export const goPage = (url = '') => (location.href = url ? fixPath(browserRouter ? `${basepath}${url}` : `${basepath}/#/${url}`) : basepath || '/');
 
 export const logout = isLogout => {
   try {
-    !isLogout && apiList.logoutFn();
+    !isLogout && getApi().logoutFn();
   } catch (err) {}
   storage.rm('token');
   goPage('/user/signin');

@@ -10,10 +10,7 @@ import {layout, tailLayout} from '@app/utils/configs';
 
 // import {userInfoStore} from '@app/store/stores';
 
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
-
-const {allUserFn, addMessageFn, addCommentFn} = apiList;
+import {getApi} from '@app/apis/apiList';
 
 const typeList = [
   {
@@ -27,6 +24,7 @@ const typeList = [
 ];
 
 const SendMsg = props => {
+  const {allUserFn, addMessageFn, addCommentFn} = getApi();
   const isNotAdmin = notAdmin();
   const [pending, setPending] = useState(false);
   const [form] = Form.useForm();

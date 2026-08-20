@@ -4,12 +4,11 @@ import {Row, Col} from '@huxy/components';
 import {message} from '@huxy/utils';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
-
+import {getApi} from '@app/apis/apiList';
 import {userInfoStore} from '@app/store/stores';
 
-import {apiList, formConfigs, formRules, category} from '../configs';
+import {formConfigs, formRules, category} from '../configs';
 
-const {addPromptFn, editPromptFn} = apiList;
 const {layout, tailLayout} = formConfigs;
 const {nameRule} = formRules;
 
@@ -18,6 +17,7 @@ const formStyle = {
 };
 
 const Index = props => {
+  const {addPromptFn, editPromptFn} = getApi();
   const profile = userInfoStore.getState();
   const isAdmin = profile.role === 5;
   const [pending, setPending] = useState(false);

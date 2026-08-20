@@ -2,6 +2,7 @@ import fetcher from '@app/apis/report/fetchError';
 import {dlApi, suspense} from '@app/apis/fetcher';
 import {allUserMock, allUserSuspenseMock} from '@app/apis/userMock';
 import {getApis} from '@app/apis/getApis';
+import {apisStore} from '@app/store/stores';
 
 const apiList = {
   allUserMock,
@@ -40,3 +41,5 @@ export const getApiFn = async () => {
   getSuspense(apis);
   return {apis: apiList, suspenseApis: suspenseList};
 };
+
+export const getApi = (type = 'apis') => apisStore.getState()?.[type] ?? {};

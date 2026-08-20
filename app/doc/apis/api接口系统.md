@@ -48,11 +48,10 @@ const getApiFn = async () => {
 使用：
 
 ```javascript
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 
 try {
-  const {code, token, message: msg} = await apiList.loginFn(values);
+  const {code, token, message: msg} = await getApi().loginFn(values);
   if (code === 200) {
     message.success(msg);
     storage.set('token', token);

@@ -6,8 +6,7 @@ import {roleList, periodList} from '@app/utils/configs';
 
 import {userInfoStore} from '@app/store/stores';
 
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 
 import './member.less';
 
@@ -56,7 +55,7 @@ const Index = props => {
       okType: 'danger',
       cancelText: '取消',
       onOk: async () => {
-        const {code, message: msg, info} = await apiList.addOrderFn({orderRole, period});
+        const {code, message: msg, info} = await getApi().addOrderFn({orderRole, period});
         if (code === 200) {
           message.success(msg);
           props.router.push({

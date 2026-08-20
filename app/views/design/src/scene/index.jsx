@@ -9,14 +9,13 @@ import SearchForm from '@app/components/searchForm';
 import Panel from '@app/components/panel';
 import {useIntls} from '@app/components/intl';
 import FixedSizeImage from '@app/components/fixedSizeImage';
-
-import {apiList, defCategories, defaultImg, baseUrl} from '../../configs';
+import {getApi} from '@app/apis/apiList';
+import {defCategories, defaultImg, baseUrl} from '../../configs';
 
 import './index.less';
 
-const {listSceneFn, deleteSceneFn} = apiList;
-
 const Index = props => {
+  const {listSceneFn, deleteSceneFn} = getApi();
   const {modal} = App.useApp();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.tables', {});

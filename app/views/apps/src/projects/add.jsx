@@ -2,8 +2,7 @@ import {Form, Input, Button, Select} from 'antd';
 
 import {Row, Col} from '@huxy/components';
 import {message} from '@huxy/utils';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {layout, tailLayout, projectRoleList} from '@app/utils/configs';
 import {nameRule} from '@app/utils/rules';
 
@@ -13,9 +12,8 @@ import Panel from '@app/components/panel';
 
 import {useIntls} from '@app/components/intl';
 
-const {addProjectFn, editProjectFn} = apiList;
-
 const Index = props => {
+  const {addProjectFn, editProjectFn} = getApi();
   const getIntls = useIntls();
   const addFormText = getIntls('main.projects.addFormText', {});
   const [form] = Form.useForm();

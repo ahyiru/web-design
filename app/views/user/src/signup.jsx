@@ -4,7 +4,8 @@ import {UserOutlined, LockOutlined, MailOutlined, LeftOutlined} from '@ant-desig
 import {message} from '@huxy/utils';
 import {useIntls} from '@app/components/intl';
 import {goPage} from '@app/utils/utils';
-import {apiList, formRules} from '../configs';
+import {getApi} from '@app/apis/apiList';
+import {formRules} from '../configs';
 
 const {nameRule, emailRule, passwordRule, confirmRule} = formRules;
 
@@ -15,7 +16,7 @@ const Index = props => {
   const onFinish = async values => {
     setPending(true);
     try {
-      const {code, message: msg} = await apiList.signupFn(values);
+      const {code, message: msg} = await getApi().signupFn(values);
       if (code === 200) {
         message.success(msg);
         setHasSignup(true);

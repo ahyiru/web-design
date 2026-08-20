@@ -14,11 +14,8 @@ import {userInfoStore} from '@app/store/stores';
 
 import {useIntls} from '@app/components/intl';
 
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {defProject} from '@app/configs';
-
-const {listApiFn, deleteApiFn} = apiList;
 
 /* const searchFormItems=()=><>
   <Form.Item name="name" label="用户名">
@@ -119,6 +116,7 @@ const getColumns = ({handleTest, handleEdit, handleDelete}, profile, i18ns) => [
 ];
 
 const Index = props => {
+  const {listApiFn, deleteApiFn} = getApi();
   const {modal} = App.useApp();
   const getIntls = useIntls();
   const profile = userInfoStore.getState();

@@ -6,15 +6,13 @@ import {useIntls} from '@app/components/intl';
 import {formatTime, message} from '@huxy/utils';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
-
+import {getApi} from '@app/apis/apiList';
 import Panel from '@app/components/panel';
 import Back from '@app/components/goBack';
 
 // import {userInfoStore} from '@app/store/stores';
 
-import {apiList, defProject} from '../../configs';
-
-const {listTagsFn, deleteTagsFn} = apiList;
+import {defProject} from '../../configs';
 
 const getColumns = ({handleEdit, handleDelete}) => [
   {
@@ -64,6 +62,7 @@ const getColumns = ({handleEdit, handleDelete}) => [
 ];
 
 const Index = props => {
+  const {listTagsFn, deleteTagsFn} = getApi();
   const {modal} = App.useApp();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.tables', {});

@@ -5,12 +5,11 @@ import {message} from '@huxy/utils';
 import {useIntls} from '@app/components/intl';
 import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
-
+import {getApi} from '@app/apis/apiList';
 // import {userInfoStore} from '@app/store/stores';
 
-import {apiList, defProject, formConfigs, formRules} from '../../configs';
+import {defProject, formConfigs, formRules} from '../../configs';
 
-const {addTagsFn, editTagsFn} = apiList;
 const {layout, tailLayout} = formConfigs;
 const {nameRule} = formRules;
 
@@ -19,6 +18,7 @@ const formStyle = {
 };
 
 const Index = props => {
+  const {addTagsFn, editTagsFn} = getApi();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.tables', {});
   // const profile = userInfoStore.getState();

@@ -10,12 +10,9 @@ import Panel from '@app/components/panel';
 import customRender from '@app/utils/render';
 import {userInfoStore, routersStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import {defProject} from '@app/configs';
 import HandleModal from './modal';
-
-const {addRouterFn, editRouterFn, deleteRouterFn, listSchemaFn} = apiList;
 const {Search} = Input;
 
 const handleClick = (actions, item, actionsText) => ({
@@ -61,6 +58,7 @@ const defSelectedItem = {
 };
 
 const Index = props => {
+  const {addRouterFn, editRouterFn, deleteRouterFn, listSchemaFn} = getApi();
   const {modal} = App.useApp();
   const getIntls = useIntls();
   const pageText = getIntls('main.projectRouter.pageText', {});

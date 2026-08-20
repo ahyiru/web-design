@@ -6,12 +6,11 @@ import Back from '@app/components/goBack';
 import Panel from '@app/components/panel';
 
 import {userInfoStore} from '@app/store/stores';
-
-import {apiList, formConfigs} from '../configs';
+import {getApi} from '@app/apis/apiList';
+import {formConfigs} from '../configs';
 
 import Upload from './upload';
 
-const {addDemandFn, editDemandFn} = apiList;
 const {layout, tailLayout} = formConfigs;
 
 const formStyle = {
@@ -19,6 +18,7 @@ const formStyle = {
 };
 
 const Index = props => {
+  const {addDemandFn, editDemandFn} = getApi();
   const profile = userInfoStore.getState();
   const isAdmin = profile.role === 5;
   const [pending, setPending] = useState(false);

@@ -1,6 +1,5 @@
 import {TitleHeader, CornerBorder, HalfBorder, BgBox, AnimateBorder} from '@huxy/materials';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import useHandleList from '@app/hooks/useHandleList';
 import {Row, Col} from '@app/components/row';
 import darkTheme from '@app/configs/themes/dark';
@@ -18,7 +17,7 @@ const Panel = ({style, ...rest}) => <DefPanel style={{background: 'rgba(0, 0, 0,
 const borderColor = '#00b4dcdd';
 
 const Bigscreen = props => {
-  const [result] = useHandleList(apiList.listReportFn, {size: 5000}, null, {isFromBigscreen: true});
+  const [result] = useHandleList(getApi().listReportFn, {size: 5000}, null, {isFromBigscreen: true});
   const list = result?.data?.list ?? [];
   const osTypeOpt = getOsTypeOpt(list);
   const browserTypeOpt = getBrowserTypeOpt(list);

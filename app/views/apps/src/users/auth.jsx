@@ -16,10 +16,7 @@ import formatTree from '@app/utils/formatTree';
 
 import {routersStore} from '@app/store/stores';
 
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
-
-const {listAuthFn, setAuthFn} = apiList;
+import {getApi} from '@app/apis/apiList';
 
 const {Search} = Input;
 
@@ -29,6 +26,7 @@ const rootNode = {
 };
 
 const Index = props => {
+  const {listAuthFn, setAuthFn} = getApi();
   const getIntls = useIntls();
   const authFormText = getIntls('main.users.authFormText', {});
 

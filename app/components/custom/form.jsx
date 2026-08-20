@@ -3,8 +3,7 @@ import {Form, Modal} from 'antd';
 import {traverItem, clone, message} from '@huxy/utils';
 
 import customRender from '@app/utils/render';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import * as rules from '@app/utils/rules';
 
 /* const formCfg={
@@ -32,7 +31,7 @@ const Index = ({commonprops, ...props}) => {
   const [fetchDatas, setFetchDatas] = useState({});
   /* useEffect(()=>{
     const getDatas=async apis=>{
-      const resultList=await Promise.all(apis.map(({name,params})=>apiList[name](params)));
+      const resultList=await Promise.all(apis.map(({name,params})=>getApi()[name](params)));
       const list={};
       apis.map(({resultName},i)=>{
         list[resultName]=resultList[i];
@@ -61,7 +60,7 @@ const Index = ({commonprops, ...props}) => {
     }
     values = {...initVal, ...values};
     const apiName = getState?.()?.apiName;
-    const apiFn = apiList[apiName];
+    const apiFn = getApi()[apiName];
     try {
       const {code, message: msg} = (await apiFn?.({...values})) || {};
       if (code === 200) {

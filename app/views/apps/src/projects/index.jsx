@@ -4,8 +4,7 @@ import {DeleteOutlined, PlusOutlined, ExclamationCircleOutlined} from '@ant-desi
 import {Row, Col} from '@huxy/components';
 import {formatTime, message} from '@huxy/utils';
 import {projectRoleList} from '@app/utils/configs';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import useHandleList from '@app/hooks/useHandleList';
 import SearchForm from '@app/components/searchForm';
 
@@ -14,8 +13,6 @@ import Ellipsis from '@app/components/ellipsis';
 
 import {userInfoStore} from '@app/store/stores';
 import {useIntls} from '@app/components/intl';
-
-const {listProjectFn, deleteProjectFn} = apiList;
 
 const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profile, i18ns) => [
   {
@@ -107,6 +104,7 @@ const getColumns = ({handleRouter, handleEdit, handleDelete, handleApis}, profil
 ];
 
 const Index = props => {
+  const {listProjectFn, deleteProjectFn} = getApi();
   const {modal} = App.useApp();
   const getIntls = useIntls();
   const i18nCfg = getIntls('main.projects', {});

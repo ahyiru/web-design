@@ -1,8 +1,7 @@
 import {Button, Tooltip} from 'antd';
 import {SyncOutlined} from '@ant-design/icons';
 import {Link} from '@huxy/router';
-import {apisStore} from '@app/store/stores';
-const apiList = apisStore.getState()?.apis ?? {};
+import {getApi} from '@app/apis/apiList';
 import useHandleList from '@app/hooks/useHandleList';
 import {useThemeStore} from '@app/store/stores';
 import RangeTimePicker, {defaultTime} from '@app/components/rangeTimePicker';
@@ -20,7 +19,7 @@ const timeRange = defaultTime();
 
 const Monitor = props => {
   const [theme] = useThemeStore();
-  const [result, update] = useHandleList(apiList.listReportFn, {size: 5000, startTime: +new Date(timeRange[0]), endTime: +new Date(timeRange[1])}, null, {isFromBigscreen: true});
+  const [result, update] = useHandleList(getApi().listReportFn, {size: 5000, startTime: +new Date(timeRange[0]), endTime: +new Date(timeRange[1])}, null, {isFromBigscreen: true});
   const handleTimeChange = time => {
     update(time);
   };
