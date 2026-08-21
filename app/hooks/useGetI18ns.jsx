@@ -1,23 +1,22 @@
 import {useState, useEffect} from 'react';
+import {langStore, apisStore} from '@app/store/stores';
 import getI18n from '@app/utils/getI18n';
-import {langStore} from '@app/store/stores';
+import {getApiFn} from '@app/apis/apiList';
+import {useAsync} from '@huxy/use';
 
 const useGetI18ns = () => {
-  const [loading, setLoading] = useState(true);
+  const [state, update] = useAsync();
   useEffect(() => {
-    const loadI18n = async () => {
-      setLoading(true);
-      try {
-        const {language} = await getI18n();
-        langStore.setState(language);
-        setLoading(false);
-      } catch (err) {
-        setLoading(false);
-      }
-    };
-    loadI18n();
+    update({
+      apis: getApiFn(),
+      i18ns: getI18n(),
+    });
   }, []);
-  return [loading];
+  if (state.allPendding === false) {
+    langStore.setState(state.i18ns.language);
+    apisStore.setState(state.apis);
+  }
+  return [state.allPendding];
 };
 
 export default useGetI18ns;

@@ -1,55 +1,38 @@
 import {useState, useEffect} from 'react';
 import {getApi} from '@app/apis/apiList';
-import {logout} from '@app/utils/utils';
 import {defProject} from '@app/configs';
-import {userInfoStore, permissionStore, routersStore} from '@app/store/stores';
+import {permissionStore, routersStore} from '@app/store/stores';
+import getUserInfo from '@app/utils/getUserInfo';
+import {useAsync} from '@huxy/use';
 
 const useGetProfile = () => {
-  const {profileFn, listAuthFn, listRouterFn} = getApi();
-  const [loading, setLoading] = useState(true);
+  const {listAuthFn, listRouterFn} = getApi();
+  const [profilePendding, setProfilePendding] = useState(true);
+  const [state, update] = useAsync();
   useEffect(() => {
     const getProfile = async () => {
-      setLoading(true);
+      setProfilePendding(true);
       try {
-        const {code, result} = (await profileFn()) || {};
+        const result = await getUserInfo();
         if (!result) {
-          logout(true);
-          setLoading(false);
+          setProfilePendding(false);
           return;
         }
-        if (code === 200) {
-          userInfoStore.setState(result);
-          getAuths(result);
-        }
+        update({
+          auths: listAuthFn({uid: result?.id}),
+          routers: listRouterFn({projectId: result?.projectId || defProject.id})
+        });
       } catch (err) {
-        setLoading(false);
-      }
-    };
-    const getAuths = async profile => {
-      try {
-        const {code, result} = (await listAuthFn({uid: profile?.id})) || {};
-        if (code === 200) {
-          permissionStore.setState(result);
-          getRouters(profile);
-        }
-      } catch (err) {
-        setLoading(false);
-      }
-    };
-    const getRouters = async profile => {
-      try {
-        const {code, result} = (await listRouterFn({projectId: profile?.projectId || defProject.id})) || {};
-        setLoading(false);
-        if (code === 200) {
-          routersStore.setState(result);
-        }
-      } catch (err) {
-        setLoading(false);
+        setProfilePendding(false);
       }
     };
     getProfile();
   }, []);
-  return [loading];
+  if (state.allPendding === false) {
+    permissionStore.setState(state.auths?.result);
+    routersStore.setState(state.routers?.result);
+  }
+  return [profilePendding && state.allPendding];
 };
 
 export default useGetProfile;

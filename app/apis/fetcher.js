@@ -11,6 +11,7 @@ const fixPrefix = prefix => {
   return isDev ? prefix : `${proxyApi.target}${prefix}`;
 };
 
+const TIMEOUT_MS = 30000;
 const success_code = [200, 10000];
 
 const handler = response => {
@@ -86,7 +87,7 @@ const dlHandler = response => {
     });
 };
 
-export const fetchApi = fetcher(handler);
+export const fetchApi = fetcher(handler, TIMEOUT_MS);
 
 const dlFile = fetcher(dlHandler);
 
